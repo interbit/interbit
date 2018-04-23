@@ -32,7 +32,7 @@ This will take care of all the lerna dependencies and set up for you
 APP_NAME=app-the-new-thing
 ```
 
-1. `.package.json` Change the name
+2. `.package.json` Change the name
 ```
 {
   "name": "app-the-new-thing",
@@ -41,7 +41,7 @@ APP_NAME=app-the-new-thing
 }
 ```
 
-1. Tweak `src/App.js` so that you can identify your site
+3. Tweak `src/App.js` so that you can identify your site
 
 
 ## Then to develop locally:

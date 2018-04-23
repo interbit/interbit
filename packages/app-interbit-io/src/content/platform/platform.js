@@ -20,7 +20,7 @@ import platformCardPrivacy from '../../assets/pagePlatform/platformCardPrivacy.s
 import platformCardDev from '../../assets/pagePlatform/platformCardDev.svg'
 import platformLogoBP from '../../assets/pagePlatform/platformLogoBP.svg'
 import platformLogoEni from '../../assets/pagePlatform/platformLogoEni.png'
-import platformLogoMC from '../../assets/pagePlatform/platformLogoMC.svg'
+import platformLogoVisa from '../../assets/pagePlatform/platformLogoVisa.svg'
 import platformLogoTotal from '../../assets/pagePlatform/platformLogoTotal.svg'
 import platformLogoGazprom from '../../assets/pagePlatform/platformLogoGazprom.svg'
 import platformLogoVattenfall from '../../assets/pagePlatform/platformLogoVattenfall.svg'
@@ -106,8 +106,8 @@ The platform provides redundancy, persistence, networking, and satisfies audit r
         alt: 'eni logo'
       },
       {
-        src: platformLogoMC,
-        alt: 'Mastercard logo'
+        src: platformLogoVisa,
+        alt: 'Visa logo'
       },
       {
         src: platformLogoTotal,

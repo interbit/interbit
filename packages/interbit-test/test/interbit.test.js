@@ -67,6 +67,20 @@ describe('interbit', () => {
     })
   })
 
+  describe('hypervisor', () => {
+    it.only('boots with the supplied key', async () => {
+      const keyPair = await interbit.generateKeyPair()
+      const hypervisor = await interbit.createHypervisor({ keyPair })
+      console.log('hypervisor: ', hypervisor)
+
+      try {
+        assert.deepEqual(hypervisor.keyPair, keyPair)
+      } finally {
+        hypervisor.stopHyperBlocker()
+      }
+    })
+  }).timeout(5000)
+
   describe('cli', () => {
     it('has expected API', async () => {
       const hypervisor = await interbit.createHypervisor()

@@ -1,6 +1,6 @@
 {
   "name": "interbit-middleware",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Redux middleware that boots an Interbit hypervisor and syncs the blockchain in your Redux state.",
   "main": "dist/interbit-middleware.js",
   "license": "MIT",

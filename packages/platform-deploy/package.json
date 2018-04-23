@@ -1,6 +1,6 @@
 {
   "name": "platform-deploy",
-  "version": "0.4.10",
+  "version": "0.4.11",
   "description": "Boots a platform node",
   "main": "src/index.js",
   "private": true,
@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "cross-env": "^5.1.4",
-    "interbit": "0.4.10"
+    "interbit": "0.4.11"
   },
   "author": "BTL GROUP LTD",
   "license": "MIT"

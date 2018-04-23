@@ -52,7 +52,7 @@ We’ve spent the last 2 years designing and developing Interbit, a next generat
         },
         {
           title: 'Small, yet powerful API',
-          content: `Develop using familiar and proven Redux patterns and 3 primary API calls; dispatch(), getState(), subscribe().`
+          content: `Develop using familiar and proven Redux patterns and three primary API calls; dispatch(), getState(), subscribe().`
         },
         {
           title: '3rd party security audit',
@@ -97,14 +97,14 @@ Port Interbit light node code to run on Android and iOS.`
       properties: [
         {
           title: 'Single Sign-On',
-          content: `Securely connect to apps, remove access for apps you no longer use, or delete your Account information entirely, all in one place.`
+          content: `Securely connect to apps, remove access for apps you no longer use, or delete your account information entirely, all in one place.`
         },
         {
           title: 'Control access to your data',
-          content: `Every Interbit user gets their own Account chain, and can control which apps have read-access to their information.`
+          content: `Every Interbit user gets their own account chain, and can control which apps have read-access to their information.`
         },
         {
-          title: 'Open source application',
+          title: 'Open-source application',
           content: `Developers can easily integrate the identity service into apps and  adopt next generation identity data management protocols.`
         },
         {
@@ -158,8 +158,8 @@ Add info to connect consumers to builders and enabling end-to-end commercializat
         }
       },
       description: {
-        title: 'Multi-sided marketplace',
-        content: `Interbit has the potential to bring together 3 communities around the central value of blockchain-based applications.
+        title: 'Marketplace',
+        content: `Interbit has the potential to bring together three communities around the central value of blockchain-based applications.
 
 Developers, enterprise customers, and individual consumers can all benefit from a platform that makes building blockchain apps faster, easier and with higher quality.`
       },
@@ -249,7 +249,7 @@ Supporting the deployment and hosting of chains across multiple regions and clou
       },
       properties: [
         {
-          title: 'Create-interbit-app',
+          title: 'Create Interbit App',
           content: `A command-line tool to speed up the creation of Interbit apps and manage the distributed application life cycle.`
         },
         {
@@ -258,7 +258,7 @@ Supporting the deployment and hosting of chains across multiple regions and clou
         },
         {
           title: 'Meta-platform and apps',
-          content: `All platform apps are open source, and can be explored, reconfigured, or integrated.`
+          content: `All platform apps are open-source, and can be explored, reconfigured, or integrated.`
         },
         {
           title: 'Chain query tools',

@@ -248,9 +248,9 @@ Control access to individual chains, and the information on each.`,
           image: iconIdentityChain
         },
         {
-          title: 'Open source',
+          title: 'Open-source',
           content:
-            'Use Interbit\u2019s open source identity and authorization code in your own apps.',
+            'Use Interbit\u2019s open-source identity and authorization code in your own apps.',
           image: iconOpenSource
         }
       ]

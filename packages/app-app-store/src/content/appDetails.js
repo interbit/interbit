@@ -51,7 +51,7 @@ NOTE: Your Account chain will have limited use until more apps start appearing i
     image: appDetailsAccountKit,
     description: `The AccountKit allows you to easily implement account creation and authentication functions within your app.
 
-The Account services generate a private blockchain for each user, where they are able to maintain sensitive personal data. Users who already use the Accounts app simply authenticate by granting you permission to read data from their chain.
+The account services generate a private blockchain for each user, where they are able to maintain sensitive personal data. Users who already use the Accounts app simply authenticate by granting you permission to read data from their chain.
 
 Your users benefit from 100% control and ownership of their personal data and how it’s used when creating accounts on your apps/services.
 

@@ -15,7 +15,7 @@ export default {
     },
     {
       title: 'React:',
-      text: `React is used all the time here at Interbit. In particular, Create-React-App was inspiration for our own bootstrapping tool Create-Interbit-App. Learning about Create-React-App is a great way to familiarize yourself with how Create-Interbit-App works.`,
+      text: `React is used all the time here at Interbit. In particular, Create React App was inspiration for our own bootstrapping tool Create Interbit App. Learning about Create React App is a great way to familiarize yourself with how Create Interbit App works.`,
       callToActions: [
         {
           to: 'https://github.com/facebook/create-react-app/blob/next/README.md'

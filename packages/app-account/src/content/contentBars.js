@@ -9,7 +9,7 @@ export default {
     title: 'Attention',
     image: iconAttention,
     content: `The Interbit platform is currently a test environment.
-There is no guarantee of data preservation, uptime, stability or security at this time.`,
+There is no guarantee of data preservation, uptime, stability, or security at this time.`,
     className: 'image-sm white',
     callToAction: {
       text: 'Learn what this means for your data'

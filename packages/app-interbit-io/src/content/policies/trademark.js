@@ -1,5 +1,5 @@
 export default {
-  title: 'Trademark usage',
+  title: 'Trademark Usage',
   content: `**Effective as of April 23, 2018.**
 
   The following guidelines apply to the use of all Interbit and BTL Marks licensed pursuant to the Terms:

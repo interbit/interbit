@@ -60,7 +60,7 @@ export default {
   gitHub: {
     title: 'Find us on GitHub',
     content:
-      'Our open source repositories are located on GitHub. Let us know if you find a bug!',
+      'Our open-source repositories are located on GitHub. Let us know if you find a bug!',
     to: constants.urls.GITHUB_IB,
     image: iconGitHuBBlue
   },

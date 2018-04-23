@@ -21,19 +21,19 @@ Securely connect to apps, with transparency around what information you\u2019ve 
     {
       title: 'Privacy & access',
       content:
-        'Securely connect to apps while keeping control of your data. It always remains with you and you decide what to share.',
+        'Securely connect to apps while keeping control of your information. It always remains with you and you decide what to share.',
       image: cardPrivacy
     },
     {
       title: 'Total transparency',
       content:
-        'When you\u2019ve authorized apps to access pieces of your information, your Account makes it crystal clear what\u2019s being shared.',
+        'When you\u2019ve authorized apps to access pieces of your information, your account makes it crystal clear what\u2019s being shared.',
       image: cardTransparency
     },
     {
       title: 'Delete your data',
       content:
-        'What you add to your Account belongs to you. Deleting your information removes all access  you\u2019ve granted to apps.',
+        'What you add to your account belongs to you. Deleting your information removes all access  you\u2019ve granted to apps.',
       image: cardDeleteData
     }
   ]

@@ -13,6 +13,6 @@ export default {
   APP_IB_IO_SUPPORT: `${interbitIoUrl}/developers/support`,
   APP_IB_IO_POLICY_PRIVACY: `${interbitIoUrl}/policy/privacy`,
   APP_IB_IO_POLICY_TOS: `${interbitIoUrl}/policy/terms-of-use`,
-  SUPPORT_SLACK: 'https://slack.test-interbit.io/',
+  SUPPORT_SLACK: 'http://slack.test-interbit.io/',
   GITHUB_IB: 'https://github.com/interbit'
 }

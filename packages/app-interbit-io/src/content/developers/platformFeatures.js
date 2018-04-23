@@ -60,7 +60,7 @@ The platform is an online marketplace where applications are commercialized. Sea
     },
     {
       title: 'Support',
-      content: `Support for the platform, application development, and general technical discussion about Interbit is provided via our [Slack community](https://slack.test-interbit.io/).`
+      content: `Support for the platform, application development, and general technical discussion about Interbit is provided via our [Slack community](http://slack.test-interbit.io/).`
     },
     {
       title: 'Payments (coming soon)',

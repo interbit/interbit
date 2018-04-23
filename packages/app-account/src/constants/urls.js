@@ -1,6 +1,6 @@
 import { generateServiceUrl } from 'lib-react-interbit'
 
-const interbitIoUrl = generateServiceUrl('interbit-io', 3020)
+const interbitIoUrl = generateServiceUrl('interbit.io', 3020)
 const projectUrl = generateServiceUrl('projects', 3035)
 const storeUrl = generateServiceUrl('store', 3000)
 

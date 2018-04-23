@@ -2,7 +2,7 @@ import { generateServiceUrl } from 'lib-react-interbit'
 
 const accountUrl = generateServiceUrl('accounts', 3025)
 const projectUrl = generateServiceUrl('projects', 3035)
-const interbitIoUrl = generateServiceUrl('interbit-io', 3020)
+const interbitIoUrl = generateServiceUrl('interbit.io', 3020)
 
 export default {
   APP_ACCOUNT: accountUrl,

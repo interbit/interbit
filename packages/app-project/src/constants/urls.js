@@ -1,7 +1,7 @@
 import { generateServiceUrl } from 'lib-react-interbit'
 
 const accountUrl = generateServiceUrl('accounts', 3025)
-const interbitIoUrl = generateServiceUrl('interbit-io', 3020)
+const interbitIoUrl = generateServiceUrl('interbit.io', 3020)
 const storeUrl = generateServiceUrl('store', 3000)
 
 export default {

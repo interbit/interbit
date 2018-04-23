@@ -10,7 +10,7 @@
     "build:lib": "lerna run --scope lib-react-interbit build",
     "build:modules": "lerna run --scope interbit-* build",
     "postinstall": "lerna bootstrap --hoist --parallel",
-    "heroku-postbuild": "npm run build:modules && npm run build",
+    "heroku-postbuild": "npm run build:modules && npm run build:lib && npm run build",
     "start": "lerna run --scope $APP_NAME serve",
     "test": "npm run lint && lerna run --parallel test -- -- --coverage",
     "lint": "eslint .",

@@ -55,7 +55,7 @@ const generateServiceUrl = (name, port) => {
   if (host.includes('localhost')) {
     return `http://localhost:${port}`
   }
-  if (name.equals('interbit.io')) {
+  if (name === 'interbit.io') {
     // TODO this is wrong
     return name
   }

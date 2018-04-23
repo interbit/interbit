@@ -33,7 +33,7 @@ const createContext = async () => {
   }
 
   console.log(`${LOG_PREFIX}: Starting interbit hypervisor`)
-  const hypervisor = await interbit.createHypervisor(keyPair)
+  const hypervisor = await interbit.createHypervisor({ keyPair })
 
   console.log(`${LOG_PREFIX}: Creating interbit client`)
   const cli = await interbit.createCli(hypervisor)

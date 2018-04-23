@@ -1,6 +1,6 @@
 {
   "name": "lib-react-interbit",
-  "version": "0.4.7",
+  "version": "0.4.9",
   "description": "lib-react-interbit React component",
   "main": "lib/index.js",
   "module": "es/index.js",

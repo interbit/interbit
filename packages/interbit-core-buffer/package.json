@@ -4,7 +4,7 @@
   "description": "Buffer of test code between interbit platform and interbit core",
   "main": "dist/interbit-core-buffer.js",
   "scripts": {
-    "prepublishOnly": "npm run build",
+    "prepack": "npm run build",
     "build": "webpack --env dev && webpack --env build",
     "build:watch": "webpack --env dev && webpack --env build --watch",
     "dev": "webpack --progress --colors --watch --env dev",

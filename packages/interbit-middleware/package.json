@@ -5,7 +5,7 @@
   "main": "dist/interbit-middleware.js",
   "license": "MIT",
   "scripts": {
-    "prepublishOnly": "npm run build",
+    "prepack": "npm run build",
     "build": "webpack --env dev && webpack --env build",
     "build:watch": "webpack --env dev && webpack --env build --watch",
     "dev": "webpack --progress --colors --watch --env dev",

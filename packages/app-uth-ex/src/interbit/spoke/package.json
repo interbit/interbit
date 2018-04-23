@@ -10,6 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "seamless-immutable": "^7.1.3",
-    "interbit-covenant-utils": "0.3.0"
+    "interbit-covenant-utils": "0.5.6"
   }
 }

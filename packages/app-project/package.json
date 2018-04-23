@@ -2,7 +2,7 @@
     "name": "app-project",
     "description": "Interbit projects",
     "author": "BTL GROUP LTD",
-    "version": "0.4.7",
+    "version": "0.4.8",
     "private": true,
     "license": "MIT",
     "main": "src/exports.js",
@@ -11,13 +11,14 @@
     ],
     "dependencies": {
         "cross-env": "^5.1.4",
-        "interbit": "0.4.7",
+        "interbit": "0.4.8",
         "interbit-core": "0.5.6",
-        "interbit-core-buffer": "0.4.7",
+        "interbit-core-buffer": "0.4.8",
         "interbit-covenant-utils": "0.5.6",
-        "interbit-middleware": "0.4.7",
-        "interbit-validate": "^0.4.7",
-        "lib-react-interbit": "0.4.7",
+        "interbit-middleware": "0.4.8",
+        "interbit-platform-tools": "0.4.8",
+        "interbit-validate": "0.4.8",
+        "lib-react-interbit": "0.4.8",
         "localforage": "^1.4.3",
         "query-string": "^5.0.1",
         "react": "^16.2.0",
@@ -35,8 +36,7 @@
         "redux-saga": "^0.16.0",
         "seamless-immutable": "^7.1.2",
         "serve": "^6.5.5",
-        "uuid": "^3.1.0",
-        "interbit-platform-tools": "0.4.7"
+        "uuid": "^3.1.0"
     },
     "devDependencies": {
         "concurrently": "^3.5.1",

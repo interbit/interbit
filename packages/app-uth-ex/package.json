@@ -2,7 +2,7 @@
     "name": "app-uth-ex",
     "description": "Interbit Under-the-Hood sample",
     "author": "BTL GROUP LTD",
-    "version": "0.4.7",
+    "version": "0.4.8",
     "private": true,
     "main": "src/exports.js",
     "license": "MIT",
@@ -12,12 +12,13 @@
     "dependencies": {
         "browserify": "^16.1.0",
         "cross-env": "^5.1.4",
-        "interbit": "0.4.7",
+        "interbit": "0.4.8",
         "interbit-core": "0.5.6",
-        "interbit-core-buffer": "0.4.7",
+        "interbit-core-buffer": "0.4.8",
         "interbit-covenant-utils": "0.5.6",
-        "interbit-middleware": "0.4.7",
-        "lib-react-interbit": "0.4.7",
+        "interbit-middleware": "0.4.8",
+        "interbit-platform-tools": "0.4.8",
+        "lib-react-interbit": "0.4.8",
         "react": "^16.2.0",
         "react-bootstrap": "^0.32.1",
         "react-dom": "^16.2.0",
@@ -32,8 +33,7 @@
         "redux-form": "^7.2.1",
         "redux-saga": "^0.16.0",
         "seamless-immutable": "^7.1.2",
-        "serve": "^6.5.5",
-        "interbit-platform-tools": "0.4.7"
+        "serve": "^6.5.5"
     },
     "scripts": {
         "start": "cross-env REACT_APP_INTERBIT_WEB_SERVER=123 REACT_APP_INTERBIT_PORT=5000 react-scripts start",

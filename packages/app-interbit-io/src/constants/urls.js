@@ -20,8 +20,8 @@ export default {
   BTL_CONTACT: 'http://btl.co/contact-us/',
   BTL_INVESTOR: 'http://btl.co/investor/',
   BTL_NEWS: 'http://btl.co/news/',
-  GITHUB_IB: 'https://github.com/interbit',
-  SDK_DOCS: 'https://github.com/interbit/interbit/docs/interbit-sdk/gitbook',
+  GITHUB_IB: 'https://github.com/interbit/interbit',
+  SDK_DOCS: 'https://docs.test-interbit.io',
   SUPPORT_SLACK: 'https://slack.test-interbit.io/',
   STARTING_BLOCK: 'http://thestartingblock.io'
 }

@@ -65,7 +65,7 @@ CI tests all commits before auto deploying to the `development` stage of the pip
 Deployment events can be viewed and controlled from slack in the #machines channel: https://devcenter.heroku.com/articles/chatops
 
 
-## So, You Wanna Change the Template.
+## To change the Template.
 
 There is a node script inside of utils/src/distributeTemplate.js that will distribute some of the changes made to the template files to all packages that match the pattern `/app-*/`
 
@@ -115,6 +115,4 @@ $ npm run start:dev                 # Poke around and make sure you didn't break
 $ git add .
 $ git commit -m"Distribute changes to..."
 ```
-
-:eyes:
 

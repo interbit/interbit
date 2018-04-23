@@ -13,7 +13,8 @@
     "start": "lerna run --scope $APP_NAME serve",
     "test": "npm run lint && lerna run --parallel test -- -- --coverage",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "publish-exact": "lerna publish --force-publish=* --exact"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",

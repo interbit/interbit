@@ -1,6 +1,6 @@
 {
   "name": "interbit-core-buffer",
-  "version": "0.4.7",
+  "version": "0.4.10",
   "description": "Buffer of test code between interbit platform and interbit core",
   "main": "dist/interbit-core-buffer.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "yargs": "^10.0.3"
   },
   "dependencies": {
-    "interbit-merge-covenants": "^0.4.7",
+    "interbit-merge-covenants": "0.4.10",
     "seamless-immutable": "^7.1.2"
   }
 }

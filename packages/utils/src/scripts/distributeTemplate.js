@@ -9,7 +9,6 @@ const writeStandardsToPackageJson = packageJsonPath => {
     ...appPackageRequirements.dependencies
   }
   packageJson.scripts = appPackageRequirements.scripts
-  packageJson.proxy = appPackageRequirements.proxy
 
   const writeData = `${JSON.stringify(packageJson, null, 4)}\r\n`
   fs.writeFileSync(packageJsonPath, writeData, 'utf8')
@@ -38,12 +37,4 @@ packageFileNames.forEach(packageFileName => {
   // Replace proxy & scripts in package.json
   const packageJsonPath = `${packageFileName}/package.json`
   writeStandardsToPackageJson(packageJsonPath)
-  // replace all of the replacable template files
-  templateFileNames.forEach(templateFileName => {
-    const newFileName = templateFileName.replace('template', packageName)
-    console.log(newFileName)
-    fs
-      .createReadStream(templateFileName)
-      .pipe(fs.createWriteStream(newFileName))
-  })
 })

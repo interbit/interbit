@@ -8,12 +8,12 @@
     "author": "BTL GROUP LTD",
     "dependencies": {
         "cross-env": "^5.1.4",
-        "interbit": "^0.4.7",
+        "interbit": "0.4.7",
         "interbit-core": "0.5.6",
-        "interbit-core-buffer": "^0.4.7",
+        "interbit-core-buffer": "0.4.7",
         "interbit-covenant-utils": "0.5.6",
-        "interbit-middleware": "^0.4.7",
-        "lib-react-interbit": "^0.4.7",
+        "interbit-middleware": "0.4.7",
+        "lib-react-interbit": "0.4.7",
         "react": "^16.2.0",
         "react-bootstrap": "^0.32.1",
         "react-dom": "^16.2.0",
@@ -26,7 +26,8 @@
         "redux-devtools-extension": "^2.13.2",
         "redux-saga": "^0.16.0",
         "seamless-immutable": "^7.1.2",
-        "serve": "^6.5.5"
+        "serve": "^6.5.5",
+        "interbit-platform-tools": "0.4.7"
     },
     "devDependencies": {
         "redux-saga-test-plan": "^3.6.0"
@@ -41,6 +42,5 @@
         "interbit:create": "cross-env COVENANT_DEV_MODE=true interbit create",
         "interbit:build": "interbit build",
         "interbit:deploy": "interbit deploy"
-    },
-    "proxy": "http://localhost:5000/"
+    }
 }

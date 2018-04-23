@@ -1,0 +1,10 @@
+node_modules
+lerna-debug.log
+npm-debug.log
+packages/*/node_modules
+packages/*/npm-debug.log
+**/db-*
+**/_book
+**/build
+**.lock
+**/dist

@@ -1,0 +1,24 @@
+.subsection {
+  margin: 0 32px 32px 0;
+  min-height: 130px;
+
+  &.grey {
+    h4 {
+      color: #999;
+    }
+
+    p:first-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: $screen-lg-min - 1) {
+    margin: 0 16px 16px 0;
+    min-height: 140px;
+  }
+
+  @media (max-width: $screen-sm-min - 1) {
+    margin-bottom: 32px;
+    min-height: 0;
+  }
+}

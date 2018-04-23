@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+          // This is the most useful debugging tool, but the port number may change if the server
+          // is restarted via "piping", so keep an eye on the console and update the port number
+          // below to match
+          "type": "node",
+          "request": "attach",
+          "name": "Attach",
+          "protocol": "inspector",
+          "port": 9879,
+          "sourceMaps": true
+        }
+    ]
+}

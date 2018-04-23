@@ -1,0 +1,101 @@
+# Auto detect text files and perform LF normalization
+# Works from Git 2.10 onwards  (https://github.com/git/git/blob/master/Documentation/RelNotes/2.10.0.txt#L248)
+* text=auto eol=lf
+*.csv text eol=lf
+
+## MICROSOFT
+*.vsdx  binary
+*.xlsx  binary
+*.docx  binary
+*.pptx  binary
+
+# Mind mapping
+*.xmind binary
+
+## Active GIF Creator
+*.agif  binary
+
+## See: https://github.com/alexkaratarakis/gitattributes/blob/master/Web.gitattributes
+
+## Archives
+*.zip  binary
+*.gz   binary
+
+## graphics
+*.ai   binary
+*.bmp  binary
+*.eps  binary
+*.gif  binary
+*.ico  binary
+*.jng  binary
+*.jp2  binary
+*.jpg  binary
+*.jpeg binary
+*.jpx  binary
+*.jxr  binary
+*.pdf  binary
+*.png  binary
+*.psb  binary
+*.psd  binary
+*.svg  text
+*.svgz binary
+*.tif  binary
+*.tiff binary
+*.wbmp binary
+*.webp binary
+## GRAPHICS
+*.AI   binary
+*.BMP  binary
+*.EPS  binary
+*.GIF  binary
+*.ICO  binary
+*.JNG  binary
+*.JP2  binary
+*.JPG  binary
+*.JPEG binary
+*.JPX  binary
+*.JXR  binary
+*.PDF  binary
+*.PNG  binary
+*.PSB  binary
+*.PSD  binary
+*.SVG  text
+*.SVGZ binary
+*.TIF  binary
+*.TIFF binary
+*.WBMP binary
+*.WEBP binary
+
+## AUDIO
+*.kar  binary
+*.m4a  binary
+*.mid  binary
+*.midi binary
+*.mp3  binary
+*.ogg  binary
+*.ra   binary
+
+## VIDEO
+*.3gpp binary
+*.3gp  binary
+*.as   binary
+*.asf  binary
+*.asx  binary
+*.fla  binary
+*.flv  binary
+*.m4v  binary
+*.mng  binary
+*.mov  binary
+*.mp4  binary
+*.mpeg binary
+*.mpg  binary
+*.swc  binary
+*.swf  binary
+*.webm binary
+
+## FONTS
+*.ttf   binary
+*.eot   binary
+*.otf   binary
+*.woff  binary
+*.woff2 binary

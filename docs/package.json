@@ -1,0 +1,24 @@
+{
+  "name": "interbit-docs",
+  "version": "0.2.0",
+  "description": "Interbit SDK",
+  "private": true,
+  "keywords": [
+    "interbit"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "BTL"
+  },
+  "main": "README.md",
+  "dependencies": {
+    "express": "4.15.2",
+    "gitbook-cli": "2.3.0",
+    "heroku-ssl-redirect": "0.0.4"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "serve": "npm start",
+    "build": "bash package.sh"
+  }
+}

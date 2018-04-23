@@ -1,0 +1,48 @@
+// Content Box
+
+.ibweb-content-box {
+  margin-bottom: $margin-md;
+
+  p {
+    font-size: $font-size-md;
+    line-height: 1.33;
+  }
+}
+
+.ibweb-content-box:last-child {
+  margin-bottom: 0;
+}
+
+.ibweb-content-box.ibweb-faq {
+  h2 {
+    font-size: $font-size-lg;
+    margin-bottom: $margin-x-sm;
+  }
+}
+
+.ibweb-content-box.md {
+  h2 {
+    font-size: $font-size-lg;
+  }
+  p {
+    font-size: $font-size-sm;
+  }
+}
+
+.ibweb-content-box.sm {
+  h2 {
+    font-size: $font-size-sm;
+  }
+  p {
+    font-size: $font-size-sm;
+  }
+}
+
+@media (max-width: $screen-sm-min - 1) {
+  .ibweb-content-box {
+    p {
+      font-size: $font-size-sm;
+    }
+  }
+}
+

@@ -1,0 +1,87 @@
+.ibweb-link-bar {
+  display: block;
+  margin: 0 0 $margin-sm 0;
+  padding: 16px;
+  border-radius: $border-radius-lg;
+  border: 1px solid $ib-med-grey;
+  color: $ib-blue;
+  transition: box-shadow .5s;
+
+  .media-left {
+    padding-right: 16px;
+
+    img {
+      border-radius: $border-radius-md;
+    }
+  }
+
+  .media-body {
+    p {
+      color: $ib-blue;
+    }
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $ib-blue;
+    text-decoration: none;
+    box-shadow: 0 8px 32px 0 rgba(204, 204, 204, 0.5);
+  }
+
+  &.slack {
+    background: $slack-purple;
+    color: $ib-white;
+    p {
+      color: $ib-white;
+    }
+  }
+
+  &.slack:hover,
+  &.slack:focus,
+  &.slack:active {
+    color: $ib-white;
+  }
+
+  &.blue {
+    background: $ib-blue;
+    border-color: $ib-blue;
+    color: $ib-white;
+
+    p {
+      color: $ib-white;
+    }
+  }
+
+  &.blue:hover,
+  &.blue:focus,
+  &.blue:active {
+    color: $ib-white;
+  }
+
+  &.dotted {
+    border: 2px dashed $ib-med-grey;
+  }
+}
+
+@media (max-width: $screen-sm-min - 1) {
+  .ibweb-link-bar {
+    padding-bottom: $margin-md;
+
+    .media-left {
+      display: block;
+
+      img {
+        margin-bottom: $margin-sm;
+      }
+    }
+  }
+}
+

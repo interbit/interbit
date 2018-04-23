@@ -1,0 +1,33 @@
+{
+  "name": "web-auth-endpoint",
+  "version": "0.3.7",
+  "description": "Express instance to handle incoming auth redirects for APC model (auth-private-control)",
+  "main": "src/index.js",
+  "private": true,
+  "keywords": [
+    "Interbit",
+    "blockchain",
+    "oAuth",
+    "cAuth",
+    "authentication"
+  ],
+  "author": "BTL GROUP LTD",
+  "license": "MIT",
+  "dependencies": {
+    "app-account": "^0.3.7",
+    "express": "^4.16.2",
+    "interbit-core": "0.5.6",
+    "interbit-covenant-utils": "0.5.6",
+    "interbit-utils": "^0.3.7"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "cross-env": "^5.1.4",
+    "mocha": "^4.0.1"
+  },
+  "scripts": {
+    "serve": "npm start",
+    "start": "cross-env COVENANT_DEV_MODE=true PORT=5002 DB_PATH=./db-interbit node src/index.js",
+    "test": "echo \"Error: no test specified\""
+  }
+}

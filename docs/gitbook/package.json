@@ -1,0 +1,21 @@
+{
+  "name": "interbit-sdk-docs",
+  "version": "0.2.0",
+  "private": false,
+  "license": "MIT",
+  "description": "Interbit SDK",
+  "keywords": [
+    "sdk",
+    "interbit"
+  ],
+  "author": {
+    "name": "BTL"
+  },
+  "main": "README.md",
+  "dependencies": {
+    "gitbook-plugin-exercises": "^3.0.0",
+    "gitbook-plugin-expandable-chapters-small": "^0.1.7",
+    "gitbook-plugin-favicon": "0.0.2",
+    "gitbook-plugin-prism": "^2.3.0"
+  }
+}

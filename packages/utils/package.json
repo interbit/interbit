@@ -1,0 +1,21 @@
+{
+  "name": "utils",
+  "version": "0.3.7",
+  "description": "",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/packagePolice.js",
+    "test": "mocha src/tests/*",
+    "distribute:template": "node src/scripts/distributeTemplate.js"
+  },
+  "author": "BTL GROUP LTD",
+  "license": "MIT",
+  "dependencies": {
+    "glob": "^7.1.2"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "nodemon": "^1.14.12"
+  }
+}

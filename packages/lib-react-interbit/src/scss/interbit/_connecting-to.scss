@@ -1,0 +1,24 @@
+.ibweb-connecting-to {
+  text-align: center;
+  margin-bottom: $margin-xx-lg;
+
+  img {
+    margin: 128px 0 32px 0;
+    max-width: 300px;
+  }
+
+  h3 {
+    color: #999;
+  }
+
+  p {
+    line-height: 1.45;
+    color: #666;
+  }
+
+  .spinner {
+    img {
+      margin: 0 0 32px 0;
+    }
+  }
+}

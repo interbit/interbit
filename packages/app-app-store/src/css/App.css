@@ -1,0 +1,73 @@
+.ibweb.app-app-store .ibweb-navbar-container {
+  margin-bottom: 128px; }
+.ibweb.app-app-store .image-with-text .text {
+  position: absolute;
+  bottom: 64px;
+  left: 50%;
+  margin-left: -220px;
+  width: 440px;
+  color: #fff;
+  text-align: center; }
+  .ibweb.app-app-store .image-with-text .text h2 {
+    font-size: 40px; }
+  .ibweb.app-app-store .image-with-text .text p {
+    color: #fff; }
+.ibweb.app-app-store .ibweb-content-bar.in-progress.store-listing h3 {
+  color: #999; }
+.ibweb.app-app-store .featured-app {
+  padding: 64px;
+  border-radius: 8px;
+  background: #f7f7f7; }
+  .ibweb.app-app-store .featured-app h2 {
+    font-size: 40px; }
+  .ibweb.app-app-store .featured-app img {
+    display: block;
+    max-width: 100%;
+    margin: 64px auto 0 auto; }
+.ibweb.app-app-store .app-details .ibweb-breadcrumb {
+  margin-bottom: 16px;
+  color: #666; }
+  .ibweb.app-app-store .app-details .ibweb-breadcrumb i {
+    padding: 0 8px; }
+.ibweb.app-app-store .app-details .icon-row {
+  margin-bottom: 32px; }
+  .ibweb.app-app-store .app-details .icon-row img {
+    display: inline-block;
+    height: 128px;
+    width: 128px;
+    margin-right: 16px;
+    border-radius: 16px;
+    vertical-align: top; }
+  .ibweb.app-app-store .app-details .icon-row .info {
+    display: inline-block; }
+    .ibweb.app-app-store .app-details .icon-row .info p {
+      color: #999; }
+      .ibweb.app-app-store .app-details .icon-row .info p a {
+        padding-right: 16px; }
+    .ibweb.app-app-store .app-details .icon-row .info .rating {
+      color: #666; }
+      .ibweb.app-app-store .app-details .icon-row .info .rating span {
+        display: inline-block;
+        padding: 0 6px;
+        border-radius: 2px;
+        background: #f7f7f7; }
+  .ibweb.app-app-store .app-details .icon-row .ibweb-button {
+    padding-left: 30px;
+    padding-right: 30px;
+    float: right; }
+.ibweb.app-app-store .app-details .ibweb-image-full-width {
+  margin-bottom: 32px; }
+.ibweb.app-app-store .app-details .ibweb-divider {
+  margin: 32px 0; }
+.ibweb.app-app-store .app-details .ibweb-content-bar .ibweb-divider {
+  margin: 16px 0; }
+.ibweb.app-app-store .app-details .reviews {
+  color: #999; }
+  .ibweb.app-app-store .app-details .reviews p {
+    color: #999; }
+  .ibweb.app-app-store .app-details .reviews .stars {
+    margin-bottom: 32px; }
+    .ibweb.app-app-store .app-details .reviews .stars i {
+      padding-right: 3px; }
+
+/*# sourceMappingURL=App.css.map */

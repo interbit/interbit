@@ -1,0 +1,10 @@
+<svg
+  id="Layer_1"
+  data-name="Layer 1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 282 282"
+  width="282"
+  height="282">
+    <defs>
+    <style>.cls-1{fill:#f6f7f7;}.cls-2{fill:#fbac21;}.cls-3{fill:#ff8533;}.cls-4{fill:url(#New_Gradient_Swatch);}.cls-5{fill:url(#New_Gradient_Swatch-2);}.cls-6{fill:url(#linear-gradient);}.cls-7{fill:none;stroke:#231f20;stroke-linecap:round;stroke-miterlimit:10;stroke-width:4px;stroke-dasharray:6.97 13.94;}</style><linearGradient id="New_Gradient_Swatch" x1="46.92" y1="99.19" x2="157.78" y2="99.19" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#1791ff"/><stop offset="1" stop-color="#1791ff"/></linearGradient><linearGradient id="New_Gradient_Swatch-2" x1="60.04" y1="132.53" x2="79.76" y2="132.53" xlink:href="#New_Gradient_Swatch"/><linearGradient id="linear-gradient" x1="168.31" y1="173.46" x2="222.73" y2="173.46" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#56d695"/><stop offset="1" stop-color="#78deaa"/></linearGradient></defs><title>App_Store</title><rect class="cls-1" width="282" height="282"/><rect class="cls-2" x="133.35" y="175.54" width="69.93" height="43.7" rx="5.39" ry="5.39" transform="translate(336.63 394.79) rotate(-180)"/><path class="cls-2" d="M188.75,217l-7.16,12a.53.53,0,0,1-.91,0l-7.16-12Z"/><path class="cls-3" d="M200.61,52.21V86.69A4.62,4.62,0,0,1,196,91.32H184.74l-5.82,9.75a.53.53,0,0,1-.92,0l-5.83-9.75h-52.6A4.62,4.62,0,0,1,115,86.69V52.21a4.62,4.62,0,0,1,4.62-4.63H196A4.62,4.62,0,0,1,200.61,52.21Z"/><rect class="cls-4" x="46.92" y="70.89" width="110.87" height="56.6" rx="5.39" ry="5.39"/><path class="cls-5" d="M60,124.61l9.27,15.51a.69.69,0,0,0,1.19,0l9.26-15.51Z"/><path class="cls-6" d="M222.73,160.86v18.82a4.47,4.47,0,0,1-4.48,4.48H186.38l-3.7,6.21a.35.35,0,0,1-.58,0l-3.7-6.21h-5.61a4.48,4.48,0,0,1-4.48-4.48V160.86a4.48,4.48,0,0,1,4.48-4.47h45.46A4.47,4.47,0,0,1,222.73,160.86Z"/><rect class="cls-7" x="83.26" y="83.26" width="115.48" height="115.48" rx="25.37" ry="25.37"/></svg>

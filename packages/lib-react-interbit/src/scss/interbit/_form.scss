@@ -1,0 +1,60 @@
+// Overrides for react-bootstrap Form elements
+
+.ibweb {
+  .form-group {
+    margin-bottom: 16px;
+
+    label {
+      margin-bottom: 8px;
+    }
+
+    .form-control-static {
+      padding: 0;
+      min-height: 0;
+    }
+  }
+
+  .form-control {
+    padding: 13px 16px;
+    margin-bottom: $margin-sm;
+    font-size: $font-size-sm;
+    border-radius: $border-radius-md;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    height: auto;
+  }
+  select.form-control {
+    height: 48px;
+    // -webkit-appearance: none;
+    -webkit-border-radius: $border-radius-md;
+  }
+
+  .radio, .checkbox {
+    margin: 0 0 $margin-sm 0;
+  }
+
+  .radio label, .checkbox label {
+    padding-left: 30px;
+    color: #666;
+  }
+
+  .radio input[type="radio"],
+  .radio-inline input[type="radio"],
+  .checkbox input[type="checkbox"],
+  .checkbox-inline input[type="checkbox"] {
+    margin-left: -30px;
+  }
+
+  .field-error {
+    .form-control {
+      border-color: $ib-red;
+      color: $ib-red;
+    }
+
+    .error-msg {
+      padding: 0 16px;
+      color: $ib-red;
+
+    }
+  }
+}

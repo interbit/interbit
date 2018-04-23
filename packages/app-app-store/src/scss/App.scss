@@ -1,0 +1,279 @@
+// .App .App-sidebar {
+//   padding: 15px;
+//   background-color: #FFFFFF;
+//   border-right: 1px solid #E7E7E7; }
+//   @media (min-width: 768px) {
+//     .App .App-sidebar {
+//       height: 100vh; } }
+//   .App .App-sidebar h4 {
+//     margin: 15px;
+//     font-weight: 900;
+//     text-transform: uppercase; }
+//     @media (max-width: 767px) {
+//       .App .App-sidebar h4 {
+//         margin-top: 0px; } }
+//   .App .App-sidebar .nav > li > a {
+//     border-radius: 2px;
+//     font-weight: 700;
+//     font-size: 18px;
+//     padding: 8px 22px; }
+//     .App .App-sidebar .nav > li > a:hover {
+//       color: #333;
+//       background-color: transparent; }
+//   .App .App-sidebar li.category > a {
+//     font-size: 14px;
+//     padding: 10px 22px; }
+//   .App .App-sidebar .nav-pills > li.active > a,
+//   .App .App-sidebar .nav-pills > li.active > a:focus,
+//   .App .App-sidebar .nav-pills > li.active > a:hover {
+//     background-color: #E7E7E7;
+//     color: #333; }
+//   .App .App-sidebar .Filters {
+//     padding-left: 15px; }
+//   @media (max-width: 767px) {
+//     .App .App-sidebar .Filter-heading, .App .App-sidebar .Filters {
+//       display: none; } }
+// .App .Select-cat, .App .Search-apps {
+//   padding-top: 15px; }
+//   .App .Select-cat .Cat-link, .App .Search-apps .Cat-link {
+//     display: flex;
+//     justify-content: space-between;
+//     margin-bottom: 15px; }
+//     @media (min-width: 992px) {
+//       .App .Select-cat .Cat-link, .App .Search-apps .Cat-link {
+//         justify-content: space-around;
+//         padding-top: 9px; } }
+//   .App .Select-cat .Primary-button, .App .Search-apps .Primary-button {
+//     width: 160px;
+//     margin-bottom: 15px; }
+//     @media (min-width: 768px) {
+//       .App .Select-cat .Primary-button, .App .Search-apps .Primary-button {
+//         margin-top: 0;
+//         margin-left: -15px; } }
+// .App .App-container {
+//   padding-top: 15px;
+//   display: flex;
+//   flex-wrap: wrap; }
+// .App .Apps-list-heading {
+//   margin-top: 20px;
+//   margin-bottom: 10px; }
+//   .App .Apps-list-heading h1 {
+//     display: inline; }
+//   .App .Apps-list-heading .See-more {
+//     margin-left: 40px;
+//     font-size: 16px; }
+// .App .App-thumbnail {
+//   display: inline; }
+//   .App .App-thumbnail img {
+//     margin: 10px auto 0;
+//     height: 124px; }
+// .App .App-description {
+//   white-space: nowrap;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   width: 128px;
+//   display: inline-block;
+//   content: "";
+//   position: relative; }
+//   .App .App-description h4 {
+//     font-size: 16px;
+//     margin-bottom: 4px; }
+// .App .App-description:before {
+//   content: '';
+//   width: 100%;
+//   height: 100%;
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   background: linear-gradient(to right, transparent 120px, white); }
+// .App .App-listing {
+//   width: 156px;
+//   margin-right: 15px;
+//   margin-bottom: 15px;
+//   border-color: transparent;
+//   box-shadow: 0px 0px 10px 1px #E7E7E7; }
+//   .App .App-listing .panel-body {
+//     padding: 8px 15px; }
+// .App .Description-panel {
+//   border-color: transparent;
+//   box-shadow: 0px 0px 12px 2px #E7E7E7;
+//   margin-top: 20px; }
+//   .App .Description-panel .panel-body {
+//     padding: 15px 24px; }
+// .App .Description-details {
+//   margin-top: 15px;
+//   margin-bottom: 28px; }
+//   .App .Description-details img {
+//     max-height: 128px; }
+//   .App .Description-details h3 {
+//     font-weight: 900; }
+// .App .Similar-heading {
+//   margin-top: 20px; }
+// .App .Screenshot-gallery {
+//   list-style: none;
+//   padding-left: 0; }
+//   .App .Screenshot-gallery .App-screenshot {
+//     max-height: 120px;
+//     display: inline-block; }
+// .App .App-overview {
+//   margin-bottom: 20px; }
+// .App .App-author {
+//   margin-bottom: 4px;
+//   color: #919191; }
+// .App .App-price {
+//   margin-bottom: 0;
+//   font-weight: 400;
+//   color: #FFAD1D; }
+// .App .App-rating {
+//   margin-top: 10px; }
+//   @media (max-width: 768px -1) {
+//     .App .App-rating {
+//       margin-top: 34px; } }
+// .App .User-count {
+//   padding-left: 6px;
+//   display: inline-block;
+//   color: #333; }
+// .App .User-rating {
+//   display: inline-block;
+//   margin-right: 6px; }
+// .App hr.Tab-divider {
+//   width: 100vw;
+//   margin-left: -15px;
+//   margin-top: 0;
+//   margin-bottom: 0; }
+
+
+
+
+
+.ibweb.app-app-store {
+  .ibweb-navbar-container {
+    margin-bottom: 128px;
+  }
+
+  .image-with-text {
+    .text {
+      position: absolute;
+      bottom: 64px;
+      left: 50%;
+      margin-left: -220px;
+      width: 440px;
+      color: #fff;
+      text-align: center;
+
+      h2 {
+        font-size: 40px;
+      }
+      p {
+        color: #fff;
+      }
+    }
+  }
+
+  .ibweb-content-bar.in-progress.store-listing {
+    h3 {
+      color: #999;
+    }
+  }
+
+  .featured-app {
+    padding: 64px;
+    border-radius: 8px;
+    background: #f7f7f7;
+
+    h2 {
+      font-size: 40px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      margin: 64px auto 0 auto;
+    }
+  }
+
+  .app-details {
+    .ibweb-breadcrumb {
+      margin-bottom: 16px;
+      color: #666;
+
+      i {
+        padding: 0 8px;
+      }
+    }
+
+    .icon-row {
+      margin-bottom: 32px;
+
+      img {
+        display: inline-block;
+        height: 128px;
+        width: 128px;
+        margin-right: 16px;
+        border-radius: 16px;
+        vertical-align: top;
+      }
+
+      .info {
+        display: inline-block;
+
+        p {
+          color: #999;
+
+          a {
+            padding-right: 16px;
+          }
+        }
+
+        .rating {
+          color: #666;
+
+          span {
+            display: inline-block;
+            padding: 0 6px;
+            border-radius: 2px;
+            background: #f7f7f7;
+          }
+        }
+      }
+
+      .ibweb-button {
+        padding-left: 30px;
+        padding-right: 30px;
+        float: right;
+      }
+    }
+
+    .ibweb-image-full-width {
+      margin-bottom: 32px;
+    }
+
+    .ibweb-divider {
+      margin: 32px 0;
+    }
+
+    .ibweb-content-bar {
+      .ibweb-divider {
+        margin: 16px 0;
+      }
+    }
+
+
+    .reviews {
+      color: #999;
+
+      p {
+        color: #999;
+      }
+
+      .stars {
+        margin-bottom: 32px;
+
+        i {
+          padding-right: 3px;
+        }
+      }
+    }
+
+  }
+}

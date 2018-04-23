@@ -1,0 +1,67 @@
+// Launchpad
+
+.ibweb-launchpad-row {
+  margin-bottom: $margin-lg;
+}
+
+.ibweb-launchpad-row > .row {
+  margin-bottom: $grid-gutter-width;
+}
+
+.ibweb-launchpad-row > .row:last-child {
+  margin-bottom: 0;
+}
+
+.ibweb-launchpad {
+  display: block;
+  position: relative;
+  font-size: $font-size-sm;
+  border-radius: $border-radius-lg;
+  background: $ib-blue;
+  color: $ib-white;
+
+  div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: $margin-sm;
+  }
+
+  img {
+    width: 64px;
+    height: 64px;
+    margin-bottom: $margin-sm;
+    border-radius: $border-radius-md;
+  }
+
+  h3 {
+    margin-bottom: 8px;
+  }
+}
+
+.ibweb-launchpad:before {
+  display: block;
+  content: '';
+  //padding-top: 87.5%;
+  padding-top: 70%;
+}
+
+.ibweb-launchpad:hover,
+.ibweb-launchpad:active,
+.ibweb-launchpad:focus {
+  color: $ib-white;
+}
+
+@media (max-width: $screen-sm-min - 1) {
+  .ibweb-launchpad-row {
+    display: none;
+  }
+}
+
+@media (max-width: $screen-lg-min - 1) {
+  .ibweb-launchpad:before {
+    padding-top: 80%;
+  }
+}

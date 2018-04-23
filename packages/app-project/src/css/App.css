@@ -1,0 +1,154 @@
+.App .Project-item .Project-container hr {
+  margin-top: 30px;
+  margin-bottom: 30px; }
+.App .Project-item:last-child hr {
+  display: none; }
+.App .Project-item .Project-title {
+  font-size: 18px;
+  margin: 10px 20px 18px 0;
+  text-decoration: underline;
+  display: inline-block;
+  transition: .25s; }
+  @media (min-width: 768px) {
+    .App .Project-item .Project-title {
+      font-size: 20px; } }
+  .App .Project-item .Project-title:hover {
+    cursor: pointer;
+    color: #1EC0C0; }
+.App .Project-item .fa {
+  margin-top: 10px;
+  font-size: 33px; }
+  @media (max-width: 767px) {
+    .App .Project-item .fa {
+      display: none; } }
+.App .Status {
+  font-size: 13px; }
+.App .Connect-create {
+  margin-bottom: 20px;
+  padding-top: 12px;
+  text-align: right; }
+  @media (max-width: 767px) {
+    .App .Connect-create .Connect {
+      padding: 7px 20px; } }
+  @media (min-width: 768px) {
+    .App .Connect-create .Connect {
+      display: inline-block;
+      width: 190px;
+      margin-right: 15px;
+      padding-top: 5px;
+      padding-bottom: 5px; } }
+  @media (max-width: 767px) {
+    .App .Connect-create .Create-new {
+      padding: 8px 20px;
+      margin-top: 12px;
+      margin-bottom: 24px; } }
+  @media (min-width: 768px) {
+    .App .Connect-create .Create-new {
+      display: inline-block;
+      width: 190px; } }
+.App .Project-details .Open {
+  display: inline-block;
+  margin-top: 6px;
+  width: 190px; }
+  @media (max-width: 767px) {
+    .App .Project-details .Open {
+      margin-top: 12px;
+      padding: 7px 20px;
+      width: 100%; } }
+.App .Project-details .Project-packages {
+  padding-top: 40px;
+  border-top: 1px solid #E7E7E7; }
+  .App .Project-details .Project-packages h3 {
+    margin-right: 20px; }
+    @media (min-width: 768px) {
+      .App .Project-details .Project-packages h3 {
+        display: inline-block; } }
+  .App .Project-details .Project-packages .Status {
+    display: inline-block; }
+  .App .Project-details .Project-packages .Secondary-button {
+    margin-top: 6px;
+    width: 190px; }
+    @media (max-width: 767px) {
+      .App .Project-details .Project-packages .Secondary-button {
+        margin-top: 16px;
+        padding: 7px 20px;
+        width: 100%; } }
+  .App .Project-details .Project-packages table {
+    margin-top: 20px;
+    background-color: #f5f5f5; }
+    .App .Project-details .Project-packages table th {
+      color: #333; }
+      .App .Project-details .Project-packages table th:nth-child(3) {
+        width: 90px;
+        text-align: center; }
+    .App .Project-details .Project-packages table tbody > tr > td:nth-child(3) {
+      text-align: center; }
+.App .Project-details textarea {
+  resize: none; }
+
+.ibweb.app-project .ibweb-navbar .ibweb-ib-icon {
+  padding: 18px 0;
+  width: auto;
+  height: auto; }
+.ibweb.app-project .ibweb-navbar .nav-main-menu li a {
+  font-weight: 500;
+  color: #17A6F2;
+  line-height: 1.38; }
+.ibweb.app-project .ibweb-navbar .nav-main-menu li.active a {
+  color: #666; }
+.ibweb.app-project .ibweb-content-bar.project-bar .status {
+  display: inline-block;
+  width: 170px; }
+  .ibweb.app-project .ibweb-content-bar.project-bar .status i {
+    vertical-align: bottom;
+    padding-right: 8px; }
+  .ibweb.app-project .ibweb-content-bar.project-bar .status i:before {
+    font-size: 20px; }
+  .ibweb.app-project .ibweb-content-bar.project-bar .status.pass {
+    color: #057514; }
+  .ibweb.app-project .ibweb-content-bar.project-bar .status.fail {
+    color: #d0021b; }
+.ibweb.app-project .ibweb-content-bar.project-bar .app-url i {
+  vertical-align: bottom;
+  padding-right: 8px; }
+.ibweb.app-project .ibweb-content-bar.project-bar .app-url i:before {
+  font-size: 20px; }
+.ibweb.app-project .app-project-icon {
+  display: block;
+  float: left;
+  width: 64px;
+  height: 64px;
+  margin-right: 16px;
+  border-radius: 16px; }
+.ibweb.app-project .app-project-details {
+  display: inline-block;
+  width: calc(100% - 82px); }
+  .ibweb.app-project .app-project-details .ibweb-divider {
+    margin: 16px 0 32px 0; }
+  .ibweb.app-project .app-project-details .ibweb-button {
+    width: 235px;
+    padding: 7px 10px; }
+  .ibweb.app-project .app-project-details .app-status span {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: 400;
+    padding-left: 16px;
+    color: #999; }
+  .ibweb.app-project .app-project-details .status {
+    display: inline-block;
+    width: 170px; }
+    .ibweb.app-project .app-project-details .status.fail {
+      color: #d0021b; }
+    .ibweb.app-project .app-project-details .status.pass {
+      color: #057514; }
+    .ibweb.app-project .app-project-details .status i {
+      vertical-align: bottom;
+      padding-right: 8px; }
+      .ibweb.app-project .app-project-details .status i:before {
+        font-size: 20px; }
+  .ibweb.app-project .app-project-details .app-url i {
+    vertical-align: bottom;
+    padding-right: 8px; }
+    .ibweb.app-project .app-project-details .app-url i:before {
+      font-size: 20px; }
+
+/*# sourceMappingURL=App.css.map */

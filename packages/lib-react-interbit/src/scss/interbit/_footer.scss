@@ -1,0 +1,129 @@
+.ibweb-footer-container {
+  margin-bottom: $margin-lg;
+
+  .ibweb-footer {
+    margin-bottom: $margin-x-sm;
+    padding: $margin-md $margin-lg $margin-lg $margin-lg;
+    border-radius: $border-radius-sm;
+    background: $ib-grey;
+    color: $ib-black;
+
+    .ibweb-ib-logo {
+      margin-bottom: $margin-md;
+    }
+
+    a {
+      color: $ib-blue;
+    }
+
+    a:hover,
+    a:active {
+      color: $ib-blue;
+      text-decoration: none;
+    }
+
+    #footer-accordion {
+      padding: 0 10px;
+
+      .panel {
+        margin-top: 0;
+        border: none;
+        background-color: transparent;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+
+      .panel-heading {
+        padding: 12px 0;
+        border-top: 1px solid $ib-dark-grey;
+        background-color: transparent;
+
+        .panel-title {
+          position: relative;
+
+          a {
+            display: block;
+            width: 100%;
+            font-weight: 700;
+          }
+
+          a:hover, a:focus, a:active {
+            text-decoration: none;
+          }
+
+          a:after {
+            position: absolute;
+            right: 0;
+            font-family: FontAwesome;
+            content: '\f0d7';
+            color: $ib-blue;
+          }
+
+          a[aria-expanded=true]:after {
+            content: '\f0d8';
+          }
+        }
+      }
+
+      .panel-body {
+        padding: 0;
+        border-top: none;
+      }
+    }
+  }
+
+  .copyright {
+    text-align: center;
+    color: #666;
+
+    a {
+      margin-right: $margin-sm;
+    }
+  }
+}
+
+@media (max-width: $screen-lg-min - 1) {
+  .ibweb-footer-container {
+    .ibweb-footer {
+      padding: $margin-sm;
+
+      .ibweb-ib-logo {
+        margin: $margin-sm 0 $margin-sm $margin-md
+      }
+
+      #footer-accordion {
+        margin-bottom: 0;
+      }
+
+      li {
+        border-bottom: 1px solid $ib-dark-grey;
+        padding: 12px 0;
+        margin-left: $margin-md;
+      }
+
+      li:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-sm-min - 1) {
+  .ibweb-footer-container {
+    .copyright {
+      a {
+        display: inline-block;
+        margin-bottom: $margin-x-sm
+      }
+
+      span {
+        display: block;
+      }
+    }
+  }
+
+  .ibweb-footer {
+    margin: 0 4px $margin-sm 4px;
+  }
+}
+

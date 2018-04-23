@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="64" viewBox="0 0 64 64">
+    <defs>
+        <path id="a" d="M19 11h26a8 8 0 0 1 8 8v26a8 8 0 0 1-8 8H19a8 8 0 0 1-8-8V19a8 8 0 0 1 8-8z"/>
+        <mask id="b" width="42" height="42" x="0" y="0" fill="#fff">
+            <use xlink:href="#a"/>
+        </mask>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(-16 -16)">
+            <rect width="566" height="134" fill="#17A6F2" rx="30"/>
+            <g fill="#FFF">
+                <text font-family="SFProText-Regular, SF Pro Text" font-size="16" transform="translate(96 16)">
+                    <tspan x="0" y="51">Get the SDK and start building ... need some text here </tspan> <tspan x="0" y="73">need some text here need some text here need some text </tspan> <tspan x="0" y="95">here need some text here</tspan>
+                </text>
+                <text font-family="Whitney-Bold, Whitney" font-size="24" font-weight="bold" transform="translate(96 16)">
+                    <tspan x="0" y="23">FREE to developers for non-commercial use</tspan>
+                </text>
+            </g>
+            <rect width="64" height="64" x="16" y="16" fill="#FFF" rx="16"/>
+        </g>
+        <g>
+            <path fill="#FFF" d="M48 64H16C7.164 64 0 56.836 0 48V16C0 7.164 7.164 0 16 0h32c8.836 0 16 7.164 16 16v32c0 8.836-7.164 16-16 16"/>
+            <use stroke="#17A6F2" stroke-dasharray="7,4" stroke-width="4" mask="url(#b)" xlink:href="#a"/>
+        </g>
+    </g>
+</svg>

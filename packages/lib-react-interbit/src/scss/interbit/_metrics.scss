@@ -1,0 +1,32 @@
+// Metrics
+
+.ibweb-metrics {
+  background: #333;
+  padding: 64px 100px 104px 100px;
+  border-radius: 30px;
+  color: $ib-white;
+
+  .section {
+    margin-bottom: $margin-md;
+
+    &:last-child {
+      margin-bottom: $margin-lg;
+    }
+  }
+
+  p {
+    color: $ib-white;
+  }
+
+  img {
+    margin-top: $margin-x-sm;
+  }
+
+
+  @media (max-width: $screen-lg-min - 1) {
+  }
+
+  @media (max-width: $screen-sm-min - 1) {
+    margin: 0 16px;
+  }
+}

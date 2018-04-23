@@ -1,0 +1,93 @@
+.ibweb-button {
+  padding: 7px 40px;
+  margin-right: $margin-sm;
+  line-height: 32px;
+  font-size:$font-size-sm;
+  background: $ib-blue;
+  border-radius: $border-radius-x-sm;
+  color: $ib-white;
+  border: 1px solid $ib-blue;
+
+  img {
+    border-radius: $border-radius-x-sm;
+    margin-right: 8px;
+  }
+
+  &.img {
+    padding: 7px;
+  }
+
+  &:hover,
+  &:focus,
+  &.focus,
+  &.btn-default:active:hover,
+  &.btn-default:active:focus,
+  &.btn-default:active.focus,
+  &.btn-default.active:hover,
+  &.btn-default.active:focus,
+  &.btn-default.active.focus
+  {
+    font-size: $font-size-sm;
+    background: $ib-blue;
+    border-radius: $border-radius-x-sm;
+    color: $ib-white;
+    border: 1px solid $ib-blue;
+  }
+
+  &.secondary,
+  &.secondary:hover,
+  &.secondary:focus,
+  &.secondary.focus {
+    background: $ib-grey;
+    border-color: $ib-grey;
+    color: $ib-blue;
+  }
+
+  &.ternary,
+  &.ternary:hover,
+  &.ternary:focus,
+  &.ternary.focus {
+    background: $ib-white;
+    border-color: $ib-med-grey;
+    color: $ib-blue;
+  }
+
+  &.white,
+  &.white:hover,
+  &.white:focus,
+  &.white.focus {
+    background: $ib-white;
+    border-color: $ib-white;
+    color: $ib-blue;
+  }
+
+  &.destructive,
+  &.destructive:hover,
+  &.destructive:focus,
+  &.destructive.focus {
+    background: $ib-white;
+    border-color: $ib-dark-grey;
+    color: $ib-red;
+  }
+
+  &.super-destructive,
+  &.super-destructive:hover,
+  &.super-destructive:focus,
+  &.super-destructive.focus {
+    background: $ib-red;
+    border-color: $ib-red;
+    color: $ib-white;
+  }
+
+  &.disabled,
+  &.disabled:hover,
+  &.disabled:focus,
+  &.disabled.focus {
+    background: #999;
+    border-color: #999;
+    color:$ib-white;
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+}
+

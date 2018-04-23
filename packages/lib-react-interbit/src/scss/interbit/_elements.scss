@@ -1,0 +1,87 @@
+// Global element styles
+
+html {
+  font-size: $font-size-sm;
+}
+
+body {
+  @include body-font;
+  font-size: $font-size-sm;
+}
+
+p {
+  font-size: $font-size-sm;
+  line-height: 1.45;
+  margin-bottom: $margin-x-sm;
+  color: #666;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+h1 {
+  @include heading-font;
+  margin: 0 0 $margin-md 0;
+  font-size: $font-size-xx-lg;
+  line-height: 1.33;
+}
+
+h2 {
+  @include heading-font;
+  margin: 0 0 $margin-sm 0;
+  font-size: $font-size-x-lg;
+  line-height: 1.25;
+}
+
+h3 {
+  @include heading-font;
+  margin: 0 0 $margin-x-sm 0;
+  font-size: $font-size-lg;
+  line-height: 1.33;
+}
+
+h4 {
+  @include heading-font;
+  margin: 0 0 $margin-x-sm 0;
+  font-size: $font-size-sm;
+  line-height: 1.5;
+}
+
+ol, ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin-bottom: $margin-xx-sm;
+  }
+}
+
+a {
+  font-weight: 400;
+  color: $ib-blue;
+
+  &:hover {
+    text-decoration: none;
+    color: $ib-blue;
+  }
+}
+
+
+@media (max-width: $screen-lg-min - 1) {
+}
+
+@media (max-width: $screen-sm-min - 1) {
+  p {
+    margin-bottom: $margin-sm;
+  }
+
+  h1 {
+    font-size: $font-size-x-lg;
+    margin-bottom: $margin-sm;
+  }
+
+}
+
+

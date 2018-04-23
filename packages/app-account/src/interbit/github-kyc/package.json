@@ -1,0 +1,18 @@
+{
+  "name": "account-github-kyc",
+  "version": "1.0.0",
+  "description": "Interbit Accounts - Github KYC provider",
+  "author": "BTL GROUP LTD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "interbit-covenant-utils": "0.3.0",
+    "node-fetch": "^2.1.2",
+    "axios": "^0.18.0",
+    "redux-saga": "^0.16.0",
+    "seamless-immutable": "^7.1.3"
+  }
+}

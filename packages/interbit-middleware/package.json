@@ -1,0 +1,38 @@
+{
+  "name": "interbit-middleware",
+  "version": "0.3.7",
+  "description": "Redux middleware that boots an Interbit hypervisor and syncs the blockchain in your Redux state.",
+  "main": "dist/interbit-middleware.js",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "npm run build",
+    "prepublishOnly": "npm run build",
+    "build": "webpack --env dev && webpack --env build",
+    "build:watch": "webpack --env dev && webpack --env build --watch",
+    "dev": "webpack --progress --colors --watch --env dev",
+    "test": "mocha tests/**/*.test.js"
+  },
+  "keywords": [
+    "Interbit",
+    "blockchain",
+    "redux",
+    "middleware"
+  ],
+  "author": "BTL GROUP LTD",
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "mocha": "^4.0.1",
+    "webpack": "^3.10.0",
+    "yargs": "^10.0.3"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "lodash": "^4.17.5",
+    "redux-saga": "^0.16.0",
+    "seamless-immutable": "^7.1.2"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "my-projects",
+  "version": "1.0.0",
+  "description": "Interbit Projects - My Projects Covenant",
+  "author": "BTL GROUP LTD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "seamless-immutable": "^7.1.3",
+    "interbit-covenant-utils": "0.3.0",
+    "interbit-validate": "../../../../interbit-validate",
+    "interbit-core-buffer": "../../../../interbit-core-buffer"
+  }
+}

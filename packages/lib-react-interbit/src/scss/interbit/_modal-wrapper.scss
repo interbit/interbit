@@ -1,0 +1,69 @@
+.ibweb-modal-wrapper {
+
+  .modal-content {
+    border-radius: $border-radius-lg;
+    padding: 40px 40px 24px 40px;
+  }
+
+  .modal-header {
+    padding: 0 0 $margin-md 0;
+    border-bottom: 0;
+
+    h2 {
+      margin: 0 0 $margin-md 0;
+    }
+
+    .ibweb-content-bar {
+      margin-bottom: -16px;
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+  }
+
+  .modal-body {
+    padding: 0 0 8px 0;
+
+    ul {
+      background: $ib-grey;
+      border-radius: $border-radius-lg;
+      margin-bottom: $margin-x-sm;
+
+      li {
+        margin: 0 $margin-sm;
+        padding: $margin-sm 0;
+        border-bottom: 1px solid $ib-dark-grey;
+      }
+
+      li:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .ibweb-button.margin-md {
+      margin: 24px 0;
+    }
+  }
+
+  .modal-footer {
+    padding: 24px 0 0 0;
+    border-top: 1px solid #e6e6e6;
+    text-align: left;
+
+    a {
+      color: $ib-blue;
+
+      &.link-red {
+        color: $ib-red;
+      }
+    }
+
+    .ibweb-button {
+      color: $ib-white;
+
+      &.secondary {
+        color: $ib-blue;
+      }
+    }
+  }
+}

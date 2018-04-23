@@ -1,0 +1,67 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "airbnb",
+    "standard-react",
+    "prettier-standard"
+  ],
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "jsx-a11y/anchor-is-valid": "off", // Doesn't behave well with <Link /> components
+    "import/no-extraneous-dependencies": "off", // <-- Because of Lerna
+    "import/no-named-as-default": "off",
+    "import/prefer-default-export": "off",
+    "func-names": "off", // <-- Allow unnamed generator functions  (https://github.com/eslint/eslint/issues/9511)
+    "no-await-in-loop": "off",
+    "no-console": "off",
+    "no-continue": "off",
+    "no-restricted-syntax": "off",
+    "no-shadow": "error",
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": [
+          "__REDUX_DEVTOOLS_EXTENSION__",
+          "_bar"
+        ]
+      }
+    ],
+    "prefer-destructuring": "off",
+    "react/jsx-closing-bracket-location": "off", // <-- Conflicts with prettier standard
+    "react/jsx-filename-extension": "off",
+    "react/no-set-state": "error",
+    "react/prefer-stateless-function": "off",
+    "react/no-array-index-key": "off",
+    "max-len": "off"
+  },
+  "settings": {
+    "ignore": [
+      "**/node_modules"
+    ]
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 7,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.Test.js",
+        "*.test.js"
+      ],
+      "env": {
+        "mocha": true
+      },
+      "rules": {
+        "func-names": "off" // <-- Avoids "unexpected unnamed async function" in async mocha tests
+      }
+    }
+  ]
+}

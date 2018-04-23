@@ -1,0 +1,132 @@
+// Sidebar nav menu for developer pages
+
+.ibweb-sidebar-nav {
+  max-width: 225px;
+
+  .nav {
+    margin-bottom: $margin-sm;
+  }
+
+  h4 {
+    margin-bottom:0;
+    color: $ib-black;
+    line-height: 1.38;
+  }
+
+  ul {
+    margin-left: -8px;
+
+    li {
+      padding: 0 $margin-x-sm;
+      border-radius: $border-radius-x-sm;
+
+      a {
+        padding: 0;
+        color: $ib-blue;
+        line-height: 1.38;
+        font-weight: 500;
+      }
+
+      a:hover,
+      a:focus {
+        background-color: transparent;
+        color: $ib-blue;
+      }
+
+      &.active {
+        background: $ib-light-blue;
+      }
+    }
+  }
+
+  #sidebar-nav-accordion {
+    padding: $margin-sm;
+
+    .panel {
+      border: none;
+      border-radius: 0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+      background-color: transparent;
+
+      .panel-heading {
+        padding: 12px 0;
+        background-color: transparent;
+        border-top: 1px solid $ib-dark-grey;
+      }
+
+      &:first-child .panel-heading {
+        border-top: none;
+      }
+    }
+
+
+    .panel-title {
+      position: relative;
+
+      a {
+        display: block;
+        width: 100%;
+        font-weight: 700;
+        color: $ib-blue;
+      }
+
+      a:hover, a:active, a:focus {
+        text-decoration: none;
+      }
+
+      a:after {
+        position: absolute;
+        right: 0;
+        font-family: FontAwesome;
+        content: '\f0d7';
+        color: $ib-blue;
+      }
+
+      a[aria-expanded=true]:after {
+        content: '\f0d8';
+      }
+    }
+
+    .panel-body {
+      padding: 0 0 0 $margin-sm;
+      border-top: none;
+
+      ul {
+        margin-bottom: 0;
+      }
+
+      li {
+        padding: 12px 0;
+        border-bottom: 1px solid $ib-dark-grey;
+      }
+
+      li:last-child {
+        border-bottom: none;
+      }
+
+      li.active {
+        background: transparent;
+
+        a {
+          color: $ib-black;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-lg-min - 1) {
+  .ibweb-sidebar-nav {
+    max-width: none;
+    margin: 0 -8px $margin-md -8px;
+    background-color: $ib-grey;
+    border-radius: $border-radius-sm;
+  }
+}
+
+@media (max-width: $screen-sm-min - 1) {
+  .ibweb-sidebar-nav {
+    display: none;
+  }
+}

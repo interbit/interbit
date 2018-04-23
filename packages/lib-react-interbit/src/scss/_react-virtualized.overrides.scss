@@ -1,0 +1,22 @@
+@import 'variables';
+@import 'mixins';
+
+.ReactVirtualized__Table {
+  background-color: $alt-gray;
+
+  :focus {
+    // Disable the chrome-default focus outline
+    outline: none !important;
+  }
+
+  .ReactVirtualized__Table__row {
+    cursor: pointer;
+  }
+
+  .ReactVirtualized__Table__headerRow {
+    @include header;
+    padding-top: 6px;
+    height: $react-virtualized-header-height;
+    cursor: default !important;
+  }
+}

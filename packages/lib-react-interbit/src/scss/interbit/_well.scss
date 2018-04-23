@@ -1,0 +1,12 @@
+.ibweb-well {
+
+  &.email {
+    padding: $margin-sm $margin-md;
+    margin: 0 $margin-md;
+    border: 1px solid $ib-grey;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: $ib-white;
+    color: $ib-green;
+  }
+}

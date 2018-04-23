@@ -1,0 +1,40 @@
+// app-interbit-io Developer page overrides
+
+.ibweb-dev-sidebar-list-row {
+  position: relative;
+  margin-bottom: $margin-md;
+
+  .ibweb-dev-sidebar-col {
+    position: absolute;
+    top: -36px;
+    left: 660px;
+  }
+}
+
+@media (max-width: $screen-lg-min - 1) {
+  .ibweb-dev-sidebar-list-row {
+    .ibweb-dev-sidebar-col {
+      position: relative;
+      top: auto;
+      left: auto;
+      margin-top: $margin-lg;
+    }
+
+    h4 {
+      font-size: $font-size-lg;
+    }
+
+    li {
+      width: 50%;
+      float: left;
+    }
+  }
+}
+
+@media (max-width: $screen-sm-min - 1) {
+  .ibweb-dev-sidebar-list-row {
+    .ibweb-dev-sidebar-col {
+      margin-top: $margin-md;
+    }
+  }
+}

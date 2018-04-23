@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_Attention</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bar_Attention" transform="translate(-16.000000, -16.000000)">
+            <g id="Bar:-Attention">
+                <g id="Group" transform="translate(16.000000, 16.000000)">
+                    <g id="icon_Attention">
+                        <rect id="Icon" fill="#D0021B" x="0" y="0" width="64" height="64" rx="16"></rect>
+                        <path d="M28.0909176,49.7714533 L28.0909176,45.5252533 C28.0909176,44.84672 28.6457412,44.2969867 29.3299765,44.2969867 L34.5008,44.2969867 C35.1850353,44.2969867 35.7393882,44.84672 35.7393882,45.5252533 L35.7393882,49.7714533 C35.7393882,50.4499867 35.1850353,51.0001867 34.5008,51.0001867 L29.3299765,51.0001867 C28.6457412,51.0001867 28.0909176,50.4499867 28.0909176,49.7714533" id="Fill-1" fill="#FFFFFF"></path>
+                        <path d="M29.0577652,38.5814875 L27.0050696,14.7718268 C26.9409826,14.0302911 27.521113,13.3924161 28.2595478,13.3924161 L36.5688522,13.3924161 C37.307287,13.3924161 37.8869391,14.0302911 37.8233304,14.7718268 L35.7701565,38.5814875 C35.7137217,39.2372018 35.1689826,39.7405589 34.5156783,39.7405589 L30.3122435,39.7405589 C29.6589391,39.7405589 29.1142,39.2372018 29.0577652,38.5814875" id="Fill-4" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

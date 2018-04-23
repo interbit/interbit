@@ -1,0 +1,15 @@
+{
+  "name": "public",
+  "version": "1.0.0",
+  "description": "Interbit Accounts - Public Covenant",
+  "author": "BTL GROUP LTD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "interbit-covenant-utils": "0.3.0",
+    "seamless-immutable": "^7.1.3"
+  }
+}

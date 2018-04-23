@@ -1,0 +1,77 @@
+.ibweb-card {
+  padding: $margin-sm;
+  height: 520px;
+
+  img {
+    width: 100%;
+    border-radius: $border-radius-md;
+    margin-bottom: $margin-sm;
+
+    &:before {
+      display: block;
+      content: '';
+      padding-top: 100%;
+    }
+  }
+
+  h3 {
+    line-height: 1.17;
+  }
+
+  p {
+    line-height: 1.38;
+  }
+
+  .content {
+    min-height: 92px;
+  }
+
+  .links {
+    a:after {
+      display: inline-block;
+      margin-left: 8px;
+      font-family: FontAwesome;
+      content: '\f105';
+    }
+  }
+
+  &.sm {
+    height: 235px;
+
+    img {
+      width: 64px;
+      height: 64px;
+    }
+
+    h3 {
+      font-size: $font-size-sm
+    }
+
+    .content {
+      min-height: 88px;
+    }
+  }
+
+  @media (max-width: $screen-lg-min - 1) {
+    padding: $margin-sm 0;
+    max-width: 288px;
+    margin: 0 auto $margin-md auto;
+    height: auto;
+
+    .content {
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: $screen-sm-min - 1) {
+    &.sm {
+      height: auto;
+      margin-bottom: $margin-sm;
+
+      .content {
+        min-height: 0;
+      }
+    }
+
+  }
+}

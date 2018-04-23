@@ -1,0 +1,120 @@
+.App .Account-sidebar {
+  margin-top: 10px;
+  padding: 0;
+  background-color: #FFFFFF; }
+  .App .Account-sidebar h4 {
+    margin: 15px;
+    font-weight: 900; }
+    @media (max-width: 767px) {
+      .App .Account-sidebar h4 {
+        margin-top: 0px; } }
+  .App .Account-sidebar .nav > li > a {
+    border-radius: 2px;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 8px 15px; }
+    .App .Account-sidebar .nav > li > a:hover {
+      color: #333;
+      background-color: transparent; }
+  .App .Account-sidebar .nav-pills > li.active > a,
+  .App .Account-sidebar .nav-pills > li.active > a:focus,
+  .App .Account-sidebar .nav-pills > li.active > a:hover {
+    background-color: #E7E7E7;
+    color: #333; }
+.App .Update {
+  width: 130px; }
+  @media (max-width: 767px) {
+    .App .Update {
+      padding: 8px 20px;
+      width: 100%; } }
+.App .My-providers th {
+  color: #333; }
+.App .My-providers .Manage-provider > span.glyphicon:hover {
+  color: #333; }
+
+.ibweb.app-account .ibweb-navbar .ibweb-ib-icon {
+  padding: 18px 0;
+  width: auto;
+  height: auto; }
+.ibweb.app-account .ibweb-navbar .nav-main-menu li a {
+  font-weight: 500;
+  color: #17A6F2;
+  line-height: 1.38; }
+.ibweb.app-account .ibweb-navbar .nav-main-menu li.active a {
+  color: #666; }
+.ibweb.app-account .form-group {
+  margin-bottom: 16px; }
+  .ibweb.app-account .form-group label {
+    margin-bottom: 8px; }
+  .ibweb.app-account .form-group .form-control-static {
+    padding: 0;
+    min-height: 0; }
+.ibweb.app-account .account-profile-form .control-label {
+  text-transform: capitalize; }
+.ibweb.app-account .account-edit-button {
+  color: #17A6F2;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: transparent; }
+  .ibweb.app-account .account-edit-button:hover, .ibweb.app-account .account-edit-button:active, .ibweb.app-account .account-edit-button:focus, .ibweb.app-account .account-edit-button:active.focus, .ibweb.app-account .account-edit-button.active:hover, .ibweb.app-account .account-edit-button.active:focus, .ibweb.app-account .account-edit-button.active.focus {
+    background: #FFF;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+.ibweb.app-account .app-auth img {
+  max-width: 100%;
+  margin-bottom: 64px; }
+.ibweb.app-account .app-auth h3 {
+  margin-bottom: 32px; }
+.ibweb.app-account .app-auth p {
+  margin-bottom: 32px; }
+.ibweb.app-account .app-auth .table {
+  margin-bottom: 16px;
+  background: transparent; }
+  .ibweb.app-account .app-auth .table td {
+    padding: 20px 16px;
+    color: #666;
+    border-color: #e6e6e6; }
+  .ibweb.app-account .app-auth .table td:first-child {
+    text-transform: capitalize;
+    font-weight: 500; }
+  .ibweb.app-account .app-auth .table td:last-child {
+    text-align: right; }
+  .ibweb.app-account .app-auth .table td[colspan="2"] {
+    text-align: left; }
+  .ibweb.app-account .app-auth .table tr:last-child td {
+    border-bottom: 1px solid #e6e6e6; }
+  .ibweb.app-account .app-auth .table .form-td {
+    padding: 16px 0; }
+    .ibweb.app-account .app-auth .table .form-td input {
+      margin: 0; }
+.ibweb.app-account .app-auth .table.logged-out {
+  margin-bottom: 32px; }
+  .ibweb.app-account .app-auth .table.logged-out td:last-child {
+    color: #999; }
+.ibweb.app-account .app-auth .btn-container {
+  margin-bottom: 64px; }
+.ibweb.app-account .app-auth .text-btn-container {
+  text-align: center; }
+
+.ibweb.app-account .ibweb-page.home .header {
+  margin-top: -65px; }
+.ibweb.app-account .ibweb-page.create-account .ibweb-content-bar.github .error {
+  color: #d0021b; }
+
+.ibweb-modal-wrapper.modal-sign-in .modal-footer .text-button:last-child {
+  float: right; }
+
+.ibweb-modal-wrapper.modal-attention .modal-header h2 {
+  margin-bottom: 0; }
+.ibweb-modal-wrapper.modal-attention .modal-body {
+  padding-bottom: 16px; }
+.ibweb-modal-wrapper.modal-attention .modal-footer {
+  padding-bottom: 16px; }
+  .ibweb-modal-wrapper.modal-attention .modal-footer .checkbox {
+    margin-bottom: 32px; }
+  .ibweb-modal-wrapper.modal-attention .modal-footer .ibweb-button {
+    margin-top: 32px; }
+
+/*# sourceMappingURL=App.css.map */

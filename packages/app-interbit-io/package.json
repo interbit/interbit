@@ -1,0 +1,45 @@
+{
+    "name": "app-interbit-io",
+    "version": "0.3.7",
+    "private": true,
+    "license": "MIT",
+    "author": "BTL GROUP LTD",
+    "dependencies": {
+        "cross-env": "^5.1.4",
+        "interbit": "^0.3.7",
+        "interbit-core": "0.5.6",
+        "interbit-core-buffer": "^0.3.7",
+        "interbit-covenant-utils": "0.5.6",
+        "interbit-middleware": "^0.3.7",
+        "lib-react-interbit": "^0.3.7",
+        "react": "^16.2.0",
+        "react-bootstrap": "^0.32.1",
+        "react-dom": "^16.2.0",
+        "react-markdown": "^3.1.5",
+        "react-redux": "5.0.6",
+        "react-router-bootstrap": "^0.24.4",
+        "react-router-dom": "^4.2.2",
+        "react-scripts": "1.1.0",
+        "react-styleguidist": "^6.2.4",
+        "redux": "3.7.2",
+        "redux-devtools-extension": "^2.13.2",
+        "redux-saga": "^0.16.0",
+        "seamless-immutable": "^7.1.2",
+        "serve": "^6.5.5"
+    },
+    "devDependencies": {
+        "react-scripts": "1.1.0"
+    },
+    "scripts": {
+        "start": "cross-env REACT_APP_INTERBIT_WEB_SERVER=123 REACT_APP_INTERBIT_PORT=5000 react-scripts start",
+        "build": "react-scripts build",
+        "serve": "cross-env serve build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject",
+        "interbit:start": "cross-env COVENANT_DEV_MODE=true DB_PATH=./db-interbit interbit start",
+        "interbit:create": "cross-env COVENANT_DEV_MODE=true interbit create",
+        "interbit:build": "interbit build",
+        "interbit:deploy": "interbit deploy"
+    },
+    "proxy": "http://localhost:5000/"
+}

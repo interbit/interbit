@@ -1,0 +1,27 @@
+{
+    "title": "Interbit",
+    "description": "Interbit SDK Documentation",
+    "plugins": [
+        "-sharing",
+        "-highlighting",
+        "favicon",
+        "exercises",
+        "expandable-chapters-small",
+        "prism",
+        "theme-interbit"
+    ],
+    "variables": {
+        "themeInterbit": {
+        }
+    },
+    "pluginsConfig": {
+        "favicon":{
+            "shortcut": "assets/img/favicon.ico"
+        },
+        "prism": {
+          "css": [
+            "prismjs/themes/prism-okaidia.css"
+          ]
+        }
+    }
+}

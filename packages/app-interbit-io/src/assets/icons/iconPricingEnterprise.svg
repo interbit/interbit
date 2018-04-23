@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_Enterprise</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M16,0 L162,0 C170.836556,-1.623249e-15 178,7.163444 178,16 L178,557 C178,565.836556 170.836556,573 162,573 L16,573 C7.163444,573 1.082166e-15,565.836556 0,557 L0,16 C-1.082166e-15,7.163444 7.163444,1.623249e-15 16,0 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="178" height="573" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Interbit-(Pricing)" transform="translate(-730.000000, -1169.000000)">
+            <g id="Tombstones" transform="translate(132.000000, 1153.000000)">
+                <g id="Tombstone" transform="translate(582.000000, 0.000000)">
+                    <use id="Background" stroke="#E6E6E6" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" stroke-dasharray="8" xlink:href="#path-1"></use>
+                    <g id="icon_Enterprise" transform="translate(16.000000, 16.000000)">
+                        <rect id="Icon" fill="#999999" x="0" y="0" width="64" height="64" rx="16"></rect>
+                        <path d="M32.9124373,17.6554233 L36.3392918,27.8012965 L47.0465732,27.9252593 C47.9679501,27.9359868 48.3493739,29.110057 47.6103653,29.6595456 L39.019986,36.0531622 L42.2108345,46.2753203 C42.4849829,47.1549789 41.4873212,47.8796842 40.7352012,47.3468828 L32.000596,41.1523218 L23.2647988,47.3456908 C22.5138707,47.8784922 21.5150171,47.152595 21.7891655,46.2741283 L24.980014,36.0519703 L16.3896347,29.6583537 C15.6506261,29.108865 16.0320499,27.9347949 16.9534268,27.9240673 L27.6607082,27.8001046 L31.0875627,17.6542313 C31.3831662,16.7817243 32.6180258,16.7817243 32.9124373,17.6554233 Z M32,48 C32.5522847,48 33,48.4477153 33,49 L33,59 C33,59.5522847 32.5522847,60 32,60 C31.4477153,60 31,59.5522847 31,59 L31,49 C31,48.4477153 31.4477153,48 32,48 Z M38,52 C38.5522847,52 39,52.4477153 39,53 L39,59 C39,59.5522847 38.5522847,60 38,60 C37.4477153,60 37,59.5522847 37,59 L37,53 C37,52.4477153 37.4477153,52 38,52 Z M26,52 C26.5522847,52 27,52.4477153 27,53 L27,59 C27,59.5522847 26.5522847,60 26,60 C25.4477153,60 25,59.5522847 25,59 L25,53 C25,52.4477153 25.4477153,52 26,52 Z" id="Combined-Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

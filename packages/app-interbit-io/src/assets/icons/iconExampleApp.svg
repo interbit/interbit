@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_ExampleAppsBlue</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon_ExampleAppsBlue">
+            <rect id="Icon" fill="#17A6F2" x="0" y="0" width="64" height="64" rx="16"></rect>
+            <rect id="Rectangle" stroke="#FFFFFF" x="12.5" y="12.5" width="39" height="39" rx="5"></rect>
+            <polygon id="Page-1" fill="#FFFFFF" points="41.2780752 16 41.6449567 20.5228206 38.1915365 17.7113247 37 19.6976923 41.3093193 21.6532891 37.0302973 23.6396566 38.1915365 25.6567948 41.6757274 22.7842309 41.2473044 27.3681196 43.5091882 27.3681196 43.0509413 22.7842309 46.5957268 25.6567948 47.7564926 23.6396566 43.4784174 21.6532891 47.7872633 19.6976923 46.5957268 17.7113247 43.0812386 20.5228206 43.4784174 16"></polygon>
+        </g>
+    </g>
+</svg>

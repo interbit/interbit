@@ -1,0 +1,80 @@
+@import 'variables';
+
+@mixin header {
+  background-color: $dark-gray;
+  color: $white-smoke;
+  font-weight: $light-font-weight;
+}
+
+
+@mixin modal {
+  // width: 80%;
+}
+
+@mixin modalHeader {
+  background-color: $dark-gray;
+  padding: 13px;
+  h4, button > span {
+    color: $white-smoke;
+    font-weight: $light-font-weight;
+  }
+}
+
+@mixin modalBody {
+  position: relative;
+  padding: 15px 15px 0px;
+}
+
+
+@mixin formContainer {
+  margin-bottom: 15px;
+
+  :global {
+    .form-group {
+      margin-bottom: 0;
+    }
+  }
+
+  label {
+    padding-top: 0 !important;
+  }
+
+  input {
+    font-size: $font-size-small;
+    border: $report-input-border;
+  }
+
+  select {
+    font-size: $font-size-small;
+    border: $report-input-border;
+  }
+
+  textarea {
+    font-size: $font-size-small;
+    border: $report-input-border;
+  }
+}
+
+
+// Tables
+@mixin alternatingRow {
+  background-color: $bs-tbl-gray;
+}
+
+@mixin selectedRow {
+  background-color: $tbl-border-gray;
+}
+
+// Button colors
+
+@mixin darkButton {
+  color: $white-smoke;
+  background-color: $dark-gray;
+  border-color: $dark-gray;
+}
+
+@mixin lightButton {
+  color: $white-smoke;
+  background-color: $light-gray;
+  border-color: $light-gray;
+}

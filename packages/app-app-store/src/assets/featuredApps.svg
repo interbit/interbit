@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" height="400" viewBox="0 0 400 400">
+    <defs>
+        <radialGradient id="a" fx="50%" fy="50%" gradientTransform="matrix(0 1 -.9975 0 .999 0)">
+            <stop offset="0%" stop-color="#FFD954"/>
+            <stop offset="100%" stop-color="#F7F7F7"/>
+        </radialGradient>
+        <path id="c" d="M35.324 0h29.352C76.96 0 81.413 1.279 85.904 3.68c4.49 2.402 8.014 5.926 10.416 10.416 2.401 4.49 3.68 8.945 3.68 21.228v29.115c0 12.283-1.279 16.737-3.68 21.228-2.402 4.49-5.926 8.014-10.416 10.416-4.49 2.401-8.945 3.68-21.228 3.68H35.324c-12.283 0-16.737-1.279-21.228-3.68-4.49-2.402-8.014-5.926-10.416-10.416C1.28 81.177 0 76.722 0 64.439V35.324C0 23.04 1.279 18.587 3.68 14.096 6.082 9.606 9.606 6.082 14.096 3.68 18.586 1.28 23.041 0 35.324 0zM25.61 43.848c-.071.297-.142.593-.071.816 0 .667.283 1.261.922 1.78l12.415 9.422-4.612 15.282c-.354 1.113-.07 2.077.71 2.745.78.593 1.632.593 2.696-.223l12.344-9.347 12.344 9.347c.567.445.993.594 1.49.594.425 0 .85-.149 1.205-.445.852-.668 1.065-1.558.71-2.745l-4.611-15.282 12.415-9.422c.638-.445.922-1.039.922-1.78-.071-.223-.071-.594-.142-.816-.355-1.039-1.064-1.558-2.2-1.558H56.897l-4.895-15.06c-.213-1.187-.922-1.706-1.986-1.706s-1.774.593-1.987 1.706l-4.966 15.06H27.881c-1.206.074-1.916.593-2.27 1.632z"/>
+        <filter id="b" width="400%" height="400.7%" x="-150%" y="-150.4%" filterUnits="objectBoundingBox">
+            <feOffset in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="50"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0"/>
+        </filter>
+        <path id="d" d="M25.61 43.502c-.07.296-.141.593-.07.816 0 .667.283 1.26.922 1.78l12.415 9.422-4.612 15.282c-.354 1.113-.07 2.077.71 2.745.78.593 1.632.593 2.696-.223l12.344-9.347 12.344 9.347c.567.445.993.594 1.49.594.425 0 .85-.149 1.205-.446.852-.667 1.065-1.557.71-2.744l-4.611-15.283 12.415-9.421c.638-.445.922-1.039.922-1.78-.071-.223-.071-.594-.142-.817-.355-1.038-1.064-1.558-2.2-1.558H56.897l-4.895-15.06c-.213-1.186-.922-1.705-1.986-1.705s-1.774.593-1.987 1.706l-4.966 15.06H27.881c-1.206.074-1.916.593-2.27 1.632z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd" transform="translate(-83 -278)">
+        <rect width="566" height="742" fill="#F7F7F7" rx="8"/>
+        <g transform="translate(83 278.573)">
+            <rect width="400" height="399" fill="url(#a)" opacity=".9" rx="13.525"/>
+            <rect width="98" height="98" x="36" y="151" stroke="#F7F7F7" stroke-width="2" rx="34.659"/>
+            <rect width="98" height="98" x="36" y="267" stroke="#F7F7F7" stroke-width="2" rx="34.659"/>
+            <rect width="98" height="98" x="36" y="35" stroke="#F7F7F7" stroke-width="2" rx="34.659"/>
+            <rect width="98" height="98" x="151" y="35" stroke="#F7F7F7" stroke-width="2" rx="34.659"/>
+            <rect width="98" height="98" x="151" y="267" stroke="#F7F7F7" stroke-width="2" rx="34.659"/>
+            <rect width="98" height="98" x="268" y="151" stroke="#F7F7F7" stroke-width="2" rx="34.659"/>
+            <rect width="98" height="98" x="268" y="267" stroke="#F7F7F7" stroke-width="2" rx="34.659"/>
+            <rect width="98" height="98" x="268" y="35" stroke="#F7F7F7" stroke-width="2" rx="34.659"/>
+            <g transform="translate(151 150)">
+                <use fill="#000" filter="url(#b)" xlink:href="#c"/>
+                <use fill="#FFF" xlink:href="#c"/>
+            </g>
+            <g transform="translate(151 150)">
+                <use fill="#F5A623" style="mix-blend-mode:soft-light" xlink:href="#d"/>
+                <use fill="#000" style="mix-blend-mode:soft-light" xlink:href="#d"/>
+                <use fill="#F8E71C" fill-opacity=".6" style="mix-blend-mode:soft-light" xlink:href="#d"/>
+            </g>
+        </g>
+    </g>
+</svg>

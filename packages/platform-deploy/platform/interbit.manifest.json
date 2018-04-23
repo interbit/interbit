@@ -1,0 +1,418 @@
+{
+  "peers": [
+    "ib-dev----master.herokuapp.com",
+    "ib-dev----master.herokuapp.com"
+  ],
+  "apps": {
+    "account": {
+      "appChain": "accountsPublic",
+      "buildLocation": "../../app-account/build",
+      "browserChains": [
+        "accountsPublic"
+      ]
+    },
+    "template": {
+      "appChain": "templatePublic",
+      "buildLocation": "../../template/build",
+      "browserChains": [
+        "templatePublic"
+      ]
+    }
+  },
+  "covenants": {
+    "app-account-my-account": {
+      "hash": "7d82786c0e53d1e7e598c26253e0adb8c5f145160b4737c234b04841562f30a2",
+      "filename": "covenants/7d82786c0e53d1e7e598c26253e0adb8c5f145160b4737c234b04841562f30a2.tgz"
+    },
+    "app-account-public": {
+      "hash": "899eb9b94b3bb5a3b3a1005ec3fe7382a9b7a4606794e849c060695fb98b0ced",
+      "filename": "covenants/899eb9b94b3bb5a3b3a1005ec3fe7382a9b7a4606794e849c060695fb98b0ced.tgz"
+    },
+    "app-account-control": {
+      "hash": "ed750861c5f9fda2f58e14e4352d1a8839f25780eef4b83858bec215d5747155",
+      "filename": "covenants/ed750861c5f9fda2f58e14e4352d1a8839f25780eef4b83858bec215d5747155.tgz"
+    },
+    "app-account-github-kyc": {
+      "hash": "c3a8bd2b0952ec109f1ea5f60e9c82a7ab9037d4e9831d18ebbd6e688455b083",
+      "filename": "covenants/c3a8bd2b0952ec109f1ea5f60e9c82a7ab9037d4e9831d18ebbd6e688455b083.tgz"
+    },
+    "public": {
+      "hash": "6f540063db9067d5bff45261d9a7d615ec199c74c3998bf88e36a9abb063349e",
+      "filename": "covenants/6f540063db9067d5bff45261d9a7d615ec199c74c3998bf88e36a9abb063349e.tgz"
+    },
+    "control": {
+      "hash": "f1b753b931fa1cfca5975978db31888c941c31385a4ea5256bc22dde02692ced",
+      "filename": "covenants/f1b753b931fa1cfca5975978db31888c941c31385a4ea5256bc22dde02692ced.tgz"
+    },
+    "private": {
+      "hash": "3cfa739136275d86c3232cfe0ecf366fa3874916f50616762575e2fa5b1ed48c",
+      "filename": "covenants/3cfa739136275d86c3232cfe0ecf366fa3874916f50616762575e2fa5b1ed48c.tgz"
+    }
+  },
+  "chains": {
+    "accountsControl": "81ff94b939efb054070fb4dc2a0fadc7e756f96b9c266c7bd6d7d5ce47398972",
+    "accountsPublic": "b98303bbc3a7dd8cf0177dc4a395b7c562af3bc37b24ef945f52d999e9a1c4aa",
+    "accountsGithubAuth": "d075c8cad460ba2b9a5f2bfd11e321aa0b6bff9ef1f0c41b9f6d871899a9f075",
+    "templatePublic": "25e9a63bdf15215437ef7ce529afc4d27584599a91e6c7c5056d40ee78325fdc",
+    "templateControl": "ca5050e99ac23af760379aa857e845a61e5b5f15c6e17ffd084ffff90417a05c",
+    "interbitRoot": "04fefd9b1c6e0fd3920e86e58159e5a185cdf1788a58ea70ee9fe32167f8c9e7"
+  },
+  "genesisBlocks": {
+    "accountsControl": {
+      "content": {
+        "previousHash": "genesis",
+        "stateHash": "49f1a029de81ab58a8c38b74348839072e7656f871278659960e7205c94f3c37",
+        "actions": [],
+        "errors": {},
+        "redispatches": {},
+        "height": 0,
+        "timestamp": 1524454668165,
+        "seed": 0.766311914023329,
+        "configChanged": true,
+        "timeToCreateBlock": 0,
+        "state": {
+          "interbit": {
+            "config": {
+              "consensus": "PoA",
+              "providing": [],
+              "consuming": [],
+              "acl": {
+                "actionPermissions": {
+                  "*": [
+                    "root"
+                  ]
+                },
+                "roles": {
+                  "root": [
+                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+                  ]
+                }
+              },
+              "blockMaster": "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
+              "covenantHash": "ed750861c5f9fda2f58e14e4352d1a8839f25780eef4b83858bec215d5747155"
+            },
+            "configChanges": {}
+          }
+        }
+      },
+      "contentHash": "3489dfe3d35e2ead061418c8a1e2e246c8cf642f615ecad2a9c349ac9e376547",
+      "signatures": {
+        "GENESIS": "GENESIS"
+      },
+      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
+      "blockHash": "81ff94b939efb054070fb4dc2a0fadc7e756f96b9c266c7bd6d7d5ce47398972"
+    },
+    "accountsPublic": {
+      "content": {
+        "previousHash": "genesis",
+        "stateHash": "e7349defe42a2cf84c61663d27a9bb9e05e8811d05a6294cf4019dd8a0fc28da",
+        "actions": [],
+        "errors": {},
+        "redispatches": {},
+        "height": 0,
+        "timestamp": 1524454668165,
+        "seed": 0.6861976338950606,
+        "configChanged": true,
+        "timeToCreateBlock": 0,
+        "state": {
+          "interbit": {
+            "config": {
+              "consensus": "PoA",
+              "providing": [],
+              "consuming": [],
+              "acl": {
+                "actionPermissions": {
+                  "*": [
+                    "root"
+                  ]
+                },
+                "roles": {
+                  "root": [
+                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+                  ]
+                }
+              },
+              "blockMaster": "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
+              "covenantHash": "899eb9b94b3bb5a3b3a1005ec3fe7382a9b7a4606794e849c060695fb98b0ced"
+            },
+            "configChanges": {}
+          }
+        }
+      },
+      "contentHash": "f4884a163f0a5ab5cefb4c8ca8622bc520b326b2e97a146edfc2bf03a5569f52",
+      "signatures": {
+        "GENESIS": "GENESIS"
+      },
+      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
+      "blockHash": "b98303bbc3a7dd8cf0177dc4a395b7c562af3bc37b24ef945f52d999e9a1c4aa"
+    },
+    "accountsGithubAuth": {
+      "content": {
+        "previousHash": "genesis",
+        "stateHash": "b1df5a61816e1ca7da06fb0352f02ddbd7f91648efafed898875914758b5f238",
+        "actions": [],
+        "errors": {},
+        "redispatches": {},
+        "height": 0,
+        "timestamp": 1524454668165,
+        "seed": 0.36744838184897866,
+        "configChanged": true,
+        "timeToCreateBlock": 0,
+        "state": {
+          "interbit": {
+            "config": {
+              "consensus": "PoA",
+              "providing": [],
+              "consuming": [],
+              "acl": {
+                "actionPermissions": {
+                  "*": [
+                    "root"
+                  ]
+                },
+                "roles": {
+                  "root": [
+                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+                  ]
+                }
+              },
+              "blockMaster": "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
+              "covenantHash": "c3a8bd2b0952ec109f1ea5f60e9c82a7ab9037d4e9831d18ebbd6e688455b083"
+            },
+            "configChanges": {}
+          }
+        }
+      },
+      "contentHash": "4bcffc0c4478d72eaffba51996231e06ba6e7309a1d06aed69223f0d1ad24f6c",
+      "signatures": {
+        "GENESIS": "GENESIS"
+      },
+      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
+      "blockHash": "d075c8cad460ba2b9a5f2bfd11e321aa0b6bff9ef1f0c41b9f6d871899a9f075"
+    },
+    "templatePublic": {
+      "content": {
+        "previousHash": "genesis",
+        "stateHash": "5f2212de6941a6577cb1d80ffc0aa69b7a8c5cb5f36d521e418340a989eebeae",
+        "actions": [],
+        "errors": {},
+        "redispatches": {},
+        "height": 0,
+        "timestamp": 1524454668165,
+        "seed": 0.39691611832117357,
+        "configChanged": true,
+        "timeToCreateBlock": 0,
+        "state": {
+          "interbit": {
+            "config": {
+              "consensus": "PoA",
+              "providing": [],
+              "consuming": [],
+              "acl": {
+                "actionPermissions": {
+                  "*": [
+                    "root"
+                  ]
+                },
+                "roles": {
+                  "root": [
+                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+                  ]
+                }
+              },
+              "blockMaster": "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
+              "covenantHash": "6f540063db9067d5bff45261d9a7d615ec199c74c3998bf88e36a9abb063349e"
+            },
+            "configChanges": {}
+          }
+        }
+      },
+      "contentHash": "e3d3710b982e7e95f47b1e0560a75841bb1549778d0df3f951667cc9fa0c62d2",
+      "signatures": {
+        "GENESIS": "GENESIS"
+      },
+      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
+      "blockHash": "25e9a63bdf15215437ef7ce529afc4d27584599a91e6c7c5056d40ee78325fdc"
+    },
+    "templateControl": {
+      "content": {
+        "previousHash": "genesis",
+        "stateHash": "bfc7f8d7fd8c2adb7bf46f8b812470cf1b2246a18ca32c373e87b7945e64923b",
+        "actions": [],
+        "errors": {},
+        "redispatches": {},
+        "height": 0,
+        "timestamp": 1524454668181,
+        "seed": 0.8894821590427358,
+        "configChanged": true,
+        "timeToCreateBlock": 0,
+        "state": {
+          "interbit": {
+            "config": {
+              "consensus": "PoA",
+              "providing": [],
+              "consuming": [],
+              "acl": {
+                "actionPermissions": {
+                  "*": [
+                    "root"
+                  ]
+                },
+                "roles": {
+                  "root": [
+                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+                  ]
+                }
+              },
+              "blockMaster": "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
+              "covenantHash": "f1b753b931fa1cfca5975978db31888c941c31385a4ea5256bc22dde02692ced"
+            },
+            "configChanges": {}
+          }
+        }
+      },
+      "contentHash": "e3aa88530ce6f7f4f8d27f0edffa42d66581ee5a266ff943fa7fbb0826d10f29",
+      "signatures": {
+        "GENESIS": "GENESIS"
+      },
+      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
+      "blockHash": "ca5050e99ac23af760379aa857e845a61e5b5f15c6e17ffd084ffff90417a05c"
+    },
+    "interbitRoot": {
+      "content": {
+        "previousHash": "genesis",
+        "stateHash": "0ca0cec2818d19ed4ea9a689b9424ce2cdd870aa0321a27d6438a3324ce406dc",
+        "actions": [],
+        "errors": {},
+        "redispatches": {},
+        "height": 0,
+        "timestamp": 1524454668181,
+        "seed": 0.27535488649963225,
+        "configChanged": true,
+        "timeToCreateBlock": 0,
+        "state": {
+          "interbit": {
+            "config": {
+              "consensus": "PoA",
+              "providing": [],
+              "consuming": [],
+              "acl": {
+                "actionPermissions": {
+                  "*": [
+                    "root"
+                  ]
+                },
+                "roles": {
+                  "root": [
+                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+                  ]
+                }
+              },
+              "blockMaster": "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+            },
+            "configChanges": {}
+          }
+        }
+      },
+      "contentHash": "ec031ca315de22152dc0c3118332ac9b2b080c4573a66828c2f27ddc810f5718",
+      "signatures": {
+        "GENESIS": "GENESIS"
+      },
+      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
+      "blockHash": "04fefd9b1c6e0fd3920e86e58159e5a185cdf1788a58ea70ee9fe32167f8c9e7"
+    }
+  },
+  "manifest": {
+    "interbitRoot": {
+      "chainId": "04fefd9b1c6e0fd3920e86e58159e5a185cdf1788a58ea70ee9fe32167f8c9e7",
+      "validators": [
+        "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+      ],
+      "covenants": {},
+      "chains": {
+        "accountsControl": {
+          "joins": {
+            "provide": [
+              {
+                "alias": "accountsPublic",
+                "path": [
+                  "privateChainHosting",
+                  "shared"
+                ],
+                "joinName": "HOSTING_SPONSOR"
+              }
+            ]
+          },
+          "covenant": "app-account-control"
+        },
+        "accountsPublic": {
+          "joins": {
+            "consume": [
+              {
+                "alias": "accountsGithubAuth",
+                "path": [
+                  "identityProviders",
+                  "oauth",
+                  "gitHub"
+                ],
+                "joinName": "OAUTH-CONFIG-GITHUB"
+              },
+              {
+                "alias": "accountsControl",
+                "path": [
+                  "privateChainHosting"
+                ],
+                "joinName": "HOSTING_SPONSOR"
+              }
+            ]
+          },
+          "covenant": "app-account-public"
+        },
+        "accountsGithubAuth": {
+          "joins": {
+            "provide": [
+              {
+                "alias": "accountsPublic",
+                "path": [
+                  "oAuth",
+                  "shared"
+                ],
+                "joinName": "OAUTH-CONFIG-GITHUB"
+              }
+            ]
+          },
+          "covenant": "app-account-github-kyc"
+        },
+        "templatePublic": {
+          "joins": {
+            "consume": [
+              {
+                "alias": "templateControl",
+                "path": [
+                  "interbitServices"
+                ],
+                "joinName": "INTERBIT_SERVICES"
+              }
+            ]
+          },
+          "covenant": "public"
+        },
+        "templateControl": {
+          "joins": {
+            "provide": [
+              {
+                "alias": "templatePublic",
+                "path": [
+                  "interbitServices",
+                  "shared"
+                ],
+                "joinName": "INTERBIT_SERVICES"
+              }
+            ]
+          },
+          "covenant": "control"
+        }
+      }
+    }
+  }
+}

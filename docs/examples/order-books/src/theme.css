@@ -1,0 +1,104 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	color: #777;
+	padding-bottom: 20px;
+	background-color: #f7f7f7;
+	min-width: 720px;
+}
+
+h1, h3 {
+	font-family: 'Quicksand', sans-serif;
+}
+
+.page-header {
+	border-color: #ddd;
+}
+
+.btn.btn-default,
+.btn.btn-default:focus {
+	color: #fff;
+	background-color: #62c0cb;
+	border-color: #62c0cb;
+	text-transform: uppercase;
+  font-size: 12px;
+  transition: .3s;
+  border-radius: 3px;
+}
+
+.btn.btn-default:hover {
+	color: #fff;
+	background-color: #1992ae;
+	border-color: #1992ae;
+}
+
+.form-control {
+	height: 32px;
+	border-radius: 3px;
+}
+
+.order-book-panel {
+	padding: 10px 22px;
+	background-color: #fff;
+	-webkit-box-shadow: 3px 3px 6px rgba(0,0,0,.05);
+  box-shadow: 3px 3px 6px rgba(0,0,0,.05);
+  margin-bottom: 20px;
+  height: 100%;
+}
+
+.order-book-panel h3 {
+	margin-bottom: 30px;
+	color: #1992ae;
+}
+
+.chain-details h3 {
+	padding-left: 26px; 
+}
+
+.place-order-form label.control-label,
+.cancel-order-form label.control-label {
+	text-align: left;
+	font-weight: 400;
+	font-family: 'Quicksand', sans-serif;
+}
+
+table thead tr th {
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+table thead tr th,
+table tbody tr td {
+	font-size: 12px;
+}
+
+.order-book-panel.chain-details {
+	padding: 10px 0 0;
+}
+
+pre {
+	background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0; 
+  border-top-width: 0;
+  margin-bottom: 0;
+  max-height: 800px;
+}
+
+.row.equal {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.equal > div[class^='col-'] {  
+  display: flex;
+  flex-direction: column;
+}
+
+.open-orders {
+	min-height: 199px;
+}
+
+.rst__tree {
+  border: 1px solid #ddd;
+  border-top: none;
+}

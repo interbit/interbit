@@ -1,0 +1,22 @@
+{
+  "name": "gitbook-plugin-theme-interbit",
+  "version": "0.2.0",
+  "description": "Gitbook custom theme for Interbit SDK",
+  "keywords": [
+    "gitbook",
+    "theme",
+    "interbit"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "BTL"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:BlockchainTechLtd/gitbook-plugin-theme-interbit.git"
+  },
+  "engines": {
+    "gitbook": ">=3.0.0"
+  }
+}

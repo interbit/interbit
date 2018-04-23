@@ -4,7 +4,6 @@ const utils = require('interbit-covenant-utils')
 
 const { actionTypes, actionCreators } = require('./actions')
 const { getOAuthProviderChainId } = require('./selectors')
-const { actionCreators: oAuthActionCreators } = require('../github-kyc/actions')
 const interbitServices = require('./interbitServices')
 
 const initialState = Immutable.from({
@@ -41,7 +40,7 @@ const reducer = (state = initialState, action) => {
 
       const providerChainId = getOAuthProviderChainId(state, oAuthProvider)
 
-      const actionToForward = oAuthActionCreators.oAuthCallback({
+      const actionToForward = actionCreators.oAuthCallback({
         consumerChainId,
         requestId,
         joinName,
@@ -64,7 +63,7 @@ const reducer = (state = initialState, action) => {
 
       const providerChainId = getOAuthProviderChainId(state, oAuthProvider)
 
-      const actionToForward = oAuthActionCreators.signOut({ consumerChainId })
+      const actionToForward = actionCreators.signOut({ consumerChainId })
 
       console.log('REMOTE DISPATCH: ', actionToForward)
       nextState = utils.remoteRedispatch(

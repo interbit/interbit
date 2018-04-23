@@ -29,6 +29,28 @@ const actionCreators = {
       oAuthProvider,
       consumerChainId
     }
+  }),
+
+  oAuthCallback: ({
+    requestId,
+    consumerChainId,
+    joinName,
+    temporaryToken
+  }) => ({
+    type: actionTypes.OAUTH_CALLBACK,
+    payload: {
+      requestId,
+      consumerChainId,
+      joinName,
+      temporaryToken
+    }
+  }),
+
+  signOut: ({ consumerChainId }) => ({
+    type: actionTypes.SIGN_OUT,
+    payload: {
+      consumerChainId
+    }
   })
 }
 

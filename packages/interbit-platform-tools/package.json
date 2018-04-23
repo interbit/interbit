@@ -1,6 +1,6 @@
 {
   "name": "interbit-platform-tools",
-  "version": "1.0.0",
+  "version": "0.4.7",
   "description": "Anything specific to platform deployment and pipelines, url sniffing",
   "private": true,
   "main": "index.js",

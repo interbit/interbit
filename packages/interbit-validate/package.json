@@ -6,7 +6,6 @@
   "license": "MIT",
   "main": "dist/interbit-validate.js",
   "scripts": {
-    "postinstall": "npm run build",
     "prepublishOnly": "npm run build",
     "build": "webpack --env dev && webpack --env build",
     "build:watch": "webpack --env dev && webpack --env build --watch",

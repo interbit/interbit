@@ -1,5 +1,5 @@
 export default {
-  title: 'Acceptable use policy',
+  title: 'Acceptable Use Policy',
   intro: `Effective as of April 23, 2018.
 
 Your use of the Interbit Platform is subject to this Acceptable Use Policy.  If you are found to be in violation of our policies at any time, as determined by BTL in its sole discretion, we may warn you or suspend or terminate your account.  Please note that we may change our Acceptable Use Policy at any time, and pursuant to the Terms of Use for the Interbit Platform (“Terms”), it is your responsibility to keep up‑to‑date with and adhere to the policies posted here.  All capitalized terms used herein have the meanings stated in the Terms, unless stated otherwise.

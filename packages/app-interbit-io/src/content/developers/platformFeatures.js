@@ -31,16 +31,16 @@ The Interbit platform provides the development community with access to patent-p
       content: `Interbit's core technology is a 100% new code, next generation permissioned blockchain. The Interbit platform is designed to support a marketplace that brings together developers and consumers.`
     },
     {
-      title: 'Open source platform',
-      content: `Platform components/apps are open source.
+      title: 'Open-source platform',
+      content: `Platform components/apps are open-source.
 
-Developers are able to learn from, contribute and use the open source code from various platform components and applications.
+Developers are able to learn from, contribute and use the open-source code from various platform components and applications.
 
-[View our open source repositories on GitHub ›](https://github.com/interbit)`
+[View our open-source repositories on GitHub ›](https://github.com/interbit)`
     },
     {
       title: 'Accounts',
-      content: `An open source identity service that can be implemented, and leveraged by other Interbit-powered applications. The service also enables an easy sign-up workflow for users. Interbit's user base can start using new applications that have integrated with the service immediately.`
+      content: `An open-source identity service that can be implemented, and leveraged by other Interbit-powered applications. The service also enables an easy sign-up workflow for users. Interbit's user base can start using new applications that have integrated with the service immediately.`
     },
     {
       title: 'Projects',

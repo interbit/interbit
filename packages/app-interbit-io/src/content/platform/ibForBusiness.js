@@ -53,7 +53,7 @@ export default {
     title: 'Powerful \u0026 easy to use. Get started today.',
     content: `Your in-house team is your blockchain team.
 
-Skilled blockchain developers are expensive and hard to find. The current open source and public blockchains require a significant investment of time to learn, digest, and practice before meaningful application development can take place. This often includes learning new languages and tools that most developers have little to no experience with.
+Skilled blockchain developers are expensive and hard to find. The current open-source and public blockchains require a significant investment of time to learn, digest, and practice before meaningful application development can take place. This often includes learning new languages and tools that most developers have little to no experience with.
 
 Interbit was designed to expose the power and benefits of blockchain technology to application developers via some of today’s most familiar, popular and proven languages, tools and design patterns.`,
     secondPara: `Interbit empowers development teams to user their existing skill-sets to design and build blockchain-based distributed applications. `

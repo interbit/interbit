@@ -1,8 +1,8 @@
 import { generateServiceUrl } from 'interbit-platform-tools'
 
-const interbitIoUrl = generateServiceUrl('interbit.io', 3020)
-const projectUrl = generateServiceUrl('projects', 3035)
-const storeUrl = generateServiceUrl('store', 3000)
+const interbitIoUrl = generateServiceUrl('interbit')
+const projectUrl = generateServiceUrl('projects')
+const storeUrl = generateServiceUrl('store')
 
 export default {
   APP_IB_IO: interbitIoUrl,

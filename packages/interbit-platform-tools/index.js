@@ -1,73 +1,59 @@
-const generateServiceUrl = (name, port) => {
-  console.log('name:', name)
+const generateServiceUrl = name => {
   const host = window.location.host
-  // const map =
-  console.log('host', host)
+  let url
+
   if (host.includes('localhost')) {
-    return `http://localhost:${port}`
-  }
-  if (name === 'interbit.io') {
-    if (!host.includes('herokuapp')) {
-      return 'https://interbit.io'
-    }
-  }
-  if (host.includes('interbit.io')) {
-    return `https://${name}.test-interbit.io`
-  }
-  if (host.includes('test-interbit.io')) {
-    return `https://${name}.test-interbit.io`
+    url = localMap[name]
+  } else if (host.startsWith('ib-dev-')) {
+    url = devMap[name]
+  } else if (host.startsWith('ib-stg-')) {
+    url = stagingMap[name]
+  } else if (host.startsWith('ib-prod-')) {
+    url = prodMap[name]
+  } else if (host.includes('interbit.io')) {
+    url = liveMap[name]
   }
 
-  const serverName = herokuMap[name] || 'app-interbit-io'
-  const stage = getStage(host)
-  return `https://ib-${stage}-${serverName}.herokuapp.com`
+  return url || 'https://interbit.io'
 }
 
-const getStage = host => {
-  const stage = host.split('-')[1]
-  console.log('stage', stage)
-  return stage
+const localMap = {
+  accounts: 'http://localhost:3025',
+  interbit: 'http://localhost:3020',
+  projects: 'http://localhost:3035',
+  store: 'http://localhost:3045',
+  template: 'http://localhost:3000'
 }
-
-const herokuMap = {
-  accounts: 'account',
-  store: 'app-store',
-  projects: 'app-projects',
-  'interbit.io': 'app-interbit-io'
+const devMap = {
+  accounts: 'https://ib-dev-account.herokuapp.com',
+  docs: 'https://ib-dev-docs.herokuapp.com',
+  interbit: 'https://ib-dev-interbit-io.herokuapp.com',
+  projects: 'https://ib-dev-app-projects.herokuapp.com',
+  store: 'https://ib-dev-app-store.herokuapp.com',
+  template: 'https://ib-dev-template.herokuapp.com'
 }
-
-// const localMap = {
-//   accounts: 'http://localhost:3025',
-//   interbitIo: 'http://localhost:3035',
-//   store: 'http://localhost:3000'
-// }
-// const devMap = {
-//   accounts: 'https://ib-dev-app-accounts.herokuapp.com'
-// }
-// const stagingMap = {
-//   accounts: 'https://ib-stg-app-accounts.herokuapp.com'
-// }
-// const prodMap = {
-//   accounts: 'https://ib-prod-app-accounts.herokuapp.com'
-// }
-// const liveMap = {
-//   accounts: 'https://accounts.test-interbit.io',
-//   docs: 'https://docs.test-interbit.io',
-//   interbitIo: 'https://interbit.io',
-//   store: 'https://store.test-interbit.io',
-//   template: 'https://template.test-interbit.io'
-// }
-
-// https://interbit.io
-// https://github.com/interbit/interbit/
-// https://store.test-interbit.io
-// https://accounts.test-interbit.io
-// https://docs.test-interbit.io
-// https://template.test-interbit.io
-// https://slack.test-interbit.io
-
-// const accountUrl = generateServiceUrl('accounts', 3025)
-// const projectUrl = generateServiceUrl('projects', 3035)
-// const interbitIoUrl = generateServiceUrl('interbit.io', 3020)
+const stagingMap = {
+  accounts: 'https://ib-stg-app-account.herokuapp.com',
+  docs: 'https://ib-stg-docs.herokuapp.com',
+  interbit: 'https://ib-stg-interbit-io.herokuapp.com',
+  projects: 'https://ib-stg-app-projects.herokuapp.com',
+  store: 'https://ib-stg-app-store.herokuapp.com',
+  template: 'https://ib-stg-template.herokuapp.com'
+}
+const prodMap = {
+  accounts: 'https://ib-prod-app-account.herokuapp.com',
+  docs: 'https://ib-prod-docs.herokuapp.com',
+  interbit: 'https://ib-prod-interbit-io.herokuapp.com',
+  projects: 'https://ib-prod-app-projects.herokuapp.com',
+  store: 'https://ib-stg-prod-store.herokuapp.com',
+  template: 'https://ib-prod-template.herokuapp.com'
+}
+const liveMap = {
+  accounts: 'https://accounts.test-interbit.io',
+  docs: 'https://docs.test-interbit.io',
+  interbit: 'https://interbit.io',
+  store: 'https://store.test-interbit.io',
+  template: 'https://template.test-interbit.io'
+}
 
 module.exports = { generateServiceUrl }

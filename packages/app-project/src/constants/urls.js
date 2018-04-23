@@ -1,8 +1,8 @@
 import { generateServiceUrl } from 'interbit-platform-tools'
 
-const accountUrl = generateServiceUrl('accounts', 3025)
-const interbitIoUrl = generateServiceUrl('interbit.io', 3020)
-const storeUrl = generateServiceUrl('store', 3000)
+const accountUrl = generateServiceUrl('accounts')
+const interbitIoUrl = generateServiceUrl('interbit')
+const storeUrl = generateServiceUrl('store')
 
 export default {
   APP_ACCOUNT: accountUrl,

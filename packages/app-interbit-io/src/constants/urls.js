@@ -19,6 +19,6 @@ export default {
   BTL_NEWS: 'http://btl.co/news/',
   GITHUB_IB: 'https://github.com/interbit/interbit',
   SDK_DOCS: 'https://docs.test-interbit.io',
-  SUPPORT_SLACK: 'https://slack.test-interbit.io/',
+  SUPPORT_SLACK: 'http://slack.test-interbit.io/',
   STARTING_BLOCK: 'http://thestartingblock.io'
 }

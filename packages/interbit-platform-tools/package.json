@@ -1,0 +1,12 @@
+{
+  "name": "interbit-platform-tools",
+  "version": "1.0.0",
+  "description": "Anything specific to platform deployment and pipelines, url sniffing",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "author": "TSXV:BTL",
+  "license": "MIT"
+}

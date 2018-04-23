@@ -1,6 +1,6 @@
 {
   "name": "interbit-merge-covenants",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Utility library for merging covenants",
   "license": "MIT",
   "main": "dist/interbit-merge-covenants.js",

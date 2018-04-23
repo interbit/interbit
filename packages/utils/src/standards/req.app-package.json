@@ -4,6 +4,7 @@
     "interbit-covenant-utils": "0.5.6",
     "interbit-core-buffer": "0.3.7",
     "interbit-middleware": "0.0.1",
+    "interbit-platform-tools": "1.0.0",
     "cross-env": "^5.1.4",
     "interbit": "1.0.0",
     "lib-react-interbit": "1.0.0",
@@ -31,6 +32,5 @@
     "interbit:create": "cross-env COVENANT_DEV_MODE=true interbit create",
     "interbit:build": "interbit build",
     "interbit:deploy": "interbit deploy"
-  },
-  "proxy": "http://localhost:5000/"
+  }
 }

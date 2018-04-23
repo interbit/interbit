@@ -1,6 +1,6 @@
 {
   "name": "interbit",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "The Interbit Blockchain Development Platform",
   "files": [
     "bin",
@@ -23,7 +23,7 @@
     "fs-extra": "^5.0.0",
     "interbit-core": "0.5.6",
     "interbit-covenant-utils": "0.5.6",
-    "interbit-utils": "^0.3.8",
+    "interbit-utils": "^0.3.9",
     "lodash": "^4.17.5",
     "socket.io": "^2.0.4",
     "watch": "^1.0.2"

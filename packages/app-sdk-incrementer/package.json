@@ -16,7 +16,7 @@
         "interbit-core-buffer": "^0.4.6",
         "interbit-covenant-utils": "0.5.6",
         "interbit-middleware": "^0.4.6",
-        "lib-react-interbit": "^0.4.6",
+        "lib-react-interbit": "0.4.6",
         "react": "^16.2.0",
         "react-bootstrap": "^0.32.1",
         "react-dom": "^16.2.0",

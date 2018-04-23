@@ -62,7 +62,7 @@ const generateServiceUrl = (name, port) => {
   if (host.includes('test-interbit.io')) {
     return `https://${name}.test-interbit.io`
   }
-  const serverName = herokuMap[name] || 'interbit.io'
+  const serverName = herokuMap[name] || 'interbit-io'
   const stage = getStage(host)
   return `https://ib-${stage}-${serverName}.herokuapp.com`
 }

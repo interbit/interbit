@@ -1,27 +1,4 @@
-const generateServiceUrl = (name, port) => {
-  const host = window.location.host
-  console.log('host', host)
-  if (host.includes('localhost')) {
-    return `http://localhost:${port}`
-  }
-  if (host.includes('test-interbit.io')) {
-    return `https://${name}.test-interbit.io`
-  }
-  const stage = getStage(host)
-  return `https://ib-${stage}-${herokuMap[name]}.herokuapp.com`
-}
-
-const getStage = host => {
-  const stage = host.split('-')[1]
-  console.log('stage', stage)
-  return stage
-}
-
-const herokuMap = {
-  accounts: 'account',
-  store: 'app-store',
-  projects: 'app-projects'
-}
+import { generateServiceUrl } from 'lib-react-interbit'
 
 const accountsUrl = generateServiceUrl('accounts', 3025)
 const storeUrl = generateServiceUrl('store', 3000)

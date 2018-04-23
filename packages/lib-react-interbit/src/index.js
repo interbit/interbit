@@ -48,3 +48,34 @@ export { default as ModalWrapper } from './components/UIKit/ModalWrapper'
 export { default as VerticalButtons } from './components/UIKit/VerticalButtons'
 
 export { renderInput } from './help/reduxForm/reduxForm'
+
+const generateServiceUrl = (name, port) => {
+  const host = window.location.host
+  console.log('host', host)
+  if (host.includes('localhost')) {
+    return `http://localhost:${port}`
+  }
+  if (name.equals('interbit.io')) {
+    // TODO this is wrong
+    return name
+  }
+  if (host.includes('test-interbit.io')) {
+    return `https://${name}.test-interbit.io`
+  }
+  const stage = getStage(host)
+  return `https://ib-${stage}-${herokuMap[name]}.herokuapp.com`
+}
+
+const getStage = host => {
+  const stage = host.split('-')[1]
+  console.log('stage', stage)
+  return stage
+}
+
+const herokuMap = {
+  accounts: 'account',
+  store: 'app-store',
+  projects: 'app-projects'
+}
+
+export { generateServiceUrl }

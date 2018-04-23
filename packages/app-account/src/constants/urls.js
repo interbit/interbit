@@ -1,11 +1,8 @@
-const generateServiceUrl = (name, port) =>
-  process.env.REACT_APP_STAGE
-    ? `https://ib-${process.env.REACT_APP_STAGE}-${name}.herokuapp.com`
-    : `http://localhost:${port}`
+import { generateServiceUrl } from 'lib-react-interbit'
 
 const interbitIoUrl = generateServiceUrl('interbit-io', 3020)
-const projectUrl = generateServiceUrl('app-projects', 3035)
-const storeUrl = generateServiceUrl('app-store', 3000)
+const projectUrl = generateServiceUrl('projects', 3035)
+const storeUrl = generateServiceUrl('store', 3000)
 
 export default {
   APP_IB_IO: interbitIoUrl,

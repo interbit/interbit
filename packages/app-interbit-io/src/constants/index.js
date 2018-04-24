@@ -1,9 +1,11 @@
+import ga from './ga'
 import layout from './layout'
 import urls from './urls'
 import paths from './paths'
 import { headerNav, footerNav, footerBottomLinks } from './navigation'
 
 export default {
+  ga,
   layout,
   urls,
   paths,

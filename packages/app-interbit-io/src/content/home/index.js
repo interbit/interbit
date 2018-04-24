@@ -19,12 +19,6 @@ export default {
         title: 'The Starting Block',
         content: `Have an idea for a blockchain-based business or application? On May 1st we\u2019ll be accepting submissions to be part of the Starting Block program.`,
         image: cardStartingBlock
-        // callToActions: [
-        //   {
-        //     to: constants.urls.STARTING_BLOCK,
-        //     text: 'Link to Landing Page'
-        //   }
-        // ]
       },
       {
         title: 'Newsroom',
@@ -54,7 +48,10 @@ export default {
         callToActions: [
           {
             to: constants.urls.GITHUB_IB,
-            text: 'Get the SDK'
+            text: 'Get the SDK',
+            clickHandler: () => {
+              window.ga(...constants.ga.CLICK_GET_SDK)
+            }
           }
         ]
       },

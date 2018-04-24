@@ -1,7 +1,7 @@
 {
   "name": "interbit-covenant-tools",
   "version": "0.4.11",
-  "description": "Buffer of test code between interbit platform and interbit core",
+  "description": "Interbit platform covenants and covenant components",
   "main": "dist/interbit-covenant-tools.js",
   "scripts": {
     "prepack": "npm run build",
@@ -26,7 +26,6 @@
     "yargs": "^10.0.3"
   },
   "dependencies": {
-    "interbit-merge-covenants": "0.4.11",
     "seamless-immutable": "^7.1.2"
   }
 }

@@ -2,7 +2,7 @@
 
 This library contains reusable covenant components that provide core functionality for managing template deployment and utilities that make it easier to write covenants that conform to standard patterns.
 
-
+This library is intended to have a small footprint. Any PRs that add external dependencies will be scrutinized carefully and are likely to be rejected.
 
 ## validate
 

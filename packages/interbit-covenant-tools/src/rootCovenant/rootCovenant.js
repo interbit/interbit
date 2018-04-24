@@ -1,4 +1,4 @@
-const mergeCovenants = require('interbit-merge-covenants')
+const mergeCovenants = require('../mergeCovenants')
 
 const mainifestCovenant = require('./manifestCovenant')
 const fileLayerCovenant = require('./fileLayerCovenant')

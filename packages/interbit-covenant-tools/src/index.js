@@ -1,7 +1,7 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const {
   manifestCovenant,
-  manifestSelectors,
+  rootStateSelectors,
   rootCovenant
 } = require('./rootCovenant')
 
@@ -13,7 +13,7 @@ const {
 
 module.exports = {
   manifestCovenant,
-  manifestSelectors,
+  rootStateSelectors,
   rootCovenant,
   validate,
   objectValidationRules,

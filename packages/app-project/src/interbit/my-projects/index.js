@@ -1,7 +1,7 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
 const {
-  manifestSelectors,
+  rootStateSelectors,
   rootCovenant: { reducer: rootReducer }
 } = require('interbit-covenant-tools')
 const {
@@ -177,8 +177,8 @@ const createProjectChain = (
 ) => {
   let nextState = state
 
-  console.log('CREATING PROJECT CHAIN: ', { manifestSelectors })
-  const covenantHash = manifestSelectors.getCovenantHash(
+  console.log('CREATING PROJECT CHAIN: ')
+  const covenantHash = rootStateSelectors.getCovenantHash(
     state,
     'app-project_project'
   )

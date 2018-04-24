@@ -11,18 +11,28 @@ export default class LinkBar extends Component {
     image: PropTypes.string,
     to: PropTypes.string,
     className: PropTypes.string,
-    isMailto: PropTypes.bool
+    isMailto: PropTypes.bool,
+    clickHandler: PropTypes.func
   }
 
   static defaultProps = {
     image: '',
     to: '#',
     className: '',
-    isMailto: false
+    isMailto: false,
+    clickHandler: undefined
   }
 
   render() {
-    const { title, content, image, to, className, isMailto } = this.props
+    const {
+      title,
+      content,
+      image,
+      to,
+      className,
+      isMailto,
+      clickHandler
+    } = this.props
 
     const isExternalLink = /^https?:\/\//.test(to)
     const linkBarContent = (
@@ -38,11 +48,17 @@ export default class LinkBar extends Component {
     )
 
     return isExternalLink || isMailto ? (
-      <a href={to} className={`ibweb-link-bar ${className}`}>
+      <a
+        href={to}
+        className={`ibweb-link-bar ${className}`}
+        onClick={clickHandler}>
         {linkBarContent}
       </a>
     ) : (
-      <Link to={to} className={`ibweb-link-bar ${className}`}>
+      <Link
+        to={to}
+        className={`ibweb-link-bar ${className}`}
+        onClick={clickHandler}>
         {linkBarContent}
       </Link>
     )

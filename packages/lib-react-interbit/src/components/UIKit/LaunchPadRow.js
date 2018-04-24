@@ -11,7 +11,8 @@ export default class LaunchPadRow extends Component {
         title: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
         image: PropTypes.string.isRequired,
-        to: PropTypes.string
+        to: PropTypes.string,
+        clickHandler: PropTypes.func
       })
     )
   }

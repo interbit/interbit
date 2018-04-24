@@ -87,7 +87,7 @@ export default {
         image: cardStore,
         callToActions: [
           {
-            to: constants.urls.APP_STORE_STORE,
+            to: constants.urls.APP_STORE,
             text: 'View Store'
           }
         ]

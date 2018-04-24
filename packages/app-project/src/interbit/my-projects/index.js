@@ -3,7 +3,7 @@ const Immutable = require('seamless-immutable')
 const {
   selectors: interbufferSelectors,
   covenant: { reducer: interbufferReducer }
-} = require('interbit-core-buffer')
+} = require('interbit-covenant-tools')
 const {
   createChildChain,
   redispatch,

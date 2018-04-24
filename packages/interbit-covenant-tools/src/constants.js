@@ -1,4 +1,4 @@
-const INTERBUFFER = 'interbit-core-buffer'
+const INTERBUFFER = 'interbit-covenant-tools'
 const ROOT = 'root'
 const COVENANTS = 'covenants'
 const COVENANT_HASH = 'covenantHash'

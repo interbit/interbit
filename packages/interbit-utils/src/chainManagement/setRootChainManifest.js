@@ -1,6 +1,6 @@
 const {
   covenant: { actionCreators }
-} = require('interbit-core-buffer')
+} = require('interbit-covenant-tools')
 
 const { getChains } = require('../config/configSelectors')
 const { getChainIdByAlias } = require('../manifest/manifestSelectors')

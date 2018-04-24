@@ -76,7 +76,7 @@ const applyJoinChanges = (cli, difference) => {
     // the file layer/deploying) and genesis blocks (for creating new chains)
     //
     // These root level manifest changes are ONLY in the root chain (hah)
-    // As such, the interbit-core-buffer needs to be able to tell it is the root chain
+    // As such, the interbit-covenant-tools needs to be able to tell it is the root chain
     // and pass itself it's own portion of the manifest tree to watch.
   }
 }

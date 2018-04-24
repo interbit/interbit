@@ -1,8 +1,8 @@
 {
-  "name": "interbit-core-buffer",
+  "name": "interbit-covenant-tools",
   "version": "0.4.11",
   "description": "Buffer of test code between interbit platform and interbit core",
-  "main": "dist/interbit-core-buffer.js",
+  "main": "dist/interbit-covenant-tools.js",
   "scripts": {
     "prepack": "npm run build",
     "build": "webpack --env dev && webpack --env build",

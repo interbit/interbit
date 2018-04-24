@@ -5,7 +5,7 @@ const covenant = require('../src/rootCovenant')
 describe('rootCovenant', () => {
   it('merges initial state', () => {
     should.deepEqual(covenant.initialState, {
-      'interbit-core-buffer': { manifest: {}, fileLayer: {} }
+      'interbit-covenant-tools': { manifest: {}, fileLayer: {} }
     })
   })
 

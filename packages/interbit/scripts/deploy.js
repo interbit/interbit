@@ -48,7 +48,7 @@ const configureChains = (cli, interbitManifest) => {
     // TODO: When #267 happens don't do this here, do this in the watcher instead
     // ... doing this in here makes it a kind of one time deal
     // TODO: ApplyCovenants to chains that are children of root #267 (Happens automatically on first deploy due to genesis config)
-    // TODO: Apply interbit-core-buffer to root #267
+    // TODO: Apply interbit-covenant-tools to root #267
 
     const joins = chainEntry.joins
     if (joins) {

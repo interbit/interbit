@@ -27,7 +27,6 @@ describe('The Build Must Not be Tampered With: It', () => {
       switch (name) {
         case 'interbit':
         case 'platform-deploy':
-        case 'interbit-core-buffer':
         case 'lib-react-interbit':
         case 'template':
         case 'utils':

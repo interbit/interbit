@@ -1,5 +1,5 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
-const { covenant: interbufferCovenant } = require('interbit-core-buffer')
+const { covenant: interbufferCovenant } = require('interbit-covenant-tools')
 const Immutable = require('seamless-immutable')
 
 const {

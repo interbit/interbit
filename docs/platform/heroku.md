@@ -1,6 +1,9 @@
 Heroku environment and process
 ------------------------------
 
+This document provides details about the Heroku test environment infrastructure for the Interbit Platform for understanding and use by our internal development team.
+
+
 Pipelines
 -------------
 * btl-website  - btl.co (website)
@@ -15,6 +18,8 @@ Process
 4. Devs manually promote to 'stg' stage in the interbit pipeline so that others (internal non-devs) can verify and provide feedback
 5. Devs manually promote to 'prod' stage in the interbit pipeline
 6. If applicable (i.e interbit.io) promote to 'prod' app in the interbit-website pipeline
+
+Note: The main (interbit.io) website can be promoted and viewed in the interbit pipeline as well (ib-prod-interbit-io) - it just isn't the actual live instance.
 
 Environment variables
 -----------------------

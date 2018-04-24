@@ -1,13 +1,20 @@
-# interbit-validate
+# interbit-covenant-tools
 
-Lightweight and flexible validation library for validating action creators and action payloads within covenants.
+This library contains reusable covenant components that provide core functionality for managing template deployment and utilities that make it easier to write covenants that conform to standard patterns.
 
+
+
+## validate
+
+`interbit-covenant-tools` contains a lightweight and flexible validation library for validating action creators and action payloads within covenants.
+
+Usage:
 
 ``` JavaScript
 const {
   validate,
   objectValidationRules: { required, faIconPattern, chainIdPattern }
-} = require('@btlgroup/interbit-validate')
+} = require('@btlgroup/interbit-covenant-tools')
 
 const actionTypes = {
   UPDATE_PROJECT: 'project/UPDATE_PROJECT',

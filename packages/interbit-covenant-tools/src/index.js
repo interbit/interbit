@@ -11,10 +11,13 @@ const {
   rulePredicates
 } = require('./validate')
 
+const mergeCovenants = require('./mergeCovenants')
+
 module.exports = {
   manifestCovenant,
   rootStateSelectors,
   rootCovenant,
+  mergeCovenants,
   validate,
   objectValidationRules,
   rulePredicates

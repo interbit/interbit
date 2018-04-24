@@ -10,7 +10,7 @@ const {
 const {
   validate,
   objectValidationRules: { required, matches, chainIdPattern, equalTo, numeric }
-} = require('interbit-validate')
+} = require('interbit-covenant-tools')
 
 const validateManifest = manifest => {
   validate(manifest, manifestRules)

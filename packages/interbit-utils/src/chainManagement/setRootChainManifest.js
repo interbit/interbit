@@ -1,5 +1,5 @@
 const {
-  covenant: { actionCreators }
+  manifestCovenant: { actionCreators }
 } = require('interbit-covenant-tools')
 
 const { getChains } = require('../config/configSelectors')

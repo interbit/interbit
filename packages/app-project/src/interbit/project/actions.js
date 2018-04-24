@@ -1,7 +1,7 @@
 const {
   validate,
   objectValidationRules: { required, faIconPattern }
-} = require('interbit-validate')
+} = require('interbit-covenant-tools')
 
 const actionTypes = {
   // Update project details

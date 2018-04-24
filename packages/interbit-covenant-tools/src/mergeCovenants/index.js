@@ -9,6 +9,12 @@ module.exports = covenants => {
     {}
   )
 
+  const actionTypes = covenants.reduce(
+    (accumActionTypes, covenant) =>
+      Object.assign({}, accumActionTypes, covenant.actionTypes),
+    {}
+  )
+
   const initialState = covenants.reduce(
     (initialStateAccum, covenant) =>
       initialStateAccum.merge(covenant.initialState || {}, { deep: true }),
@@ -27,6 +33,7 @@ module.exports = covenants => {
 
   return {
     actionCreators,
+    actionTypes,
     reducer,
     initialState,
     *rootSaga() {

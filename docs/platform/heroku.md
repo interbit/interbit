@@ -3,9 +3,9 @@ Heroku environment and process
 
 Pipelines
 -------------
-btl-website  - btl.co (website)
-interbit-website - interbit.io (website)
-interbit - test-interbit.io (platform)
+* btl-website  - btl.co (website)
+* interbit-website - interbit.io (website)
+* interbit - test-interbit.io (platform)
 
 Process
 -------------

@@ -12,7 +12,6 @@
     "fs-extra": "^5.0.0",
     "interbit-core": "0.5.6",
     "interbit-covenant-tools": "0.4.12",
-    "interbit-covenant-utils": "0.5.6",
     "lodash": "^4.17.5",
     "path": "^0.12.7"
   },

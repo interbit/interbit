@@ -16,7 +16,7 @@ Process
 2. Heroku auto-deploys to every app in the 'dev' stage in the interbit pipeline, and to the 'staging' app in the interbit-website pipeline
 3. Devs can verify functionality on the 'dev' apps
 4. Devs manually promote to 'stg' stage in the interbit pipeline so that others (internal non-devs) can verify and provide feedback
-5. Devs manually promote to 'prod' stage in the interbit pipeline
+5. Admins manually promote to 'prod' stage in the interbit pipeline
 6. If applicable (i.e interbit.io) promote to 'prod' app in the interbit-website pipeline
 
 Note: The main (interbit.io) website can be promoted and viewed in the interbit pipeline as well (ib-prod-interbit-io) - it just isn't the actual live instance.

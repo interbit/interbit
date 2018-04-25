@@ -1,6 +1,11 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
-const utils = require('interbit-covenant-utils')
+const {
+  coreCovenant: {
+    redispatch,
+    actionCreators: { startConsumeState, startProvideState }
+  }
+} = require('interbit-covenant-tools')
 const { actionTypes, actionCreators } = require('./actions')
 const { PATHS, SHARED_PROFILE } = require('./constants')
 
@@ -50,14 +55,14 @@ const reducer = (state = initialState, action) => {
         sharedTokens
       })
 
-      const provideAction = utils.startProvideState({
+      const provideAction = startProvideState({
         consumer: consumerChainId,
         statePath: [...PATHS.SHARED_ROOT, consumerChainId, SHARED_PROFILE],
         joinName
       })
 
       console.log('REDISPATCH: ', provideAction)
-      nextState = utils.redispatch(nextState, provideAction)
+      nextState = redispatch(nextState, provideAction)
 
       return nextState
     }
@@ -108,14 +113,14 @@ const reducer = (state = initialState, action) => {
       }
       // TODO: Check for stale requests
 
-      const consumeAction = utils.startConsumeState({
+      const consumeAction = startConsumeState({
         provider: providerChainId,
         mount: [...PATHS.PRIVATE_PROFILE, tokenName],
         joinName
       })
 
       console.log('REDISPATCH: ', consumeAction)
-      nextState = utils.redispatch(nextState, consumeAction)
+      nextState = redispatch(nextState, consumeAction)
       nextState = removeAuthenticationRequest(nextState, requestId)
       return nextState
     }

@@ -1,6 +1,13 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
-const utils = require('interbit-covenant-utils')
+const {
+  coreCovenant: {
+    redispatch,
+    remoteRedispatch,
+    actionCreators: { startConsumeState }
+  }
+} = require('interbit-covenant-tools')
+
 const { actionCreators: hubActionCreators } = require('../hub/actions')
 const { actionTypes, actionCreators } = require('./actions')
 
@@ -50,11 +57,7 @@ const smartContract = (state = initialState, action) => {
       })
 
       console.log('REMOTE DISPATCH: ', actionToForward)
-      nextState = utils.remoteRedispatch(
-        nextState,
-        providerChainId,
-        actionToForward
-      )
+      nextState = remoteRedispatch(nextState, providerChainId, actionToForward)
 
       return nextState.setIn(['tokenRequests', consumerRequestId], {
         providerChainId,
@@ -71,14 +74,14 @@ const smartContract = (state = initialState, action) => {
         consumerRequestId
       } = action.payload
 
-      const consumeAction = utils.startConsumeState({
+      const consumeAction = startConsumeState({
         provider: providerChainId,
         mount: ['providerTokens', tokenName],
         joinName
       })
 
       console.log('REDISPATCH: ', consumeAction)
-      nextState = utils.redispatch(nextState, consumeAction)
+      nextState = redispatch(nextState, consumeAction)
 
       return nextState.updateIn(
         ['tokenRequests'],

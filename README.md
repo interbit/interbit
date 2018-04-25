@@ -5,7 +5,7 @@
 
 Interbit is a blockchain platform for building enterprise-grade applications. Interbit’s proprietary blockchain technology makes application development better and faster. All of the trust and reliability of blockchain technology with much less work and maintenance.
 
-The Interbit Platform is a set of services and tools built on and for Interbit. 
+The Interbit Platform is a set of services and tools built on and for Interbit.
 
 Disclaimer
 
@@ -98,8 +98,7 @@ To anything matching `/app-*/` and the template itself it will:
 ```json
 {
   "interbit": "1.0.0",
-  "interbit-covenant-utils": "1.0.0",
-  "interbit": "1.0.0",
+  "interbit-covenant-tools": "0.4.12",
   "lib-react-interbit": "1.0.0",
   "react": "^16.2.0",
   "react-bootstrap": "0.31.5",

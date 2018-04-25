@@ -1,6 +1,15 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const path = require('path')
-const covenantUtils = require('interbit-covenant-utils')
+const {
+  coreCovenant: {
+    actionCreators: {
+      startConsumeState,
+      startProvideState,
+      authorizeReceiveActions,
+      authorizeSendActions
+    }
+  }
+} = require('interbit-covenant-tools')
 const {
   argOptions: { ADMIN_KEYS },
   constants: { joinTypes },
@@ -79,7 +88,7 @@ const configureConsume = (consume, interbitManifest) => {
   return consume.reduce(
     (prev, { alias: chainAlias, path: mount, joinName }) => {
       const provider = getChainIdByAlias(chainAlias, interbitManifest)
-      const consumeAction = covenantUtils.startConsumeState({
+      const consumeAction = startConsumeState({
         provider,
         mount,
         joinName
@@ -97,7 +106,7 @@ const configureProvide = (provide, interbitManifest) => {
   return provide.reduce(
     (prev, { alias: chainAlias, path: statePath, joinName }) => {
       const consumer = getChainIdByAlias(chainAlias, interbitManifest)
-      const provideAction = covenantUtils.startProvideState({
+      const provideAction = startProvideState({
         consumer,
         statePath,
         joinName
@@ -114,7 +123,7 @@ const configureReceive = (receive, interbitManifest) => {
   }
   return receive.reduce((prev, { alias: chainAlias, authorizedActions }) => {
     const senderChainId = getChainIdByAlias(chainAlias, interbitManifest)
-    const receiveAction = covenantUtils.authorizeReceiveActions({
+    const receiveAction = authorizeReceiveActions({
       senderChainId,
       authorizedActions
     })
@@ -128,7 +137,7 @@ const configureSend = (send, interbitManifest) => {
   }
   return send.reduce((prev, { alias: chainAlias }) => {
     const receiverChainId = getChainIdByAlias(chainAlias, interbitManifest)
-    const sendAction = covenantUtils.authorizeSendActions({
+    const sendAction = authorizeSendActions({
       receiverChainId
     })
     return prev.concat(sendAction)

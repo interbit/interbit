@@ -1,15 +1,14 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
 const {
+  coreCovenant: {
+    redispatch,
+    remoteRedispatch,
+    actionCreators: { createChildChain, startConsumeState }
+  },
   rootStateSelectors,
   rootCovenant: { reducer: rootReducer }
 } = require('interbit-covenant-tools')
-const {
-  createChildChain,
-  redispatch,
-  remoteRedispatch,
-  startConsumeState
-} = require('interbit-covenant-utils')
 
 const sampleProjectList = require('./sampleProjects')
 const interbitServices = require('./interbitServices')

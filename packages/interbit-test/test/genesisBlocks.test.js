@@ -21,7 +21,6 @@ the request, all you need to do is `throw`.
 */
 
 const assert = require('assert')
-// const utils = require('interbit-covenant-utils')
 const {
   createGenesisBlock,
   createDefaultSponsoredChainConfig

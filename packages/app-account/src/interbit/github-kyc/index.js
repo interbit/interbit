@@ -1,7 +1,13 @@
 /* eslint camelcase: 0 */
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
-const utils = require('interbit-covenant-utils')
+const {
+  coreCovenant: {
+    redispatch,
+    actionCreators: { startProvideState }
+  }
+} = require('interbit-covenant-tools')
+
 // const fetch = require('node-fetch')
 const axios = require('axios')
 const { takeEvery, call, put, select } = require('redux-saga').effects
@@ -132,7 +138,7 @@ const reducer = (state = initialState, action) => {
       })
 
       console.log('REDISPATCH: ', sagaAction)
-      nextState = utils.redispatch(nextState, sagaAction)
+      nextState = redispatch(nextState, sagaAction)
       return nextState
     }
 
@@ -148,14 +154,14 @@ const reducer = (state = initialState, action) => {
       console.log('DISPATCH: ', action)
       const { consumerChainId, joinName } = action.payload
 
-      const provideAction = utils.startProvideState({
+      const provideAction = startProvideState({
         consumer: consumerChainId,
         statePath: ['profiles', consumerChainId, 'sharedProfile'],
         joinName
       })
 
       console.log('REDISPATCH: ', provideAction)
-      nextState = utils.redispatch(nextState, provideAction)
+      nextState = redispatch(nextState, provideAction)
       return nextState
     }
 

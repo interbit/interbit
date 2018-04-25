@@ -1,4 +1,13 @@
-const covenantUtils = require('interbit-covenant-utils')
+const {
+  coreCovenant: {
+    actionCreators: {
+      startConsumeState,
+      startProvideState,
+      authorizeReceiveActions,
+      authorizeSendActions
+    }
+  }
+} = require('interbit-covenant-tools')
 const {
   getChainJoins,
   getJoinTypeForChain,
@@ -62,7 +71,7 @@ const establishConsumes = async (chainInterface, consume, manifest) => {
       continue
     }
     const { chainId: provider } = manifest[alias]
-    const consumeAction = covenantUtils.startConsumeState({
+    const consumeAction = startConsumeState({
       provider,
       mount,
       joinName
@@ -82,7 +91,7 @@ const establishProvides = async (chainInterface, provide, manifest) => {
       continue
     }
     const { chainId: consumer } = manifest[alias]
-    const provideAction = covenantUtils.startProvideState({
+    const provideAction = startProvideState({
       consumer,
       statePath,
       joinName
@@ -106,7 +115,7 @@ const establishReceiveActions = async (
       continue
     }
     const { chainId: senderChainId } = manifest[alias]
-    const authorizeReceiveAction = covenantUtils.authorizeReceiveActions({
+    const authorizeReceiveAction = authorizeReceiveActions({
       senderChainId,
       permittedActions: authorizedActions
     })
@@ -125,7 +134,7 @@ const establishSendActions = async (chainInterface, sendActionTo, manifest) => {
       continue
     }
     const { chainId: receiverChainId } = manifest[alias]
-    const authorizeSendAction = covenantUtils.authorizeSendActions({
+    const authorizeSendAction = authorizeSendActions({
       receiverChainId
     })
     console.log(authorizeSendAction)

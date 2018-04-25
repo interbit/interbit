@@ -92,7 +92,7 @@ const generateAppsManifest = (location, interbitConfig) => {
       ...prev,
       [appAlias]: {
         appChain: configApps[appAlias].appChain,
-        // TODO: Update this build location with implementation of #335
+        // TODO: Update this build location with implementation of #9
         buildLocation: path.relative(
           location,
           configApps[appAlias].buildLocation
@@ -126,7 +126,6 @@ const resolveGenesisBlocks = (config, originalManifest, covenants) => {
   )
 
   if (resolvedChainAliases.indexOf(ROOT_CHAIN_ALIAS) === -1) {
-    // TODO: Find a way to get the root covenant hash in here... probs a constant
     const rootGenesisBlock = createGenesisBlock(ROOT_CHAIN_ALIAS, config)
     newlyResolvedChains[ROOT_CHAIN_ALIAS] = rootGenesisBlock
   }
@@ -136,9 +135,7 @@ const resolveGenesisBlocks = (config, originalManifest, covenants) => {
 
 const resolveChains = (unresolvedChains, covenants, config) =>
   unresolvedChains.reduce((prev, [chainAlias, chainConfig]) => {
-    const covenantAlias = getChainCovenant(chainAlias, config)
-    const covenantHash = getCovenantHash(covenantAlias, covenants)
-    const genesisBlock = createGenesisBlock(chainAlias, config, covenantHash)
+    const genesisBlock = createGenesisBlock(chainAlias, config)
     return {
       ...prev,
       [chainAlias]: genesisBlock
@@ -184,13 +181,7 @@ const mergeResolutions = (config, originalManifest, newlyResolvedChains) => {
   }
 }
 
-const getCovenantHash = (covenantAlias, covenants) => {
-  console.log('GETTING COVENANT HASH', covenantAlias, covenants)
-  const covenant = covenants[covenantAlias]
-  return covenant ? covenant.hash : undefined
-}
-
-const createGenesisBlock = (chainAlias, config, covenantHash) => {
+const createGenesisBlock = (chainAlias, config) => {
   console.log(`BUILDING GENESIS FOR ${chainAlias}`)
 
   const validators =
@@ -223,7 +214,7 @@ const createGenesisBlock = (chainAlias, config, covenantHash) => {
   // NOTE: Might not be the right idea to include covenant hash in here per #258 #218 #267
   // ... try it and see if it messes with the chain IDs and it's better to apply the
   // covenants in the watcher
-  const builtConfig = configBuilder.build().merge({ covenantHash })
+  const builtConfig = configBuilder.build()
   console.log(builtConfig)
   return interbit.createGenesisBlock({ config: builtConfig })
 }

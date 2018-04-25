@@ -1,6 +1,6 @@
 const mergeCovenants = require('../mergeCovenants')
 
-const mainifestCovenant = require('./manifestCovenant')
+const manifestCovenant = require('./manifestCovenant')
 const fileLayerCovenant = require('./fileLayerCovenant')
 
-module.exports = mergeCovenants([mainifestCovenant, fileLayerCovenant])
+module.exports = mergeCovenants([manifestCovenant, fileLayerCovenant])

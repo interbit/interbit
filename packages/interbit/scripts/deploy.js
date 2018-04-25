@@ -19,7 +19,12 @@ const {
   getKeyPair,
   getManifest,
   getPort,
-  manifestSelectors: { getChains, getRootChildren, getChainIdByAlias }
+  manifestSelectors: {
+    getChains,
+    getRootChildren,
+    getChainIdByAlias,
+    getCovenantHashByAlias
+  }
 } = require('interbit-utils')
 
 const deploy = async () => {
@@ -46,7 +51,7 @@ const deploy = async () => {
   // TODO: Once deployed, watch the root chain for manifest updates and reconfigure #267
 }
 
-const configureChains = (cli, interbitManifest) => {
+const configureChains = async (cli, interbitManifest) => {
   const childChains = getRootChildren(interbitManifest)
   const childChainEntries = Object.entries(childChains)
 
@@ -56,7 +61,11 @@ const configureChains = (cli, interbitManifest) => {
 
     // TODO: When #267 happens don't do this here, do this in the watcher instead
     // ... doing this in here makes it a kind of one time deal
-    // TODO: ApplyCovenants to chains that are children of root #267 (Happens automatically on first deploy due to genesis config)
+
+    const covenantHash = getCovenantHashByAlias(chainAlias, interbitManifest)
+    console.log(`Applying ${covenantHash} covenant to chain ${chainId}`)
+    await cli.applyCovenant(chainId, covenantHash)
+
     // TODO: Apply interbit-covenant-tools to root #267
 
     const joins = chainEntry.joins

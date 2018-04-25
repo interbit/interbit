@@ -36,4 +36,14 @@ describe('Manifest Selectors', () => {
 
     assert.equal(actualBlockMaster, expectedBlockMaster)
   })
+
+  it('gets the covenant hash by chain alias', () => {
+    const expectedCovenantHash = defaultManifest.covenants[chainAlias].hash
+    const actualCovenantHash = manifestSelectors.getCovenantHashByAlias(
+      chainAlias,
+      defaultManifest
+    )
+
+    assert.equal(expectedCovenantHash, actualCovenantHash)
+  })
 })

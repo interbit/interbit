@@ -39,6 +39,6 @@
         "interbit:start": "cross-env COVENANT_DEV_MODE=true DB_PATH=./db-interbit interbit start",
         "interbit:create": "cross-env COVENANT_DEV_MODE=true interbit create",
         "interbit:build": "interbit build",
-        "interbit:deploy": "interbit deploy"
+        "interbit:deploy": "interbit deploy --admin-keys keyPair.js"
     }
 }

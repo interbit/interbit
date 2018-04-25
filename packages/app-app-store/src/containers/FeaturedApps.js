@@ -20,7 +20,7 @@ export default class FeaturedApps extends Component {
               <h2>The Starting Block</h2>
               <p>
                 Have an idea for a blockchain-based business or application? On
-                May 1st we’ll be accepting submissions to be part of the
+                May 7th we’ll be accepting submissions to be part of the
                 Starting Block program.
               </p>
               <img src={featuredStarting} alt="The Starting Block" />

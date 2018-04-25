@@ -2,10 +2,10 @@
 const Immutable = require('seamless-immutable')
 const utils = require('interbit-covenant-utils')
 const { actionTypes, actionCreators } = require('./actions')
+const { PATHS, SHARED_PROFILE } = require('./constants')
 
 const initialState = Immutable.from({
   chainMetadata: {
-    name: 'anonymous user',
     chainName: 'Personal Account Chain'
   },
   // Tokens comprising the user's profile
@@ -14,7 +14,7 @@ const initialState = Immutable.from({
     name: 'anonymous user'
   },
   // Tokens that user has explicitly shared with other
-  // chains through the cAuth loop. This ensures that
+  // chains through the cAuthloop. This ensures that
   // the user has full control over what information is
   // shared and can revoke access at any time.
   shared: {},
@@ -41,7 +41,7 @@ const reducer = (state = initialState, action) => {
       console.log('DISPATCH: ', action)
       const { consumerChainId, joinName, sharedTokens } = action.payload
 
-      const profile = state.getIn(['profile'])
+      const profile = state.getIn(PATHS.PRIVATE_PROFILE)
 
       nextState = makeProfileShareable(nextState, {
         consumerChainId,
@@ -52,7 +52,7 @@ const reducer = (state = initialState, action) => {
 
       const provideAction = utils.startProvideState({
         consumer: consumerChainId,
-        statePath: ['shared', consumerChainId, 'sharedProfile'],
+        statePath: [...PATHS.SHARED_ROOT, consumerChainId, SHARED_PROFILE],
         joinName
       })
 
@@ -75,7 +75,7 @@ const reducer = (state = initialState, action) => {
       console.log('DISPATCH: ', action)
       const { oAuthProvider, requestId, timestamp } = action.payload
 
-      nextState = nextState.setIn(['authenticationRequests', requestId], {
+      nextState = nextState.setIn([...PATHS.AUTH_REQUESTS, requestId], {
         oAuthProvider,
         timestamp
       })
@@ -86,7 +86,7 @@ const reducer = (state = initialState, action) => {
       console.log('DISPATCH: ', action)
       const { requestId } = action.payload
 
-      const request = state.getIn(['authenticationRequests', requestId])
+      const request = state.getIn([...PATHS.AUTH_REQUESTS, requestId])
 
       if (!request) {
         throw new Error('You did not originate this request')
@@ -101,7 +101,7 @@ const reducer = (state = initialState, action) => {
 
       const { requestId, providerChainId, tokenName, joinName } = action.payload
 
-      const request = state.getIn(['authenticationRequests', requestId])
+      const request = state.getIn([...PATHS.AUTH_REQUESTS, requestId])
 
       if (!request) {
         throw new Error('You did not originate this request')
@@ -110,7 +110,7 @@ const reducer = (state = initialState, action) => {
 
       const consumeAction = utils.startConsumeState({
         provider: providerChainId,
-        mount: ['profile', tokenName],
+        mount: [...PATHS.PRIVATE_PROFILE, tokenName],
         joinName
       })
 
@@ -126,22 +126,20 @@ const reducer = (state = initialState, action) => {
 }
 
 const updateProfile = (state, { alias, name, email }) => {
-  const current = state.getIn(['profile'], Immutable.from({}))
+  const current = state.getIn(PATHS.PRIVATE_PROFILE, Immutable.from({}))
   const updated = current.merge({
     alias,
     name,
     email
   })
-  return state
-    .setIn(['profile'], updated)
-    .setIn(['chainMetadata', 'name'], alias || 'anonymous user')
+  return state.setIn(PATHS.PRIVATE_PROFILE, updated)
 }
 
 const makeProfileShareable = (
   state,
   { consumerChainId, joinName, profile, sharedTokens }
 ) =>
-  state.setIn(['shared', consumerChainId], {
+  state.setIn([...PATHS.SHARED_ROOT, consumerChainId], {
     sharedTokens,
     sharedProfile: filterTokens(profile, sharedTokens),
     joinName
@@ -157,12 +155,16 @@ const filterTokens = (profile, sharedTokens) =>
   )
 
 const removeSharedProfile = (state, consumerChainId) =>
-  state.updateIn(['shared'], Immutable.without, consumerChainId)
+  state.updateIn([PATHS.SHARED_ROOT], Immutable.without, consumerChainId)
 
 const updateSharedProfiles = (state, profile) =>
   Object.keys(state.shared || {}).reduce(
     (nextState, chainId) =>
-      nextState.updateIn(['shared', chainId], updateSharedProfile, profile),
+      nextState.updateIn(
+        [...PATHS.SHARED_ROOT, chainId],
+        updateSharedProfile,
+        profile
+      ),
     state
   )
 
@@ -172,7 +174,7 @@ const updateSharedProfile = (current, profile) => ({
 })
 
 const removeAuthenticationRequest = (state, requestId) =>
-  state.updateIn(['authenticationRequests'], Immutable.without, requestId)
+  state.updateIn([...PATHS.AUTH_REQUESTS], Immutable.without, requestId)
 
 module.exports = {
   actionTypes,

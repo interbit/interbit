@@ -17,7 +17,7 @@ const build = async () => {
   const artifactsLocation = getArtifactsLocation()
   const location = path.relative(process.cwd(), artifactsLocation)
 
-  // TODO: Copy the specified app builds into dist/builds/dirname #335
+  // TODO: Copy the specified app builds into dist/builds/dirname #9
 
   setupDist(location)
 

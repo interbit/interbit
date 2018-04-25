@@ -11,6 +11,16 @@ const getPeers = manifest => manifest.peers
 const getChainIdByAlias = (chainAlias, manifest) =>
   _.get(manifest, ['chains', chainAlias])
 
+const getCovenantHashByAlias = (chainAlias, manifest) => {
+  // TODO: Expand to get root covenant + walk the manifest tree when
+  // cascading deployment arrives
+  const covenantAlias = _.get(getRootChildren(manifest), [
+    chainAlias,
+    'covenant'
+  ])
+  return _.get(getCovenants(manifest), [covenantAlias, 'hash'])
+}
+
 const getGenesisBlockByAlias = (chainAlias, manifest) =>
   _.get(manifest, ['genesisBlocks', chainAlias])
 
@@ -41,6 +51,7 @@ module.exports = {
   getPeers,
   getBlockMasterByAlias,
   getChainIdByAlias,
+  getCovenantHashByAlias,
   getGenesisBlockByAlias,
   getRootChildren
 }

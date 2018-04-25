@@ -17,6 +17,7 @@ import CreateAccount from './containers/CreateAcount'
 
 import LogoAccount from './components/LogoAccounts'
 import { PRIVATE } from './constants/chainAliases'
+import { PATHS } from './constants/chainStatePaths'
 import paths from './constants/paths'
 import urls from './constants/urls'
 import './css/App.css'
@@ -24,7 +25,7 @@ import './css/App.css'
 const mapStateToProps = state => {
   const chainAlias = PRIVATE
   const userName = selectors.isChainLoaded(state, { chainAlias })
-    ? selectors.getChain(state, { chainAlias }).getIn(['profie', 'name'])
+    ? selectors.getChain(state, { chainAlias }).getIn(PATHS.USERNAME)
     : undefined
 
   return {

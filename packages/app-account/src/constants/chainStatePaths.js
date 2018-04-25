@@ -1,5 +1,5 @@
 const myAccountConstants = require('../interbit/my-account/constants')
 
 module.exports = {
-  PATHS: myAccountConstants.PATHS
+  PRIVATE_CHAIN_PATHS: myAccountConstants.PATHS
 }

@@ -16,16 +16,18 @@ import ChainConnect from './containers/ChainConnect'
 import CreateAccount from './containers/CreateAcount'
 
 import LogoAccount from './components/LogoAccounts'
-import { PRIVATE } from './constants/chainAliases'
-import { PATHS } from './constants/chainStatePaths'
+import CHAIN_ALIASES from './constants/chainAliases'
+import { PRIVATE_CHAIN_PATHS } from './constants/chainStatePaths'
 import paths from './constants/paths'
 import urls from './constants/urls'
 import './css/App.css'
 
 const mapStateToProps = state => {
-  const chainAlias = PRIVATE
+  const chainAlias = CHAIN_ALIASES.PRIVATE
   const userName = selectors.isChainLoaded(state, { chainAlias })
-    ? selectors.getChain(state, { chainAlias }).getIn(PATHS.USERNAME)
+    ? selectors
+        .getChain(state, { chainAlias })
+        .getIn(PRIVATE_CHAIN_PATHS.USERNAME)
     : undefined
 
   return {

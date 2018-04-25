@@ -8,6 +8,9 @@ describe('chainServices/mergeCovenants', () => {
       initialState: Immutable.from({
         one: 1
       }),
+      actionTypes: {
+        one: 'first/ONE'
+      },
       actionCreators: {
         one: ({ number }) => ({
           type: 'first/ONE',
@@ -24,6 +27,9 @@ describe('chainServices/mergeCovenants', () => {
       initialState: Immutable.from({
         two: []
       }),
+      actionTypes: {
+        two: 'second/TWO'
+      },
       actionCreators: {
         two: ({ text }) => ({
           type: 'second/TWO',
@@ -41,6 +47,8 @@ describe('chainServices/mergeCovenants', () => {
     assert.ok(resultCovenant)
     assert.equal('function', typeof resultCovenant.actionCreators.one)
     assert.equal('function', typeof resultCovenant.actionCreators.two)
+    assert.equal('first/ONE', resultCovenant.actionTypes.one)
+    assert.equal('second/TWO', resultCovenant.actionTypes.two)
     assert.deepEqual(
       Immutable.from({ one: 1, two: [] }),
       resultCovenant.initialState

@@ -18,6 +18,8 @@ const {
   STATUS
 } = require('./constants')
 
+const emptyObject = Immutable.from({})
+
 const immutable = state =>
   Immutable.isImmutable(state) ? state : Immutable.from(state || {})
 
@@ -46,18 +48,20 @@ const getPrivateChainId = (
   { root, privateChainAlias = PRIVATE_CHAIN_ALIAS } = {}
 ) => getChainId(state, { root, chainAlias: privateChainAlias })
 
-const getChain = (state, { root = fromStoreRoot, chainAlias }) =>
-  root(state).getIn([CHAINS, chainAlias])
+const getChain = (
+  state,
+  { root = fromStoreRoot, chainAlias, defaultValue = emptyObject }
+) => root(state).getIn([CHAINS, chainAlias], defaultValue)
 
 const getPublicChain = (
   state,
-  { root, publicChainAlias = PUBLIC_CHAIN_ALIAS } = {}
-) => getChain(state, { root, chainAlias: publicChainAlias })
+  { root, publicChainAlias = PUBLIC_CHAIN_ALIAS, defaultValue } = {}
+) => getChain(state, { root, chainAlias: publicChainAlias, defaultValue })
 
 const getPrivateChain = (
   state,
-  { root, privateChainAlias = PRIVATE_CHAIN_ALIAS } = {}
-) => getChain(state, { root, chainAlias: privateChainAlias })
+  { root, privateChainAlias = PRIVATE_CHAIN_ALIAS, defaultValue } = {}
+) => getChain(state, { root, chainAlias: privateChainAlias, defaultValue })
 
 const getBlockMaster = (state, { root = fromStoreRoot, chainAlias } = {}) =>
   root(state).getIn([CHAINS, chainAlias, INTERBIT, CONFIG, BLOCK_MASTER])
@@ -72,7 +76,7 @@ const getSponsorConfig = (
 ) =>
   root(state).getIn(
     [CHAINS, publicChainAlias, SPONSOR_CONFIG, privateChainAlias],
-    {}
+    emptyObject
   )
 
 const getPublicKey = (state, { root = fromStoreRoot } = {}) =>
@@ -88,7 +92,7 @@ const getCovenantHash = (state, { root = fromStoreRoot, covenantAlias }) =>
   root(state).getIn([COVENANTS, covenantAlias])
 
 const getConfiguredChains = (state, { root = fromStoreRoot } = {}) =>
-  root(state).getIn([CHAIN_DATA], {})
+  root(state).getIn([CHAIN_DATA], emptyObject)
 
 const getConfiguredPeers = (state, { root = fromStoreRoot } = {}) =>
   root(state).getIn([PEERS], [])

@@ -1,5 +1,5 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
-const { hoistPackages } = require('interbit-utils')
+const { hoistPackages } = require('interbit')
 
 const appLocation = process.cwd()
 const interbitLocation = `${appLocation}/src/interbit`

@@ -14,7 +14,7 @@ const {
   validateConfig,
   // watchChain,
   watchCovenants
-} = require('interbit-utils')
+} = require('interbit')
 
 const startInterbitNode = async () => {
   try {

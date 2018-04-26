@@ -7,7 +7,7 @@ const {
   updateIndexHtmls,
   validateConfig,
   watchCovenants
-} = require('interbit-utils')
+} = require('interbit')
 
 const startInterbitNode = async () => {
   try {

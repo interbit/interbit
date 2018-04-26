@@ -8,6 +8,9 @@ const {
       authorizeReceiveActions,
       authorizeSendActions
     }
+  },
+  manifestCovenant: {
+    actionCreators: { setManifest }
   }
 } = require('interbit-covenant-tools')
 const {
@@ -59,9 +62,7 @@ const configureChains = async (cli, interbitManifest) => {
     const chainId = getChainIdByAlias(chainAlias, interbitManifest)
     const chainInterface = cli.getChain(chainId)
 
-    // TODO: When #267 happens don't do this here, do this in the watcher instead
-    // ... doing this in here makes it a kind of one time deal
-
+    // TODO: Set covenants in watchers after cascading deployment is available
     const covenantHash = getCovenantHashByAlias(chainAlias, interbitManifest)
     console.log(`Applying ${covenantHash} covenant to chain ${chainId}`)
     await cli.applyCovenant(chainId, covenantHash)
@@ -74,6 +75,11 @@ const configureChains = async (cli, interbitManifest) => {
     }
 
     chainInterface.dispatch({ type: '@@interbit/DEPLOY' })
+
+    // TODO: Only dispatch this to the root once cascading deployment is available
+    const setManifestAction = setManifest(interbitManifest)
+    console.log(setManifestAction)
+    chainInterface.dispatch(setManifestAction)
   }
 }
 

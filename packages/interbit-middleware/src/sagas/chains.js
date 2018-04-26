@@ -91,16 +91,15 @@ function* sponsorChain({
     )
   }
 
-  const genesisConfig = interbit
-    .createDefaultSponsoredChainConfig({
-      blockMaster,
-      myPublicKey: publicKey,
-      sponsorChainId
-    })
-    .merge({ covenantHash })
+  const genesisConfig = interbit.createDefaultSponsoredChainConfig({
+    blockMaster,
+    myPublicKey: publicKey,
+    sponsorChainId
+  })
 
   const genesisBlock = interbit.createGenesisBlock({
-    config: genesisConfig
+    config: genesisConfig,
+    configChanges: { covenantHash }
   })
 
   const chainId = genesisBlock.blockHash

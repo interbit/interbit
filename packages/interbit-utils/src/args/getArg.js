@@ -1,6 +1,7 @@
 const getArg = (argv, argName) => {
   const argIndex = argv.indexOf(argName) + 1
-  const isArgAvailable = argIndex > 0 && argv.length > argIndex
+  const isArgAvailable =
+    argIndex > 0 && argv.length > argIndex && !argv[argIndex].startsWith('--')
 
   return isArgAvailable ? argv[argIndex] : undefined
 }

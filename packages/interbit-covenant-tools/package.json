@@ -8,7 +8,7 @@
     "build": "webpack --env dev && webpack --env build",
     "build:watch": "webpack --env dev && webpack --env build --watch",
     "dev": "webpack --progress --colors --watch --env dev",
-    "test": "mocha tests/**/*.test.js"
+    "test": "mocha \"tests/**/*.test.js\""
   },
   "author": "BTL GROUP LTD",
   "license": "MIT",

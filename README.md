@@ -41,6 +41,9 @@ Let's call the new site `app-the-new-thing`
 Run `npm i` from the repository root.  This will take care of all the lerna dependencies and set up for you
 
 ## Build the new Interbit site
+1. From within the `packages/app-the-new-thing` folder, run `npm run build:modules && npm run build:lib`
+
+## Run it
 1. From within the `packages/app-the-new-thing` folder, run `npm run interbit:start`.  This command will keep running until interrupted.  Let it continue to run.
 1. Open a second shell.  From within the `packages/app-the-new-thing` folder, run `npm run start`.  This runs the development server and will cause a browser window to open to http://localhost:3000 You should see your site load in the browser.
 

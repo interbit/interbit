@@ -5,6 +5,7 @@ import { Covenant } from 'lib-react-interbit'
 import { reset } from 'redux-form'
 import { chainDispatch } from 'interbit-middleware'
 
+import chainAliases from '../constants/chainAliases'
 import chainCovenant from '../interbit/public'
 
 const mapStateToProps = state => ({
@@ -16,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(reset(form))
   },
   publicDispatch: action => {
-    dispatch(chainDispatch('public', action))
+    dispatch(chainDispatch(chainAliases.PUBLIC, action))
   }
 })
 

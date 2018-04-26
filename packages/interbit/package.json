@@ -1,5 +1,5 @@
 {
-  "name": "interbit-utils",
+  "name": "interbit",
   "version": "0.4.13",
   "description": "Requireable deployment utilities for interbit-cli",
   "main": "src/index.js",

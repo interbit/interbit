@@ -1,7 +1,7 @@
 const interbit = require('interbit-core')
 const path = require('path')
 const fs = require('fs-extra')
-const { getArg } = require('interbit-utils')
+const { getArg } = require('interbit')
 
 const keys = async () => {
   const filenameOption = getArg(process.argv, '--filename')

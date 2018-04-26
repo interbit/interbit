@@ -1,4 +1,4 @@
-# interbit-utils
+# interbit
 
 Util functions for managing config and working with interbit
 

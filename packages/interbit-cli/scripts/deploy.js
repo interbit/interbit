@@ -25,7 +25,7 @@ const {
     getChainIdByAlias,
     getCovenantHashByAlias
   }
-} = require('interbit-utils')
+} = require('interbit')
 
 const deploy = async () => {
   const interbitManifest = getManifest()

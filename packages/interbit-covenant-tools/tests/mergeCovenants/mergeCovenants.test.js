@@ -6,7 +6,8 @@ describe('chainServices/mergeCovenants', () => {
   it('merges covenants', () => {
     const firstCovenant = {
       initialState: Immutable.from({
-        one: 1
+        one: 1,
+        nested: { a: 1, b: 'b', c: { c1: 1, c2: 'c2', d: { d1: 1, d2: 'd2' } } }
       }),
       actionTypes: {
         one: 'first/ONE'
@@ -25,7 +26,8 @@ describe('chainServices/mergeCovenants', () => {
 
     const secondCovenant = {
       initialState: Immutable.from({
-        two: []
+        two: [],
+        nested: { a: 2, c: { c1: 2, c3: 'c3', d: { d1: 2, d3: 'd3' } } }
       }),
       actionTypes: {
         two: 'second/TWO'
@@ -50,20 +52,44 @@ describe('chainServices/mergeCovenants', () => {
     assert.equal('first/ONE', resultCovenant.actionTypes.one)
     assert.equal('second/TWO', resultCovenant.actionTypes.two)
     assert.deepEqual(
-      Immutable.from({ one: 1, two: [] }),
+      Immutable.from({
+        one: 1,
+        two: [],
+        nested: {
+          a: 2,
+          b: 'b',
+          c: { c1: 2, c2: 'c2', c3: 'c3', d: { d1: 2, d2: 'd2', d3: 'd3' } }
+        }
+      }),
       resultCovenant.initialState
     )
 
     const action = resultCovenant.actionCreators.one({ number: 1 })
     assert.deepEqual(
-      Immutable.from({ one: 2, two: [] }),
+      Immutable.from({
+        one: 2,
+        two: [],
+        nested: {
+          a: 2,
+          b: 'b',
+          c: { c1: 2, c2: 'c2', c3: 'c3', d: { d1: 2, d2: 'd2', d3: 'd3' } }
+        }
+      }),
       resultCovenant.reducer(resultCovenant.initialState, action)
     )
 
     const anotherAction = resultCovenant.actionCreators.two({ text: 'meow' })
     console.log(anotherAction)
     assert.deepEqual(
-      Immutable.from({ one: 1, two: ['meow'] }),
+      Immutable.from({
+        one: 1,
+        two: ['meow'],
+        nested: {
+          a: 2,
+          b: 'b',
+          c: { c1: 2, c2: 'c2', c3: 'c3', d: { d1: 2, d2: 'd2', d3: 'd3' } }
+        }
+      }),
       resultCovenant.reducer(resultCovenant.initialState, anotherAction)
     )
   })

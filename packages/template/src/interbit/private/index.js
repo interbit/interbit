@@ -1,25 +1,46 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
+const { actionTypes, actionCreators } = require('./actions')
 
 const initialState = Immutable.from({
   chainMetadata: { name: `Template application - User's private chain` },
-  texts: []
+  memos: [],
+  runningTotal: 0
 })
 
-const actionCreators = {
-  act: text => ({ type: 'ACT', payload: { text } })
-}
-
 const reducer = (state = initialState, action) => {
-  const nextState = state
-  if (action.type === 'ACT') {
-    return nextState.set('texts', nextState.texts.concat([action.payload.text]))
+  if (action.type.endsWith('STROBE')) {
+    return state
   }
-  return nextState
+
+  console.log('REDUCING: ', action)
+
+  switch (action.type) {
+    case actionTypes.MEMO: {
+      const { text } = action.payload
+      const memos = state.getIn(['memos'], Immutable.from([]))
+
+      return text ? state.set('memos', memos.concat(text)) : state
+    }
+
+    case actionTypes.ADD: {
+      const { number: maybeNumber } = action.payload
+      const number = Number(maybeNumber)
+      const runningTotal = state.getIn(['runningTotal'], 0)
+
+      return Number.isFinite(number)
+        ? state.set('runningTotal', runningTotal + number)
+        : state
+    }
+
+    default:
+      return state
+  }
 }
 
 module.exports = {
-  initialState,
+  actionTypes,
   actionCreators,
+  initialState,
   reducer
 }

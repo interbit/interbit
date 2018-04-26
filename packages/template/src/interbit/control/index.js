@@ -45,6 +45,10 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case rootCovenant.actionTypes.SET_MANIFEST: {
       const { covenants } = action.payload.manifest
+      if (!covenants) {
+        return nextState
+      }
+
       const covenantHash = covenants[COVENANTS.PRIVATE]
 
       return nextState.setIn(

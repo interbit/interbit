@@ -1,22 +1,38 @@
-import { Welcome } from 'lib-react-interbit'
 import React, { Component } from 'react'
-import logo from './logo.svg'
+import { Grid } from 'react-bootstrap'
+import { Navigation } from 'lib-react-interbit'
+import { Switch, Route } from 'react-router-dom'
+
+import NotFound from './containers/NotFoundPage'
+import InteractiveChains from './containers/InteractiveChains'
+import ExploreChain from './containers/ExploreChain'
+
 import './css/App.css'
-import ConnectedCovenant from './components/ConnectedCovenant'
 
 export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to Interbit</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Welcome />
-        <ConnectedCovenant />
+        <Navigation
+          navItems={[
+            {
+              title: 'PRIVATE CHAIN',
+              eventKey: 'chains'
+            },
+            {
+              title: 'BLOCK EXPLORER',
+              eventKey: 'explore'
+            }
+          ]}
+        />
+        <Grid>
+          <Switch>
+            <Route exact path="/" component={InteractiveChains} />
+            <Route exact path="/chains" component={InteractiveChains} />
+            <Route path="/explore" component={ExploreChain} />
+            <Route component={NotFound} />
+          </Switch>
+        </Grid>
       </div>
     )
   }

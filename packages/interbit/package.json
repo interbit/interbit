@@ -4,7 +4,7 @@
   "description": "Requireable deployment utilities for interbit-cli",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha tests/**/*.test.js"
+    "test": "mocha \"tests/**/*.test.js\""
   },
   "author": "BTL GROUP LTD",
   "license": "MIT",

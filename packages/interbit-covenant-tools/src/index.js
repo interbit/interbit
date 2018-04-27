@@ -26,13 +26,15 @@ const {
   rootStateSelectors
 } = require('./rootCovenant')
 
+const cAuthConsumerCovenant = require('./cAuthConsumerCovenant')
+
+const mergeCovenants = require('./mergeCovenants')
+
 const {
   validate,
   objectValidationRules,
   rulePredicates
 } = require('./validate')
-
-const mergeCovenants = require('./mergeCovenants')
 
 module.exports = {
   createAction,
@@ -60,6 +62,7 @@ module.exports = {
   manifestCovenant,
   rootCovenant,
   rootStateSelectors,
+  cAuthConsumerCovenant,
   mergeCovenants,
   validate,
   objectValidationRules,

@@ -204,7 +204,7 @@ Chains can join to each other via a read or write join. These joins enable Inter
 
 A read join allows one blockchain to share application state with another. Both blockchains must agree to and authorize the join in order for any data to be shared.
 
-Once authorized on both chains, the providing chain will send verifyable blockheaders and data to the consuming chain which will receive a subset of the providing chain's state. A read join is authorized on the providing chain with an [`'@@interbit/START_PROVIDE_STATE'`](../reference/interbit-covenant-utils/startProvideState.md) action and on the receiving chain by an [`'@@interbit/START_CONSUME_STATE'`](../reference/interbit-covenant-utils/startConsumeState.md). Once both actions have been blocked the state will be shared.
+Once authorized on both chains, the providing chain will send verifiable blockheaders and data to the consuming chain which will receive a subset of the providing chain's state. A read join is authorized on the providing chain with an [`'@@interbit/START_PROVIDE_STATE'`](../reference/interbit-covenant-utils/startProvideState.md) action and on the receiving chain by an [`'@@interbit/START_CONSUME_STATE'`](../reference/interbit-covenant-utils/startConsumeState.md). Once both actions have been blocked the state will be shared.
 
 ## Write joins
 

@@ -18,7 +18,8 @@
   ],
   "dependencies": {
     "cross-env": "^5.1.4",
-    "interbit-cli": "0.4.14"
+    "interbit-cli": "0.4.14",
+    "lodash": "^4.17.5"
   },
   "author": "BTL GROUP LTD",
   "license": "MIT"

@@ -1,4 +1,5 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
+const { cAuthConsumerCovenant } = require('interbit-covenant-tools')
 const Immutable = require('seamless-immutable')
 const { actionTypes, actionCreators } = require('./actions')
 
@@ -34,7 +35,7 @@ const reducer = (state = initialState, action) => {
     }
 
     default:
-      return state
+      return cAuthConsumerCovenant.reducer(state, action)
   }
 }
 

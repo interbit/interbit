@@ -198,7 +198,7 @@ Refer to the [redux-saga](https://redux-saga.js.org/docs/introduction/BeginnerTu
 
 ## Chain Joining
 
-Chains can join to eachother via a read or write join. These joins enable Interbit blockchains to share data and interact with eachother.
+Chains can join to each other via a read or write join. These joins enable Interbit blockchains to share data and interact with eachother.
 
 ## Read Joins
 

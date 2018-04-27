@@ -9,7 +9,7 @@ This action should be dispatched to the receiver chain for a write join.
 #### Arguments
 
 1. `senderChainId` *(string)*: The chain ID of the blockchain that will send actions
-2. `permittedActions` *(array)*: The actions that the sender is permitted to send
+2. `permittedActions` *(array [string])*: The actions that the sender is permitted to send
 
 
 #### Returns

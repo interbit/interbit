@@ -9,7 +9,7 @@ This action should be dispatched to the consumer chain for a read join.
 #### Arguments
 
 1. `provider` *(string)*: The chain ID of the blockchain that will be providing state
-2. `mount` *(array)*: A state path that the shared state will be mounted to 
+2. `mount` *(array [string])*: A state path that the shared state will be mounted to 
 3. `joinName` *(string)*: A name for the join. This must be the same as the name used by the provider chain 
 
 

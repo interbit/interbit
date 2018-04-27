@@ -20,7 +20,7 @@ The Key considerations in chain architecture are:
 
 When data is distributed on a single blockchain, confidentiality is sacrificed to those who have permissions for that chain. Most blockchains achieve privacy though obfuscation or anonymization, this is not true confidentiality. By segregating that data to distinct blockchains, Interbit enforces data confidentiality at the architectural level.
 
-Once the data is segregated into chains, chains can connect with eachother and only share what is necessary. A connection does not need to include the entire state of a chain. This can be thought of as a microservice architecture where each chain is a microservice keeping some private data and exposing other data to select connected chains.
+Once the data is segregated into chains, chains can connect with each other and only share what is necessary. A connection does not need to include the entire state of a chain. This can be thought of as a microservice architecture where each chain is a microservice keeping some private data and exposing other data to select connected chains.
 
 
 ### Scalability
@@ -98,7 +98,7 @@ This allows them to gain another potential order of magnitude more throughput wi
 
 In this architecture each company has a chain that holds the entirety of their data. They do not wish to share, so no other parties can see that data. A directory chain (the hub) contains hashes of company chains participating in consortium which maintains data integrity and trust system wide. All parties in this architecture participate in directory chain. Hashes provide shared auditability and accountability throughout network without sharing any trade data.
 
-The companies do, however, wish to shared trade data with eachother. Therefore, the parties control trading chains run between them that contain this trade data. The company chains control the trading chains and send hashes to the directory to maintain data integrity of the trades by proxy.
+The companies do, however, wish to shared trade data with each other. Therefore, the parties control trading chains run between them that contain this trade data. The company chains control the trading chains and send hashes to the directory to maintain data integrity of the trades by proxy.
 
 The blue chains, trading chains, were completely hidden from anyone other than the involved parties. The green company chains are controlled entirely by the companies in question. The red chain has hashes periodically reported to it so that every party involved accountable for data integrity of their individual chains.
 

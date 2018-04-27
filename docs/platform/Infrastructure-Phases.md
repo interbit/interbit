@@ -7,7 +7,7 @@
 - Interbit AWS Hosts are able to run user code
 - Interbit hosts can publish to static S3 sites
 - Interbit hosts can set DNS names for user code
-- Users cand deploy their projects to our infrastructure
+- Users can deploy their projects to our infrastructure
 - Platform sites still hosted on heroku nodes
 
 # Phase 3 - Hyperconvergence

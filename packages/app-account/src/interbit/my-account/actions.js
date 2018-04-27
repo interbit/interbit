@@ -1,3 +1,5 @@
+const uuid = require('uuid')
+
 const covenantName = 'app-account-my-account'
 
 const actionTypes = {
@@ -9,9 +11,7 @@ const actionTypes = {
   COMPLETE_AUTHENTICATION: `${covenantName}/COMPLETE_AUTHENTICATION`
 }
 
-// Could use UUID to generate a random join name
-const generateJoinName = ({ consumerChainId, providerChainId }) =>
-  `PROFILE-${providerChainId.substr(0, 12)}-${consumerChainId.substr(0, 12)}`
+const generateJoinName = () => `PROFILE-${uuid.v4().toUpperCase()}`
 
 const actionCreators = {
   updateProfile: ({ alias, name, email }) => ({
@@ -23,11 +23,11 @@ const actionCreators = {
     }
   }),
 
-  shareProfileTokens: ({ providerChainId, consumerChainId, sharedTokens }) => ({
+  shareProfileTokens: ({ consumerChainId, sharedTokens }) => ({
     type: actionTypes.SHARE_PROFILE_TOKENS,
     payload: {
       consumerChainId,
-      joinName: generateJoinName({ providerChainId, consumerChainId }),
+      joinName: generateJoinName(),
       sharedTokens
     }
   }),

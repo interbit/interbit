@@ -20,7 +20,14 @@ import ModalSignUp from '../components/ModalSignUp'
 import { toggleModal } from '../redux/uiReducer'
 import modalNames from '../constants/modalNames'
 import { PRIVATE } from '../constants/chainAliases'
-import chairmanmeow from '../assets/chairmanmeow.jpg'
+import mainGraphic from '../assets/homeHeader.jpg'
+
+const MODES = {
+  NOT_LOGGED_IN: 0,
+  PROPS_MISSING: 1,
+  PROPS_ADDING: 2,
+  PROPS_AVAILABLE: 3
+}
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -28,22 +35,19 @@ const mapStateToProps = (state, ownProps) => {
   } = ownProps
   const query = queryString.parse(search)
 
-  const chainState = state.interbit.chains
-    ? state.interbit.chains[PRIVATE]
-    : undefined
+  const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
 
   const { chainId, redirectUrl, tokens } = query
   const isSignInModalVisible = state.ui.modals[modalNames.SIGN_IN_MODAL_NAME]
   const isSignUpModalVisible = state.ui.modals[modalNames.SIGN_UP_MODAL_NAME]
 
-  console.log(state)
-
   return {
     profileFields: chainState ? chainState.profile : {},
     redirectUrl,
     consumerChainId: chainId,
-    requestedTokens: tokens,
-    providerChainId: selectors.getChainId(state.interbit, PRIVATE),
+    requestedTokens: Array.isArray(tokens) ? tokens : [tokens],
+    providerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
+    mode: MODES.PROPS_AVAILABLE,
     isSignInModalVisible,
     isSignUpModalVisible
   }
@@ -56,12 +60,17 @@ const mapDispatchToProps = dispatch => ({
 
 export class ChainConnect extends Component {
   static propTypes = {
-    profileFields: PropTypes.shape,
+    profileFields: PropTypes.shape({
+      alias: PropTypes.string,
+      email: PropTypes.string,
+      name: PropTypes.string
+    }),
     redirectUrl: PropTypes.string,
     providerChainId: PropTypes.string,
     consumerChainId: PropTypes.string,
     requestedTokens: PropTypes.arrayOf(PropTypes.string),
     blockchainDispatch: PropTypes.func.isRequired,
+    mode: PropTypes.number,
     isSignInModalVisible: PropTypes.bool,
     isSignUpModalVisible: PropTypes.bool,
     toggleModalFunction: PropTypes.func.isRequired
@@ -73,6 +82,7 @@ export class ChainConnect extends Component {
     providerChainId: '',
     consumerChainId: '',
     requestedTokens: [],
+    mode: MODES.NOT_LOGGED_IN,
     isSignInModalVisible: false,
     isSignUpModalVisible: false
   }
@@ -86,12 +96,7 @@ export class ChainConnect extends Component {
       redirectUrl
     } = this.props
 
-    // TODO: Probably dispatch a redux action to UI noting loading of chain situation
-
-    await window.cli.loadChain(consumerChainId)
-
     const shareProfileTokensAction = actionCreators.shareProfileTokens({
-      providerChainId,
       consumerChainId,
       sharedTokens: requestedTokens
     })
@@ -108,7 +113,9 @@ export class ChainConnect extends Component {
 
   render() {
     const {
+      mode,
       consumerChainId,
+      providerChainId,
       requestedTokens,
       profileFields,
       isSignInModalVisible,
@@ -163,7 +170,7 @@ export class ChainConnect extends Component {
         <Table>
           <tbody>
             {Object.keys(profileFields).map(key => (
-              <tr>
+              <tr key={key}>
                 <td>{key}</td>
                 <td>{profileFields[key]}</td>
               </tr>
@@ -187,7 +194,7 @@ export class ChainConnect extends Component {
         <Table>
           <tbody>
             {Object.keys(profileFields).map(key => (
-              <tr>
+              <tr key={key}>
                 <td>{key}</td>
                 <td>{profileFields[key]}</td>
               </tr>
@@ -215,34 +222,48 @@ export class ChainConnect extends Component {
       <div>
         <Table>
           <tbody>
-            {Object.keys(profileFields).map(key => (
-              <tr>
+            {requestedTokens.map(key => (
+              <tr key={key}>
                 <td>{key}</td>
                 <td>{profileFields[key]}</td>
               </tr>
             ))}
           </tbody>
         </Table>
-        <IconButton onClick={this.doConnectChains} text="Continue" />
-        <IconButton text="Go Back" className="secondary" />
+        <IconButton
+          className={providerChainId ? '' : 'disabled'}
+          onClick={this.doConnectChains}
+          text="Accept"
+        />
+        <IconButton text="Reject" className="secondary" />
       </div>
     )
+
+    const getFormForCurrentMode = () => {
+      switch (mode) {
+        case MODES.NOT_LOGGED_IN:
+          return formLoggedOut
+        case MODES.PROPS_MISSING:
+          return formMissingProfileField
+        case MODES.PROPS_ADDING:
+          return formMissingProfileFieldForm
+        case MODES.PROPS_AVAILABLE:
+        default:
+          return formContinueAuth
+      }
+    }
 
     return (
       <Grid>
         <div className="ibweb-page app-auth">
           <Row>
             <Col {...colLayout}>
-              <img src={chairmanmeow} alt="App info access" />
+              <img src={mainGraphic} alt="App info access" />
               <h3>
                 (Service: {consumerChainId}) wants to access the following
                 identity information:
               </h3>
-              {/* TODO: swap out these forms depending on state */}
-              {formLoggedOut}
-              {formMissingProfileField}
-              {formMissingProfileFieldForm}
-              {formContinueAuth}
+              {getFormForCurrentMode()}
             </Col>
           </Row>
         </div>

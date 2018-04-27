@@ -204,13 +204,13 @@ Chains can join to each other via a read or write join. These joins enable Inter
 
 A read join allows one blockchain to share application state with another. Both blockchains must agree to and authorize the join in order for any data to be shared.
 
-Once authorized on both sides, the providing blockchain will send verifyable blockheaders and data to the consuming chain which will receive a subset of the providing blockchain's state. A read join is authorized on the providing side with an [`'@@interbit/START_PROVIDE_STATE'`](../reference/interbit-covenant-utils/startProvideState.md) action and on the receiving side by an [`'@@interbit/START_CONSUME_STATE'`](../reference/interbit-covenant-utils/startConsumeState.md). Once both actions have been blocked the state will be shared.
+Once authorized on both chains, the providing chain will send verifyable blockheaders and data to the consuming chain which will receive a subset of the providing chain's state. A read join is authorized on the providing chain with an [`'@@interbit/START_PROVIDE_STATE'`](../reference/interbit-covenant-utils/startProvideState.md) action and on the receiving chain by an [`'@@interbit/START_CONSUME_STATE'`](../reference/interbit-covenant-utils/startConsumeState.md). Once both actions have been blocked the state will be shared.
 
 ## Write joins
 
 A write join allows one blockchain to remotely dispatch actions to another blockchain. Both blockchains must agree to authorize the join in order for any actions to be sent.
 
-Once both sides have agreed to the join, the remote dispatch is handled using a read join that shares a queue of actions from the sending chain to the receiving chain. The receiving chain will process these actions if the sending chain is authorized to dispatch them.
+Once both chains have agreed to the join, the remote dispatch is handled using a read join that shares a queue of actions from the sending chain to the receiving chain. The receiving chain will process these actions if the sending chain is authorized to dispatch them.
 
 A write join is authorized on the sending side with an [`'@@interbit/AUTHORIZE_SEND_ACTIONS'`](../reference/interbit-covenant-utils/authorizeSendActions.md) action and on the receiving side with an [`'@@interbit/AUTHORIZE_RECEIVE_ACTIONS'`](../reference/interbit-covenant-utils/authorizeReceiveActions.md) action.
 

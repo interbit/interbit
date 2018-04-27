@@ -9,6 +9,7 @@
   * [Interbit State](key-concepts/README.md#interbit-state)
   * [Smart Contracts](key-concepts/README.md#smart-contracts)
   * [Sagas](/key-concepts/README.md#sagas)
+  * [Chain Joining](/key-concepts/README.md#chain-joining)
 * [Architecture](architecture/README.md)
   * [Chain Architecture](architecture/chain-architecture.md)
 * [Reference](reference/README.md)

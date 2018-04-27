@@ -1,6 +1,6 @@
 # Contributing
 
-If you would like to ask a question about Interbit head to our [Slack Channel]() for some support.
+If you would like to ask a question about Interbit head to our [Slack Channel](http://interbitdev.slack.com) for some support.
 
 If you would like to know more about how it works head over to our [SDK Documentation](https://docs.test-interbit.io/).
 

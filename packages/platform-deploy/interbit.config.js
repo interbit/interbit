@@ -1,3 +1,5 @@
+const _ = require('lodash')
+
 const accountConfig = require('../app-account/interbit.prod.config')
 const templateConfig = require('../template/interbit.prod.config')
 
@@ -28,6 +30,7 @@ const config = [accountConfig, templateConfig].reduce(
   init
 )
 
+config.peers = _.uniq(config.peers)
 console.log(config)
 
 module.exports = config

@@ -1,7 +1,6 @@
 const {
   getChains,
   getApps,
-  getPeers,
   getChainByAlias,
   getChainJoins
 } = require('./configSelectors')
@@ -61,7 +60,6 @@ const validateChains = config => {
 }
 
 const validateApps = config => {
-  const peers = getPeers(config)
   const chains = getChains(config)
   const chainAliases = Object.keys(chains)
 
@@ -93,13 +91,6 @@ const validateApps = config => {
         }"`
       )
     }
-    appConfig.peers.forEach(peer => {
-      if (peers.indexOf(peer) === -1) {
-        throw new Error(
-          `app "${appAlias}" references unconfigured peer "${peer}"`
-        )
-      }
-    })
   })
 }
 

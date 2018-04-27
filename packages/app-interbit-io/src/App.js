@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { Grid } from 'react-bootstrap'
+import { HeaderNav, Footer } from 'lib-react-interbit'
 
 import constants from './constants'
 import Home from './containers/Home'
@@ -25,113 +27,99 @@ import './css/App.css'
 
 class App extends Component {
   render() {
+    const accountsUrl = constants.urls.APP_ACCOUNT
+    const userIcon = <a href={accountsUrl}>Go to Accounts</a>
+
     return (
-      <Switch>
-        <Route exact path={constants.paths.HOME} component={Home} />
-        <Route exact path={constants.paths.CONTACT} component={Contact} />
-        <Route exact path={constants.paths.PLATFORM} component={Platform} />
-        <Route
-          exact
-          path={constants.paths.PLATFORM_INTERBIT_FOR_BUSINESS}
-          component={PlatformInterbitForBusiness}
-        />
-        <Route
-          exact
-          path={constants.paths.PLATFORM_CASE_STUDY}
-          component={PlatformCaseStudy}
-        />
-        <Route
-          exact
-          path={constants.paths.PLATFORM_ROADMAP}
-          component={PlatformRoadmap}
+      <div className="App ibweb">
+        {/* TODO: move page-level classnames down to ,ibweb-page level */}
+        <HeaderNav
+          headerNavItems={constants.navigation.headerNav}
+          account={{ userIcon }}
         />
 
-        <Route
-          exact
-          path={constants.paths.DEVELOPERS}
-          component={DevelopersOverview}
-        />
-        <Route
-          exact
-          path={constants.paths.DEVELOPERS_ARCHITECTURE}
-          component={DevelopersArchitecture}
-        />
-        <Route
-          exact
-          path={constants.paths.DEVELOPERS_EXAMPLES}
-          component={DevelopersExampleApps}
-        />
-        <Route
-          exact
-          path={constants.paths.DEVELOPERS_PLATFORM_FEATURES}
-          component={DevelopersPlatformFeatures}
-        />
-        <Route
-          exact
-          path={constants.paths.DEVELOPERS_RESOURCES}
-          component={DevelopersResources}
-        />
-        <Route
-          exact
-          path={constants.paths.DEVELOPERS_SUPPORT}
-          component={DevelopersSupport}
-        />
-        {/*
-        <Route
-          exact
-          path={constants.paths.DEVELOPERS_APP_DIRECTORY}
-          component={DevelopersAppDirectory}
-        />
-        <Route
-          exact
-          path={constants.paths.DEVELOPERS_BEST_PRACTICES}
-          component={DevelopersBestPractices}
-        />
-        <Route
-          exact
-          path={constants.paths.DEVELOPERS_BLUEPRINTS}
-          component={DevelopersAppBlueprints}
-        />
-        <Route
-          exact
-          path={constants.paths.DEVELOPERS_BUILDING_INTERBIT_APPS}
-          component={DevelopersBuildingInterbitApps}
-        />
-        <Route
-          exact
-          path={constants.paths.DEVELOPERS_IDENTITY}
-          component={DevelopersIdentity}
-        />
-        <Route
-          exact
-          path={constants.paths.DEVELOPERS_PROJECTS}
-          component={DevelopersProjects}
-        />
-        */}
+        <Grid>
+          <Switch>
+            <Route exact path={constants.paths.HOME} component={Home} />
+            <Route exact path={constants.paths.CONTACT} component={Contact} />
+            <Route exact path={constants.paths.PLATFORM} component={Platform} />
+            <Route
+              exact
+              path={constants.paths.PLATFORM_INTERBIT_FOR_BUSINESS}
+              component={PlatformInterbitForBusiness}
+            />
+            <Route
+              exact
+              path={constants.paths.PLATFORM_CASE_STUDY}
+              component={PlatformCaseStudy}
+            />
+            <Route
+              exact
+              path={constants.paths.PLATFORM_ROADMAP}
+              component={PlatformRoadmap}
+            />
 
-        <Route exact path={constants.paths.PRICING} component={Pricing} />
-        <Route
-          exact
-          path={constants.paths.POLICY_ACCEPTABLE_USE}
-          component={AcceptableUse}
-        />
-        <Route
-          exact
-          path={constants.paths.POLICY_PRIVACY}
-          component={Privacy}
-        />
-        <Route
-          exact
-          path={constants.paths.POLICY_TOS}
-          component={TermsOfService}
-        />
-        <Route
-          exact
-          path={constants.paths.POLICY_TRADEMARK}
-          component={Trademark}
-        />
-        <Route component={NotFound} />
-      </Switch>
+            <Route
+              exact
+              path={constants.paths.DEVELOPERS}
+              component={DevelopersOverview}
+            />
+            <Route
+              exact
+              path={constants.paths.DEVELOPERS_ARCHITECTURE}
+              component={DevelopersArchitecture}
+            />
+            <Route
+              exact
+              path={constants.paths.DEVELOPERS_EXAMPLES}
+              component={DevelopersExampleApps}
+            />
+            <Route
+              exact
+              path={constants.paths.DEVELOPERS_PLATFORM_FEATURES}
+              component={DevelopersPlatformFeatures}
+            />
+            <Route
+              exact
+              path={constants.paths.DEVELOPERS_RESOURCES}
+              component={DevelopersResources}
+            />
+            <Route
+              exact
+              path={constants.paths.DEVELOPERS_SUPPORT}
+              component={DevelopersSupport}
+            />
+            <Route exact path={constants.paths.PRICING} component={Pricing} />
+            <Route
+              exact
+              path={constants.paths.POLICY_ACCEPTABLE_USE}
+              component={AcceptableUse}
+            />
+            <Route
+              exact
+              path={constants.paths.POLICY_PRIVACY}
+              component={Privacy}
+            />
+            <Route
+              exact
+              path={constants.paths.POLICY_TOS}
+              component={TermsOfService}
+            />
+            <Route
+              exact
+              path={constants.paths.POLICY_TRADEMARK}
+              component={Trademark}
+            />
+            <Route component={NotFound} />
+          </Switch>
+
+          <Footer
+            sections={constants.navigation.footerNav}
+            isInline={false}
+            bottomLinks={constants.navigation.footerBottomLinks}
+          />
+        </Grid>
+      </div>
     )
   }
 }

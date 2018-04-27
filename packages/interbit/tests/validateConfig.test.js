@@ -482,8 +482,7 @@ describe('validateConfig(config)', () => {
     }, /app "hub" references unconfigured chain "incorrect"$/)
   })
 
-  // NOTE: This might actually be OK... ?
-  it('fails when apps reference unconfigured peers', () => {
+  it('returns true when apps reference unconfigured peers', () => {
     const config = {
       ...defaultConfig,
       apps: {
@@ -493,9 +492,8 @@ describe('validateConfig(config)', () => {
         }
       }
     }
-    should.throws(() => {
-      validateConfig(config)
-    }, /app "hub" references unconfigured peer "localhost"$/)
+    const result = validateConfig(config)
+    should.equal(result, true)
   })
 
   it('fails when apps reference unconfigured appChain', () => {

@@ -12,10 +12,13 @@ function* connectToPeers({ cli, peers = [] }) {
 
   console.log(`${LOG_PREFIX}: Connecting to Interbit nodes`, peers)
   for (const peer of peers) {
-    const [toAddress, toPort] = peer.split(':')
+    const [toAddress, port] = peer.split(':')
+    const toPort = port || getDefaultPort(window.location.protocol)
     yield call(tryConnect, { cli, toAddress, toPort })
   }
 }
+
+const getDefaultPort = protocol => (protocol === 'https:' ? 443 : 80)
 
 function* tryConnect({ cli, toAddress = 'localhost', toPort }) {
   if (toAddress && toPort) {

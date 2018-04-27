@@ -8,7 +8,7 @@ const initialState = Immutable.from({
 const actionCreators = {}
 
 const reducer = (state = initialState, action) =>
-  // const nextState = interbit-core-buffer.covenant.reducer(state, action)
+  // const nextState = interbit-covenant-tools.covenant.reducer(state, action)
   state
 
 module.exports = {

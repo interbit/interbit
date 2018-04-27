@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import { withRouter, Route, Switch } from 'react-router-dom'
 import { Navigation, Footer } from 'lib-react-interbit'
 
 import { selectors } from 'interbit-middleware'
@@ -16,15 +16,18 @@ import ChainConnect from './containers/ChainConnect'
 import CreateAccount from './containers/CreateAcount'
 
 import LogoAccount from './components/LogoAccounts'
-import { PRIVATE } from './constants/chainAliases'
+import CHAIN_ALIASES from './constants/chainAliases'
+import { PRIVATE_CHAIN_PATHS } from './constants/chainStatePaths'
 import paths from './constants/paths'
 import urls from './constants/urls'
 import './css/App.css'
 
 const mapStateToProps = state => {
-  const chainAlias = PRIVATE
+  const chainAlias = CHAIN_ALIASES.PRIVATE
   const userName = selectors.isChainLoaded(state, { chainAlias })
-    ? selectors.getChain(state, { chainAlias }).getIn(['profie', 'name'])
+    ? selectors
+        .getChain(state, { chainAlias })
+        .getIn(PRIVATE_CHAIN_PATHS.USERNAME)
     : undefined
 
   return {
@@ -155,4 +158,4 @@ export class App extends Component {
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default withRouter(connect(mapStateToProps)(App))

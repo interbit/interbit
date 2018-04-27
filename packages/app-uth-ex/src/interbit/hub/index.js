@@ -1,6 +1,13 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
-const utils = require('interbit-covenant-utils')
+const {
+  coreCovenant: {
+    actionCreators: { startProvideState },
+    redispatch,
+    remoteRedispatch
+  }
+} = require('interbit-covenant-tools')
+
 const { actionTypes, actionCreators } = require('./actions')
 const { actionCreators: spokeActionCreators } = require('../spoke/actions')
 
@@ -72,14 +79,14 @@ const smartContract = (state = initialState, action) => {
 
         const joinName = `TOKEN-${requestId}`
 
-        const provideAction = utils.startProvideState({
+        const provideAction = startProvideState({
           consumer: consumerChainId,
           statePath: ['sharedTokens', requestId],
           joinName
         })
 
         console.log('REDISPATCH: ', provideAction)
-        nextState = utils.redispatch(nextState, provideAction)
+        nextState = redispatch(nextState, provideAction)
 
         const actionToForward = spokeActionCreators.mountToken({
           consumerRequestId,
@@ -89,7 +96,7 @@ const smartContract = (state = initialState, action) => {
         })
 
         console.log('REMOTE DISPATCH: ', actionToForward)
-        nextState = utils.remoteRedispatch(
+        nextState = remoteRedispatch(
           nextState,
           consumerChainId,
           actionToForward

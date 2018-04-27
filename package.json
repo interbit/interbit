@@ -6,12 +6,12 @@
     "lerna": "^2.10.2"
   },
   "scripts": {
-    "build": "lerna run --scope $APP_NAME build",
+    "build": "cross-env-shell lerna run --scope $APP_NAME build",
     "build:lib": "lerna run --scope lib-react-interbit build",
     "build:modules": "lerna run --scope interbit-* build",
     "postinstall": "lerna bootstrap --hoist --parallel",
     "heroku-postbuild": "npm run build:modules && npm run build",
-    "start": "lerna run --scope $APP_NAME serve",
+    "start": "cross-env-shell lerna run --scope $APP_NAME serve --stream",
     "test": "npm run lint && lerna run --parallel test -- -- --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

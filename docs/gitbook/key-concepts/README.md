@@ -2,6 +2,22 @@
 
 Actions, application states, and smart contracts are covered below to foster understanding of blockchain technology and Interbit.
 
+## Covenants
+
+A covenant is a set of action creators and types, a reducer (which is a smart contract), and a redux saga that together indicate the functioning of an Interbit blockchain. These actions, smart contract, and saga will work together to fulfill the functionality of a single Interbit blockchain. The rootSaga in a smart contract is optional.
+
+A covenant should be packaged as an npm module but does not necessarily have to be published anywhere to run on the interbit blockchain.
+
+```js
+// Covenant exports
+module.exports = {
+  reducer,
+  actionCreators,
+  actionTypes,
+  rootSaga
+}
+```
+
 ## Actions
 Actions are data payloads that provide information from your application to your Interbit blockchain. Interbit uses the [Redux](http://redux.js.org/) design, so actions in Interbit are essentially the same as actions in Redux. Specifically, actions are plain JavaScript objects that must have a `type` and a `payload` property. Types should be defined as string constants. The contents of the `payload` property are completely up to you.
 
@@ -92,11 +108,6 @@ See also: [Blockchain State](../GLOSSARY.md#blockchain-state)
 ## Smart Contracts
 Smart Contracts provide the programmability and customizability of Interbit. Smart Contracts must be written in JavaScript and must be developed using deterministic, functional programming methodology.
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>We need to talk about the third argument passed into smart contracts (chain).</p>
-</div>
-
 <div class="hide-in-web">
   <p>Below is an implementation of a simple Smart Contract that increments a counter by an amount whenever an <code>ADD</code> action is received. For context, the action and state are also given.</p>
   <pre><code class="lang-jsx">
@@ -179,9 +190,8 @@ var smartContract = {
   </div>
 </div>
 
-## Sagas
+## Root Saga
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>Talk about the root saga.</p>
-</div>
+Because a smart contract must be deterministic a method of handling side effects on a blockchain must be used. Interbit uses the redux-saga API to manage side effects. If you require side effect management in your covenant simply export a `rootSaga` in your covenant package export in the same way you would export a redux saga.
+
+Refer to the [redux-saga](https://redux-saga.js.org/docs/introduction/BeginnerTutorial.html) documentation for implementation details.

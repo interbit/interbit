@@ -1,6 +1,6 @@
 {
   "name": "utils",
-  "version": "0.4.11",
+  "version": "0.4.13",
   "description": "",
   "private": true,
   "main": "index.js",

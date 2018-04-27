@@ -1,6 +1,6 @@
 {
   "name": "interbit-middleware",
-  "version": "0.4.11",
+  "version": "0.4.13",
   "description": "Redux middleware that boots an Interbit hypervisor and syncs the blockchain in your Redux state.",
   "main": "dist/interbit-middleware.js",
   "license": "MIT",
@@ -9,7 +9,7 @@
     "build": "webpack --env dev && webpack --env build",
     "build:watch": "webpack --env dev && webpack --env build --watch",
     "dev": "webpack --progress --colors --watch --env dev",
-    "test": "mocha tests/**/*.test.js"
+    "test": "mocha \"tests/**/*.test.js\""
   },
   "keywords": [
     "Interbit",

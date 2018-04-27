@@ -41,7 +41,10 @@ export default {
     image: iconDownload,
     content:
       'Download the Interbit SDK and get started building blockchain applications within minutes.',
-    to: constants.urls.GITHUB_IB
+    to: constants.urls.GITHUB_IB,
+    clickHandler: () => {
+      window.ga(...constants.ga.CLICK_GET_SDK)
+    }
   },
   forBusiness: {
     title: 'For Business',

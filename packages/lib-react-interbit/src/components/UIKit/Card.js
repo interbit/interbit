@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import LinkWrapper from './LinkWrapper'
 
 export default class Card extends Component {
   static propTypes = {
@@ -10,7 +11,8 @@ export default class Card extends Component {
     callToActions: PropTypes.arrayOf(
       PropTypes.shape({
         to: PropTypes.string,
-        text: PropTypes.string.isRequired
+        text: PropTypes.string.isRequired,
+        clickHandler: PropTypes.func
       })
     )
   }
@@ -31,7 +33,9 @@ export default class Card extends Component {
           <div className="links">
             {callToActions.map(c => (
               <p key={c.text}>
-                <a href={c.to}>{c.text}</a>
+                <LinkWrapper to={c.to} clickHandler={c.clickHandler}>
+                  {c.text}
+                </LinkWrapper>
               </p>
             ))}
           </div>

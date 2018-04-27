@@ -7,7 +7,7 @@ const {
     string,
     object
   }
-} = require('interbit-validate')
+} = require('interbit-covenant-tools')
 
 const covenantName = 'app-project_my-projects'
 

@@ -3,18 +3,19 @@
   "private": true,
   "dependencies": {
     "cross-env": "^5.1.4",
-    "lerna": "^2.10.2",
-    "serve": "^6.5.5"
+    "lerna": "^2.10.2"
   },
   "scripts": {
     "build": "lerna run --scope $APP_NAME build",
+    "build:lib": "lerna run --scope lib-react-interbit build",
+    "build:modules": "lerna run --scope interbit-* build",
     "postinstall": "lerna bootstrap --hoist --parallel",
-    "start": "cross-env serve packages/$APP_NAME/build",
+    "heroku-postbuild": "npm run build:modules && npm run build",
+    "start": "lerna run --scope $APP_NAME serve --stream",
     "test": "npm run lint && lerna run --parallel test -- -- --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "interbit:build": "interbit build",
-    "interbit:deploy": "interbit deploy"
+    "release": "npm run build:modules && npm run build:lib && lerna publish --force-publish=* --exact"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",

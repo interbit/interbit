@@ -1,0 +1,35 @@
+{
+  "name": "interbit-cli",
+  "version": "0.4.13",
+  "description": "The Interbit Blockchain Development Platform",
+  "files": [
+    "bin",
+    "files"
+  ],
+  "bin": {
+    "interbit": "./bin/interbit-scripts.js"
+  },
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "author": "TSXV:BTL",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "browserify": "^16.1.0",
+    "cheerio": "^1.0.0-rc.2",
+    "cross-spawn": "5.1.0",
+    "express": "^4.16.2",
+    "fs-extra": "^5.0.0",
+    "interbit-core": "0.5.6",
+    "interbit-covenant-tools": "0.4.13",
+    "interbit": "0.4.13",
+    "lodash": "^4.17.5",
+    "socket.io": "^2.0.4",
+    "watch": "^1.0.2"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "mocha": "^4.0.1"
+  }
+}

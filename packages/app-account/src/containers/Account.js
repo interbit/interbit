@@ -18,7 +18,6 @@ import chairmanmeow from '../assets/chairmanmeow.jpg'
 import { actionCreators } from '../interbit/my-account/actions'
 import { actionCreators as publicActionCreators } from '../interbit/public/actions'
 import { getOAuthProviderChainId } from '../interbit/public/selectors'
-import { getExploreChainState } from '../redux/exploreChainReducer'
 import { toggleForm, toggleModal } from '../redux/uiReducer'
 import formNames from '../constants/formNames'
 import modalNames from '../constants/modalNames'
@@ -30,7 +29,9 @@ const mapStateToProps = (state, ownProps) => {
   const isAttentionMoreInfoModalVisible =
     state.ui.modals[modalNames.ATTENTION_MORE_INFO_MODAL_NAME]
 
-  const { state: chainState } = getExploreChainState(state)
+  const chainState = selectors.getPrivateChain(state, {
+    privateChainAlias: PRIVATE
+  })
   const profileFormProps = {
     isEditable: isAccountFormEditable
   }

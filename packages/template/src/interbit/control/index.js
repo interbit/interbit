@@ -1,5 +1,5 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
-const { covenant: interbufferCovenant } = require('interbit-core-buffer')
+const { rootCovenant } = require('interbit-covenant-tools')
 const Immutable = require('seamless-immutable')
 
 const { CHAIN_ALIASES, COVENANTS } = require('./constants')
@@ -37,14 +37,18 @@ const initialState = Immutable.from({
 })
 
 const reducer = (state = initialState, action) => {
-  const nextState = interbufferCovenant.reducer(state, action)
+  const nextState = rootCovenant.reducer(state, action)
   if (action.type.endsWith('STROBE')) {
     return nextState
   }
 
   switch (action.type) {
-    case interbufferCovenant.actionTypes.SET_MANIFEST: {
+    case rootCovenant.actionTypes.SET_MANIFEST: {
       const { covenants } = action.payload.manifest
+      if (!covenants) {
+        return nextState
+      }
+
       const covenantHash = covenants[COVENANTS.PRIVATE]
 
       return nextState.setIn(

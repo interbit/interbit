@@ -1,6 +1,8 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
-const utils = require('interbit-covenant-utils')
+const {
+  coreCovenant: { remoteRedispatch }
+} = require('interbit-covenant-tools')
 
 const { actionTypes, actionCreators } = require('./actions')
 const { getOAuthProviderChainId } = require('./selectors')
@@ -48,11 +50,7 @@ const reducer = (state = initialState, action) => {
       })
 
       console.log('REMOTE DISPATCH: ', actionToForward)
-      nextState = utils.remoteRedispatch(
-        nextState,
-        providerChainId,
-        actionToForward
-      )
+      nextState = remoteRedispatch(nextState, providerChainId, actionToForward)
 
       return nextState
     }
@@ -66,11 +64,7 @@ const reducer = (state = initialState, action) => {
       const actionToForward = actionCreators.signOut({ consumerChainId })
 
       console.log('REMOTE DISPATCH: ', actionToForward)
-      nextState = utils.remoteRedispatch(
-        nextState,
-        providerChainId,
-        actionToForward
-      )
+      nextState = remoteRedispatch(nextState, providerChainId, actionToForward)
 
       return nextState
     }

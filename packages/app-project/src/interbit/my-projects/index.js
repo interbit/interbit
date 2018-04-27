@@ -1,15 +1,14 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
 const {
-  selectors: interbufferSelectors,
-  covenant: { reducer: interbufferReducer }
-} = require('interbit-core-buffer')
-const {
-  createChildChain,
-  redispatch,
-  remoteRedispatch,
-  startConsumeState
-} = require('interbit-covenant-utils')
+  coreCovenant: {
+    redispatch,
+    remoteRedispatch,
+    actionCreators: { createChildChain, startConsumeState }
+  },
+  rootStateSelectors,
+  rootCovenant: { reducer: rootReducer }
+} = require('interbit-covenant-tools')
 
 const sampleProjectList = require('./sampleProjects')
 const interbitServices = require('./interbitServices')
@@ -49,7 +48,7 @@ const reducer = (state = initialState, action) => {
     return state
   }
 
-  let nextState = interbufferReducer(state, action)
+  let nextState = rootReducer(state, action)
   console.log(action)
   switch (action.type) {
     case actionTypes.AUTHORIZED: {
@@ -177,8 +176,8 @@ const createProjectChain = (
 ) => {
   let nextState = state
 
-  console.log('CREATING PROJECT CHAIN: ', { interbufferSelectors })
-  const covenantHash = interbufferSelectors.getCovenantHash(
+  console.log('CREATING PROJECT CHAIN: ')
+  const covenantHash = rootStateSelectors.getCovenantHash(
     state,
     'app-project_project'
   )

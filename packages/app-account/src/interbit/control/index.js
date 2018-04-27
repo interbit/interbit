@@ -24,8 +24,8 @@ const reducer = (state = initialState, action) => {
 
   switch (action.type) {
     case rootCovenant.actionTypes.SET_MANIFEST: {
-      const { covenants } = action.payload.manifest
-      const covenantHash = covenants[MY_ACCOUNT]
+      const { manifest } = action.payload
+      const covenantHash = getCovenantHash(MY_ACCOUNT, manifest)
 
       return nextState.setIn(['privateChainHosting', 'shared', PRIVATE], {
         blockMaster: nextState.getIn(['interbit', 'config', 'blockMaster']),
@@ -37,6 +37,19 @@ const reducer = (state = initialState, action) => {
     default:
       return nextState
   }
+}
+
+const getCovenantHash = (covenantAlias, manifest) => {
+  if (!manifest.covenants) {
+    return undefined
+  }
+
+  const covenant = manifest.covenants[covenantAlias]
+  if (typeof covenant === 'string') {
+    return covenant
+  }
+
+  return covenant.hash
 }
 
 module.exports = {

@@ -195,3 +195,22 @@ var smartContract = {
 Because a smart contract must be deterministic a method of handling side effects on a blockchain must be used. Interbit uses the redux-saga API to manage side effects. If you require side effect management in your covenant simply export a `rootSaga` in your covenant package export in the same way you would export a redux saga.
 
 Refer to the [redux-saga](https://redux-saga.js.org/docs/introduction/BeginnerTutorial.html) documentation for implementation details.
+
+## Chain Joining
+
+Chains can join to eachother via a read or write join. These joins enable Interbit blockchains to share data and interact with eachother.
+
+## Read Joins
+
+A read join allows one blockchain to share application state with another. Both blockchains must agree to and authorize the join in order for any data to be shared.
+
+Once authorized on both sides, the providing blockchain will send verifyable blockheaders and data to the consuming chain which will receive a subset of the providing blockchain's state. A read join is authorized on the providing side with an [`'@@interbit/START_PROVIDE_STATE'`](../reference/interbit-covenant-utils/startProvideState.md) action and on the receiving side by an [`'@@interbit/START_CONSUME_STATE'`](../reference/interbit-covenant-utils/startConsumeState.md). Once both actions have been blocked the state will be shared.
+
+## Write joins
+
+A write join allows one blockchain to remotely dispatch actions to another blockchain. Both blockchains must agree to authorize the join in order for any actions to be sent.
+
+Once both sides have agreed to the join, the remote dispatch is handled using a read join that shares a queue of actions from the sending chain to the receiving chain. The receiving chain will process these actions if the sending chain is authorized to dispatch them.
+
+A write join is authorized on the sending side with an [`'@@interbit/AUTHORIZE_SEND_ACTIONS'`](../reference/interbit-covenant-utils/authorizeSendActions.md) action and on the receiving side with an [`'@@interbit/AUTHORIZE_RECEIVE_ACTIONS'`](../reference/interbit-covenant-utils/authorizeReceiveActions.md) action.
+

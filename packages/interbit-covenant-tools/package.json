@@ -1,6 +1,6 @@
 {
   "name": "interbit-covenant-tools",
-  "version": "0.4.13",
+  "version": "0.4.14",
   "description": "Interbit platform covenants and covenant components",
   "main": "dist/interbit-covenant-tools.js",
   "scripts": {

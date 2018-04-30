@@ -3,7 +3,7 @@ import { reducer as formReducer } from 'redux-form'
 import {
   reducer as interbitReducer,
   INTERBIT_REDUCER_KEY
-} from 'interbit-middleware'
+} from 'interbit-ui-tools'
 import exploreChainReducer from './exploreChainReducer'
 
 export default combineReducers({

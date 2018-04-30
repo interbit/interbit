@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { BrowserRouter } from 'react-router-dom'
-import { middleware as interbitMiddleware } from 'interbit-middleware'
+import { middleware as interbitMiddleware } from 'interbit-ui-tools'
 
 import 'lib-react-interbit/src/css/index.css'
 import 'lib-react-interbit/src/css/interbit.css'

@@ -1,5 +1,5 @@
 import Immutable from 'seamless-immutable'
-import { actionTypes as middlewareActionTypes } from 'interbit-middleware'
+import { actionTypes as middlewareActionTypes } from 'interbit-ui-tools'
 
 // BlockExplorer specific actions
 const TOGGLE_RAW = 'Interbit/BlockExplorer/TOGGLE_RAW'

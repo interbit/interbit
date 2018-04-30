@@ -4,7 +4,7 @@ import { Grid, Row, Col, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
-import { selectors } from 'interbit-middleware'
+import { selectors } from 'interbit-ui-tools'
 import { LinkBar, LinkBarSlack } from 'lib-react-interbit'
 
 import urls from '../constants/urls'

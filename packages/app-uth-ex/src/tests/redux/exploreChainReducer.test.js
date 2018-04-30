@@ -1,6 +1,6 @@
 import assert from 'assert'
 import Immutable from 'seamless-immutable'
-import { actionCreators } from 'interbit-middleware'
+import { actionCreators } from 'interbit-ui-tools'
 
 import exploreChainReducer from '../../redux/exploreChainReducer'
 

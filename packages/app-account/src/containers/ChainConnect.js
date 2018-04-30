@@ -11,7 +11,7 @@ import {
   FormControl
 } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { chainDispatch, selectors } from 'interbit-middleware'
+import { chainDispatch, selectors } from 'interbit-ui-tools'
 import { IconButton } from 'lib-react-interbit'
 
 import { actionCreators } from '../interbit/my-account/actions'

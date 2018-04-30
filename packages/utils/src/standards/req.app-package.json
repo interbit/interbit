@@ -2,7 +2,7 @@
   "dependencies": {
     "interbit": "0.4.7",
     "interbit-covenant-tools": "0.4.12",
-    "interbit-middleware": "0.4.7",
+    "interbit-ui-tools": "0.4.7",
     "interbit-platform-tools": "0.4.7",
     "cross-env": "^5.1.4",
     "lib-react-interbit": "0.4.7",

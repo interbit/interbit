@@ -8,15 +8,20 @@ export { default as ObjectTree } from './components/ObjectTree'
 export { default as Logo } from './components/UIKit/Logo'
 export { default as IBIcon } from './components/UIKit/IBIcon'
 export { default as IBWordmark } from './components/UIKit/IBWordmark'
-export { default as Footer } from './components/Footer'
-export { default as HeaderNav } from './components/HeaderNav'
 export { default as NotFound } from './components/NotFound'
-export { default as Navigation } from './components/Navigation'
-export { default as NavigationWrapper } from './components/NavigationWrapper'
+export { default as Markdown } from './components/Markdown'
+
+// Navigation Components
+export { default as Navigation } from './components/Navigation/Navigation'
+export {
+  default as NavigationWrapper
+} from './components/Navigation/NavigationWrapper'
 export {
   default as DeveloperNavigation
-} from './components/DeveloperNavigation'
-export { default as Markdown } from './components/Markdown'
+} from './components/Navigation/DeveloperNavigation'
+export { default as Footer } from './components/Navigation/Footer'
+export { default as HeaderNav } from './components/Navigation/HeaderNav'
+export { default as SideBarNav } from './components/Navigation/SideBarNav'
 
 // Content Components
 export { default as Card } from './components/UIKit/Card'
@@ -32,7 +37,6 @@ export {
 } from './components/UIKit/ContentBarWithButton'
 export { default as Divider } from './components/UIKit/Divider'
 export { default as Quote } from './components/UIKit/Quote'
-export { default as SideBarNav } from './components/UIKit/SideBarNav'
 export { default as SidebarList } from './components/UIKit/SidebarList'
 export { default as TitledList } from './components/UIKit/TitledList'
 

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col, Panel, PanelGroup } from 'react-bootstrap'
-import LinkWrapper from './UIKit/LinkWrapper'
-import Logo from './UIKit/Logo'
-import TitledList from './UIKit/TitledList'
+import LinkWrapper from '../UIKit/LinkWrapper'
+import Logo from '../UIKit/Logo'
+import TitledList from '../UIKit/TitledList'
 
 export default class Footer extends Component {
   static propTypes = {

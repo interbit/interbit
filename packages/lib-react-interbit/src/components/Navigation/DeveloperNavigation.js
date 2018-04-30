@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-bootstrap'
 
-import LaunchPadRow from '../components/UIKit/LaunchPadRow'
-import SideBarNav from './UIKit/SideBarNav'
+import LaunchPadRow from '../UIKit/LaunchPadRow'
+import SideBarNav from '../Navigation/SideBarNav'
 
 export default class DeveloperNavigation extends Component {
   static propTypes = {

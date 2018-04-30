@@ -1,19 +1,21 @@
+// Header component for app-interbit.io
+// TODO: refactor and combine with other apps' header nav
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Grid, Row, Col, Navbar, NavItem, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 import NavWrap from './NavWrap'
-import Footer from './Footer'
-import Logo from './UIKit/Logo'
-import IBIcon from './UIKit/IBIcon'
+import LinkWrapper from '../UIKit/LinkWrapper'
+import Logo from '../UIKit/Logo'
+import IBIcon from '../UIKit/IBIcon'
 
-export default class NavigationWrapper extends Component {
+export default class HeaderNav extends Component {
   static propTypes = {
     account: PropTypes.shape({
-      userIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
       to: PropTypes.string,
-      logout: PropTypes.string
+      text: PropTypes.string
     }),
     headerNavItems: PropTypes.arrayOf(
       PropTypes.shape({
@@ -23,26 +25,15 @@ export default class NavigationWrapper extends Component {
         isHidden: PropTypes.bool
       })
     ),
-    footerNavItems: PropTypes.arrayOf(PropTypes.shape({})), // TODO: Define the shape
-    footerBottomLinks: PropTypes.arrayOf(
-      PropTypes.shape({
-        to: PropTypes.string,
-        text: PropTypes.string
-      })
-    ),
-    container: PropTypes.element.isRequired,
     className: PropTypes.string
   }
 
   static defaultProps = {
     account: {
-      userIcon: '',
-      accountTo: '#',
-      logout: '#'
+      to: '#',
+      text: ''
     },
     headerNavItems: [],
-    footerNavItems: [],
-    footerBottomLinks: [],
     className: ''
   }
 
@@ -65,14 +56,7 @@ export default class NavigationWrapper extends Component {
       )
     }
 
-    const {
-      container,
-      headerNavItems,
-      footerNavItems,
-      footerBottomLinks,
-      account,
-      className
-    } = this.props
+    const { headerNavItems, account, className } = this.props
 
     return (
       <div className={`ibweb ${className}`}>
@@ -90,24 +74,19 @@ export default class NavigationWrapper extends Component {
                     </Navbar.Brand>
                   </Navbar.Header>
                   <Nav className="nav-main-menu">
-                    {headerNavItems.map(
-                      navItem => !navItem.isHidden && renderNavItem(navItem)
-                    )}
+                    {headerNavItems.length &&
+                      headerNavItems.map(
+                        navItem => !navItem.isHidden && renderNavItem(navItem)
+                      )}
                   </Nav>
                 </Navbar>
               </Col>
               <Col lg={2} md={3} sm={12} className="accounts-link">
-                {account.userIcon}
+                <LinkWrapper to={account.to}>{account.text}</LinkWrapper>
               </Col>
             </Row>
           </Grid>
         </div>
-        <Grid className="ibweb-container">
-          {container}
-          {footerNavItems && (
-            <Footer sections={footerNavItems} bottomLinks={footerBottomLinks} />
-          )}
-        </Grid>
       </div>
     )
   }

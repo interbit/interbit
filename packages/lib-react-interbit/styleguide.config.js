@@ -7,8 +7,5 @@ module.exports = {
   require: [path.join(__dirname, 'src/css/interbit.css')],
   assetsDir: 'src/assets',
   template: 'styleguide/template.html',
-  ignore: [
-    '**/src/components/DeveloperNavigation.js',
-    '**/src/components/Welcome.js'
-  ]
+  ignore: ['**/src/components/Welcome.js']
 }

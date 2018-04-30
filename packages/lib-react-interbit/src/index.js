@@ -13,12 +13,6 @@ export { default as Markdown } from './components/Markdown'
 
 // Navigation Components
 export { default as Navigation } from './components/Navigation/Navigation'
-export {
-  default as NavigationWrapper
-} from './components/Navigation/NavigationWrapper'
-export {
-  default as DeveloperNavigation
-} from './components/Navigation/DeveloperNavigation'
 export { default as Footer } from './components/Navigation/Footer'
 export { default as HeaderNav } from './components/Navigation/HeaderNav'
 export { default as SideBarNav } from './components/Navigation/SideBarNav'

@@ -18,7 +18,7 @@ The Interbit team is an agile team that will react to  community needs and work 
   },
   intro: `This release not only marks a significant milestone in the maturity of our proprietary technology, it also unveils the Interbit platform, which will serve as the hub for our communities, a development platform for applications as well as end-to-end app commercialization support via our Store.
 
-We’ve spent the last 2 years designing and developing Interbit, a next generation blockchain that features patent-pending secure chain joining. Unlike other blockchains, Interbit makes it incredibly easy to create many lightweight blockchains and join them together. This unique approach allows for flexible and powerful many chain architectures that can horizontally scale and achieve true privacy.`,
+We’ve spent the last 2 years designing and developing Interbit, a next generation blockchain that features patent-pending secure chain joining. Unlike other blockchains, Interbit makes it incredibly easy to create many lightweight blockchains and join them together. This unique approach allows for flexible and powerful many chain architectures that can horizontally scale and achieve true privacy. See what we’re doing at a technical level by viewing our [detailed roadmap](https://ext.prodpad.com/ext/portfolio/cded6a66a54757a024c4ef0f9a886c6d48a5a1bd).`,
 
   features: [
     {

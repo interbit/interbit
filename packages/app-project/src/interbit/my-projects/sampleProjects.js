@@ -6,9 +6,9 @@ const sampleProjects = [
     license: 'Interbit Open Source',
     icon: 'fa-list',
     documentation:
-      'https://github.com/BlockchainTechLtd/interbit-sdk/blob/master/gitbook/examples/to-do-list.md',
+      'https://github.com/interbit/interbit/blob/master/docs/gitbook/examples/to-do-list.md',
     sourceCode:
-      'https://github.com/BlockchainTechLtd/interbit-sdk/tree/master/examples/example-solutions/to-do-list'
+      'https://github.com/interbit/interbit/tree/master/docs/examples/to-do-list'
   },
   {
     projectAlias: 'Order-Books-Sample',
@@ -19,9 +19,9 @@ The application mimics an exchange’s set of open orders for various commoditie
     license: 'Interbit Open Source',
     icon: 'fa-line-chart',
     documentation:
-      'https://github.com/BlockchainTechLtd/interbit-sdk/blob/master/gitbook/examples/order-books.md',
+      'https://github.com/interbit/interbit/blob/master/docs/gitbook/examples/order-books.md',
     sourceCode:
-      'https://github.com/BlockchainTechLtd/interbit-sdk/tree/master/examples/order-books'
+      'https://github.com/interbit/interbit/tree/master/docs/examples/order-books'
   },
   {
     projectAlias: 'Interbit-Under-the-Hood-Sample',
@@ -32,9 +32,9 @@ _Interbit Under the Hood_ contains a blockchain viewer that you can use to see t
     license: 'Interbit Open Source',
     icon: 'fa-cogs',
     documentation:
-      'https://github.com/BlockchainTechLtd/integration/blob/master/packages/app-uth-ex/ITH.md',
+      'https://github.com/interbit/interbit/blob/master/packages/app-uth-ex/ITH.md',
     sourceCode:
-      'https://github.com/BlockchainTechLtd/integration/tree/master/packages/app-uth-ex',
+      'https://github.com/interbit/interbit/tree/master/packages/app-uth-ex',
     launchUrl: 'https://ib-dev-uth.herokuapp.com/'
   }
 ]

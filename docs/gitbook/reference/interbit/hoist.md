@@ -1,6 +1,11 @@
 
 # `hoist`
 
+<div class="tips danger">
+  <p><span></span>TODO</p>
+  <p>Incomplete content. Unfinished feature.</p>
+</div>
+
 Hoists an application
 
 

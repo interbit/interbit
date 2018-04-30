@@ -1,5 +1,10 @@
 # `getChain(chainId)`
 
+<div class="tips danger">
+  <p><span></span>TODO</p>
+  <p>Incomplete content.</p>
+</div>
+
 Returns a chain interface for the chain ID specified
 
 #### Arguments

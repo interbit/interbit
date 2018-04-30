@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import { Row, Col } from 'react-bootstrap'
-import { LaunchPadRow, SideBarNav } from 'lib-react-interbit'
+import { LaunchPadRow, Sidebar } from 'lib-react-interbit'
 
 import Architecture from './Architecture'
 import ExampleApps from './ExampleApps'
@@ -26,7 +26,7 @@ class DevContainer extends Component {
         <LaunchPadRow buttonLinks={launchPads} />
         <Row>
           <Col lg={2} md={12}>
-            <SideBarNav contents={sidebarNav} />
+            <Sidebar contents={sidebarNav} />
           </Col>
           <Col lg={8} md={12}>
             <Switch>

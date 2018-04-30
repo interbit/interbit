@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Grid, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
-import { Navigation, Footer } from 'lib-react-interbit'
+import { HeaderApp, Footer } from 'lib-react-interbit'
 
 import { selectors } from 'interbit-ui-tools'
 
@@ -115,7 +115,7 @@ export class App extends Component {
           <Grid>
             <Row>
               <Col lg={10} md={9} sm={12}>
-                <Navigation
+                <HeaderApp
                   className="nav-main-menu"
                   logo={<LogoAccount />}
                   navItems={isLoggedIn ? headerNav : headerNavLoggedOut}

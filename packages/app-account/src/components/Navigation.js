@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Navigation } from 'lib-react-interbit'
+import { HeaderApp } from 'lib-react-interbit'
 
 import paths from '../constants/paths'
 import navigation from '../constants/navigation'
@@ -29,7 +29,7 @@ export default class AccountNavigation extends Component {
     )
 
     return (
-      <Navigation
+      <HeaderApp
         account={{
           userAlias: userProfile,
           to: paths.ACCOUNT

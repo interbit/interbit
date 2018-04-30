@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-// import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
 import { Navbar, Nav, NavItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
@@ -8,7 +7,7 @@ import NavWrap from './NavWrap'
 import LinkWrapper from '../UIKit/LinkWrapper'
 import Logo from '../UIKit/Logo'
 
-export default class Navigation extends Component {
+export default class HeaderApp extends Component {
   static propTypes = {
     navItems: PropTypes.arrayOf(
       PropTypes.shape({

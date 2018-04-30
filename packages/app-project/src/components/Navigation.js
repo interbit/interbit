@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Navigation } from 'lib-react-interbit'
+import { HeaderApp } from 'lib-react-interbit'
 
 import navigation from '../constants/navigation'
 import profilePic from '../img/profilePic.png'
@@ -33,7 +33,7 @@ export default class ProjectNavigation extends Component {
 
     return (
       <div className="App">
-        <Navigation
+        <HeaderApp
           account={{
             to: accountsUrl,
             userAlias: userProfile

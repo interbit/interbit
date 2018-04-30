@@ -11,7 +11,7 @@ import LinkWrapper from '../UIKit/LinkWrapper'
 import Logo from '../UIKit/Logo'
 import IBIcon from '../UIKit/IBIcon'
 
-export default class HeaderNav extends Component {
+export default class Header extends Component {
   static propTypes = {
     account: PropTypes.shape({
       to: PropTypes.string,

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import { Row, Col } from 'react-bootstrap'
-import { SideBarNav } from 'lib-react-interbit'
+import { Sidebar } from 'lib-react-interbit'
 
 import AcceptableUse from './AcceptableUse'
 import Privacy from './Privacy'
@@ -21,7 +21,7 @@ class DevContainer extends Component {
     return (
       <Row className="ibweb-page policy">
         <Col lg={2} md={12}>
-          <SideBarNav contents={sidebarNav} />
+          <Sidebar contents={sidebarNav} />
         </Col>
         <Col lg={8} md={12}>
           <Switch>

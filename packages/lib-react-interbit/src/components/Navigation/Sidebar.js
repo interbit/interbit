@@ -3,7 +3,7 @@ import { Nav, NavItem, Panel, PanelGroup } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
 
-export default class SideBarNav extends Component {
+export default class Sidebar extends Component {
   static propTypes = {
     contents: PropTypes.arrayOf(
       PropTypes.shape({
@@ -36,6 +36,7 @@ export default class SideBarNav extends Component {
             </div>
           ))}
         </div>
+
         <div className="visible-md visible-sm visible-xs">
           <PanelGroup accordion id="sidebar-nav-accordion">
             {contents.map(c => (

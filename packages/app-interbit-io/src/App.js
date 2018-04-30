@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { Grid } from 'react-bootstrap'
-import { HeaderNav, Footer } from 'lib-react-interbit'
+import { Header, Footer } from 'lib-react-interbit'
 
 import constants from './constants'
 import Home from './containers/Home'
@@ -25,7 +25,7 @@ class App extends Component {
 
     return (
       <div className="App ibweb app-interbit-io">
-        <HeaderNav
+        <Header
           headerNavItems={constants.navigation.headerNav}
           account={account}
         />

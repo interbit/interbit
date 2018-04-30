@@ -12,10 +12,10 @@ export { default as NotFound } from './components/NotFound'
 export { default as Markdown } from './components/Markdown'
 
 // Navigation Components
-export { default as Navigation } from './components/Navigation/Navigation'
 export { default as Footer } from './components/Navigation/Footer'
-export { default as HeaderNav } from './components/Navigation/HeaderNav'
-export { default as SideBarNav } from './components/Navigation/SideBarNav'
+export { default as Header } from './components/Navigation/Header'
+export { default as HeaderApp } from './components/Navigation/HeaderApp'
+export { default as Sidebar } from './components/Navigation/Sidebar'
 
 // Content Components
 export { default as Card } from './components/UIKit/Card'

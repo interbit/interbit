@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { Grid, Col, Row } from 'react-bootstrap'
-import { Navigation, Footer } from 'lib-react-interbit'
+import { HeaderApp, Footer } from 'lib-react-interbit'
 
 import AppDirectory from './containers/AppDirectory'
 import MyApps from './containers/MyApps'
@@ -77,7 +77,7 @@ export default class App extends Component {
           <Grid>
             <Row>
               <Col lg={10} md={9} sm={12}>
-                <Navigation navItems={headerNav} logo={<LogoStore />} />
+                <HeaderApp navItems={headerNav} logo={<LogoStore />} />
               </Col>
             </Row>
           </Grid>

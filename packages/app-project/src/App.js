@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
-import { Navigation, Footer } from 'lib-react-interbit'
+import { HeaderApp, Footer } from 'lib-react-interbit'
 import { Switch, Route } from 'react-router-dom'
 
 import ProjectList from './containers/ProjectList'
@@ -78,7 +78,7 @@ export default class App extends Component {
           <Grid>
             <Row>
               <Col lg={10} md={9} sm={12}>
-                <Navigation
+                <HeaderApp
                   userAlias={userProfile}
                   navItems={[
                     {

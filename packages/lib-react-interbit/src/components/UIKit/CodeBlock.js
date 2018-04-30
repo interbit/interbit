@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 import jsx from 'react-syntax-highlighter/languages/prism/jsx'
 import SyntaxHighlighter, {
-  registerLanguage
+  registerlanguage
 } from 'react-syntax-highlighter/prism-light'
 import { darcula } from 'react-syntax-highlighter/styles/prism'
 
-registerLanguage('jsx', jsx)
+registerlanguage('jsx', jsx)
 
 export default class CodeBlock extends Component {
   static propTypes = {

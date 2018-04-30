@@ -7,15 +7,15 @@ import { Grid, Row, Col, Navbar, NavItem, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 import NavWrap from './NavWrap'
+import LinkWrapper from './UIKit/LinkWrapper'
 import Logo from './UIKit/Logo'
 import IBIcon from './UIKit/IBIcon'
 
 export default class HeaderNav extends Component {
   static propTypes = {
     account: PropTypes.shape({
-      userIcon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
       to: PropTypes.string,
-      logout: PropTypes.string
+      text: PropTypes.string
     }),
     headerNavItems: PropTypes.arrayOf(
       PropTypes.shape({
@@ -30,9 +30,8 @@ export default class HeaderNav extends Component {
 
   static defaultProps = {
     account: {
-      userIcon: '',
-      accountTo: '#',
-      logout: '#'
+      to: '#',
+      text: ''
     },
     headerNavItems: [],
     className: ''
@@ -83,7 +82,7 @@ export default class HeaderNav extends Component {
                 </Navbar>
               </Col>
               <Col lg={2} md={3} sm={12} className="accounts-link">
-                {account.userIcon}
+                <LinkWrapper to={account.to}>{account.text}</LinkWrapper>
               </Col>
             </Row>
           </Grid>

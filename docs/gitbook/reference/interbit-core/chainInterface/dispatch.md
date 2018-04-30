@@ -1,5 +1,11 @@
 # `dispatch()`
 
+
+<div class="tips danger">
+  <p><span></span>TODO</p>
+  <p>Incomplete content.</p>
+</div>
+
 Dispatches a single action to a chain. This is the only way to trigger a state change.
 
 This is a method that is called from a running chain.

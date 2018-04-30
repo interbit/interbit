@@ -37,29 +37,6 @@ describe('Renders without crashing:', () => {
   })
 
   describe('Containers', () => {
-    /**
-    it('Dev App Blueprints', () => {
-      renderWithContext(<DevelopersAppBlueprints />)
-    })
-    it('Dev App Directory', () => {
-      renderWithContext(<DevelopersAppDirectory />)
-    })
-    it('Dev Best Practices', () => {
-      renderWithContext(<DevelopersBestPractices />)
-    })
-    it('Dev Building Interbit Apps', () => {
-      renderWithContext(<DevelopersBuildingInterbitApps />)
-    })
-    it('Dev Identity', () => {
-      renderWithContext(<DevelopersIdentity />)
-    })
-    it('Dev Projects', () => {
-      renderWithContext(<DevelopersProjects />)
-    })
-    it('Platform Case Study', () => {
-      renderWithContext(<PlatformCaseStudy />)
-    })
-    */
     it('Contact', () => {
       renderWithContext(<Contact />)
     })

@@ -7,12 +7,6 @@ import constants from './constants'
 import Home from './containers/Home'
 import Contact from './containers/Contact'
 import Platform from './containers/Platform/Platform'
-import DevelopersArchitecture from './containers/Developers/Architecture'
-import DevelopersExampleApps from './containers/Developers/ExampleApps'
-import DevelopersOverview from './containers/Developers/Overview'
-import DevelopersPlatformFeatures from './containers/Developers/PlatformFeatures'
-import DevelopersResources from './containers/Developers/Resources'
-import DevelopersSupport from './containers/Developers/Support'
 import PlatformInterbitForBusiness from './containers/Platform/InterbitForBusiness'
 import PlatformRoadmap from './containers/Platform/Roadmap'
 import Pricing from './containers/Pricing'
@@ -21,6 +15,7 @@ import AcceptableUse from './containers/Policies/AcceptableUse'
 import TermsOfService from './containers/Policies/TermsOfService'
 import Trademark from './containers/Policies/Trademark'
 import NotFound from './containers/NotFound'
+import DevPageContainer from './containers/Developers/PageContainer'
 
 import './css/App.css'
 
@@ -52,37 +47,11 @@ class App extends Component {
               path={constants.paths.PLATFORM_ROADMAP}
               component={PlatformRoadmap}
             />
-
             <Route
-              exact
               path={constants.paths.DEVELOPERS}
-              component={DevelopersOverview}
+              component={DevPageContainer}
             />
-            <Route
-              exact
-              path={constants.paths.DEVELOPERS_ARCHITECTURE}
-              component={DevelopersArchitecture}
-            />
-            <Route
-              exact
-              path={constants.paths.DEVELOPERS_EXAMPLES}
-              component={DevelopersExampleApps}
-            />
-            <Route
-              exact
-              path={constants.paths.DEVELOPERS_PLATFORM_FEATURES}
-              component={DevelopersPlatformFeatures}
-            />
-            <Route
-              exact
-              path={constants.paths.DEVELOPERS_RESOURCES}
-              component={DevelopersResources}
-            />
-            <Route
-              exact
-              path={constants.paths.DEVELOPERS_SUPPORT}
-              component={DevelopersSupport}
-            />
+
             <Route exact path={constants.paths.PRICING} component={Pricing} />
             <Route
               exact

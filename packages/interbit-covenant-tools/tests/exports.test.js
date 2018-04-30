@@ -46,6 +46,13 @@ describe('module exports expected API', () => {
     assert.ok(api.rootStateSelectors)
   })
 
+  it('cAuthConsumerCovenant', () => {
+    assert.ok(api.cAuthConsumerCovenant)
+    assert.ok(api.cAuthConsumerCovenant.actionCreators)
+    assert.ok(api.cAuthConsumerCovenant.actionTypes)
+    assert.ok(api.cAuthConsumerCovenant.reducer)
+  })
+
   it('mergeCovenants', () => {
     assert.ok(api.mergeCovenants)
   })

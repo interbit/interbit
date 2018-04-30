@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import { Navigation, Footer } from 'lib-react-interbit'
 
-import { selectors } from 'interbit-middleware'
+import { selectors } from 'interbit-ui-tools'
 
 import Account from './containers/Account'
 import Home from './containers/Home'

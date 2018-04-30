@@ -1,6 +1,11 @@
 
 # `build`
 
+<div class="tips danger">
+  <p><span></span>TODO</p>
+  <p>Incomplete content</p>
+</div>
+
 Builds an application
 
 Use the production config in `interbit.config.prod.js` if it exists

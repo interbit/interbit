@@ -15,37 +15,4 @@ We will be updating this environment regularly - adding functionality, applicati
 
 ## To get started, make a new Interbit site
 
-### Get the source code
-1. Fork the Interbit repository
-1. Clone the forked repository on your PC
-
-### Make a new Interbit site by creating a new package
-Let's call the new site `app-the-new-thing`
-
-1. Copy the `packages/template` folder to `packages/app-the-new-thing`
-
-### Make the following changes in `packages/app-the-new-thing`:
-
-1. `.package.json` Change the name
-   ```
-   {
-     "name": "app-the-new-thing",
-     "version": "0.1.0",
-     ...
-   }
-   ```
-
-1. Tweak `src/App.js` so that you can identify your site
-
-## Install the dependencies
-Run `npm i` from the repository root.  This will take care of all the lerna dependencies and set up for you
-
-## Build the new Interbit site
-1. From the repository root, run `npm run build:modules && npm run build:lib`
-
-## Run it
-1. From within the `packages/app-the-new-thing` folder, run `npm run interbit:start`.  This command will keep running until interrupted.  Let it continue to run.
-1. Open a second shell.  From within the `packages/app-the-new-thing` folder, run `npm run start`.  This runs the development server and will cause a browser window to open to http://localhost:3000 You should see your site load in the browser.
-
-The development server continues to run.  Changes made to the Interbit website will be automatically reflected in the browser.
-
+See our [Getting Started Guide](https://github.com/interbit/interbit/tree/master/docs/gitbook/getting-started)

@@ -1,5 +1,10 @@
 # `getState()`
 
+<div class="tips danger">
+  <p><span></span>TODO</p>
+  <p>Incomplete content.</p>
+</div>
+
 Returns the current [Application State](../key-concepts/README.md#application-state). This is the same as the last value returned by any [Smart Contract](../key-concepts/README.md#smart-contracts) or library function (reducers).
 
 

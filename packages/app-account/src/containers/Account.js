@@ -4,7 +4,7 @@ import { Grid, Row, Col } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { SubmissionError } from 'redux-form'
-import { chainDispatch, selectors } from 'interbit-middleware'
+import { chainDispatch, selectors } from 'interbit-ui-tools'
 import { Markdown } from 'lib-react-interbit'
 
 import ContentBarApp from '../components/ContentBarApp'

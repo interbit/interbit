@@ -1,6 +1,11 @@
 
 # `start`
 
+<div class="tips danger">
+  <p><span></span>TODO</p>
+  <p>Incomplete content. Unfinished feature.</p>
+</div>
+
 Start the Developer mode hypervisor. It will:
 
 start an interbit hypervisor in dev mode

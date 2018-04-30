@@ -3,12 +3,10 @@ import { Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { LinkBar, Card, ContentBox, Markdown } from 'lib-react-interbit'
 
-import getInterbitServices from '../redux/getInterbitServices'
 import layout from '../constants/layout'
 import headerHome from '../assets/headerHome.jpg'
 
 const mapStateToProps = state => ({
-  interbitServices: getInterbitServices(state),
   linkBarContent: state.content.linkBars,
   ...state.content.home
 })
@@ -16,11 +14,11 @@ const mapStateToProps = state => ({
 class Home extends Component {
   render() {
     // eslint-disable-next-line react/prop-types
-    const { interbitServices, title, linkBarContent, ...home } = this.props
+    const { title, linkBarContent, ...home } = this.props
     const colLayout = layout.colLayout.default
 
     return (
-      <div className="ibweb-page">
+      <div className="ibweb-page home">
         <Row>
           <Col md={12}>
             <img

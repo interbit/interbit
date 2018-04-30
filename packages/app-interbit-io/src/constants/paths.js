@@ -14,7 +14,6 @@ export default {
   DEVELOPERS_RESOURCES: '/developers/resources',
   DEVELOPERS_SUPPORT: '/developers/support',
   PLATFORM: '/platform',
-  PLATFORM_CASE_STUDY: '/platform/case-study',
   PLATFORM_INTERBIT_FOR_BUSINESS: '/platform/interbit-for-business',
   PLATFORM_ROADMAP: '/platform/roadmap',
   PRICING: '/pricing',

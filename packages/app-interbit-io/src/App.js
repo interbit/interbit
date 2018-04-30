@@ -14,7 +14,6 @@ import DevelopersPlatformFeatures from './containers/Developers/PlatformFeatures
 import DevelopersResources from './containers/Developers/Resources'
 import DevelopersSupport from './containers/Developers/Support'
 import PlatformInterbitForBusiness from './containers/Platform/InterbitForBusiness'
-import PlatformCaseStudy from './containers/Platform/CaseStudy'
 import PlatformRoadmap from './containers/Platform/Roadmap'
 import Pricing from './containers/Pricing'
 import Privacy from './containers/Policies/Privacy'
@@ -31,7 +30,7 @@ class App extends Component {
     const userIcon = <a href={accountsUrl}>Go to Accounts</a>
 
     return (
-      <div className="App ibweb">
+      <div className="App ibweb app-interbit-io">
         {/* TODO: move page-level classnames down to ,ibweb-page level */}
         <HeaderNav
           headerNavItems={constants.navigation.headerNav}
@@ -47,11 +46,6 @@ class App extends Component {
               exact
               path={constants.paths.PLATFORM_INTERBIT_FOR_BUSINESS}
               component={PlatformInterbitForBusiness}
-            />
-            <Route
-              exact
-              path={constants.paths.PLATFORM_CASE_STUDY}
-              component={PlatformCaseStudy}
             />
             <Route
               exact

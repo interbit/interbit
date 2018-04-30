@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
 import { Card, ContentBox, Markdown, Quote, LinkBar } from 'lib-react-interbit'
 
-import Navigation from '../../components/Navigation'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({
@@ -17,14 +16,14 @@ class Platform extends Component {
     const { platform, linkBarContent } = this.props
     const colLayout = layout.colLayout.default
 
-    const platformContent = (
-      <div className="ibweb-page">
+    return (
+      <div className="ibweb-page platform">
         <Row>
           <Col md={12}>
             <img
               src={platform.headerImage.image}
               alt={platform.headerImage.title}
-              className="ibweb-image-full-width bleed"
+              className="ibweb-image-full-width bleed header"
             />
           </Col>
         </Row>
@@ -165,13 +164,6 @@ class Platform extends Component {
           </Col>
         </Row>
       </div>
-    )
-
-    return (
-      <Navigation
-        container={platformContent}
-        className="app-interbit-io platform"
-      />
     )
   }
 }

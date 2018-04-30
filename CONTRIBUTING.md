@@ -2,7 +2,7 @@
 
 If you would like to ask a question about Interbit head to our [Slack Channel](http://interbitdev.slack.com) for some support.
 
-If you would like to know more about how it works head over to our [SDK Documentation](https://docs.test-interbit.io/).
+If you would like to know more about how it works head over to our [SDK Documentation](https://docs.interbit.io/).
 
 Please do not open issues just to ask a question. We are happy to help and are available for questions and comments on other channels.
 

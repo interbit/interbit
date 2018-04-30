@@ -4,7 +4,7 @@ import queryString from 'query-string'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { BlockExplorer } from 'lib-react-interbit'
-import { chainDispatch } from 'interbit-middleware'
+import { chainDispatch } from 'interbit-ui-tools'
 
 import {
   getExploreChainState,

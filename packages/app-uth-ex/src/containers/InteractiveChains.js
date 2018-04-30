@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Grid, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
-import { chainDispatch } from 'interbit-middleware'
+import { chainDispatch } from 'interbit-ui-tools'
 
 import LinkedCovenant from '../components/LinkedCovenant'
 import { actionCreators as hubActionCreators } from '../components/hubCovenantAdapter'

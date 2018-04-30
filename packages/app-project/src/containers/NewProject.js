@@ -3,7 +3,7 @@ import { Grid, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
 import PropTypes from 'prop-types'
-import { chainDispatch } from 'interbit-middleware'
+import { chainDispatch } from 'interbit-ui-tools'
 import { LinkBarSlack } from 'lib-react-interbit'
 
 import ProjectDetailsForm from '../components/ProjectDetailsForm'

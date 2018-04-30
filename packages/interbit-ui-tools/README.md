@@ -1,6 +1,6 @@
 # Interbit Middleware
 
-The interbit-middleware package contains a Redux middleware and reducer. The middleware and reducer work together to boot the Interbit blockchains specified in the DOM, sync their states with the Redux store, and allow you to dispatch to them.
+The interbit-ui-tools package contains a Redux middleware and reducer. The middleware and reducer work together to boot the Interbit blockchains specified in the DOM, sync their states with the Redux store, and allow you to dispatch to them.
 
 The Interbit middleware reads the index.html file generated when the blockchain node boots to connect to the chains. To learn more about this file [click here](TODO: LINK or DESCRIBE).
 
@@ -24,7 +24,7 @@ const { createStore, applyMiddleware } = require('redux')
 const {
   reducer as interbitReducer,
   middleware as interbitMiddleware
-} = require('interbit-middleware')
+} = require('interbit-ui-tools')
 
 // including the reducer
 const reducers = combineReducers({
@@ -41,14 +41,14 @@ const store = createStore(reducers, applyMiddleware(interbitMiddleware))
 To dispatch an action to the blockchain you will need to wrap your blockchain action in a 'CHAIN_DISPATCH' action. This redux dispatch function will return the resulting promise from the blockchain.
 
 ```js
-const { chainDispatch } = require('interbit-middleware')
+const { chainDispatch } = require('interbit-ui-tools')
 const { myBlockchainActionCreator } = require('./actionCreators')
 
 // Take your chain alias (from interbit.config.js) and the blockchain action ...
 const chainAlias = 'myChain'
 const blockchainAction = myBlockchainActionCreator(...args)
 
-// ... and wrap them in interbit-middleware's chainDispatch ...
+// ... and wrap them in interbit-ui-tools's chainDispatch ...
 const action = chainDispatch(chainAlias, blockchainAction)
 
 // ... then dispatch to the redux store!

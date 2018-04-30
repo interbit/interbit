@@ -4,7 +4,7 @@ import { Grid, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
 import queryString from 'query-string'
-import { chainDispatch } from 'interbit-middleware'
+import { chainDispatch } from 'interbit-ui-tools'
 
 import LinkedCovenant from '../components/LinkedCovenant'
 import { actionCreators } from '../adapters/my-projects.adapter'

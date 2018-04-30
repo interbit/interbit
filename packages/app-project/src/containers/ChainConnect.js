@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
-import { chainDispatch } from 'interbit-middleware'
+import { chainDispatch } from 'interbit-ui-tools'
 
 import { getExploreChainState } from '../redux/exploreChainReducer'
 import { actionCreators } from '../interbit/my-projects'

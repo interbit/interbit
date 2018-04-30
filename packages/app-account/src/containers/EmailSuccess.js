@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Row, Col, Well } from 'react-bootstrap'
-import { chainDispatch } from 'interbit-middleware'
+import { chainDispatch } from 'interbit-ui-tools'
 
 import { getExploreChainState } from '../redux/exploreChainReducer'
 import { PRIVATE } from '../constants/chainAliases'

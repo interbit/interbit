@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { chainDispatch } from 'interbit-middleware'
+import { chainDispatch } from 'interbit-ui-tools'
 import { Grid, Row, Col } from 'react-bootstrap'
 import { ContentBar, Divider, IconButton, Markdown } from 'lib-react-interbit'
 

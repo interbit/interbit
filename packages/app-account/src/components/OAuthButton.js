@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 // import uuid from 'uuid'
 import { IconButton } from 'lib-react-interbit'
 
-import { generateChainTemplate } from 'interbit-middleware'
+import { generateChainTemplate } from 'interbit-ui-tools'
 
 // const authenticationHandler = ({
 //   oAuthProvider,

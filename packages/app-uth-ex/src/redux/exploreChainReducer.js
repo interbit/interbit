@@ -1,5 +1,5 @@
 import Immutable from 'seamless-immutable'
-import { actionTypes as middlewareActionTypes } from 'interbit-middleware'
+import { actionTypes as middlewareActionTypes } from 'interbit-ui-tools'
 
 // TODO: This is non-standard. Make it the same as the template.
 const REGISTER_CHAIN = 'Interbit/Chains/REGISTER_CHAIN'

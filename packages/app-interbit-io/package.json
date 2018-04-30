@@ -8,7 +8,7 @@
         "cross-env": "^5.1.4",
         "interbit-cli": "0.4.14",
         "interbit-covenant-tools": "0.4.14",
-        "interbit-middleware": "0.4.14",
+        "interbit-ui-tools": "0.4.14",
         "interbit-platform-tools": "0.4.14",
         "lib-react-interbit": "0.4.14",
         "react": "^16.2.0",

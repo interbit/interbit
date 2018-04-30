@@ -1,19 +1,18 @@
 const fs = require('fs-extra')
 const cheerio = require('cheerio')
-const { getApps, getPeers } = require('../config/configSelectors')
+const { getApps } = require('../config/configSelectors')
 
 const updateIndexHtmls = ({ config, chains }) => {
   console.log({ config, chains })
   const apps = getApps(config)
   const appsList = Object.entries(apps)
-  const peers = getPeers(config)
 
   appsList.forEach(([appName, appConfig]) => {
-    updateIndexHtml({ appConfig, peers, chains })
+    updateIndexHtml({ appConfig, chains })
   })
 }
 
-const updateIndexHtml = ({ appConfig, peers, chains }) => {
+const updateIndexHtml = ({ appConfig, chains }) => {
   console.log(appConfig)
   const indexHtmlFilepath = appConfig.indexLocation
 
@@ -21,7 +20,7 @@ const updateIndexHtml = ({ appConfig, peers, chains }) => {
   const indexHtml = fs.readFileSync(indexHtmlFilepath).toString()
 
   const dom = cheerio.load(indexHtml)
-  updateDom(dom, appConfig, peers, chains)
+  updateDom(dom, appConfig, chains)
 
   const updatedIndexHtml = `<!DOCTYPE html>\n${dom(':root').toString()}`
   fs.writeFileSync(indexHtmlFilepath, updatedIndexHtml)
@@ -29,7 +28,7 @@ const updateIndexHtml = ({ appConfig, peers, chains }) => {
   console.log('Finished updating index.html with chain IDs')
 }
 
-const updateDom = (dom, appConfig, peers, chains) => {
+const updateDom = (dom, appConfig, chains) => {
   const interbitElement = dom('#interbit')
   if (!interbitElement.length) {
     console.error(
@@ -40,7 +39,7 @@ const updateDom = (dom, appConfig, peers, chains) => {
 
   stripChainAttrs(interbitElement)
   insertChainsInDom(interbitElement, appConfig, chains)
-  updateMetaData(interbitElement, appConfig, peers)
+  updateMetaData(interbitElement, appConfig)
 }
 
 const stripChainAttrs = interbitElement => {
@@ -68,18 +67,14 @@ const insertChainsInDom = (interbitElement, appConfig, chains) => {
   })
 }
 
-const updateMetaData = (interbitElement, appConfig, peers) => {
+const updateMetaData = (interbitElement, appConfig) => {
+  const { peers } = appConfig
   if (!peers) {
-    console.error('Interbit configuration file must contain a list of peers')
+    console.warn(
+      'Interbit configuration file does not contain any peers for one of its apps'
+    )
   } else {
     interbitElement.attr('data-peer-hints', peers.toString())
-  }
-
-  const appChain = appConfig.appChain
-  if (!appChain) {
-    console.error('App configuration file must specify an appChain')
-  } else {
-    interbitElement.attr('data-boot-react-app', appChain)
   }
 }
 

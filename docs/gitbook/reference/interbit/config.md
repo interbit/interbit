@@ -1,46 +1,28 @@
-# Config
+# The Interbit Configuration File
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>Incomplete, slightly outdated content</p>
-</div>
+The interbit configuration file containts instructions for the [build](build.md) script. It details how to read and bundle your covenants and deploy them to a network. The build script will consume a configuration and file and resolve the variables inside of it to generate a manifest file used to deploy your network.
 
-The interbit configuration file tells the script how to read and bundle your covenants.
+It is a JS file and can be altered at any time.
 
-The configuration file must live inside of the src/interbit directory. This is also where all your covenants will live.
+It contains network information such as peers, validator public keys, and the different chains your network may run. It also contains a list of [covenants](../../key-concepts/README.md#covenants) and which blockchains they will run on.
 
+## Example
 
-
-#### Example
-
-For the folder structure
-
-my-interbit-app/
-  src/
-    interbit/
-      yourCovenant/
-        index.js
-        package.json
-      interbit.config.js
-    otherCode/
-  package.json
-
-...your interbit.config.js file would look like this:
+Your interbit.config.js file would look something like this:
 
 ```js
 const path = require('path')
 
 const config = {
   peers: ['localhost:5000', 'localhost:5050'], // First peers to connect to
-  masterChain: 'hub',
-  adminValidators: ['adminKey1', 'adminKey2'], // Deployment pubkeys for the root node
-  staticChains: {
+  adminValidators: [process.env.ADMIN_KEY_1, process.env.ADMIN_KEY_2], // Deployment pubkeys for the root node
+  staticChains: { // Chain configuration
     hub: {
       covenant: 'hub',
       config: {
         maxBlockSize: 9001,
         // The first validator listed is the blockMaster
-        validators: ['pubKey1', 'pubKey2'],
+        validators: [process.env.PUBKEY_1, process.env.PUBKEY_2],
         joins: {
           consume: [],
           provide: [],
@@ -53,12 +35,12 @@ const config = {
           sendActionTo: [{ alias: 'spoke1' }]
         }
       },
-      childValidators: ['pubKey1', 'pubKey2', 'pubKey3', 'pubKey4', 'pubKey5']
+      childValidators: [process.env.PUBKEY_1, process.env.PUBKEY_2, process.env.PUBKEY_3, process.env.PUBKEY_4, process.env.PUBKEY_5]
       // ability to make more spokes defined below
       genesisTemplate: {
         covenantHash: 'spoke', // get hash later from the covenants section of config ... must match the parents config of allowed covenant hashes
         parentChain: 'hub', // this is how you spec out your tree without going mad
-        validators: ['pubKey3', 'pubKey4', 'pubKey5'], // 'must be a whole subset of the parent list of child validators'
+        validators: [process.env.PUBKEY_3, process.env.PUBKEY_4, process.env.PUBKEY_5], // 'must be a whole subset of the parent list of child validators'
         acl: {
           doSomething: 'may contain any pubkey'
         }
@@ -68,7 +50,7 @@ const config = {
       covenant: 'spoke',
       parentChain: 'hub',
       config: {
-        validators: ['pubKey3', 'pubKey4', 'pubKey5'],
+        validators: [process.env.PUBKEY_3, process.env.PUBKEY_4, process.env.PUBKEY_5],
         joins: {
           consume: [],
           provide: [],
@@ -106,42 +88,4 @@ const config = {
 }
 
 module.exports = config
-The above config will generate the below manifest.json in the master:
-
-{
-  config: {
-    chainMap: {
-      hub: {
-        chainId: 'chn_123sdfsadfasdfasdfasdfaweghhqerh',
-        children: {
-          spoke: 'chn_dk23k4jsdflksdjlfksjd',
-          spoke2: 'chn_dsajfkolu342920wjrfiaskldjikoasl',
-          spoke3: 'chn_dfsdflkj234234lkjsdfljsd'
-        }
-      }
-    },
-    childChainValidatorPool: [
-      'v1pubkey',
-      'v2pubkey',
-      'v3pubkey',
-      'v4pubkey',
-      'v5pubkey'
-    ],
-    covenants: {
-      hubCovenant: 'cov_12asdfawdfasdfasdf',
-      spokeCovenant: 'cov_1234123412341qwedfasdfasdf'
-    },
-    chainCovenantMap: {
-      hub: 'hubCovenant',
-      spoke1: 'spokeCovenant',
-      spoke2: 'spokeCovenant',
-      spoke3: 'spokeCovenant'
-    }
-    masterChain: 'self', // special in the case of the creator
-    genesisBlocksCache: {
-      // cleaned out by chain maintenance
-      chn_dk23k4jsdflksdjlfksjd: 'the block itself held for 100 blocks time'
-    }
-  }
-}
 ```

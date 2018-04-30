@@ -75,7 +75,7 @@ const config = {
   },
   apps: {
     account: {
-      peers: [], // the peers the browser should connect to
+      peers: ['ib-dev----master.herokuapp.com'], // the peers the browser should connect to
       chains: [chainAliases.PUBLIC], // the chains that need to load in the browser
       appChain: chainAliases.PUBLIC, // The chain that the static page is loaded on
       indexLocation: path.join(__dirname, 'public/index.html'), // the index.html to update with the app info

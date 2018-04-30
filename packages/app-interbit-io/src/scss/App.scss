@@ -251,32 +251,32 @@
       }
     }
 
-  }
+    // Policy pages
+    &.policy {
+      .policy-content {
+        ol {
+          margin: 32px 0 8px 32px;
+          list-style-type: decimal;
+          font-size: 22px;
+          color: #666;
 
+          li {
+            margin-bottom: 32px;
+          }
+        }
 
-  .ibweb-page.policy {
-    ol {
-      margin: 32px 0 8px 32px;
-      list-style-type: decimal;
-      font-size: 22px;
-      color: #666;
+        ul {
+          margin: 8px 0 8px 32px;
+          list-style-type: disc;
+          font-size: 22px;
+          color: #666;
+        }
 
-      li {
-        margin-bottom: 32px;
+        .subsection {
+          margin-left: 64px;
+        }
+
       }
     }
-
-    ul {
-      margin: 8px 0 8px 32px;
-      list-style-type: disc;
-      font-size: 22px;
-      color: #666;
-    }
-
-    .subsection {
-      margin-left: 64px;
-    }
   }
-
-
 }

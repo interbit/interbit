@@ -10,12 +10,9 @@ import Platform from './containers/Platform/Platform'
 import PlatformInterbitForBusiness from './containers/Platform/InterbitForBusiness'
 import PlatformRoadmap from './containers/Platform/Roadmap'
 import Pricing from './containers/Pricing'
-import Privacy from './containers/Policies/Privacy'
-import AcceptableUse from './containers/Policies/AcceptableUse'
-import TermsOfService from './containers/Policies/TermsOfService'
-import Trademark from './containers/Policies/Trademark'
 import NotFound from './containers/NotFound'
 import DevPageContainer from './containers/Developers/PageContainer'
+import PolicyPageContainer from './containers/Policies/PageContainer'
 
 import './css/App.css'
 
@@ -51,28 +48,12 @@ class App extends Component {
               path={constants.paths.DEVELOPERS}
               component={DevPageContainer}
             />
-
+            <Route
+              path={constants.paths.POLICY}
+              component={PolicyPageContainer}
+            />
             <Route exact path={constants.paths.PRICING} component={Pricing} />
-            <Route
-              exact
-              path={constants.paths.POLICY_ACCEPTABLE_USE}
-              component={AcceptableUse}
-            />
-            <Route
-              exact
-              path={constants.paths.POLICY_PRIVACY}
-              component={Privacy}
-            />
-            <Route
-              exact
-              path={constants.paths.POLICY_TOS}
-              component={TermsOfService}
-            />
-            <Route
-              exact
-              path={constants.paths.POLICY_TRADEMARK}
-              component={Trademark}
-            />
+
             <Route component={NotFound} />
           </Switch>
 

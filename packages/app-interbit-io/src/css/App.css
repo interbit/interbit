@@ -105,19 +105,19 @@
   margin-bottom: 32px; }
 .ibweb.app-interbit-io .ibweb-page.dev-support .sections .row:last-child {
   margin-bottom: 64px; }
-.ibweb.app-interbit-io .ibweb-page.policy ol {
+.ibweb.app-interbit-io .ibweb-page.policy .policy-content ol {
   margin: 32px 0 8px 32px;
   list-style-type: decimal;
   font-size: 22px;
   color: #666; }
-  .ibweb.app-interbit-io .ibweb-page.policy ol li {
+  .ibweb.app-interbit-io .ibweb-page.policy .policy-content ol li {
     margin-bottom: 32px; }
-.ibweb.app-interbit-io .ibweb-page.policy ul {
+.ibweb.app-interbit-io .ibweb-page.policy .policy-content ul {
   margin: 8px 0 8px 32px;
   list-style-type: disc;
   font-size: 22px;
   color: #666; }
-.ibweb.app-interbit-io .ibweb-page.policy .subsection {
+.ibweb.app-interbit-io .ibweb-page.policy .policy-content .subsection {
   margin-left: 64px; }
 
 /*# sourceMappingURL=App.css.map */

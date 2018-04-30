@@ -1,5 +1,10 @@
 # Config
 
+<div class="tips danger">
+  <p><span></span>TODO</p>
+  <p>Incomplete, slightly outdated content</p>
+</div>
+
 The interbit configuration file tells the script how to read and bundle your covenants.
 
 The configuration file must live inside of the src/interbit directory. This is also where all your covenants will live.

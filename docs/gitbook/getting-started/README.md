@@ -31,6 +31,11 @@ Familiarity with the following technologies, tools, and concepts will greatly ac
 
 ### Setup
 
+<div class="tips danger">
+  <p><span></span>TODO</p>
+  <p>Missing Content</p>
+</div>
+
 ...
 <br>
 Run the following commands to create a new <a href="https://nodejs.org" target="_blank">Node.js</a> application.

@@ -1,5 +1,10 @@
 # `createHypervisor()`
 
+<div class="tips danger">
+  <p><span></span>TODO</p>
+  <p>Incomplete content.</p>
+</div>
+
 Creates an Interbit Hypervisor. The Hypervisor is used to...
 
 

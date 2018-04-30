@@ -1,5 +1,10 @@
 # `deploy`
 
+<div class="tips danger">
+  <p><span></span>TODO</p>
+  <p>Incomplete content</p>
+</div>
+
 Deploys an application
 
 Note that hosting the static index.html is a separate concern handled elsewhere

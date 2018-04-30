@@ -50,11 +50,12 @@ export default class Footer extends Component {
             <Logo />
           </LinkWrapper>
         </Col>
-        {sections.map(s => (
-          <Col key={s.title} {...colLayout}>
-            <TitledList title={s.title} items={s.items} />
-          </Col>
-        ))}
+        {sections.length &&
+          sections.map(s => (
+            <Col key={s.title} {...colLayout}>
+              <TitledList title={s.title} items={s.items} />
+            </Col>
+          ))}
       </Row>
     )
 
@@ -68,11 +69,12 @@ export default class Footer extends Component {
           </Col>
         </Row>
         <Row>
-          {sections.map(s => (
-            <Col key={s.title} {...colLayout}>
-              <TitledList title={s.title} items={s.items} />
-            </Col>
-          ))}
+          {sections.length &&
+            sections.map(s => (
+              <Col key={s.title} {...colLayout}>
+                <TitledList title={s.title} items={s.items} />
+              </Col>
+            ))}
         </Row>
       </div>
     )
@@ -87,33 +89,35 @@ export default class Footer extends Component {
               <Logo />
             </LinkWrapper>
             <PanelGroup accordion id="footer-accordion">
-              {sections.map(s => (
-                <Panel key={s.title} eventKey={s.title}>
-                  <Panel.Heading>
-                    <Panel.Title toggle>{s.title}</Panel.Title>
-                  </Panel.Heading>
-                  <Panel.Body collapsible>
-                    <ul>
-                      {s.items.map(item => (
-                        <li key={item.text}>
-                          <LinkWrapper to={item.to}>{item.text}</LinkWrapper>
-                        </li>
-                      ))}
-                    </ul>
-                  </Panel.Body>
-                </Panel>
-              ))}
+              {sections.length &&
+                sections.map(s => (
+                  <Panel key={s.title} eventKey={s.title}>
+                    <Panel.Heading>
+                      <Panel.Title toggle>{s.title}</Panel.Title>
+                    </Panel.Heading>
+                    <Panel.Body collapsible>
+                      <ul>
+                        {s.items.map(item => (
+                          <li key={item.text}>
+                            <LinkWrapper to={item.to}>{item.text}</LinkWrapper>
+                          </li>
+                        ))}
+                      </ul>
+                    </Panel.Body>
+                  </Panel>
+                ))}
             </PanelGroup>
           </Row>
         </Row>
 
         <Row className="copyright">
           <Col md={12} lg={8} lgOffset={2}>
-            {bottomLinks.map(l => (
-              <LinkWrapper key={l.to} to={l.to}>
-                {l.text}
-              </LinkWrapper>
-            ))}
+            {bottomLinks.length &&
+              bottomLinks.map(l => (
+                <LinkWrapper key={l.to} to={l.to}>
+                  {l.text}
+                </LinkWrapper>
+              ))}
             <span>&copy; 2018 BTL Group Ltd.</span>
           </Col>
         </Row>

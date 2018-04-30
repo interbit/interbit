@@ -75,9 +75,10 @@ export default class HeaderNav extends Component {
                     </Navbar.Brand>
                   </Navbar.Header>
                   <Nav className="nav-main-menu">
-                    {headerNavItems.map(
-                      navItem => !navItem.isHidden && renderNavItem(navItem)
-                    )}
+                    {headerNavItems.length &&
+                      headerNavItems.map(
+                        navItem => !navItem.isHidden && renderNavItem(navItem)
+                      )}
                   </Nav>
                 </Navbar>
               </Col>

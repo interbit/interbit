@@ -158,6 +158,99 @@
       }
     }
 
+    // Dev Overview page
+    &.dev-overview {
+      .app-characteristics {
+        & > div {
+          margin-bottom: 16px;
+        }
+
+        p {
+          min-height: 46px;
+        }
+      }
+
+      .common-services {
+        h2 {
+          margin-bottom: 32px;
+        }
+
+        .ibweb-content-bar {
+          a {
+            display: block;
+          }
+        }
+      }
+    }
+
+    // Dev Platform Features page
+    &.dev-platform-features {
+      .sections {
+        .row:last-child {
+          margin-bottom: 64px;
+        }
+        .subtitle {
+          font-size: 22px;
+          font-weight: 600;
+        }
+
+        ol {
+          list-style-type: decimal;
+          margin-top: 16px;
+          margin-left: 32px;
+
+          li {
+            margin-bottom: 12px;
+            font-size: 22px;
+            color: #666;
+          }
+        }
+      }
+
+      @media (max-width: $screen-sm-min - 1) {
+        .sections {
+          ol li {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    // Dev Resources page
+    &.dev-resources {
+      .sections {
+        .row:last-child {
+          margin-bottom: 64px;
+        }
+
+        .ibweb-intro {
+          margin-bottom: 16px;
+        }
+      }
+    }
+
+    // Dev Chain Architecture page
+    &.dev-architecture {
+      .sections {
+        .ibweb-intro {
+          margin-bottom: 16px;
+        }
+
+        .example {
+          margin-bottom: 32px;
+        }
+      }
+    }
+
+    // Dev Support page
+    &.dev-support {
+      .sections {
+        .row:last-child {
+          margin-bottom: 64px;
+        }
+      }
+    }
+
   }
 
 
@@ -185,96 +278,5 @@
     }
   }
 
-  // Dev Overview page
-  .ibweb-page.dev-overview {
-    .app-characteristics {
-      & > div {
-        margin-bottom: 16px;
-      }
 
-      p {
-        min-height: 46px;
-      }
-    }
-  }
-
-  .common-services {
-    h2 {
-      margin-bottom: 32px;
-    }
-
-    .ibweb-content-bar {
-      a {
-        display: block;
-      }
-    }
-  }
-
-  // Dev Platform Features page
-  .ibweb-page.dev-platform-features {
-    .sections {
-      .row:last-child {
-        margin-bottom: 64px;
-      }
-      .subtitle {
-        font-size: 22px;
-        font-weight: 600;
-      }
-
-      ol {
-        list-style-type: decimal;
-        margin-top: 16px;
-        margin-left: 32px;
-
-        li {
-          margin-bottom: 12px;
-          font-size: 22px;
-          color: #666;
-        }
-      }
-    }
-
-    @media (max-width: $screen-sm-min - 1) {
-      .sections {
-        ol li {
-          font-size: 16px;
-        }
-      }
-    }
-  }
-
-  // Dev Resources page
-  .ibweb-page.dev-resources {
-    .sections {
-      .row:last-child {
-        margin-bottom: 64px;
-      }
-
-      .ibweb-intro {
-        margin-bottom: 16px;
-      }
-    }
-  }
-
-  // Dev Chain Architecture page
-  .ibweb-page.dev-architecture {
-    .sections {
-      .ibweb-intro {
-        margin-bottom: 16px;
-      }
-
-      .example {
-        margin-bottom: 32px;
-      }
-    }
-  }
-
-  // Dev Support page
-  .ibweb-page.dev-support {
-    .sections {
-      .row:last-child {
-        margin-bottom: 64px;
-      }
-    }
-  }
 }

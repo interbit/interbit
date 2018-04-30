@@ -71,27 +71,13 @@
   color: #999; }
 .ibweb.app-interbit-io .ibweb-page.platform-roadmap .ibweb-content-bar.in-progress h3 {
   color: #999; }
-.ibweb.app-interbit-io .ibweb-page.policy ol {
-  margin: 32px 0 8px 32px;
-  list-style-type: decimal;
-  font-size: 22px;
-  color: #666; }
-  .ibweb.app-interbit-io .ibweb-page.policy ol li {
-    margin-bottom: 32px; }
-.ibweb.app-interbit-io .ibweb-page.policy ul {
-  margin: 8px 0 8px 32px;
-  list-style-type: disc;
-  font-size: 22px;
-  color: #666; }
-.ibweb.app-interbit-io .ibweb-page.policy .subsection {
-  margin-left: 64px; }
 .ibweb.app-interbit-io .ibweb-page.dev-overview .app-characteristics > div {
   margin-bottom: 16px; }
 .ibweb.app-interbit-io .ibweb-page.dev-overview .app-characteristics p {
   min-height: 46px; }
-.ibweb.app-interbit-io .common-services h2 {
+.ibweb.app-interbit-io .ibweb-page.dev-overview .common-services h2 {
   margin-bottom: 32px; }
-.ibweb.app-interbit-io .common-services .ibweb-content-bar a {
+.ibweb.app-interbit-io .ibweb-page.dev-overview .common-services .ibweb-content-bar a {
   display: block; }
 .ibweb.app-interbit-io .ibweb-page.dev-platform-features .sections .row:last-child {
   margin-bottom: 64px; }
@@ -119,5 +105,19 @@
   margin-bottom: 32px; }
 .ibweb.app-interbit-io .ibweb-page.dev-support .sections .row:last-child {
   margin-bottom: 64px; }
+.ibweb.app-interbit-io .ibweb-page.policy ol {
+  margin: 32px 0 8px 32px;
+  list-style-type: decimal;
+  font-size: 22px;
+  color: #666; }
+  .ibweb.app-interbit-io .ibweb-page.policy ol li {
+    margin-bottom: 32px; }
+.ibweb.app-interbit-io .ibweb-page.policy ul {
+  margin: 8px 0 8px 32px;
+  list-style-type: disc;
+  font-size: 22px;
+  color: #666; }
+.ibweb.app-interbit-io .ibweb-page.policy .subsection {
+  margin-left: 64px; }
 
 /*# sourceMappingURL=App.css.map */

@@ -1,8 +1,12 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
+const _ = require('lodash')
+const path = require('path')
 const {
   argOptions,
-  createChains: { createChainsFromConfig },
-  generateDeploymentDetails,
+  configSelectors,
+  createChains: { createChainsFromManifest },
+  generateManifest,
+  getArtifactsLocation,
   getConfig,
   getManifest,
   isArg,
@@ -20,53 +24,61 @@ const startInterbitNode = async () => {
   try {
     console.log(logo)
 
-    const options = getOptions(process.argv)
-    const interbitConfig = getConfig()
+    const opts = getOptions(process.argv)
 
-    // eslint-disable-next-line
+    const location = path.relative(process.cwd(), opts.artifactsLocation)
+    const interbitConfig = getConfig()
     const interbitManifest = getManifest()
-    // TODO: Use the manifest as initial variable resolution for generating the new one #262
 
     validateConfig(interbitConfig)
 
+    // TODO: If there are no keys in the config...
+    // ... generate a pair and insert them as validators in all the chains
+
+    const covenants = configSelectors.getCovenants(interbitConfig)
+
+    const newManifest = generateManifest(
+      location,
+      interbitConfig,
+      covenants,
+      interbitManifest
+    )
+
     const { cli } = await startInterbit()
-    // TODO: This create based on config should only run in dev mode, else run chains based on manifest #276
-    const { chainManifest, covenantHashes } = await createChainsFromConfig(
+
+    const covenantHashes = await createChainsFromManifest(
+      location,
       cli,
-      interbitConfig
+      newManifest,
+      opts
     )
 
-    // TODO: This manifest mock is no longer required
-    const deploymentDetails = generateDeploymentDetails(
-      chainManifest,
-      covenantHashes
+    newManifest.covenants = _.merge(newManifest.covenants, covenantHashes)
+
+    console.log(
+      'available chains + covenants: ',
+      JSON.stringify(
+        {
+          chains: newManifest.chains,
+          covenants: newManifest.covenants
+        },
+        null,
+        2
+      )
     )
 
-    console.log('available chains + covenants: ', deploymentDetails)
+    setRootChainManifest(cli, newManifest, interbitConfig)
 
-    setRootChainManifest(cli, deploymentDetails, interbitConfig)
-
-    if (options.isDevModeEnabled && options.isWatchModeEnabled) {
-      watchCovenants(cli, interbitConfig, chainManifest)
+    if (opts.isWatchModeEnabled) {
+      watchCovenants(cli, newManifest)
     }
 
-    if (!options.isDevModeEnabled) {
-      // TODO: We are not in dev mode so output the diff'd manifest
-
-      // TODO: Use the manifest to update index.html instead of "deploymentDetails"
-      updateIndexHtmls({
-        config: interbitConfig, // manifest here
-        chains: deploymentDetails.chains
-      })
-    } else {
-      updateIndexHtmls({
-        config: interbitConfig,
-        chains: deploymentDetails.chains
-      })
-    }
+    updateIndexHtmls({
+      config: interbitConfig,
+      chains: newManifest.chains
+    })
 
     // TODO: Watch the chains for manifest changes #267
-    // Blocked by #258 #336
     // watchChain(cli, chainInterface)
   } catch (e) {
     console.error(`ERROR: ${e.message}`)
@@ -75,10 +87,11 @@ const startInterbitNode = async () => {
 }
 
 const getOptions = argv => ({
-  isDevModeEnabled: isArg(argv, argOptions.DEV),
+  isDevModeEnabled: true, // isArg(argv, argOptions.DEV),
   isWatchModeEnabled: !isArg(argv, argOptions.NO_WATCH),
   port: getArg(argv, argOptions.PORT),
-  dbPath: getArg(argv, argOptions.DB_PATH)
+  dbPath: getArg(argv, argOptions.DB_PATH),
+  artifactsLocation: getArtifactsLocation()
 })
 
 startInterbitNode()

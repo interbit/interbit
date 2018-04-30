@@ -36,8 +36,8 @@
         "serve": "cross-env serve build",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
-        "interbit:start": "cross-env COVENANT_DEV_MODE=true DB_PATH=./db-interbit interbit start",
-        "interbit:create": "cross-env COVENANT_DEV_MODE=true interbit create",
+        "interbit:start": "cross-env DB_PATH=./db-interbit interbit start",
+        "interbit:create": "interbit create",
         "interbit:build": "interbit build",
         "interbit:deploy": "interbit deploy --admin-keys keyPair.js"
     }

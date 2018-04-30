@@ -16,6 +16,7 @@ const setRootChainManifest = require('./chainManagement/setRootChainManifest')
 const watchChain = require('./chainManagement/watchChain')
 
 const buildManifest = require('./manifest/buildManifest')
+const { generateManifest } = require('./manifest/generateManifest')
 const manifestSelectors = require('./manifest/manifestSelectors')
 const {
   updateIndexHtmls,
@@ -37,6 +38,7 @@ module.exports = {
   constants,
   createChains,
   generateDeploymentDetails,
+  generateManifest,
   getArg,
   getArgs,
   getArtifactsLocation,

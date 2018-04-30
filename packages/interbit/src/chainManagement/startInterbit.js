@@ -4,7 +4,6 @@ const {
   createCli
 } = require('interbit-core/dist/bundle.server')
 
-// TODO: accept a port var #280
 const startInterbit = async (keyPair, options) => {
   const port = _.get(options, ['port']) || 5000
 

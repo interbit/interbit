@@ -1,27 +1,29 @@
-const deployCovenants = async ({ cli, covenantConfig }) => {
-  console.log('DEPLOYING COVENANTS')
-  const covenants = Object.keys(covenantConfig)
+const path = require('path')
+const {
+  getCovenants: getCovenantsFromManifest
+} = require('../manifest/manifestSelectors')
 
+const deployCovenants = async (location, cli, manifest, opts) => {
   const covenantHashes = {}
+  const covenants = getCovenantsFromManifest(manifest)
+  const covenantEntries = Object.entries(covenants)
+  for (const [covenantAlias, covenantManifest] of covenantEntries) {
+    let covenantLocation
+    if (opts.isDevModeEnabled) {
+      process.env.COVENANT_DEV_MODE = true
+      covenantLocation = covenantManifest.location
+    } else {
+      covenantLocation = path.resolve(
+        `${location}/${covenantManifest.filename}`
+      )
+    }
 
-  for (const covenantName of covenants) {
-    const config = covenantConfig[covenantName]
+    const covenantHash = await cli.deployCovenant(covenantLocation)
+    covenantHashes[covenantAlias] = { hash: covenantHash }
 
-    console.log('DEPLOYING COVENANT:', {
-      covenantName,
-      location: config.location
-    })
-    // eslint-disable-next-line no-await-in-loop
-    const covenantHash = await cli.deployCovenant(config.location)
-    covenantHashes[covenantName] = covenantHash
-
-    console.log('DEPLOYED COVENANT:', {
-      covenantName,
-      covenantHash
-    })
+    console.log(`...deployed ${covenantLocation}`)
   }
 
-  console.log('DEPLOYED COVENANTS')
   return covenantHashes
 }
 

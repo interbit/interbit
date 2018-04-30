@@ -1,6 +1,10 @@
 const watch = require('watch')
-const { getCovenants, getChainByAlias } = require('../config/configSelectors')
-const generateDeploymentDetails = require('./generateDeploymentDetails')
+const _ = require('lodash')
+const {
+  getCovenants,
+  getChainIdByAlias,
+  getCovenantHashByAlias
+} = require('../manifest/manifestSelectors')
 const deployCovenants = require('./deployCovenants')
 
 const watchCovenants = (cli, interbitConfig, chainManifest) => {
@@ -34,7 +38,7 @@ const redeployBuffer = {
   isDeployPending: false
 }
 
-const redeployCovenants = async (cli, interbitConfig, chainManifest) => {
+const redeployCovenants = async (cli, manifest) => {
   if (redeployBuffer.isDeploying) {
     redeployBuffer.isDeployPending = true
     return undefined
@@ -45,41 +49,30 @@ const redeployCovenants = async (cli, interbitConfig, chainManifest) => {
 
   console.log('Redeploying updated covenants...')
 
+  const newManifest = manifest
   const covenantHashes = await deployCovenants({
     cli,
-    covenantConfig: getCovenants(interbitConfig)
+    covenantConfig: getCovenants(manifest)
   })
 
-  applyUpdates(cli, chainManifest, interbitConfig, covenantHashes)
+  newManifest.covenants = _.merge(newManifest.covenants, covenantHashes)
+
+  applyUpdates(cli, newManifest, covenantHashes)
   redeployBuffer.isDeploying = false
 
   return covenantHashes
 }
 
-const applyUpdates = (cli, chainManifest, interbitConfig, covenantHashes) => {
-  Object.entries(chainManifest).forEach(async ([chainAlias, chainEntry]) => {
-    const aliasedChain = getChainByAlias(chainAlias, interbitConfig)
-    const covenantAlias = aliasedChain.covenant
-    const covenantHash = covenantHashes[covenantAlias]
+const applyUpdates = (cli, manifest) => {
+  Object.entries(manifest).forEach(async ([chainAlias, chainEntry]) => {
+    // NOTE: UNTESTED
+    const chainId = getChainIdByAlias(chainAlias, manifest)
+    const covenantHash = getCovenantHashByAlias(chainAlias, manifest)
 
-    cli.applyCovenant(chainEntry.chainId, covenantHash)
+    cli.applyCovenant(chainId, covenantHash)
 
-    const isDefaultChain = aliasedChain.isDefaultChain
-    if (isDefaultChain) {
-      const defaultChain = await cli.getChain(chainEntry.chainId)
-      updateProdConfig(chainManifest, covenantHashes, defaultChain)
-    }
+    // TODO: Set manifest
   })
-}
-
-const updateProdConfig = (chainManifest, covenantHashes, defaultChain) => {
-  const deploymentDetails = generateDeploymentDetails(
-    chainManifest,
-    covenantHashes
-  )
-  console.log('Updated deploymentDetails ', deploymentDetails)
-
-  // TODO: dispatch updated deployment deets to the defaultChain
 }
 
 module.exports = watchCovenants

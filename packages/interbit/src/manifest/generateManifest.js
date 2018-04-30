@@ -19,11 +19,7 @@ const generateManifest = (
 ) => {
   console.log('GENERATING A MANIFEST')
   console.log({ location, interbitConfig, covenants, originalManifest })
-  const genesisBlocks = resolveGenesisBlocks(
-    interbitConfig,
-    originalManifest,
-    covenants
-  )
+  const genesisBlocks = resolveGenesisBlocks(interbitConfig, originalManifest)
   const chains = resolveChainIds(genesisBlocks)
   const apps = generateAppsManifest(location, interbitConfig)
 
@@ -106,7 +102,7 @@ const generateAppsManifest = (location, interbitConfig) => {
   return apps
 }
 
-const resolveGenesisBlocks = (config, originalManifest, covenants) => {
+const resolveGenesisBlocks = (config, originalManifest) => {
   const chainsConfig = getChains(config)
   const resolvedChainAliases = originalManifest
     ? Object.keys(originalManifest.chains)
@@ -119,11 +115,7 @@ const resolveGenesisBlocks = (config, originalManifest, covenants) => {
     return originalManifest.genesisBlocks
   }
 
-  const newlyResolvedChains = resolveChains(
-    unresolvedChainConfigs,
-    covenants,
-    config
-  )
+  const newlyResolvedChains = resolveChains(unresolvedChainConfigs, config)
 
   if (resolvedChainAliases.indexOf(ROOT_CHAIN_ALIAS) === -1) {
     const rootGenesisBlock = createGenesisBlock(ROOT_CHAIN_ALIAS, config)
@@ -133,7 +125,7 @@ const resolveGenesisBlocks = (config, originalManifest, covenants) => {
   return mergeResolutions(config, originalManifest, newlyResolvedChains)
 }
 
-const resolveChains = (unresolvedChains, covenants, config) =>
+const resolveChains = (unresolvedChains, config) =>
   unresolvedChains.reduce((prev, [chainAlias, chainConfig]) => {
     const genesisBlock = createGenesisBlock(chainAlias, config)
     return {
@@ -211,9 +203,6 @@ const createGenesisBlock = (chainAlias, config) => {
   // created unless the other side has resolved its genesis block which means...
   // ... deploy will have to do the the joining
 
-  // NOTE: Might not be the right idea to include covenant hash in here per #258 #218 #267
-  // ... try it and see if it messes with the chain IDs and it's better to apply the
-  // covenants in the watcher
   const builtConfig = configBuilder.build()
   console.log(builtConfig)
   return interbit.createGenesisBlock({ config: builtConfig })

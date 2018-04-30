@@ -3,7 +3,6 @@ const cheerio = require('cheerio')
 const { getApps } = require('../config/configSelectors')
 
 const updateIndexHtmls = ({ config, chains }) => {
-  console.log({ config, chains })
   const apps = getApps(config)
   const appsList = Object.entries(apps)
 
@@ -13,7 +12,6 @@ const updateIndexHtmls = ({ config, chains }) => {
 }
 
 const updateIndexHtml = ({ appConfig, chains }) => {
-  console.log(appConfig)
   const indexHtmlFilepath = appConfig.indexLocation
 
   console.log('Updating index.html with chain data...', indexHtmlFilepath)

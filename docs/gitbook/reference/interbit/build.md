@@ -1,29 +1,26 @@
 
 # `build`
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>Incomplete content</p>
-</div>
+Builds an Interbit application from a [configuration](config.md) file.
 
-Builds an application
+This script
+- generates a [manifest](manifest.md) file based on the provided [configuration](config.md)
+- packs all covenants described in the configuration and outputs them to dist/covenants
+- updates the index.html files described in [configuration](config.md) with the chain IDs that were resolved in the [manifest](manifest.md)
 
-Use the production config in `interbit.config.prod.js` if it exists
-Outputs to the `dist` folder
-static build of the react app from webpack
-contents of the `public` folder
-edited html file for static hosting
-bundled covenants named by hash
-`interbit.manifest.json`
-freshly minted genesis blocks OR genesis blocks from prod config for consistency
+Coming soon:
+- build your front end applications by executing the build steps provided
+- update only the index.html file from the completed application build
+- support an interbit root node and [cascading deployment](../../chain-management/cascading-deployment.md)
 
-#### Arguments
+#### Options
 
-1. `config` *(Filepath)*: a config file filepath
-
+1. `--config` *(Filepath)*: a filepath to a config file
+1. `--artifacts` *(Filepath)*: a filepath to output built artifacts to
+1. `--manifest` *(Filepath)*: a filepath to a pre-existing manifest used for initial variable resolution
 
 #### Example
 
-```js
-interbit build --config [configFilePath]
+```bash
+interbit build --config [configFilePath] --manifest [manifestFilePath] --artifacts [outputDir]
 ```

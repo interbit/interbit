@@ -214,3 +214,9 @@ Once both chains have agreed to the join, the remote dispatch is handled using a
 
 A write join is authorized on the sending side with an [`'@@interbit/AUTHORIZE_SEND_ACTIONS'`](../reference/interbit-covenant-utils/authorizeSendActions.md) action and on the receiving side with an [`'@@interbit/AUTHORIZE_RECEIVE_ACTIONS'`](../reference/interbit-covenant-utils/authorizeReceiveActions.md) action.
 
+
+## Configuration and Manifest File
+
+Interbit uses a [configuration](../reference/interbit/config.md) file so that you can describe your entire blockchain network in a single place. This file allows you to generate and manage networks based on the constraints described in the configuration.
+
+The [manifest](../reference/interbit/manifest.md) file is generated during the [`interbit build`](../reference/interbit/build.md) step to describe a fully resolved and deployable blockchain network.

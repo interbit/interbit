@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ContentBox } from 'lib-react-interbit'
+import { ContentBox } from 'interbit-ui-components'
 
 import Navigation from '../../components/Navigation'
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { Grid, Col, Row } from 'react-bootstrap'
-import { Navigation, Footer } from 'lib-react-interbit'
+import { Navigation, Footer } from 'interbit-ui-components'
 
 import AppDirectory from './containers/AppDirectory'
 import MyApps from './containers/MyApps'

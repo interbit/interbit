@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 import { Field, reduxForm } from 'redux-form'
-import { ContentBox } from 'lib-react-interbit'
+import { ContentBox } from 'interbit-ui-components'
 import PropTypes from 'prop-types'
 import formNames from '../constants/formNames'
 

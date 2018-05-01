@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { Markdown, LinkBarSlack, Divider } from 'lib-react-interbit'
+import { Markdown, LinkBarSlack, Divider } from 'interbit-ui-components'
 
 import DeveloperNavigation from '../../components/DeveloperNavigation'
 import getInterbitServices from '../../redux/getInterbitServices'

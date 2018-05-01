@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
-import { Navigation, Footer } from 'lib-react-interbit'
+import { Navigation, Footer } from 'interbit-ui-components'
 import { Switch, Route } from 'react-router-dom'
 
 import ProjectList from './containers/ProjectList'

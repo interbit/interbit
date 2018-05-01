@@ -6,7 +6,7 @@ import {
   Divider,
   IconButton,
   ModalWrapper
-} from 'lib-react-interbit'
+} from 'interbit-ui-components'
 
 import modalNames from '../constants/modalNames'
 import chairmanmeow from '../assets/chairmanmeow.jpg'

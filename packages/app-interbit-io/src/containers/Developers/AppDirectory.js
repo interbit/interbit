@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ContentBox, LinkBar, LinkBarSlack } from 'lib-react-interbit'
+import { ContentBox, LinkBar, LinkBarSlack } from 'interbit-ui-components'
 
 import DeveloperNavigation from '../../components/DeveloperNavigation'
 import urls from '../../constants/urls'

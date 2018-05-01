@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 // import queryString from 'query-string'
 // import uuid from 'uuid'
-import { IconButton } from 'lib-react-interbit'
+import { IconButton } from 'interbit-ui-components'
 
 import { generateChainTemplate } from 'interbit-ui-tools'
 

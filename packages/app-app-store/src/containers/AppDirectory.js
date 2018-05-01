@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
-import { ContentBar, Divider, IconButton } from 'lib-react-interbit'
+import { ContentBar, Divider, IconButton } from 'interbit-ui-components'
 
 import appBars from '../content/appBars'
 import contentBars from '../content/contentBars'

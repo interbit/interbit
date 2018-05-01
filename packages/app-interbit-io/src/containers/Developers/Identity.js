@@ -10,7 +10,7 @@ import {
   LinkBarSlack,
   Divider,
   Quote
-} from 'lib-react-interbit'
+} from 'interbit-ui-components'
 
 import Navigation from '../../components/Navigation'
 import urls from '../../constants/urls'

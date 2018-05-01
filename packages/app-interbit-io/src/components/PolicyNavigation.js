@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-bootstrap'
-import { SideBarNav } from 'lib-react-interbit'
+import { SideBarNav } from 'interbit-ui-components'
 import Navigation from './Navigation'
 
 export default class PolicyNavigation extends Component {

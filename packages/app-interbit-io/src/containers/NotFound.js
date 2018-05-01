@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { NotFound } from 'lib-react-interbit'
+import { NotFound } from 'interbit-ui-components'
 
 import getInterbitServices from '../redux/getInterbitServices'
 import Navigation from '../components/Navigation'

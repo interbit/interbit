@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { ConnectingTo } from 'lib-react-interbit'
+import { ConnectingTo } from 'interbit-ui-components'
 
 import spinner from '../assets/spinner.gif'
 

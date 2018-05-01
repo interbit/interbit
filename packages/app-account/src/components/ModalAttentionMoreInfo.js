@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { IconButton, Markdown, ModalWrapper } from 'lib-react-interbit'
+import { IconButton, Markdown, ModalWrapper } from 'interbit-ui-components'
 
 import modalNames from '../constants/modalNames'
 

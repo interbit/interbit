@@ -12,7 +12,7 @@ import {
 } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { chainDispatch, selectors } from 'interbit-ui-tools'
-import { IconButton } from 'lib-react-interbit'
+import { IconButton } from 'interbit-ui-components'
 
 import { actionCreators } from '../interbit/my-account/actions'
 import ModalSignIn from '../components/ModalSignIn'

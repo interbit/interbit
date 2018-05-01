@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NotFound } from 'lib-react-interbit'
+import { NotFound } from 'interbit-ui-components'
 
 import paths from '../constants/paths'
 import urls from '../constants/urls'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { DeveloperNavigation as LriDeveloperNavigation } from 'lib-react-interbit'
+import { DeveloperNavigation as LriDeveloperNavigation } from 'interbit-ui-components'
 import Navigation from './Navigation'
 
 export default class DeveloperNavigation extends Component {

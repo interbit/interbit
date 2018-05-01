@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { Grid } from 'react-bootstrap'
-import { Header, Footer } from 'lib-react-interbit'
+import { Header, Footer, Logo, IBIcon } from 'lib-react-interbit'
 
 import constants from './constants'
 import Home from './containers/Home'
@@ -23,6 +23,8 @@ class App extends Component {
         <Header
           navItems={constants.navigation.headerNav}
           rightNavItems={constants.navigation.headerRightNav}
+          logo={<Logo className="sm hidden-xs" />}
+          logoSm={<IBIcon className="visible-xs hidden-sm" />}
         />
 
         <Grid>

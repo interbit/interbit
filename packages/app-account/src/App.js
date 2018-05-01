@@ -72,6 +72,17 @@ export class App extends Component {
       }
     ]
 
+    const headerTextNav = [
+      {
+        content: (
+          <div className="username">
+            {userName} <span>(Signed in)</span>
+          </div>
+        ),
+        key: 'username'
+      }
+    ]
+
     const footerNav = [
       {
         title: 'Accounts',
@@ -118,7 +129,7 @@ export class App extends Component {
           className="nav-main-menu"
           logo={<LogoAccount />}
           navItems={isLoggedIn ? headerNav : headerNavLoggedOut}
-          username={userName}
+          textNavItems={headerTextNav}
         />
 
         <Grid>

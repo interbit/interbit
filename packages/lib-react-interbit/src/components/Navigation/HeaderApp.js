@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Row, Col, Navbar, Nav } from 'react-bootstrap'
+import { Grid, Row, Col, Navbar, Nav, NavItem } from 'react-bootstrap'
 
 import NavLinkWrapper from './NavLinkWrapper'
 import LinkWrapper from '../UIKit/LinkWrapper'
@@ -24,18 +24,25 @@ export default class HeaderApp extends Component {
         isHidden: PropTypes.bool
       })
     ),
+    textNavItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        content: PropTypes.element,
+        key: PropTypes.string
+      })
+    ),
     logo: PropTypes.element,
+    logoSm: PropTypes.element,
     logoUrl: PropTypes.string,
-    username: PropTypes.string,
     className: PropTypes.string
   }
 
   static defaultProps = {
     navItems: [],
     rightNavItems: [],
-    logo: <Logo className="sm" />,
+    textNavItems: [],
+    logo: <Logo className="sm hidden-xs" />,
+    logoSm: <div />,
     logoUrl: '/',
-    username: '',
     className: ''
   }
 
@@ -43,9 +50,10 @@ export default class HeaderApp extends Component {
     const {
       navItems,
       rightNavItems,
+      textNavItems,
       logo,
+      logoSm,
       logoUrl,
-      username,
       className
     } = this.props
 
@@ -57,7 +65,10 @@ export default class HeaderApp extends Component {
               <Navbar collapseOnSelect className="ibweb-navbar">
                 <Navbar.Header>
                   <Navbar.Brand>
-                    <LinkWrapper to={logoUrl}>{logo}</LinkWrapper>
+                    <LinkWrapper to={logoUrl}>
+                      {logo}
+                      {logoSm}
+                    </LinkWrapper>
                   </Navbar.Brand>
                 </Navbar.Header>
 
@@ -79,13 +90,14 @@ export default class HeaderApp extends Component {
                           <NavLinkWrapper key={navItem.eventKey} {...navItem} />
                         )
                     )}
-                </Nav>
 
-                {username && (
-                  <div className="username">
-                    {username} <span>(Signed in)</span>
-                  </div>
-                )}
+                  {!!textNavItems.length &&
+                    textNavItems.map(navItem => (
+                      <NavItem key={navItem.key} disabled>
+                        {navItem.content}
+                      </NavItem>
+                    ))}
+                </Nav>
               </Navbar>
             </Col>
           </Row>

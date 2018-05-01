@@ -6,7 +6,7 @@ import { createStore, combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import { Welcome, HeaderApp } from '../../src'
+import { Welcome, Header } from '../../src'
 import ConnectedCovenant from './ConnectedCovenant'
 import chainReducer from './testCovenant'
 import ConnectedBlockExplorer from './ConnectedBlockExplorer'
@@ -30,7 +30,7 @@ class Demo extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <div>
-            <HeaderApp
+            <Header
               account={{
                 userAlias: 'John Smith',
                 to: 'https://accounts.google.com'

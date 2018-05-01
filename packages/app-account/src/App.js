@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Grid } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
-import { HeaderApp, Footer } from 'lib-react-interbit'
+import { Header, Footer } from 'lib-react-interbit'
 
 import { selectors } from 'interbit-ui-tools'
 
@@ -125,7 +125,7 @@ export class App extends Component {
 
     return (
       <div className="App ibweb app-account">
-        <HeaderApp
+        <Header
           className="nav-main-menu"
           logo={<LogoAccount />}
           navItems={isLoggedIn ? headerNav : headerNavLoggedOut}

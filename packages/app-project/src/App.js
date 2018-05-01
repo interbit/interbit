@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid } from 'react-bootstrap'
-import { HeaderApp, Footer } from 'lib-react-interbit'
+import { Header, Footer } from 'lib-react-interbit'
 import { Switch, Route } from 'react-router-dom'
 
 import ProjectList from './containers/ProjectList'
@@ -74,7 +74,7 @@ export default class App extends Component {
 
     return (
       <div className="App ibweb app-project">
-        <HeaderApp
+        <Header
           userAlias={userProfile}
           navItems={[
             {

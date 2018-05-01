@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid } from 'react-bootstrap'
-import { HeaderApp } from 'lib-react-interbit'
+import { Header } from 'lib-react-interbit'
 import { Switch, Route } from 'react-router-dom'
 
 import NotFound from './containers/NotFound'
@@ -21,7 +21,7 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        <HeaderApp
+        <Header
           userAlias={userProfile}
           navItems={[
             {

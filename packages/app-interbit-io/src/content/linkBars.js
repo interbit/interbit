@@ -40,7 +40,7 @@ export default {
     title: 'Contact us',
     image: iconChatEmpty,
     content:
-      'Get in touch to receive more information about Interbit and what it can do for your business.',
+      'Get in touch to receive more information about Interbit and learn what it can do for your business.',
     to: constants.paths.CONTACT,
     className: 'blue'
   },

@@ -1,6 +1,6 @@
 # Getting Started
 
-Review the prerequisites and setup instructions in their entirety. Proceed to install any missing prerequisites before installing Interbit.
+Review the prerequisites and setup instructions in their entirety. Install any missing prerequisites before installing Interbit.
 
 ### Prerequisites
 

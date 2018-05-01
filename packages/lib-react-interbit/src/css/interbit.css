@@ -5590,12 +5590,6 @@ a {
   border-bottom: 1px solid #CECECE; }
   .ibweb-navbar-container .ibweb-button {
     margin: 12px 0; }
-  .ibweb-navbar-container .accounts-link {
-    text-align: right; }
-    .ibweb-navbar-container .accounts-link a {
-      display: inline-block;
-      padding: 25px 0;
-      line-height: 1.5; }
 
 .ibweb-navbar {
   background-color: #FFFFFF;
@@ -5603,7 +5597,8 @@ a {
   margin-bottom: 0; }
   .ibweb-navbar .navbar-brand {
     padding-top: 22px; }
-  .ibweb-navbar .nav-main-menu li a {
+  .ibweb-navbar .nav-main-menu li a,
+  .ibweb-navbar .nav-right-menu li a {
     font-size: 1rem;
     font-weight: 500;
     color: #666666;
@@ -5614,8 +5609,8 @@ a {
   .ibweb-navbar .nav-main-menu li.active a:focus {
     background: transparent; }
   .ibweb-navbar .username {
-    float: right;
-    padding: 25px 0 15px 16px; }
+    font-weight: 400;
+    color: #666666; }
     .ibweb-navbar .username span {
       color: #057514; }
 
@@ -5648,7 +5643,7 @@ a {
           padding-left: 16px; }
         .ibweb-navbar-container .nav-main-menu li a {
           padding: 10px 8px; }
-    .ibweb-navbar-container .accounts-link a {
+    .ibweb-navbar-container li.accounts-link a {
       width: 100%;
       text-align: center;
       padding: 7px 40px;
@@ -5657,7 +5652,10 @@ a {
       background: #17A6F2;
       border-radius: 4px;
       color: #FFFFFF;
-      border: 1px solid #17A6F2; } }
+      border: 1px solid #17A6F2; }
+      .ibweb-navbar-container li.accounts-link a:hover, .ibweb-navbar-container li.accounts-link a:active, .ibweb-navbar-container li.accounts-link a:focus {
+        color: #FFFFFF;
+        background: #17A6F2; } }
 .ibweb-footer-container {
   margin-bottom: 64px; }
   .ibweb-footer-container .ibweb-footer {

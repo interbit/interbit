@@ -125,6 +125,7 @@ export const headerRightNav = [
   {
     text: 'Go to Accounts',
     to: urls.APP_ACCOUNT,
-    eventKey: 'accounts'
+    eventKey: 'accounts',
+    className: 'accounts-link'
   }
 ]

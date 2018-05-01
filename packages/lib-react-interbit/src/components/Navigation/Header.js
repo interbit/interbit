@@ -82,7 +82,7 @@ export default class Header extends Component {
                     )}
                 </Nav>
 
-                <Nav pullRight>
+                <Nav className="nav-right-menu" pullRight>
                   {!!rightNavItems.length &&
                     rightNavItems.map(
                       navItem =>

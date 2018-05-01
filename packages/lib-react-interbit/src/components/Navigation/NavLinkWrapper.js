@@ -24,9 +24,11 @@ export default class NavLinkWrapper extends Component {
         {text}
       </NavItem>
     ) : (
-      <NavLink to={to} className={className}>
-        {text}
-      </NavLink>
+      <li role="presentation">
+        <NavLink to={to} className={className}>
+          {text}
+        </NavLink>
+      </li>
     )
   }
 }

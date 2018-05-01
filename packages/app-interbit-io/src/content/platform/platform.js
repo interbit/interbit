@@ -261,8 +261,8 @@ Control access to individual chains, and the information on each.`,
         'Discover new apps and services to use or commercialize your own.',
       callToActions: [
         {
-          to: constants.urls.APP_STORE_STORE,
-          text: 'View in Store'
+          to: constants.urls.APP_STORE,
+          text: 'View Store'
         }
       ],
       image: platformAppStore,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Header } from 'lib-react-interbit'
+import { Header } from 'interbit-ui-components'
 
 import navigation from '../constants/navigation'
 import profilePic from '../img/profilePic.png'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { ContentBar, LinkBar, Markdown } from 'lib-react-interbit'
+import { ContentBar, LinkBar, Markdown } from 'interbit-ui-components'
 
 import layout from '../constants/layout'
 

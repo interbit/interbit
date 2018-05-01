@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ContentBar } from 'lib-react-interbit'
+import { ContentBar } from 'interbit-ui-components'
 
 export default class ProjectBar extends Component {
   static propTypes = {

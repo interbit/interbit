@@ -69,7 +69,7 @@ export default class Footer extends Component {
           </Col>
         </Row>
         <Row>
-          {sections.length &&
+          {!!sections.length &&
             sections.map(s => (
               <Col key={s.title} {...colLayout}>
                 <TitledList title={s.title} items={s.items} />
@@ -89,7 +89,7 @@ export default class Footer extends Component {
               <Logo />
             </LinkWrapper>
             <PanelGroup accordion id="footer-accordion">
-              {sections.length &&
+              {!!sections.length &&
                 sections.map(s => (
                   <Panel key={s.title} eventKey={s.title}>
                     <Panel.Heading>

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Panel } from 'react-bootstrap'
-import { Covenant } from 'lib-react-interbit'
+import { Covenant } from 'interbit-ui-components'
 
 export default class LinkedCovenant extends Component {
   static propTypes = {

@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-bootstrap'
-import { ContentBar, Divider, IconButton, Markdown } from 'lib-react-interbit'
+import {
+  ContentBar,
+  Divider,
+  IconButton,
+  Markdown
+} from 'interbit-ui-components'
 
 import appDetails from '../content/appDetails'
 import appBars from '../content/appBars'

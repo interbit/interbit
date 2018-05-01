@@ -27,7 +27,7 @@ describe('The Build Must Not be Tampered With: It', () => {
       switch (name) {
         case 'interbit':
         case 'platform-deploy':
-        case 'lib-react-interbit':
+        case 'interbit-ui-components':
         case 'template':
         case 'utils':
         case 'web-auth-endpoint':
@@ -49,7 +49,7 @@ describe('The Build Must Not be Tampered With: It', () => {
     })
   })
 
-  it.skip('does not have a modified lerna.json', () => {
+  it('does not have a modified lerna.json', () => {
     // eslint-disable-next-line
     const lernaPolice = require('../../../../lerna.json')
     // eslint-disable-next-line
@@ -62,7 +62,7 @@ describe('The Build Must Not be Tampered With: It', () => {
     )
   })
 
-  it.skip('does not have a modified package.json', () => {
+  it('does not have a modified package.json', () => {
     // eslint-disable-next-line
     const packageJsonPolice = require('../../../../package.json')
     // eslint-disable-next-line

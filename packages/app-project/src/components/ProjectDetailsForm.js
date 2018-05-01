@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Form, FormGroup } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import { renderInput, IconButton } from 'lib-react-interbit'
+import { renderInput, IconButton } from 'interbit-ui-components'
 import PropTypes from 'prop-types'
 import renderFontAwesomePicker from './renderFontAwesomePicker'
 

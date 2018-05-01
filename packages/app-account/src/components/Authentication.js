@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ContentBar, Divider } from 'lib-react-interbit'
+import { ContentBar, Divider } from 'interbit-ui-components'
 
 import OAuthButton from './OAuthButton'
 

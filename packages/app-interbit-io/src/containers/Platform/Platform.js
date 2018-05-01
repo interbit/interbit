@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { Card, ContentBox, Markdown, Quote, LinkBar } from 'lib-react-interbit'
+import {
+  Card,
+  ContentBox,
+  Markdown,
+  Quote,
+  LinkBar
+} from 'interbit-ui-components'
 
 import layout from '../../constants/layout'
 

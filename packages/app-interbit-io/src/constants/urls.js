@@ -9,7 +9,6 @@ export default {
   APP_STORE: storeUrl,
   APP_STORE_ACCOUNTS: `${storeUrl}/apps/accounts`,
   APP_STORE_HOSTING: `${storeUrl}/apps/hosting`,
-  APP_STORE_STORE: `${storeUrl}/apps/store`,
   APP_STORE_CREATE_IB_APP: `${storeUrl}/apps/createIBApp`,
   APP_PROJECT: projectUrl,
   BTL_ABOUT: 'http://btl.co/about/',

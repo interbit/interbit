@@ -14,7 +14,7 @@ import {
   Button
 } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { Navigation } from 'lib-react-interbit'
+import { Navigation } from 'interbit-ui-components'
 import './css/App.css'
 import AppsList from './components/AppsList'
 import AppDescription from './components/AppDescription'

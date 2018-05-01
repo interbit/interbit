@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { LinkBar, Card, ContentBox, Markdown } from 'lib-react-interbit'
+import { LinkBar, Card, ContentBox, Markdown } from 'interbit-ui-components'
 
 import layout from '../constants/layout'
 import headerHome from '../assets/headerHome.jpg'

@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { Divider, LinkBar, LinkBarSlack, Markdown } from 'lib-react-interbit'
+import {
+  Divider,
+  LinkBar,
+  LinkBarSlack,
+  Markdown
+} from 'interbit-ui-components'
 
 import urls from '../../constants/urls'
 import layout from '../../constants/layout'

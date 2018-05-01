@@ -15,7 +15,7 @@
         "interbit-covenant-tools": "0.4.14",
         "interbit-ui-tools": "0.4.14",
         "interbit-platform-tools": "0.4.14",
-        "lib-react-interbit": "0.4.14",
+        "interbit-ui-components": "0.4.14",
         "localforage": "^1.4.3",
         "query-string": "^5.0.1",
         "react": "^16.2.0",

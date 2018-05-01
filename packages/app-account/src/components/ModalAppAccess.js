@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ModalWrapper, ContentBar, IconButton } from 'lib-react-interbit'
+import { ModalWrapper, ContentBar, IconButton } from 'interbit-ui-components'
 
 export default class ModalAppAccess extends Component {
   static propTypes = {

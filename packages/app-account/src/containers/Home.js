@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Grid, Row, Col } from 'react-bootstrap'
-import { Card, LinkBar, Markdown } from 'lib-react-interbit'
+import { Card, LinkBar, Markdown } from 'interbit-ui-components'
 
 import layout from '../constants/layout'
 

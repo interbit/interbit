@@ -24,7 +24,7 @@ The major technologies used in Interbit (and applications powered by Interbit) a
 
 <br>
 
-![](../assets/img/BTL_015_Technology_Diagram-01.png)
+![](../assets/img/Technology_Diagram.png)
 
 <br>
 
@@ -33,5 +33,5 @@ The major technologies used in Interbit (and applications powered by Interbit) a
 
 Interbit is implemented using the Redux design pattern. The following diagram shows how the traditional Redux elements appear within an application powered by Interbit.
 
-![](../assets/img/BTL_015_Application_Design_Pattern-01.png)
+![](../assets/img/Application_Design_Pattern.png)
 

@@ -3,24 +3,28 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Row, Col, Navbar, NavItem, Nav } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import { Grid, Row, Col, Navbar, Nav } from 'react-bootstrap'
 
-import LinkWrapper from '../UIKit/LinkWrapper'
+import NavLinkWrapper from './NavLinkWrapper'
 import Logo from '../UIKit/Logo'
 import IBIcon from '../UIKit/IBIcon'
 
 export default class Header extends Component {
   static propTypes = {
-    account: PropTypes.shape({
-      to: PropTypes.string,
-      text: PropTypes.string
-    }),
     headerNavItems: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string,
         eventKey: PropTypes.string,
         to: PropTypes.string,
+        text: PropTypes.string,
+        isHidden: PropTypes.bool
+      })
+    ),
+    headerRightNavItems: PropTypes.arrayOf(
+      PropTypes.shape({
+        eventKey: PropTypes.string,
+        to: PropTypes.string,
+        text: PropTypes.string,
         isHidden: PropTypes.bool
       })
     ),
@@ -28,34 +32,13 @@ export default class Header extends Component {
   }
 
   static defaultProps = {
-    account: {
-      to: '#',
-      text: ''
-    },
     headerNavItems: [],
+    headerRightNavItems: [],
     className: ''
   }
 
   render() {
-    const renderNavItem = navItem => {
-      if (navItem.to) {
-        return (
-          <li role="presentation" key={navItem.eventKey} className="Nav-link">
-            <a href={navItem.to}>{navItem.title}</a>
-          </li>
-        )
-      }
-
-      return (
-        <LinkContainer to={`/${navItem.eventKey}`} key={navItem.eventKey}>
-          <NavItem className="Nav-link" eventKey={navItem.eventKey} href="#">
-            {navItem.title}
-          </NavItem>
-        </LinkContainer>
-      )
-    }
-
-    const { headerNavItems, account, className } = this.props
+    const { headerNavItems, headerRightNavItems, className } = this.props
 
     return (
       <div className={`ibweb ${className}`}>
@@ -72,22 +55,34 @@ export default class Header extends Component {
                       </a>
                     </Navbar.Brand>
                   </Navbar.Header>
+
                   <Nav className="nav-main-menu">
-                    {headerNavItems.length &&
+                    {!!headerNavItems.length &&
                       headerNavItems.map(
-                        navItem => !navItem.isHidden && renderNavItem(navItem)
+                        navItem =>
+                          !navItem.isHidden && (
+                            <NavLinkWrapper
+                              key={navItem.eventKey}
+                              {...navItem}
+                            />
+                          )
                       )}
                   </Nav>
+
                   <Nav pullRight>
-                    <LinkWrapper to={account.to}>{account.text}</LinkWrapper>
+                    {!!headerRightNavItems.length &&
+                      headerRightNavItems.map(
+                        navItem =>
+                          !navItem.isHidden && (
+                            <NavLinkWrapper
+                              key={navItem.eventKey}
+                              {...navItem}
+                            />
+                          )
+                      )}
                   </Nav>
                 </Navbar>
               </Col>
-              {/*
-              <Col lg={2} md={3} sm={12} className="accounts-link">
-                <LinkWrapper to={account.to}>{account.text}</LinkWrapper>
-              </Col>
-              */}
             </Row>
           </Grid>
         </div>

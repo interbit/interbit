@@ -18,16 +18,11 @@ import './css/App.css'
 
 class App extends Component {
   render() {
-    const account = {
-      to: constants.urls.APP_ACCOUNT,
-      text: 'Go to Accounts'
-    }
-
     return (
       <div className="App ibweb app-interbit-io">
         <Header
           headerNavItems={constants.navigation.headerNav}
-          account={account}
+          headerRightNavItems={constants.navigation.headerRightNav}
         />
 
         <Grid>

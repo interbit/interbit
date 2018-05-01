@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import { Row, Col } from 'react-bootstrap'
-import { Sidebar } from 'lib-react-interbit'
+import { Sidebar } from 'interbit-ui-components'
 
 import AcceptableUse from './AcceptableUse'
 import Privacy from './Privacy'

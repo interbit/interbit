@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import { Row, Col } from 'react-bootstrap'
-import { LaunchPadRow, Sidebar } from 'lib-react-interbit'
+import { LaunchPadRow, Sidebar } from 'interbit-ui-components'
 
 import Architecture from './Architecture'
 import ExampleApps from './ExampleApps'

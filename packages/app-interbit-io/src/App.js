@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { Grid } from 'react-bootstrap'
-import { Header, Footer, Logo, IBIcon } from 'lib-react-interbit'
+import { Header, Footer, Logo, IBIcon } from 'interbit-ui-components'
 
 import constants from './constants'
 import Home from './containers/Home'

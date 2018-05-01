@@ -1,24 +1,19 @@
 {
   "name": "interbit-ui-components",
   "version": "0.4.14",
-  "description": "interbit-ui-components React component",
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "description": "React components helpful for working with Interbit",
+  "main": "dist/interbit-ui-components.js",
   "files": [
     "css",
-    "es",
-    "lib",
-    "umd",
+    "dist",
     "src/css/*.css"
   ],
   "scripts": {
     "prepack": "npm run build",
-    "build": "nwb build-react-component",
-    "clean": "nwb clean-module && nwb clean-demo",
-    "start": "nwb serve-react-demo",
-    "test": "nwb test-react",
-    "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server",
+    "build": "webpack --env dev && webpack --env build",
+    "build:watch": "webpack --env dev && webpack --env build --watch",
+    "dev": "webpack --progress --colors --watch --env dev",
+    "test": "echo \"No tests specified\"",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build"
   },
@@ -45,11 +40,20 @@
     "react": "16.x"
   },
   "devDependencies": {
-    "create-nwb-webpack-config": "^1.0.0",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-styleguidist": "^6.2.4",
-    "should": "^13.2.1"
+    "webpack": "^3.10.0",
+    "yargs": "^10.0.3"
   },
   "homepage": "https://btl.co",
   "license": "MIT",

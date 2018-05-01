@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { SubmissionError } from 'redux-form'
 import { chainDispatch, selectors } from 'interbit-ui-tools'
-import { Markdown } from 'lib-react-interbit'
+import { Markdown } from 'interbit-ui-components'
 
 import ContentBarApp from '../components/ContentBarApp'
 import ContentBarAttention from '../components/ContentBarAttention'

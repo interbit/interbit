@@ -8,7 +8,7 @@ import {
   LinkBar,
   LinkBarSlack,
   Divider
-} from 'lib-react-interbit'
+} from 'interbit-ui-components'
 import DeveloperNavigation from '../../components/DeveloperNavigation'
 import getInterbitServices from '../../redux/getInterbitServices'
 import urls from '../../constants/urls'

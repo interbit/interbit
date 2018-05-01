@@ -3,7 +3,12 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { chainDispatch } from 'interbit-ui-tools'
 import { Grid, Row, Col } from 'react-bootstrap'
-import { ContentBar, Divider, IconButton, Markdown } from 'lib-react-interbit'
+import {
+  ContentBar,
+  Divider,
+  IconButton,
+  Markdown
+} from 'interbit-ui-components'
 
 import Authentication from '../components/Authentication'
 import { getOAuthConfig } from '../interbit/public/selectors'

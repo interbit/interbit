@@ -9,4 +9,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-**Note:** Version bump only for package lib-react-interbit
+**Note:** Version bump only for package interbit-ui-components

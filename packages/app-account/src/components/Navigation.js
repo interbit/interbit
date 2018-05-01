@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Navigation } from 'lib-react-interbit'
+import { Navigation } from 'interbit-ui-components'
 
 import paths from '../constants/paths'
 import navigation from '../constants/navigation'

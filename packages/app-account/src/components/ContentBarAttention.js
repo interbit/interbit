@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Button } from 'react-bootstrap'
-import { ContentBar } from 'lib-react-interbit'
+import { ContentBar } from 'interbit-ui-components'
 import modalNames from '../constants/modalNames'
 
 export default class ContentBarAttention extends Component {

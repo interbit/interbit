@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "lerna run --scope $APP_NAME build",
-    "build:lib": "lerna run --scope lib-react-interbit build",
+    "build:lib": "lerna run --scope interbit-ui-components build",
     "build:modules": "lerna run --scope interbit-* build",
     "postinstall": "lerna bootstrap --hoist --parallel",
     "heroku-postbuild": "npm run build:modules && npm run build",

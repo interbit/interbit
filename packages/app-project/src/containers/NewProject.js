@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
 import PropTypes from 'prop-types'
 import { chainDispatch } from 'interbit-ui-tools'
-import { LinkBarSlack } from 'lib-react-interbit'
+import { LinkBarSlack } from 'interbit-ui-components'
 
 import ProjectDetailsForm from '../components/ProjectDetailsForm'
 import { actionCreators } from '../interbit/my-projects/actions'

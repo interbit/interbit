@@ -60,7 +60,7 @@ class Demo extends Component {
                 }
               ]}
             />
-            <h1>lib-react-interbit Demo</h1>
+            <h1>interbit-ui-components Demo</h1>
             <Switch>
               <Route exact path="/" component={Welcome} />
               <Route exact path="/home" component={Welcome} />

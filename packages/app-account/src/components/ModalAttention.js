@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Checkbox } from 'react-bootstrap'
-import { IconButton, Markdown, ModalWrapper } from 'lib-react-interbit'
+import { IconButton, Markdown, ModalWrapper } from 'interbit-ui-components'
 
 import buttonNames from '../constants/buttonNames'
 import modalNames from '../constants/modalNames'

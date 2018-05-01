@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Grid, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
-import { Navigation, Footer } from 'lib-react-interbit'
+import { Navigation, Footer } from 'interbit-ui-components'
 
 import { selectors } from 'interbit-ui-tools'
 

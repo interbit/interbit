@@ -1,7 +1,7 @@
 {
-  "name": "lib-react-interbit",
+  "name": "interbit-ui-components",
   "version": "0.4.14",
-  "description": "lib-react-interbit React component",
+  "description": "interbit-ui-components React component",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [

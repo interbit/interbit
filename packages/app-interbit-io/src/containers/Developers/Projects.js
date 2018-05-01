@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { LinkBarSlack } from 'lib-react-interbit'
+import { LinkBarSlack } from 'interbit-ui-components'
 
 import DeveloperNavigation from '../../components/DeveloperNavigation'
 import urls from '../../constants/urls'

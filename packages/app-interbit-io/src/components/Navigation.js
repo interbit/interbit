@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { NavigationWrapper } from 'lib-react-interbit'
+import { NavigationWrapper } from 'interbit-ui-components'
 
 import constants from '../constants'
 

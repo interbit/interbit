@@ -1,4 +1,4 @@
-# lib-react-interbit
+# interbit-ui-components
 
 The demo app src is in the demo/ directory.
 The component src is in the src/ directory.
@@ -9,7 +9,7 @@ The component src is in the src/ directory.
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 
-Describe lib-react-interbit here.
+Describe interbit-ui-components here.
 
 [build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
 [build]: https://travis-ci.org/user/repo

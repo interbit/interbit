@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ContentBar, Divider, LinkWrapper } from 'lib-react-interbit'
+import { ContentBar, Divider, LinkWrapper } from 'interbit-ui-components'
 
 export default class ContentBarApp extends Component {
   static propTypes = {

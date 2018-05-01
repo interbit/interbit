@@ -25,11 +25,13 @@ export default class App extends Component {
           userAlias={userProfile}
           navItems={[
             {
-              title: 'INTERACTIVE CHAINS',
+              text: 'INTERACTIVE CHAINS',
+              to: '/chains',
               eventKey: 'chains'
             },
             {
-              title: 'BLOCK EXPLORER',
+              text: 'BLOCK EXPLORER',
+              to: '/explore',
               eventKey: 'explore'
             }
           ]}

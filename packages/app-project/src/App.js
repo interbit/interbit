@@ -78,21 +78,20 @@ export default class App extends Component {
           userAlias={userProfile}
           navItems={[
             {
-              title: 'My Projects',
+              text: 'My Projects',
+              to: '/projects',
               eventKey: 'projects'
             },
             {
-              title: 'Interactive Chains',
+              text: 'Interactive Chains',
+              to: '/chains',
               eventKey: 'chains',
               isHidden: process.env.NODE_ENV !== 'development'
             },
             {
-              title: 'Block Explorer',
+              text: 'Block Explorer',
+              to: '/explore',
               eventKey: 'explore'
-            },
-            {
-              title: 'Marketplace',
-              eventKey: 'marketplace'
             }
           ]}
         />

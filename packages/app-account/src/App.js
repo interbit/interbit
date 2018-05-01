@@ -53,18 +53,21 @@ export class App extends Component {
 
     const headerNav = [
       {
-        title: 'My Account',
+        text: 'My Account',
+        to: paths.ACCOUNT,
         eventKey: 'account'
       },
       {
-        title: 'Block Explorer',
+        text: 'Block Explorer',
+        to: paths.BLOCK_EXPLORER,
         eventKey: 'explore'
       }
     ]
 
     const headerNavLoggedOut = [
       {
-        title: 'Create Account / Sign-in',
+        text: 'Create Account / Sign-in',
+        to: paths.CREATE_ACCOUNT,
         eventKey: 'create-account'
       }
     ]

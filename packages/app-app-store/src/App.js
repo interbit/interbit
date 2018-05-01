@@ -17,15 +17,18 @@ export default class App extends Component {
   render() {
     const headerNav = [
       {
-        title: 'Featured',
+        text: 'Featured',
+        to: constants.paths.FEATURED_APPS,
         eventKey: 'featured-apps'
       },
       {
-        title: 'Apps',
-        eventKey: ''
+        text: 'Apps',
+        to: constants.paths.HOME,
+        eventKey: 'home'
       },
       {
-        title: 'Developers',
+        text: 'Developers',
+        to: constants.paths.DEVELOPERS,
         eventKey: 'developers'
       }
     ]

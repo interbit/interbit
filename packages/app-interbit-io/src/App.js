@@ -21,8 +21,8 @@ class App extends Component {
     return (
       <div className="App ibweb app-interbit-io">
         <Header
-          headerNavItems={constants.navigation.headerNav}
-          headerRightNavItems={constants.navigation.headerRightNav}
+          navItems={constants.navigation.headerNav}
+          rightNavItems={constants.navigation.headerRightNav}
         />
 
         <Grid>

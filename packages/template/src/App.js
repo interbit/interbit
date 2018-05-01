@@ -16,11 +16,13 @@ export default class App extends Component {
         <HeaderApp
           navItems={[
             {
-              title: 'PRIVATE CHAIN',
+              text: 'PRIVATE CHAIN',
+              to: '/chains',
               eventKey: 'chains'
             },
             {
-              title: 'BLOCK EXPLORER',
+              text: 'BLOCK EXPLORER',
+              to: '/explore',
               eventKey: 'explore'
             }
           ]}

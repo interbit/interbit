@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Row, Col } from 'react-bootstrap'
+import { Grid } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import { HeaderApp, Footer } from 'lib-react-interbit'
@@ -111,20 +111,12 @@ export class App extends Component {
 
     return (
       <div className="App ibweb app-account">
-        <div className="ibweb-navbar-container">
-          <Grid>
-            <Row>
-              <Col lg={10} md={9} sm={12}>
-                <HeaderApp
-                  className="nav-main-menu"
-                  logo={<LogoAccount />}
-                  navItems={isLoggedIn ? headerNav : headerNavLoggedOut}
-                  username={userName}
-                />
-              </Col>
-            </Row>
-          </Grid>
-        </div>
+        <HeaderApp
+          className="nav-main-menu"
+          logo={<LogoAccount />}
+          navItems={isLoggedIn ? headerNav : headerNavLoggedOut}
+          username={userName}
+        />
 
         <Grid>
           <Switch>

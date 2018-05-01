@@ -6,7 +6,6 @@ import PropTypes from 'prop-types'
 import { Grid, Row, Col, Navbar, NavItem, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
-import NavWrap from './NavWrap'
 import LinkWrapper from '../UIKit/LinkWrapper'
 import Logo from '../UIKit/Logo'
 import IBIcon from '../UIKit/IBIcon'
@@ -41,9 +40,9 @@ export default class Header extends Component {
     const renderNavItem = navItem => {
       if (navItem.to) {
         return (
-          <NavWrap key={navItem.eventKey} className="Nav-link">
+          <li role="presentation" key={navItem.eventKey} className="Nav-link">
             <a href={navItem.to}>{navItem.title}</a>
-          </NavWrap>
+          </li>
         )
       }
 
@@ -79,11 +78,16 @@ export default class Header extends Component {
                         navItem => !navItem.isHidden && renderNavItem(navItem)
                       )}
                   </Nav>
+                  <Nav pullRight>
+                    <LinkWrapper to={account.to}>{account.text}</LinkWrapper>
+                  </Nav>
                 </Navbar>
               </Col>
+              {/*
               <Col lg={2} md={3} sm={12} className="accounts-link">
                 <LinkWrapper to={account.to}>{account.text}</LinkWrapper>
               </Col>
+              */}
             </Row>
           </Grid>
         </div>

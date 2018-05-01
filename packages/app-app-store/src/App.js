@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Grid, Col, Row } from 'react-bootstrap'
+import { Grid } from 'react-bootstrap'
 import { HeaderApp, Footer } from 'lib-react-interbit'
 
 import AppDirectory from './containers/AppDirectory'
@@ -73,15 +73,7 @@ export default class App extends Component {
 
     return (
       <div className="App ibweb app-app-store">
-        <div className="ibweb-navbar-container">
-          <Grid>
-            <Row>
-              <Col lg={10} md={9} sm={12}>
-                <HeaderApp navItems={headerNav} logo={<LogoStore />} />
-              </Col>
-            </Row>
-          </Grid>
-        </div>
+        <HeaderApp navItems={headerNav} logo={<LogoStore />} />
 
         <Grid>
           <Switch>

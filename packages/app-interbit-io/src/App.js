@@ -45,6 +45,7 @@ class App extends Component {
               path={constants.paths.PLATFORM_ROADMAP}
               component={PlatformRoadmap}
             />
+            <Route exact path={constants.paths.PRICING} component={Pricing} />
             <Route
               path={constants.paths.DEVELOPERS}
               component={DevPageContainer}
@@ -53,7 +54,6 @@ class App extends Component {
               path={constants.paths.POLICY}
               component={PolicyPageContainer}
             />
-            <Route exact path={constants.paths.PRICING} component={Pricing} />
 
             <Route component={NotFound} />
           </Switch>

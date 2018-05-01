@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Row, Col } from 'react-bootstrap'
+import { Grid } from 'react-bootstrap'
 import { HeaderApp, Footer } from 'lib-react-interbit'
 import { Switch, Route } from 'react-router-dom'
 
@@ -74,36 +74,29 @@ export default class App extends Component {
 
     return (
       <div className="App ibweb app-project">
-        <div className="ibweb-navbar-container">
-          <Grid>
-            <Row>
-              <Col lg={10} md={9} sm={12}>
-                <HeaderApp
-                  userAlias={userProfile}
-                  navItems={[
-                    {
-                      title: 'My Projects',
-                      eventKey: 'projects'
-                    },
-                    {
-                      title: 'Interactive Chains',
-                      eventKey: 'chains',
-                      isHidden: process.env.NODE_ENV !== 'development'
-                    },
-                    {
-                      title: 'Block Explorer',
-                      eventKey: 'explore'
-                    },
-                    {
-                      title: 'Marketplace',
-                      eventKey: 'marketplace'
-                    }
-                  ]}
-                />
-              </Col>
-            </Row>
-          </Grid>
-        </div>
+        <HeaderApp
+          userAlias={userProfile}
+          navItems={[
+            {
+              title: 'My Projects',
+              eventKey: 'projects'
+            },
+            {
+              title: 'Interactive Chains',
+              eventKey: 'chains',
+              isHidden: process.env.NODE_ENV !== 'development'
+            },
+            {
+              title: 'Block Explorer',
+              eventKey: 'explore'
+            },
+            {
+              title: 'Marketplace',
+              eventKey: 'marketplace'
+            }
+          ]}
+        />
+
         <Grid>
           <Switch>
             <Route exact path="/" component={ProjectList} />

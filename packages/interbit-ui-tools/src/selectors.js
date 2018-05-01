@@ -4,6 +4,7 @@ const {
   CHAINS,
   CHAIN_ID,
   CHAIN_DATA,
+  CHAIN_STATUS,
   CONFIG,
   CONNECTION,
   COVENANTS,
@@ -27,8 +28,13 @@ const fromStoreRoot = state => immutable(state[INTERBIT_REDUCER_KEY])
 
 const interbitAtRoot = state => immutable(state)
 
-const isChainLoaded = (state, { root = fromStoreRoot, chainAlias }) =>
-  !!root(state).getIn([CHAINS, chainAlias])
+const isChainLoaded = (state, { root = fromStoreRoot, chainAlias }) => {
+  const chainStatus = root(state).getIn(
+    [CHAIN_DATA, chainAlias, STATUS],
+    CHAIN_STATUS.UNKNOWN
+  )
+  return chainStatus === CHAIN_STATUS.BLOCKING
+}
 
 const isPublicChainLoaded = (
   state,

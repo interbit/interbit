@@ -48,6 +48,7 @@ class InterbitForBusiness extends Component {
 
         <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
+            <LinkBar {...linkBarContent.contactUs} />
             <LinkBar {...linkBarContent.shareWithFriend} />
           </Col>
         </Row>
@@ -89,12 +90,6 @@ class InterbitForBusiness extends Component {
               markdown={content.consortia.content}
               className="ibweb-intro"
             />
-          </Col>
-        </Row>
-
-        <Row className="ibweb-mg-xx-lg">
-          <Col {...colLayout}>
-            <LinkBar {...linkBarContent.requestDemo} />
           </Col>
         </Row>
 

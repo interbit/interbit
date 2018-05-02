@@ -24,7 +24,7 @@ function* tryConnect({ cli, toAddress = 'localhost', toPort }) {
   if (toAddress && toPort) {
     try {
       console.log(`${LOG_PREFIX}: Connecting to: ${toAddress}:${toPort}`)
-      yield call(cli.connect, toPort, toAddress)
+      yield call(cli.connect, Number(toPort), toAddress)
       console.log(`${LOG_PREFIX}: Connected to: ${toAddress}:${toPort}`)
     } catch (error) {
       console.error(

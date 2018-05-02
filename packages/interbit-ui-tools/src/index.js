@@ -5,6 +5,7 @@ const reducer = require('./reducer')
 const { rootSaga } = require('./sagas')
 const selectors = require('./selectors')
 const { INTERBIT_REDUCER_KEY } = require('./constants')
+const cAuthRequests = require('./cAuth')
 
 module.exports = {
   actionTypes,
@@ -14,5 +15,6 @@ module.exports = {
   reducer,
   rootSaga,
   selectors,
-  INTERBIT_REDUCER_KEY
+  INTERBIT_REDUCER_KEY,
+  cAuthRequests
 }

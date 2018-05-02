@@ -29,7 +29,7 @@ const startInterbitNode = async () => {
 
     validateConfig(interbitConfig)
 
-    const { cli } = await startInterbit()
+    const { cli } = await startInterbit(undefined, options)
     // TODO: This create based on config should only run in dev mode, else run chains based on manifest #276
     const { chainManifest, covenantHashes } = await createChainsFromConfig(
       cli,

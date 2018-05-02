@@ -39,7 +39,7 @@ const updateDom = (dom, appConfig, chains) => {
 
   stripChainAttrs(interbitElement)
   insertChainsInDom(interbitElement, appConfig, chains)
-  updateMetaData(interbitElement, appConfig)
+  updateMetadata(interbitElement, appConfig)
 }
 
 const stripChainAttrs = interbitElement => {
@@ -67,7 +67,7 @@ const insertChainsInDom = (interbitElement, appConfig, chains) => {
   })
 }
 
-const updateMetaData = (interbitElement, appConfig) => {
+const updateMetadata = (interbitElement, appConfig) => {
   const { peers } = appConfig
   if (!peers) {
     console.warn(

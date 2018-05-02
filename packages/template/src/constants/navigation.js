@@ -1,18 +1,21 @@
+import paths from './paths'
+
 export default {
-  ACCOUNT: {
-    title: 'MY ACCOUNT',
-    eventKey: 'account'
-  },
-  DEVELOPMENT: {
-    title: 'DEVELOPMENT',
-    eventKey: 'development'
-  },
-  PROJECTS: {
-    title: 'MY PROJECTS',
-    eventKey: 'projects'
-  },
-  APP_STORE: {
-    title: 'MARKETPLACE',
-    eventKey: 'marketplace'
-  }
+  headerNav: [
+    {
+      text: 'Private Chain',
+      to: paths.CHAINS,
+      eventKey: 'chains'
+    },
+    {
+      text: 'Block Explorer',
+      to: paths.BLOCK_EXPLORER,
+      eventKey: 'explore'
+    },
+    {
+      text: 'Connect to Profile',
+      to: paths.CAUTH_REQUEST,
+      eventKey: 'cauthRequest'
+    }
+  ]
 }

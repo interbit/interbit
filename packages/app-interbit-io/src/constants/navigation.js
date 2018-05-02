@@ -47,6 +47,10 @@ export const footerNav = [
         to: paths.DEVELOPERS_EXAMPLES
       },
       {
+        text: 'Docs',
+        to: urls.SDK_DOCS
+      },
+      {
         text: 'Support',
         to: paths.DEVELOPERS_SUPPORT
       }

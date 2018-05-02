@@ -23,6 +23,9 @@ const reducer = (state = initialState, action) => {
         joinName
       })
 
+      // HACK: Let consume action happen with the same public key
+      consumeAction.publicKey = action.publicKey
+
       console.log('REDISPATCH: ', consumeAction)
       return redispatch(state, consumeAction)
     }

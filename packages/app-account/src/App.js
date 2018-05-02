@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Row, Col } from 'react-bootstrap'
+import { Grid } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
-import { Navigation, Footer } from 'interbit-ui-components'
+import { Header, Footer } from 'interbit-ui-components'
 
 import { selectors } from 'interbit-ui-tools'
 
@@ -53,19 +53,33 @@ export class App extends Component {
 
     const headerNav = [
       {
-        title: 'My Account',
+        text: 'My Account',
+        to: paths.ACCOUNT,
         eventKey: 'account'
       },
       {
-        title: 'Block Explorer',
+        text: 'Block Explorer',
+        to: paths.BLOCK_EXPLORER,
         eventKey: 'explore'
       }
     ]
 
     const headerNavLoggedOut = [
       {
-        title: 'Create Account / Sign-in',
+        text: 'Create Account / Sign-in',
+        to: paths.CREATE_ACCOUNT,
         eventKey: 'create-account'
+      }
+    ]
+
+    const headerTextNav = [
+      {
+        content: (
+          <div className="username">
+            {userName} <span>(Signed in)</span>
+          </div>
+        ),
+        key: 'username'
       }
     ]
 
@@ -111,20 +125,12 @@ export class App extends Component {
 
     return (
       <div className="App ibweb app-account">
-        <div className="ibweb-navbar-container">
-          <Grid>
-            <Row>
-              <Col lg={10} md={9} sm={12}>
-                <Navigation
-                  className="nav-main-menu"
-                  logo={<LogoAccount />}
-                  navItems={isLoggedIn ? headerNav : headerNavLoggedOut}
-                  username={userName}
-                />
-              </Col>
-            </Row>
-          </Grid>
-        </div>
+        <Header
+          className="nav-main-menu"
+          logo={<LogoAccount />}
+          navItems={isLoggedIn ? headerNav : headerNavLoggedOut}
+          textNavItems={headerTextNav}
+        />
 
         <Grid>
           <Switch>

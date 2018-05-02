@@ -25,7 +25,7 @@ export default class LinkWrapper extends Component {
         href={to}
         className={className}
         onClick={() => {
-          clickHandler()
+          clickHandler && clickHandler()
         }}>
         {children}
       </a>
@@ -34,7 +34,7 @@ export default class LinkWrapper extends Component {
         to={to}
         className={className}
         onClick={() => {
-          clickHandler()
+          clickHandler && clickHandler()
         }}>
         {children}
       </Link>

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
 import { Markdown } from 'interbit-ui-components'
 
-import Navigation from '../components/Navigation'
 import layout from '../constants/layout'
 
 const mapStateToProps = state => ({
@@ -25,8 +24,8 @@ class Contact extends Component {
     const { content } = this.props
     const colLayout = layout.colLayout.default
 
-    const contactContent = (
-      <div className="ibweb-page">
+    return (
+      <div className="ibweb-page contact">
         <Row>
           <Col {...colLayout}>
             <h1>{content.title}</h1>
@@ -45,13 +44,6 @@ class Contact extends Component {
           </Col>
         </Row>
       </div>
-    )
-
-    return (
-      <Navigation
-        container={contactContent}
-        className="app-interbit-io contact"
-      />
     )
   }
 }

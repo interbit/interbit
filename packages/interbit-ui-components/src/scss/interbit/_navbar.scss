@@ -8,16 +8,6 @@
   .ibweb-button {
     margin: 12px 0;
   }
-
-  .accounts-link {
-    text-align: right;
-
-    a {
-      display: inline-block;
-      padding: 25px 0;
-      line-height: 1.5;
-    }
-  }
 }
 
 .ibweb-navbar {
@@ -29,7 +19,8 @@
     padding-top: 22px;
   }
 
-  .nav-main-menu li a {
+  .nav-main-menu li a,
+  .nav-right-menu li a {
     font-size: $font-size-sm;
     font-weight: 500;
     color: $ib-text-grey;
@@ -44,8 +35,8 @@
   }
 
   .username {
-    float: right;
-    padding: 25px 0 15px 16px;
+    font-weight: 400;
+    color: $ib-text-grey;
 
     span {
       color: $ib-green;
@@ -87,10 +78,6 @@
         padding: 8px 0;
         height: auto;
       }
-
-      .ibweb-ib-wordmark {
-        // display: none;
-      }
     }
 
     .nav-main-menu {
@@ -110,17 +97,20 @@
       }
     }
 
-    .accounts-link {
-      a {
-        width: 100%;
-        text-align: center;
-        padding: 7px 40px;
-        margin-bottom: 8px;
-        line-height: 32px;
-        background: $ib-blue;
-        border-radius: 4px;
+    li.accounts-link a {
+      width: 100%;
+      text-align: center;
+      padding: 7px 40px;
+      margin-bottom: 8px;
+      line-height: 32px;
+      background: $ib-blue;
+      border-radius: 4px;
+      color: $ib-white;
+      border: 1px solid $ib-blue;
+
+      &:hover, &:active, &:focus {
         color: $ib-white;
-        border: 1px solid $ib-blue;
+        background: $ib-blue;
       }
     }
 

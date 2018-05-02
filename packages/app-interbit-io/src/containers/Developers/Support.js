@@ -8,13 +8,10 @@ import {
   Divider
 } from 'interbit-ui-components'
 
-import DeveloperNavigation from '../../components/DeveloperNavigation'
-import getInterbitServices from '../../redux/getInterbitServices'
 import urls from '../../constants/urls'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({
-  interbitServices: getInterbitServices(state),
   linkBarContent: state.content.linkBars,
   ...state.content.developers
 })
@@ -25,7 +22,7 @@ class DevelopersSupport extends Component {
     const { support, linkBarContent } = this.props
     const colLayout = layout.colLayout.developers
 
-    const supportContent = (
+    return (
       <div className="ibweb-page dev-support">
         <Row className="ibweb-mg-md">
           <Col {...colLayout}>
@@ -55,8 +52,6 @@ class DevelopersSupport extends Component {
         </Row>
       </div>
     )
-
-    return <DeveloperNavigation {...this.props} component={supportContent} />
   }
 }
 

@@ -1,4 +1,0 @@
-SidebarNav example:
-```js
-
-```

@@ -18,7 +18,6 @@ export { default as Sidebar } from './components/Navigation/Sidebar'
 
 // Content Components
 export { default as Card } from './components/UIKit/Card'
-// export { default as CodeBlock } from './components/UIKit/CodeBlock'
 export { default as ConnectingTo } from './components/UIKit/ConnectingTo'
 export { default as ContentBox } from './components/UIKit/ContentBox'
 export { default as ContentBar } from './components/UIKit/ContentBar'

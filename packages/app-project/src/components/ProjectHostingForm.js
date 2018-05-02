@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Checkbox, FormControl } from 'react-bootstrap'
-import { Divider, IconButton } from 'lib-react-interbit'
+import { Divider, IconButton } from 'interbit-ui-components'
 
 import { toggleModal } from '../redux/uiReducer'
 import modalNames from '../constants/modalNames'

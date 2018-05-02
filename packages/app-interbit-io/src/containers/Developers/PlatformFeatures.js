@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { Divider, LinkBar, LinkBarSlack, Markdown } from 'lib-react-interbit'
+import {
+  Divider,
+  LinkBar,
+  LinkBarSlack,
+  Markdown
+} from 'interbit-ui-components'
 
-import DeveloperNavigation from '../../components/DeveloperNavigation'
-import getInterbitServices from '../../redux/getInterbitServices'
 import urls from '../../constants/urls'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({
-  interbitServices: getInterbitServices(state),
   linkBarsContent: state.content.linkBars,
   ...state.content.developers
 })
@@ -20,7 +22,7 @@ class DevelopersPlatformFeatures extends Component {
     const { platformFeatures, linkBarsContent } = this.props
     const colLayout = layout.colLayout.developers
 
-    const platformFeaturesContent = (
+    return (
       <div className="ibweb-page dev-platform-features">
         <Row className="ibweb-mg-md">
           <Col {...colLayout}>
@@ -53,13 +55,6 @@ class DevelopersPlatformFeatures extends Component {
           </Col>
         </Row>
       </div>
-    )
-
-    return (
-      <DeveloperNavigation
-        {...this.props}
-        component={platformFeaturesContent}
-      />
     )
   }
 }

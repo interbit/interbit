@@ -2,7 +2,12 @@ import ga from './ga'
 import layout from './layout'
 import urls from './urls'
 import paths from './paths'
-import { headerNav, footerNav, footerBottomLinks } from './navigation'
+import {
+  headerNav,
+  headerRightNav,
+  footerNav,
+  footerBottomLinks
+} from './navigation'
 
 export default {
   ga,
@@ -11,6 +16,7 @@ export default {
   paths,
   navigation: {
     headerNav,
+    headerRightNav,
     footerNav,
     footerBottomLinks
   }

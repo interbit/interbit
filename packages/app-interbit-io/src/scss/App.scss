@@ -1,277 +1,281 @@
 @import '_variables';
 
 .ibweb.app-interbit-io {
-
-  &.home .ibweb-navbar-container,
-  &.ib-for-business .ibweb-navbar-container,
-  &.platform .ibweb-navbar-container {
-    margin-bottom: 0px;
-  }
-
-  &.platform-roadmap .ibweb-navbar-container,
-  &.policy .ibweb-navbar-container,
-  &.pricing .ibweb-navbar-container {
-    margin-bottom: 160px;
-
-    @media (max-width: $screen-lg-min - 1) {
-      margin-bottom: 128px;
+  .ibweb-page {
+    &.home .header,
+    &.ib-for-business .header,
+    &.platform .header {
+      margin-top: -64px;
     }
 
-    @media (max-width: $screen-sm-min - 1) {
+    &.platform-roadmap,
+    &.policy,
+    &.pricing {
+      margin-top: 96px;
+
+      @media (max-width: $screen-lg-min - 1) {
+        margin-top: 64px;
+      }
+
+      @media (max-width: $screen-sm-min - 1) {
+        margin-top: 0;
+      }
+    }
+
+    &.platform-roadmap h1,
+    &.pricing h1 {
       margin-bottom: 64px;
-    }
-  }
 
-  &.platform-roadmap h1,
-  &.pricing h1 {
-    margin-bottom: 64px;
-
-    @media (max-width: $screen-lg-min - 1) {
-    }
-
-    @media (max-width: $screen-sm-min - 1) {
-      margin-bottom: 16px;
-    }
-  }
-
-  // Contact page
-  &.contact {
-    .pipedrive-container {
-      padding: 64px;
-      border-radius: 16px;
-      height: 1005px;
-      background: #f3f5f6;
-    }
-  }
-
-
-  // Platform page
-  &.platform {
-    .logos {
-      h4 {
-        margin-bottom: 32px;
+      @media (max-width: $screen-lg-min - 1) {
       }
 
-      .logo {
+      @media (max-width: $screen-sm-min - 1) {
         margin-bottom: 16px;
       }
     }
 
-    .app-section {
-      .ibweb-intro {
-        margin-bottom: 16px;
+    // Contact page
+    &.contact {
+      .pipedrive-container {
+        padding: 64px;
+        border-radius: 16px;
+        height: 1005px;
+        background: #f3f5f6;
       }
+    }
 
-      .links {
-        margin-bottom: 32px;
+    // Platform page
+    &.platform {
+      .logos {
+        h4 {
+          margin-bottom: 32px;
+        }
 
-        a:after {
-          display: inline-block;
-          margin-left: 8px;
-          font-family: FontAwesome;
-          content: '\f105';
+        .logo {
+          margin-bottom: 16px;
         }
       }
 
-      .ibweb-card {
-        height: 230px;
+      .app-section {
+        .ibweb-intro {
+          margin-bottom: 16px;
+        }
+
+        .links {
+          margin-bottom: 32px;
+
+          a:after {
+            display: inline-block;
+            margin-left: 8px;
+            font-family: FontAwesome;
+            content: '\f105';
+          }
+        }
+
+        .ibweb-card {
+          height: 230px;
+        }
       }
     }
-  }
 
-  // Interbit For Business page
-  &.ib-for-business {
-    .logos img {
-      margin-bottom: 16px;
-    }
-
-    .logo-third {
-      display: inline-block;
-      width: calc(33% - 16px);
-      margin-right: 16px;
-
-      &:last-child {
-        margin-right: 0;
-      }
-
-      img {
-        margin-left: 0;
-      }
-    }
-  }
-
-  // Pricing page
-  &.pricing {
-    h2 {
-      margin-bottom: 32px;
-    }
-
-    .pricing-tile {
-      .cont {
-        padding: 16px;
+    // Interbit For Business page
+    &.ib-for-business {
+      .logos img {
         margin-bottom: 16px;
-        border: 1px dashed #e6e6e6;
-        border-radius: 16px;
-        color: #999;
+      }
 
-        h3 sup {
-          font-size: 16px;
-          font-weight: 400;
+      .logo-third {
+        display: inline-block;
+        width: calc(33% - 16px);
+        margin-right: 16px;
+
+        &:last-child {
+          margin-right: 0;
         }
 
         img {
+          margin-left: 0;
+        }
+      }
+    }
+
+    // Pricing page
+    &.pricing {
+      h2 {
+        margin-bottom: 32px;
+      }
+
+      .pricing-tile {
+        .cont {
+          padding: 16px;
           margin-bottom: 16px;
-          width: 64px;
-          height: 64px;
+          border: 1px dashed #e6e6e6;
           border-radius: 16px;
+          color: #999;
+
+          h3 sup {
+            font-size: 16px;
+            font-weight: 400;
+          }
+
+          img {
+            margin-bottom: 16px;
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+          }
+
+          p {
+            color: #999;
+          }
+
+          ul {
+            li {
+              padding: 16px 0;
+              border-bottom: 1px solid #e6e6e6;
+
+              &:last-child {
+                border-bottom: none;
+              }
+            }
+          }
+        }
+
+      }
+
+      .pricing-note {
+        font-style: italic;
+        color: #999;
+      }
+    }
+
+    // Platform Roadmap page
+    &.platform-roadmap {
+      .ibweb-content-bar.in-progress {
+        h3 {
+          color: #999;
+        }
+      }
+    }
+
+    // Dev Overview page
+    &.dev-overview {
+      .app-characteristics {
+        & > div {
+          margin-bottom: 16px;
         }
 
         p {
-          color: #999;
+          min-height: 46px;
+        }
+      }
+
+      .common-services {
+        h2 {
+          margin-bottom: 32px;
         }
 
-        ul {
-          li {
-            padding: 16px 0;
-            border-bottom: 1px solid #e6e6e6;
+        .ibweb-content-bar {
+          a {
+            display: block;
+          }
+        }
+      }
+    }
 
-            &:last-child {
-              border-bottom: none;
-            }
+    // Dev Platform Features page
+    &.dev-platform-features {
+      .sections {
+        .row:last-child {
+          margin-bottom: 64px;
+        }
+        .subtitle {
+          font-size: 22px;
+          font-weight: 600;
+        }
+
+        ol {
+          list-style-type: decimal;
+          margin-top: 16px;
+          margin-left: 32px;
+
+          li {
+            margin-bottom: 12px;
+            font-size: 22px;
+            color: #666;
           }
         }
       }
 
-    }
-
-    .pricing-note {
-      font-style: italic;
-      color: #999;
-    }
-  }
-
-  // Platform Roadmap page
-  &.platform-roadmap {
-    .ibweb-content-bar.in-progress {
-      h3 {
-        color: #999;
-      }
-    }
-  }
-
-  .ibweb-page.policy {
-    ol {
-      margin: 32px 0 8px 32px;
-      list-style-type: decimal;
-      font-size: 22px;
-      color: #666;
-
-      li {
-        margin-bottom: 32px;
+      @media (max-width: $screen-sm-min - 1) {
+        .sections {
+          ol li {
+            font-size: 16px;
+          }
+        }
       }
     }
 
-    ul {
-      margin: 8px 0 8px 32px;
-      list-style-type: disc;
-      font-size: 22px;
-      color: #666;
-    }
+    // Dev Resources page
+    &.dev-resources {
+      .sections {
+        .row:last-child {
+          margin-bottom: 64px;
+        }
 
-    .subsection {
-      margin-left: 64px;
-    }
-  }
-
-  // Dev Overview page
-  .ibweb-page.dev-overview {
-    .app-characteristics {
-      & > div {
-        margin-bottom: 16px;
-      }
-
-      p {
-        min-height: 46px;
+        .ibweb-intro {
+          margin-bottom: 16px;
+        }
       }
     }
-  }
 
-  .common-services {
-    h2 {
-      margin-bottom: 32px;
-    }
+    // Dev Chain Architecture page
+    &.dev-architecture {
+      .sections {
+        .ibweb-intro {
+          margin-bottom: 16px;
+        }
 
-    .ibweb-content-bar {
-      a {
-        display: block;
+        .example {
+          margin-bottom: 32px;
+        }
       }
     }
-  }
 
-  // Dev Platform Features page
-  .ibweb-page.dev-platform-features {
-    .sections {
-      .row:last-child {
-        margin-bottom: 64px;
+    // Dev Support page
+    &.dev-support {
+      .sections {
+        .row:last-child {
+          margin-bottom: 64px;
+        }
       }
-      .subtitle {
-        font-size: 22px;
-        font-weight: 600;
-      }
+    }
 
-      ol {
-        list-style-type: decimal;
-        margin-top: 16px;
-        margin-left: 32px;
+    // Policy pages
+    &.policy {
+      .policy-content {
+        ol {
+          margin: 32px 0 8px 32px;
+          list-style-type: decimal;
+          font-size: 22px;
+          color: #666;
 
-        li {
-          margin-bottom: 12px;
+          li {
+            margin-bottom: 32px;
+          }
+        }
+
+        ul {
+          margin: 8px 0 8px 32px;
+          list-style-type: disc;
           font-size: 22px;
           color: #666;
         }
-      }
-    }
 
-    @media (max-width: $screen-sm-min - 1) {
-      .sections {
-        ol li {
-          font-size: 16px;
+        .subsection {
+          margin-left: 64px;
         }
-      }
-    }
-  }
 
-  // Dev Resources page
-  .ibweb-page.dev-resources {
-    .sections {
-      .row:last-child {
-        margin-bottom: 64px;
-      }
-
-      .ibweb-intro {
-        margin-bottom: 16px;
-      }
-    }
-  }
-
-  // Dev Chain Architecture page
-  .ibweb-page.dev-architecture {
-    .sections {
-      .ibweb-intro {
-        margin-bottom: 16px;
-      }
-
-      .example {
-        margin-bottom: 32px;
-      }
-    }
-  }
-
-  // Dev Support page
-  .ibweb-page.dev-support {
-    .sections {
-      .row:last-child {
-        margin-bottom: 64px;
       }
     }
   }

@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { ContentBar, ContentBarDefault, Markdown } from 'lib-react-interbit'
+import { ContentBar, ContentBarDefault, Markdown } from 'interbit-ui-components'
 
-import Navigation from '../../components/Navigation'
-
-import getInterbitServices from '../../redux/getInterbitServices'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({
-  interbitServices: getInterbitServices(state),
   ...state.content.platform
 })
 
@@ -19,8 +15,8 @@ class PlatformRoadmap extends Component {
     const { roadmap } = this.props
     const colLayout = layout.colLayout.default
 
-    const platformRoadmapContent = (
-      <div className="ibweb-page">
+    return (
+      <div className="ibweb-page platform-roadmap">
         <Row className="ibweb-mg-md-scr-xs">
           <Col {...colLayout}>
             <h1>{roadmap.title}</h1>
@@ -76,13 +72,6 @@ class PlatformRoadmap extends Component {
           </Col>
         </Row>
       </div>
-    )
-
-    return (
-      <Navigation
-        container={platformRoadmapContent}
-        className="app-interbit-io platform-roadmap"
-      />
     )
   }
 }

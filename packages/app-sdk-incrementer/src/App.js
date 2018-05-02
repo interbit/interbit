@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid } from 'react-bootstrap'
-import { Navigation } from 'lib-react-interbit'
+import { Header } from 'interbit-ui-components'
 import { Switch, Route } from 'react-router-dom'
 
 import NotFound from './containers/NotFound'
@@ -21,15 +21,17 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        <Navigation
+        <Header
           userAlias={userProfile}
           navItems={[
             {
-              title: 'INCREMENT',
+              text: 'INCREMENT',
+              to: '/chains',
               eventKey: 'chains'
             },
             {
-              title: 'BLOCK EXPLORER',
+              text: 'BLOCK EXPLORER',
+              to: '/explore',
               eventKey: 'explore'
             }
           ]}

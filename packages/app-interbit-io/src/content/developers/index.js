@@ -46,7 +46,7 @@ export default {
       }
     }
   ],
-  sideBar: [
+  sidebar: [
     {
       title: 'Start Here',
       items: [

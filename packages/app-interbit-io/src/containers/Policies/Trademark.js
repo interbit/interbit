@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { Markdown } from 'lib-react-interbit'
+import { Markdown } from 'interbit-ui-components'
 
-import PolicyNavigation from '../../components/PolicyNavigation'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({
@@ -14,11 +13,11 @@ const mapStateToProps = state => ({
 class Trademark extends Component {
   render() {
     // eslint-disable-next-line react/prop-types
-    const { content, sideBar } = this.props
+    const { content } = this.props
     const colLayout = layout.colLayout.developers
 
-    const trademarkContent = (
-      <div className="ibweb-page policy">
+    return (
+      <div className="policy-content">
         <Row>
           <Col {...colLayout}>
             <h1>{content.title}</h1>
@@ -27,8 +26,6 @@ class Trademark extends Component {
         </Row>
       </div>
     )
-
-    return <PolicyNavigation component={trademarkContent} sideBar={sideBar} />
   }
 }
 

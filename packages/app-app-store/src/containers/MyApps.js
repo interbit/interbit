@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
-import { Card, Markdown } from 'lib-react-interbit'
+import { Card, Markdown } from 'interbit-ui-components'
 
 import LinkBarGetStarted from '../components/LinkBarGetStarted'
 import cardBuild from '../assets/cardBuild.svg'

@@ -8,9 +8,8 @@ import {
   LinkBar,
   LinkBarSlack,
   Divider
-} from 'lib-react-interbit'
+} from 'interbit-ui-components'
 
-import DeveloperNavigation from '../../components/DeveloperNavigation'
 import urls from '../../constants/urls'
 import layout from '../../constants/layout'
 
@@ -25,7 +24,7 @@ class DevelopersExampleApps extends Component {
     const { exampleApps, linkBarContent } = this.props
     const colLayout = layout.colLayout.developers
 
-    const exampleAppsContent = (
+    return (
       <div className="ibweb-page dev-examples">
         <Row>
           <Col {...colLayout}>
@@ -63,10 +62,6 @@ class DevelopersExampleApps extends Component {
           </Col>
         </Row>
       </div>
-    )
-
-    return (
-      <DeveloperNavigation {...this.props} component={exampleAppsContent} />
     )
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { LinkBar } from 'lib-react-interbit'
+import { LinkBar } from 'interbit-ui-components'
 
 import linkBars from '../content/linkBars'
 

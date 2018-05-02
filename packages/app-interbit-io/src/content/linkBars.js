@@ -36,6 +36,14 @@ export default {
       'Interbit apps use many blockchains that are joined together. This introduces a new area of solution design: Chain Architecture. Learn more here!',
     to: constants.paths.DEVELOPERS_ARCHITECTURE
   },
+  contactUs: {
+    title: 'Contact us',
+    image: iconChatEmpty,
+    content:
+      'Get in touch to receive more information about Interbit and learn what it can do for your business.',
+    to: constants.paths.CONTACT,
+    className: 'blue'
+  },
   downloadSDK: {
     title: 'Get the SDK',
     image: iconDownload,

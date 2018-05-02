@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { IconButton, Markdown } from 'lib-react-interbit'
+import { IconButton, Markdown } from 'interbit-ui-components'
 
 export default class DeleteData extends Component {
   static propTypes = {

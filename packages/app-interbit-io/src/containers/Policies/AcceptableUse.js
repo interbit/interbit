@@ -1,24 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { Markdown } from 'lib-react-interbit'
+import { Markdown } from 'interbit-ui-components'
 
-import PolicyNavigation from '../../components/PolicyNavigation'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({
-  content: state.content.policies.acceptableUse,
-  sideBar: state.content.policies.sidebar
+  content: state.content.policies.acceptableUse
 })
 
 class AcceptableUse extends Component {
   render() {
     // eslint-disable-next-line react/prop-types
-    const { content, sideBar } = this.props
+    const { content } = this.props
     const colLayout = layout.colLayout.developers
 
-    const acceptableUseContent = (
-      <div className="ibweb-page policy">
+    return (
+      <div className="policy-content">
         <Row>
           <Col {...colLayout}>
             <h1>{content.title}</h1>
@@ -42,10 +40,6 @@ class AcceptableUse extends Component {
           </Row>
         ))}
       </div>
-    )
-
-    return (
-      <PolicyNavigation component={acceptableUseContent} sideBar={sideBar} />
     )
   }
 }

@@ -37,18 +37,18 @@ describe('updateIndexHtml', () => {
     })
   })
 
-  describe('updateDom(dom, appConfig, peers, chains)', () => {
+  describe('updateDom(dom, appConfig, chains)', () => {
     it('adds chain id data', () => {
       const dom = cheerio.load(indexHtml)
       const appConfig = {
-        chains: ['meow']
+        chains: ['meow'],
+        peers: []
       }
-      const peers = []
       const chains = {
         meow: '123456789'
       }
 
-      updateDom(dom, appConfig, peers, chains)
+      updateDom(dom, appConfig, chains)
 
       assert.equal(dom('#interbit').attr('data-chain-id-meow'), chains.meow)
     })
@@ -56,40 +56,27 @@ describe('updateIndexHtml', () => {
     it('strips old chain id data', () => {
       const dom = cheerio.load(indexHtml)
       const appConfig = {
-        chains: []
+        chains: [],
+        peers: []
       }
-      const peers = []
       const chains = []
 
-      updateDom(dom, appConfig, peers, chains)
+      updateDom(dom, appConfig, chains)
 
       assert.equal(dom('#interbit').data('chain-id-spoke1'), undefined)
       assert.equal(dom('#interbit').data('chain-id-hub'), undefined)
-    })
-
-    it('marks the chain that contains the react-app in the payload', () => {
-      const dom = cheerio.load(indexHtml)
-      const peers = ['192.0.0.1', '8.8.8.8']
-      const appConfig = {
-        chains: ['meow'],
-        appChain: 'meow'
-      }
-      const chains = []
-
-      updateDom(dom, appConfig, peers, chains)
-
-      assert.equal(dom('#interbit').data('boot-react-app'), 'meow')
     })
 
     it('includes peer hints', () => {
       const dom = cheerio.load(indexHtml)
       const peers = ['192.0.0.1', '8.8.8.8']
       const appConfig = {
-        chains: []
+        chains: [],
+        peers
       }
       const chains = []
 
-      updateDom(dom, appConfig, peers, chains)
+      updateDom(dom, appConfig, chains)
 
       assert.equal(dom('#interbit').data('peer-hints'), peers.toString())
     })
@@ -113,7 +100,7 @@ describe('updateIndexHtml', () => {
           'ea36311631faf66691c1e55ac7108843eab80ef79ebcfc4ed5bcf241ba33bcb3'
       }
 
-      updateDom(dom, appConfig, peers, chains)
+      updateDom(dom, appConfig, chains)
 
       assert.equal(dom('#interbit').data('chain-id-public'), chains.public)
       assert.equal(dom('#interbit').data('peer-hints'), peers.toString())

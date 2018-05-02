@@ -1,0 +1,65 @@
+{
+  "name": "interbit-ui-components",
+  "version": "0.4.14",
+  "description": "React components helpful for working with Interbit",
+  "main": "dist/interbit-ui-components.js",
+  "files": [
+    "css",
+    "dist",
+    "src/css/*.css"
+  ],
+  "scripts": {
+    "prepack": "npm run build",
+    "build": "webpack --env dev && webpack --env build",
+    "build:watch": "webpack --env dev && webpack --env build --watch",
+    "dev": "webpack --progress --colors --watch --env dev",
+    "test": "echo \"No tests specified\"",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "moment": "^2.20.1",
+    "react-bootstrap": "^0.32.1",
+    "react-dates": "^16.0.1",
+    "react-helmet": "^5.2.0",
+    "react-redux": "5.0.6",
+    "react-router-bootstrap": "^0.24.4",
+    "react-router-dom": "^4.2.2",
+    "react-sortable-tree": "^1.5.3",
+    "react-syntax-highlighter": "^7.0.2",
+    "react-toggle": "^4.0.2",
+    "react-virtualized": "^9.4.0",
+    "redux": "3.7.2",
+    "redux-form": "^7.2.1",
+    "redux-saga": "^0.16.0",
+    "seamless-immutable": "^7.1.2",
+    "uuid": "^3.1.0"
+  },
+  "peerDependencies": {
+    "react": "16.x"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-styleguidist": "^6.2.4",
+    "webpack": "^3.10.0",
+    "yargs": "^10.0.3"
+  },
+  "homepage": "https://btl.co",
+  "license": "MIT",
+  "author": "BTL GROUP LTD",
+  "repository": "",
+  "keywords": [
+    "react-component"
+  ]
+}

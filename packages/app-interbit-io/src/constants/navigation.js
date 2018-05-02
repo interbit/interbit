@@ -104,7 +104,28 @@ export const footerBottomLinks = [
 ]
 
 export const headerNav = [
-  { title: 'Platform', eventKey: 'platform' },
-  { title: 'Developers', eventKey: 'developers' },
-  { title: 'Pricing', eventKey: 'pricing' }
+  {
+    text: 'Platform',
+    to: paths.PLATFORM,
+    eventKey: 'platform'
+  },
+  {
+    text: 'Developers',
+    to: paths.DEVELOPERS,
+    eventKey: 'developers'
+  },
+  {
+    text: 'Pricing',
+    to: paths.PRICING,
+    eventKey: 'pricing'
+  }
+]
+
+export const headerRightNav = [
+  {
+    text: 'Go to Accounts',
+    to: urls.APP_ACCOUNT,
+    eventKey: 'accounts',
+    className: 'accounts-link'
+  }
 ]

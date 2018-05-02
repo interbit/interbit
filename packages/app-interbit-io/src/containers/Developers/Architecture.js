@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { Markdown, LinkBar, LinkBarSlack, Divider } from 'lib-react-interbit'
+import {
+  Markdown,
+  LinkBar,
+  LinkBarSlack,
+  Divider
+} from 'interbit-ui-components'
 
-import DeveloperNavigation from '../../components/DeveloperNavigation'
 import urls from '../../constants/urls'
 
 const mapStateToProps = state => ({
@@ -19,7 +23,7 @@ class DevelopersArchitecture extends Component {
       md: 12
     }
 
-    const architectureContent = (
+    return (
       <div className="ibweb-page dev-architecture">
         <Row>
           <Col md={12}>
@@ -54,10 +58,6 @@ class DevelopersArchitecture extends Component {
           </Col>
         </Row>
       </div>
-    )
-
-    return (
-      <DeveloperNavigation {...this.props} component={architectureContent} />
     )
   }
 }

@@ -1,26 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { ContentBar, LinkBar, Markdown } from 'lib-react-interbit'
+import { ContentBar, LinkBar, Markdown } from 'interbit-ui-components'
 
-import getInterbitServices from '../redux/getInterbitServices'
-import Navigation from '../components/Navigation'
 import layout from '../constants/layout'
 
 const mapStateToProps = state => ({
   content: state.content.pricing,
-  linkBarContent: state.content.linkBars,
-  interbitServices: getInterbitServices(state)
+  linkBarContent: state.content.linkBars
 })
 
 class Pricing extends Component {
   render() {
     // eslint-disable-next-line react/prop-types
-    const { content, linkBarContent, interbitServices } = this.props
+    const { content, linkBarContent } = this.props
     const colLayout = layout.colLayout.default
 
-    const pricingContent = (
-      <div className="ibweb-page">
+    return (
+      <div className="ibweb-page pricing">
         <Row className="ibweb-mg-md-scr-xs">
           <Col {...colLayout}>
             <h1>{content.title}</h1>
@@ -95,14 +92,6 @@ class Pricing extends Component {
           </Col>
         </Row>
       </div>
-    )
-
-    return (
-      <Navigation
-        container={pricingContent}
-        interbitServices={interbitServices}
-        className="app-interbit-io pricing"
-      />
     )
   }
 }

@@ -2,8 +2,7 @@ const path = require('path')
 const chainAliases = require('./src/constants/chainAliases')
 
 const config = {
-  // peers: ['localhost:5025'], // Running with INTERBIT_PORT set
-  peers: [], // If you run projects on it's own: (https://github.com/BlockchainTechLtd/integration/issues/201)
+  peers: [],
   adminValidators: [],
   staticChains: {
     [chainAliases.MY_PROJECTS]: {

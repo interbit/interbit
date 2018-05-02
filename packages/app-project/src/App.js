@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Grid, Row, Col } from 'react-bootstrap'
-import { Navigation, Footer } from 'lib-react-interbit'
+import { Grid } from 'react-bootstrap'
+import { Header, Footer } from 'interbit-ui-components'
 import { Switch, Route } from 'react-router-dom'
 
 import ProjectList from './containers/ProjectList'
@@ -74,36 +74,28 @@ export default class App extends Component {
 
     return (
       <div className="App ibweb app-project">
-        <div className="ibweb-navbar-container">
-          <Grid>
-            <Row>
-              <Col lg={10} md={9} sm={12}>
-                <Navigation
-                  userAlias={userProfile}
-                  navItems={[
-                    {
-                      title: 'My Projects',
-                      eventKey: 'projects'
-                    },
-                    {
-                      title: 'Interactive Chains',
-                      eventKey: 'chains',
-                      isHidden: process.env.NODE_ENV !== 'development'
-                    },
-                    {
-                      title: 'Block Explorer',
-                      eventKey: 'explore'
-                    },
-                    {
-                      title: 'Marketplace',
-                      eventKey: 'marketplace'
-                    }
-                  ]}
-                />
-              </Col>
-            </Row>
-          </Grid>
-        </div>
+        <Header
+          userAlias={userProfile}
+          navItems={[
+            {
+              text: 'My Projects',
+              to: '/projects',
+              eventKey: 'projects'
+            },
+            {
+              text: 'Interactive Chains',
+              to: '/chains',
+              eventKey: 'chains',
+              isHidden: process.env.NODE_ENV !== 'development'
+            },
+            {
+              text: 'Block Explorer',
+              to: '/explore',
+              eventKey: 'explore'
+            }
+          ]}
+        />
+
         <Grid>
           <Switch>
             <Route exact path="/" component={ProjectList} />

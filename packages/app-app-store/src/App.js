@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import { Grid, Col, Row } from 'react-bootstrap'
-import { Navigation, Footer } from 'lib-react-interbit'
+import { Grid } from 'react-bootstrap'
+import { Header, Footer } from 'interbit-ui-components'
 
 import AppDirectory from './containers/AppDirectory'
 import MyApps from './containers/MyApps'
@@ -17,15 +17,18 @@ export default class App extends Component {
   render() {
     const headerNav = [
       {
-        title: 'Featured',
+        text: 'Featured',
+        to: constants.paths.FEATURED_APPS,
         eventKey: 'featured-apps'
       },
       {
-        title: 'Apps',
-        eventKey: ''
+        text: 'Apps',
+        to: constants.paths.HOME,
+        eventKey: 'home'
       },
       {
-        title: 'Developers',
+        text: 'Developers',
+        to: constants.paths.DEVELOPERS,
         eventKey: 'developers'
       }
     ]
@@ -73,15 +76,7 @@ export default class App extends Component {
 
     return (
       <div className="App ibweb app-app-store">
-        <div className="ibweb-navbar-container">
-          <Grid>
-            <Row>
-              <Col lg={10} md={9} sm={12}>
-                <Navigation navItems={headerNav} logo={<LogoStore />} />
-              </Col>
-            </Row>
-          </Grid>
-        </div>
+        <Header navItems={headerNav} logo={<LogoStore />} />
 
         <Grid>
           <Switch>

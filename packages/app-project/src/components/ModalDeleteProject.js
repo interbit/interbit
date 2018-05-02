@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Button, FormControl } from 'react-bootstrap'
-import { ContentBar, IconButton, ModalWrapper } from 'lib-react-interbit'
+import { ContentBar, IconButton, ModalWrapper } from 'interbit-ui-components'
 
 import modalNames from '../constants/modalNames'
 

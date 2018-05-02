@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { selectors } from 'interbit-ui-tools'
-import { LinkBar, LinkBarSlack } from 'lib-react-interbit'
+import { LinkBar, LinkBarSlack } from 'interbit-ui-components'
 
 import urls from '../constants/urls'
 import ProjectItem from '../components/ProjectItem'

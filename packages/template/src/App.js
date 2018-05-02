@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid } from 'react-bootstrap'
-import { Header } from 'interbit-ui-components'
+import { Header, Logo, IBIcon } from 'interbit-ui-components'
 import { Switch, Route } from 'react-router-dom'
 
 import NotFound from './containers/NotFoundPage'
@@ -10,38 +10,30 @@ import RequestCAuth from './containers/RequestCAuth'
 import CompleteCAuth from './containers/CompleteCAuth'
 
 import './css/App.css'
+import navigation from './constants/navigation'
+import paths from './constants/paths'
 
 export default class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="App ibweb app-interbit-io">
         <Header
-          navItems={[
-            {
-              text: 'PRIVATE CHAIN',
-              to: '/chains',
-              eventKey: 'chains'
-            },
-            {
-              text: 'BLOCK EXPLORER',
-              to: '/explore',
-              eventKey: 'explore'
-            },
-            {
-              text: 'CONNECT TO MY PROFILE',
-              to: '/cauth/request',
-              eventKey: 'cauthRequest'
-            }
-          ]}
+          navItems={navigation.headerNav}
+          logo={<Logo className="sm hidden-xs" />}
+          logoSm={<IBIcon className="visible-xs hidden-sm" />}
         />
         <Grid>
           <Switch>
-            <Route exact path="/" component={InteractiveChains} />
-            <Route exact path="/chains" component={InteractiveChains} />
-            <Route exact path="/cauth/request" component={RequestCAuth} />
-            <Route exact path="/cauth/complete" component={CompleteCAuth} />
-            <Route exact path="/connect" component={CompleteCAuth} />
-            <Route path="/explore" component={ExploreChain} />
+            <Route exact path={paths.HOME} component={InteractiveChains} />
+            <Route exact path={paths.CHAINS} component={InteractiveChains} />
+            <Route exact path={paths.CAUTH_REQUEST} component={RequestCAuth} />
+            <Route
+              exact
+              path={paths.CAUTH_COMPLETE}
+              component={CompleteCAuth}
+            />
+            <Route exact path={paths.CONNECT} component={CompleteCAuth} />
+            <Route path={paths.BLOCK_EXPLORER} component={ExploreChain} />
             <Route component={NotFound} />
           </Switch>
         </Grid>

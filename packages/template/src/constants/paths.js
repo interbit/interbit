@@ -1,9 +1,9 @@
-import navigation from './navigation'
-
 export default {
   BLOCK_EXPLORER: '/explore',
   CHAINS: '/chains',
   CONNECT: '/connect',
-  DEVELOPMENT: `/${navigation.DEVELOPMENT.eventKey}`,
+  CAUTH_COMPLETE: '/cauth/complete',
+  CAUTH_REQUEST: '/cauth/request',
+  DEVELOPMENT: '/development',
   HOME: '/'
 }

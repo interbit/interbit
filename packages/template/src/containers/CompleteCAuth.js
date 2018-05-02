@@ -4,19 +4,19 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { chainDispatch, selectors } from 'interbit-ui-tools'
+import { cAuthConsumerCovenant as covenant } from 'interbit-covenant-tools'
 
-import { actionCreators } from '../interbit/private'
-import CHAIN_ALIASES from '../constants/chainAliases'
+import chainAliases from '../constants/chainAliases'
 
 const mapStateToProps = (state, ownProps) => {
   const {
     location: { search }
   } = ownProps
   const query = queryString.parse(search)
-  const { chainId: providerChainId, joinName } = query
+  const { providerChainId, joinName } = query
 
   const isChainLoaded = selectors.isChainLoaded(state, {
-    chainId: CHAIN_ALIASES.PRIVATE
+    chainAlias: chainAliases.PRIVATE
   })
 
   return {
@@ -28,7 +28,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
   blockchainDispatch: action =>
-    dispatch(chainDispatch(CHAIN_ALIASES.PRIVATE, action))
+    dispatch(chainDispatch(chainAliases.PRIVATE, action))
 })
 
 export class CompleteCAuth extends Component {
@@ -49,7 +49,7 @@ export class CompleteCAuth extends Component {
   doCompleteChainAuth = async () => {
     const { providerChainId, joinName, blockchainDispatch } = this.props
 
-    const mountProfileTokensAction = actionCreators.authorized({
+    const mountProfileTokensAction = covenant.actionCreators.authorized({
       providerChainId,
       joinName
     })

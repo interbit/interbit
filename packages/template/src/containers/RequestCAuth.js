@@ -4,17 +4,18 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { cAuthRequests, selectors } from 'interbit-ui-tools'
 
-import { APP_ACCOUNTS_CONNECT } from '../constants/urls'
-import CHAIN_ALIASES from '../constants/chainAliases'
+import urls from '../constants/urls'
+import chainAliases from '../constants/chainAliases'
 
 const mapStateToProps = state => {
   const isChainLoaded = selectors.isChainLoaded(state, {
-    chainId: CHAIN_ALIASES.PRIVATE
+    chainAlias: chainAliases.PRIVATE
   })
   const queryString = cAuthRequests.requestParams(state, {
-    publicChainAlias: CHAIN_ALIASES.PUBLIC,
-    privateChainAlias: CHAIN_ALIASES.PRIVATE,
-    tokens: ['name', 'email']
+    publicChainAlias: chainAliases.PUBLIC,
+    privateChainAlias: chainAliases.PRIVATE,
+    tokens: ['name', 'email'],
+    redirectUrl: `${window.location.origin}/cauth/complete`
   })
 
   return {
@@ -37,7 +38,7 @@ export class RequestCAuth extends Component {
   doRequestChainAuth = () => {
     const { queryString } = this.props
 
-    const cAuthUrl = `${APP_ACCOUNTS_CONNECT}?${queryString}`
+    const cAuthUrl = `${urls.APP_ACCOUNTS_CONNECT}?${queryString}`
 
     console.log(`Redirecting to ${cAuthUrl}`)
     window.location = cAuthUrl

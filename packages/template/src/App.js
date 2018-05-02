@@ -28,8 +28,9 @@ export default class App extends Component {
               eventKey: 'explore'
             },
             {
-              title: 'CONNECT TO MY PROFILE',
-              eventKey: 'cauth/request'
+              text: 'CONNECT TO MY PROFILE',
+              to: '/cauth/request',
+              eventKey: 'cauthRequest'
             }
           ]}
         />

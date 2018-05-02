@@ -6,7 +6,7 @@ const PUBLIC_KEY =
 
 const config = {
   // TODO: Ensure that at least one account chain is set as a peer
-  peers: [],
+  peers: ['localhost:5025'],
   adminValidators: [PUBLIC_KEY],
   staticChains: {
     // The public chain runs on the browser and is the entry point for the application
@@ -70,7 +70,7 @@ const config = {
   },
   apps: {
     template: {
-      peers: [], // the peers the browser should connect to
+      peers: ['localhost:5000'], // the peers the browser should connect to
       chains: [chainAliases.PUBLIC], // the chains that need to load in the browser
       appChain: chainAliases.PUBLIC, // The chain that the static page is loaded on
       indexLocation: path.join(__dirname, 'public/index.html'), // the index.html to update with the app info

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.15"></a>
+## [0.4.15](https://github.com/interbit/interbit/compare/v0.4.14...v0.4.15) (2018-05-02)
+
+
+### Bug Fixes
+
+* build step uses peers configured for app to update peer list in index.html. Closes [#59](https://github.com/interbit/interbit/issues/59) ([c6e6a6a](https://github.com/interbit/interbit/commit/c6e6a6a))
+
+
+
+
 <a name="0.4.14"></a>
 ## [0.4.14](https://github.com/interbit/interbit/compare/v0.4.13...v0.4.14) (2018-04-27)
 

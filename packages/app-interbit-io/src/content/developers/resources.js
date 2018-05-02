@@ -1,7 +1,19 @@
+import constants from '../../constants'
+
 export default {
   title: 'Resources',
   intro: `Interbit uses a number of technologies, and has gained a lot from the community (in particular, the Redux community). Some helpful resources are listed below.`,
   sections: [
+    {
+      title: 'Interbit Docs:',
+      text:
+        'API reference and documentation on Interbit. These are living docs and so are under constant revision.',
+      callToActions: [
+        {
+          to: constants.urls.SDK_DOCS
+        }
+      ]
+    },
     {
       title: 'Redux:',
       callToActions: [

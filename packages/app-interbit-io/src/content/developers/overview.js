@@ -44,7 +44,9 @@ export default {
 
 Interbit is a general purpose, permission-based blockchain platform built specifically for the rapid development of applications. As a blockchain built entirely with JavaScript—Interbit is for all developers, not just those with blockchain experience.
 
-Interbit enables you to use many joined blockchains to build your applications—instead of a single, massive chain. This allows those chains to securely share between them, enabling service-oriented architectures.`
+Interbit enables you to use many blockchains, joined together, to build your applications—instead of a single, monolithic chain. This allows those chains to share data securely between them, enabling service-oriented architectures.
+
+[Go to docs now.](${constants.urls.SDK_DOCS})`
   },
 
   getStarted: {

@@ -42,7 +42,7 @@ const createChainsFromManifest = async (location, cli, manifest) => {
   }
 }
 
-// NOTE: Does this function become redundant once we build the manifest on the fly in dev mode? Revisit after #276
+// SET FOR DEPRECATION: Pending issue #79
 const createChainsFromConfig = async (cli, interbitConfig) => {
   console.log('BOOTING CHAINS')
 

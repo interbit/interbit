@@ -1,6 +1,5 @@
 {
   "peers": [
-    "ib-dev----master.herokuapp.com",
     "ib-dev----master.herokuapp.com"
   ],
   "apps": {
@@ -21,32 +20,32 @@
   },
   "covenants": {
     "app-account-my-account": {
-      "hash": "e1fd119d04af3b3fc42a4541d844f6e197de301d56ec6e50bb42967ed1d5cc38",
-      "filename": "covenants/e1fd119d04af3b3fc42a4541d844f6e197de301d56ec6e50bb42967ed1d5cc38.tgz"
+      "hash": "ad79205b8484e7a823e3e0671e9244af324515b22815b9a01bf5527455f22b01",
+      "filename": "covenants/ad79205b8484e7a823e3e0671e9244af324515b22815b9a01bf5527455f22b01.tgz"
     },
     "app-account-public": {
-      "hash": "bae85605dda48babda756deb740cbd13df743be33da25ca07fe78549d47edda4",
-      "filename": "covenants/bae85605dda48babda756deb740cbd13df743be33da25ca07fe78549d47edda4.tgz"
+      "hash": "d830cfa50f38fa69b4cf15c4ef9ff61151ad610240744d76edde723f4e419223",
+      "filename": "covenants/d830cfa50f38fa69b4cf15c4ef9ff61151ad610240744d76edde723f4e419223.tgz"
     },
     "app-account-control": {
-      "hash": "fc6fe95ba8b543f5b29c02c5434feaf02bfc6c85b0b03f105153a19fd471fe7f",
-      "filename": "covenants/fc6fe95ba8b543f5b29c02c5434feaf02bfc6c85b0b03f105153a19fd471fe7f.tgz"
+      "hash": "aaa1838f1e8d61481ae664938d06b1996974633841f54c4d0fbae1dec34d3de0",
+      "filename": "covenants/aaa1838f1e8d61481ae664938d06b1996974633841f54c4d0fbae1dec34d3de0.tgz"
     },
     "app-account-github-kyc": {
-      "hash": "9b585d05617d06b1840b4e23cf53f74773ffcb36d0e21c8313f0cb08f06ee72d",
-      "filename": "covenants/9b585d05617d06b1840b4e23cf53f74773ffcb36d0e21c8313f0cb08f06ee72d.tgz"
+      "hash": "68563567cfea64b4f830567489fefce7d42986a47aaa98d3ea1c8ebb5c894704",
+      "filename": "covenants/68563567cfea64b4f830567489fefce7d42986a47aaa98d3ea1c8ebb5c894704.tgz"
     },
     "public": {
       "hash": "dfdeefe6b1988c799f8356573795e9c483a2456612287cabf2d6af37b8f1dd06",
       "filename": "covenants/dfdeefe6b1988c799f8356573795e9c483a2456612287cabf2d6af37b8f1dd06.tgz"
     },
     "control": {
-      "hash": "da24d6739d476392a3e4477fcf3649ed9b2708358c2acd8befe66c8501785543",
-      "filename": "covenants/da24d6739d476392a3e4477fcf3649ed9b2708358c2acd8befe66c8501785543.tgz"
+      "hash": "0da4a1aafe19b4446a5ec3c870aeebfa84f80a7b4beaeb94a5649779b9e7fb34",
+      "filename": "covenants/0da4a1aafe19b4446a5ec3c870aeebfa84f80a7b4beaeb94a5649779b9e7fb34.tgz"
     },
     "private": {
-      "hash": "aeabea94ee4401b5831110b3f74004d1e373e4e0396428279e644a3544f49919",
-      "filename": "covenants/aeabea94ee4401b5831110b3f74004d1e373e4e0396428279e644a3544f49919.tgz"
+      "hash": "7f54a950fcedbc83575de69ec33d31cdf9c609a00bdd14a2f6e7090182873a10",
+      "filename": "covenants/7f54a950fcedbc83575de69ec33d31cdf9c609a00bdd14a2f6e7090182873a10.tgz"
     }
   },
   "chains": {

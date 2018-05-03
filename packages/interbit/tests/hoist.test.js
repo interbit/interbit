@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { hoistAllCovenantPackages } = require('../src/hoist')
+const { hoistAllCovenantPackages } = require('../src/scripts/hoist')
 
 describe('hoist interbit covenant dependencies into app', () => {
   describe('hoistAllCovenantPackages(appPackageJson, covenantPackageJsons)', () => {

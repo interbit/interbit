@@ -66,22 +66,14 @@ const waitForInterbit = async () => {
   if (!isConnected()) {
     await createContext()
   }
-  return Object.assign(
-    {},
-    { interbit: window.interbit },
-    window.interbit.middleware
-  )
+  return { interbit: window.interbit, ...window.interbit.middleware }
 }
 
 const getInterbit = () => {
   if (!isConnected()) {
     throw new Error('interbit is not available')
   }
-  return Object.assign(
-    {},
-    { interbit: window.interbit },
-    window.interbit.middleware
-  )
+  return { interbit: window.interbit, ...window.interbit.middleware }
 }
 
 module.exports = {

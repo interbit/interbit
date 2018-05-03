@@ -57,7 +57,7 @@ const cAuthRequestParams = (
 
 const parseCAuthRequestParams = query => {
   const { redirectUrl, state } = queryString.parse(query)
-  return Object.assign({ redirectUrl }, parseState(state))
+  return { redirectUrl, ...parseState(state) }
 }
 
 module.exports = {

@@ -6,7 +6,7 @@ const {
 } = require('app-account')
 const interbitNode = require('./interbitNode')
 
-const port = process.env.PORT || 9999
+const port = process.env.PORT || 5002
 
 // @dave: I am not really sure where this request comes from so please adjust the whitelist as necessary
 const whitelist = [`localhost:${port}`, 'github.com']

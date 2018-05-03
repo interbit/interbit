@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Grid } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { withRouter, Route, Switch } from 'react-router-dom'
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Header, Footer } from 'interbit-ui-components'
 
 import { selectors } from 'interbit-ui-tools'
@@ -63,6 +63,9 @@ export class App extends Component {
       }
     ]
 
+    const redirectToSignIn = (isSignedIn, renderComponent) =>
+      isSignedIn ? renderComponent : <Redirect to={paths.CREATE_ACCOUNT} />
+
     return (
       <div className="App ibweb app-account">
         <Header
@@ -79,17 +82,36 @@ export class App extends Component {
             <Route exact path={paths.HOME} component={Home} />
             <Route
               exact
+              path={paths.CREATE_ACCOUNT}
+              component={CreateAccount}
+            />
+            <Route
+              exact
               path="/account/oauth/:oAuthProvider"
               component={Account}
             />
-            <Route path={paths.ACCOUNT} component={Account} />
             <Route path={paths.CONNECT} component={ChainConnect} />
-            <Route exact path={paths.CHAINS} component={InteractiveChains} />
-            <Route path={paths.BLOCK_EXPLORER} component={ExploreChain} />
+            <Route
+              path={paths.ACCOUNT}
+              render={() =>
+                redirectToSignIn(isLoggedIn, <Account {...this.props} />)
+              }
+            />
+            <Route
+              path={paths.BLOCK_EXPLORER}
+              render={() =>
+                redirectToSignIn(isLoggedIn, <ExploreChain {...this.props} />)
+              }
+            />
             <Route
               exact
-              path={paths.CREATE_ACCOUNT}
-              component={CreateAccount}
+              path={paths.CHAINS}
+              render={() =>
+                redirectToSignIn(
+                  isLoggedIn,
+                  <InteractiveChains {...this.props} />
+                )
+              }
             />
             <Route component={NotFoundPage} />
           </Switch>

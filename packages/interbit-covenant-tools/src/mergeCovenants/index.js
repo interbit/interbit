@@ -4,14 +4,18 @@ const Immutable = require('seamless-immutable')
 
 module.exports = covenants => {
   const actionCreators = covenants.reduce(
-    (accumActionCreators, covenant) =>
-      Object.assign({}, accumActionCreators, covenant.actionCreators),
+    (accumActionCreators, covenant) => ({
+      ...accumActionCreators,
+      ...covenant.actionCreators
+    }),
     {}
   )
 
   const actionTypes = covenants.reduce(
-    (accumActionTypes, covenant) =>
-      Object.assign({}, accumActionTypes, covenant.actionTypes),
+    (accumActionTypes, covenant) => ({
+      ...accumActionTypes,
+      ...covenant.actionTypes
+    }),
     {}
   )
 

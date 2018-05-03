@@ -20,6 +20,7 @@ import CHAIN_ALIASES from './constants/chainAliases'
 import { PRIVATE_CHAIN_PATHS } from './constants/chainStatePaths'
 import paths from './constants/paths'
 import urls from './constants/urls'
+import navigation from './constants/navigation'
 import './css/App.css'
 
 const mapStateToProps = state => {
@@ -51,27 +52,6 @@ export class App extends Component {
   render() {
     const { userName, isLoggedIn } = this.props
 
-    const headerNav = [
-      {
-        text: 'My Account',
-        to: paths.ACCOUNT,
-        eventKey: 'account'
-      },
-      {
-        text: 'Block Explorer',
-        to: paths.BLOCK_EXPLORER,
-        eventKey: 'explore'
-      }
-    ]
-
-    const headerNavLoggedOut = [
-      {
-        text: 'Create Account / Sign-in',
-        to: paths.CREATE_ACCOUNT,
-        eventKey: 'create-account'
-      }
-    ]
-
     const headerTextNav = [
       {
         content: (
@@ -83,52 +63,14 @@ export class App extends Component {
       }
     ]
 
-    const footerNav = [
-      {
-        title: 'Accounts',
-        items: [
-          {
-            text: 'Your Account',
-            to: paths.ACCOUNT
-          },
-          {
-            text: 'Support',
-            to: urls.APP_IB_IO_DEVELOPERS_SUPPORT
-          }
-        ]
-      },
-      {
-        title: 'Services',
-        items: [
-          {
-            text: 'Accounts',
-            to: paths.HOME
-          },
-          {
-            text: 'Store',
-            to: urls.APP_STORE
-          }
-        ]
-      }
-    ]
-
-    const footerBottomLinks = [
-      {
-        text: 'Privacy Policy',
-        to: urls.APP_IB_IO_POLICY_PRIVACY
-      },
-      {
-        text: 'Terms of Use',
-        to: urls.APP_IB_IO_POLICY_TOS
-      }
-    ]
-
     return (
       <div className="App ibweb app-account">
         <Header
           className="nav-main-menu"
           logo={<LogoAccount />}
-          navItems={isLoggedIn ? headerNav : headerNavLoggedOut}
+          navItems={
+            isLoggedIn ? navigation.headerNav : navigation.headerNavLoggedOut
+          }
           textNavItems={headerTextNav}
         />
 
@@ -153,10 +95,10 @@ export class App extends Component {
           </Switch>
 
           <Footer
-            sections={footerNav}
+            sections={navigation.footerNav}
             isInline
             logoUrl={urls.APP_IB_IO}
-            bottomLinks={footerBottomLinks}
+            bottomLinks={navigation.footerBottomLinks}
           />
         </Grid>
       </div>

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Grid } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { withRouter, Route, Switch } from 'react-router-dom'
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Header, Footer } from 'interbit-ui-components'
 
 import { selectors } from 'interbit-ui-tools'
@@ -20,6 +20,7 @@ import CHAIN_ALIASES from './constants/chainAliases'
 import { PRIVATE_CHAIN_PATHS } from './constants/chainStatePaths'
 import paths from './constants/paths'
 import urls from './constants/urls'
+import navigation from './constants/navigation'
 import './css/App.css'
 
 const mapStateToProps = state => {
@@ -51,27 +52,6 @@ export class App extends Component {
   render() {
     const { userName, isLoggedIn } = this.props
 
-    const headerNav = [
-      {
-        text: 'My Account',
-        to: paths.ACCOUNT,
-        eventKey: 'account'
-      },
-      {
-        text: 'Block Explorer',
-        to: paths.BLOCK_EXPLORER,
-        eventKey: 'explore'
-      }
-    ]
-
-    const headerNavLoggedOut = [
-      {
-        text: 'Create Account / Sign-in',
-        to: paths.CREATE_ACCOUNT,
-        eventKey: 'create-account'
-      }
-    ]
-
     const headerTextNav = [
       {
         content: (
@@ -83,52 +63,17 @@ export class App extends Component {
       }
     ]
 
-    const footerNav = [
-      {
-        title: 'Accounts',
-        items: [
-          {
-            text: 'Your Account',
-            to: paths.ACCOUNT
-          },
-          {
-            text: 'Support',
-            to: urls.APP_IB_IO_DEVELOPERS_SUPPORT
-          }
-        ]
-      },
-      {
-        title: 'Services',
-        items: [
-          {
-            text: 'Accounts',
-            to: paths.HOME
-          },
-          {
-            text: 'Store',
-            to: urls.APP_STORE
-          }
-        ]
-      }
-    ]
-
-    const footerBottomLinks = [
-      {
-        text: 'Privacy Policy',
-        to: urls.APP_IB_IO_POLICY_PRIVACY
-      },
-      {
-        text: 'Terms of Use',
-        to: urls.APP_IB_IO_POLICY_TOS
-      }
-    ]
+    const redirectToSignIn = (isSignedIn, renderComponent) =>
+      isSignedIn ? renderComponent : <Redirect to={paths.CREATE_ACCOUNT} />
 
     return (
       <div className="App ibweb app-account">
         <Header
           className="nav-main-menu"
           logo={<LogoAccount />}
-          navItems={isLoggedIn ? headerNav : headerNavLoggedOut}
+          navItems={
+            isLoggedIn ? navigation.headerNav : navigation.headerNavLoggedOut
+          }
           textNavItems={headerTextNav}
         />
 
@@ -137,26 +82,45 @@ export class App extends Component {
             <Route exact path={paths.HOME} component={Home} />
             <Route
               exact
+              path={paths.CREATE_ACCOUNT}
+              component={CreateAccount}
+            />
+            <Route
+              exact
               path="/account/oauth/:oAuthProvider"
               component={Account}
             />
-            <Route path={paths.ACCOUNT} component={Account} />
             <Route path={paths.CONNECT} component={ChainConnect} />
-            <Route exact path={paths.CHAINS} component={InteractiveChains} />
-            <Route path={paths.BLOCK_EXPLORER} component={ExploreChain} />
+            <Route
+              path={paths.ACCOUNT}
+              render={() =>
+                redirectToSignIn(isLoggedIn, <Account {...this.props} />)
+              }
+            />
+            <Route
+              path={paths.BLOCK_EXPLORER}
+              render={() =>
+                redirectToSignIn(isLoggedIn, <ExploreChain {...this.props} />)
+              }
+            />
             <Route
               exact
-              path={paths.CREATE_ACCOUNT}
-              component={CreateAccount}
+              path={paths.CHAINS}
+              render={() =>
+                redirectToSignIn(
+                  isLoggedIn,
+                  <InteractiveChains {...this.props} />
+                )
+              }
             />
             <Route component={NotFoundPage} />
           </Switch>
 
           <Footer
-            sections={footerNav}
+            sections={navigation.footerNav}
             isInline
             logoUrl={urls.APP_IB_IO}
-            bottomLinks={footerBottomLinks}
+            bottomLinks={navigation.footerBottomLinks}
           />
         </Grid>
       </div>

@@ -9,6 +9,6 @@
   "author": "BTL GROUP LTD",
   "license": "MIT",
   "dependencies": {
-    "seamless-immutable": "^7.1.3"
+    "seamless-immutable": "^7.1.2"
   }
 }

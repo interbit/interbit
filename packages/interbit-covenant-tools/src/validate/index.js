@@ -77,6 +77,12 @@ const object = msg => (obj, property) => {
   }
 }
 
+const func = msg => (obj, property) => {
+  if (!isFunction(propertyValue(obj, property))) {
+    throw new Error(msg || `${property} is not a function`)
+  }
+}
+
 const condition = (predicate, msg) => {
   if (!isFunction(predicate)) {
     throw new Error(`predicate is not a function`)
@@ -150,7 +156,8 @@ const objectValidationRules = {
   faIconPattern,
   chainIdPattern,
   condition,
-  equalTo
+  equalTo,
+  func
 }
 
 const rulePredicates = {

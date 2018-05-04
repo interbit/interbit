@@ -5,6 +5,7 @@ const initialState = Immutable.from({
   chainMetadata: { name: `Template application - public chain` }
 })
 
+const actionTypes = {}
 const actionCreators = {}
 
 const reducer = (state = initialState, action) =>
@@ -13,6 +14,7 @@ const reducer = (state = initialState, action) =>
 
 module.exports = {
   initialState,
+  actionTypes,
   actionCreators,
   reducer
 }

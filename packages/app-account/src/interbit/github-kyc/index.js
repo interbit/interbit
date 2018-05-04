@@ -322,15 +322,18 @@ function* fetchAuthToken(
     state: requestId
   }
   console.log('POST: ', tokenUrl, params)
-  const getTokenQuery = yield call(fetchApi.request, tokenUrl, {
-    method: 'POST',
-    params,
-    data: {},
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+  const getTokenQuery = yield call(
+    fetchApi.post,
+    tokenUrl,
+    {},
+    {
+      params,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
     }
-  })
+  )
   const getTokenResult = getTokenQuery.data
   console.log(getTokenResult)
 
@@ -351,8 +354,7 @@ function* fetchAuthToken(
 
 function* fetchPublicProfile({ profileUrl, accessToken }, fetchApi) {
   console.log('GET: ', profileUrl)
-  const getProfileResult = yield call(fetchApi.request, profileUrl, {
-    method: 'GET',
+  const getProfileResult = yield call(fetchApi.get, profileUrl, {
     params: {
       access_token: accessToken
     },

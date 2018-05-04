@@ -1,8 +1,7 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const express = require('express')
 const {
-  githubOAuthCovenant: { actionCreators: githubActionCreators },
-  controlCovenant: { actionCreators: controlActionCreators }
+  githubOAuthCovenant: { actionCreators: githubActionCreators }
 } = require('app-account')
 const interbitNode = require('./interbitNode')
 
@@ -15,11 +14,15 @@ const startNode = async () => {
   // Start an interbit node based on config
   const interbit = await interbitNode()
 
+  const githubChainAlias = 'accountsGithubAuth'
+  const githubChainId = interbit.chains[githubChainAlias]
+  const githubChain = interbit.cli.getChain(githubChainId)
+
   const app = express()
 
-  app.get('/oauth/gitHub', (request, response) => {
+  app.get('/oauth/github', (request, response) => {
     const host = request.get('host')
-    console.log('/oauth/gitHub request from: ', host)
+    console.log('/oauth/github request from: ', host)
     if (whitelist.indexOf(host) === -1) {
       console.log('no host found using whitelist: ', whitelist)
       return response.status(403).send('Nope!')
@@ -30,22 +33,21 @@ const startNode = async () => {
       state: requestId,
       state: consumerChainId,
       state: joinName,
-      code: temporaryToken
-      // error
-      // error_description
+      code: temporaryToken,
+      error,
+      error_description: errorDescription
     } = request.query
 
     console.log(request.query)
 
     // Trigger the oAuth saga
-    const githubChainAlias = 'githubKyc'
-    const githubChainId = interbit.chains[githubChainAlias]
-    const githubChain = interbit.cli.getChain(githubChainId)
     const action = githubActionCreators.oAuthCallback({
       requestId,
       consumerChainId,
       joinName,
-      temporaryToken
+      temporaryToken,
+      error,
+      errorDescription
     })
     githubChain.dispatch(action)
 
@@ -53,20 +55,6 @@ const startNode = async () => {
     // and have separate URLs/query params for success/failure
     return response.redirect('http://localhost:3025/account')
   })
-
-  const controlChainAlias = 'accountsControl'
-  const controlChainId = interbit.chains[controlChainAlias]
-  const controlChain = interbit.cli.getChain(controlChainId)
-
-  const privateChainAlias = 'accountsPrivate'
-  const privateCovenantAlias = 'app-account-my-account'
-  const privateCovenantHash = interbit.covenants[privateCovenantAlias]
-
-  const action = controlActionCreators.privateChainCovenant({
-    chainAlias: privateChainAlias,
-    covenantHash: privateCovenantHash
-  })
-  controlChain.dispatch(action)
 
   app.listen(port, () => console.log(`App is listening on port ${port}`))
 }

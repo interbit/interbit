@@ -1,13 +1,38 @@
 const covenantName = 'app-account-control'
 
 const actionTypes = {
-  PRIVATE_CHAIN_COVENANT: `${covenantName}/PRIVATE_CHAIN_COVENANT`
+  COMPLETE_AUTHENTICATION: `${covenantName}/COMPLETE_AUTHENTICATION`,
+  CANCEL_AUTHENTICATION: `${covenantName}/CANCEL_AUTHENTICATION`
 }
 
 const actionCreators = {
-  privateChainCovenant: ({ chainAlias, covenantHash }) => ({
-    type: actionTypes.PRIVATE_CHAIN_COVENANT,
-    payload: { chainAlias, covenantHash }
+  cancelAuthentication: ({ consumerChainId, requestId }) => ({
+    type: actionTypes.START_AUTHENTICATION,
+    payload: {
+      consumerChainId,
+      requestId
+    }
+  }),
+
+  completeAuthentication: ({
+    oAuthProvider,
+    consumerChainId,
+    providerChainId,
+    tokenName,
+    joinName,
+    requestId,
+    timestamp = Date.now()
+  }) => ({
+    type: actionTypes.COMPLETE_AUTHENTICATION,
+    payload: {
+      oAuthProvider,
+      consumerChainId,
+      providerChainId,
+      tokenName,
+      joinName,
+      requestId,
+      timestamp
+    }
   })
 }
 

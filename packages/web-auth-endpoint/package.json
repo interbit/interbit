@@ -25,7 +25,7 @@
   },
   "scripts": {
     "serve": "npm start",
-    "start": "cross-env COVENANT_DEV_MODE=true DB_PATH=./db-interbit node src/index.js",
+    "start": "cross-env COVENANT_DEV_MODE=true PORT=5002 DB_PATH=./db-interbit node src/index.js --port 5025 --dev --no-watch",
     "test": "echo \"Error: no test specified\""
   }
 }

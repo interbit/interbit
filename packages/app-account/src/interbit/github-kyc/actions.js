@@ -40,14 +40,18 @@ const actionCreators = {
     requestId,
     consumerChainId,
     joinName,
-    temporaryToken
+    temporaryToken,
+    error,
+    errorDescription
   }) => ({
     type: actionTypes.OAUTH_CALLBACK,
     payload: {
       requestId,
       consumerChainId,
       joinName,
-      temporaryToken
+      temporaryToken,
+      error,
+      errorDescription
     }
   }),
 
@@ -55,14 +59,18 @@ const actionCreators = {
     requestId,
     consumerChainId,
     joinName,
-    temporaryToken
+    temporaryToken,
+    error,
+    errorDescription
   }) => ({
     type: actionTypes.OAUTH_CALLBACK_SAGA,
     payload: {
       requestId,
       consumerChainId,
       joinName,
-      temporaryToken
+      temporaryToken,
+      error,
+      errorDescription
     }
   }),
 

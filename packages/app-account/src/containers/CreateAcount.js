@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { chainDispatch } from 'interbit-ui-tools'
+import { chainDispatch, selectors } from 'interbit-ui-tools'
 import { Grid, Row, Col } from 'react-bootstrap'
 import {
   ContentBar,
@@ -12,7 +12,6 @@ import {
 
 import Authentication from '../components/Authentication'
 import { getOAuthConfig } from '../interbit/public/selectors'
-import { getExploreChainState } from '../redux/exploreChainReducer'
 import { toggleButton, toggleModal } from '../redux/uiReducer'
 import ContentBarAttention from '../components/ContentBarAttention'
 import ModalAttention from '../components/ModalAttention'
@@ -23,7 +22,7 @@ import modalNames from '../constants/modalNames'
 import { PUBLIC, PRIVATE } from '../constants/chainAliases'
 
 const mapStateToProps = state => {
-  const { state: chainState } = getExploreChainState(state)
+  const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
   const isAttentionButtonEnabled =
     state.ui.buttons[buttonNames.DISCLAIMER_BUTTON_NAME]
   const isAttentionMoreInfoModalVisible =
@@ -38,21 +37,20 @@ const mapStateToProps = state => {
       modals: state.content.modals,
       isAttentionButtonEnabled,
       isAttentionModalVisible,
-      isAttentionMoreInfoModalVisible,
-      oAuthConfig: {},
-      blockchainDispatch: () => {}
+      isAttentionMoreInfoModalVisible
     }
   }
 
-  const { state: publicChainState } = getExploreChainState(state, PUBLIC)
+  const publicChainState = selectors.getChain(state, { chainAlias: PUBLIC })
   return {
+    consumerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
+    oAuthConfig: getOAuthConfig(publicChainState),
     content: state.content.createAccount,
     contentBars: state.content.contentBars,
     modals: state.content.modals,
     isAttentionButtonEnabled,
     isAttentionModalVisible,
-    isAttentionMoreInfoModalVisible,
-    oAuthConfig: getOAuthConfig(publicChainState)
+    isAttentionMoreInfoModalVisible
   }
 }
 
@@ -65,6 +63,7 @@ const mapDispatchToProps = dispatch => ({
 
 export class CreateAccount extends Component {
   static propTypes = {
+    consumerChainId: PropTypes.string,
     // eslint-disable-next-line
     oAuthConfig: PropTypes.object,
     blockchainDispatch: PropTypes.func,
@@ -79,6 +78,7 @@ export class CreateAccount extends Component {
   }
 
   static defaultProps = {
+    consumerChainId: '',
     oAuthConfig: {},
     blockchainDispatch: () => {},
     isAttentionButtonEnabled: false,
@@ -88,6 +88,7 @@ export class CreateAccount extends Component {
 
   render() {
     const {
+      consumerChainId,
       oAuthConfig,
       blockchainDispatch,
       content,
@@ -119,6 +120,7 @@ export class CreateAccount extends Component {
               />
 
               <Authentication
+                consumerChainId={consumerChainId}
                 oAuthConfig={oAuthConfig}
                 blockchainDispatch={blockchainDispatch}
                 {...contentBars.gitHubCreateAccount}

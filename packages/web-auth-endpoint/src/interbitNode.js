@@ -1,9 +1,13 @@
 const {
+  argOptions,
   createChains: { createChainsFromConfig },
   generateDeploymentDetails,
   getConfig,
+  isArg,
+  getArg,
   logo,
   startInterbit,
+  setRootChainManifest,
   updateIndexHtmls,
   validateConfig,
   watchCovenants
@@ -12,11 +16,12 @@ const {
 const startInterbitNode = async () => {
   try {
     console.log(logo)
+    const options = getOptions(process.argv)
     const interbitConfig = getConfig()
 
     validateConfig(interbitConfig)
 
-    const { hypervisor, cli } = await startInterbit()
+    const { hypervisor, cli } = await startInterbit(undefined, options)
     const { chainManifest, covenantHashes } = await createChainsFromConfig(
       cli,
       interbitConfig
@@ -29,14 +34,18 @@ const startInterbitNode = async () => {
 
     console.log('available chains + covenants: ', deploymentDetails)
 
-    if (process.env.COVENANT_DEV_MODE === 'true') {
+    setRootChainManifest(cli, deploymentDetails, interbitConfig)
+
+    if (options.isDevModeEnabled) {
       // Makes it easier to spin up the environment for development
       updateIndexHtmls({
         config: interbitConfig,
         chains: deploymentDetails.chains
       })
 
-      watchCovenants(cli, interbitConfig, chainManifest)
+      if (options.isWatchModeEnabled) {
+        watchCovenants(cli, interbitConfig, chainManifest)
+      }
     }
 
     return {
@@ -50,5 +59,12 @@ const startInterbitNode = async () => {
     process.exit(1)
   }
 }
+
+const getOptions = argv => ({
+  isDevModeEnabled: isArg(argv, argOptions.DEV),
+  isWatchModeEnabled: !isArg(argv, argOptions.NO_WATCH),
+  port: getArg(argv, argOptions.PORT),
+  dbPath: getArg(argv, argOptions.DB_PATH)
+})
 
 module.exports = startInterbitNode

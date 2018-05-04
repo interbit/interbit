@@ -57,7 +57,7 @@ Let's call the new site `app-the-new-thing`
 Run `npm i` from the repository root.  This will take care of all the lerna dependencies and set up for you
 
 ## Build the new Interbit site
-1. From the repository root, run `npm run build:modules && npm run build:lib`
+1. From the repository root, run `npm run build:modules`
 
 ## Run it
 1. From within the `packages/app-the-new-thing` folder, run `npm run interbit:start`.  This command will keep running until interrupted.  Let it continue to run.

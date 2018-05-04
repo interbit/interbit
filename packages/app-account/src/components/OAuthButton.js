@@ -1,40 +1,40 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-// import queryString from 'query-string'
-// import uuid from 'uuid'
+import queryString from 'query-string'
+import uuid from 'uuid'
 import { IconButton } from 'interbit-ui-components'
+import { actionCreators } from '../interbit/my-account'
 
-import { generateChainTemplate } from 'interbit-ui-tools'
+const authenticationHandler = ({
+  consumerChainId,
+  oAuthProvider,
+  oAuthConfig,
+  blockchainDispatch
+}) => async () => {
+  const providerConfig = oAuthConfig[oAuthProvider] || {}
+  const { serviceEndPoint, params } = providerConfig
 
-// const authenticationHandler = ({
-//   oAuthProvider,
-//   oAuthConfig,
-//   blockchainDispatch
-// }) => async () => {
-//   const providerConfig = oAuthConfig[oAuthProvider] || {}
-//   const { serviceEndPoint, params } = providerConfig
+  console.log(oAuthProvider, oAuthConfig)
 
-//   console.log(oAuthProvider, oAuthConfig)
+  if (serviceEndPoint) {
+    const requestId = uuid.v4()
+    const queryOpts = { ...params, state: consumerChainId }
+    const queryParams = queryString.stringify(queryOpts)
 
-//   if (serviceEndPoint) {
-//     const requestId = uuid.v4()
-//     const queryOpts = { ...params, state: requestId }
-//     const queryParams = queryString.stringify(queryOpts)
-
-//     const connectUrl = `${serviceEndPoint}?${queryParams}`
-//     // const action = actionCreators.startAuthentication({
-//     //   oAuthProvider,
-//     //   requestId
-//     // })
-//     // await blockchainDispatch(action)
-//     // window.location = connectUrl
-//     const sponsorAction = reducer.generateChainTemplate(PRIVATE)
-//   }
-// }
+    const connectUrl = `${serviceEndPoint}?${queryParams}`
+    const action = actionCreators.startAuthentication({
+      oAuthProvider,
+      requestId
+    })
+    await blockchainDispatch(action)
+    window.location = connectUrl
+  }
+}
 
 export default class OAuthButton extends Component {
   static propTypes = {
+    consumerChainId: PropTypes.string,
     oAuthProvider: PropTypes.string,
     // eslint-disable-next-line
     oAuthConfig: PropTypes.object,
@@ -46,6 +46,7 @@ export default class OAuthButton extends Component {
   }
 
   static defaultProps = {
+    consumerChainId: '',
     oAuthProvider: 'gitHub',
     oAuthConfig: {},
     icon: '',
@@ -60,6 +61,7 @@ export default class OAuthButton extends Component {
       text,
       image,
       className,
+      consumerChainId,
       oAuthProvider,
       oAuthConfig,
       blockchainDispatch
@@ -67,11 +69,12 @@ export default class OAuthButton extends Component {
 
     return (
       <IconButton
-        // onClick={authenticationHandler({
-        //   oAuthProvider,
-        //   oAuthConfig,
-        //   blockchainDispatch
-        // })}
+        onClick={authenticationHandler({
+          consumerChainId,
+          oAuthProvider,
+          oAuthConfig,
+          blockchainDispatch
+        })}
         icon={icon}
         text={text}
         image={image}

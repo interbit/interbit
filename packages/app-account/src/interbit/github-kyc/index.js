@@ -113,7 +113,9 @@ const reducer = (state = initialState, action) => {
         requestId,
         consumerChainId,
         joinName,
-        temporaryToken
+        temporaryToken,
+        error,
+        errorDescription
       } = action.payload
 
       if (
@@ -134,8 +136,13 @@ const reducer = (state = initialState, action) => {
         requestId,
         consumerChainId,
         joinName,
-        temporaryToken
+        temporaryToken,
+        error,
+        errorDescription
       })
+
+      // HACK: Same permissions as the current action
+      sagaAction.publicKey = action.publicKey
 
       console.log('REDISPATCH: ', sagaAction)
       nextState = redispatch(nextState, sagaAction)
@@ -246,10 +253,17 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
     requestId,
     consumerChainId,
     joinName,
-    temporaryToken
+    temporaryToken,
+    error,
+    errorDescription
   } = action.payload
 
   try {
+    if (error) {
+      console.log(`Authentication failed: ${error} ${errorDescription}`)
+      throw new Error(errorDescription || error)
+    }
+
     const oAuthConfig = yield select(selectors.oAuthConfig)
     const {
       tokenUrl,
@@ -285,9 +299,15 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
     yield put(actionCreators.shareProfile({ consumerChainId, joinName }))
     yield put(actionCreators.updateProfile({ consumerChainId, profile }))
     yield put(actionCreators.authSuceeded({ requestId }))
-  } catch (error) {
+  } catch (e) {
     // Remove the request and shared data
-    yield put(actionCreators.authFailed({ requestId, consumerChainId, error }))
+    yield put(
+      actionCreators.authFailed({
+        requestId,
+        consumerChainId,
+        error: e.message
+      })
+    )
   }
 }
 
@@ -301,15 +321,19 @@ function* fetchAuthToken(
     code: temporaryToken,
     state: requestId
   }
-  console.log('POST: ', tokenUrl)
-  const getTokenQuery = yield call(fetchApi.post, tokenUrl, {
-    params,
-    data: {},
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+  console.log('POST: ', tokenUrl, params)
+  const getTokenQuery = yield call(
+    fetchApi.post,
+    tokenUrl,
+    {},
+    {
+      params,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
     }
-  })
+  )
   const getTokenResult = getTokenQuery.data
   console.log(getTokenResult)
 

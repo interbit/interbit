@@ -14,7 +14,8 @@ const {
     faIconPattern,
     chainIdPattern,
     condition,
-    equalTo
+    equalTo,
+    func
   }
 } = require('../../src')
 
@@ -64,6 +65,10 @@ describe('validate', () => {
     {
       input: { prop: 'fred' },
       rules: { prop: equalTo('fred') }
+    },
+    {
+      input: { prop: () => 25 },
+      rules: { prop: func() }
     }
   ]
 
@@ -210,6 +215,11 @@ describe('validate', () => {
       input: { prop: 'decidedly not fred' },
       rules: { prop: equalTo('fred') },
       msg: 'prop is not equal to "fred"'
+    },
+    {
+      input: { prop: '1' },
+      rules: { prop: func() },
+      msg: 'prop is not a function'
     }
   ]
 

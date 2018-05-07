@@ -6,7 +6,13 @@ const {
 const { AUTH_PORT } = require('./networkConfig')
 
 const startAuthServer = async (cli, manifest) => {
-  const whitelist = [`localhost:${AUTH_PORT}`, 'github.com']
+  const whitelist = [
+    `localhost:${AUTH_PORT}`,
+    'github.com',
+    'ib-dev-web-auth.herokuapp.com',
+    'ib-stg-web-auth.herokuapp.com',
+    'ib-prod-web-auth.herokuapp.com'
+  ]
   const app = express()
 
   // Trigger the oAuth saga

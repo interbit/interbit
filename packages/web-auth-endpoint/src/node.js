@@ -9,7 +9,8 @@ const startNode = async manifest => {
     port: undefined,
     location: path.relative(process.cwd(), '../platform-deploy/platform'),
     keyPair,
-    manifest
+    manifest,
+    connect: true
   }
   const cli = await deploy(options)
   return cli

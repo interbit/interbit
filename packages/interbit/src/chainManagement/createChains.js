@@ -15,16 +15,18 @@ const deployCovenants = require('./deployCovenants')
 const connectToPeers = require('./connectToPeers')
 const { joinChains } = require('./joinChains')
 
-const createChainsFromManifest = async (location, cli, manifest) => {
+const createChainsFromManifest = async (location, cli, manifest, options) => {
   console.log('DEPLOYING COVENANTS')
-  const covenants = getCovenantsFromManifest(manifest)
-  const covenantEntries = Object.values(covenants)
-  for (const covenantManifest of covenantEntries) {
-    const covenantLocation = path.resolve(
-      `${location}/${covenantManifest.filename}`
-    )
-    await cli.deployCovenant(covenantLocation)
-    console.log(`...deployed${covenantLocation}`)
+  if (!options.connect) {
+    const covenants = getCovenantsFromManifest(manifest)
+    const covenantEntries = Object.values(covenants)
+    for (const covenantManifest of covenantEntries) {
+      const covenantLocation = path.resolve(
+        `${location}/${covenantManifest.filename}`
+      )
+      await cli.deployCovenant(covenantLocation)
+      console.log(`...deployed${covenantLocation}`)
+    }
   }
 
   const peers = getPeersFromManifest(manifest)

@@ -41,6 +41,19 @@
         border-radius: 16px;
         height: 1005px;
         background: #f3f5f6;
+
+        .pipedriveWebForms {
+          height: 100%;
+
+          iframe {
+            position: relative;
+            border: none;
+            overflow: hidden;
+            width: 100%;
+            max-width: 768px;
+            height: 100%;
+          }
+        }
       }
     }
 

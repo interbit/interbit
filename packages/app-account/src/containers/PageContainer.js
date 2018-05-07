@@ -57,7 +57,11 @@ export default class PageContainer extends Component {
 
         <Grid>
           <Switch>
-            <Route exact path={paths.HOME} component={Home} />
+            <Route
+              exact
+              path={paths.HOME}
+              render={() => <Home isLoggedIn={isLoggedIn} />}
+            />
             <Route
               exact
               path={paths.CREATE_ACCOUNT}

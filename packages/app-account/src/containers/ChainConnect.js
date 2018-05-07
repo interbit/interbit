@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
-import {
-  Grid,
-  Row,
-  Col,
-  Button,
-  Table,
-  Form,
-  FormControl
-} from 'react-bootstrap'
+import { Grid, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { chainDispatch, selectors } from 'interbit-ui-tools'
-import { IconButton } from 'interbit-ui-components'
 
 import { actionCreators } from '../interbit/my-account/actions'
+import ConnectFormAddMissingProfileField from '../components/ConnectFormAddMissingProfileField'
+import ConnectFormContinueAuth from '../components/ConnectFormContinueAuth'
+import ConnectFormLoggedOut from '../components/ConnectFormLoggedOut'
+import ConnectFormMissingProfileField from '../components/ConnectFormMissingProfileField'
 import ModalSignIn from '../components/ModalSignIn'
 import ModalSignUp from '../components/ModalSignUp'
 import { toggleModal } from '../redux/uiReducer'
@@ -115,12 +110,12 @@ export class ChainConnect extends Component {
     const {
       mode,
       consumerChainId,
-      providerChainId,
       requestedTokens,
       profileFields,
       isSignInModalVisible,
       isSignUpModalVisible,
-      toggleModalFunction
+      toggleModalFunction,
+      providerChainId
     } = this.props
 
     const colLayout = {
@@ -128,128 +123,33 @@ export class ChainConnect extends Component {
       mdOffset: 2
     }
 
-    const formLoggedOut = (
-      <div style={{ marginBottom: '100px' }}>
-        <Table className="logged-out">
-          <tbody>
-            {requestedTokens.map(token => (
-              <tr key={token}>
-                <td>{token}</td>
-                <td>Not signed in</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-        <p>
-          Your (unfilled field name) will be added to your interbit identity and
-          can be used in other apps that require a (unfilled field name).
-        </p>
-        <div className="btn-container">
-          <IconButton
-            text="Create Account"
-            onClick={() => {
-              toggleModalFunction(modalNames.SIGN_UP_MODAL_NAME)
-            }}
-          />
-          <IconButton text="Go Back" className="secondary" />
-        </div>
-        <div className="text-btn-container">
-          <Button
-            className="text-button"
-            onClick={() => {
-              toggleModalFunction(modalNames.SIGN_IN_MODAL_NAME)
-            }}>
-            Have an Account? Sign-in
-          </Button>
-        </div>
-      </div>
-    )
-
-    const formMissingProfileField = (
-      <div style={{ marginBottom: '100px' }}>
-        <Table>
-          <tbody>
-            {Object.keys(profileFields).map(key => (
-              <tr key={key}>
-                <td>{key}</td>
-                <td>{profileFields[key]}</td>
-              </tr>
-            ))}
-            <tr>
-              <td colSpan={2}>
-                <Button className="text-button">
-                  Add a (missing token name)
-                </Button>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-        <IconButton text="Continue" className="disabled" />
-        <IconButton text="Go Back" className="secondary" />
-      </div>
-    )
-
-    const formMissingProfileFieldForm = (
-      <Form style={{ marginBottom: '100px' }}>
-        <Table>
-          <tbody>
-            {Object.keys(profileFields).map(key => (
-              <tr key={key}>
-                <td>{key}</td>
-                <td>{profileFields[key]}</td>
-              </tr>
-            ))}
-            <tr>
-              <td colSpan={2} className="form-td">
-                <FormControl
-                  type="text"
-                  placeholder="Add a (missing token name)"
-                />
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-        <p>
-          Your (unfilled field name) will be added to your interbit identity and
-          can be used in other apps that require a (unfilled field name).
-        </p>
-        <IconButton text="Save" />
-        <IconButton text="Cancel" className="secondary" />
-      </Form>
-    )
-
-    const formContinueAuth = (
-      <div>
-        <Table>
-          <tbody>
-            {requestedTokens.map(key => (
-              <tr key={key}>
-                <td>{key}</td>
-                <td>{profileFields[key]}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-        <IconButton
-          className={providerChainId ? '' : 'disabled'}
-          onClick={this.doConnectChains}
-          text="Accept"
-        />
-        <IconButton text="Reject" className="secondary" />
-      </div>
-    )
-
     const getFormForCurrentMode = () => {
       switch (mode) {
         case MODES.NOT_LOGGED_IN:
-          return formLoggedOut
+          return (
+            <ConnectFormLoggedOut
+              toggleModalFunction={toggleModalFunction}
+              requestedTokens={requestedTokens}
+            />
+          )
         case MODES.PROPS_MISSING:
-          return formMissingProfileField
+          return (
+            <ConnectFormMissingProfileField profileFields={profileFields} />
+          )
         case MODES.PROPS_ADDING:
-          return formMissingProfileFieldForm
+          return (
+            <ConnectFormAddMissingProfileField profileFields={profileFields} />
+          )
         case MODES.PROPS_AVAILABLE:
         default:
-          return formContinueAuth
+          return (
+            <ConnectFormContinueAuth
+              requestedTokens={requestedTokens}
+              profileFields={profileFields}
+              providerChainId={providerChainId}
+              doConnectChains={this.doConnectChains}
+            />
+          )
       }
     }
 

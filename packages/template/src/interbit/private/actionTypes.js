@@ -1,18 +1,18 @@
-const actionTypes = require('./actionTypes')
+const covenantName = 'template-private'
 
-const actionCreators = {
-  memo: text => ({
-    type: actionTypes.MEMO,
-    payload: { text }
-  }),
-
-  add: number => ({
-    type: actionTypes.ADD,
-    payload: { number }
-  })
+const actionTypes = {
+  MEMO: `${covenantName}/MEMO`,
+  ADD: `${covenantName}/ADD`
 }
 
-module.exports = {
-  actionTypes,
-  actionCreators
-}
+// Export a proxy so an exception is thrown in case an undefined property is accessed
+module.exports = new Proxy(actionTypes, {
+  get: (obj, prop) => {
+    if (prop in obj) {
+      return obj[prop]
+    }
+    throw new Error(
+      `Invalid action type "${prop}" in covenant "${covenantName}"`
+    )
+  }
+})

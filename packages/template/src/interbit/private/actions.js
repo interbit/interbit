@@ -1,9 +1,4 @@
-const covenantName = 'template-private'
-
-const actionTypes = {
-  MEMO: `${covenantName}/MEMO`,
-  ADD: `${covenantName}/ADD`
-}
+const actionTypes = require('./actionTypes')
 
 const actionCreators = {
   memo: text => ({

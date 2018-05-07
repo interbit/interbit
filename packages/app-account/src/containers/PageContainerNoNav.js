@@ -10,17 +10,17 @@ import paths from '../constants/paths'
 
 export default class PageContainer extends Component {
   static propTypes = {
-    userName: PropTypes.string
-    // isLoggedIn: PropTypes.bool
+    userName: PropTypes.string,
+    isLoggedIn: PropTypes.bool
   }
 
   static defaultProps = {
-    userName: 'anonymous user'
-    // isLoggedIn: false
+    userName: 'anonymous user',
+    isLoggedIn: false
   }
 
   render() {
-    const { userName } = this.props
+    const { userName, isLoggedIn } = this.props
     const headerTextNav = [
       {
         content: (
@@ -37,7 +37,8 @@ export default class PageContainer extends Component {
         <Header
           className="nav-main-menu"
           logo={<LogoAccount />}
-          textNavItems={headerTextNav}
+          textNavItems={isLoggedIn && headerTextNav}
+          disableLogoLink
         />
 
         <Grid>
@@ -49,5 +50,3 @@ export default class PageContainer extends Component {
     )
   }
 }
-
-// export default connect(mapStateToProps)(PageContainer)

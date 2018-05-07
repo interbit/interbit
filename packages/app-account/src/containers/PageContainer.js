@@ -52,7 +52,7 @@ export default class PageContainer extends Component {
           navItems={
             isLoggedIn ? navigation.headerNav : navigation.headerNavLoggedOut
           }
-          textNavItems={headerTextNav}
+          textNavItems={isLoggedIn && headerTextNav}
         />
 
         <Grid>
@@ -97,5 +97,3 @@ export default class PageContainer extends Component {
     )
   }
 }
-
-// export default connect(mapStateToProps)(PageContainer)

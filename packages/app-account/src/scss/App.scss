@@ -112,8 +112,9 @@
 
   .app-auth {
     img {
+      display: block;
+      margin: 64px auto;
       max-width: 100%;
-      margin-bottom: 64px;
     }
 
     h3 {

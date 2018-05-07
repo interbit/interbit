@@ -1,13 +1,11 @@
 const DEFAULT_PORT = 8888
 
-const port = process.env.PORT || DEFAULT_PORT
-const nodePort = port + 10
-// const authServerPort = port + 20
+const PORT = process.env.PORT || DEFAULT_PORT
 
 module.exports = {
-  PORT: port,
-  AUTH_PORT: port,
-  NODE_PORT: nodePort,
+  PORT,
+  AUTH_PORT: PORT,
+  NODE_PORT: PORT + 1 > 65535 ? 5 : PORT + 1,
   NODE_HOST: `ws://localhost`,
   AUTH_HOST: `http://localhost`
 }

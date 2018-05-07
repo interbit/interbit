@@ -17,7 +17,8 @@
     "app-account": "0.4.15",
     "express": "^4.16.2",
     "http-proxy": "^1.17.0",
-    "interbit": "0.4.15"
+    "interbit": "0.4.15",
+    "interbit-cli": "0.4.15"
   },
   "devDependencies": {
     "assert": "^1.4.1",
@@ -26,6 +27,7 @@
   },
   "scripts": {
     "serve": "npm start",
+    "build": "interbit build --config ../platform-deploy/interbit.config.js --artifacts ../platform-deploy/platform",
     "start": "cross-env DB_PATH=./db-interbit node src/index.js",
     "test": "echo \"Error: no test specified\""
   }

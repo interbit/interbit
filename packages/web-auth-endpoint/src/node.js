@@ -2,11 +2,11 @@ const path = require('path')
 const { deploy } = require('interbit')
 const keyPair = require('../keyPair.js')
 
-// const { NODE_PORT } = require('./networkConfig')
+const { NODE_PORT } = require('./networkConfig')
 
 const startNode = async manifest => {
   const options = {
-    port: undefined,
+    port: NODE_PORT,
     location: path.relative(process.cwd(), '../platform-deploy/platform'),
     keyPair,
     manifest,

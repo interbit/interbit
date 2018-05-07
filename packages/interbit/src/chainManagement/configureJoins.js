@@ -26,7 +26,7 @@ const configureJoins = (chainInterface, joins, interbitManifest) => {
 }
 
 const configureConsume = (consume, interbitManifest) => {
-  if (!consume || !consume.length) {
+  if (!Array.isArray(consume)) {
     return []
   }
   return consume.reduce(
@@ -44,7 +44,7 @@ const configureConsume = (consume, interbitManifest) => {
 }
 
 const configureProvide = (provide, interbitManifest) => {
-  if (!provide || !provide.length) {
+  if (!Array.isArray(provide)) {
     return []
   }
   return provide.reduce(
@@ -62,7 +62,7 @@ const configureProvide = (provide, interbitManifest) => {
 }
 
 const configureReceive = (receive, interbitManifest) => {
-  if (!receive || !receive.length) {
+  if (!Array.isArray(receive)) {
     return []
   }
   return receive.reduce((prev, { alias: chainAlias, authorizedActions }) => {
@@ -76,7 +76,7 @@ const configureReceive = (receive, interbitManifest) => {
 }
 
 const configureSend = (send, interbitManifest) => {
-  if (!send || !send.length) {
+  if (!Array.isArray(send)) {
     return []
   }
   return send.reduce((prev, { alias: chainAlias }) => {

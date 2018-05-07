@@ -10,19 +10,16 @@ const mapStateToProps = state => ({
 })
 
 class Contact extends Component {
-  componentDidMount() {
-    const addScript = document.createElement('script')
-    addScript.setAttribute(
-      'src',
-      'https://webforms.pipedriveassets.com/webforms.min.js'
-    )
-    document.body.appendChild(addScript)
-  }
-
   render() {
     // eslint-disable-next-line react/prop-types
     const { content } = this.props
     const colLayout = layout.colLayout.default
+
+    const formId = '7148955b25f0e873fca3d9eb37c1118f906729'
+    const uuid = Math.random()
+      .toString(36)
+      .substring(7)
+    const iframeSrc = `https://pipedrivewebforms.com/form/${formId}?embeded=1&uudid=${uuid}`
 
     return (
       <div className="ibweb-page contact">
@@ -39,7 +36,9 @@ class Contact extends Component {
               <div
                 className="pipedriveWebForms"
                 data-pd-webforms="https://pipedrivewebforms.com/form/7148955b25f0e873fca3d9eb37c1118f906729"
-              />
+                data-uuid={uuid}>
+                <iframe title="ib-pipedrive-form" src={iframeSrc} />
+              </div>
             </div>
           </Col>
         </Row>

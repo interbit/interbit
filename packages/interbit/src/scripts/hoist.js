@@ -1,7 +1,7 @@
 const fs = require('fs-extra')
 const promisify = require('util').promisify
 const exec = promisify(require('child_process').exec)
-const { getArg } = require('./args/getArg')
+const { getArg } = require('../args/getArg')
 
 const hoistPackages = async ({ appLocation, covenantConfig }) => {
   console.log('interbit-hoist: Hoisting covenant packages', {

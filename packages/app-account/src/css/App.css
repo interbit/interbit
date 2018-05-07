@@ -63,8 +63,9 @@
     -webkit-box-shadow: none;
     box-shadow: none; }
 .ibweb.app-account .app-auth img {
-  max-width: 100%;
-  margin-bottom: 64px; }
+  display: block;
+  margin: 64px auto;
+  max-width: 100%; }
 .ibweb.app-account .app-auth h3 {
   margin-bottom: 32px; }
 .ibweb.app-account .app-auth p {

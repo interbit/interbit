@@ -20,7 +20,7 @@ import ModalSignUp from '../components/ModalSignUp'
 import { toggleModal } from '../redux/uiReducer'
 import modalNames from '../constants/modalNames'
 import { PRIVATE } from '../constants/chainAliases'
-import mainGraphic from '../assets/homeHeader.jpg'
+import connectingHeader from '../assets/connectingHeader.svg'
 
 const MODES = {
   NOT_LOGGED_IN: 0,
@@ -258,7 +258,7 @@ export class ChainConnect extends Component {
         <div className="ibweb-page app-auth">
           <Row>
             <Col {...colLayout}>
-              <img src={mainGraphic} alt="App info access" />
+              <img src={connectingHeader} alt="App info access" />
               <h3>
                 (Service: {consumerChainId}) wants to access the following
                 identity information:

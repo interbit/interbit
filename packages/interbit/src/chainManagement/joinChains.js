@@ -14,6 +14,7 @@ const {
   joinTypes
 } = require('../config/configSelectors')
 
+// SET FOR DEPRECATION: Pending issue #79
 const joinChains = async (manifest, cli, config) => {
   console.log('JOINING CHAINS')
   try {

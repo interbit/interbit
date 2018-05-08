@@ -30,6 +30,8 @@ const cAuthConsumerCovenant = require('./cAuthConsumerCovenant')
 
 const mergeCovenants = require('./mergeCovenants')
 
+const selectors = require('./selectors')
+
 const {
   validate,
   objectValidationRules,
@@ -57,7 +59,8 @@ module.exports = {
     removeRedispatches,
     remoteRedispatch,
     shiftRedispatchQueue,
-    pushUpRedispatches
+    pushUpRedispatches,
+    selectors
   },
   manifestCovenant,
   rootCovenant,

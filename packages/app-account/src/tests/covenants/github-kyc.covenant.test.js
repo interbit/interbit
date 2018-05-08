@@ -87,7 +87,7 @@ describe('github-kyc/covenant', () => {
         })
         .put({
           type: covenant.actionTypes.AUTH_SUCEEDED,
-          payload: { requestId }
+          payload: { requestId, joinName }
         })
         .run()
     })

@@ -68,7 +68,7 @@ const dispatchBufferedActions = (blockingChains, buffer = []) =>
   buffer.filter(payload => {
     const { chainAlias, action } = payload
     const canDispatch = blockingChains.includes(chainAlias)
-    if (canDispatch(chainAlias)) {
+    if (canDispatch) {
       dispatchToChain(chainAlias, action)
     }
     return !canDispatch

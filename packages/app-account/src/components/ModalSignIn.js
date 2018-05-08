@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Checkbox, FormControl } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import {
   ContentBar,
   Divider,
@@ -9,47 +9,37 @@ import {
 } from 'interbit-ui-components'
 
 import modalNames from '../constants/modalNames'
-import chairmanmeow from '../assets/chairmanmeow.jpg'
+import iconGitHub from '../assets/icons/iconGitHub.svg'
 
 export default class ModalSignIn extends Component {
   static propTypes = {
     show: PropTypes.bool.isRequired,
-    toggleModal: PropTypes.func.isRequired
+    toggleModal: PropTypes.func.isRequired,
+    serviceName: PropTypes.string
+  }
+
+  static defaultProps = {
+    serviceName: ''
   }
 
   render() {
-    const { show, toggleModal } = this.props
+    const { show, toggleModal, serviceName } = this.props
 
     const header = (
       <div>
-        <h2>Sign in to access (app name)</h2>
-        <p>
-          Sign in with a link sent to your email (no passwordz), or use an
-          authentication provider (GitHub), sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua.
-        </p>
+        <h2>
+          Sign in to access <span>{serviceName}</span>
+        </h2>
       </div>
     )
 
     const body = (
       <div>
-        <ContentBar image={chairmanmeow} className="image-sm" title="Email">
-          <FormControl
-            type="text"
-            placeholder="Enter your email address to sign in"
-          />
-          <Checkbox inline={false}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt.
-          </Checkbox>
-          <Divider />
-          <IconButton text="Continue" />
-        </ContentBar>
         <ContentBar
-          image={chairmanmeow}
+          image={iconGitHub}
           className="image-sm"
           title="Sign in with GitHub">
-          <p>Description of why you&rsquo;d use your GitHub, etc?</p>
+          <p>Authenticate with GitHub to sign in to your account.</p>
           <Divider />
           <IconButton text="Continue" />
         </ContentBar>

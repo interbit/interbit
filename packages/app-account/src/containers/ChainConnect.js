@@ -101,7 +101,7 @@ export class ChainConnect extends Component {
     providerChainId: '',
     consumerChainId: '',
     requestedTokens: [],
-    mode: MODES.NOT_LOGGED_IN,
+    mode: MODES.LOADING_CHAIN,
     isSignInModalVisible: false,
     isSignUpModalVisible: false,
     content: {
@@ -215,10 +215,12 @@ export class ChainConnect extends Component {
         <ModalSignIn
           show={isSignInModalVisible}
           toggleModal={toggleModalFunction}
+          serviceName={consumerChainId}
         />
         <ModalSignUp
           show={isSignUpModalVisible}
           toggleModal={toggleModalFunction}
+          serviceName={consumerChainId}
         />
       </Grid>
     )

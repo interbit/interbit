@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { chainDispatch, selectors } from 'interbit-ui-tools'
 
 import { actionCreators } from '../interbit/my-account/actions'
+import Connecting from '../components/Connecting'
 import ConnectFormAddMissingProfileField from '../components/ConnectFormAddMissingProfileField'
 import ConnectFormContinueAuth from '../components/ConnectFormContinueAuth'
 import ConnectFormLoggedOut from '../components/ConnectFormLoggedOut'
@@ -15,13 +16,13 @@ import ModalSignUp from '../components/ModalSignUp'
 import { toggleModal } from '../redux/uiReducer'
 import modalNames from '../constants/modalNames'
 import { PRIVATE } from '../constants/chainAliases'
-import connectingHeader from '../assets/connectingHeader.svg'
 
 const MODES = {
   NOT_LOGGED_IN: 0,
   PROPS_MISSING: 1,
   PROPS_ADDING: 2,
-  PROPS_AVAILABLE: 3
+  PROPS_AVAILABLE: 3,
+  LOADING_CHAIN: 4
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -29,22 +30,40 @@ const mapStateToProps = (state, ownProps) => {
     location: { search }
   } = ownProps
   const query = queryString.parse(search)
-
-  const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
-
   const { chainId, redirectUrl, tokens } = query
+
+  const isChainLoaded = selectors.isChainLoaded(state, { chainAlias: PRIVATE })
+  const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
+  const requestedTokens = Array.isArray(tokens) ? tokens : [tokens]
+  const profileFields = chainState ? chainState.profile : {}
+
   const isSignInModalVisible = state.ui.modals[modalNames.SIGN_IN_MODAL_NAME]
   const isSignUpModalVisible = state.ui.modals[modalNames.SIGN_UP_MODAL_NAME]
+
+  // TODO: isLoggedIn === true if gitHub oauth has completed and private chain is loaded
+  const isLoggedIn = true
+  let mode
+  let missingFields = []
+
+  if (!isChainLoaded) {
+    mode = MODES.LOADING_CHAIN
+  } else if (!isLoggedIn) {
+    mode = MODES.NOT_LOGGED_IN
+  } else if (profileFields) {
+    missingFields = requestedTokens.filter(t => !profileFields[t])
+    mode = missingFields.length ? MODES.PROPS_MISSING : MODES.PROPS_AVAILABLE
+  }
 
   return {
     profileFields: chainState ? chainState.profile : {},
     redirectUrl,
     consumerChainId: chainId,
-    requestedTokens: Array.isArray(tokens) ? tokens : [tokens],
+    requestedTokens,
     providerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
-    mode: MODES.PROPS_AVAILABLE,
+    mode,
     isSignInModalVisible,
-    isSignUpModalVisible
+    isSignUpModalVisible,
+    content: state.content.chainConnect
   }
 }
 
@@ -68,7 +87,12 @@ export class ChainConnect extends Component {
     mode: PropTypes.number,
     isSignInModalVisible: PropTypes.bool,
     isSignUpModalVisible: PropTypes.bool,
-    toggleModalFunction: PropTypes.func.isRequired
+    toggleModalFunction: PropTypes.func.isRequired,
+    content: PropTypes.shape({
+      headerImage: PropTypes.string,
+      headerImageAlt: PropTypes.string,
+      title: PropTypes.string
+    })
   }
 
   static defaultProps = {
@@ -79,7 +103,12 @@ export class ChainConnect extends Component {
     requestedTokens: [],
     mode: MODES.NOT_LOGGED_IN,
     isSignInModalVisible: false,
-    isSignUpModalVisible: false
+    isSignUpModalVisible: false,
+    content: {
+      headerImage: '',
+      headerImageAlt: '',
+      title: ''
+    }
   }
 
   doConnectChains = async () => {
@@ -115,7 +144,8 @@ export class ChainConnect extends Component {
       isSignInModalVisible,
       isSignUpModalVisible,
       toggleModalFunction,
-      providerChainId
+      providerChainId,
+      content
     } = this.props
 
     const colLayout = {
@@ -124,21 +154,38 @@ export class ChainConnect extends Component {
     }
 
     const getFormForCurrentMode = () => {
+      const componentTitle = `Service ${consumerChainId} ${content.title}`
+
       switch (mode) {
+        case MODES.LOADING_CHAIN:
+          return <Connecting />
         case MODES.NOT_LOGGED_IN:
           return (
             <ConnectFormLoggedOut
               toggleModalFunction={toggleModalFunction}
               requestedTokens={requestedTokens}
+              image={content.headerImage}
+              imageAlt={content.headerImageAlt}
+              title={componentTitle}
             />
           )
         case MODES.PROPS_MISSING:
           return (
-            <ConnectFormMissingProfileField profileFields={profileFields} />
+            <ConnectFormMissingProfileField
+              profileFields={profileFields}
+              image={content.headerImage}
+              imageAlt={content.headerImageAlt}
+              title={componentTitle}
+            />
           )
         case MODES.PROPS_ADDING:
           return (
-            <ConnectFormAddMissingProfileField profileFields={profileFields} />
+            <ConnectFormAddMissingProfileField
+              profileFields={profileFields}
+              image={content.headerImage}
+              imageAlt={content.headerImageAlt}
+              title={componentTitle}
+            />
           )
         case MODES.PROPS_AVAILABLE:
         default:
@@ -148,6 +195,9 @@ export class ChainConnect extends Component {
               profileFields={profileFields}
               providerChainId={providerChainId}
               doConnectChains={this.doConnectChains}
+              image={content.headerImage}
+              imageAlt={content.headerImageAlt}
+              title={componentTitle}
             />
           )
       }
@@ -157,14 +207,7 @@ export class ChainConnect extends Component {
       <Grid>
         <div className="ibweb-page app-auth">
           <Row>
-            <Col {...colLayout}>
-              <img src={connectingHeader} alt="App info access" />
-              <h3>
-                (Service: {consumerChainId}) wants to access the following
-                identity information:
-              </h3>
-              {getFormForCurrentMode()}
-            </Col>
+            <Col {...colLayout}>{getFormForCurrentMode()}</Col>
           </Row>
         </div>
 

@@ -9,18 +9,26 @@ export default class ConnectFormMissingProfileField extends Component {
       alias: PropTypes.string,
       email: PropTypes.string,
       name: PropTypes.string
-    })
+    }),
+    image: PropTypes.string,
+    imageAlt: PropTypes.string,
+    title: PropTypes.string
   }
 
   static defaultProps = {
-    profileFields: []
+    profileFields: [],
+    image: '',
+    imageAlt: '',
+    title: ''
   }
 
   render() {
-    const { profileFields } = this.props
+    const { profileFields, image, imageAlt, title } = this.props
 
     return (
       <div>
+        {image && <img src={image} alt={imageAlt} />}
+        <h3>{title}</h3>
         <Table>
           <tbody>
             {Object.keys(profileFields).map(key => (

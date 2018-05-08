@@ -8,18 +8,32 @@ import modalNames from '../constants/modalNames'
 export default class ConnectFormLoggedOut extends Component {
   static propTypes = {
     toggleModalFunction: PropTypes.func.isRequired,
-    requestedTokens: PropTypes.arrayOf(PropTypes.string)
+    requestedTokens: PropTypes.arrayOf(PropTypes.string),
+    image: PropTypes.string,
+    imageAlt: PropTypes.string,
+    title: PropTypes.string
   }
 
   static defaultProps = {
-    requestedTokens: []
+    requestedTokens: [],
+    image: '',
+    imageAlt: '',
+    title: ''
   }
 
   render() {
-    const { toggleModalFunction, requestedTokens } = this.props
+    const {
+      toggleModalFunction,
+      requestedTokens,
+      image,
+      imageAlt,
+      title
+    } = this.props
 
     return (
       <div>
+        {image && <img src={image} alt={imageAlt} />}
+        <h3>{title}</h3>
         <Table className="logged-out">
           <tbody>
             {requestedTokens.map(token => (

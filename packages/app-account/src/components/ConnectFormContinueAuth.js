@@ -12,14 +12,20 @@ export default class ConnectFormContinueAuth extends Component {
     }),
     requestedTokens: PropTypes.arrayOf(PropTypes.string),
     providerChainId: PropTypes.string,
-    doConnectChains: PropTypes.func
+    doConnectChains: PropTypes.func,
+    image: PropTypes.string,
+    imageAlt: PropTypes.string,
+    title: PropTypes.string
   }
 
   static defaultProps = {
     profileFields: [],
     requestedTokens: [],
     providerChainId: '',
-    doConnectChains: undefined
+    doConnectChains: undefined,
+    image: '',
+    imageAlt: '',
+    title: ''
   }
 
   render() {
@@ -27,10 +33,15 @@ export default class ConnectFormContinueAuth extends Component {
       profileFields,
       requestedTokens,
       providerChainId,
-      doConnectChains
+      doConnectChains,
+      image,
+      imageAlt,
+      title
     } = this.props
     return (
       <div>
+        {image && <img src={image} alt={imageAlt} />}
+        <h3>{title}</h3>
         <Table>
           <tbody>
             {requestedTokens.map(key => (

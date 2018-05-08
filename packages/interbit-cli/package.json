@@ -4,7 +4,7 @@
   "description": "The Interbit Blockchain Development Platform",
   "files": [
     "bin",
-    "files"
+    "scripts"
   ],
   "bin": {
     "interbit": "./bin/interbit-scripts.js"

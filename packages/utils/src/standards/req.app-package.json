@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "interbit": "0.4.7",
+    "interbit": "0.4.17",
     "interbit-covenant-tools": "0.4.17",
     "interbit-ui-tools": "0.4.17",
     "interbit-platform-tools": "0.4.17",

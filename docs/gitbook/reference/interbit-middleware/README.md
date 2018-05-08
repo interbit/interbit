@@ -81,10 +81,23 @@ const state = {
   interbit: {
     chains: {
       myChain: { ...chainState }
+    },
+    chainData: {
+      myChain: {
+        status: 'BLOCKING',
+        chainId: '32b9365f325da189439f6d453593cf4e0a5a06ead7e6bbecc1d0814c578df452'
+      }
     }
   }
 }
 ```
+
+The chains property contains chain state for each of the connected chains and the chainData section contains metadata about the chains including their status (LOADING, BLOCKING, etc.) as well as their chainId.
+
+<div class="tips warning">
+  <p><span></span>TODO</p>
+  <p>Incomplete content. These statuses need to be documented in an API reference and linked to from here.</p>
+</div>
 
 ### Specifying peers in index.html
 
@@ -94,10 +107,10 @@ If no port is specified the middleware will attempt to connect on port 80 for ht
 
 To specify multiple peers, separate them using a comma.
 
-If no peers are specified the middleware will attempt to connect to localhost:5000, which is the default set by interbit when it runs a node as well.
+If no peers are specified the middleware will attempt to connect to localhost:5000, which is the default set by interbit when it runs a node.
 
 ```html
-<div id="interbit" data-peer-hints="your-blockchain-node.com,localhost" />
+<div id="interbit" data-peer-hints="your-blockchain-node.com,localhost:1234" />
 ```
 
 ### Using Interbit Config to Specify Chains in index.html
@@ -111,7 +124,7 @@ const config = {
   // ... other configuration ...
   apps: {
     myApp: {
-      peers: [], // If no peers are specified then the middleware will use the default of localhost.
+      peers: [], // If no peers are specified then the middleware will use the default of localhost:5000
       chains: ['myChain'], // the chains that need to load in the browser
       indexLocation: path.join(__dirname, 'public/index.html'), // the index.html to update with the app info
       buildLocation: path.join(__dirname, 'build/') // the location of the finished build to update

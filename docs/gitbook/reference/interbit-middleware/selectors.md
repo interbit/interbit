@@ -36,7 +36,7 @@ All selector functions share the following parameters
 
 1. `state` *(Object)*: The state slice from the redux store belonging to the middleware
 1. `options` *(Object)*: An options object for specifying selection rules
-  1. `root` *(Object)*: The root of the state to select from. Defaults to the middleware root. If you configure your middleware to use a different root you will need to use this option.
+  1. `root` *(Object)*: The root of the state to select from. Defaults to the store root. You will probably not need to use it.
 
 ### `getBlockMaster(state, { root , chainAlias })`
 

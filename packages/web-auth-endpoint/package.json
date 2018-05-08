@@ -16,7 +16,8 @@
   "dependencies": {
     "app-account": "0.4.15",
     "express": "^4.16.2",
-    "interbit": "0.4.15"
+    "interbit": "0.4.15",
+    "query-string": "^5.0.1"
   },
   "devDependencies": {
     "assert": "^1.4.1",

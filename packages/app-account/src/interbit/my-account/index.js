@@ -122,6 +122,9 @@ const reducer = (state = initialState, action) => {
         joinName
       })
 
+      // HACK: Same permissions as the current action
+      consumeAction.publicKey = action.publicKey
+
       console.log('REDISPATCH: ', consumeAction)
       nextState = redispatch(nextState, consumeAction)
       nextState = removeAuthenticationRequest(nextState, requestId)

@@ -5593,7 +5593,8 @@ a {
   border: none;
   margin-bottom: 0; }
   .ibweb-navbar .navbar-brand {
-    padding-top: 22px; }
+    padding-top: 22px;
+    height: auto; }
   .ibweb-navbar .nav-main-menu li a,
   .ibweb-navbar .nav-right-menu li a {
     font-size: 1rem;

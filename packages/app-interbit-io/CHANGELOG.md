@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.16"></a>
+## [0.4.16](https://github.com/interbit/interbit/compare/v0.4.15...v0.4.16) (2018-05-07)
+
+
+### Bug Fixes
+
+* Pipedrive form now loads when Contact page accessed not on initial load of app ([8ccf523](https://github.com/interbit/interbit/commit/8ccf523))
+
+
+
+
 <a name="0.4.15"></a>
 ## [0.4.15](https://github.com/interbit/interbit/compare/v0.4.14...v0.4.15) (2018-05-02)
 

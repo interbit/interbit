@@ -14,15 +14,17 @@ const mapStateToProps = state => ({
 export class Home extends Component {
   static propTypes = {
     content: PropTypes.shape({}).isRequired,
-    linkBars: PropTypes.shape({}).isRequired
+    linkBars: PropTypes.shape({}).isRequired,
+    isLoggedIn: PropTypes.bool
+  }
+
+  static defaultProps = {
+    isLoggedIn: false
   }
 
   render() {
-    const { content, linkBars } = this.props
+    const { content, linkBars, isLoggedIn } = this.props
     const colLayout = layout.colLayout.default
-
-    // TODO: replace with actual auth status
-    const isLoggedIn = false
 
     return (
       <Grid>

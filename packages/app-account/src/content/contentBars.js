@@ -18,7 +18,7 @@ There is no guarantee of data preservation, uptime, stability, or security at th
   appHosting: {
     title: 'Hosting',
     content:
-      'Description of the app. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+      'Simple, hassle-free hosting for your development projects. Host on Interbit or with other providers.',
     image: iconHosting,
     callToAction: {
       text: 'Coming soon...'

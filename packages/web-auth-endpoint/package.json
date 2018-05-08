@@ -18,7 +18,8 @@
     "express": "^4.16.2",
     "http-proxy": "^1.17.0",
     "interbit": "0.4.16",
-    "interbit-cli": "0.4.16"
+    "interbit-cli": "0.4.16",
+    "query-string": "^5.0.1"
   },
   "devDependencies": {
     "assert": "^1.4.1",

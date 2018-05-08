@@ -16,8 +16,6 @@ import ModalAttentionMoreInfo from '../components/ModalAttentionMoreInfo'
 import chairmanmeow from '../assets/chairmanmeow.jpg'
 
 import { actionCreators } from '../interbit/my-account/actions'
-import { actionCreators as publicActionCreators } from '../interbit/public/actions'
-import { getOAuthProviderChainId } from '../interbit/public/selectors'
 import { toggleForm, toggleModal } from '../redux/uiReducer'
 import formNames from '../constants/formNames'
 import modalNames from '../constants/modalNames'
@@ -54,20 +52,19 @@ const mapStateToProps = (state, ownProps) => {
     isAttentionMoreInfoModalVisible
   }
 
+  if (!selectors.isChainLoaded(state, { chainAlias: PRIVATE })) {
+    return notAuthenticating
+  }
+
   const {
     location: { search },
     match: { params }
   } = ownProps
   const query = queryString.parse(search)
-  const { code, state: requestId } = query
+  const { requestId, providerChainId, joinName } = query
   const { oAuthProvider } = params
 
-  if (!(oAuthProvider && code && requestId)) {
-    return notAuthenticating
-  }
-
-  const consumerChainId = selectors.getChainId(state.interbit, PRIVATE)
-  if (!consumerChainId) {
+  if (!(oAuthProvider && requestId && providerChainId && joinName)) {
     return notAuthenticating
   }
 
@@ -80,24 +77,11 @@ const mapStateToProps = (state, ownProps) => {
     return notAuthenticating
   }
 
-  const providerChainId =
-    oAuthProvider &&
-    state.interbit &&
-    state.interbit.chains &&
-    state.interbit.chains.public
-      ? getOAuthProviderChainId(state.interbit.chains.public, oAuthProvider)
-      : undefined
-
-  if (!providerChainId) {
-    return notAuthenticating
-  }
-
   return {
     ...notAuthenticating,
-    consumerChainId,
-    providerChainId,
     oAuthProvider,
-    code,
+    providerChainId,
+    joinName,
     requestId,
     isAuthenticating: true
   }
@@ -122,10 +106,9 @@ export class Account extends Component {
     toggleFormFunction: PropTypes.func.isRequired,
     profileFormProps: PropTypes.shape({}),
     isAuthenticating: PropTypes.bool,
-    consumerChainId: PropTypes.string,
     providerChainId: PropTypes.string,
     oAuthProvider: PropTypes.string,
-    code: PropTypes.string,
+    joinName: PropTypes.string,
     requestId: PropTypes.string,
     content: PropTypes.shape({}).isRequired,
     contentBars: PropTypes.shape({}).isRequired,
@@ -143,10 +126,9 @@ export class Account extends Component {
     profileFormProps: {},
     isAuthenticating: false,
     oAuthProvider: undefined,
-    code: undefined,
+    joinName: undefined,
     requestId: undefined,
     providerChainId: undefined,
-    consumerChainId: undefined,
     isAttentionMoreInfoModalVisible: false
   }
 
@@ -154,16 +136,13 @@ export class Account extends Component {
     const {
       isAuthenticating,
       oAuthProvider,
-      code,
+      joinName,
       requestId,
-      consumerChainId,
       blockchainDispatch,
-      providerChainId,
-      publicChainDispatch
+      providerChainId
     } = this.props
 
     if (isAuthenticating) {
-      const joinName = `${oAuthProvider}-${consumerChainId}`
       const tokenName = `${oAuthProvider}-identity`
 
       const privateChainAction = actionCreators.completeAuthentication({
@@ -174,15 +153,6 @@ export class Account extends Component {
         requestId
       })
       blockchainDispatch(privateChainAction)
-
-      const publicAccountAction = publicActionCreators.oAuthSignIn({
-        oAuthProvider,
-        consumerChainId,
-        requestId,
-        joinName,
-        temporaryToken: code
-      })
-      publicChainDispatch(publicAccountAction)
     }
   }
 

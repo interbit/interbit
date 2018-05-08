@@ -1,6 +1,6 @@
 {
   "name": "web-auth-endpoint",
-  "version": "0.4.15",
+  "version": "0.4.16",
   "description": "Express instance to handle incoming auth redirects for APC model (auth-private-control)",
   "main": "src/index.js",
   "private": true,
@@ -14,9 +14,11 @@
   "author": "BTL GROUP LTD",
   "license": "MIT",
   "dependencies": {
-    "app-account": "0.4.15",
+    "app-account": "0.4.16",
     "express": "^4.16.2",
-    "interbit": "0.4.15",
+    "http-proxy": "^1.17.0",
+    "interbit": "0.4.16",
+    "interbit-cli": "0.4.16",
     "query-string": "^5.0.1"
   },
   "devDependencies": {
@@ -26,7 +28,8 @@
   },
   "scripts": {
     "serve": "npm start",
-    "start": "cross-env COVENANT_DEV_MODE=true PORT=5002 DB_PATH=./db-interbit node src/index.js --port 5025 --dev --no-watch",
+    "build": "interbit build --config ../platform-deploy/interbit.config.js --artifacts ../platform-deploy/platform",
+    "start": "cross-env DB_PATH=./db-interbit node src/index.js",
     "test": "echo \"Error: no test specified\""
   }
 }

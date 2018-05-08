@@ -33,6 +33,7 @@ export default class Header extends Component {
     logo: PropTypes.element,
     logoSm: PropTypes.element,
     logoUrl: PropTypes.string,
+    disableLogoLink: PropTypes.bool,
     className: PropTypes.string
   }
 
@@ -43,6 +44,7 @@ export default class Header extends Component {
     logo: <Logo className="sm hidden-xs" />,
     logoSm: <div />,
     logoUrl: '/',
+    disableLogoLink: false,
     className: ''
   }
 
@@ -54,6 +56,7 @@ export default class Header extends Component {
       logo,
       logoSm,
       logoUrl,
+      disableLogoLink,
       className
     } = this.props
 
@@ -65,10 +68,17 @@ export default class Header extends Component {
               <Navbar collapseOnSelect className="ibweb-navbar">
                 <Navbar.Header>
                   <Navbar.Brand>
-                    <LinkWrapper to={logoUrl}>
-                      {logo}
-                      {logoSm}
-                    </LinkWrapper>
+                    {disableLogoLink ? (
+                      <div>
+                        {logo}
+                        {logoSm}
+                      </div>
+                    ) : (
+                      <LinkWrapper to={logoUrl}>
+                        {logo}
+                        {logoSm}
+                      </LinkWrapper>
+                    )}
                   </Navbar.Brand>
                 </Navbar.Header>
 

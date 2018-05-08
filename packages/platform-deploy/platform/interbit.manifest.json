@@ -1,7 +1,7 @@
 {
   "peers": [
     "ib-dev----master.herokuapp.com",
-    "ib-dev----master.herokuapp.com"
+    "ib-dev-web-auth.herokuapp.com"
   ],
   "apps": {
     "account": {
@@ -21,55 +21,55 @@
   },
   "covenants": {
     "app-account-my-account": {
-      "hash": "e1fd119d04af3b3fc42a4541d844f6e197de301d56ec6e50bb42967ed1d5cc38",
-      "filename": "covenants/e1fd119d04af3b3fc42a4541d844f6e197de301d56ec6e50bb42967ed1d5cc38.tgz"
+      "hash": "895ff2f04a4e28f50547f07c557cb84f256babdec7668f98296a747823975440",
+      "filename": "covenants/895ff2f04a4e28f50547f07c557cb84f256babdec7668f98296a747823975440.tgz"
     },
     "app-account-public": {
-      "hash": "bae85605dda48babda756deb740cbd13df743be33da25ca07fe78549d47edda4",
-      "filename": "covenants/bae85605dda48babda756deb740cbd13df743be33da25ca07fe78549d47edda4.tgz"
+      "hash": "9590aa510ddcc392dda2b0fe2b014c83fb3f02cb0e01f408a00b395de3343f89",
+      "filename": "covenants/9590aa510ddcc392dda2b0fe2b014c83fb3f02cb0e01f408a00b395de3343f89.tgz"
     },
     "app-account-control": {
-      "hash": "fc6fe95ba8b543f5b29c02c5434feaf02bfc6c85b0b03f105153a19fd471fe7f",
-      "filename": "covenants/fc6fe95ba8b543f5b29c02c5434feaf02bfc6c85b0b03f105153a19fd471fe7f.tgz"
+      "hash": "684306b81be8db6c2983db7f7d05199e49357cd5e086e6da3cc65834f6723eb7",
+      "filename": "covenants/684306b81be8db6c2983db7f7d05199e49357cd5e086e6da3cc65834f6723eb7.tgz"
     },
     "app-account-github-kyc": {
-      "hash": "9b585d05617d06b1840b4e23cf53f74773ffcb36d0e21c8313f0cb08f06ee72d",
-      "filename": "covenants/9b585d05617d06b1840b4e23cf53f74773ffcb36d0e21c8313f0cb08f06ee72d.tgz"
+      "hash": "dd65478113bc811aec07691476f890f1d185bf66afe2c64dfb89a9bfa742d810",
+      "filename": "covenants/dd65478113bc811aec07691476f890f1d185bf66afe2c64dfb89a9bfa742d810.tgz"
     },
     "public": {
-      "hash": "dfdeefe6b1988c799f8356573795e9c483a2456612287cabf2d6af37b8f1dd06",
-      "filename": "covenants/dfdeefe6b1988c799f8356573795e9c483a2456612287cabf2d6af37b8f1dd06.tgz"
+      "hash": "266e97c95e154402d1b9be397476ec9d5da2409aa13f3988aa99472040bcd36d",
+      "filename": "covenants/266e97c95e154402d1b9be397476ec9d5da2409aa13f3988aa99472040bcd36d.tgz"
     },
     "control": {
-      "hash": "da24d6739d476392a3e4477fcf3649ed9b2708358c2acd8befe66c8501785543",
-      "filename": "covenants/da24d6739d476392a3e4477fcf3649ed9b2708358c2acd8befe66c8501785543.tgz"
+      "hash": "0da4a1aafe19b4446a5ec3c870aeebfa84f80a7b4beaeb94a5649779b9e7fb34",
+      "filename": "covenants/0da4a1aafe19b4446a5ec3c870aeebfa84f80a7b4beaeb94a5649779b9e7fb34.tgz"
     },
     "private": {
-      "hash": "aeabea94ee4401b5831110b3f74004d1e373e4e0396428279e644a3544f49919",
-      "filename": "covenants/aeabea94ee4401b5831110b3f74004d1e373e4e0396428279e644a3544f49919.tgz"
+      "hash": "d9abab37f42b0793de0b469c5a1699a71f84508b550f3ef318d6ddda1dbabf39",
+      "filename": "covenants/d9abab37f42b0793de0b469c5a1699a71f84508b550f3ef318d6ddda1dbabf39.tgz"
     }
   },
   "chains": {
-    "accountsControl": "ed3c1b057eb597267bd12ac47069d8f188ae85487bae5abd843d2cedbe912ca0",
-    "accountsPublic": "0fa869ec5a0e979fdfafd4d217342d5d091a59a3284079f269ead760b35d569c",
-    "accountsGithubAuth": "4f8027aa24e8e13942010a0c10c1026005e7593dbbc7bf3e1faef1997d1703ce",
-    "templatePublic": "8afdda40b86ad927fb5c52a0b9a19301217950ec721d3407dc902aed33750d20",
-    "templateControl": "d0890fb6db3392c7acfd5061086fc08262f66697774871b20d1a7f15f8bb15fe",
-    "interbitRoot": "e6799db7249d896717ebf6c12410ac52340126f816b52cdab7db75e46a91fc2a"
+    "accountsControl": "9f58584c030c7c366ac7730796806870dcd90c8fb415ba629e0bcaaa792c40cf",
+    "accountsPublic": "6cffd9f24329c49d3a5047aa187c805e20e39923a15d7f9c427bc659225c08d2",
+    "accountsGithubAuth": "7ee48aef5d991f0659261f256332ae3a5354502f7910350bdd0171e98c9dfbd3",
+    "templatePublic": "32b9365f325da189439f6d453593cf4e0a5a06ead7e6bbecc1d0814c578df452",
+    "templateControl": "3d05bbff1087a5c51748b9f23e5720721541abc4dacaa4bf4ea3bedafb51e4b9",
+    "interbitRoot": "d8b872656a90f66507c5acd24f2b9c3cb20f399b9bd296c62967671a1ef65c6a"
   },
   "genesisBlocks": {
     "accountsControl": {
       "content": {
         "previousHash": "genesis",
-        "stateHash": "cf4a4db0ba7c7c1a67cc42ddba18859b8117bea26d4011ae708ce9a42f79a78e",
+        "stateHash": "bec34387e5bd0aa5db5a1c3d33b00cc2a024ad2bfed4f9016f45a8a075b4697c",
         "actions": [],
         "errors": {},
         "redispatches": {},
         "height": 0,
-        "timestamp": 1524766086527,
-        "seed": 0.27819930142121874,
+        "timestamp": 1525470577795,
+        "seed": 0.4605513442751523,
         "configChanged": true,
-        "timeToCreateBlock": 0,
+        "timeToCreateBlock": 1,
         "state": {
           "interbit": {
             "config": {
@@ -84,7 +84,8 @@
                 },
                 "roles": {
                   "root": [
-                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
+                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWut+NgECAI4y80VaEfL6tTbyECqE2rx4fmxsLc2dxQaGAIbiHjY15gaf\nHTF4zv7nWz0JNJbeN6K9/EsfPmiqXOEiUMdwvXEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa6342BgsJBwgDAgkQ1/MBdYQZN78EFQgKAgMWAgEC\nGQECGwMCHgEAAIZAAf94MBDqmbohRdBDAubCyzD0f39vYCz6ysNsOgVPVw5l\nOXjnwlsHSW3B0TixvQhrtfuSO2E1ec8mRQYZJJwvaNDEzk0EWut+NgEB/1oZ\nnEY3VWhW1+v4va/Yul6PCADi3L6kTXOA37Tu/zfVLrMXZBm4Er39i3KF1PK5\ny5BpE49vqgmIXm1wFXBXRv8AEQEAAcJfBBgBCAATBQJa6342CRDX8wF1hBk3\nvwIbDAAAevwCAIWOItKogE8OLAnGyhS3heS9oMG8/hbysWB0+5aTcO0FGyir\n28wOiF+LdzmvcYu4oo3YcDEPZHQt6FfqK1OHr4U=\r\n=zedb\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
                   ]
                 }
               },
@@ -94,12 +95,12 @@
           }
         }
       },
-      "contentHash": "0bb4299b4bb72e5944685a02b3c435534bcc3a779a10f9943c2d1471569a687a",
+      "contentHash": "994059e5b9960e351a82fb22e9ebad499ffe2e59464b66f95c07db1490f7a244",
       "signatures": {
         "GENESIS": "GENESIS"
       },
       "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
-      "blockHash": "ed3c1b057eb597267bd12ac47069d8f188ae85487bae5abd843d2cedbe912ca0"
+      "blockHash": "9f58584c030c7c366ac7730796806870dcd90c8fb415ba629e0bcaaa792c40cf"
     },
     "accountsPublic": {
       "content": {
@@ -109,8 +110,8 @@
         "errors": {},
         "redispatches": {},
         "height": 0,
-        "timestamp": 1524766086527,
-        "seed": 0.9253297004873204,
+        "timestamp": 1525470577796,
+        "seed": 0.5010602554835246,
         "configChanged": true,
         "timeToCreateBlock": 0,
         "state": {
@@ -137,23 +138,23 @@
           }
         }
       },
-      "contentHash": "779be70f323529df9bf49aef649678cb9fb25f784065bd41b1be5d088afe59f7",
+      "contentHash": "74f3101d429f8dd8557e53be949168711a2f8f2c4f403dc1246abff22c50e3cc",
       "signatures": {
         "GENESIS": "GENESIS"
       },
       "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
-      "blockHash": "0fa869ec5a0e979fdfafd4d217342d5d091a59a3284079f269ead760b35d569c"
+      "blockHash": "6cffd9f24329c49d3a5047aa187c805e20e39923a15d7f9c427bc659225c08d2"
     },
     "accountsGithubAuth": {
       "content": {
         "previousHash": "genesis",
-        "stateHash": "cf4a4db0ba7c7c1a67cc42ddba18859b8117bea26d4011ae708ce9a42f79a78e",
+        "stateHash": "bec34387e5bd0aa5db5a1c3d33b00cc2a024ad2bfed4f9016f45a8a075b4697c",
         "actions": [],
         "errors": {},
         "redispatches": {},
         "height": 0,
-        "timestamp": 1524766086528,
-        "seed": 0.5285408317475466,
+        "timestamp": 1525470577797,
+        "seed": 0.28104409215019444,
         "configChanged": true,
         "timeToCreateBlock": 0,
         "state": {
@@ -170,7 +171,8 @@
                 },
                 "roles": {
                   "root": [
-                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
+                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWut+NgECAI4y80VaEfL6tTbyECqE2rx4fmxsLc2dxQaGAIbiHjY15gaf\nHTF4zv7nWz0JNJbeN6K9/EsfPmiqXOEiUMdwvXEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa6342BgsJBwgDAgkQ1/MBdYQZN78EFQgKAgMWAgEC\nGQECGwMCHgEAAIZAAf94MBDqmbohRdBDAubCyzD0f39vYCz6ysNsOgVPVw5l\nOXjnwlsHSW3B0TixvQhrtfuSO2E1ec8mRQYZJJwvaNDEzk0EWut+NgEB/1oZ\nnEY3VWhW1+v4va/Yul6PCADi3L6kTXOA37Tu/zfVLrMXZBm4Er39i3KF1PK5\ny5BpE49vqgmIXm1wFXBXRv8AEQEAAcJfBBgBCAATBQJa6342CRDX8wF1hBk3\nvwIbDAAAevwCAIWOItKogE8OLAnGyhS3heS9oMG8/hbysWB0+5aTcO0FGyir\n28wOiF+LdzmvcYu4oo3YcDEPZHQt6FfqK1OHr4U=\r\n=zedb\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
                   ]
                 }
               },
@@ -180,12 +182,12 @@
           }
         }
       },
-      "contentHash": "0d4b48bbf96f3796096dd31e4714cef3375eba1047bff3a0851cc89fef8f9401",
+      "contentHash": "ee9b3471f0befb445d74fc3f10521fe00ba89db844a6b8c5493e4304bf9f4907",
       "signatures": {
         "GENESIS": "GENESIS"
       },
       "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
-      "blockHash": "4f8027aa24e8e13942010a0c10c1026005e7593dbbc7bf3e1faef1997d1703ce"
+      "blockHash": "7ee48aef5d991f0659261f256332ae3a5354502f7910350bdd0171e98c9dfbd3"
     },
     "templatePublic": {
       "content": {
@@ -195,8 +197,8 @@
         "errors": {},
         "redispatches": {},
         "height": 0,
-        "timestamp": 1524766086529,
-        "seed": 0.25794856355148066,
+        "timestamp": 1525470577798,
+        "seed": 0.4275372482582187,
         "configChanged": true,
         "timeToCreateBlock": 0,
         "state": {
@@ -223,12 +225,12 @@
           }
         }
       },
-      "contentHash": "b0a40c4ef6c51f6eb6c04f41489d68468a7e3bb1b5e48a34c22d8450180f0983",
+      "contentHash": "a3c39849285fb6c610e0f95845f8f488c305f3111f92dc7b914cdca4fa4a9ce8",
       "signatures": {
         "GENESIS": "GENESIS"
       },
       "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
-      "blockHash": "8afdda40b86ad927fb5c52a0b9a19301217950ec721d3407dc902aed33750d20"
+      "blockHash": "32b9365f325da189439f6d453593cf4e0a5a06ead7e6bbecc1d0814c578df452"
     },
     "templateControl": {
       "content": {
@@ -238,8 +240,8 @@
         "errors": {},
         "redispatches": {},
         "height": 0,
-        "timestamp": 1524766086529,
-        "seed": 0.7147333604316661,
+        "timestamp": 1525470577798,
+        "seed": 0.7065613937907986,
         "configChanged": true,
         "timeToCreateBlock": 0,
         "state": {
@@ -266,23 +268,23 @@
           }
         }
       },
-      "contentHash": "7e8ebfa992c029cd10fd4bc59618a9888ad457503c76cd1a05bf6cefa0ab16d4",
+      "contentHash": "8ad2584abcd81d4edb1c3aedbc5ec6d0f009276aad28bdca149fbfea44080aab",
       "signatures": {
         "GENESIS": "GENESIS"
       },
       "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
-      "blockHash": "d0890fb6db3392c7acfd5061086fc08262f66697774871b20d1a7f15f8bb15fe"
+      "blockHash": "3d05bbff1087a5c51748b9f23e5720721541abc4dacaa4bf4ea3bedafb51e4b9"
     },
     "interbitRoot": {
       "content": {
         "previousHash": "genesis",
-        "stateHash": "cf4a4db0ba7c7c1a67cc42ddba18859b8117bea26d4011ae708ce9a42f79a78e",
+        "stateHash": "bec34387e5bd0aa5db5a1c3d33b00cc2a024ad2bfed4f9016f45a8a075b4697c",
         "actions": [],
         "errors": {},
         "redispatches": {},
         "height": 0,
-        "timestamp": 1524766086530,
-        "seed": 0.9443482742485698,
+        "timestamp": 1525470577799,
+        "seed": 0.6056140449995393,
         "configChanged": true,
         "timeToCreateBlock": 0,
         "state": {
@@ -299,7 +301,8 @@
                 },
                 "roles": {
                   "root": [
-                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
+                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWut+NgECAI4y80VaEfL6tTbyECqE2rx4fmxsLc2dxQaGAIbiHjY15gaf\nHTF4zv7nWz0JNJbeN6K9/EsfPmiqXOEiUMdwvXEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa6342BgsJBwgDAgkQ1/MBdYQZN78EFQgKAgMWAgEC\nGQECGwMCHgEAAIZAAf94MBDqmbohRdBDAubCyzD0f39vYCz6ysNsOgVPVw5l\nOXjnwlsHSW3B0TixvQhrtfuSO2E1ec8mRQYZJJwvaNDEzk0EWut+NgEB/1oZ\nnEY3VWhW1+v4va/Yul6PCADi3L6kTXOA37Tu/zfVLrMXZBm4Er39i3KF1PK5\ny5BpE49vqgmIXm1wFXBXRv8AEQEAAcJfBBgBCAATBQJa6342CRDX8wF1hBk3\nvwIbDAAAevwCAIWOItKogE8OLAnGyhS3heS9oMG8/hbysWB0+5aTcO0FGyir\n28wOiF+LdzmvcYu4oo3YcDEPZHQt6FfqK1OHr4U=\r\n=zedb\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
                   ]
                 }
               },
@@ -309,18 +312,20 @@
           }
         }
       },
-      "contentHash": "e0f52a57537c8bce6165b7f4668c335fb6254209e257c7dbe81e48db41f8e905",
+      "contentHash": "9f72d684382bbc167735ad72d60c158af7b6b5bd1b189975711dd3d37ee8c035",
       "signatures": {
         "GENESIS": "GENESIS"
       },
       "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
-      "blockHash": "e6799db7249d896717ebf6c12410ac52340126f816b52cdab7db75e46a91fc2a"
+      "blockHash": "d8b872656a90f66507c5acd24f2b9c3cb20f399b9bd296c62967671a1ef65c6a"
     }
   },
   "manifest": {
     "interbitRoot": {
-      "chainId": "e6799db7249d896717ebf6c12410ac52340126f816b52cdab7db75e46a91fc2a",
+      "chainId": "d8b872656a90f66507c5acd24f2b9c3cb20f399b9bd296c62967671a1ef65c6a",
       "validators": [
+        "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
+        "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWut+NgECAI4y80VaEfL6tTbyECqE2rx4fmxsLc2dxQaGAIbiHjY15gaf\nHTF4zv7nWz0JNJbeN6K9/EsfPmiqXOEiUMdwvXEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa6342BgsJBwgDAgkQ1/MBdYQZN78EFQgKAgMWAgEC\nGQECGwMCHgEAAIZAAf94MBDqmbohRdBDAubCyzD0f39vYCz6ysNsOgVPVw5l\nOXjnwlsHSW3B0TixvQhrtfuSO2E1ec8mRQYZJJwvaNDEzk0EWut+NgEB/1oZ\nnEY3VWhW1+v4va/Yul6PCADi3L6kTXOA37Tu/zfVLrMXZBm4Er39i3KF1PK5\ny5BpE49vqgmIXm1wFXBXRv8AEQEAAcJfBBgBCAATBQJa6342CRDX8wF1hBk3\nvwIbDAAAevwCAIWOItKogE8OLAnGyhS3heS9oMG8/hbysWB0+5aTcO0FGyir\n28wOiF+LdzmvcYu4oo3YcDEPZHQt6FfqK1OHr4U=\r\n=zedb\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
         "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
       ],
       "covenants": {},

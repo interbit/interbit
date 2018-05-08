@@ -1,11 +1,11 @@
 {
   "dependencies": {
     "interbit": "0.4.7",
-    "interbit-covenant-tools": "0.4.15",
-    "interbit-ui-tools": "0.4.15",
-    "interbit-platform-tools": "0.4.15",
+    "interbit-covenant-tools": "0.4.16",
+    "interbit-ui-tools": "0.4.16",
+    "interbit-platform-tools": "0.4.16",
     "cross-env": "^5.1.4",
-    "interbit-ui-components": "0.4.15",
+    "interbit-ui-components": "0.4.16",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",

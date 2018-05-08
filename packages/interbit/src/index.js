@@ -7,6 +7,7 @@ const getPort = require('./args/getPort')
 const { getKeyPair } = require('./args/getKeyPair')
 const getManifest = require('./args/getManifest')
 
+const configureChains = require('./chainManagement/configureChains')
 const constants = require('./chainManagement/constants')
 const createChains = require('./chainManagement/createChains')
 const watchCovenants = require('./chainManagement/watchCovenants')
@@ -26,7 +27,9 @@ const {
 const configSelectors = require('./config/configSelectors')
 const validateConfig = require('./config/validateConfig')
 
-const { hoistPackages, hoistAllCovenantPackages } = require('./hoist')
+const { hoistPackages, hoistAllCovenantPackages } = require('./scripts/hoist')
+const deploy = require('./scripts/deploy')
+
 const logo = require('./logo')
 
 module.exports = {
@@ -34,8 +37,10 @@ module.exports = {
   buildManifest,
   camelCaseToHyphenated,
   configSelectors,
+  configureChains,
   constants,
   createChains,
+  deploy,
   generateDeploymentDetails,
   getArg,
   getArgs,

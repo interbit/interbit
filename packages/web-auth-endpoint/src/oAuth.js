@@ -9,23 +9,36 @@ const waitForOAuth = async (
   githubChain,
   { requestId, consumerChainId, temporaryToken, error, errorDescription }
 ) => {
-  // Trigger the oAuth saga
-  const action = actionCreators.oAuthCallback({
-    requestId,
-    consumerChainId,
-    temporaryToken,
-    error,
-    errorDescription
-  })
-  githubChain.dispatch(action)
+  try {
+    // Trigger the oAuth saga
+    const action = actionCreators.oAuthCallback({
+      requestId,
+      consumerChainId,
+      temporaryToken,
+      error,
+      errorDescription
+    })
+    await githubChain.dispatch(action)
 
-  const redirectUrl = await waitForFinalSagaAction(
-    githubChain,
-    isOAuthCompleted(requestId),
-    oAuthCompleted(requestId),
-    oAuthTimeout(requestId)
-  )
-  return redirectUrl
+    const redirectUrl = await waitForFinalSagaAction(
+      githubChain,
+      isOAuthCompleted(requestId),
+      oAuthCompleted(requestId),
+      oAuthTimeout(requestId)
+    )
+    return redirectUrl
+  } catch (e) {
+    return getRedirectUrl(githubChain.getState(), {
+      requestId,
+      error: 'failed'
+    })
+  }
+}
+
+const getRedirectUrl = (state, params = {}) => {
+  const rootUrl = selectors.callbackUrl(state)
+  const urlParams = queryString.stringify(params)
+  return urlParams ? `${rootUrl}?${urlParams}` : rootUrl
 }
 
 const isResolvingAction = requestId => action => {
@@ -43,37 +56,40 @@ const isOAuthCompleted = requestId => (state, block) => {
   return actions.some(isResolvingAction(requestId))
 }
 
-const oAuthTimeout = requestId => (state, block) => {
-  const rootUrl = selectors.callbackUrl(state)
-  const failedParams = queryString.stringify({ requestId, error: 'timeout' })
-  return `${rootUrl}?${failedParams}`
-}
+const oAuthTimeout = requestId => (state, block) =>
+  getRedirectUrl(state, {
+    requestId,
+    error: 'timeout'
+  })
 
 const oAuthCompleted = requestId => (state, block) => {
   const {
     content: { actions }
   } = block
   const action = actions.find(isResolvingAction(requestId))
-  const rootUrl = selectors.callbackUrl(state)
 
   if (!action || !action.payload) {
-    return `${rootUrl}?requestId=${requestId}&error=no-action`
+    return getRedirectUrl(state, {
+      requestId,
+      error: 'no-action'
+    })
   }
 
   const { joinName, error } = action.payload
 
   if (action.type === actionTypes.AUTH_FAILED) {
-    const failedParams = queryString.stringify({ requestId, error })
-    return `${rootUrl}?${failedParams}`
+    return getRedirectUrl(state, {
+      requestId,
+      error
+    })
   }
 
   const providerChainId = state.getIn(['interbit', 'chainId'])
-  const successParams = queryString.stringify({
+  return getRedirectUrl(state, {
     requestId,
     providerChainId,
     joinName
   })
-  return `${rootUrl}?${successParams}`
 }
 
 const waitForFinalSagaAction = (
@@ -81,7 +97,7 @@ const waitForFinalSagaAction = (
   predicate,
   resolveFunction,
   timeoutFunction,
-  maxTime = 5000
+  maxTime = Number(process.env.OAUTH_TIMEOUT || 30000)
 ) =>
   new Promise((resolve, reject) => {
     let state
@@ -102,8 +118,8 @@ const waitForFinalSagaAction = (
 
     const timeout = timeoutFunction
       ? setTimeout(() => {
-          reject(timeoutFunction(state, block))
           unsubscribe()
+          resolve(timeoutFunction(state, block))
         }, maxTime)
       : undefined
 

@@ -20,7 +20,7 @@ const waitForOAuth = async (
     })
 
     console.log('waitForOAuth: DISPATCHING: ', action)
-    await githubChain.dispatch(action)
+    githubChain.dispatch(action)
 
     const redirectUrl = await waitForFinalSagaAction(
       githubChain,

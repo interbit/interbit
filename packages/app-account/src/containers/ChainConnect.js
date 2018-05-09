@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { chainDispatch, selectors } from 'interbit-ui-tools'
 
 import { actionCreators } from '../interbit/my-account/actions'
+import { getOAuthConfig } from '../interbit/public/selectors'
 import Connecting from '../components/Connecting'
 import ConnectFormAddMissingProfileField from '../components/ConnectFormAddMissingProfileField'
 import ConnectFormContinueAuth from '../components/ConnectFormContinueAuth'
@@ -15,7 +16,7 @@ import ModalSignIn from '../components/ModalSignIn'
 import ModalSignUp from '../components/ModalSignUp'
 import { toggleModal } from '../redux/uiReducer'
 import modalNames from '../constants/modalNames'
-import { PRIVATE } from '../constants/chainAliases'
+import { PRIVATE, PUBLIC } from '../constants/chainAliases'
 
 const MODES = {
   NOT_LOGGED_IN: 0,
@@ -54,16 +55,18 @@ const mapStateToProps = (state, ownProps) => {
     mode = missingFields.length ? MODES.PROPS_MISSING : MODES.PROPS_AVAILABLE
   }
 
+  const publicChainState = selectors.getChain(state, { chainAlias: PUBLIC })
   return {
-    profileFields: chainState ? chainState.profile : {},
-    redirectUrl,
     consumerChainId: chainId,
-    requestedTokens,
-    providerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
-    mode,
+    content: state.content.chainConnect,
     isSignInModalVisible,
     isSignUpModalVisible,
-    content: state.content.chainConnect
+    mode,
+    oAuthConfig: getOAuthConfig(publicChainState),
+    profileFields: chainState ? chainState.profile : {},
+    providerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
+    redirectUrl,
+    requestedTokens
   }
 }
 
@@ -74,50 +77,53 @@ const mapDispatchToProps = dispatch => ({
 
 export class ChainConnect extends Component {
   static propTypes = {
+    blockchainDispatch: PropTypes.func.isRequired,
+    consumerChainId: PropTypes.string,
+    content: PropTypes.shape({
+      headerImage: PropTypes.string,
+      headerImageAlt: PropTypes.string,
+      title: PropTypes.string
+    }),
+    isSignInModalVisible: PropTypes.bool,
+    isSignUpModalVisible: PropTypes.bool,
+    mode: PropTypes.number,
+    // eslint-disable-next-line
+    oAuthConfig: PropTypes.object,
     profileFields: PropTypes.shape({
       alias: PropTypes.string,
       email: PropTypes.string,
       name: PropTypes.string
     }),
-    redirectUrl: PropTypes.string,
     providerChainId: PropTypes.string,
-    consumerChainId: PropTypes.string,
+    redirectUrl: PropTypes.string,
     requestedTokens: PropTypes.arrayOf(PropTypes.string),
-    blockchainDispatch: PropTypes.func.isRequired,
-    mode: PropTypes.number,
-    isSignInModalVisible: PropTypes.bool,
-    isSignUpModalVisible: PropTypes.bool,
-    toggleModalFunction: PropTypes.func.isRequired,
-    content: PropTypes.shape({
-      headerImage: PropTypes.string,
-      headerImageAlt: PropTypes.string,
-      title: PropTypes.string
-    })
+    toggleModalFunction: PropTypes.func.isRequired
   }
 
   static defaultProps = {
-    profileFields: {},
-    redirectUrl: '',
-    providerChainId: '',
     consumerChainId: '',
-    requestedTokens: [],
-    mode: MODES.LOADING_CHAIN,
-    isSignInModalVisible: false,
-    isSignUpModalVisible: false,
     content: {
       headerImage: '',
       headerImageAlt: '',
       title: ''
-    }
+    },
+    isSignInModalVisible: false,
+    isSignUpModalVisible: false,
+    mode: MODES.LOADING_CHAIN,
+    oAuthConfig: {},
+    profileFields: {},
+    providerChainId: '',
+    redirectUrl: '',
+    requestedTokens: []
   }
 
   doConnectChains = async () => {
     const {
       blockchainDispatch,
-      providerChainId,
       consumerChainId,
-      requestedTokens,
-      redirectUrl
+      providerChainId,
+      redirectUrl,
+      requestedTokens
     } = this.props
 
     const shareProfileTokensAction = actionCreators.shareProfileTokens({
@@ -137,15 +143,17 @@ export class ChainConnect extends Component {
 
   render() {
     const {
-      mode,
+      blockchainDispatch,
       consumerChainId,
-      requestedTokens,
-      profileFields,
+      content,
       isSignInModalVisible,
       isSignUpModalVisible,
-      toggleModalFunction,
+      mode,
+      oAuthConfig,
+      profileFields,
       providerChainId,
-      content
+      requestedTokens,
+      toggleModalFunction
     } = this.props
 
     const colLayout = {
@@ -213,14 +221,20 @@ export class ChainConnect extends Component {
 
         {/* TODO: consolidate these two modals */}
         <ModalSignIn
+          blockchainDispatch={blockchainDispatch}
+          consumerChainId={consumerChainId}
+          oAuthConfig={oAuthConfig}
+          serviceName={consumerChainId}
           show={isSignInModalVisible}
           toggleModal={toggleModalFunction}
-          serviceName={consumerChainId}
         />
         <ModalSignUp
+          blockchainDispatch={blockchainDispatch}
+          consumerChainId={consumerChainId}
+          oAuthConfig={oAuthConfig}
+          serviceName={consumerChainId}
           show={isSignUpModalVisible}
           toggleModal={toggleModalFunction}
-          serviceName={consumerChainId}
         />
       </Grid>
     )

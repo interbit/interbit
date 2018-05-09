@@ -44,10 +44,7 @@ export default class ConnectFormLoggedOut extends Component {
             ))}
           </tbody>
         </Table>
-        <p>
-          Your (unfilled field name) will be added to your interbit identity and
-          can be used in other apps that require a (unfilled field name).
-        </p>
+
         <div className="btn-container">
           <IconButton
             text="Create Account"

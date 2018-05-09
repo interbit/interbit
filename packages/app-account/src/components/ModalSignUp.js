@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Button, Checkbox } from 'react-bootstrap'
 import {
   ContentBar,
@@ -8,22 +9,44 @@ import {
   ModalWrapper
 } from 'interbit-ui-components'
 
+import Authentication from '../components/Authentication'
 import modalNames from '../constants/modalNames'
 import iconGitHub from '../assets/icons/iconGitHub.svg'
 
-export default class ModalSignUp extends Component {
+const mapStateToProps = state => ({
+  contentBars: state.content.contentBars
+})
+
+export class ModalSignUp extends Component {
   static propTypes = {
+    blockchainDispatch: PropTypes.func,
+    consumerChainId: PropTypes.string,
+    contentBars: PropTypes.shape({}),
+    // eslint-disable-next-line
+    oAuthConfig: PropTypes.object,
+    serviceName: PropTypes.string,
     show: PropTypes.bool.isRequired,
-    toggleModal: PropTypes.func.isRequired,
-    serviceName: PropTypes.string
+    toggleModal: PropTypes.func.isRequired
   }
 
   static defaultProps = {
+    blockchainDispatch: () => {},
+    consumerChainId: '',
+    contentBars: {},
+    oAuthConfig: {},
     serviceName: ''
   }
 
   render() {
-    const { show, toggleModal, serviceName } = this.props
+    const {
+      blockchainDispatch,
+      consumerChainId,
+      contentBars,
+      oAuthConfig,
+      serviceName,
+      show,
+      toggleModal
+    } = this.props
 
     const header = (
       <div>
@@ -45,6 +68,12 @@ export default class ModalSignUp extends Component {
           <Divider />
           <IconButton text="Continue" />
         </ContentBar>
+        <Authentication
+          blockchainDispatch={blockchainDispatch}
+          consumerChainId={consumerChainId}
+          oAuthConfig={oAuthConfig}
+          {...contentBars.gitHubCreateAccount}
+        />
       </div>
     )
 
@@ -57,7 +86,14 @@ export default class ModalSignUp extends Component {
           }}>
           Cancel
         </Button>
-        <Button className="text-button">Already have an account?</Button>
+        <Button
+          className="text-button"
+          onClick={() => {
+            toggleModal(modalNames.SIGN_UP_MODAL_NAME)
+            toggleModal(modalNames.SIGN_IN_MODAL_NAME)
+          }}>
+          Already have an account?
+        </Button>
       </div>
     )
 
@@ -72,3 +108,5 @@ export default class ModalSignUp extends Component {
     )
   }
 }
+
+export default connect(mapStateToProps)(ModalSignUp)

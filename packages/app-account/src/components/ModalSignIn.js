@@ -1,29 +1,45 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
-import {
-  ContentBar,
-  Divider,
-  IconButton,
-  ModalWrapper
-} from 'interbit-ui-components'
+import { ModalWrapper } from 'interbit-ui-components'
 
+import Authentication from '../components/Authentication'
 import modalNames from '../constants/modalNames'
-import iconGitHub from '../assets/icons/iconGitHub.svg'
 
-export default class ModalSignIn extends Component {
+const mapStateToProps = state => ({
+  contentBars: state.content.contentBars
+})
+export class ModalSignIn extends Component {
   static propTypes = {
+    blockchainDispatch: PropTypes.func,
+    consumerChainId: PropTypes.string,
+    contentBars: PropTypes.shape({}),
+    // eslint-disable-next-line
+    oAuthConfig: PropTypes.object,
+    serviceName: PropTypes.string,
     show: PropTypes.bool.isRequired,
-    toggleModal: PropTypes.func.isRequired,
-    serviceName: PropTypes.string
+    toggleModal: PropTypes.func.isRequired
   }
 
   static defaultProps = {
+    blockchainDispatch: () => {},
+    consumerChainId: '',
+    contentBars: {},
+    oAuthConfig: {},
     serviceName: ''
   }
 
   render() {
-    const { show, toggleModal, serviceName } = this.props
+    const {
+      blockchainDispatch,
+      consumerChainId,
+      contentBars,
+      oAuthConfig,
+      serviceName,
+      show,
+      toggleModal
+    } = this.props
 
     const header = (
       <div>
@@ -34,16 +50,12 @@ export default class ModalSignIn extends Component {
     )
 
     const body = (
-      <div>
-        <ContentBar
-          image={iconGitHub}
-          className="image-sm"
-          title="Sign in with GitHub">
-          <p>Authenticate with GitHub to sign in to your account.</p>
-          <Divider />
-          <IconButton text="Continue" />
-        </ContentBar>
-      </div>
+      <Authentication
+        blockchainDispatch={blockchainDispatch}
+        consumerChainId={consumerChainId}
+        oAuthConfig={oAuthConfig}
+        {...contentBars.gitHubSignIn}
+      />
     )
 
     const footer = (
@@ -55,7 +67,14 @@ export default class ModalSignIn extends Component {
           }}>
           Cancel
         </Button>
-        <Button className="text-button">Don&rsquo;t have an account?</Button>
+        <Button
+          className="text-button"
+          onClick={() => {
+            toggleModal(modalNames.SIGN_IN_MODAL_NAME)
+            toggleModal(modalNames.SIGN_UP_MODAL_NAME)
+          }}>
+          Don&rsquo;t have an account?
+        </Button>
       </div>
     )
 
@@ -70,3 +89,5 @@ export default class ModalSignIn extends Component {
     )
   }
 }
+
+export default connect(mapStateToProps)(ModalSignIn)

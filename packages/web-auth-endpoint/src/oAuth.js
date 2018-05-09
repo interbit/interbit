@@ -18,6 +18,8 @@ const waitForOAuth = async (
       error,
       errorDescription
     })
+
+    console.log('waitForOAuth: DISPATCHING: ', action)
     await githubChain.dispatch(action)
 
     const redirectUrl = await waitForFinalSagaAction(
@@ -28,6 +30,7 @@ const waitForOAuth = async (
     )
     return redirectUrl
   } catch (e) {
+    console.log('waitForOAuth: ERROR: ', e.message || e)
     return getRedirectUrl(githubChain.getState(), {
       requestId,
       error: 'failed'
@@ -38,7 +41,9 @@ const waitForOAuth = async (
 const getRedirectUrl = (state, params = {}) => {
   const rootUrl = selectors.callbackUrl(state)
   const urlParams = queryString.stringify(params)
-  return urlParams ? `${rootUrl}?${urlParams}` : rootUrl
+  const result = urlParams ? `${rootUrl}?${urlParams}` : rootUrl
+  console.log('getRedirectUrl', result)
+  return result
 }
 
 const isResolvingAction = requestId => action => {
@@ -56,13 +61,16 @@ const isOAuthCompleted = requestId => (state, block) => {
   return actions.some(isResolvingAction(requestId))
 }
 
-const oAuthTimeout = requestId => (state, block) =>
+const oAuthTimeout = requestId => (state, block) => {
+  console.log('oAuthTimeout')
   getRedirectUrl(state, {
     requestId,
     error: 'timeout'
   })
+}
 
 const oAuthCompleted = requestId => (state, block) => {
+  console.log('oAuthCompleted')
   const {
     content: { actions }
   } = block
@@ -98,14 +106,17 @@ const waitForFinalSagaAction = (
   resolveFunction,
   timeoutFunction,
   maxTime = Number(process.env.OAUTH_TIMEOUT || 30000)
-) =>
-  new Promise((resolve, reject) => {
+) => {
+  console.log('waitForFinalSagaAction')
+
+  return new Promise((resolve, reject) => {
     let state
     let block
 
     const tester = () => {
       state = chain.getState()
       block = chain.getCurrentBlock()
+      console.log('tester', { state, block })
       return predicate(state, block)
     }
 
@@ -131,5 +142,6 @@ const waitForFinalSagaAction = (
       }
     })
   })
+}
 
 module.exports = waitForOAuth

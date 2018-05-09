@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Button, Checkbox } from 'react-bootstrap'
-import {
-  ContentBar,
-  Divider,
-  IconButton,
-  ModalWrapper
-} from 'interbit-ui-components'
+import { Button } from 'react-bootstrap'
+import { ModalWrapper } from 'interbit-ui-components'
 
 import Authentication from '../components/Authentication'
 import modalNames from '../constants/modalNames'
-import iconGitHub from '../assets/icons/iconGitHub.svg'
 
 const mapStateToProps = state => ({
   contentBars: state.content.contentBars
@@ -57,24 +51,12 @@ export class ModalSignUp extends Component {
     )
 
     const body = (
-      <div>
-        <ContentBar
-          image={iconGitHub}
-          className="image-sm"
-          title="Sign up with GitHub">
-          <Checkbox inline={false}>
-            Allow Interbit to access your GitHub username and user ID.
-          </Checkbox>
-          <Divider />
-          <IconButton text="Continue" />
-        </ContentBar>
-        <Authentication
-          blockchainDispatch={blockchainDispatch}
-          consumerChainId={consumerChainId}
-          oAuthConfig={oAuthConfig}
-          {...contentBars.gitHubCreateAccount}
-        />
-      </div>
+      <Authentication
+        blockchainDispatch={blockchainDispatch}
+        consumerChainId={consumerChainId}
+        oAuthConfig={oAuthConfig}
+        {...contentBars.gitHubCreateAccount}
+      />
     )
 
     const footer = (

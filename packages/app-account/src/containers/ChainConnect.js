@@ -62,6 +62,7 @@ const mapStateToProps = (state, ownProps) => {
     isSignInModalVisible,
     isSignUpModalVisible,
     mode,
+    missingFields,
     oAuthConfig: getOAuthConfig(publicChainState),
     profileFields: chainState ? chainState.profile : {},
     providerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
@@ -86,6 +87,7 @@ export class ChainConnect extends Component {
     }),
     isSignInModalVisible: PropTypes.bool,
     isSignUpModalVisible: PropTypes.bool,
+    missingFields: PropTypes.arrayOf(PropTypes.string),
     mode: PropTypes.number,
     // eslint-disable-next-line
     oAuthConfig: PropTypes.object,
@@ -109,6 +111,7 @@ export class ChainConnect extends Component {
     },
     isSignInModalVisible: false,
     isSignUpModalVisible: false,
+    missingFields: [],
     mode: MODES.LOADING_CHAIN,
     oAuthConfig: {},
     profileFields: {},
@@ -148,6 +151,7 @@ export class ChainConnect extends Component {
       content,
       isSignInModalVisible,
       isSignUpModalVisible,
+      missingFields,
       mode,
       oAuthConfig,
       profileFields,
@@ -180,9 +184,10 @@ export class ChainConnect extends Component {
         case MODES.PROPS_MISSING:
           return (
             <ConnectFormMissingProfileField
-              profileFields={profileFields}
               image={content.headerImage}
               imageAlt={content.headerImageAlt}
+              missingFields={missingFields}
+              profileFields={profileFields}
               title={componentTitle}
             />
           )

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { Grid, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
+import { SubmissionError } from 'redux-form'
 import { chainDispatch, selectors } from 'interbit-ui-tools'
 
 import { actionCreators } from '../interbit/my-account/actions'
@@ -144,6 +145,18 @@ export class ChainConnect extends Component {
     window.location.replace(nextUrl)
   }
 
+  submitMissingProfileFieldForm = formValues => {
+    try {
+      const action = actionCreators.updateProfile(formValues)
+      this.props.blockchainDispatch(action)
+    } catch (error) {
+      console.log(error)
+      throw new SubmissionError({
+        _error: error.message
+      })
+    }
+  }
+
   render() {
     const {
       blockchainDispatch,
@@ -194,9 +207,11 @@ export class ChainConnect extends Component {
         case MODES.PROPS_ADDING:
           return (
             <ConnectFormAddMissingProfileField
-              profileFields={profileFields}
               image={content.headerImage}
               imageAlt={content.headerImageAlt}
+              missingFields={missingFields}
+              profileFields={profileFields}
+              onSubmit={this.submitMissingProfileFieldForm}
               title={componentTitle}
             />
           )

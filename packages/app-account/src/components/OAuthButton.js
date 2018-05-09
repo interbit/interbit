@@ -18,14 +18,13 @@ const authenticationHandler = ({
   console.log(oAuthProvider, oAuthConfig)
 
   if (serviceEndPoint) {
-    const requestId = uuid.v4()
     const queryOpts = { ...params, state: consumerChainId }
     const queryParams = queryString.stringify(queryOpts)
 
     const connectUrl = `${serviceEndPoint}?${queryParams}`
     const action = actionCreators.startAuthentication({
       oAuthProvider,
-      requestId
+      requestId: consumerChainId
     })
     await blockchainDispatch(action)
     window.location = connectUrl

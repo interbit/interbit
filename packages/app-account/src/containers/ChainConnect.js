@@ -154,6 +154,12 @@ export class ChainConnect extends Component {
     window.location.replace(nextUrl)
   }
 
+  cancelConnectChains = () => {
+    const { redirectUrl } = this.props
+    const nextUrl = `${redirectUrl}/?error=cancel`
+    window.location.replace(nextUrl)
+  }
+
   submitMissingProfileFieldForm = formValues => {
     try {
       const action = actionCreators.updateProfile(formValues)
@@ -198,11 +204,12 @@ export class ChainConnect extends Component {
         case MODES.NOT_LOGGED_IN:
           return (
             <ConnectFormLoggedOut
-              toggleModalFunction={toggleModalFunction}
-              requestedTokens={requestedTokens}
               image={content.headerImage}
               imageAlt={content.headerImageAlt}
+              onCancel={this.cancelConnectChains}
+              requestedTokens={requestedTokens}
               title={componentTitle}
+              toggleModalFunction={toggleModalFunction}
             />
           )
         case MODES.ADD_PROFILE_FIELDS:
@@ -211,6 +218,7 @@ export class ChainConnect extends Component {
               image={content.headerImage}
               imageAlt={content.headerImageAlt}
               missingFields={missingFields}
+              onCancel={this.cancelConnectChains}
               profileFields={profileFields}
               {...profileFormProps}
               onSubmit={this.submitMissingProfileFieldForm}
@@ -228,6 +236,7 @@ export class ChainConnect extends Component {
               doConnectChains={this.doConnectChains}
               image={content.headerImage}
               imageAlt={content.headerImageAlt}
+              onCancel={this.cancelConnectChains}
               title={componentTitle}
             />
           )

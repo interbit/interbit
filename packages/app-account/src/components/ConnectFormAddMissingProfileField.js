@@ -22,6 +22,7 @@ export class ConnectFormAddMissingProfileField extends Component {
     imageAlt: PropTypes.string,
     isEditable: PropTypes.bool,
     missingFields: PropTypes.arrayOf(PropTypes.string),
+    onCancel: PropTypes.func,
     profileFields: PropTypes.shape({}),
     handleSubmit: PropTypes.func.isRequired,
     title: PropTypes.string,
@@ -33,6 +34,7 @@ export class ConnectFormAddMissingProfileField extends Component {
     imageAlt: '',
     isEditable: false,
     missingFields: [],
+    onCancel: undefined,
     profileFields: {},
     title: ''
   }
@@ -43,6 +45,7 @@ export class ConnectFormAddMissingProfileField extends Component {
       imageAlt,
       isEditable,
       missingFields,
+      onCancel,
       profileFields,
       handleSubmit,
       title,
@@ -75,7 +78,11 @@ export class ConnectFormAddMissingProfileField extends Component {
           </tbody>
         </Table>
         <IconButton text="Continue" className="disabled" />
-        <IconButton text="Go Back" className="secondary" />
+        <IconButton
+          text="Go Back"
+          className="secondary"
+          onClick={() => onCancel()}
+        />
       </div>
     )
 

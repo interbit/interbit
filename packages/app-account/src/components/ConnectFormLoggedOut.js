@@ -7,26 +7,29 @@ import modalNames from '../constants/modalNames'
 
 export default class ConnectFormLoggedOut extends Component {
   static propTypes = {
-    toggleModalFunction: PropTypes.func.isRequired,
-    requestedTokens: PropTypes.arrayOf(PropTypes.string),
     image: PropTypes.string,
     imageAlt: PropTypes.string,
+    onCancel: PropTypes.func,
+    requestedTokens: PropTypes.arrayOf(PropTypes.string),
+    toggleModalFunction: PropTypes.func.isRequired,
     title: PropTypes.string
   }
 
   static defaultProps = {
-    requestedTokens: [],
     image: '',
     imageAlt: '',
+    onCancel: undefined,
+    requestedTokens: [],
     title: ''
   }
 
   render() {
     const {
-      toggleModalFunction,
-      requestedTokens,
       image,
       imageAlt,
+      onCancel,
+      requestedTokens,
+      toggleModalFunction,
       title
     } = this.props
 
@@ -52,7 +55,11 @@ export default class ConnectFormLoggedOut extends Component {
               toggleModalFunction(modalNames.SIGN_UP_MODAL_NAME)
             }}
           />
-          <IconButton text="Go Back" className="secondary" />
+          <IconButton
+            text="Go Back"
+            className="secondary"
+            onClick={() => onCancel()}
+          />
         </div>
         <div className="text-btn-container">
           <Button

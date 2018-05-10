@@ -1,6 +1,6 @@
 const generateUrlEntry = (name, port) =>
   process.env.REACT_APP_STAGE
-    ? `https://ib-${process.env.REACT_APP_STAGE}-${name}.herokuapp.com`
+    ? `https://ib-${process.env.REACT_APP_STAGE}-${name}.herokuapp.com:443`
     : `http://localhost:${port}`
 
 const interbitServices = {

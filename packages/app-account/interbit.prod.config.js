@@ -7,7 +7,10 @@ const WEB_AUTH_PUB_KEY =
   '-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWut+NgECAI4y80VaEfL6tTbyECqE2rx4fmxsLc2dxQaGAIbiHjY15gaf\nHTF4zv7nWz0JNJbeN6K9/EsfPmiqXOEiUMdwvXEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa6342BgsJBwgDAgkQ1/MBdYQZN78EFQgKAgMWAgEC\nGQECGwMCHgEAAIZAAf94MBDqmbohRdBDAubCyzD0f39vYCz6ysNsOgVPVw5l\nOXjnwlsHSW3B0TixvQhrtfuSO2E1ec8mRQYZJJwvaNDEzk0EWut+NgEB/1oZ\nnEY3VWhW1+v4va/Yul6PCADi3L6kTXOA37Tu/zfVLrMXZBm4Er39i3KF1PK5\ny5BpE49vqgmIXm1wFXBXRv8AEQEAAcJfBBgBCAATBQJa6342CRDX8wF1hBk3\nvwIbDAAAevwCAIWOItKogE8OLAnGyhS3heS9oMG8/hbysWB0+5aTcO0FGyir\n28wOiF+LdzmvcYu4oo3YcDEPZHQt6FfqK1OHr4U=\r\n=zedb\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n'
 
 const config = {
-  peers: ['ib-dev----master.herokuapp.com', 'ib-dev-web-auth.herokuapp.com'],
+  peers: [
+    'ib-dev----master.herokuapp.com:443',
+    'ib-dev-web-auth.herokuapp.com:443'
+  ],
   adminValidators: [PUB_KEY, WEB_AUTH_PUB_KEY],
   staticChains: {
     [chainAliases.CONTROL]: {
@@ -77,7 +80,7 @@ const config = {
   },
   apps: {
     account: {
-      peers: ['ib-dev----master.herokuapp.com'], // the peers the browser should connect to
+      peers: ['ib-dev----master.herokuapp.com:443'], // the peers the browser should connect to
       chains: [chainAliases.PUBLIC], // the chains that need to load in the browser
       appChain: chainAliases.PUBLIC, // The chain that the static page is loaded on
       indexLocation: path.join(__dirname, 'public/index.html'), // the index.html to update with the app info

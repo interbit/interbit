@@ -1,5 +1,10 @@
 const uuid = require('uuid')
 
+const {
+  validate,
+  objectValidationRules: { required, matches, chainIdPattern, object }
+} = require('interbit-covenant-tools')
+
 const covenantName = 'app-account-github-kyc'
 
 const actionTypes = {
@@ -18,6 +23,10 @@ const actionTypes = {
 
 const generateJoinName = () => `GITHUB-${uuid.v4().toUpperCase()}`
 
+const GITHUB_JOIN_PATTERN = /^GITHUB-[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/
+const GITHUB_CLIENT_ID_PATTERN = /^[0-9A-Fa-f]{20}$/
+const GITHUB_CLIENT_SECRET_PATTERN = /^[0-9A-Fa-f]{40}$/
+
 const actionCreators = {
   configureOauthApp: ({
     oldClientId,
@@ -29,15 +38,22 @@ const actionCreators = {
     allowSignup = true
   }) => ({
     type: actionTypes.CONFIGURE_OAUTH_APP,
-    payload: {
-      oldClientId,
-      newClientId,
-      oldClientSecret,
-      newClientSecret,
-      redirectUrl,
-      scope,
-      allowSignup
-    }
+    payload: validate(
+      {
+        oldClientId,
+        newClientId,
+        oldClientSecret,
+        newClientSecret,
+        redirectUrl,
+        scope,
+        allowSignup
+      },
+      {
+        newCliendId: matches(GITHUB_CLIENT_ID_PATTERN),
+        newClientSecret: matches(GITHUB_CLIENT_SECRET_PATTERN),
+        redirectUrl: required()
+      }
+    )
   }),
 
   oAuthCallback: ({
@@ -48,14 +64,19 @@ const actionCreators = {
     errorDescription
   }) => ({
     type: actionTypes.OAUTH_CALLBACK,
-    payload: {
-      requestId,
-      consumerChainId,
-      joinName: generateJoinName(),
-      temporaryToken,
-      error,
-      errorDescription
-    }
+    payload: validate(
+      {
+        requestId,
+        consumerChainId,
+        joinName: generateJoinName(),
+        temporaryToken,
+        error,
+        errorDescription
+      },
+      {
+        requestId: required()
+      }
+    )
   }),
 
   oAuthCallbackSaga: ({
@@ -67,51 +88,113 @@ const actionCreators = {
     errorDescription
   }) => ({
     type: actionTypes.OAUTH_CALLBACK_SAGA,
-    payload: {
-      requestId,
-      consumerChainId,
-      joinName,
-      temporaryToken,
-      error,
-      errorDescription
-    }
+    payload: validate(
+      {
+        requestId,
+        consumerChainId,
+        joinName,
+        temporaryToken,
+        error,
+        errorDescription
+      },
+      {
+        requestId: required()
+      }
+    )
   }),
 
   authRequested: ({ requestId, temporaryToken }) => ({
     type: actionTypes.AUTH_REQUESTED,
-    payload: { requestId, temporaryToken }
+    payload: validate(
+      {
+        requestId,
+        temporaryToken
+      },
+      {
+        requestId: required(),
+        temporaryToken: required()
+      }
+    )
   }),
 
   authSuceeded: ({ requestId, joinName }) => ({
     type: actionTypes.AUTH_SUCEEDED,
-    payload: { requestId, joinName }
+    payload: validate(
+      {
+        requestId,
+        joinName
+      },
+      {
+        requestId: required(),
+        joinName: required()
+      }
+    )
   }),
 
   authFailed: ({ requestId, consumerChainId, error }) => ({
     type: actionTypes.AUTH_FAILED,
-    payload: { requestId, consumerChainId, error }
+    payload: validate(
+      {
+        requestId,
+        consumerChainId,
+        error
+      },
+      {
+        requestId: required()
+      }
+    )
   }),
 
   updateProfile: ({ consumerChainId, profile }) => ({
     type: actionTypes.UPDATE_PROFILE,
-    payload: { consumerChainId, profile }
+    payload: validate(
+      {
+        consumerChainId,
+        profile
+      },
+      {
+        consumerChainId: chainIdPattern(),
+        profile: object()
+      }
+    )
   }),
 
   shareProfile: ({ consumerChainId, joinName }) => ({
     type: actionTypes.SHARE_PROFILE,
-    payload: { consumerChainId, joinName }
+    payload: validate(
+      {
+        consumerChainId,
+        joinName
+      },
+      {
+        consumerChainId: chainIdPattern(),
+        joinName: matches(GITHUB_JOIN_PATTERN)
+      }
+    )
   }),
 
   removeProfile: ({ consumerChainId }) => ({
     type: actionTypes.REMOVE_PROFILE,
-    payload: { consumerChainId }
+    payload: validate(
+      {
+        consumerChainId
+      },
+      {
+        consumerChainId: chainIdPattern()
+      }
+    )
   }),
 
   signOut: ({ consumerChainId }) => ({
     type: actionTypes.SIGN_OUT,
-    payload: {
-      consumerChainId
-    }
+    payload: validate(
+      {
+        consumerChainId
+      },
+      {
+        consumerChainId: chainIdPattern()
+      }
+    )
   })
 }
 

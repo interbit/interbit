@@ -2,7 +2,7 @@
 const DEFAULT_PORT = 443
 
 const connectToPeers = async (cli, manifestPeers = []) => {
-  const peerOverride = process.env.CONNECT_TO_PEERS || ''
+  const peerOverride = process.env.CONNECT_TO_PEERS
   const peers = peerOverride ? peerOverride.split(',') : manifestPeers
 
   console.log('CONNECTING TO PEERS', peers)

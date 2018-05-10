@@ -5,7 +5,7 @@ const PUBLIC_KEY =
 
 const config = {
   // TODO: Ensure that at least one account chain is set as a peer
-  peers: ['ib-dev----master.herokuapp.com'],
+  peers: ['ib-dev----master.herokuapp.com:443'],
   adminValidators: [PUBLIC_KEY],
   staticChains: {
     // The public chain runs on the browser and is the entry point for the application

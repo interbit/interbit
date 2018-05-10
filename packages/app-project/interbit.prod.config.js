@@ -2,7 +2,7 @@ const path = require('path')
 const chainAliases = require('./src/constants/chainAliases')
 
 const config = {
-  peers: ['ib-dev----master.herokuapp.com'],
+  peers: ['ib-dev----master.herokuapp.com:443'],
   adminValidators: [],
   staticChains: {
     [chainAliases.MY_PROJECTS]: {

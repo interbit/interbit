@@ -12,19 +12,18 @@ import Connecting from '../components/Connecting'
 import ConnectFormAddMissingProfileField from '../components/ConnectFormAddMissingProfileField'
 import ConnectFormContinueAuth from '../components/ConnectFormContinueAuth'
 import ConnectFormLoggedOut from '../components/ConnectFormLoggedOut'
-import ConnectFormMissingProfileField from '../components/ConnectFormMissingProfileField'
 import ModalSignIn from '../components/ModalSignIn'
 import ModalSignUp from '../components/ModalSignUp'
-import { toggleModal } from '../redux/uiReducer'
+import { toggleForm, toggleModal } from '../redux/uiReducer'
+import formNames from '../constants/formNames'
 import modalNames from '../constants/modalNames'
 import { PRIVATE, PUBLIC } from '../constants/chainAliases'
 
 const MODES = {
   NOT_LOGGED_IN: 0,
-  PROPS_MISSING: 1,
-  PROPS_ADDING: 2,
-  PROPS_AVAILABLE: 3,
-  LOADING_CHAIN: 4
+  ADD_PROFILE_FIELDS: 1,
+  CONTINUE_CAUTH: 2,
+  LOADING_CHAIN: 3
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -41,12 +40,17 @@ const mapStateToProps = (state, ownProps) => {
 
   const isSignInModalVisible = state.ui.modals[modalNames.SIGN_IN_MODAL_NAME]
   const isSignUpModalVisible = state.ui.modals[modalNames.SIGN_UP_MODAL_NAME]
+  const isProfileFormEditable =
+    state.ui.editableForms[formNames.CAUTH_ADD_REQUESTED_TOKENS]
 
   // TODO: isLoggedIn === true if gitHub oauth has completed and private chain is loaded
   const isLoggedIn = true
   let mode
   let missingFields = []
-  const profileFormProps = {}
+
+  const profileFormProps = {
+    isEditable: isProfileFormEditable
+  }
 
   if (!isChainLoaded) {
     mode = MODES.LOADING_CHAIN
@@ -55,7 +59,9 @@ const mapStateToProps = (state, ownProps) => {
   } else if (profileFields) {
     missingFields = requestedTokens.filter(t => !profileFields[t])
     profileFormProps.initialValues = profileFields
-    mode = missingFields.length ? MODES.PROPS_MISSING : MODES.PROPS_AVAILABLE
+    mode = missingFields.length
+      ? MODES.ADD_PROFILE_FIELDS
+      : MODES.CONTINUE_CAUTH
   }
 
   const publicChainState = selectors.getChain(state, { chainAlias: PUBLIC })
@@ -77,6 +83,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
   blockchainDispatch: action => dispatch(chainDispatch(PRIVATE, action)),
+  toggleFormFunction: formName => dispatch(toggleForm(formName)),
   toggleModalFunction: modalName => dispatch(toggleModal(modalName))
 })
 
@@ -100,6 +107,7 @@ export class ChainConnect extends Component {
     providerChainId: PropTypes.string,
     redirectUrl: PropTypes.string,
     requestedTokens: PropTypes.arrayOf(PropTypes.string),
+    toggleFormFunction: PropTypes.func.isRequired,
     toggleModalFunction: PropTypes.func.isRequired
   }
 
@@ -172,6 +180,7 @@ export class ChainConnect extends Component {
       profileFormProps,
       providerChainId,
       requestedTokens,
+      toggleFormFunction,
       toggleModalFunction
     } = this.props
 
@@ -196,17 +205,7 @@ export class ChainConnect extends Component {
               title={componentTitle}
             />
           )
-        case MODES.PROPS_MISSING:
-          return (
-            <ConnectFormMissingProfileField
-              image={content.headerImage}
-              imageAlt={content.headerImageAlt}
-              missingFields={missingFields}
-              profileFields={profileFields}
-              title={componentTitle}
-            />
-          )
-        case MODES.PROPS_ADDING:
+        case MODES.ADD_PROFILE_FIELDS:
           return (
             <ConnectFormAddMissingProfileField
               image={content.headerImage}
@@ -216,9 +215,10 @@ export class ChainConnect extends Component {
               {...profileFormProps}
               onSubmit={this.submitMissingProfileFieldForm}
               title={componentTitle}
+              toggleForm={toggleFormFunction}
             />
           )
-        case MODES.PROPS_AVAILABLE:
+        case MODES.CONTINUE_CAUTH:
         default:
           return (
             <ConnectFormContinueAuth

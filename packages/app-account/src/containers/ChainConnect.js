@@ -46,6 +46,7 @@ const mapStateToProps = (state, ownProps) => {
   const isLoggedIn = true
   let mode
   let missingFields = []
+  const profileFormProps = {}
 
   if (!isChainLoaded) {
     mode = MODES.LOADING_CHAIN
@@ -53,6 +54,7 @@ const mapStateToProps = (state, ownProps) => {
     mode = MODES.NOT_LOGGED_IN
   } else if (profileFields) {
     missingFields = requestedTokens.filter(t => !profileFields[t])
+    profileFormProps.initialValues = profileFields
     mode = missingFields.length ? MODES.PROPS_MISSING : MODES.PROPS_AVAILABLE
   }
 
@@ -66,6 +68,7 @@ const mapStateToProps = (state, ownProps) => {
     missingFields,
     oAuthConfig: getOAuthConfig(publicChainState),
     profileFields: chainState ? chainState.profile : {},
+    profileFormProps,
     providerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
     redirectUrl,
     requestedTokens
@@ -92,11 +95,8 @@ export class ChainConnect extends Component {
     mode: PropTypes.number,
     // eslint-disable-next-line
     oAuthConfig: PropTypes.object,
-    profileFields: PropTypes.shape({
-      alias: PropTypes.string,
-      email: PropTypes.string,
-      name: PropTypes.string
-    }),
+    profileFields: PropTypes.shape({}),
+    profileFormProps: PropTypes.shape({}),
     providerChainId: PropTypes.string,
     redirectUrl: PropTypes.string,
     requestedTokens: PropTypes.arrayOf(PropTypes.string),
@@ -116,6 +116,7 @@ export class ChainConnect extends Component {
     mode: MODES.LOADING_CHAIN,
     oAuthConfig: {},
     profileFields: {},
+    profileFormProps: {},
     providerChainId: '',
     redirectUrl: '',
     requestedTokens: []
@@ -168,6 +169,7 @@ export class ChainConnect extends Component {
       mode,
       oAuthConfig,
       profileFields,
+      profileFormProps,
       providerChainId,
       requestedTokens,
       toggleModalFunction
@@ -211,6 +213,7 @@ export class ChainConnect extends Component {
               imageAlt={content.headerImageAlt}
               missingFields={missingFields}
               profileFields={profileFields}
+              {...profileFormProps}
               onSubmit={this.submitMissingProfileFieldForm}
               title={componentTitle}
             />

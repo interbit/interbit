@@ -46,7 +46,7 @@ const createChainsFromManifest = async (location, cli, manifest, options) => {
     }
 
     const chain = cli.getChain(chainId)
-    await chain.dispatch({ type: '@@interbit/DEPLOY' })
+    chain.dispatch({ type: '@@interbit/DEPLOY' })
   }
 }
 

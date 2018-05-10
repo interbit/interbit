@@ -92,19 +92,18 @@ export class ConnectFormAddMissingProfileField extends Component {
                 </td>
               </tr>
             ))}
-            {!!missingFields.length &&
-              missingFields.map(field => (
-                <tr key={field}>
-                  <td colSpan={2} className="form-td">
-                    <Field
-                      component={renderInput}
-                      name={field}
-                      placeholder={`Add ${field}`}
-                      type="text"
-                    />
-                  </td>
-                </tr>
-              ))}
+            {missingFields.map(field => (
+              <tr key={field}>
+                <td colSpan={2} className="form-td">
+                  <Field
+                    component={renderInput}
+                    name={field}
+                    placeholder={`Add ${field}`}
+                    type="text"
+                  />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
         <p>

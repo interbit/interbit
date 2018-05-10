@@ -60,7 +60,7 @@ const config = {
   },
   apps: {
     template: {
-      peers: ['ib-dev----master.herokuapp.com:443'], // the peers the browser should connect to
+      peers: ['ib-dev----master.herokuapp.com'], // the peers the browser should connect to
       chains: ['templatePublic'], // the chains that need to load in the browser
       appChain: 'templatePublic', // The chain that the static page is loaded on
       indexLocation: path.join(__dirname, 'public/index.html'), // the index.html to update with the app info

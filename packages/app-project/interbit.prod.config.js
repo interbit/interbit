@@ -20,7 +20,7 @@ const config = {
   },
   apps: {
     project: {
-      peers: ['ib-dev----master.herokuapp.com:443'],
+      peers: ['ib-dev----master.herokuapp.com'],
       chains: [chainAliases.MY_PROJECTS],
       appChain: chainAliases.MY_PROJECTS,
       indexLocation: path.join(__dirname, 'public/index.html'),

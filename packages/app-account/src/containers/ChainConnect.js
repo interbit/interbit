@@ -3,25 +3,27 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { Grid, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
+import { SubmissionError } from 'redux-form'
 import { chainDispatch, selectors } from 'interbit-ui-tools'
 
 import { actionCreators } from '../interbit/my-account/actions'
+import { getOAuthConfig } from '../interbit/public/selectors'
+import Connecting from '../components/Connecting'
 import ConnectFormAddMissingProfileField from '../components/ConnectFormAddMissingProfileField'
 import ConnectFormContinueAuth from '../components/ConnectFormContinueAuth'
 import ConnectFormLoggedOut from '../components/ConnectFormLoggedOut'
-import ConnectFormMissingProfileField from '../components/ConnectFormMissingProfileField'
 import ModalSignIn from '../components/ModalSignIn'
 import ModalSignUp from '../components/ModalSignUp'
-import { toggleModal } from '../redux/uiReducer'
+import { toggleForm, toggleModal } from '../redux/uiReducer'
+import formNames from '../constants/formNames'
 import modalNames from '../constants/modalNames'
-import { PRIVATE } from '../constants/chainAliases'
-import connectingHeader from '../assets/connectingHeader.svg'
+import { PRIVATE, PUBLIC } from '../constants/chainAliases'
 
 const MODES = {
   NOT_LOGGED_IN: 0,
-  PROPS_MISSING: 1,
-  PROPS_ADDING: 2,
-  PROPS_AVAILABLE: 3
+  ADD_PROFILE_FIELDS: 1,
+  CONTINUE_CAUTH: 2,
+  LOADING_CHAIN: 3
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -29,66 +31,112 @@ const mapStateToProps = (state, ownProps) => {
     location: { search }
   } = ownProps
   const query = queryString.parse(search)
-
-  const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
-
   const { chainId, redirectUrl, tokens } = query
+
+  const isChainLoaded = selectors.isChainLoaded(state, { chainAlias: PRIVATE })
+  const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
+  const requestedTokens = Array.isArray(tokens) ? tokens : [tokens]
+  const profileFields = chainState ? chainState.profile : {}
+
   const isSignInModalVisible = state.ui.modals[modalNames.SIGN_IN_MODAL_NAME]
   const isSignUpModalVisible = state.ui.modals[modalNames.SIGN_UP_MODAL_NAME]
+  const isProfileFormEditable =
+    state.ui.editableForms[formNames.CAUTH_ADD_REQUESTED_TOKENS]
 
+  // TODO: isLoggedIn === true if gitHub oauth has completed and private chain is loaded
+  const isLoggedIn = true
+  let mode
+  let missingFields = []
+
+  const profileFormProps = {
+    isEditable: isProfileFormEditable
+  }
+
+  if (!isChainLoaded) {
+    mode = MODES.LOADING_CHAIN
+  } else if (!isLoggedIn) {
+    mode = MODES.NOT_LOGGED_IN
+  } else if (profileFields) {
+    missingFields = requestedTokens.filter(t => !profileFields[t])
+    profileFormProps.initialValues = profileFields
+    mode = missingFields.length
+      ? MODES.ADD_PROFILE_FIELDS
+      : MODES.CONTINUE_CAUTH
+  }
+
+  const publicChainState = selectors.getChain(state, { chainAlias: PUBLIC })
   return {
-    profileFields: chainState ? chainState.profile : {},
-    redirectUrl,
     consumerChainId: chainId,
-    requestedTokens: Array.isArray(tokens) ? tokens : [tokens],
-    providerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
-    mode: MODES.PROPS_AVAILABLE,
+    content: state.content.chainConnect,
     isSignInModalVisible,
-    isSignUpModalVisible
+    isSignUpModalVisible,
+    mode,
+    missingFields,
+    oAuthConfig: getOAuthConfig(publicChainState),
+    profileFields: chainState ? chainState.profile : {},
+    profileFormProps,
+    providerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
+    redirectUrl,
+    requestedTokens
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   blockchainDispatch: action => dispatch(chainDispatch(PRIVATE, action)),
+  toggleFormFunction: formName => dispatch(toggleForm(formName)),
   toggleModalFunction: modalName => dispatch(toggleModal(modalName))
 })
 
 export class ChainConnect extends Component {
   static propTypes = {
-    profileFields: PropTypes.shape({
-      alias: PropTypes.string,
-      email: PropTypes.string,
-      name: PropTypes.string
-    }),
-    redirectUrl: PropTypes.string,
-    providerChainId: PropTypes.string,
-    consumerChainId: PropTypes.string,
-    requestedTokens: PropTypes.arrayOf(PropTypes.string),
     blockchainDispatch: PropTypes.func.isRequired,
-    mode: PropTypes.number,
+    consumerChainId: PropTypes.string,
+    content: PropTypes.shape({
+      headerImage: PropTypes.string,
+      headerImageAlt: PropTypes.string,
+      title: PropTypes.string
+    }),
     isSignInModalVisible: PropTypes.bool,
     isSignUpModalVisible: PropTypes.bool,
+    missingFields: PropTypes.arrayOf(PropTypes.string),
+    mode: PropTypes.number,
+    // eslint-disable-next-line
+    oAuthConfig: PropTypes.object,
+    profileFields: PropTypes.shape({}),
+    profileFormProps: PropTypes.shape({}),
+    providerChainId: PropTypes.string,
+    redirectUrl: PropTypes.string,
+    requestedTokens: PropTypes.arrayOf(PropTypes.string),
+    toggleFormFunction: PropTypes.func.isRequired,
     toggleModalFunction: PropTypes.func.isRequired
   }
 
   static defaultProps = {
-    profileFields: {},
-    redirectUrl: '',
-    providerChainId: '',
     consumerChainId: '',
-    requestedTokens: [],
-    mode: MODES.NOT_LOGGED_IN,
+    content: {
+      headerImage: '',
+      headerImageAlt: '',
+      title: ''
+    },
     isSignInModalVisible: false,
-    isSignUpModalVisible: false
+    isSignUpModalVisible: false,
+    missingFields: [],
+    mode: MODES.LOADING_CHAIN,
+    oAuthConfig: {},
+    profileFields: {},
+    profileFormProps: {},
+    providerChainId: '',
+    redirectUrl: '',
+    requestedTokens: []
   }
 
   doConnectChains = async () => {
     const {
       blockchainDispatch,
-      providerChainId,
       consumerChainId,
-      requestedTokens,
-      redirectUrl
+      providerChainId,
+      redirectUrl,
+      requestedTokens
     } = this.props
 
     const shareProfileTokensAction = actionCreators.shareProfileTokens({
@@ -106,16 +154,34 @@ export class ChainConnect extends Component {
     window.location.replace(nextUrl)
   }
 
+  submitMissingProfileFieldForm = formValues => {
+    try {
+      const action = actionCreators.updateProfile(formValues)
+      this.props.blockchainDispatch(action)
+    } catch (error) {
+      console.log(error)
+      throw new SubmissionError({
+        _error: error.message
+      })
+    }
+  }
+
   render() {
     const {
-      mode,
+      blockchainDispatch,
       consumerChainId,
-      requestedTokens,
-      profileFields,
+      content,
       isSignInModalVisible,
       isSignUpModalVisible,
-      toggleModalFunction,
-      providerChainId
+      missingFields,
+      mode,
+      oAuthConfig,
+      profileFields,
+      profileFormProps,
+      providerChainId,
+      requestedTokens,
+      toggleFormFunction,
+      toggleModalFunction
     } = this.props
 
     const colLayout = {
@@ -124,23 +190,35 @@ export class ChainConnect extends Component {
     }
 
     const getFormForCurrentMode = () => {
+      const componentTitle = `Service ${consumerChainId} ${content.title}`
+
       switch (mode) {
+        case MODES.LOADING_CHAIN:
+          return <Connecting />
         case MODES.NOT_LOGGED_IN:
           return (
             <ConnectFormLoggedOut
               toggleModalFunction={toggleModalFunction}
               requestedTokens={requestedTokens}
+              image={content.headerImage}
+              imageAlt={content.headerImageAlt}
+              title={componentTitle}
             />
           )
-        case MODES.PROPS_MISSING:
+        case MODES.ADD_PROFILE_FIELDS:
           return (
-            <ConnectFormMissingProfileField profileFields={profileFields} />
+            <ConnectFormAddMissingProfileField
+              image={content.headerImage}
+              imageAlt={content.headerImageAlt}
+              missingFields={missingFields}
+              profileFields={profileFields}
+              {...profileFormProps}
+              onSubmit={this.submitMissingProfileFieldForm}
+              title={componentTitle}
+              toggleForm={toggleFormFunction}
+            />
           )
-        case MODES.PROPS_ADDING:
-          return (
-            <ConnectFormAddMissingProfileField profileFields={profileFields} />
-          )
-        case MODES.PROPS_AVAILABLE:
+        case MODES.CONTINUE_CAUTH:
         default:
           return (
             <ConnectFormContinueAuth
@@ -148,6 +226,9 @@ export class ChainConnect extends Component {
               profileFields={profileFields}
               providerChainId={providerChainId}
               doConnectChains={this.doConnectChains}
+              image={content.headerImage}
+              imageAlt={content.headerImageAlt}
+              title={componentTitle}
             />
           )
       }
@@ -157,23 +238,24 @@ export class ChainConnect extends Component {
       <Grid>
         <div className="ibweb-page app-auth">
           <Row>
-            <Col {...colLayout}>
-              <img src={connectingHeader} alt="App info access" />
-              <h3>
-                (Service: {consumerChainId}) wants to access the following
-                identity information:
-              </h3>
-              {getFormForCurrentMode()}
-            </Col>
+            <Col {...colLayout}>{getFormForCurrentMode()}</Col>
           </Row>
         </div>
 
         {/* TODO: consolidate these two modals */}
         <ModalSignIn
+          blockchainDispatch={blockchainDispatch}
+          consumerChainId={consumerChainId}
+          oAuthConfig={oAuthConfig}
+          serviceName={consumerChainId}
           show={isSignInModalVisible}
           toggleModal={toggleModalFunction}
         />
         <ModalSignUp
+          blockchainDispatch={blockchainDispatch}
+          consumerChainId={consumerChainId}
+          oAuthConfig={oAuthConfig}
+          serviceName={consumerChainId}
           show={isSignUpModalVisible}
           toggleModal={toggleModalFunction}
         />

@@ -63,7 +63,7 @@ const isOAuthCompleted = requestId => (state, block) => {
 
 const oAuthTimeout = requestId => (state, block) => {
   console.log('oAuthTimeout')
-  getRedirectUrl(state, {
+  return getRedirectUrl(state, {
     requestId,
     error: 'timeout'
   })

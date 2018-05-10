@@ -39,7 +39,7 @@ const waitForOAuth = async (
 }
 
 const getRedirectUrl = (state, params = {}) => {
-  const rootUrl = selectors.callbackUrl(state)
+  const rootUrl = selectors.callbackUrl(state) || process.env.OAUTH_CALLBACK_URL
   const urlParams = queryString.stringify(params)
   const result = urlParams ? `${rootUrl}?${urlParams}` : rootUrl
   console.log('getRedirectUrl', result)
@@ -112,10 +112,11 @@ const waitForFinalSagaAction = (
   return new Promise((resolve, reject) => {
     let state
     let block
+    const emptyBlock = { content: { actions: [] } }
 
     const tester = () => {
       state = chain.getState()
-      block = chain.getCurrentBlock()
+      block = chain.getCurrentBlock() || emptyBlock
       console.log('tester', { state, block })
       return predicate(state, block)
     }

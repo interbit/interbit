@@ -14,7 +14,7 @@ Deploy will tell the local hypervisor to host the chains described in the provid
 1. `--admin-keys` *(filepath)*: a js or json file exporting a key pair to be used to boot the hypervisor with. If none is given a random pair will be generated which may not be permissioned on the chain network.
 
 
-#### Example
+#### Usage
 
 ```bash
 interbit deploy --manifest [interbitManifestFile] --artifacts [buildArtifactsLocation] --port 8888 --admin-keys [pathToKeys]

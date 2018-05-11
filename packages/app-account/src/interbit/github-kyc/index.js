@@ -144,9 +144,6 @@ const reducer = (state = initialState, action) => {
         errorDescription
       })
 
-      // HACK: Same permissions as the current action
-      sagaAction.publicKey = action.publicKey
-
       console.log('REDISPATCH: ', sagaAction)
       nextState = redispatch(nextState, sagaAction)
       return nextState
@@ -169,9 +166,6 @@ const reducer = (state = initialState, action) => {
         statePath: ['profiles', consumerChainId, 'sharedProfile'],
         joinName
       })
-
-      // HACK: Same permissions as the current action
-      provideAction.publicKey = action.publicKey
 
       console.log('REDISPATCH: ', provideAction)
       nextState = redispatch(nextState, provideAction)

@@ -1,6 +1,6 @@
 {
   "name": "interbit-covenant-tools",
-  "version": "0.4.18",
+  "version": "0.4.20",
   "description": "Interbit platform covenants and covenant components",
   "main": "dist/interbit-covenant-tools.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "yargs": "^10.0.3"
   },
   "dependencies": {
-    "interbit-covenant-utils": "0.5.6",
+    "interbit-covenant-utils": "0.7.1",
     "seamless-immutable": "^7.1.2"
   }
 }

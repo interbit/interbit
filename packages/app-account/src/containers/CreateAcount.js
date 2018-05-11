@@ -10,7 +10,6 @@ import {
   Markdown
 } from 'interbit-ui-components'
 
-import Authentication from '../components/Authentication'
 import { getOAuthConfig } from '../interbit/public/selectors'
 import { toggleButton, toggleModal } from '../redux/uiReducer'
 import ContentBarAttention from '../components/ContentBarAttention'
@@ -127,12 +126,26 @@ export class CreateAccount extends Component {
                 toggleModal={toggleModalFunction}
               />
 
-              <Authentication
-                consumerChainId={consumerChainId}
-                oAuthConfig={oAuthConfig}
-                blockchainDispatch={blockchainDispatch}
-                {...contentBars.gitHubCreateAccount}
-              />
+              <ContentBar
+                image={contentBars.gitHubCreateAccount.image}
+                className="image-sm github"
+                title="GitHub">
+                <p>{contentBars.gitHubCreateAccount.content}</p>
+                {/* TODO: only show error message if github auth fails
+                <p className="error">{contentBars.gitHubSignIn.error}</p>
+                */}
+                <Divider />
+                <IconButton
+                  text={contentBars.gitHubCreateAccount.buttonText}
+                  clickHandler={() => {
+                    toggleModalFunction(modalNames.ATTENTION_MODAL_NAME)
+                    toggleButtonFunction(
+                      buttonNames.DISCLAIMER_BUTTON_NAME,
+                      false
+                    )
+                  }}
+                />
+              </ContentBar>
             </Col>
           </Row>
 

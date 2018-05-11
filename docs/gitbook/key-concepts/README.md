@@ -220,3 +220,7 @@ A write join is authorized on the sending side with an [`'@@interbit/AUTHORIZE_S
 Interbit uses a [configuration](../reference/interbit/config.md) file so that you can describe your entire blockchain network in a single place. This file allows you to generate and manage networks based on the constraints described in the configuration.
 
 The [manifest](../reference/interbit/manifest.md) file is generated during the [`interbit build`](../reference/interbit/build.md) step to describe a fully resolved and deployable blockchain network.
+
+# Hypervisor
+
+The small piece of code that boots interbit and allows hosting of multiple blockchains on a single node.

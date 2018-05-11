@@ -42,9 +42,8 @@ const mapStateToProps = (state, ownProps) => {
   const isSignUpModalVisible = state.ui.modals[modalNames.SIGN_UP_MODAL_NAME]
   const isProfileFormEditable =
     state.ui.editableForms[formNames.CAUTH_ADD_REQUESTED_TOKENS]
+  const isLoggedIn = isChainLoaded && !!profileFields['gitHub-identity']
 
-  // TODO: isLoggedIn === true if gitHub oauth has completed and private chain is loaded
-  const isLoggedIn = true
   let mode
   let missingFields = []
 
@@ -260,7 +259,7 @@ export class ChainConnect extends Component {
           blockchainDispatch={blockchainDispatch}
           consumerChainId={consumerChainId}
           oAuthConfig={oAuthConfig}
-          serviceName={consumerChainId}
+          serviceName={consumerChainAlias}
           show={isSignInModalVisible}
           toggleModal={toggleModalFunction}
         />
@@ -268,7 +267,7 @@ export class ChainConnect extends Component {
           blockchainDispatch={blockchainDispatch}
           consumerChainId={consumerChainId}
           oAuthConfig={oAuthConfig}
-          serviceName={consumerChainId}
+          serviceName={consumerChainAlias}
           show={isSignUpModalVisible}
           toggleModal={toggleModalFunction}
         />

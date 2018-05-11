@@ -8,7 +8,8 @@ import covenant from '../../interbit/github-kyc'
 describe('github-kyc/covenant', () => {
   describe('reducer', () => {
     it('adds a new profile on UPDATE_PROFILE', () => {
-      const consumerChainId = '987654321'
+      const consumerChainId =
+        'b36b03cd329b0e7d5aae0b750b1116950b9b88abccbdeb6eb22d8205ebb13ce5'
       const profile = { id: 'ABC123', name: 'Joe Bloggs' }
 
       const action = covenant.actionCreators.updateProfile({
@@ -26,8 +27,9 @@ describe('github-kyc/covenant', () => {
 
     it('oAuthCallbackSaga works', async () => {
       const requestId = '1234'
-      const consumerChainId = '987654321'
-      const joinName = 'GITHUB-987654321'
+      const consumerChainId =
+        'b36b03cd329b0e7d5aae0b750b1116950b9b88abccbdeb6eb22d8205ebb13ce5'
+      const joinName = 'GITHUB-0003E343-787E-4C9C-B596-AED2B2BE41B9'
       const temporaryToken = 'TEMP-TOKEN-AAAAAAA'
       const accessToken = 'ACCESS-TOKEN-DDDDDDD'
       const gitHubProfile = {
@@ -50,10 +52,10 @@ describe('github-kyc/covenant', () => {
         oAuth: {
           shared: {
             params: {
-              client_id: 'CLIENT-ID'
+              client_id: '01234567890123456789'
             }
           },
-          client_secret: 'CLIENT-SECRET',
+          client_secret: '0123456789012345678901234567890123456789',
           tokenUrl: 'mock://github.com/login/oauth/access_token',
           profileUrl: 'mock://api.github.com/user'
         },

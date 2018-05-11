@@ -52,7 +52,7 @@ const config = {
 
 ## By Action Dispatch
 
-When dynamically dispatching join actions to a chain you must be sure to match the join names. Chain IDs must be used as the friendly alias is only available in the configuration file and the middleware.
+When dynamically dispatching join actions to a chain you must be sure to match the join names. Chain IDs must be used, as the friendly alias is only available in the configuration file and the middleware.
 
 ```js
 const {

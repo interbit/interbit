@@ -5,7 +5,7 @@ const PUBLIC_KEY =
 
 const config = {
   // TODO: Ensure that at least one account chain is set as a peer
-  peers: ['ib-dev----master.herokuapp.com:443'],
+  peers: ['ib-prod----master.herokuapp.com:443'],
   adminValidators: [PUBLIC_KEY],
   staticChains: {
     // The public chain runs on the browser and is the entry point for the application
@@ -60,7 +60,7 @@ const config = {
   },
   apps: {
     template: {
-      peers: ['ib-dev----master.herokuapp.com'], // the peers the browser should connect to
+      peers: ['ib-prod----master.herokuapp.com'], // the peers the browser should connect to
       chains: ['templatePublic'], // the chains that need to load in the browser
       appChain: 'templatePublic', // The chain that the static page is loaded on
       indexLocation: path.join(__dirname, 'public/index.html'), // the index.html to update with the app info

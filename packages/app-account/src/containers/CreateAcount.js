@@ -21,6 +21,9 @@ import modalNames from '../constants/modalNames'
 import { PUBLIC, PRIVATE } from '../constants/chainAliases'
 
 const mapStateToProps = state => {
+  const isPrivateChainLoaded = selectors.isChainLoaded(state, {
+    chainAlias: PRIVATE
+  })
   const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
 
   const isAttentionButtonEnabled =
@@ -37,7 +40,8 @@ const mapStateToProps = state => {
       modals: state.content.modals,
       isAttentionButtonEnabled,
       isAttentionModalVisible,
-      isAttentionMoreInfoModalVisible
+      isAttentionMoreInfoModalVisible,
+      isPrivateChainLoaded
     }
   }
 
@@ -50,7 +54,8 @@ const mapStateToProps = state => {
     modals: state.content.modals,
     isAttentionButtonEnabled,
     isAttentionModalVisible,
-    isAttentionMoreInfoModalVisible
+    isAttentionMoreInfoModalVisible,
+    isPrivateChainLoaded
   }
 }
 
@@ -73,6 +78,7 @@ export class CreateAccount extends Component {
     isAttentionButtonEnabled: PropTypes.bool,
     isAttentionModalVisible: PropTypes.bool,
     isAttentionMoreInfoModalVisible: PropTypes.bool,
+    isPrivateChainLoaded: PropTypes.bool,
     toggleButtonFunction: PropTypes.func.isRequired,
     toggleModalFunction: PropTypes.func.isRequired
   }
@@ -83,7 +89,8 @@ export class CreateAccount extends Component {
     blockchainDispatch: () => {},
     isAttentionButtonEnabled: false,
     isAttentionModalVisible: false,
-    isAttentionMoreInfoModalVisible: false
+    isAttentionMoreInfoModalVisible: false,
+    isPrivateChainLoaded: false
   }
 
   render() {
@@ -97,6 +104,7 @@ export class CreateAccount extends Component {
       isAttentionButtonEnabled,
       isAttentionModalVisible,
       isAttentionMoreInfoModalVisible,
+      isPrivateChainLoaded,
       toggleButtonFunction,
       toggleModalFunction
     } = this.props
@@ -137,6 +145,7 @@ export class CreateAccount extends Component {
                 <Divider />
                 <IconButton
                   text={contentBars.gitHubCreateAccount.buttonText}
+                  className={isPrivateChainLoaded ? '' : 'disabled'}
                   clickHandler={() => {
                     toggleModalFunction(modalNames.ATTENTION_MODAL_NAME)
                     toggleButtonFunction(
@@ -173,6 +182,7 @@ export class CreateAccount extends Component {
                 <Divider />
                 <IconButton
                   text={contentBars.gitHubSignIn.buttonText}
+                  className={isPrivateChainLoaded ? '' : 'disabled'}
                   clickHandler={() => {
                     toggleModalFunction(modalNames.ATTENTION_MODAL_NAME)
                     toggleButtonFunction(

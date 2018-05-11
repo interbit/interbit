@@ -17,6 +17,7 @@ const requestParams = (
   const params = {
     redirectUrl,
     chainId: getPrivateChainId(state, { privateChainAlias }),
+    chainAlias: privateChainAlias,
     tokens
   }
 

@@ -13,7 +13,7 @@ const mapStateToProps = (state, ownProps) => {
     location: { search }
   } = ownProps
   const query = queryString.parse(search)
-  const { providerChainId, joinName } = query
+  const { providerChainId, joinName, error } = query
 
   const isChainLoaded = selectors.isChainLoaded(state, {
     chainAlias: chainAliases.PRIVATE
@@ -22,7 +22,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     isChainLoaded,
     providerChainId,
-    joinName
+    joinName,
+    error
   }
 }
 
@@ -36,14 +37,16 @@ export class CompleteCAuth extends Component {
     isChainLoaded: PropTypes.bool,
     providerChainId: PropTypes.string,
     joinName: PropTypes.string,
-    blockchainDispatch: PropTypes.func
+    blockchainDispatch: PropTypes.func,
+    error: PropTypes.string
   }
 
   static defaultProps = {
     isChainLoaded: false,
     providerChainId: null,
     joinName: null,
-    blockchainDispatch: () => {}
+    blockchainDispatch: () => {},
+    error: ''
   }
 
   doCompleteChainAuth = async () => {
@@ -58,10 +61,12 @@ export class CompleteCAuth extends Component {
   }
 
   render() {
-    const { isChainLoaded, providerChainId, joinName } = this.props
+    const { isChainLoaded, providerChainId, joinName, error } = this.props
 
     if (!isChainLoaded) {
       return <div>Loading...</div>
+    } else if (error) {
+      return <div>User cancelled the app&rsquo;s authoriztion request</div>
     }
 
     return (

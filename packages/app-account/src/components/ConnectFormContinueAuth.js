@@ -5,37 +5,40 @@ import { IconButton } from 'interbit-ui-components'
 
 export default class ConnectFormContinueAuth extends Component {
   static propTypes = {
+    doConnectChains: PropTypes.func,
+    image: PropTypes.string,
+    imageAlt: PropTypes.string,
+    onCancel: PropTypes.func,
     profileFields: PropTypes.shape({
       alias: PropTypes.string,
       email: PropTypes.string,
       name: PropTypes.string
     }),
-    requestedTokens: PropTypes.arrayOf(PropTypes.string),
     providerChainId: PropTypes.string,
-    doConnectChains: PropTypes.func,
-    image: PropTypes.string,
-    imageAlt: PropTypes.string,
+    requestedTokens: PropTypes.arrayOf(PropTypes.string),
     title: PropTypes.string
   }
 
   static defaultProps = {
-    profileFields: [],
-    requestedTokens: [],
-    providerChainId: '',
     doConnectChains: undefined,
     image: '',
     imageAlt: '',
+    onCancel: undefined,
+    profileFields: [],
+    providerChainId: '',
+    requestedTokens: [],
     title: ''
   }
 
   render() {
     const {
-      profileFields,
-      requestedTokens,
-      providerChainId,
       doConnectChains,
       image,
       imageAlt,
+      onCancel,
+      profileFields,
+      providerChainId,
+      requestedTokens,
       title
     } = this.props
     return (
@@ -57,7 +60,11 @@ export default class ConnectFormContinueAuth extends Component {
           onClick={doConnectChains}
           text="Accept"
         />
-        <IconButton text="Reject" className="secondary" />
+        <IconButton
+          text="Reject"
+          className="secondary"
+          onClick={() => onCancel()}
+        />
       </div>
     )
   }

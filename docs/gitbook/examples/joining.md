@@ -12,11 +12,11 @@ When creating a join both sides must agree on the join name and both sides must 
 
 ## By Configuration File
 
-Ultimately, the joins setup in the configuration file are dispatched by the admin keys to the chain during start and deployment.
+Ultimately, the joins set up in the configuration file are dispatched by the admin keys to the chain during start and deployment.
 
 Join configuration is set in each individual chain's config and both sides of the join must be properly configured. A join name will automatically be created for the join.
 
-The friendly alias is used to setup the join in configuration and the chain specified by alias must be configured.
+The friendly alias is used to set up the join in configuration and the chain specified by alias must be configured.
 
 ```js
 const config = {

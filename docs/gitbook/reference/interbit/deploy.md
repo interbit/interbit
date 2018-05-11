@@ -1,24 +1,27 @@
-# `deploy`
+# `deploy()`
 
-Deploys an application
+<div class="tips warning">
+  <p><span></span>TODO</p>
+  <p>Incomplete content. The [options](https://github.com/interbit/interbit/blob/ff803110c89a97e4bf9237ba633aedef4fe57d50/packages/interbit/src/scripts/deploy.js#L6) need to be documented.</p>
+</div>
 
-Note that hosting the static index.html is a separate concern handled elsewhere. Deploy does not deploy your front end application. It only deploys your blockchain nodes.
+Uses a manifest to deploy a blockchain node.
 
-Deploy will tell the local hypervisor to host the chains described in the provided manifest file.
+#### Arguments
 
-#### Options
+1. `options` *(Object)*: An object containing information about how to deploy the manifest. Defaults will be used if no options are given.
 
-1. `--manifest` *(Filepath)*: an Interbit manifest file used for deployment instructions. If none is provided it will be read from `{--artifacts}/interbit.manifest.json`
-1. `--artifacts` *(Filepath)*: a directory of build artifacts to deploy. Should contain a manifest file and packed covenants. If none is given the current working directory is used.
-1. `--port` *(number)*: The port number interbit will communicate on
-1. `--admin-keys` *(filepath)*: a js or json file exporting a key pair to be used to boot the hypervisor with. If none is given a random pair will be generated which may not be permissioned on the chain network.
+
+#### Returns
+
+*(Object)*: A [cli](../interbit-core/cli/README.md) to use to interact with the Interbit node
 
 
 #### Example
 
-```bash
-interbit deploy --manifest [interbitManifestFile] --artifacts [buildArtifactsLocation] --port 8888 --admin-keys [pathToKeys]
+```js
+const cli = deploy({
+  manifest: './manifestLocation/'
+})
 ```
-
-
 

@@ -17,7 +17,13 @@ An action that can be dispatched to a chain to destroy it.
 #### Example
 
 ```js
-const covenantUtils = require('interbit-covenant-utils')
+const { destroy, redispatch } = require('interbit-covenant-utils')
 
-const destroyAction = covenantUtils.destroy()
+const reducer = (state, action) => {
+  const destroyAction = destroy()
+  const nextState = redispatch(nextState, destroyAction)
+
+  return nextState
+}
+
 ```

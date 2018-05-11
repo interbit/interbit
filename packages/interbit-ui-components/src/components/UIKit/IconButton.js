@@ -9,8 +9,7 @@ export default class IconButton extends Component {
     text: PropTypes.string.isRequired,
     to: PropTypes.string,
     className: PropTypes.string,
-    clickHandler: PropTypes.func,
-    onClick: PropTypes.func
+    clickHandler: PropTypes.func
   }
 
   static defaultProps = {
@@ -18,24 +17,15 @@ export default class IconButton extends Component {
     image: '',
     to: '#',
     className: '',
-    clickHandler: undefined,
-    onClick: undefined
+    clickHandler: undefined
   }
 
   render() {
-    const {
-      icon,
-      text,
-      to,
-      image,
-      className,
-      onClick,
-      clickHandler
-    } = this.props
+    const { icon, text, to, image, className, clickHandler } = this.props
     return (
       <Button
         className={`ibweb-button ${image && 'img '}${className}`}
-        href={onClick ? undefined : to}
+        href={clickHandler ? undefined : to}
         onClick={clickHandler}>
         {image && <img alt="" width={32} height={32} src={image} />}
         {icon && <i className={`fa ${icon}`} />}

@@ -61,9 +61,6 @@ const reducer = (state = initialState, action) => {
         joinName
       })
 
-      // HACK: Same permissions as the current action
-      provideAction.publicKey = action.publicKey
-
       console.log('REDISPATCH: ', provideAction)
       nextState = redispatch(nextState, provideAction)
 
@@ -121,9 +118,6 @@ const reducer = (state = initialState, action) => {
         mount: [...PATHS.PRIVATE_PROFILE, tokenName],
         joinName
       })
-
-      // HACK: Same permissions as the current action
-      consumeAction.publicKey = action.publicKey
 
       console.log('REDISPATCH: ', consumeAction)
       nextState = redispatch(nextState, consumeAction)

@@ -2,7 +2,7 @@ const path = require('path')
 const chainAliases = require('./src/constants/chainAliases')
 
 const config = {
-  peers: ['ib-dev----master.herokuapp.com:443'],
+  peers: ['ib-stg----master.herokuapp.com:443'],
   adminValidators: [],
   staticChains: {
     [chainAliases.MY_PROJECTS]: {
@@ -20,7 +20,7 @@ const config = {
   },
   apps: {
     project: {
-      peers: ['ib-dev----master.herokuapp.com'],
+      peers: ['ib-stg----master.herokuapp.com'],
       chains: [chainAliases.MY_PROJECTS],
       appChain: chainAliases.MY_PROJECTS,
       indexLocation: path.join(__dirname, 'public/index.html'),

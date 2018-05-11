@@ -35,7 +35,7 @@ _Interbit Under the Hood_ contains a blockchain viewer that you can use to see t
       'https://github.com/interbit/interbit/blob/master/packages/app-uth-ex/ITH.md',
     sourceCode:
       'https://github.com/interbit/interbit/tree/master/packages/app-uth-ex',
-    launchUrl: 'https://ib-dev-uth.herokuapp.com/'
+    launchUrl: 'https://ib-stg-uth.herokuapp.com/'
   }
 ]
 

@@ -138,8 +138,7 @@ describe('interbit', () => {
             dispatch: 'function',
             getState: 'function',
             getCurrentBlock: 'function',
-            subscribe: 'function',
-            getActionPoolLength: 'function'
+            subscribe: 'function'
           }
 
           verifyApi(chain, expectedChainApi)

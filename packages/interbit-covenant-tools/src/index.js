@@ -17,7 +17,8 @@ const {
   authorizeReceiveActions,
   authorizeSendActions,
   createChildChain,
-  createAction
+  createAction,
+  destroy
 } = require('interbit-covenant-utils')
 
 const {
@@ -51,7 +52,8 @@ module.exports = {
       addToAcl,
       createChildChain,
       sponsorChainRequest,
-      sponsorChain
+      sponsorChain,
+      destroy
     },
     constants,
     redispatch,

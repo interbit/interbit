@@ -68,7 +68,7 @@ export default class OAuthButton extends Component {
 
     return (
       <IconButton
-        onClick={authenticationHandler({
+        clickHandler={authenticationHandler({
           consumerChainId,
           oAuthProvider,
           oAuthConfig,

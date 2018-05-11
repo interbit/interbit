@@ -51,14 +51,14 @@ export default class ConnectFormLoggedOut extends Component {
         <div className="btn-container">
           <IconButton
             text="Create Account"
-            onClick={() => {
+            clickHandler={() => {
               toggleModalFunction(modalNames.SIGN_UP_MODAL_NAME)
             }}
           />
           <IconButton
             text="Go Back"
             className="secondary"
-            onClick={() => onCancel()}
+            clickHandler={() => onCancel()}
           />
         </div>
         <div className="text-btn-container">

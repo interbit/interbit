@@ -23,6 +23,7 @@ import { PUBLIC, PRIVATE } from '../constants/chainAliases'
 
 const mapStateToProps = state => {
   const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
+
   const isAttentionButtonEnabled =
     state.ui.buttons[buttonNames.DISCLAIMER_BUTTON_NAME]
   const isAttentionMoreInfoModalVisible =
@@ -102,6 +103,13 @@ export class CreateAccount extends Component {
     } = this.props
     const colLayout = layout.colLayout.default
 
+    const oAuthProps = {
+      blockchainDispatch,
+      consumerChainId,
+      oAuthConfig,
+      oAuthProvider: 'gitHub'
+    }
+
     return (
       <Grid>
         <div className="ibweb-page create-account">
@@ -152,7 +160,7 @@ export class CreateAccount extends Component {
                 <Divider />
                 <IconButton
                   text={contentBars.gitHubSignIn.buttonText}
-                  onClick={() => {
+                  clickHandler={() => {
                     toggleModalFunction(modalNames.ATTENTION_MODAL_NAME)
                     toggleButtonFunction(
                       buttonNames.DISCLAIMER_BUTTON_NAME,
@@ -176,6 +184,7 @@ export class CreateAccount extends Component {
           toggleModal={toggleModalFunction}
           isEnabled={isAttentionButtonEnabled}
           show={isAttentionModalVisible}
+          oAuth={oAuthProps}
         />
       </Grid>
     )

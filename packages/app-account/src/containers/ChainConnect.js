@@ -31,7 +31,7 @@ const mapStateToProps = (state, ownProps) => {
     location: { search }
   } = ownProps
   const query = queryString.parse(search)
-  const { chainId, redirectUrl, tokens } = query
+  const { chainAlias, chainId, redirectUrl, tokens } = query
 
   const isChainLoaded = selectors.isChainLoaded(state, { chainAlias: PRIVATE })
   const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
@@ -66,6 +66,7 @@ const mapStateToProps = (state, ownProps) => {
 
   const publicChainState = selectors.getChain(state, { chainAlias: PUBLIC })
   return {
+    consumerChainAlias: chainAlias,
     consumerChainId: chainId,
     content: state.content.chainConnect,
     isSignInModalVisible,
@@ -90,6 +91,7 @@ const mapDispatchToProps = dispatch => ({
 export class ChainConnect extends Component {
   static propTypes = {
     blockchainDispatch: PropTypes.func.isRequired,
+    consumerChainAlias: PropTypes.string,
     consumerChainId: PropTypes.string,
     content: PropTypes.shape({
       headerImage: PropTypes.string,
@@ -112,6 +114,7 @@ export class ChainConnect extends Component {
   }
 
   static defaultProps = {
+    consumerChainAlias: '',
     consumerChainId: '',
     content: {
       headerImage: '',
@@ -175,6 +178,7 @@ export class ChainConnect extends Component {
   render() {
     const {
       blockchainDispatch,
+      consumerChainAlias,
       consumerChainId,
       content,
       isSignInModalVisible,
@@ -196,7 +200,7 @@ export class ChainConnect extends Component {
     }
 
     const getFormForCurrentMode = () => {
-      const componentTitle = `Service ${consumerChainId} ${content.title}`
+      const componentTitle = `Service ${consumerChainAlias} ${content.title}`
 
       switch (mode) {
         case MODES.LOADING_CHAIN:

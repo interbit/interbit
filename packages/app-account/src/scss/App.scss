@@ -198,6 +198,11 @@
 
 
 .ibweb-modal-wrapper.modal-sign-in {
+  .modal-header {
+    h2 span {
+      word-break: break-all;
+    }
+  }
   .modal-footer {
     .text-button:last-child {
       float: right;

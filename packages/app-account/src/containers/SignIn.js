@@ -15,13 +15,15 @@ const mapStateToProps = state => {
   if (!chainState) {
     return {
       oAuthConfig: {},
-      blockchainDispatch: () => {}
+      blockchainDispatch: () => {},
+      contentBars: state.content.contentBars
     }
   }
 
   const { state: publicChainState } = getExploreChainState(state, PUBLIC)
   return {
-    oAuthConfig: getOAuthConfig(publicChainState)
+    oAuthConfig: getOAuthConfig(publicChainState),
+    contentBars: state.content.contentBars
   }
 }
 
@@ -33,16 +35,18 @@ export class SignIn extends Component {
   static propTypes = {
     // eslint-disable-next-line
     oAuthConfig: PropTypes.object,
-    blockchainDispatch: PropTypes.func
+    blockchainDispatch: PropTypes.func,
+    contentBars: PropTypes.shape({})
   }
 
   static defaultProps = {
     oAuthConfig: {},
-    blockchainDispatch: () => {}
+    blockchainDispatch: () => {},
+    contentBars: {}
   }
 
   render() {
-    const { oAuthConfig, blockchainDispatch } = this.props
+    const { oAuthConfig, blockchainDispatch, contentBars } = this.props
 
     return (
       <Grid>
@@ -67,6 +71,7 @@ export class SignIn extends Component {
               <Authentication
                 oAuthConfig={oAuthConfig}
                 blockchainDispatch={blockchainDispatch}
+                {...contentBars.gitHubCreateAccount}
               />
             </Col>
           </Row>

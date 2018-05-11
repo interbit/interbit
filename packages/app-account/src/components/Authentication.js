@@ -39,25 +39,23 @@ export default class Authentication extends Component {
     } = this.props
 
     return (
-      <div>
-        <ContentBar image={image} className="image-sm github" title={title}>
-          <p>{content}</p>
+      <ContentBar image={image} className="image-sm github" title={title}>
+        <p>{content}</p>
 
-          {/* TODO: only show error message if github auth fails
+        {/* TODO: only show error message if github auth fails
           <p className="error">{error}</p>
           */}
 
-          <Divider />
+        <Divider />
 
-          <OAuthButton
-            text={buttonText}
-            consumerChainId={consumerChainId}
-            oAuthProvider="gitHub"
-            oAuthConfig={oAuthConfig}
-            blockchainDispatch={blockchainDispatch}
-          />
-        </ContentBar>
-      </div>
+        <OAuthButton
+          text={buttonText}
+          consumerChainId={consumerChainId}
+          oAuthProvider="gitHub"
+          oAuthConfig={oAuthConfig}
+          blockchainDispatch={blockchainDispatch}
+        />
+      </ContentBar>
     )
   }
 }

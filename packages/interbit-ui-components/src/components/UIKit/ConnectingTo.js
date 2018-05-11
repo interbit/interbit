@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 
 export default class ConnectingTo extends Component {
@@ -22,18 +21,14 @@ export default class ConnectingTo extends Component {
 
     return (
       <div className={`ibweb-connecting-to ${className}`}>
-        <Row>
-          <Col md={4} mdOffset={4}>
-            {image && <img src={image} alt={title} />}
-            {spinner && (
-              <div className="spinner">
-                <img src={spinner} alt="Loading" />
-              </div>
-            )}
-            <h3>{title}</h3>
-            <p>{content}</p>
-          </Col>
-        </Row>
+        {image && <img src={image} alt={title} />}
+        {spinner && (
+          <div className="spinner">
+            <img src={spinner} alt="Loading" />
+          </div>
+        )}
+        <h3>{title}</h3>
+        <p>{content}</p>
       </div>
     )
   }

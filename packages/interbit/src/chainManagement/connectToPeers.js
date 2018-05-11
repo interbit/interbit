@@ -1,9 +1,15 @@
+// Port 443 appropriate for heroku deployment
+const DEFAULT_PORT = 443
+
 const connectToPeers = async (
   cli,
-  peers = [],
+  manifestPeers = [],
   maxRetries = 25,
   timeout = 20000
 ) => {
+  const peerOverride = process.env.CONNECT_TO_PEERS
+  const peers = peerOverride ? peerOverride.split(',') : manifestPeers
+
   console.log('CONNECTING TO PEERS', peers)
   for (const peer of peers) {
     const [toAddress, toPort] = peer.split(':')
@@ -13,8 +19,8 @@ const connectToPeers = async (
 
 const tryConnect = async ({
   cli,
-  toAddress = 'localhost',
-  toPort,
+  toAddress,
+  toPort = DEFAULT_PORT,
   maxRetries = 25,
   timeout = 20000
 }) => {

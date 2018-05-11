@@ -1,59 +1,61 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Checkbox, FormControl } from 'react-bootstrap'
-import {
-  ContentBar,
-  Divider,
-  IconButton,
-  ModalWrapper
-} from 'interbit-ui-components'
+import { connect } from 'react-redux'
+import { Button } from 'react-bootstrap'
+import { ModalWrapper } from 'interbit-ui-components'
 
+import Authentication from '../components/Authentication'
 import modalNames from '../constants/modalNames'
-import chairmanmeow from '../assets/chairmanmeow.jpg'
 
-export default class ModalSignIn extends Component {
+const mapStateToProps = state => ({
+  contentBars: state.content.contentBars
+})
+export class ModalSignIn extends Component {
   static propTypes = {
+    blockchainDispatch: PropTypes.func,
+    consumerChainId: PropTypes.string,
+    contentBars: PropTypes.shape({}),
+    // eslint-disable-next-line
+    oAuthConfig: PropTypes.object,
+    serviceName: PropTypes.string,
     show: PropTypes.bool.isRequired,
     toggleModal: PropTypes.func.isRequired
   }
 
+  static defaultProps = {
+    blockchainDispatch: () => {},
+    consumerChainId: '',
+    contentBars: {},
+    oAuthConfig: {},
+    serviceName: ''
+  }
+
   render() {
-    const { show, toggleModal } = this.props
+    const {
+      blockchainDispatch,
+      consumerChainId,
+      contentBars,
+      oAuthConfig,
+      serviceName,
+      show,
+      toggleModal
+    } = this.props
 
     const header = (
       <div>
-        <h2>Sign in to access (app name)</h2>
-        <p>
-          Sign in with a link sent to your email (no passwordz), or use an
-          authentication provider (GitHub), sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua.
-        </p>
+        <h2>
+          Sign in to access <span>{serviceName}</span>
+        </h2>
       </div>
     )
 
     const body = (
-      <div>
-        <ContentBar image={chairmanmeow} className="image-sm" title="Email">
-          <FormControl
-            type="text"
-            placeholder="Enter your email address to sign in"
-          />
-          <Checkbox inline={false}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt.
-          </Checkbox>
-          <Divider />
-          <IconButton text="Continue" />
-        </ContentBar>
-        <ContentBar
-          image={chairmanmeow}
-          className="image-sm"
-          title="Sign in with GitHub">
-          <p>Description of why you&rsquo;d use your GitHub, etc?</p>
-          <Divider />
-          <IconButton text="Continue" />
-        </ContentBar>
-      </div>
+      <Authentication
+        blockchainDispatch={blockchainDispatch}
+        consumerChainId={consumerChainId}
+        oAuthConfig={oAuthConfig}
+        {...contentBars.gitHubSignIn}
+      />
     )
 
     const footer = (
@@ -65,7 +67,14 @@ export default class ModalSignIn extends Component {
           }}>
           Cancel
         </Button>
-        <Button className="text-button">Don&rsquo;t have an account?</Button>
+        <Button
+          className="text-button"
+          onClick={() => {
+            toggleModal(modalNames.SIGN_IN_MODAL_NAME)
+            toggleModal(modalNames.SIGN_UP_MODAL_NAME)
+          }}>
+          Don&rsquo;t have an account?
+        </Button>
       </div>
     )
 
@@ -80,3 +89,5 @@ export default class ModalSignIn extends Component {
     )
   }
 }
+
+export default connect(mapStateToProps)(ModalSignIn)

@@ -104,6 +104,8 @@
 .ibweb.app-account .ibweb-page.create-account .ibweb-content-bar.github .error {
   color: #d0021b; }
 
+.ibweb-modal-wrapper.modal-sign-in .modal-header h2 span {
+  word-break: break-all; }
 .ibweb-modal-wrapper.modal-sign-in .modal-footer .text-button:last-child {
   float: right; }
 

@@ -1,6 +1,6 @@
 # Interbit CLI
 
-Interbit provides scripts that work with an app that is either created with create-interbit-app (coming soon...) or installed to a project with npm. It aids in developing and deploying interbit applications.
+Interbit provides scripts that work with an app that is either created with create-interbit-app (coming soon...) or installed to a project with npm. It aids in developing and deploying Interbit applications.
 
 It is composed of two packages, `interbit` and `interbit-cli` which wraps the interbit package to provide a command line interface (CLI) to work with Interbit.
 

@@ -16,6 +16,14 @@ const renderInput = ({onChange, props, placeholder, type, input, meta: {touched,
   </div>
 )
 
+// TODO: move this to a common validation file
+const required = value => (value ? undefined : 'This field is required.')
+
+const email = value =>
+  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? undefined
+    : 'Invalid email address.'
+
 export class ConnectFormAddMissingProfileField extends Component {
   static propTypes = {
     image: PropTypes.string,
@@ -26,7 +34,8 @@ export class ConnectFormAddMissingProfileField extends Component {
     profileFields: PropTypes.shape({}),
     handleSubmit: PropTypes.func.isRequired,
     title: PropTypes.string,
-    toggleForm: PropTypes.func.isRequired
+    toggleForm: PropTypes.func.isRequired,
+    valid: PropTypes.bool.isRequired
   }
 
   static defaultProps = {
@@ -49,7 +58,8 @@ export class ConnectFormAddMissingProfileField extends Component {
       profileFields,
       handleSubmit,
       title,
-      toggleForm
+      toggleForm,
+      valid
     } = this.props
 
     const viewForm = (
@@ -106,7 +116,10 @@ export class ConnectFormAddMissingProfileField extends Component {
                     component={renderInput}
                     name={field}
                     placeholder={`Add ${field}`}
-                    type="text"
+                    type={field === 'email' ? 'email' : 'text'}
+                    validate={
+                      field === 'email' ? [required, email] : [required]
+                    }
                   />
                 </td>
               </tr>
@@ -117,9 +130,12 @@ export class ConnectFormAddMissingProfileField extends Component {
           These field(s) will be added to your Interbit identity and can be used
           in other apps that require them.
         </p>
-        <Button type="submit" className="ibweb-button" onClick={handleSubmit}>
-          Save
-        </Button>
+        <IconButton
+          text="Save"
+          type="submit"
+          className={`ibweb-button ${!valid && `disabled`}`}
+          onClick={() => handleSubmit()}
+        />
         <IconButton
           text="Cancel"
           className="secondary"

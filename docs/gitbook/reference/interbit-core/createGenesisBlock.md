@@ -1,25 +1,27 @@
-# `createGenesisBlock(config)`
+# `createGenesisBlock(genesisConfig)`
 
-Accepts a valid genesis block configuration which can be build using the [genesisConfigBuilder](./genesisConfigBuilder.md) and returns a fully resolved genesis block that can be used to start a chain.
+Creates a genesis block based on the passed in configuration. 
 
 #### Arguments
 
-1. `config` *(Object)*: The configuration object used to create the genesis block.
+1. `genesisConfig` *(Object)*: The genesis block configuration. See [tips](#tips) section for more information.
 
-{
-  config: The config built from genesisConfigBuilder
-}
 
 #### Returns
 
-*(Object)*: A resolved genesis block based on the passed in config
+*(Object)*: A genesis block that can be used to [startChain](startChain.md)
 
 
 #### Example
 
 ```js
-const builtGenesisConfig = genesisConfigBuilder.build()
+const interbit = require('interbit')
 
-const genesisBlock = interbit.createGenesisBlock({ config: builtGenesisConfig })
+// ... generate the genesis configuration
+
+const genesisBlock = interbit.createGenesisBlock(genesisConfig)
 ```
 
+#### Tips
+
+ - The genesis block configuration can be created using the [Genesis Config Builder](../genesisConfigBuilder.md)

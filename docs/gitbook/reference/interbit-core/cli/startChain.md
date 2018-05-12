@@ -1,11 +1,11 @@
 # `startChain(config)`
 
-starts a chain based on the configuration provided
+starts a chain based on the genesis block in configuration provided
 
 #### Arguments
 
 1. `config` *(Object)*: {
-  genesisBlock: the genesis to start the chain from
+  genesisBlock: *(Object)* the genesis to start the chain from
 }
 
 

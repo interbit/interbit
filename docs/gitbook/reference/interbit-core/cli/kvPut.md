@@ -5,7 +5,7 @@
   <p>Incomplete content.</p>
 </div>
 
-...
+Gets something from the cli's key value store.
 
 #### Arguments
 

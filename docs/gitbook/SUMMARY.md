@@ -12,6 +12,8 @@
   * [Chain Joining](/key-concepts/README.md#chain-joining)
 * [Examples](/examples/README.md)
   * [Chain Joining](/examples/joining.md)
+  * [Initializing a Chain](/examples/initialize.md)
+  * [Determinism](/examples/determinism.md)
 * [Architecture](architecture/README.md)
   * [Chain Architecture](architecture/chain-architecture.md)
 * [Reference](reference/README.md)

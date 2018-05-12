@@ -1,20 +1,15 @@
 # `createGenesisBlock(genesisConfig)`
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>Incomplete content.</p>
-</div>
-
-...
+Creates a genesis block based on the passed in configuration. 
 
 #### Arguments
 
-1. `?` *(Object)*: ?
+1. `genesisConfig` *(Object)*: The genesis block configuration. See [tips](#tips) section for more information.
 
 
 #### Returns
 
-*(Object)*: ?
+*(Object)*: A genesis block that can be used to [startChain](startChain.md)
 
 
 #### Example
@@ -23,8 +18,11 @@
 const hypervisor = interbit.createHypervisor()
 const cli = interbit.createCli(hypervisor)
 
-// ...
+// ... generate the genesis configuration
 
-cli.createGenesisBlock(genesisConfig)
+const genesisBlock = cli.createGenesisBlock(genesisConfig)
 ```
 
+#### Tips
+
+ - The genesis block configuration can be created using the [Genesis Config Builder](../genesisConfigBuilder.md)

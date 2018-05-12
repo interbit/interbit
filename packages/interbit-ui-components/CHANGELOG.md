@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.22"></a>
+## [0.4.22](https://github.com/interbit/interbit/compare/v0.4.21...v0.4.22) (2018-05-12)
+
+
+
+
+**Note:** Version bump only for package interbit-ui-components
+
 <a name="0.4.21"></a>
 ## [0.4.21](https://github.com/interbit/interbit/compare/v0.4.20...v0.4.21) (2018-05-12)
 

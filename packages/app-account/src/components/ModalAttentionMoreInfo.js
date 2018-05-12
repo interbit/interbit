@@ -24,7 +24,7 @@ export default class ModalAttentionMoreInfo extends Component {
     const footer = (
       <IconButton
         text="Close"
-        onClick={() => {
+        clickHandler={() => {
           toggleModal(modalNames.ATTENTION_MORE_INFO_MODAL_NAME)
         }}
       />

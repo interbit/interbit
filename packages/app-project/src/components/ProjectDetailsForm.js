@@ -128,7 +128,7 @@ class ProjectDetailsForm extends Component {
               className="Select-icon"
             />
           </FormGroup>
-          <IconButton text="Create Project" onClick={handleSubmit} />
+          <IconButton text="Create Project" clickHandler={handleSubmit} />
           <LinkContainer to="/projects">
             <IconButton text="Cancel" className="secondary" />
           </LinkContainer>

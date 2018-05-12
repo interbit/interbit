@@ -10,7 +10,6 @@ import {
   Markdown
 } from 'interbit-ui-components'
 
-import Authentication from '../components/Authentication'
 import { getOAuthConfig } from '../interbit/public/selectors'
 import { toggleButton, toggleModal } from '../redux/uiReducer'
 import ContentBarAttention from '../components/ContentBarAttention'
@@ -22,7 +21,11 @@ import modalNames from '../constants/modalNames'
 import { PUBLIC, PRIVATE } from '../constants/chainAliases'
 
 const mapStateToProps = state => {
+  const isPrivateChainLoaded = selectors.isChainLoaded(state, {
+    chainAlias: PRIVATE
+  })
   const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
+
   const isAttentionButtonEnabled =
     state.ui.buttons[buttonNames.DISCLAIMER_BUTTON_NAME]
   const isAttentionMoreInfoModalVisible =
@@ -37,7 +40,8 @@ const mapStateToProps = state => {
       modals: state.content.modals,
       isAttentionButtonEnabled,
       isAttentionModalVisible,
-      isAttentionMoreInfoModalVisible
+      isAttentionMoreInfoModalVisible,
+      isPrivateChainLoaded
     }
   }
 
@@ -50,7 +54,8 @@ const mapStateToProps = state => {
     modals: state.content.modals,
     isAttentionButtonEnabled,
     isAttentionModalVisible,
-    isAttentionMoreInfoModalVisible
+    isAttentionMoreInfoModalVisible,
+    isPrivateChainLoaded
   }
 }
 
@@ -73,6 +78,7 @@ export class CreateAccount extends Component {
     isAttentionButtonEnabled: PropTypes.bool,
     isAttentionModalVisible: PropTypes.bool,
     isAttentionMoreInfoModalVisible: PropTypes.bool,
+    isPrivateChainLoaded: PropTypes.bool,
     toggleButtonFunction: PropTypes.func.isRequired,
     toggleModalFunction: PropTypes.func.isRequired
   }
@@ -83,7 +89,8 @@ export class CreateAccount extends Component {
     blockchainDispatch: () => {},
     isAttentionButtonEnabled: false,
     isAttentionModalVisible: false,
-    isAttentionMoreInfoModalVisible: false
+    isAttentionMoreInfoModalVisible: false,
+    isPrivateChainLoaded: false
   }
 
   render() {
@@ -97,10 +104,18 @@ export class CreateAccount extends Component {
       isAttentionButtonEnabled,
       isAttentionModalVisible,
       isAttentionMoreInfoModalVisible,
+      isPrivateChainLoaded,
       toggleButtonFunction,
       toggleModalFunction
     } = this.props
     const colLayout = layout.colLayout.default
+
+    const oAuthProps = {
+      blockchainDispatch,
+      consumerChainId,
+      oAuthConfig,
+      oAuthProvider: 'gitHub'
+    }
 
     return (
       <Grid>
@@ -119,12 +134,27 @@ export class CreateAccount extends Component {
                 toggleModal={toggleModalFunction}
               />
 
-              <Authentication
-                consumerChainId={consumerChainId}
-                oAuthConfig={oAuthConfig}
-                blockchainDispatch={blockchainDispatch}
-                {...contentBars.gitHubCreateAccount}
-              />
+              <ContentBar
+                image={contentBars.gitHubCreateAccount.image}
+                className="image-sm github"
+                title="GitHub">
+                <p>{contentBars.gitHubCreateAccount.content}</p>
+                {/* TODO: only show error message if github auth fails
+                <p className="error">{contentBars.gitHubSignIn.error}</p>
+                */}
+                <Divider />
+                <IconButton
+                  text={contentBars.gitHubCreateAccount.buttonText}
+                  className={isPrivateChainLoaded ? '' : 'disabled'}
+                  clickHandler={() => {
+                    toggleModalFunction(modalNames.ATTENTION_MODAL_NAME)
+                    toggleButtonFunction(
+                      buttonNames.DISCLAIMER_BUTTON_NAME,
+                      false
+                    )
+                  }}
+                />
+              </ContentBar>
             </Col>
           </Row>
 
@@ -152,7 +182,8 @@ export class CreateAccount extends Component {
                 <Divider />
                 <IconButton
                   text={contentBars.gitHubSignIn.buttonText}
-                  onClick={() => {
+                  className={isPrivateChainLoaded ? '' : 'disabled'}
+                  clickHandler={() => {
                     toggleModalFunction(modalNames.ATTENTION_MODAL_NAME)
                     toggleButtonFunction(
                       buttonNames.DISCLAIMER_BUTTON_NAME,
@@ -176,6 +207,7 @@ export class CreateAccount extends Component {
           toggleModal={toggleModalFunction}
           isEnabled={isAttentionButtonEnabled}
           show={isAttentionModalVisible}
+          oAuth={oAuthProps}
         />
       </Grid>
     )

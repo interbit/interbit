@@ -52,7 +52,7 @@ export default class PageContainer extends Component {
           navItems={
             isLoggedIn ? navigation.headerNav : navigation.headerNavLoggedOut
           }
-          textNavItems={isLoggedIn && headerTextNav}
+          textNavItems={isLoggedIn ? headerTextNav : []}
         />
 
         <Grid>

@@ -19,6 +19,11 @@ const config = {
               alias: 'templateControl',
               path: ['interbitServices'],
               joinName: 'INTERBIT_SERVICES'
+            },
+            {
+              alias: 'templateControl',
+              path: ['privateChainHosting'],
+              joinName: 'HOSTING_SPONSOR'
             }
           ]
         }
@@ -38,6 +43,11 @@ const config = {
               alias: 'templatePublic',
               path: ['interbitServices', 'shared'],
               joinName: 'INTERBIT_SERVICES'
+            },
+            {
+              alias: 'templatePublic',
+              path: ['privateChainHosting', 'shared'],
+              joinName: 'HOSTING_SPONSOR'
             }
           ]
         }

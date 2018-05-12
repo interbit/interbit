@@ -91,7 +91,7 @@ export class ConnectFormAddMissingProfileField extends Component {
         <IconButton
           text="Go Back"
           className="secondary"
-          onClick={() => onCancel()}
+          clickHandler={() => onCancel()}
         />
       </div>
     )
@@ -134,12 +134,12 @@ export class ConnectFormAddMissingProfileField extends Component {
           text="Save"
           type="submit"
           className={`ibweb-button ${!valid && `disabled`}`}
-          onClick={() => handleSubmit()}
+          clickHandler={() => handleSubmit()}
         />
         <IconButton
           text="Cancel"
           className="secondary"
-          onClick={() => {
+          clickHandler={() => {
             toggleForm(formNames.CAUTH_ADD_REQUESTED_TOKENS)
           }}
         />

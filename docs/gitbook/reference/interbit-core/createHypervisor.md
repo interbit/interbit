@@ -1,12 +1,8 @@
 # `createHypervisor()`
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>Incomplete content.</p>
-</div>
+Creates an Interbit Hypervisor. The Hypervisor is the small piece of code that is used to boot chains and is itself a blockchain.
 
-Creates an Interbit Hypervisor. The Hypervisor is used to...
-
+The hypervisor hosts all chains you wish to run on a given interbit node and manages admin actions.
 
 #### Arguments
 

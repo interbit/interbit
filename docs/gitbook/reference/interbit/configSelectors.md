@@ -4,17 +4,17 @@ A set of selectors for getting information from a properly formatted configurati
 
 ## Functions available
 
- - getAdminValidators
- - getApps
- - getChains
- - getChainByAlias
- - getChainCovenant
- - getChainJoins
- - getChainValidators
- - getJoinTypeForChain
- - getCovenants
- - getPeers
- - joinTypes
+ - `getAdminValidators`
+ - `getApps`
+ - `getChains`
+ - `getChainByAlias`
+ - `getChainCovenant`
+ - `getChainJoins`
+ - `getChainValidators`
+ - `getJoinTypeForChain`
+ - `getCovenants`
+ - `getPeers`
+ - `joinTypes`
 
 
 ## Function Definitions

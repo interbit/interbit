@@ -1,15 +1,12 @@
 # Determinism
 
+<div class="tips warning">
+  <p><span></span>Incomplete Content</p>
+  <p>Since this documentation was written a new feature was implemented. [`redux-saga`](https://github.com/redux-saga/redux-saga) can be used and included in the covenant as the property rootSaga.</p>
+  <p>TODO: Write a saga implementation that handles randomness.</p>
+</div>
+
 This example will cover the topic of determinism in Smart Contract development. Determinism in software development means that given a particular state and a specific set of input, the result will always be the same.  This is an important concept to understand before developing an Interbit application.
-
-The example exists in `examples/determinism` and contains the following directory structure.
-
-Directory/File     | Purpose
--------------------| -------
-node_modules/      | Installed npm packages
-index.js           | Entry point to your application
-keys.js            | PGP Keys used for cryptography in the blockchain
-package.json       | Configuration file for the Node.js project
 
 Determinism is very important when writing smart contracts.
 
@@ -39,10 +36,7 @@ We will handle generating randomness in an Interbit application in 2 ways:
 
 The standard way to generate random data in JavaScript is with `Math.random()`. Although it is a pseudorandom number generator (PRNG), it cannot be deterministic because it does not accept a seed value. To handle this oddness, we can simply dispatch a value from `Math.random()` to the blockchain.
 
-In the example code we have written a simple smart contract that accepts an action called `RANDOM` and replaces the random value in state with the one it received from the action.
-
-
-<div class="filename">src/chain.js</div>
+In the following sample is a simple smart contract that accepts an action called `RANDOM` and replaces the random value in state with the one it received from the action.
 
 ```js
 // Option 1a: Dispatch some random data to your smart contract
@@ -69,9 +63,8 @@ chain.dispatch(randomAction)
 
 ### True Randomness Dispatched to Chain
 
-If you need something more random, then it is also possible to generate random data and dispatch that value to the blockchain as we have in our example code.
+If you need something more random, then it is also possible to generate random data and dispatch that value to the blockchain as we have here.
 
-<div class="filename">src/chain.js</div>
 
 ```js
 // Option 1b: Dispatch some random data to your smart contract
@@ -93,7 +86,6 @@ If a PRNG is given a seed value it can be used to give sufficiently random value
 
 Option 2 in our example demonstrates this.
 
-<div class="filename">src/chain.js</div>
 
 ```js
 // Option 2: Use a seeded PRNG to make a deterministic "random" value
@@ -135,3 +127,12 @@ Here are some questions that may help when faced with non-determinism:
 * Does the data you are storing in a file truly need to be on file or can it be loaded on the chain and used that way?
 
 Ultimately, the decision will be based on the requirements of the project but how you handle it will make all the difference in a well written Interbit application.
+
+
+### Redux Saga
+
+<div class="tips danger">
+  <p><span></span>Incomplete Content</p>
+  <p>Since this documentation was written a new feature was implemented. [`redux-saga`](https://github.com/redux-saga/redux-saga) can be used and included in the covenant as rootSaga.</p>
+  <p>TODO: Write the optional saga implementation.</p>
+</div>

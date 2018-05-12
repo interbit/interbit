@@ -3,6 +3,58 @@ import covenant from '../../interbit/my-account'
 
 describe('my-account/covenant', () => {
   describe('reducer', () => {
+    it('updates profile on UPDATE_PROFILE', () => {
+      const state = covenant.initialState.setIn(['profile'], {
+        email: 'meow@meowmeow.com',
+        alias: 'cat'
+      })
+
+      const action = covenant.actionCreators.updateProfile({
+        alias: 'dog',
+        email: 'woof@woofwoof.com',
+        name: 'Rover'
+      })
+
+      const afterState = covenant.reducer(state, action)
+
+      const expectedProfile = {
+        alias: 'dog',
+        email: 'woof@woofwoof.com',
+        name: 'Rover'
+      }
+      assert.deepEqual(afterState.profile, expectedProfile)
+    })
+
+    it('existing tokens are not removed on UPDATE_PROFILE', () => {
+      const state = covenant.initialState.setIn(['profile'], {
+        email: 'meow@meowmeow.com',
+        alias: 'cat',
+        name: 'Marmaduke',
+        'gitHub-identity': {
+          id: 123456,
+          name: 'Marmaduke'
+        }
+      })
+
+      const action = covenant.actionCreators.updateProfile({
+        email: 'woof@woofwoof.com',
+        name: 'Rover'
+      })
+
+      const afterState = covenant.reducer(state, action)
+
+      const expectedProfile = {
+        email: 'woof@woofwoof.com',
+        alias: 'cat',
+        name: 'Rover',
+        'gitHub-identity': {
+          id: 123456,
+          name: 'Marmaduke'
+        }
+      }
+      assert.deepEqual(afterState.profile, expectedProfile)
+    })
+
     it('adds a new connection path on SHARE_PROFILE_TOKENS', () => {
       const ownChainId = '987654321'
       const requestingChainId = '123456789'

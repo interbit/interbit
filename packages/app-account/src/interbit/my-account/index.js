@@ -131,13 +131,26 @@ const reducer = (state = initialState, action) => {
 }
 
 const updateProfile = (state, { alias, name, email }) => {
-  const current = state.getIn(PATHS.PRIVATE_PROFILE, Immutable.from({}))
-  const updated = current.merge({
+  const tokensToReplace = removeEmptyProperties({
     alias,
     name,
     email
   })
-  return state.setIn(PATHS.PRIVATE_PROFILE, updated)
+
+  return mergeAtPath(state, PATHS.PRIVATE_PROFILE, tokensToReplace, {})
+}
+
+const removeEmptyProperties = payload =>
+  Object.entries(payload).reduce(
+    (cleaned, [token, value]) =>
+      value ? { ...cleaned, [token]: value } : cleaned,
+    {}
+  )
+
+const mergeAtPath = (state, path, value, options = { deep: true }) => {
+  const currentValue = state.getIn(path, Immutable.from({}))
+  const newValue = currentValue.merge(value, options)
+  return state.setIn(path, newValue)
 }
 
 const makeProfileShareable = (

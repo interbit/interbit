@@ -15,16 +15,21 @@ import './css/App.css'
 
 const mapStateToProps = state => {
   const chainAlias = CHAIN_ALIASES.PRIVATE
-  const userName = selectors.isChainLoaded(state, { chainAlias })
+  const isChainLoaded = selectors.isChainLoaded(state, { chainAlias })
+  const userName = isChainLoaded
     ? selectors
         .getChain(state, { chainAlias })
         .getIn(PRIVATE_CHAIN_PATHS.USERNAME)
     : undefined
 
+  const chainState = isChainLoaded
+    ? selectors.getChain(state, { chainAlias })
+    : {}
+  const isLoggedIn = isChainLoaded && !!chainState.profile['gitHub-identity']
+
   return {
     userName,
-    // TODO: Require authentication
-    isLoggedIn: true
+    isLoggedIn
   }
 }
 
@@ -35,7 +40,7 @@ export class App extends Component {
   }
 
   static defaultProps = {
-    userName: 'anonymous user',
+    userName: '',
     isLoggedIn: false
   }
 

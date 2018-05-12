@@ -37,7 +37,7 @@ export default class PageContainer extends Component {
         <Header
           className="nav-main-menu"
           logo={<LogoAccount />}
-          textNavItems={isLoggedIn && headerTextNav}
+          textNavItems={isLoggedIn ? headerTextNav : []}
           disableLogoLink
         />
 

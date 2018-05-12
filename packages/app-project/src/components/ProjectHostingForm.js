@@ -99,7 +99,7 @@ export class ProjectHostingForm extends Component {
           </p>
           <IconButton
             text="Reset"
-            onClick={() => {
+            clickHandler={() => {
               toggleModalFunction(modalNames.RESET_PROJECT_MODAL_NAME)
             }}
             className="destructive"
@@ -113,7 +113,7 @@ export class ProjectHostingForm extends Component {
           </p>
           <IconButton
             text="Delete Project"
-            onClick={() => {
+            clickHandler={() => {
               toggleModalFunction(modalNames.DELETE_PROJECT_MODAL_NAME)
             }}
             className="super-destructive"

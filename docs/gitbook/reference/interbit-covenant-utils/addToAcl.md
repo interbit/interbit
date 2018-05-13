@@ -21,6 +21,9 @@ None
 #### Example
 
 ```js
-const covenantUtils = require('interbit-covenant-utils')
-covenantUtils.addToAcl()
+    const addToAclAction = utils.addToAcl({
+      actionPermissions: { INC: ['partner'] },
+      roles: { partner: [otherPublicKey] }
+    })
+    await chainInterface.dispatch(addToAclAction)
 ```

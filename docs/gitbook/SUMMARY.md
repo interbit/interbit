@@ -36,6 +36,7 @@
       * [reducer](reference/interbit-middleware/actionCreators.md)
       * [rootSaga](reference/interbit-middleware/rootSaga.md)
       * [selectors](reference/interbit-middleware/selectors.md)
+      * [Chain Sponsorship](reference/interbit-middleware/chainSponsorship.md)
   * [interbit-covenant-utils](reference/interbit-covenant-utils/README.md)
     * [actionTypes](reference/interbit-covenant-utils/actionTypes.md)
     * [addToAcl](reference/interbit-covenant-utils/addToAcl.md)

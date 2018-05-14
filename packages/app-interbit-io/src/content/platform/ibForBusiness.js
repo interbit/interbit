@@ -25,7 +25,7 @@ export default {
       {
         title: 'Privacy and scalability',
         content:
-          'Joining blockchains means applications are easier to integrate and can be designed with purpose-built chains that perform specific tasks at scale.',
+          'Chain joining is unique to Interbit. Chain joining delivers privacy by separating chains and delivers scale by joining them.',
         image: iconChainJoin
       },
       {

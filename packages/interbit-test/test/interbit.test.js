@@ -51,8 +51,10 @@ describe('interbit', () => {
     let hypervisor
     let keyPair
 
+    // regular function is required for before to honour timeout
     // eslint-disable-next-line prefer-arrow-callback
     before(async function() {
+      this.timeout(5000)
       keyPair = await interbit.generateKeyPair()
       hypervisor = await interbit.createHypervisor({ keyPair })
     })

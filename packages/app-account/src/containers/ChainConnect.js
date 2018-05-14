@@ -8,7 +8,6 @@ import { chainDispatch, selectors } from 'interbit-ui-tools'
 
 import { actionCreators } from '../interbit/my-account/actions'
 import { getOAuthConfig } from '../interbit/public/selectors'
-import Connecting from '../components/Connecting'
 import ConnectFormAddMissingProfileField from '../components/ConnectFormAddMissingProfileField'
 import ConnectFormContinueAuth from '../components/ConnectFormContinueAuth'
 import ConnectFormLoggedOut from '../components/ConnectFormLoggedOut'
@@ -22,8 +21,7 @@ import { PRIVATE, PUBLIC } from '../constants/chainAliases'
 const MODES = {
   NOT_LOGGED_IN: 0,
   ADD_PROFILE_FIELDS: 1,
-  CONTINUE_CAUTH: 2,
-  LOADING_CHAIN: 3
+  CONTINUE_CAUTH: 2
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -51,9 +49,7 @@ const mapStateToProps = (state, ownProps) => {
     isEditable: isProfileFormEditable
   }
 
-  if (!isChainLoaded) {
-    mode = MODES.LOADING_CHAIN
-  } else if (!isLoggedIn) {
+  if (!isLoggedIn) {
     mode = MODES.NOT_LOGGED_IN
   } else if (profileFields) {
     missingFields = requestedTokens.filter(t => !profileFields[t])
@@ -202,8 +198,6 @@ export class ChainConnect extends Component {
       const componentTitle = `Service ${consumerChainAlias} ${content.title}`
 
       switch (mode) {
-        case MODES.LOADING_CHAIN:
-          return <Connecting />
         case MODES.NOT_LOGGED_IN:
           return (
             <ConnectFormLoggedOut

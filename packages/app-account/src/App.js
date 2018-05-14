@@ -32,6 +32,7 @@ const mapStateToProps = state => {
 
   return {
     userName: gitHubUsername || '',
+    isChainLoaded,
     isLoggedIn
   }
 }
@@ -39,25 +40,33 @@ const mapStateToProps = state => {
 export class App extends Component {
   static propTypes = {
     userName: PropTypes.string,
+    isChainLoaded: PropTypes.bool,
     isLoggedIn: PropTypes.bool
   }
 
   static defaultProps = {
     userName: '',
+    isChainLoaded: false,
     isLoggedIn: false
   }
 
   render() {
+    const { isChainLoaded } = this.props
+
     return (
       <div className="App ibweb app-account">
-        <Switch>
-          <Route
-            path={paths.CONNECT}
-            render={() => <PageContainerNoNav {...this.props} />}
-            isLoggedIn
-          />
-          <Route render={() => <PageContainer {...this.props} />} />
-        </Switch>
+        {isChainLoaded ? (
+          <Switch>
+            <Route
+              path={paths.CONNECT}
+              render={() => <PageContainerNoNav {...this.props} />}
+              isLoggedIn
+            />
+            <Route render={() => <PageContainer {...this.props} />} />
+          </Switch>
+        ) : (
+          <Route render={() => <PageContainerNoNav {...this.props} />} />
+        )}
       </div>
     )
   }

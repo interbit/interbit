@@ -1,7 +1,6 @@
 /* eslint camelcase: 0 */
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
-const uuid = require('uuid')
 const {
   coreCovenant: {
     redispatch,
@@ -25,9 +24,7 @@ const paths = {
   CLIENT_SECRET: ['oAuth', 'secret'],
   REDIRECT_URL: ['oAuth', 'shared', 'params', 'redirect_uri'],
   SCOPE: ['oAuth', 'shared', 'params', 'scope'],
-  ALLOW_SIGNUP: ['oAuth', 'shared', 'params', 'allow_signup'],
-
-  JOIN_PROVIDERS: ['interbit', 'config', 'providing']
+  ALLOW_SIGNUP: ['oAuth', 'shared', 'params', 'allow_signup']
 }
 
 const selectors = {
@@ -40,9 +37,7 @@ const selectors = {
   params: state => state.getIn(paths.PARAMS),
   redirectUrl: state => state.getIn(paths.REDIRECT_URL),
   scope: state => state.getIn(paths.SCOPE),
-  allowSignup: state => state.getIn(paths.ALLOW_SIGNUP),
-
-  joinProviders: state => state.getIn(paths.JOIN_PROVIDERS, [])
+  allowSignup: state => state.getIn(paths.ALLOW_SIGNUP)
 }
 
 const initialState = Immutable.from({
@@ -120,6 +115,7 @@ const reducer = (state = initialState, action) => {
       const {
         requestId,
         consumerChainId,
+        joinName,
         temporaryToken,
         error,
         errorDescription
@@ -142,6 +138,7 @@ const reducer = (state = initialState, action) => {
       const sagaAction = actionCreators.oAuthCallbackSaga({
         requestId,
         consumerChainId,
+        joinName,
         temporaryToken,
         error,
         errorDescription
@@ -157,6 +154,21 @@ const reducer = (state = initialState, action) => {
       const { consumerChainId, profile } = action.payload
 
       nextState = saveProfile(nextState, { consumerChainId, profile })
+      return nextState
+    }
+
+    case actionTypes.SHARE_PROFILE: {
+      console.log('DISPATCH: ', action)
+      const { consumerChainId, joinName } = action.payload
+
+      const provideAction = startProvideState({
+        consumer: consumerChainId,
+        statePath: ['profiles', consumerChainId, 'sharedProfile'],
+        joinName
+      })
+
+      console.log('REDISPATCH: ', provideAction)
+      nextState = redispatch(nextState, provideAction)
       return nextState
     }
 
@@ -228,14 +240,6 @@ const saveProfile = (state, { consumerChainId, profile }) =>
 const removeProfile = (state, { consumerChainId }) =>
   state.updateIn(['profiles'], Immutable.without, consumerChainId)
 
-const findExistingJoin = (state, { consumerChainId }) => {
-  const joinProviders = selectors.joinProviders(state)
-  return joinProviders.find(
-    join =>
-      join.consumer === consumerChainId && join.joinName.startsWith('GITHUB-')
-  )
-}
-
 function* rootSaga() {
   console.log(`ROOT SAGA: watching for ${actionTypes.OAUTH_CALLBACK_SAGA}`)
   yield takeEvery(actionTypes.OAUTH_CALLBACK_SAGA, oAuthCallbackSaga)
@@ -248,6 +252,7 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
   const {
     requestId,
     consumerChainId,
+    joinName,
     temporaryToken,
     error,
     errorDescription
@@ -292,8 +297,7 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
     )
 
     // Make the github profile sharable to complete the cAuth loop
-    const joinName = yield call(shareProfile, { consumerChainId })
-
+    yield put(actionCreators.shareProfile({ consumerChainId, joinName }))
     yield put(actionCreators.updateProfile({ consumerChainId, profile }))
     yield put(
       actionCreators.authSuceeded({
@@ -394,28 +398,6 @@ const extractProfile = ({ login, id, name, avatar_url }) => ({
   name,
   avatarUrl: avatar_url
 })
-
-function* shareProfile({ consumerChainId }) {
-  const existingJoin = yield select(findExistingJoin, { consumerChainId })
-  if (existingJoin) {
-    console.log(`Already providing GitHub profile to ${consumerChainId}.`)
-    return existingJoin.joinName
-  }
-
-  const joinName = yield call(generateJoinName)
-  yield put(
-    startProvideState({
-      consumer: consumerChainId,
-      statePath: ['profiles', consumerChainId, 'sharedProfile'],
-      joinName
-    })
-  )
-
-  console.log(`Providing GitHub profile to ${consumerChainId}.`)
-  return joinName
-}
-
-const generateJoinName = () => `GITHUB-${uuid.v4().toUpperCase()}`
 
 module.exports = {
   actionTypes,

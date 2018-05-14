@@ -107,25 +107,20 @@ const reducer = (state = initialState, action) => {
       const { requestId, providerChainId, tokenName, joinName } = action.payload
 
       const request = state.getIn([...PATHS.AUTH_REQUESTS, requestId])
+
       if (!request) {
-        console.log(`Request ${requestId} not found.`)
-        return state
+        throw new Error('You did not originate this request')
       }
+      // TODO: Check for stale requests
 
-      const existingJoin = findExistingJoin(state, { providerChainId })
-      if (existingJoin) {
-        console.log(`Join ${existingJoin.joinName} already configured.`)
-      } else {
-        const consumeAction = startConsumeState({
-          provider: providerChainId,
-          mount: [...PATHS.PRIVATE_PROFILE, tokenName],
-          joinName
-        })
+      const consumeAction = startConsumeState({
+        provider: providerChainId,
+        mount: [...PATHS.PRIVATE_PROFILE, tokenName],
+        joinName
+      })
 
-        console.log('REDISPATCH: ', consumeAction)
-        nextState = redispatch(nextState, consumeAction)
-      }
-
+      console.log('REDISPATCH: ', consumeAction)
+      nextState = redispatch(nextState, consumeAction)
       nextState = removeAuthenticationRequest(nextState, requestId)
       return nextState
     }
@@ -133,15 +128,6 @@ const reducer = (state = initialState, action) => {
     default:
       return state
   }
-}
-
-const findExistingJoin = (state, { providerChainId }) => {
-  // TODO: Move this to interbit-covenant-tools selectors
-  const joinConsumers = state.getIn(['interbit', 'config', 'consuming'], [])
-  return joinConsumers.find(
-    join =>
-      join.provider === providerChainId && join.joinName.startsWith('GITHUB-')
-  )
 }
 
 const updateProfile = (state, { alias, name, email }) => {

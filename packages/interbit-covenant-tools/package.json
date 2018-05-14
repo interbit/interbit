@@ -27,7 +27,7 @@
     "yargs": "^10.0.3"
   },
   "dependencies": {
-    "interbit-covenant-utils": "0.7.1",
+    "interbit-covenant-utils": "0.8.0",
     "seamless-immutable": "^7.1.2"
   }
 }

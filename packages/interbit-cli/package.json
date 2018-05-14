@@ -22,7 +22,7 @@
     "express": "^4.16.2",
     "fs-extra": "^5.0.0",
     "interbit": "0.4.23",
-    "interbit-core": "0.7.1",
+    "interbit-core": "0.8.0",
     "interbit-covenant-tools": "0.4.23",
     "lodash": "^4.17.5",
     "socket.io": "^2.0.4",

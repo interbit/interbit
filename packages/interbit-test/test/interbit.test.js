@@ -143,6 +143,26 @@ describe('interbit', () => {
 
           verifyApi(chain, expectedChainApi)
         })
+
+        // interbit-core 0.7.0 regression - unsubscribe() does not unsubscribe #186
+        it('subscribe and unsubscribe work', async () => {
+          const chainId = await cli.createChain()
+          const chain = await cli.getChain(chainId)
+          let unsubscribe = () => {}
+          let count = 0
+          unsubscribe = chain.subscribe(() => {
+            console.log(`Subscribe callback: ${count}`)
+            if (count === 1) {
+              unsubscribe()
+            }
+            count += 1
+          })
+          // assuming a blocking frequency of 2 secs
+          await sleep(5000)
+          assert.equal(count, 1)
+        }).timeout(6000)
+
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
       })
     })
   })

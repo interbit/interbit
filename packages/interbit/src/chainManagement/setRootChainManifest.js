@@ -42,7 +42,7 @@ const waitForBlockToDispatch = (chainInterface, action) => {
   unsubscribe = chainInterface.subscribe(() => {
     if (count === 0) {
       chainInterface.dispatch(action)
-      unsubscribe() // interbit-core 0.7.0 regression - unsubscripe does not unsubscribe #186
+      unsubscribe() // interbit-core 0.7.0 regression - unsubscribe does not unsubscribe #186
       count += 1
     }
   })

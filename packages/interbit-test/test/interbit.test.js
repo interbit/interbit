@@ -40,7 +40,8 @@ describe('interbit', () => {
       createGenesisBlock: 'function',
       createDefaultSponsoredChainConfig: 'function',
       genesisConfigBuilder: 'function',
-      generateKeyPair: 'function'
+      generateKeyPair: 'function',
+      VERSION: 'string'
     }
 
     verifyApi(interbit, expectedInterbitApi)
@@ -150,15 +151,17 @@ describe('interbit', () => {
           const chain = await cli.getChain(chainId)
           let unsubscribe = () => {}
           let count = 0
+          console.time('Time to unsubscribe')
           unsubscribe = chain.subscribe(() => {
             console.log(`Subscribe callback: ${count}`)
+            count += 1
             if (count === 1) {
               unsubscribe()
+              console.timeEnd('Time to unsubscribe')
             }
-            count += 1
           })
           // assuming a blocking frequency of 2 secs
-          await sleep(5000)
+          await sleep(4500)
           assert.equal(count, 1)
         }).timeout(6000)
 

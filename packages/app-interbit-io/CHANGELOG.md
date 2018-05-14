@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.24"></a>
+## [0.4.24](https://github.com/interbit/interbit/compare/v0.4.23...v0.4.24) (2018-05-14)
+
+
+
+
+**Note:** Version bump only for package app-interbit-io
+
 <a name="0.4.23"></a>
 ## [0.4.23](https://github.com/interbit/interbit/compare/v0.4.22...v0.4.23) (2018-05-14)
 

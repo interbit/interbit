@@ -38,13 +38,9 @@ const setRootChainManifest = (cli, manifest, config) => {
 // Wait for chain to init and make it's first block before setting manifest
 const waitForBlockToDispatch = (chainInterface, action) => {
   let unsubscribe = () => {}
-  let count = 0
   unsubscribe = chainInterface.subscribe(() => {
-    if (count === 0) {
-      chainInterface.dispatch(action)
-      unsubscribe() // interbit-core 0.7.0 regression - unsubscripe does not unsubscribe #186
-      count += 1
-    }
+    chainInterface.dispatch(action)
+    unsubscribe()
   })
 }
 

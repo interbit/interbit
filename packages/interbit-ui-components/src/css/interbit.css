@@ -5128,6 +5128,8 @@ a {
     outline: 0;
     -webkit-box-shadow: none;
     box-shadow: none; }
+.ibweb .btn.disabled {
+  pointer-events: none; }
 
 .ibweb-button {
   padding: 7px 40px;

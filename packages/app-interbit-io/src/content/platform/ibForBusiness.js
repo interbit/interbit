@@ -20,7 +20,7 @@ export default {
   headerImage: businessHeader,
   title: 'Interbit for business',
   intro: {
-    content: `Interbit is a different kind of platform. Interbit\u2019s unique chain joining technology allows you to build blockchain apps with the privacy, speed, and scalability required for enterprise business.`,
+    content: `Build blockchain apps with the privacy, speed, and scalability required for enterprise businesses.`,
     cards: [
       {
         title: 'Privacy and scalability',

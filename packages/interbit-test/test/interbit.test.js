@@ -51,10 +51,8 @@ describe('interbit', () => {
     let hypervisor
     let keyPair
 
-    // regular function is required for before to honour timeout
     // eslint-disable-next-line prefer-arrow-callback
     before(async function() {
-      this.timeout(5000)
       keyPair = await interbit.generateKeyPair()
       hypervisor = await interbit.createHypervisor({ keyPair })
     })
@@ -160,10 +158,13 @@ describe('interbit', () => {
               console.timeEnd('Time to unsubscribe')
             }
           })
-          // assuming a blocking frequency of 2 secs
+          // Potentially brittle
+          // Test needs to wait for at least 2 blocks
+          // sleep timeout assumes a blocking frequency of 2 secs
+          // test timeout needs to be longer than the sleep period
           await sleep(4500)
           assert.equal(count, 1)
-        }).timeout(6000)
+        }).timeout(5000)
 
         const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
       })

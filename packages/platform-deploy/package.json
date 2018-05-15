@@ -1,13 +1,14 @@
 {
   "name": "platform-deploy",
-  "version": "0.4.23",
+  "version": "0.4.25",
   "description": "Boots a platform node",
   "main": "src/index.js",
   "private": true,
   "scripts": {
     "start": "npm run deploy",
     "serve": "npm start",
-    "build": "interbit build --config interbit.config.js --artifacts ./platform",
+    "build": "interbit build --config interbit.prod.config.js --artifacts ./platform",
+    "build:dev": "interbit build --config interbit.config.js --artifacts ./platform",
     "deploy": "cross-env interbit deploy --admin-keys src/keys.js --port $PORT --artifacts ./platform",
     "test": "echo \"No tests specified\""
   },
@@ -18,7 +19,7 @@
   ],
   "dependencies": {
     "cross-env": "^5.1.4",
-    "interbit-cli": "0.4.23",
+    "interbit-cli": "0.4.25",
     "lodash": "^4.17.5"
   },
   "author": "BTL GROUP LTD",

@@ -43,10 +43,10 @@ const createChainsFromManifest = async (location, cli, manifest, options) => {
       await cli.startChain({ genesisBlock })
       console.log(`Created chain ${chainId}`)
       // The covenant will apply itself due to its presence in the genesis block
-    }
 
-    const chain = cli.getChain(chainId)
-    chain.dispatch({ type: '@@interbit/DEPLOY' })
+      const chain = cli.getChain(chainId)
+      chain.dispatch({ type: '@@interbit/DEPLOY' })
+    }
   }
 }
 

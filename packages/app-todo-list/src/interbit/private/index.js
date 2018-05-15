@@ -9,7 +9,7 @@ const {
 const { actionTypes, actionCreators } = require('./actions')
 
 const initialState = Immutable.from({
-  chainMetadata: { name: `Template application - User's private chain` },
+  chainMetadata: { name: `Todo list application - User's private chain` },
   memos: [],
   runningTotal: 0
 })

@@ -1,5 +1,5 @@
 {
-  "name": "template-control",
+  "name": "app-todo-list-control",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
   "author": "BTL GROUP LTD",
   "license": "MIT",
   "dependencies": {
-    "interbit-covenant-tools": "0.4.23",
+    "interbit-covenant-tools": "0.4.25",
     "seamless-immutable": "^7.1.2"
   }
 }

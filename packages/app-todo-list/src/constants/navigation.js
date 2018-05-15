@@ -11,11 +11,6 @@ export default {
       text: 'Block Explorer',
       to: paths.BLOCK_EXPLORER,
       eventKey: 'explore'
-    },
-    {
-      text: 'Connect to Profile',
-      to: paths.CAUTH_REQUEST,
-      eventKey: 'cauthRequest'
     }
   ]
 }

@@ -10,7 +10,7 @@ const actionCreators = {}
 
 const initialState = Immutable.from({
   // Not required but handy for troubleshooting
-  chainMetadata: { chainName: `Template application - control chain` },
+  chainMetadata: { chainName: `Todo list application - control chain` },
 
   // Where to find required Interbit services
   // For security, this information is maintained in the control chain and

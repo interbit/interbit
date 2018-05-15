@@ -11,7 +11,7 @@ const config = {
   staticChains: {
     // The public chain runs on the browser and is the entry point for the application
     [chainAliases.PUBLIC]: {
-      covenant: 'template-public',
+      covenant: 'app-todo-list-public',
       config: {
         validators: [PUBLIC_KEY],
         joins: {
@@ -34,7 +34,7 @@ const config = {
     // on validator nodes, but not on the browser.
     [chainAliases.CONTROL]: {
       applyInterbuffer: true,
-      covenant: 'template-control',
+      covenant: 'app-todo-list-control',
       config: {
         validators: [PUBLIC_KEY],
         joins: {
@@ -58,19 +58,19 @@ const config = {
   covenants: {
     // All covenants used by the application, including covenants for
     // dynamically created chains
-    'template-public': {
+    'app-todo-list-public': {
       location: path.join(__dirname, 'src/interbit/public')
     },
-    'template-control': {
+    'app-todo-list-control': {
       location: path.join(__dirname, 'src/interbit/control')
     },
-    'template-private': {
+    'app-todo-list-private': {
       location: path.join(__dirname, 'src/interbit/private')
     }
   },
   apps: {
-    template: {
-      peers: ['localhost:5000'], // the peers the browser should connect to
+    appTodoList: {
+      peers: ['localhost:5055'], // the peers the browser should connect to
       chains: [chainAliases.PUBLIC], // the chains that need to load in the browser
       appChain: chainAliases.PUBLIC, // The chain that the static page is loaded on
       indexLocation: path.join(__dirname, 'public/index.html'), // the index.html to update with the app info

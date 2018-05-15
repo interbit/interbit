@@ -1,10 +1,10 @@
 module.exports = {
   CHAIN_ALIASES: {
-    CONTROL: 'templateControl',
-    PUBLIC: 'templatePublic',
-    PRIVATE: 'templatePrivate'
+    CONTROL: 'appTodoListControl',
+    PUBLIC: 'appTodoListPublic',
+    PRIVATE: 'appTodoListPrivate'
   },
   COVENANTS: {
-    PRIVATE: 'template-private'
+    PRIVATE: 'app-todo-list-private'
   }
 }

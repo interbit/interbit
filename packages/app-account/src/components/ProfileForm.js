@@ -63,15 +63,6 @@ class ProfileForm extends Component {
 
     const viewForm = (
       <form>
-        {Object.keys(profile)
-          .filter(key => typeof profile[key] !== 'object')
-          .map(key => (
-            <FormGroup key={key}>
-              <ControlLabel>{key}</ControlLabel>
-              <FormControl.Static>{profile[key]}</FormControl.Static>
-            </FormGroup>
-          ))}
-
         {profile['gitHub-identity'] && (
           <FormGroup key="gitHub">
             <ControlLabel>GitHub username</ControlLabel>
@@ -80,6 +71,15 @@ class ProfileForm extends Component {
             </FormControl.Static>
           </FormGroup>
         )}
+
+        {Object.keys(profile)
+          .filter(key => typeof profile[key] !== 'object')
+          .map(key => (
+            <FormGroup key={key}>
+              <ControlLabel>{key}</ControlLabel>
+              <FormControl.Static>{profile[key]}</FormControl.Static>
+            </FormGroup>
+          ))}
       </form>
     )
 

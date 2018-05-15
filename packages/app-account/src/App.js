@@ -9,7 +9,6 @@ import PageContainer from './containers/PageContainer'
 import PageContainerNoNav from './containers/PageContainerNoNav'
 
 import CHAIN_ALIASES from './constants/chainAliases'
-// import { PRIVATE_CHAIN_PATHS } from './constants/chainStatePaths'
 import paths from './constants/paths'
 import './config/amplitude'
 import './css/App.css'
@@ -17,11 +16,6 @@ import './css/App.css'
 const mapStateToProps = state => {
   const chainAlias = CHAIN_ALIASES.PRIVATE
   const isChainLoaded = selectors.isChainLoaded(state, { chainAlias })
-  // const userName = isChainLoaded
-  //   ? selectors
-  //       .getChain(state, { chainAlias })
-  //       .getIn(PRIVATE_CHAIN_PATHS.USERNAME)
-  //   : undefined
 
   const chainState = isChainLoaded
     ? selectors.getChain(state, { chainAlias })

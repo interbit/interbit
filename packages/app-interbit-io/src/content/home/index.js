@@ -1,6 +1,6 @@
 import constants from '../../constants'
 
-import cardStartingBlock from '../../assets/cards/cardStartingBlock.jpg'
+import cardStartingBlock from '../../assets/cards/cardStartingBlock2.jpg'
 import cardNewsroom from '../../assets/cards/cardNewsroom.svg'
 import cardCore from '../../assets/cards/cardCore.jpg'
 import cardAccounts from '../../assets/cards/cardAccounts.jpg'
@@ -17,8 +17,14 @@ export default {
     cards: [
       {
         title: 'The Starting Block',
-        content: `Have an idea for a blockchain-based business or application? On May 7th we\u2019ll be accepting submissions to be part of the Starting Block program.`,
-        image: cardStartingBlock
+        content: `Have an idea for a blockchain-based business or application? We are accepting submissions to be part of the Starting Block program.`,
+        image: cardStartingBlock,
+        callToActions: [
+          {
+            to: constants.urls.STARTING_BLOCK,
+            text: 'Apply to the Program'
+          }
+        ]
       },
       {
         title: 'Newsroom',

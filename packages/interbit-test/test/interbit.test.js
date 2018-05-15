@@ -40,7 +40,8 @@ describe('interbit', () => {
       createGenesisBlock: 'function',
       createDefaultSponsoredChainConfig: 'function',
       genesisConfigBuilder: 'function',
-      generateKeyPair: 'function'
+      generateKeyPair: 'function',
+      VERSION: 'string'
     }
 
     verifyApi(interbit, expectedInterbitApi)

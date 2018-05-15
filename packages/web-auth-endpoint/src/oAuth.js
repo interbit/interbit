@@ -117,6 +117,7 @@ const waitForFinalSagaAction = (
     const tester = () => {
       state = chain.getState()
       block = chain.getCurrentBlock() || emptyBlock
+      console.log('tester', { state, block })
       return predicate(state, block)
     }
 

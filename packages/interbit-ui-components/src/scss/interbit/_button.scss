@@ -18,4 +18,8 @@
       box-shadow: none;
     }
   }
+
+  .btn.disabled {
+    pointer-events: none;
+  }
 }

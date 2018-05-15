@@ -32,7 +32,8 @@ class ProfileForm extends Component {
     profile: PropTypes.shape({
       alias: PropTypes.string,
       name: PropTypes.string,
-      email: PropTypes.string
+      email: PropTypes.string,
+      'gitHub-identity': PropTypes.shape({})
     })
   }
 
@@ -41,7 +42,8 @@ class ProfileForm extends Component {
     profile: {
       alias: '',
       name: '',
-      email: ''
+      email: '',
+      'gitHub-identity': {}
     }
   }
 
@@ -61,6 +63,15 @@ class ProfileForm extends Component {
 
     const viewForm = (
       <form>
+        {profile['gitHub-identity'] && (
+          <FormGroup key="gitHub">
+            <ControlLabel>GitHub username</ControlLabel>
+            <FormControl.Static>
+              {profile['gitHub-identity'].login}
+            </FormControl.Static>
+          </FormGroup>
+        )}
+
         {Object.keys(profile)
           .filter(key => typeof profile[key] !== 'object')
           .map(key => (

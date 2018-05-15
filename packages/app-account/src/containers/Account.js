@@ -96,40 +96,42 @@ const mapDispatchToProps = dispatch => ({
 
 export class Account extends Component {
   static propTypes = {
+    blockchainDispatch: PropTypes.func.isRequired,
+    content: PropTypes.shape({}).isRequired,
+    contentBars: PropTypes.shape({}).isRequired,
+    isAttentionMoreInfoModalVisible: PropTypes.bool,
+    isAuthenticating: PropTypes.bool,
+    joinName: PropTypes.string,
+    modals: PropTypes.shape({}).isRequired,
+    oAuthProvider: PropTypes.string,
     profile: PropTypes.shape({
       alias: PropTypes.string,
       name: PropTypes.string,
-      email: PropTypes.string
+      email: PropTypes.string,
+      'gitHub-identity': PropTypes.shape({})
     }),
-    blockchainDispatch: PropTypes.func.isRequired,
-    publicChainDispatch: PropTypes.func.isRequired,
-    toggleFormFunction: PropTypes.func.isRequired,
     profileFormProps: PropTypes.shape({}),
-    isAuthenticating: PropTypes.bool,
     providerChainId: PropTypes.string,
-    oAuthProvider: PropTypes.string,
-    joinName: PropTypes.string,
+    publicChainDispatch: PropTypes.func.isRequired,
     requestId: PropTypes.string,
-    content: PropTypes.shape({}).isRequired,
-    contentBars: PropTypes.shape({}).isRequired,
-    modals: PropTypes.shape({}).isRequired,
-    toggleModalFunction: PropTypes.func.isRequired,
-    isAttentionMoreInfoModalVisible: PropTypes.bool
+    toggleFormFunction: PropTypes.func.isRequired,
+    toggleModalFunction: PropTypes.func.isRequired
   }
 
   static defaultProps = {
+    isAttentionMoreInfoModalVisible: false,
+    isAuthenticating: false,
+    joinName: undefined,
+    oAuthProvider: undefined,
     profile: {
       alias: '',
       name: '',
-      email: ''
+      email: '',
+      'gitHub-identity': {}
     },
     profileFormProps: {},
-    isAuthenticating: false,
-    oAuthProvider: undefined,
-    joinName: undefined,
-    requestId: undefined,
     providerChainId: undefined,
-    isAttentionMoreInfoModalVisible: false
+    requestId: undefined
   }
 
   componentDidUpdate() {

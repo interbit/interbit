@@ -5,22 +5,25 @@ import { Grid } from 'react-bootstrap'
 import { Header } from 'interbit-ui-components'
 
 import ChainConnect from '../containers/ChainConnect'
+import Connecting from '../containers/Connecting'
 import LogoAccount from '../components/LogoAccounts'
 import paths from '../constants/paths'
 
 export default class PageContainer extends Component {
   static propTypes = {
     userName: PropTypes.string,
+    isChainLoaded: PropTypes.bool,
     isLoggedIn: PropTypes.bool
   }
 
   static defaultProps = {
-    userName: 'anonymous user',
+    userName: '',
+    isChainLoaded: false,
     isLoggedIn: false
   }
 
   render() {
-    const { userName, isLoggedIn } = this.props
+    const { userName, isLoggedIn, isChainLoaded } = this.props
     const headerTextNav = [
       {
         content: (
@@ -43,7 +46,10 @@ export default class PageContainer extends Component {
 
         <Grid>
           <Switch>
-            <Route path={paths.CONNECT} component={ChainConnect} />
+            {isChainLoaded && (
+              <Route path={paths.CONNECT} component={ChainConnect} />
+            )}
+            <Route component={Connecting} />
           </Switch>
         </Grid>
       </div>

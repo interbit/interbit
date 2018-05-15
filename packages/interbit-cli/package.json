@@ -1,6 +1,6 @@
 {
   "name": "interbit-cli",
-  "version": "0.4.23",
+  "version": "0.4.25",
   "description": "The Interbit Blockchain Development Platform",
   "files": [
     "bin",
@@ -21,9 +21,9 @@
     "cross-spawn": "5.1.0",
     "express": "^4.16.2",
     "fs-extra": "^5.0.0",
-    "interbit": "0.4.23",
-    "interbit-core": "0.7.1",
-    "interbit-covenant-tools": "0.4.23",
+    "interbit": "0.4.25",
+    "interbit-core": "0.8.2",
+    "interbit-covenant-tools": "0.4.25",
     "lodash": "^4.17.5",
     "socket.io": "^2.0.4",
     "watch": "^1.0.2"

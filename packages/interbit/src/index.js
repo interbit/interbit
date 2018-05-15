@@ -3,6 +3,7 @@ const { getArg, getArgs, isArg } = require('./args/getArg')
 const argOptions = require('./args/argOptions')
 const getArtifactsLocation = require('./args/getArtifactsLocation')
 const getConfig = require('./args/getConfig')
+const getConnect = require('./args/getConnect')
 const getPort = require('./args/getPort')
 const { getKeyPair } = require('./args/getKeyPair')
 const getManifest = require('./args/getManifest')
@@ -46,6 +47,7 @@ module.exports = {
   getArgs,
   getArtifactsLocation,
   getConfig,
+  getConnect,
   getKeyPair,
   getManifest,
   getPort,

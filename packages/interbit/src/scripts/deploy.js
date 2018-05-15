@@ -3,7 +3,7 @@ const { createChainsFromManifest } = require('../chainManagement/createChains')
 const configureChains = require('../chainManagement/configureChains')
 
 const deploy = async options => {
-  const { keyPair, port, location, manifest } = options
+  const { keyPair, port, location, manifest, connect } = options
 
   const { cli } = await startInterbit(keyPair, { port })
   // TODO: Refactor deployCovenants to its own function and move options up into here
@@ -11,7 +11,7 @@ const deploy = async options => {
   // compatible with other uses of deploy throughout the code (Issue #39)
   await createChainsFromManifest(location, cli, manifest, options)
 
-  if (!options.connect) {
+  if (!connect) {
     await configureChains(cli, manifest, options)
   }
 

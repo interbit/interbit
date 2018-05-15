@@ -11,5 +11,6 @@ module.exports = {
   RESET: '--reset',
   DEPLOY: '--deploy',
   HOST_CHAINS: '--host-chains',
-  WITH_CHILDREN: '--with-children'
+  WITH_CHILDREN: '--with-children',
+  CONNECT: '--connect'
 }

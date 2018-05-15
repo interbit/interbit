@@ -3,6 +3,7 @@ const path = require('path')
 const {
   argOptions: { ADMIN_KEYS },
   getArtifactsLocation,
+  getConnect,
   getKeyPair,
   getManifest,
   getPort,
@@ -29,7 +30,8 @@ const getOptions = () => ({
   manifest: getManifest(),
   port: getPort(),
   keyPair: getKeyPair(),
-  location: path.relative(process.cwd(), getArtifactsLocation())
+  location: path.relative(process.cwd(), getArtifactsLocation()),
+  connect: getConnect()
 })
 
 deployWithCliOptions()

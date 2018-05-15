@@ -2,6 +2,7 @@ import constants from '../constants'
 
 import iconAccounts from '../assets/iconAccounts.svg'
 import iconCreateIBApp from '../assets/iconCreateIBApp.png'
+import iconTruckLovely from '../assets/iconTruckLovely.png'
 
 export default {
   accounts: {
@@ -32,5 +33,14 @@ export default {
       'Boilerplate for building Interbit apps. Save time with setup through an easy command-line tool.',
     buttonText: 'View Source',
     buttonTo: constants.urls.GITHUB_IB
+  },
+
+  truckLovely: {
+    barTitle: 'TruckLovely',
+    barTitleTo: constants.paths.TRUCK_LOVELY,
+    barImage: iconTruckLovely,
+    barP: 'Everything pickup and delivery services need in one lovely package.',
+    buttonText: 'Visit Creator',
+    buttonTo: constants.urls.TRUCK_LOVELY_URL
   }
 }

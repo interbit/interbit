@@ -5,7 +5,7 @@
   <p>Incomplete content.</p>
 </div>
 
-...
+Returns all of the blocks that this hypervisor has so far.
 
 #### Arguments
 

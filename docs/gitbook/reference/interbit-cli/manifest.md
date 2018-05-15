@@ -6,6 +6,44 @@ It is a JSON file and should not be altered manually.
 
 It contains similar information about the network as the configuration file, except that is not variable. All variables have been resolved. Chain configurations become genesis blocks and chain IDs, and covenant file locations become packed covenant hashes.
 
+You can check out a functioning [sample manifest](#example) at the bottom of this page.
+
+## Parts of the Manifest
+
+The parts of the manifest mirror the configuration file fairly closely with two major changes, the manifest property, and the genesisBlocks property.
+
+### Peers
+
+The peers part of the manifest contains a list of peers for nodes to connect to.
+
+### Apps
+
+The apps part of the manifest contains information on your application static builds that work with the chains in your manfiest and configuration files. 
+
+It is your responsibility to build your apps. (For now)
+
+### Covenants
+
+The covenants section of the manifest contains references to the packed covenant files and the covenant hashes.
+
+The packed covenants in the dist folder after running interbit-cli's [build](./build.md) are meant to be a snapshot and should not be built without also rebuilding the manifest. If you rebuild them the hashes will not correspond and the covenants will not be applied to your chains.
+
+### Chains
+
+The chains section contains the chain IDs that were generated during the build step from the genesis blocks. 
+
+Altering anything in the manifest file, especially the genesis blocks, will ensure these chain IDs are invalid and will not function.
+
+### Manifest
+
+The manifest section of the manifest file contains any dynamic configuration that may need to occur during the manifest deployment step. This includes covenants applications, adjustments to the ACL, and joins.
+
+### Genesis Blocks
+
+The genesis blocks section contains all of the genesis blocks that were generated from your configuration file.
+
+If you rerun the build step with an existing manifest these genesis blocks will not change.
+
 ## Example
 
 Although you should never manually edit a manifest, here is an example of what a manifest file could look like.

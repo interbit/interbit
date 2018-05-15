@@ -1,21 +1,16 @@
 # `getKeys()`
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>Incomplete content.</p>
-</div>
-
-...
+Returns the keys that this cli is currently using on its chains.
 
 #### Arguments
 
-1. `?` *(Object)*: ?
-
+None.
 
 #### Returns
 
-*(Object)*: ?
-
+*(Object)*: A key pair
+  - `publicKey`: *(String)* the public key string of the new keyPair
+  - `privateKey`: *(String)* the private key string of the new keyPair
 
 #### Example
 
@@ -23,6 +18,6 @@
 const hypervisor = interbit.createHypervisor()
 const cli = interbit.createCli(hypervisor)
 
-cli.getKeys()
+const keys = await cli.getKeys()
 ```
 

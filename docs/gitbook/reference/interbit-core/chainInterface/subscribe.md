@@ -15,10 +15,7 @@ This function does not return anything.
 #### Example
 
 ```js
-const hypervisor = interbit.createHypervisor()
-const cli = interbit.createCli(hypervisor)
-
-cli.subscribe(() => {
+chainInterface.subscribe(() => {
   // State has changed, do something.
 })
 ```

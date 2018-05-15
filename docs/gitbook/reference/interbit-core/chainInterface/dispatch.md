@@ -1,11 +1,5 @@
 # `dispatch()`
 
-
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>Incomplete content.</p>
-</div>
-
 Dispatches a single action to a chain. This is the only way to trigger a state change.
 
 This is a method that is called from a running chain.
@@ -20,7 +14,7 @@ Note: Actions are how new data is fed to the blockchain. Actions must have a `ty
 
 #### Returns
 
-*(Object)*: the dispatched action.
+*(Object)*: A promise that resolves when the action is accepted and blocked.
 
 
 #### Example
@@ -41,3 +35,5 @@ hypervisor.dispatch(action)
 #### Tips
 
 * You cannot call `dispatch` from inside a smart contract or another reducer.
+* If you do wish to dispatch further actions from within a smart contract use [`redispatch`](../../interbit-covenant-utils/redispatch.md
+)

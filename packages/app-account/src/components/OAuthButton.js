@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import uuid from 'uuid'
+import amplitude from 'amplitude-js'
 import { IconButton } from 'interbit-ui-components'
 import { actionCreators } from '../interbit/my-account'
 
@@ -16,6 +17,7 @@ const authenticationHandler = ({
   const { serviceEndPoint, params } = providerConfig
 
   console.log(oAuthProvider, oAuthConfig)
+  amplitude.getInstance().logEvent('INITIATE_GITHUB_OAUTH')
 
   if (serviceEndPoint) {
     const queryOpts = { ...params, state: consumerChainId }

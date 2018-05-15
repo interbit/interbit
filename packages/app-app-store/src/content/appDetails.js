@@ -1,9 +1,11 @@
 import constants from '../constants'
 import iconAccountsLg from '../assets/iconAccountsLg.svg'
 import iconCreateIBAppLg from '../assets/iconCreateIBAppLg.svg'
+import iconTruckLovely from '../assets/iconTruckLovely.png'
 import appDetailsAccounts from '../assets/appDetailsAccounts.jpg'
 import appDetailsAccountKit from '../assets/appDetailsAccountKit.jpg'
 import appDetailsCreateIBApp from '../assets/appDetailsCreateIBApp.jpg'
+import appDetailsHelixAccelerator from '../assets/appDetailsHelixAccelerator.jpg'
 
 export default {
   accounts: {
@@ -73,5 +75,26 @@ User account chains will become central to experiencing Interbit and any Interbi
     button: 'View Source',
     image: appDetailsCreateIBApp,
     description: `With a single command, Create Interbit App will bootstrap an application, set up multiple chains, and initiate joins between them. We want you to spend time writing application code, not configuring your Interbit instance.`
+  },
+
+  truckLovely: {
+    name: 'Truck Lovely',
+    icon: iconTruckLovely,
+    appUrl: constants.urls.TRUCK_LOVELY_URL,
+    companyName: 'Helix Accelerator',
+    companyUrl: 'https://helixaccelerator.ca/',
+    category: '',
+    rating: 'T',
+    ratingName: 'Technical',
+    pricing: 'N/A',
+    button: 'Visit Creator',
+    image: appDetailsHelixAccelerator,
+    description: `Everything pickup and delivery services need in one lovely package.
+
+Customer data is easy to view and edit, and is connected to a simple interface to plan routes and edit individual stops.
+
+See by area and vehicle allocation, schedule routes.
+
+Add or remove customers as needed, modify the route, and tie it all into easy automated accounting.`
   }
 }

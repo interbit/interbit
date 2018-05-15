@@ -1,7 +1,8 @@
 # `createCli()`
 
-Creates an Interbit Interface. The Interface is used to...
+Creates an Interbit Interface. The Interface is used to interact with the running interbit node. It can load chains from peers, connect to new peers, get chain interfaces for you, and do many other cool tricks.
 
+It requires a hypervisor to mount and run your chains onto.
 
 #### Arguments
 

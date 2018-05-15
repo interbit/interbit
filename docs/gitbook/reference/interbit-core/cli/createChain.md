@@ -1,11 +1,6 @@
 # `createChain()`
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>Incomplete content.</p>
-</div>
-
-...
+Creates a chain that will run on this cli and corresponding hypervisor. When first created the chain is empty. It does not have a covennt and is only a genesis block. It will inherit the keys of the cli that created it.
 
 #### Returns
 

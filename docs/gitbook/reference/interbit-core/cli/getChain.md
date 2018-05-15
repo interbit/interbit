@@ -1,28 +1,18 @@
 # `getChain(chainId)`
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>Incomplete content.</p>
-</div>
-
 Returns a chain interface for the chain ID specified
 
 #### Arguments
 
-1. `chainId` *(String)*: The chain ID to retrieve
+1. `chainId` *(String)*: The chain ID for the chain to retrieve
 
 
 #### Returns
 
 *(Object)*: A Chain Interface to interact with the chain ID specified
-
-```js
-{
-  dispatch: (action) => {}, // Dispatch an action to the blockchain
-  subscribe: (callback) => {}, // Subscribe to chain changes
-  getState: () => {} // Get the chain state
-}
-```
+  - `dispatch` *(function)* `(action) => {}` Dispatches an action to the blockchain
+  - `subscribe` *(function)* `(callback) => {}` Subscribes to chain changes and calls the callback on change
+  - `getState` *(function)* `() => {return state}` Gets the chain state
 
 #### Example
 

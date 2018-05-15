@@ -1,15 +1,12 @@
 # `generateKeyPair()`
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>Incomplete content.</p>
-</div>
-
-Generates a new key pair
+Generates a new PGP key pair
 
 #### Returns
 
-*(Object)*: ?
+*(Object)*: A key pair
+  - `publicKey`: *(String)* the public key string of the new keyPair
+  - `privateKey`: *(String)* the private key string of the new keyPair
 
 
 #### Example
@@ -18,6 +15,6 @@ Generates a new key pair
 const hypervisor = interbit.createHypervisor()
 const cli = interbit.createCli(hypervisor)
 
-cli.generateKeyPair()
+const keyPair = await cli.generateKeyPair()
 ```
 

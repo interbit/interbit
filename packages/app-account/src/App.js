@@ -11,6 +11,7 @@ import PageContainerNoNav from './containers/PageContainerNoNav'
 import CHAIN_ALIASES from './constants/chainAliases'
 import { PRIVATE_CHAIN_PATHS } from './constants/chainStatePaths'
 import paths from './constants/paths'
+import './config/amplitude'
 import './css/App.css'
 
 const mapStateToProps = state => {

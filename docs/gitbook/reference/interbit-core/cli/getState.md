@@ -1,18 +1,12 @@
 # `getState()`
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>Incomplete content.</p>
-</div>
-
-Returns the current [Application State](../key-concepts/README.md#application-state). This is the same as the last value returned by any [Smart Contract](../key-concepts/README.md#smart-contracts) or library function (reducers).
+Returns the current [Application State](../key-concepts/README.md#application-state) for the cli. This is the same as the last value returned by any [Smart Contract](../key-concepts/README.md#smart-contracts) or library function (reducers).
 
 
 
 #### Arguments
 
-1. `?` *(Object)*: ?
-
+None.
 
 #### Returns
 
@@ -25,7 +19,7 @@ Returns the current [Application State](../key-concepts/README.md#application-st
 const hypervisor = interbit.createHypervisor()
 const cli = interbit.createCli(hypervisor)
 
-cli.getState()
+const state = cli.getState()
 ```
 
 #### Tips

@@ -1,9 +1,6 @@
-# Destroying a Chain
+# Using the Template Application
 
-<div class="tips info">
-  <p><span></span>Incomplete Content</p>
-  <p>TODO: Write this documentation example.</p>
-</div>
+This walkthrough starts where the [Getting Started](../getting-started/README.md) guide left off.
 
 #### Version Requirements
 To develop Interbit applications, your development environment will need the following software:

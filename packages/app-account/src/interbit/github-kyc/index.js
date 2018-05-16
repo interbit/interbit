@@ -6,8 +6,7 @@ const {
   coreCovenant: {
     redispatch,
     actionCreators: { startProvideState },
-    selectors: coreSelectors,
-    constants: coreConstants
+    selectors: coreSelectors
   }
 } = require('interbit-covenant-tools')
 
@@ -15,32 +14,8 @@ const axios = require('axios')
 const { takeEvery, call, put, select } = require('redux-saga').effects
 
 const { actionTypes, actionCreators } = require('./actions')
-
-const paths = {
-  OAUTH: ['oAuth'],
-  TOKEN_URL: ['oAuth', 'tokenUrl'],
-  PROFILE_URL: ['oAuth', 'profileUrl'],
-  CALLBACK_URL: ['oAuth', 'callbackUrl'],
-  PARAMS: ['oAuth', 'shared', 'params'],
-  CLIENT_ID: ['oAuth', 'shared', 'params', 'client_id'],
-  REDIRECT_URL: ['oAuth', 'shared', 'params', 'redirect_uri'],
-  SCOPE: ['oAuth', 'shared', 'params', 'scope'],
-  ALLOW_SIGNUP: ['oAuth', 'shared', 'params', 'allow_signup']
-}
-
-const selectors = {
-  oAuthConfig: state => state.getIn(paths.OAUTH),
-  tokenUrl: state => state.getIn(paths.TOKEN_URL),
-  profileUrl: state => state.getIn(paths.PROFILE_URL),
-  callbackUrl: state => state.getIn(paths.CALLBACK_URL),
-  clientId: state => state.getIn(paths.CLIENT_ID),
-  params: state => state.getIn(paths.PARAMS),
-  redirectUrl: state => state.getIn(paths.REDIRECT_URL),
-  scope: state => state.getIn(paths.SCOPE),
-  allowSignup: state => state.getIn(paths.ALLOW_SIGNUP),
-
-  joinProviders: state => state.getIn(coreConstants.PATHS.PROVIDING, [])
-}
+const { PATHS } = require('./constants')
+const selectors = require('./selectors')
 
 const initialState = Immutable.from({
   chainMetadata: { chainName: 'Interbit Accounts - GitHub KYC Provider' },
@@ -93,10 +68,10 @@ const reducer = (state = initialState, action) => {
 
       if (!currentClientId || currentClientId === oldClientId) {
         nextState
-          .setIn(paths.CLIENT_ID, newClientId)
-          .setIn(paths.REDIRECT_URL, redirectUrl)
-          .setIn(paths.SCOPE, scope)
-          .setIn(paths.ALLOW_SIGNUP, allowSignup)
+          .setIn(PATHS.CLIENT_ID, newClientId)
+          .setIn(PATHS.REDIRECT_URL, redirectUrl)
+          .setIn(PATHS.SCOPE, scope)
+          .setIn(PATHS.ALLOW_SIGNUP, allowSignup)
 
         return nextState
       }

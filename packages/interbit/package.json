@@ -1,6 +1,6 @@
 {
   "name": "interbit",
-  "version": "0.4.26",
+  "version": "0.4.27",
   "description": "Requireable deployment utilities for interbit-cli",
   "main": "src/index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "dependencies": {
     "fs-extra": "^5.0.0",
     "interbit-core": "0.8.2",
-    "interbit-covenant-tools": "0.4.26",
+    "interbit-covenant-tools": "0.4.27",
     "lodash": "^4.17.5",
     "path": "^0.12.7"
   },

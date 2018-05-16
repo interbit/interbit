@@ -19,14 +19,11 @@ const actionTypes = {
 }
 
 const GITHUB_CLIENT_ID_PATTERN = /^[0-9A-Fa-f]{20}$/
-const GITHUB_CLIENT_SECRET_PATTERN = /^[0-9A-Fa-f]{40}$/
 
 const actionCreators = {
   configureOauthApp: ({
     oldClientId,
     newClientId,
-    oldClientSecret,
-    newClientSecret,
     redirectUrl,
     scope = '',
     allowSignup = true
@@ -36,15 +33,12 @@ const actionCreators = {
       {
         oldClientId,
         newClientId,
-        oldClientSecret,
-        newClientSecret,
         redirectUrl,
         scope,
         allowSignup
       },
       {
         newCliendId: matches(GITHUB_CLIENT_ID_PATTERN),
-        newClientSecret: matches(GITHUB_CLIENT_SECRET_PATTERN),
         redirectUrl: required()
       }
     )

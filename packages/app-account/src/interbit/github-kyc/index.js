@@ -6,7 +6,8 @@ const {
   coreCovenant: {
     redispatch,
     actionCreators: { startProvideState },
-    selectors: coreSelectors
+    selectors: coreSelectors,
+    constants: coreConstants
   }
 } = require('interbit-covenant-tools')
 
@@ -22,12 +23,9 @@ const paths = {
   CALLBACK_URL: ['oAuth', 'callbackUrl'],
   PARAMS: ['oAuth', 'shared', 'params'],
   CLIENT_ID: ['oAuth', 'shared', 'params', 'client_id'],
-  CLIENT_SECRET: ['oAuth', 'secret'],
   REDIRECT_URL: ['oAuth', 'shared', 'params', 'redirect_uri'],
   SCOPE: ['oAuth', 'shared', 'params', 'scope'],
-  ALLOW_SIGNUP: ['oAuth', 'shared', 'params', 'allow_signup'],
-
-  JOIN_PROVIDERS: ['interbit', 'config', 'providing']
+  ALLOW_SIGNUP: ['oAuth', 'shared', 'params', 'allow_signup']
 }
 
 const selectors = {
@@ -36,13 +34,12 @@ const selectors = {
   profileUrl: state => state.getIn(paths.PROFILE_URL),
   callbackUrl: state => state.getIn(paths.CALLBACK_URL),
   clientId: state => state.getIn(paths.CLIENT_ID),
-  clientSecret: state => state.getIn(paths.CLIENT_SECRET),
   params: state => state.getIn(paths.PARAMS),
   redirectUrl: state => state.getIn(paths.REDIRECT_URL),
   scope: state => state.getIn(paths.SCOPE),
   allowSignup: state => state.getIn(paths.ALLOW_SIGNUP),
 
-  joinProviders: state => state.getIn(paths.JOIN_PROVIDERS, [])
+  joinProviders: state => state.getIn(coreConstants.PATHS.PROVIDING, [])
 }
 
 const initialState = Immutable.from({
@@ -64,7 +61,6 @@ const initialState = Immutable.from({
       }
     },
     // These parameters are internal to the covenant and are not shared
-    client_secret: process.env.GITHUB_CLIENT_SECRET,
     tokenUrl: 'https://github.com/login/oauth/access_token',
     profileUrl: 'https://api.github.com/user',
     callbackUrl: process.env.OAUTH_CALLBACK_URL
@@ -87,8 +83,6 @@ const reducer = (state = initialState, action) => {
       const {
         oldClientId,
         newClientId,
-        oldClientSecret,
-        newClientSecret,
         redirectUrl = selectors.redirectUrl(state),
         scope = selectors.scope(state),
         allowSignup = selectors.allowSignup(state)
@@ -96,16 +90,10 @@ const reducer = (state = initialState, action) => {
 
       // Only allow update if the action shows knowledge of the last state
       const currentClientId = selectors.clientId(state)
-      const currrentClientSecret = selectors.clientSecret(state)
 
-      if (
-        (!currentClientId && !currrentClientSecret) ||
-        (currentClientId === oldClientId &&
-          currrentClientSecret === oldClientSecret)
-      ) {
+      if (!currentClientId || currentClientId === oldClientId) {
         nextState
           .setIn(paths.CLIENT_ID, newClientId)
-          .setIn(paths.CLIENT_SECRET, newClientSecret)
           .setIn(paths.REDIRECT_URL, redirectUrl)
           .setIn(paths.SCOPE, scope)
           .setIn(paths.ALLOW_SIGNUP, allowSignup)
@@ -264,7 +252,6 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
     const {
       tokenUrl,
       profileUrl,
-      client_secret,
       shared: {
         params: { client_id }
       }
@@ -277,7 +264,6 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
       {
         tokenUrl,
         client_id,
-        client_secret,
         requestId,
         temporaryToken
       },
@@ -316,16 +302,19 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
 }
 
 function* fetchAuthToken(
-  { tokenUrl, client_id, client_secret, requestId, temporaryToken },
+  { tokenUrl, client_id, requestId, temporaryToken },
   fetchApi
 ) {
   const params = {
     client_id,
-    client_secret,
     code: temporaryToken,
     state: requestId
   }
+
   console.log('POST: ', tokenUrl, params)
+
+  params.client_secret = process.env.GITHUB_CLIENT_SECRET
+
   const getTokenQuery = yield call(
     fetchApi.post,
     tokenUrl,
@@ -339,7 +328,6 @@ function* fetchAuthToken(
     }
   )
   const getTokenResult = getTokenQuery.data
-  console.log(getTokenResult)
 
   // If API returns 200, result will either contain an access token
   // or an error such as bad authorization code

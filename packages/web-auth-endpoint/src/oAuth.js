@@ -42,7 +42,6 @@ const getRedirectUrl = (state, params = {}) => {
   const rootUrl = selectors.callbackUrl(state) || process.env.OAUTH_CALLBACK_URL
   const urlParams = queryString.stringify(params)
   const result = urlParams ? `${rootUrl}?${urlParams}` : rootUrl
-  console.log('getRedirectUrl', result)
   return result
 }
 
@@ -117,7 +116,6 @@ const waitForFinalSagaAction = (
     const tester = () => {
       state = chain.getState()
       block = chain.getCurrentBlock() || emptyBlock
-      console.log('tester', { state, block })
       return predicate(state, block)
     }
 

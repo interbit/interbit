@@ -84,7 +84,7 @@ Update the `interbit/packages/app-the-new-thing/interbit.config.js` file like so
 ```js
   // Leave the rest of the config unchanged.
   apps: {
-    template: {
+    theNewThing: { // Name our app config something more appropriate.
       peers: ['localhost:6000'], // Change the peer connection
       // ...
       // Leave the rest of the template app config unchanged

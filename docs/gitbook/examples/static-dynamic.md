@@ -1,4 +1,4 @@
-# Destroying a Chain
+# Static and Dynamic Chains
 
 <div class="tips danger">
   <p><span></span>Incomplete Content</p>

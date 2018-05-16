@@ -1,4 +1,4 @@
-# Destroying a Chain
+# Writing Covenants
 
 <div class="tips danger">
   <p><span></span>Incomplete Content</p>

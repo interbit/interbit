@@ -88,6 +88,18 @@ const reducer = (state = initialState, action) => {
         errorDescription
       } = action.payload
 
+      if (error) {
+        const failedAction = actionCreators.authFailed({
+          requestId,
+          consumerChainId,
+          error: errorDescription || error
+        })
+
+        console.log('REDISPATCH: ', failedAction)
+        nextState = redispatch(nextState, failedAction)
+        return nextState
+      }
+
       if (
         authenticationRequestExists(state, {
           requestId,
@@ -177,6 +189,8 @@ const reducer = (state = initialState, action) => {
 }
 
 const authenticationRequestExists = (state, { requestId, temporaryToken }) =>
+  requestId &&
+  temporaryToken &&
   state.getIn(['authenticationRequests', requestId]) === temporaryToken
 
 const saveAuthenticationRequest = (state, { requestId, temporaryToken }) =>
@@ -343,7 +357,6 @@ function* fetchPublicProfile({ profileUrl, accessToken }, fetchApi) {
   }
 
   const profile = extractProfile(publicProfile)
-  console.log(profile)
 
   return profile
 }
@@ -355,7 +368,8 @@ const extractProfile = ({ login, id, name, avatar_url }) => ({
   id,
   login,
   name,
-  avatarUrl: avatar_url
+  avatarUrl: avatar_url,
+  timestamp: Date.now()
 })
 
 function* shareProfile({ consumerChainId }) {

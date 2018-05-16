@@ -47,7 +47,6 @@ describe('github-kyc/covenant', () => {
         temporaryToken
       })
 
-      // const mockAxios = { post: () => {}, get: () => {} }
       const startingState = Immutable.from({
         oAuth: {
           shared: {
@@ -55,7 +54,6 @@ describe('github-kyc/covenant', () => {
               client_id: '01234567890123456789'
             }
           },
-          client_secret: '0123456789012345678901234567890123456789',
           tokenUrl: 'mock://github.com/login/oauth/access_token',
           profileUrl: 'mock://api.github.com/user'
         },
@@ -71,25 +69,34 @@ describe('github-kyc/covenant', () => {
           ],
           [matchers.call.fn(axios.get), { data: gitHubProfile }]
         ])
-        .put({
-          type: covenant.actionTypes.SHARE_PROFILE,
-          payload: { consumerChainId, joinName }
-        })
-        .put({
-          type: covenant.actionTypes.UPDATE_PROFILE,
-          payload: {
-            consumerChainId,
-            profile: {
-              id: gitHubProfile.id,
-              login: gitHubProfile.login,
-              name: gitHubProfile.name,
-              avatarUrl: gitHubProfile.avatar_url
+        .put.like({
+          action: {
+            type: '@@interbit/START_PROVIDE_STATE',
+            payload: {
+              consumer: consumerChainId,
+              statePath: ['profiles', consumerChainId, 'sharedProfile']
             }
           }
         })
-        .put({
-          type: covenant.actionTypes.AUTH_SUCEEDED,
-          payload: { requestId, joinName }
+        .put.like({
+          action: {
+            type: covenant.actionTypes.UPDATE_PROFILE,
+            payload: {
+              consumerChainId,
+              profile: {
+                id: gitHubProfile.id,
+                login: gitHubProfile.login,
+                name: gitHubProfile.name,
+                avatarUrl: gitHubProfile.avatar_url
+              }
+            }
+          }
+        })
+        .put.like({
+          action: {
+            type: covenant.actionTypes.AUTH_SUCEEDED,
+            payload: { requestId }
+          }
         })
         .run()
     })

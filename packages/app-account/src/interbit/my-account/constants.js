@@ -1,3 +1,7 @@
+const {
+  coreCovenant: { constants: coreConstants }
+} = require('interbit-covenant-tools')
+
 const SHARED_ROOT = 'shared'
 const SHARED_PROFILE = 'sharedProfile'
 const PRIVATE_PROFILE = 'profile'
@@ -7,6 +11,7 @@ const EMAIL = 'email'
 const NAME = 'name'
 
 const PATHS = {
+  ...coreConstants.PATHS,
   PRIVATE_PROFILE: [PRIVATE_PROFILE],
   SHARED_ROOT: [SHARED_ROOT],
   USERNAME: [PRIVATE_PROFILE, ALIAS],

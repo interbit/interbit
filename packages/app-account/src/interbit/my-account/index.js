@@ -112,7 +112,11 @@ const reducer = (state = initialState, action) => {
         return state
       }
 
-      const existingJoin = findExistingJoin(state, { providerChainId })
+      const existingJoin = findExistingJoin(state, {
+        providerChainId,
+        joinName
+      })
+
       if (existingJoin) {
         console.log(`Join ${existingJoin.joinName} already configured.`)
       } else {
@@ -135,12 +139,10 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-const findExistingJoin = (state, { providerChainId }) => {
-  // TODO: Move this to interbit-covenant-tools selectors
-  const joinConsumers = state.getIn(['interbit', 'config', 'consuming'], [])
+const findExistingJoin = (state, { providerChainId, joinName }) => {
+  const joinConsumers = state.getIn(PATHS.CONSUMING, [])
   return joinConsumers.find(
-    join =>
-      join.provider === providerChainId && join.joinName.startsWith('GITHUB-')
+    join => join.provider === providerChainId && join.joinName === joinName
   )
 }
 

@@ -7,8 +7,28 @@ import queryString from 'query-string'
 import { chainDispatch } from 'interbit-ui-tools'
 
 import LinkedCovenant from '../components/LinkedCovenant'
-import { actionCreators } from '../components/incrementCovenantAdapter'
+import { actionCreators } from '../adapters/publicChainAdapter'
 import { getExploreChainState } from '../redux/exploreChainReducer'
+
+const mapStateToProps = (state, ownProps) => {
+  const {
+    location: { search }
+  } = ownProps
+  const query = queryString.parse(search)
+  const { alias: chainAlias } = query
+
+  const exploreChainState = getExploreChainState(state, chainAlias)
+
+  return {
+    selectedChain: {
+      chainAlias: exploreChainState.chainId,
+      state: {
+        ...exploreChainState.state,
+        interbit: exploreChainState.interbit
+      }
+    }
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   resetForm: form => {

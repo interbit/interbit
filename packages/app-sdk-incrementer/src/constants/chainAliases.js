@@ -1,1 +1,1 @@
-module.exports = require('../interbit/control/constants').CHAIN_ALIASES
+module.exports = require('../interbit/public/chainAliases').CHAIN_ALIASES

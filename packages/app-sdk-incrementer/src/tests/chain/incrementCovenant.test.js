@@ -1,6 +1,6 @@
 import assert from 'assert'
 import Immutable from 'seamless-immutable'
-import covenant from '../../interbit/increment'
+import covenant from '../../interbit/public'
 
 describe('covenant', () => {
   const sum = 25

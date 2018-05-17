@@ -1,6 +1,17 @@
-const covenantName = 'Interbit Template Public Chain'
+const covenant = require('../interbit/public')
 
-const actionCreators = {}
+const covenantName = 'Interbit SDK Increment Example'
+const valueLabel = 'Enter a number'
+
+const actionCreators = {
+  add: () => ({
+    type: 'Add to the sum',
+    arguments: {
+      [valueLabel]: ''
+    },
+    invoke: ({ [valueLabel]: value }) => covenant.actionCreators.add(value)
+  })
+}
 
 module.exports = {
   covenantName,

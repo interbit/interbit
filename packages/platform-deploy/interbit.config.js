@@ -2,6 +2,7 @@ const _ = require('lodash')
 
 const accountConfig = require('../app-account/interbit.config')
 const templateConfig = require('../template/interbit.config')
+const sdkConfig = require('../app-sdk-incrementer/interbit.config')
 
 const init = {
   peers: [],
@@ -10,7 +11,7 @@ const init = {
   covenants: {}
 }
 
-const config = [accountConfig, templateConfig].reduce(
+const config = [accountConfig, templateConfig, sdkConfig].reduce(
   (prev, curr) => ({
     peers: prev.peers.concat(curr.peers),
     adminValidators: prev.adminValidators.concat(curr.adminValidators),

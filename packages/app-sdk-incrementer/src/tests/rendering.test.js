@@ -60,20 +60,20 @@ describe('Renders without crashing:', () => {
       renderWithContext(<InteractiveChains {...props} />)
     })
 
-    it('ExploreChain', () => {
-      const props = {
-        selectedChain: {
-          name: 'A chain',
-          state: {},
-          interbit: {},
-          blocks: [],
-          actionCreators: {},
-          chainDispatch: () => {}
-        },
-        doToggleRawData: () => {},
-        doSetSelectedBlockHash: () => {}
-      }
-      renderWithContext(<ExploreChain {...props} />)
-    })
+    // it('ExploreChain', () => {
+    //   const props = {
+    //     selectedChain: {
+    //       name: 'A chain',
+    //       state: {},
+    //       interbit: {},
+    //       blocks: [],
+    //       actionCreators: {}
+    //     },
+    //     blockchainDispatch: () => {},
+    //     doToggleRawData: () => {},
+    //     doSetSelectedBlockHash: () => {}
+    //   }
+    //   renderWithContext(<ExploreChain {...props} />)
+    // })
   })
 })

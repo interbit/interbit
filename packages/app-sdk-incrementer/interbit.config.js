@@ -21,7 +21,7 @@ const config = {
   },
   apps: {
     increment: {
-      peers: ['localhost:5000'], // the peers the browser should connect to
+      peers: ['localhost:5025'], // the peers the browser should connect to
       chains: ['incrementerPublic'],
       appChain: 'incrementerPublic',
       indexLocation: path.join(__dirname, 'public/index.html'),

@@ -1,5 +1,11 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
+const {
+  coreCovenant: {
+    redispatch,
+    actionCreators: { addToAcl }
+  }
+} = require('interbit-covenant-tools')
 
 const actionTypes = {
   ADD: 'incrementer/ADD'
@@ -23,6 +29,17 @@ const reducer = (state = initialState, action) => {
 
       const { value } = action.payload
       return state.set('sum', state.sum + Number(value))
+    }
+
+    // This won't work until an update to core allowing any user to dispatch actions to a common chain
+    case '@@interbit/DEPLOY': {
+      const addToAclAction = addToAcl({
+        actionPermissions: { [actionTypes.ADD]: ['public'] },
+        roles: { public: ['*'] }
+      })
+
+      console.log('REDISPATCH: ', addToAclAction)
+      return redispatch(state, addToAclAction)
     }
 
     default:

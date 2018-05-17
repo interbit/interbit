@@ -1,14 +1,11 @@
 {
     "name": "app-sdk-incrementer",
     "description": "Interbit SDK increment example",
-    "author": "BTL GROUP LTD",
     "version": "0.4.27",
     "private": true,
-    "license": "MIT",
     "main": "src/exports.js",
-    "files": [
-        "src/interbit/*"
-    ],
+    "license": "MIT",
+    "author": "BTL GROUP LTD",
     "dependencies": {
         "cross-env": "^5.1.4",
         "interbit-cli": "0.4.27",
@@ -26,24 +23,22 @@
         "react-styleguidist": "^6.2.4",
         "redux": "3.7.2",
         "redux-devtools-extension": "^2.13.2",
-        "redux-form": "^7.2.1",
         "redux-saga": "^0.16.0",
         "seamless-immutable": "^7.1.2",
         "serve": "^6.5.5"
     },
+    "devDependencies": {
+        "redux-saga-test-plan": "^3.6.0"
+    },
     "scripts": {
         "start": "cross-env REACT_APP_INTERBIT_WEB_SERVER=123 REACT_APP_INTERBIT_PORT=5000 react-scripts start",
         "build": "react-scripts build",
-        "serve": "cross-env serve build",
+        "serve": "cross-env serve --single build",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
-        "interbit:start": "cross-env COVENANT_DEV_MODE=true DB_PATH=./db-interbit interbit start",
-        "interbit:create": "cross-env COVENANT_DEV_MODE=true interbit create",
+        "interbit:start": "interbit start --db-path ./db-interbit --port 5000 --dev --no-watch",
+        "interbit:create": "interbit create --dev",
         "interbit:build": "interbit build",
-        "interbit:deploy": "interbit deploy"
-    },
-    "devDependencies": {
-        "concurrently": "^3.5.1",
-        "nodemon": "^1.14.12"
+        "interbit:deploy": "interbit deploy --admin-keys keyPair.js"
     }
 }

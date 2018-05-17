@@ -1,46 +1,30 @@
 import React, { Component } from 'react'
 import { Grid } from 'react-bootstrap'
-import { Header } from 'interbit-ui-components'
+import { Header, Logo, IBIcon } from 'interbit-ui-components'
 import { Switch, Route } from 'react-router-dom'
 
-import NotFound from './containers/NotFound'
+import NotFound from './containers/NotFoundPage'
 import InteractiveChains from './containers/InteractiveChains'
 import ExploreChain from './containers/ExploreChain'
 
-import profilePic from './img/profilePic.png'
 import './css/App.css'
+import navigation from './constants/navigation'
+import paths from './constants/paths'
 
 export default class App extends Component {
   render() {
-    const userProfile = (
-      <div className="Logged-in-user">
-        <img className="Profile-pic" src={profilePic} alt="profile" />
-        <span>JohnSmith</span>
-      </div>
-    )
-
     return (
-      <div className="App">
+      <div className="App ibweb app-interbit-io">
         <Header
-          userAlias={userProfile}
-          navItems={[
-            {
-              text: 'INCREMENT',
-              to: '/chains',
-              eventKey: 'chains'
-            },
-            {
-              text: 'BLOCK EXPLORER',
-              to: '/explore',
-              eventKey: 'explore'
-            }
-          ]}
+          navItems={navigation.headerNav}
+          logo={<Logo className="sm hidden-xs" />}
+          logoSm={<IBIcon className="visible-xs hidden-sm" />}
         />
         <Grid>
           <Switch>
-            <Route exact path="/" component={InteractiveChains} />
-            <Route exact path="/chains" component={InteractiveChains} />
-            <Route path="/explore" component={ExploreChain} />
+            <Route exact path={paths.HOME} component={InteractiveChains} />
+            <Route exact path={paths.CHAINS} component={InteractiveChains} />
+            <Route path={paths.BLOCK_EXPLORER} component={ExploreChain} />
             <Route component={NotFound} />
           </Switch>
         </Grid>

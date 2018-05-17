@@ -5,20 +5,36 @@ import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { BrowserRouter } from 'react-router-dom'
-import { middleware as interbitMiddleware } from 'interbit-ui-tools'
+import createSagaMiddleware from 'redux-saga'
+import {
+  createMiddleware as createInterbitMiddleware,
+  rootSaga as interbitSaga
+} from 'interbit-ui-tools'
 
 import 'interbit-ui-components/src/css/index.css'
 import 'interbit-ui-components/src/css/interbit.css'
 
 import App from './App'
 
+import { PUBLIC } from './constants/chainAliases'
 import registerServiceWorker from './registerServiceWorker'
+import { setSelectedChain } from './redux/exploreChainReducer'
 import reducers from './redux'
+
+const interbitMiddleware = createInterbitMiddleware({
+  publicChainAlias: PUBLIC
+})
+
+const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(
   reducers,
-  composeWithDevTools(applyMiddleware(interbitMiddleware))
+  composeWithDevTools(applyMiddleware(interbitMiddleware, sagaMiddleware))
 )
+sagaMiddleware.run(interbitSaga)
+
+// BlockExplorer will monitor the public chain
+store.dispatch(setSelectedChain(PUBLIC))
 
 // eslint-disable-next-line react/no-render-return-value
 ReactDOM.render(

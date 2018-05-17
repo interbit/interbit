@@ -4,36 +4,36 @@ import queryString from 'query-string'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { BlockExplorer } from 'interbit-ui-components'
+import { chainDispatch } from 'interbit-ui-tools'
+
 import {
-  NO_CHAIN_SELECTED,
-  emptyChainState,
+  getExploreChainState,
   toggleRawData,
   setSelectedBlockHash
 } from '../redux/exploreChainReducer'
 
 const mapStateToProps = (state, ownProps) => {
   const {
-    exploreChain,
-    exploreChain: { selectedChainId }
+    exploreChain: { showRawData, selectedBlockHash }
   } = state
   const {
     location: { search }
   } = ownProps
   const query = queryString.parse(search)
-  const { chainId } = query
+  const { alias: chainAlias } = query
 
   return {
-    ...exploreChain,
-    selectedChain:
-      exploreChain.chains[chainId || selectedChainId] ||
-      exploreChain.chains[NO_CHAIN_SELECTED] ||
-      emptyChainState(NO_CHAIN_SELECTED)
+    showRawData,
+    selectedBlockHash,
+    selectedChain: getExploreChainState(state, chainAlias)
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   doToggleRawData: () => dispatch(toggleRawData()),
-  doSetSelectedBlockHash: hash => dispatch(setSelectedBlockHash(hash))
+  doSetSelectedBlockHash: hash => dispatch(setSelectedBlockHash(hash)),
+  blockchainDispatch: chainAlias => action =>
+    dispatch(chainDispatch(chainAlias, action))
 })
 
 export class ExploreChain extends Component {
@@ -43,13 +43,13 @@ export class ExploreChain extends Component {
       state: PropTypes.object.isRequired,
       interbit: PropTypes.object.isRequired,
       blocks: PropTypes.arrayOf(PropTypes.object).isRequired,
-      chainType: PropTypes.string,
-      chainDispatch: PropTypes.func
+      covenantName: PropTypes.string
     }).isRequired,
     showRawData: PropTypes.bool,
     doToggleRawData: PropTypes.func.isRequired,
     selectedBlockHash: PropTypes.string,
-    doSetSelectedBlockHash: PropTypes.func.isRequired
+    doSetSelectedBlockHash: PropTypes.func.isRequired,
+    blockchainDispatch: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -63,11 +63,17 @@ export class ExploreChain extends Component {
       doToggleRawData,
       selectedChain,
       selectedBlockHash,
-      doSetSelectedBlockHash
+      doSetSelectedBlockHash,
+      blockchainDispatch
     } = this.props
+    const chain = selectedChain.set(
+      'blockchainDispatch',
+      blockchainDispatch(selectedChain.chainId)
+    )
+
     return (
       <BlockExplorer
-        selectedChain={selectedChain}
+        selectedChain={chain}
         showRawData={showRawData}
         doToggleRawData={doToggleRawData}
         selectedBlockHash={selectedBlockHash}

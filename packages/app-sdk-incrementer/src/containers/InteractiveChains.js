@@ -10,18 +10,6 @@ import LinkedCovenant from '../components/LinkedCovenant'
 import { actionCreators } from '../components/incrementCovenantAdapter'
 import { getExploreChainState } from '../redux/exploreChainReducer'
 
-const mapStateToProps = (state, ownProps) => {
-  const {
-    location: { search }
-  } = ownProps
-  const query = queryString.parse(search)
-  const { chainId } = query
-
-  return {
-    selectedChain: getExploreChainState(state, chainId || 'increment')
-  }
-}
-
 const mapDispatchToProps = dispatch => ({
   resetForm: form => {
     dispatch(reset(form))
@@ -30,23 +18,15 @@ const mapDispatchToProps = dispatch => ({
     dispatch(chainDispatch(chainAlias, action))
 })
 
-const generateChainName = chain => {
-  const chainName =
-    chain.state && chain.state.chainMetadata
-      ? chain.state.chainMetadata.chainName
-      : undefined
-  const covenant =
-    chain.state && chain.state.chainMetadata
-      ? chain.state.chainMetadata.covenant
-      : undefined
-
-  return chainName || covenant || chain.covenantName
-}
+const generateChainName = chain =>
+  chain.state && chain.state.chainMetadata
+    ? chain.state.chainMetadata.chainName
+    : chain.chainAlias
 
 export class InteractiveChains extends Component {
   static propTypes = {
     selectedChain: PropTypes.shape({
-      chainId: PropTypes.string.isRequired,
+      chainAlias: PropTypes.string.isRequired,
       state: PropTypes.object.isRequired
     }),
     resetForm: PropTypes.func.isRequired,
@@ -68,12 +48,12 @@ export class InteractiveChains extends Component {
       <Grid>
         <Row>
           <LinkedCovenant
-            chainId={selectedChain.chainId}
+            chainId={selectedChain.chainAlias}
             chainName={generateChainName(selectedChain)}
             raw={selectedChain.state}
             covenant={{ actionCreators }}
             reset={resetForm}
-            blockchainDispatch={blockchainDispatch(selectedChain.chainId)}
+            blockchainDispatch={blockchainDispatch(selectedChain.chainAlias)}
           />
         </Row>
       </Grid>

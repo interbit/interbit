@@ -91,11 +91,11 @@ Interbit enables you to use many blockchains, joined together, to build your app
         content: 'Perfect audit, no logs'
       },
       {
-        title: 'Disaster recovery',
+        title: 'Disaster recoverable',
         content: 'RTO & RPO nearly zero'
       },
       {
-        title: 'Data integrity',
+        title: 'Ensured data integrity',
         content: 'Immutable app history'
       },
       {

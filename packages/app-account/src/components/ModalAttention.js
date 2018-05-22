@@ -44,6 +44,7 @@ export default class ModalAttention extends Component {
     const footer = (
       <div>
         <Checkbox
+          name="check"
           onClick={e => {
             toggleButton(buttonNames.DISCLAIMER_BUTTON_NAME, e.target.checked)
           }}>
@@ -53,12 +54,14 @@ export default class ModalAttention extends Component {
 
         <OAuthButton
           text="Continue"
+          name="continue"
           {...oAuth}
           oAuthProvider="gitHub"
           className={isEnabled ? '' : 'disabled'}
         />
         <IconButton
           text="Cancel"
+          name="cancel"
           className="secondary"
           clickHandler={() => toggleModal(modalNames.ATTENTION_MODAL_NAME)}
         />

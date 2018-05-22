@@ -18,7 +18,7 @@ export default class ContentBar extends Component {
   }
 
   render() {
-    const { title, titleTo, image, className } = this.props
+    const { title, titleTo, image, className, ...rest } = this.props
     return (
       <Media className={`ibweb-content-bar ${className}`}>
         <Media.Left>
@@ -26,7 +26,7 @@ export default class ContentBar extends Component {
         </Media.Left>
         <Media.Body>
           {titleTo ? (
-            <a href={titleTo}>
+            <a href={titleTo} {...rest}>
               <h3>{title}</h3>
             </a>
           ) : (

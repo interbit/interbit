@@ -144,6 +144,7 @@ export class CreateAccount extends Component {
                 */}
                 <Divider />
                 <IconButton
+                  id={contentBars.gitHubCreateAccount.id}
                   text={contentBars.gitHubCreateAccount.buttonText}
                   className={isPrivateChainLoaded ? '' : 'disabled'}
                   clickHandler={() => {
@@ -181,6 +182,7 @@ export class CreateAccount extends Component {
                 */}
                 <Divider />
                 <IconButton
+                  id={contentBars.gitHubCreateAccount.id}
                   text={contentBars.gitHubSignIn.buttonText}
                   className={isPrivateChainLoaded ? '' : 'disabled'}
                   clickHandler={() => {

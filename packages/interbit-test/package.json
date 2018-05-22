@@ -9,10 +9,12 @@
   "author": "BTL GROUP LTD",
   "license": "MIT",
   "dependencies": {
-    "interbit-core": "0.8.2"
+    "interbit-core": "0.8.2",
+    "selenium-webdriver": "^4.0.0-alpha.1"
   },
   "devDependencies": {
     "assert": "^1.4.1",
+    "chromedriver": "^2.38.3",
     "mocha": "^4.0.1"
   }
 }

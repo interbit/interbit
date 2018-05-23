@@ -36,7 +36,7 @@ There is no guarantee of data preservation, uptime, stability, or security at th
   },
   gitHubCreateAccount: {
     title: 'GitHub',
-    id: 'ib-github-create',
+    id: 'ib-test-github-create',
     image: iconGitHub,
     content: 'Authenticate with GitHub to create your account.',
     error: 'Error connecting to GitHub. Please try again.',
@@ -44,7 +44,7 @@ There is no guarantee of data preservation, uptime, stability, or security at th
   },
   gitHubSignIn: {
     title: 'GitHub',
-    id: 'ib-github-signin',
+    id: 'ib-test-github-signin',
     image: iconGitHub,
     content: 'Authenticate with GitHub to sign in to your account.',
     error: 'Error connecting to GitHub. Please try again.',

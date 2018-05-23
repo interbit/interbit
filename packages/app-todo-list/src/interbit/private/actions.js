@@ -11,10 +11,9 @@ const actionCreators = {
     payload: { number }
   }),
 
-  addItem: (id, title, description) => ({
-    type: actionTypes.ADD_ITEM,
+  addTodo: (title, description) => ({
+    type: actionTypes.ADD_TODO,
     payload: {
-      id,
       title,
       description
     }

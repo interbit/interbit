@@ -9,7 +9,6 @@ const addActionLabel = 'Add-up some numbers'
 const numberParamLabel = 'Enter a number'
 
 const addItemActionLabel = 'Add a to do item'
-const addItemIdLabel = 'Enter an ID number'
 const addItemTitleLabel = 'Enter a title'
 const addItemDescriptionLabel = 'Enter a description'
 
@@ -34,15 +33,13 @@ const actionCreators = {
   addItem: () => ({
     type: addItemActionLabel,
     arguments: {
-      [addItemIdLabel]: '',
       [addItemTitleLabel]: '',
       [addItemDescriptionLabel]: ''
     },
     invoke: ({
-      [addItemIdLabel]: id,
       [addItemTitleLabel]: title,
       [addItemDescriptionLabel]: description
-    }) => covenant.actionCreators.addItem(id, title, description)
+    }) => covenant.actionCreators.addTodo(title, description)
   })
 }
 

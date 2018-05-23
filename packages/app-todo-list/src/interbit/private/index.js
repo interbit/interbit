@@ -40,11 +40,14 @@ const reducer = (state = initialState, action) => {
         : state
     }
 
-    case actionTypes.ADD_ITEM: {
-      const { id } = action.payload
+    case actionTypes.ADD_TODO: {
+      const { title, description } = action.payload
       const items = state.getIn(['items'], Immutable.from([]))
+      const id = items.length
 
-      return id ? state.set('items', items.concat(action.payload)) : state
+      return title
+        ? state.set('items', items.concat({ id, title, description }))
+        : state
     }
 
     default:

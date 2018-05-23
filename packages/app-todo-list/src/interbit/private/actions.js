@@ -9,6 +9,15 @@ const actionCreators = {
   add: number => ({
     type: actionTypes.ADD,
     payload: { number }
+  }),
+
+  addItem: (id, title, description) => ({
+    type: actionTypes.ADD_ITEM,
+    payload: {
+      id,
+      title,
+      description
+    }
   })
 }
 

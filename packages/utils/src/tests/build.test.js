@@ -26,8 +26,6 @@ describe('The Build Must Not be Tampered With: It', () => {
       // check the names match a format
       switch (name) {
         case 'interbit':
-        case 'interbit-e2e':
-        case 'interbit-ui-components':
         case 'platform-deploy':
         case 'template':
         case 'utils':
@@ -35,8 +33,8 @@ describe('The Build Must Not be Tampered With: It', () => {
           break
 
         default: {
-          const defaultMessage = `App name does not match standard app-* and is not in allowed exclusions whitelist: ${name}`
-          assert(name.match(/^(app|interbit)(-[a-z]+)+$/), defaultMessage)
+          const defaultMessage = `App name does not match regex /^(app|interbit)(-[a-z0-9]+)+$/ and is not in allowed exclusions whitelist: ${name}`
+          assert(name.match(/^(app|interbit)(-[a-z0-9]+)+$/), defaultMessage)
         }
       }
 

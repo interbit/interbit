@@ -26,8 +26,9 @@ describe('The Build Must Not be Tampered With: It', () => {
       // check the names match a format
       switch (name) {
         case 'interbit':
-        case 'platform-deploy':
+        case 'interbit-e2e':
         case 'interbit-ui-components':
+        case 'platform-deploy':
         case 'template':
         case 'utils':
         case 'web-auth-endpoint':

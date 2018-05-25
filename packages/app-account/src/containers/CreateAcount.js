@@ -120,7 +120,7 @@ export class CreateAccount extends Component {
     return (
       <Grid>
         <div className="ibweb-page create-account">
-          <Row className="ibweb-mg-md">
+          <Row className="ibweb-mg-md ibweb-mg-md-scr-xs">
             <Col {...colLayout}>
               <h1>{content.title}</h1>
               <Markdown markdown={content.intro} className="ibweb-intro" />
@@ -159,7 +159,7 @@ export class CreateAccount extends Component {
             </Col>
           </Row>
 
-          <Row className="ibweb-mg-md">
+          <Row className="ibweb-mg-md ibweb-mg-md-scr-xs">
             <Col {...colLayout}>
               <h1>{content.signIn.title}</h1>
               <Markdown

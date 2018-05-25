@@ -194,7 +194,7 @@ export class Account extends Component {
     return (
       <Grid>
         <div className="ibweb-page">
-          <Row className="ibweb-mg-md">
+          <Row className="ibweb-mg-md ibweb-mg-md-scr-xs">
             <Col {...colLayout}>
               <h1>{content.title}</h1>
               <Markdown markdown={content.intro} className="ibweb-intro" />
@@ -210,7 +210,7 @@ export class Account extends Component {
             </Col>
           </Row>
 
-          <Row>
+          <Row className="ibweb-mg-md-scr-xs">
             <Col {...colLayout}>
               <ProfileForm
                 onSubmit={this.submit}
@@ -229,7 +229,7 @@ export class Account extends Component {
           </Row>
           */}
 
-          <Row className="ibweb-mg-md">
+          <Row className="ibweb-mg-md ibweb-mg-sm-scr-xs">
             <Col {...colLayout}>
               <h1>{content.apps.title}</h1>
               <Markdown

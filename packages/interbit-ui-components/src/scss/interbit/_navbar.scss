@@ -98,22 +98,27 @@
       }
     }
 
-    li.accounts-link a {
-      width: 100%;
-      text-align: center;
-      padding: 7px 40px;
-      margin-bottom: 8px;
-      line-height: 32px;
-      background: $ib-blue;
-      border-radius: 4px;
-      color: $ib-white;
-      border: 1px solid $ib-blue;
+    .nav-right-menu {
+      li a {
+        padding: 0;
+      }
 
-      &:hover, &:active, &:focus {
-        color: $ib-white;
+      li.accounts-link a {
+        width: 100%;
+        text-align: center;
+        padding: 7px 40px;
+        margin-bottom: 8px;
+        line-height: 32px;
         background: $ib-blue;
+        border-radius: 4px;
+        color: $ib-white;
+        border: 1px solid $ib-blue;
+
+        &:hover, &:active, &:focus {
+          color: $ib-white;
+          background: $ib-blue;
+        }
       }
     }
-
   }
 }

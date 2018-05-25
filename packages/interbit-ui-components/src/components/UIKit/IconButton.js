@@ -21,12 +21,21 @@ export default class IconButton extends Component {
   }
 
   render() {
-    const { icon, text, to, image, className, clickHandler } = this.props
+    const {
+      icon,
+      text,
+      to,
+      image,
+      className,
+      clickHandler,
+      ...rest
+    } = this.props
     return (
       <Button
         className={`ibweb-button ${image && 'img '}${className}`}
         href={clickHandler ? undefined : to}
-        onClick={clickHandler}>
+        onClick={clickHandler}
+        {...rest}>
         {image && <img alt="" width={32} height={32} src={image} />}
         {icon && <i className={`fa ${icon}`} />}
         {text}

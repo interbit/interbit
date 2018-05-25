@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
+const uuid = require('uuid')
 const {
   coreCovenant: {
     redispatch,
@@ -13,32 +14,8 @@ const axios = require('axios')
 const { takeEvery, call, put, select } = require('redux-saga').effects
 
 const { actionTypes, actionCreators } = require('./actions')
-
-const paths = {
-  OAUTH: ['oAuth'],
-  TOKEN_URL: ['oAuth', 'tokenUrl'],
-  PROFILE_URL: ['oAuth', 'profileUrl'],
-  CALLBACK_URL: ['oAuth', 'callbackUrl'],
-  PARAMS: ['oAuth', 'shared', 'params'],
-  CLIENT_ID: ['oAuth', 'shared', 'params', 'client_id'],
-  CLIENT_SECRET: ['oAuth', 'secret'],
-  REDIRECT_URL: ['oAuth', 'shared', 'params', 'redirect_uri'],
-  SCOPE: ['oAuth', 'shared', 'params', 'scope'],
-  ALLOW_SIGNUP: ['oAuth', 'shared', 'params', 'allow_signup']
-}
-
-const selectors = {
-  oAuthConfig: state => state.getIn(paths.OAUTH),
-  tokenUrl: state => state.getIn(paths.TOKEN_URL),
-  profileUrl: state => state.getIn(paths.PROFILE_URL),
-  callbackUrl: state => state.getIn(paths.CALLBACK_URL),
-  clientId: state => state.getIn(paths.CLIENT_ID),
-  clientSecret: state => state.getIn(paths.CLIENT_SECRET),
-  params: state => state.getIn(paths.PARAMS),
-  redirectUrl: state => state.getIn(paths.REDIRECT_URL),
-  scope: state => state.getIn(paths.SCOPE),
-  allowSignup: state => state.getIn(paths.ALLOW_SIGNUP)
-}
+const { PATHS } = require('./constants')
+const selectors = require('./selectors')
 
 const initialState = Immutable.from({
   chainMetadata: { chainName: 'Interbit Accounts - GitHub KYC Provider' },
@@ -59,7 +36,6 @@ const initialState = Immutable.from({
       }
     },
     // These parameters are internal to the covenant and are not shared
-    client_secret: process.env.GITHUB_CLIENT_SECRET,
     tokenUrl: 'https://github.com/login/oauth/access_token',
     profileUrl: 'https://api.github.com/user',
     callbackUrl: process.env.OAUTH_CALLBACK_URL
@@ -82,8 +58,6 @@ const reducer = (state = initialState, action) => {
       const {
         oldClientId,
         newClientId,
-        oldClientSecret,
-        newClientSecret,
         redirectUrl = selectors.redirectUrl(state),
         scope = selectors.scope(state),
         allowSignup = selectors.allowSignup(state)
@@ -91,19 +65,13 @@ const reducer = (state = initialState, action) => {
 
       // Only allow update if the action shows knowledge of the last state
       const currentClientId = selectors.clientId(state)
-      const currrentClientSecret = selectors.clientSecret(state)
 
-      if (
-        (!currentClientId && !currrentClientSecret) ||
-        (currentClientId === oldClientId &&
-          currrentClientSecret === oldClientSecret)
-      ) {
+      if (!currentClientId || currentClientId === oldClientId) {
         nextState
-          .setIn(paths.CLIENT_ID, newClientId)
-          .setIn(paths.CLIENT_SECRET, newClientSecret)
-          .setIn(paths.REDIRECT_URL, redirectUrl)
-          .setIn(paths.SCOPE, scope)
-          .setIn(paths.ALLOW_SIGNUP, allowSignup)
+          .setIn(PATHS.CLIENT_ID, newClientId)
+          .setIn(PATHS.REDIRECT_URL, redirectUrl)
+          .setIn(PATHS.SCOPE, scope)
+          .setIn(PATHS.ALLOW_SIGNUP, allowSignup)
 
         return nextState
       }
@@ -115,11 +83,22 @@ const reducer = (state = initialState, action) => {
       const {
         requestId,
         consumerChainId,
-        joinName,
         temporaryToken,
         error,
         errorDescription
       } = action.payload
+
+      if (error) {
+        const failedAction = actionCreators.authFailed({
+          requestId,
+          consumerChainId,
+          error: errorDescription || error
+        })
+
+        console.log('REDISPATCH: ', failedAction)
+        nextState = redispatch(nextState, failedAction)
+        return nextState
+      }
 
       if (
         authenticationRequestExists(state, {
@@ -138,7 +117,6 @@ const reducer = (state = initialState, action) => {
       const sagaAction = actionCreators.oAuthCallbackSaga({
         requestId,
         consumerChainId,
-        joinName,
         temporaryToken,
         error,
         errorDescription
@@ -154,21 +132,6 @@ const reducer = (state = initialState, action) => {
       const { consumerChainId, profile } = action.payload
 
       nextState = saveProfile(nextState, { consumerChainId, profile })
-      return nextState
-    }
-
-    case actionTypes.SHARE_PROFILE: {
-      console.log('DISPATCH: ', action)
-      const { consumerChainId, joinName } = action.payload
-
-      const provideAction = startProvideState({
-        consumer: consumerChainId,
-        statePath: ['profiles', consumerChainId, 'sharedProfile'],
-        joinName
-      })
-
-      console.log('REDISPATCH: ', provideAction)
-      nextState = redispatch(nextState, provideAction)
       return nextState
     }
 
@@ -226,6 +189,8 @@ const reducer = (state = initialState, action) => {
 }
 
 const authenticationRequestExists = (state, { requestId, temporaryToken }) =>
+  requestId &&
+  temporaryToken &&
   state.getIn(['authenticationRequests', requestId]) === temporaryToken
 
 const saveAuthenticationRequest = (state, { requestId, temporaryToken }) =>
@@ -240,6 +205,14 @@ const saveProfile = (state, { consumerChainId, profile }) =>
 const removeProfile = (state, { consumerChainId }) =>
   state.updateIn(['profiles'], Immutable.without, consumerChainId)
 
+const findExistingJoin = (state, { consumerChainId }) => {
+  const joinProviders = selectors.joinProviders(state)
+  return joinProviders.find(
+    join =>
+      join.consumer === consumerChainId && join.joinName.startsWith('GITHUB-')
+  )
+}
+
 function* rootSaga() {
   console.log(`ROOT SAGA: watching for ${actionTypes.OAUTH_CALLBACK_SAGA}`)
   yield takeEvery(actionTypes.OAUTH_CALLBACK_SAGA, oAuthCallbackSaga)
@@ -252,7 +225,6 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
   const {
     requestId,
     consumerChainId,
-    joinName,
     temporaryToken,
     error,
     errorDescription
@@ -269,7 +241,6 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
     const {
       tokenUrl,
       profileUrl,
-      client_secret,
       shared: {
         params: { client_id }
       }
@@ -282,7 +253,6 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
       {
         tokenUrl,
         client_id,
-        client_secret,
         requestId,
         temporaryToken
       },
@@ -297,7 +267,8 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
     )
 
     // Make the github profile sharable to complete the cAuth loop
-    yield put(actionCreators.shareProfile({ consumerChainId, joinName }))
+    const joinName = yield call(shareProfile, { consumerChainId })
+
     yield put(actionCreators.updateProfile({ consumerChainId, profile }))
     yield put(
       actionCreators.authSuceeded({
@@ -320,16 +291,19 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
 }
 
 function* fetchAuthToken(
-  { tokenUrl, client_id, client_secret, requestId, temporaryToken },
+  { tokenUrl, client_id, requestId, temporaryToken },
   fetchApi
 ) {
   const params = {
     client_id,
-    client_secret,
     code: temporaryToken,
     state: requestId
   }
+
   console.log('POST: ', tokenUrl, params)
+
+  params.client_secret = process.env.GITHUB_CLIENT_SECRET
+
   const getTokenQuery = yield call(
     fetchApi.post,
     tokenUrl,
@@ -343,7 +317,6 @@ function* fetchAuthToken(
     }
   )
   const getTokenResult = getTokenQuery.data
-  console.log(getTokenResult)
 
   // If API returns 200, result will either contain an access token
   // or an error such as bad authorization code
@@ -384,7 +357,6 @@ function* fetchPublicProfile({ profileUrl, accessToken }, fetchApi) {
   }
 
   const profile = extractProfile(publicProfile)
-  console.log(profile)
 
   return profile
 }
@@ -396,8 +368,31 @@ const extractProfile = ({ login, id, name, avatar_url }) => ({
   id,
   login,
   name,
-  avatarUrl: avatar_url
+  avatarUrl: avatar_url,
+  timestamp: Date.now()
 })
+
+function* shareProfile({ consumerChainId }) {
+  const existingJoin = yield select(findExistingJoin, { consumerChainId })
+  if (existingJoin) {
+    console.log(`Already providing GitHub profile to ${consumerChainId}.`)
+    return existingJoin.joinName
+  }
+
+  const joinName = yield call(generateJoinName)
+  yield put(
+    startProvideState({
+      consumer: consumerChainId,
+      statePath: ['profiles', consumerChainId, 'sharedProfile'],
+      joinName
+    })
+  )
+
+  console.log(`Providing GitHub profile to ${consumerChainId}.`)
+  return joinName
+}
+
+const generateJoinName = () => `GITHUB-${uuid.v4().toUpperCase()}`
 
 module.exports = {
   actionTypes,

@@ -65,7 +65,8 @@ export default class OAuthButton extends Component {
       consumerChainId,
       oAuthProvider,
       oAuthConfig,
-      blockchainDispatch
+      blockchainDispatch,
+      ...rest
     } = this.props
 
     return (
@@ -80,6 +81,7 @@ export default class OAuthButton extends Component {
         text={text}
         image={image}
         className={className}
+        {...rest}
       />
     )
   }

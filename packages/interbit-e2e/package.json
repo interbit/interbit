@@ -1,0 +1,22 @@
+{
+  "name": "interbit-e2e",
+  "version": "0.4.27",
+  "description": "End to end tests for the Interbit platform",
+  "private": true,
+  "scripts": {
+    "test": "mocha test/**/*.test.js",
+    "mttf": "node scripts/mttf.js"
+  },
+  "author": "BTL GROUP LTD",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "lodash": "^4.17.10",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "chromedriver": "^2.38.3",
+    "mocha": "^4.0.1"
+  }
+}

@@ -35,7 +35,7 @@ const tryConnect = async ({
       )
       console.log(`Connected to: ${toAddress}:${toPort}`)
     } catch (error) {
-      console.warn(`Connection failed: ${toAddress}:${toPort}: `, error)
+      console.warn(`Connection failed: ${toAddress}:${toPort}`)
     }
   }
 }

@@ -27,7 +27,7 @@ export default class PageContainer extends Component {
     const headerTextNav = [
       {
         content: (
-          <div className="username">
+          <div id="ib-test-signed-in" className="username">
             {userName} <span>(Signed in)</span>
           </div>
         ),

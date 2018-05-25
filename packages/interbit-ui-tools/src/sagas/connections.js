@@ -44,10 +44,7 @@ function* tryConnect({
       )
       console.log(`${LOG_PREFIX}: Connected to: ${toAddress}:${toPort}`)
     } catch (error) {
-      console.error(
-        `${LOG_PREFIX}: Connection failed: ${toAddress}:${toPort}: `,
-        error
-      )
+      console.error(`${LOG_PREFIX}: Connection failed: ${toAddress}:${toPort}`)
     }
   }
 }

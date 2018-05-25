@@ -1,5 +1,3 @@
-const uuid = require('uuid')
-
 const {
   validate,
   objectValidationRules: { required, matches, chainIdPattern, object }
@@ -16,23 +14,16 @@ const actionTypes = {
   AUTH_SUCEEDED: `${covenantName}/AUTH_SUCEEDED`,
   AUTH_FAILED: `${covenantName}/AUTH_FAILED`,
   UPDATE_PROFILE: `${covenantName}/UPDATE_PROFILE`,
-  SHARE_PROFILE: `${covenantName}/SHARE_PROFILE`,
   REMOVE_PROFILE: `${covenantName}/REMOVE_PROFILE`,
   SIGN_OUT: `${covenantName}/SIGN_OUT`
 }
 
-const generateJoinName = () => `GITHUB-${uuid.v4().toUpperCase()}`
-
-const GITHUB_JOIN_PATTERN = /^GITHUB-[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/
 const GITHUB_CLIENT_ID_PATTERN = /^[0-9A-Fa-f]{20}$/
-const GITHUB_CLIENT_SECRET_PATTERN = /^[0-9A-Fa-f]{40}$/
 
 const actionCreators = {
   configureOauthApp: ({
     oldClientId,
     newClientId,
-    oldClientSecret,
-    newClientSecret,
     redirectUrl,
     scope = '',
     allowSignup = true
@@ -42,15 +33,12 @@ const actionCreators = {
       {
         oldClientId,
         newClientId,
-        oldClientSecret,
-        newClientSecret,
         redirectUrl,
         scope,
         allowSignup
       },
       {
         newCliendId: matches(GITHUB_CLIENT_ID_PATTERN),
-        newClientSecret: matches(GITHUB_CLIENT_SECRET_PATTERN),
         redirectUrl: required()
       }
     )
@@ -68,7 +56,6 @@ const actionCreators = {
       {
         requestId,
         consumerChainId,
-        joinName: generateJoinName(),
         temporaryToken,
         error,
         errorDescription
@@ -82,7 +69,6 @@ const actionCreators = {
   oAuthCallbackSaga: ({
     requestId,
     consumerChainId,
-    joinName,
     temporaryToken,
     error,
     errorDescription
@@ -92,7 +78,6 @@ const actionCreators = {
       {
         requestId,
         consumerChainId,
-        joinName,
         temporaryToken,
         error,
         errorDescription
@@ -155,20 +140,6 @@ const actionCreators = {
       {
         consumerChainId: chainIdPattern(),
         profile: object()
-      }
-    )
-  }),
-
-  shareProfile: ({ consumerChainId, joinName }) => ({
-    type: actionTypes.SHARE_PROFILE,
-    payload: validate(
-      {
-        consumerChainId,
-        joinName
-      },
-      {
-        consumerChainId: chainIdPattern(),
-        joinName: matches(GITHUB_JOIN_PATTERN)
       }
     )
   }),

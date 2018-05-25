@@ -2,6 +2,7 @@ const metaCapabilities = {
   'browserstack.user': process.env.BROWSERSTACK_USER,
   'browserstack.key': process.env.BROWSERSTACK_KEY,
   'browserstack.console': 'verbose',
+  'browserstack.networkLogs': true,
   'browserstack.debug': true
 }
 

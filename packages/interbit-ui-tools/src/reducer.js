@@ -22,7 +22,7 @@ const reducer = (state = initialState, action = {}) => {
     action.type.startsWith(ACTION_PREFIX) &&
     action.type !== actionTypes.CHAIN_UPDATED
   ) {
-    console.log(`${LOG_PREFIX}: reducer()`, action)
+    console.log(`${LOG_PREFIX}: reducer() ${JSON.stringify(action, null, 2)}`)
   }
 
   switch (action.type) {

@@ -27,15 +27,14 @@ describe('The Build Must Not be Tampered With: It', () => {
       switch (name) {
         case 'interbit':
         case 'platform-deploy':
-        case 'interbit-ui-components':
         case 'template':
         case 'utils':
         case 'web-auth-endpoint':
           break
 
         default: {
-          const defaultMessage = `App name does not match standard app-* and is not in allowed exclusions whitelist: ${name}`
-          assert(name.match(/^(app|interbit)(-[a-z]+)+$/), defaultMessage)
+          const defaultMessage = `App name does not match s/^(app|interbit)(-[a-z0-9]+)+$/ and is not in allowed exclusions whitelist: ${name}`
+          assert(name.match(/^(app|interbit)(-[a-z0-9]+)+$/), defaultMessage)
         }
       }
 

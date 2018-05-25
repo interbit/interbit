@@ -28,7 +28,9 @@ function* rootSaga() {
 }
 
 function* loadInterbitSaga(action) {
-  console.log(`${LOG_PREFIX}: *loadInterbitSaga()`, action)
+  console.log(
+    `${LOG_PREFIX}: *loadInterbitSaga() ${JSON.stringify(action, null, 2)}`
+  )
 
   try {
     const { cli } = yield call(interbitContext)
@@ -46,13 +48,15 @@ function* loadInterbitSaga(action) {
 
     yield put(actionCreators.interbitReady())
   } catch (error) {
-    console.error(`${LOG_PREFIX}: `, error)
+    console.error(`${LOG_PREFIX}: ${JSON.stringify(error, null, 2)}`)
     yield put(actionCreators.interbitError(error.message))
   }
 }
 
 function* privateChainSaga(action) {
-  console.log(`${LOG_PREFIX}: *privateChainSaga()`, action)
+  console.log(
+    `${LOG_PREFIX}: *privateChainSaga() ${JSON.stringify(action, null, 2)}`
+  )
 
   const { privateChainAlias, publicChainAlias } = action.payload || {}
 
@@ -67,7 +71,7 @@ function* privateChainSaga(action) {
       chainAlias: privateChainAlias
     })
   } catch (error) {
-    console.error(`${LOG_PREFIX}: `, error)
+    console.error(`${LOG_PREFIX}: ${JSON.stringify(error, null, 2)}`)
     yield put(
       actionCreators.chainError({
         chainAlias: privateChainAlias,
@@ -78,7 +82,9 @@ function* privateChainSaga(action) {
 }
 
 function* sponsorChainSaga(action) {
-  console.log(`${LOG_PREFIX}: *sponsorChainSaga()`, action)
+  console.log(
+    `${LOG_PREFIX}: *sponsorChainSaga() ${JSON.stringify(action, null, 2)}`
+  )
 
   const { chainAlias, publicChainAlias } = action.payload
 
@@ -100,7 +106,7 @@ function* sponsorChainSaga(action) {
 
     yield call(loadChain, { cli, chainAlias, chainId })
   } catch (error) {
-    console.error(`${LOG_PREFIX}: `, error)
+    console.error(`${LOG_PREFIX}: ${JSON.stringify(error, null, 2)}`)
     yield put(actionCreators.chainError({ chainAlias, error: error.message }))
   }
 }

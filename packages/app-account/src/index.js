@@ -17,7 +17,6 @@ import 'interbit-ui-components/src/css/interbit.css'
 import App from './App'
 
 import { PUBLIC, PRIVATE } from './constants/chainAliases'
-import registerServiceWorker from './registerServiceWorker'
 import { setSelectedChain } from './redux/exploreChainReducer'
 import reducers from './redux'
 
@@ -46,5 +45,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 )
-
-registerServiceWorker()

@@ -184,6 +184,10 @@
   .ibweb-page.home {
     .header {
       margin-top: -65px;
+
+      @media (max-width: $screen-sm - 1) {
+        margin-top: 0;
+      }
     }
   }
 
@@ -230,6 +234,26 @@
 
     .ibweb-button {
       margin-top: 32px;
+    }
+  }
+}
+
+.ibweb-modal-wrapper.modal-attention-more-info {
+  .modal-header {
+    h2 {
+      margin-bottom: 0;
+    }
+  }
+
+  .modal-body {
+    padding-bottom: 16px;
+  }
+
+  .modal-footer {
+    padding-bottom: 16px;
+
+    .checkbox {
+      margin-bottom: 32px;
     }
   }
 }

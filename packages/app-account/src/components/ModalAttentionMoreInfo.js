@@ -36,7 +36,7 @@ export default class ModalAttentionMoreInfo extends Component {
         body={body}
         footer={footer}
         show={show}
-        className="modal-attention"
+        className="modal-attention-more-info"
       />
     )
   }

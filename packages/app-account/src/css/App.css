@@ -5,7 +5,7 @@
   .App .Account-sidebar h4 {
     margin: 15px;
     font-weight: 900; }
-    @media (max-width: 767px) {
+    @media (max-width: 629px) {
       .App .Account-sidebar h4 {
         margin-top: 0px; } }
   .App .Account-sidebar .nav > li > a {
@@ -23,7 +23,7 @@
     color: #333; }
 .App .Update {
   width: 130px; }
-  @media (max-width: 767px) {
+  @media (max-width: 629px) {
     .App .Update {
       padding: 8px 20px;
       width: 100%; } }
@@ -101,6 +101,9 @@
 
 .ibweb.app-account .ibweb-page.home .header {
   margin-top: -65px; }
+  @media (max-width: 629px) {
+    .ibweb.app-account .ibweb-page.home .header {
+      margin-top: 0; } }
 .ibweb.app-account .ibweb-page.create-account .ibweb-content-bar.github .error {
   color: #d0021b; }
 
@@ -119,5 +122,14 @@
     margin-bottom: 32px; }
   .ibweb-modal-wrapper.modal-attention .modal-footer .ibweb-button {
     margin-top: 32px; }
+
+.ibweb-modal-wrapper.modal-attention-more-info .modal-header h2 {
+  margin-bottom: 0; }
+.ibweb-modal-wrapper.modal-attention-more-info .modal-body {
+  padding-bottom: 16px; }
+.ibweb-modal-wrapper.modal-attention-more-info .modal-footer {
+  padding-bottom: 16px; }
+  .ibweb-modal-wrapper.modal-attention-more-info .modal-footer .checkbox {
+    margin-bottom: 32px; }
 
 /*# sourceMappingURL=App.css.map */

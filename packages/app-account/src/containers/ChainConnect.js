@@ -190,8 +190,9 @@ export class ChainConnect extends Component {
     } = this.props
 
     const colLayout = {
-      md: 8,
-      mdOffset: 2
+      lg: 8,
+      lgOffset: 2,
+      md: 12
     }
 
     const getFormForCurrentMode = () => {

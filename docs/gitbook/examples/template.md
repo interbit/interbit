@@ -16,13 +16,12 @@ In this walkthrough we will cover:
     - Joins
     - Apps
   - [The Covenants](./template.md#the-covenants)
-    - What each one does
-    - How to Modify Covenants
-    - How to give a browser permission on the control chain
+    - The Private Covenant
+    - The Public Covenant
+    - The Control Covenant
   - [The Application](./template.md#the-application)
     - index.js
-    - How to load another chain in the browser
-    - How to dispatch an action to the UI
+    - Connecting the Chain to a UI Component
 
 #### Version Requirements
 To develop Interbit applications, your development environment will need the following software:
@@ -240,180 +239,8 @@ It simply provides the information required for the browser's hypervisor to send
 
 ### The Control Covenant
 
-At the moment, the control chain only sets up information about sponsorship and shares it with the public chain.
+The control chain only sets up information about sponsorship and shares it with the public chain.
 
-The control covenant does not do much, but we can change that!
-
-If we want some information to be added and shared by all users, we can authorize the browser's hypervisor to dispatch actions directly into the control chain when they make their sponsorship requests for the private chains.
-
-This should ONLY be done if you not have any information you want to keep a secret. If you do have information to keep secret, the control chain can be setup to forward the browser keys to the public chain and the users can do public things there, instead.
-
-### How to Modify Covenants
-
-If we want the control chain to allow users to add shared data, we have to describe a new action for it.
-
-Add a new action to actionTypes and actionCreators.
-
-```js
-const actionTypes = {
-  MEOW: 'MEOW'
-}
-
-const actionCreators = {
-  meow: (whoMeowed) => ({
-    type: actionTypes.MEOW,
-    payload: {
-      whoMeowed
-    }
-  })
-}
-```
-
-Of course, we need a place for these meows in initialState.
-
-```js
-
-const initialState = Immutable.from({
-  cats: {},
-  // ...
-})
-```
-
-Now that we've defined an action, we need to handle it in the reducer.
-
-```js
-const reducer = (state = initialState, action) => {
-  // ...
-  switch (action.type) {
-    case actionTypes.MEOW: {
-      const { whoMeowed } = action.payload
-      const numberOfMeows = state.cats[whoMeowed] || 0
-      return nextState.setIn(['cats', whoMeowed], numberOfMeows + 1)
-    }
-    // ...
-    default:
-      return nextState
-  }
-}
-```
-
-Just to make sure this works, let's test it. Since we can't do anything to it from the browser, we need to know it works.
-
-Let's add a test to `src/tests/interbit/controlCovenant.test.js`
-
-```js
-  it('counts meows', () => {
-    const goodCat = 'Mr. Tibbs'
-    const action = controlCovenant.actionCreators.meow(goodCat)
-    const actualState = controlCovenant.reducer(
-      controlCovenant.initialState,
-      action
-    )
-
-    assert.equal(actualState.cats[goodCat], 1)
-  })
-```
-
-But it's not very useful unless we can do something with it from our UI.
-
-Further Reading
- - [Covenants](../key-concepts/README.md)
-
-### How to Add a Browser Key to the ACL
-
-AKA. How to give a browser permission to do things on the control chain, like MEOW. :cat:
-
-To give the browser permission to dispatch MEOWs to the control chain, we will need to add its hypervisor public key to the control chain's ACL. ACL stands for access control list, which dictates who is allowed to do what on that chain.
-
-We will somehow need to find the public key to add it to the ACL.
-
-When the chain sponsorship request arrives at the control covenant's reducer, it contains the entire genesis block for the chain that is requesting sponsorship. This genesis block includes the public key for the browser hypervisor.
-
-It also contains the control chain's public key, so we will have to filter that out.
-
-Finally, we don't want to simply give all of these browsers root access, so we will need to define a role in the ACL for them.
-
-We will handle the request for sponsorship in the reducer with a switch case on the sponsorship request:
-
-```js
-    case '@@interbit/SPONSOR_CHAIN_REQUEST': {
-      const rootKeys =
-        action.payload.genesisBlock.content.state.interbit.config.acl.roles.root
-      const blockMaster = state.interbit.config.blockMaster
-
-      const [privateChainPublicKey] = rootKeys.filter(
-        key => key !== blockMaster
-      )
-
-      console.log(JSON.stringify(rootKeys))
-      console.log(privateChainPublicKey)
-
-      const addToAclAction = addToAcl({
-        actionPermissions: {
-          [actionTypes.MEOW]: 'coolcats'
-        },
-        roles: { coolcats: [privateChainPublicKey] }
-      })
-
-      return redispatch(nextState, addToAclAction)
-    }
-```
-
-Let's make sure it doesn't break anything by adding another test to `src/tests/interbit/controlCovenant.test.js`.
-
-For this unit test, I've mocked the parts of the genesis block that are required to find and add the pubkey as well as the interbit configuration state in the chain's application state.
-
-```js
-  it('adds role and pubkey to ACL on sponsor request', () => {
-    const catPubKey = 'catPubKey'
-    const controlPubKey = 'controlPubKey'
-    const action = {
-      type: '@@interbit/SPONSOR_CHAIN_REQUEST',
-      payload: {
-        genesisBlock: {
-          content: {
-            state: {
-              interbit: {
-                config: {
-                  consuming: [],
-                  acl: {
-                    actionPermissions: {
-                      '*': ['root']
-                    },
-                    roles: {
-                      root: [catPubKey, controlPubKey]
-                    }
-                  },
-                  blockMaster: controlPubKey
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    const state = controlCovenant.initialState.setIn(
-      ['interbit', 'config', 'blockMaster'],
-      controlPubKey
-    )
-
-    const actualState = controlCovenant.reducer(state, action)
-
-    assert.deepEqual(actualState.sideEffects[0], {
-      payload: {
-        actionPermissions: { MEOW: 'coolcats' },
-        roles: { coolcats: ['catPubKey'] }
-      },
-      type: '@@interbit/ADD_TO_ACL'
-    })
-  })
-```
-
-This test checks to make sure our ACL action made it into interbit's side effects queue.
-
-This test is not a great test as it assumes a lot of underlying state, but hopefully it will show more of what is happening when a redispatch occurs as well as what the ACL for a sponsored chain needs to look like to be hosted.
-
-This is fine and dandy, but we will need to load the chain in the browser to interact with it. We will cover the React application next.
 
 ## The Application
 
@@ -476,104 +303,67 @@ Further Reading
  - [interbit-middleware](../reference/interbit-middleware/README.md)
  - [create-react-app](https://github.com/facebook/create-react-app/)
 
-### How to Load a Chain in the Browser
+### Connecting the Chain to a UI Component
 
-You may have noticed that chain IDs and peers have not been specified in the middleware. This is because the are written in the index.html file automagically by the `interbit-cli` start script based on `apps` configuration.
+The React component `InteractiveChains`, found at `app-the-new-thing/src/containers/InteractiveChains.js`, does a few things to map the blockchain dispatch to the UI.
 
-In order to load the control chain in the browser so we can use it, we will need to include it in the `apps` portion of the Interbit config file.
+First, it is a redux connected component which has mapped the Interbit middleware state to props and has also mapped a special redux action from the middleware to props.
 
-```js
-  apps: {
-    template: {
-      chains: [chainAliases.PUBLIC, chainAliases.CONTROL],
-      // ...
-    }
-  }
-```
+Mapping state to props is simple since the middleware handles almost everything for you. Inside of state.interbit lies all the state from the chains that were connected to the app from the apps configuration in the Interbit config file.
 
-The next time `interbit:start` is run, index.html will be updated with the chain ID for the control chain. This will cause the middleware to load it in the browser hypervisor and connect it to the redux store.
-
-Further Reading
- - [Apps Config](../reference/interbit-cli/config.md#apps)
-
-### How to Dispatch an Action to the UI
-
-So, how do we dispatch to the chain now that it's loaded in the UI?
-
-The container that does the most interacting with the selected chain is called `InteractiveChains`. It uses an adapter to populate a form to dispatch actions to the selected chain. It also displays the state of the selected chain.
-
-First thing, let's attach the control chain to the UI and forget about the private chain for now. We will need to select it and adapt the form to its actions.
-
-Back in the `index.js` file, set the selected chain to the control chain by dispatching a `SET_SELECTED_CHAIN` action to the redux store.
+The dispatch is a little more interesting. Let's take a look.
 
 ```jsx
-// Import the alias of the control chain, too
-import { PUBLIC, PRIVATE, CONTROL } from './constants/chainAliases'
-
+import { chainDispatch } from 'interbit-ui-tools'
 // ...
-
-// We keep the interbit middleware configuration the same.
-// The public chain is still supplying the sponsorship data and the private chain is still the sponsored chain
-const interbitMiddleware = createInterbitMiddleware({
-  publicChainAlias: PUBLIC,
-  privateChainAlias: PRIVATE
+const mapDispatchToProps = dispatch => ({
+  resetForm: form => {
+    dispatch(reset(form))
+  },
+  // We have curried this function by chain alias, so that we can dispatch to the blockchain through the middleware
+  blockchainDispatch: chainAlias => action =>
+    dispatch(chainDispatch(chainAlias, action))
 })
-
 // ...
 
-// BlockExplorer will monitor the control chain now...
-store.dispatch(setSelectedChain(CONTROL))
-```
+export class InteractiveChains extends Component {
+  // ...
 
-This will connect the control chain to the UI.
+  render() {
+    const { selectedChain, resetForm, blockchainDispatch } = this.props
+    // ...
 
-Unfortunately, it is still using the form for the private chain. We can fix this by writing a controlChainAdapter and attaching it to the UI.
+    return (
+      <Grid>
+        <Row>
+          <LinkedCovenant
+            // ...
 
-`src/adapters/controlChainAdapter.js`
-```js
-const covenant = require('../interbit/control')
-
-const covenantName = 'Interbit Template Control Chain'
-
-const meowActionLabel = 'Meow at the Moon'
-const textParamLabel = 'Who even meowed?'
-
-const actionCreators = {
-  meow: () => ({
-    type: meowActionLabel,
-    arguments: {
-      [textParamLabel]: ''
-    },
-    invoke: ({ [textParamLabel]: whoMeowed }) =>
-      covenant.actionCreators.meow(whoMeowed)
-  })
-}
-
-module.exports = {
-  covenantName,
-  actionCreators
+            // Here we are using the blockchainDispatch like any other redux dispatch prop
+            blockchainDispatch={blockchainDispatch(selectedChain.chainAlias)}
+          />
+        </Row>
+      </Grid>
+    )
+  }
 }
 ```
 
-To use the adapter inside of `InteractiveChains` you can simply update the import of the actionCreators inside of the `InteractiveChains` container.
+First, in mapDispatchToProps there is a prop called `blockchainDispatch` which dispatches a chainDispatch action from `interbit-ui-tools` to the redux store. This function takes an action that is destined for your blockchain and the alias of the blockchain to send it to.
 
-Inside of `src/containers/InteractiveChains.js`
+In our case, when we pass the prop to `LinkedCovenant` in the render function we are currying it to use the chain that is selected in our redux state. This way, whenever a new chain is loaded in the UI we are automatically mapping our dispatch to the chain that was selected.
 
-```js
-// ...
-import { actionCreators } from '../adapters/controlChainAdapter'
+When this action is dispatched to the redux store the middleware will intercept it and send it to the correct blockchain. The middleware will return the promise that was returned from the blockchain from the redux dispatch function. This promise will resolve when the action is accepted by the chain.
 
-// ...
-```
+Further Reading
+ - [chainDispatch](../reference/interbit-middleware/chainDispatch.md)
+ - [Function Currying](https://hackernoon.com/currying-in-js-d9ddc64f162e)
 
-<div class="tips warning">
-  <p><span></span>Incomplete Content</p>
-  <p>TODO: Add a screenshot of what the UI should look like...</p>
-</div>
+## Conclusion
 
-And that's it! Now all of the folks in the neighbourhood watch can track who's meowing at the moon late at night and inform their owners of unruly behaviour.
+The template application utilizes the PPC model to authorize a chain to run in the browser and interact with the application chains. This model can be extended into many other architectures that use a private user chain in the browser to interact with one or many chains in different contexts.
 
-Updating the `interbit.prod.config.js` file has been left as an exercise for the reader. Once updated, you can try the `interbit:build` and `interbit:deploy` commands.
+This application also leverages the interbit middleware to sync the blockchain with the redux store, so the UI developer doesn't have to interact directly with the chain, but instead can use the redux store.
 
 Further Reading
  - [interbit-middleware](../reference/interbit-middleware/README.md)

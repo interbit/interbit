@@ -40,7 +40,22 @@ const initialState = Immutable.from({
     profileUrl: 'https://api.github.com/user',
     callbackUrl: process.env.OAUTH_CALLBACK_URL
   },
+  // User profiles by chain ID. State shape is:
+  //
+  // profiles: {
+  //   [consumerChainId]: {
+  //     sharedProfile: {
+  //       id: 1234567,
+  //       login: 'joeb',
+  //       name: 'Joe Bloggs'
+  //       avatarUrl: 'http://ddhhgjhfhjhfjha.png',
+  //       timestamp: 1234567890
+  //     }
+  //   }
+  // }
   profiles: {},
+  // Authentication requests in progress
+  // (to prevent re-entrant authorization requests)
   authenticationRequests: {}
 })
 
@@ -117,9 +132,7 @@ const reducer = (state = initialState, action) => {
       const sagaAction = actionCreators.oAuthCallbackSaga({
         requestId,
         consumerChainId,
-        temporaryToken,
-        error,
-        errorDescription
+        temporaryToken
       })
 
       console.log('REDISPATCH: ', sagaAction)
@@ -222,20 +235,9 @@ function* rootSaga() {
 function* oAuthCallbackSaga(action, fetchApi = axios) {
   console.log('SAGA: ', action)
 
-  const {
-    requestId,
-    consumerChainId,
-    temporaryToken,
-    error,
-    errorDescription
-  } = action.payload
+  const { requestId, consumerChainId, temporaryToken } = action.payload
 
   try {
-    if (error) {
-      console.log(`Authentication failed: ${error} ${errorDescription}`)
-      throw new Error(errorDescription || error)
-    }
-
     const providerChainId = yield select(coreSelectors.chainId)
     const oAuthConfig = yield select(selectors.oAuthConfig)
     const {
@@ -265,6 +267,10 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
       { profileUrl, accessToken },
       fetchApi
     )
+
+    // TODO: Use profile.id to see if we already have a private chain for this user
+    // If so, return the chain id with an instruction to load it
+    // if not, return the join name with an instruction to load it (or could create the chain)
 
     // Make the github profile sharable to complete the cAuth loop
     const joinName = yield call(shareProfile, { consumerChainId })

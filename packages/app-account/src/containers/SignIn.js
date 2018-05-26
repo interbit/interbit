@@ -3,25 +3,25 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-bootstrap'
-import { chainDispatch } from 'interbit-ui-tools'
+import { chainDispatch, selectors } from 'interbit-ui-tools'
 
 import Authentication from '../components/Authentication'
 import { getOAuthConfig } from '../interbit/public/selectors'
-import { getExploreChainState } from '../redux/exploreChainReducer'
 import { PUBLIC, PRIVATE } from '../constants/chainAliases'
+import oAuthProviders from '../constants/oAuthProviders'
 
 const mapStateToProps = state => {
-  const { state: chainState } = getExploreChainState(state)
+  const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
   if (!chainState) {
     return {
-      oAuthConfig: {},
-      blockchainDispatch: () => {},
       contentBars: state.content.contentBars
     }
   }
 
-  const { state: publicChainState } = getExploreChainState(state, PUBLIC)
+  const publicChainState = selectors.getChain(state, { chainAlias: PUBLIC })
   return {
+    publicKey: selectors.getPublicKey(state),
+    consumerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
     oAuthConfig: getOAuthConfig(publicChainState),
     contentBars: state.content.contentBars
   }
@@ -33,20 +33,37 @@ const mapDispatchToProps = dispatch => ({
 
 export class SignIn extends Component {
   static propTypes = {
-    // eslint-disable-next-line
-    oAuthConfig: PropTypes.object,
+    consumerChainId: PropTypes.string,
+    oAuthConfig: PropTypes.shape({}),
+    publicKey: PropTypes.string,
     blockchainDispatch: PropTypes.func,
     contentBars: PropTypes.shape({})
   }
 
   static defaultProps = {
+    consumerChainId: '',
     oAuthConfig: {},
+    publicKey: undefined,
     blockchainDispatch: () => {},
     contentBars: {}
   }
 
   render() {
-    const { oAuthConfig, blockchainDispatch, contentBars } = this.props
+    const {
+      consumerChainId,
+      oAuthConfig,
+      publicKey,
+      blockchainDispatch,
+      contentBars
+    } = this.props
+
+    const oAuthProps = {
+      blockchainDispatch,
+      consumerChainId,
+      oAuthConfig,
+      oAuthProvider: oAuthProviders.GITHUB,
+      publicKey
+    }
 
     return (
       <Grid>
@@ -69,8 +86,7 @@ export class SignIn extends Component {
             <Col md={2} />
             <Col md={8}>
               <Authentication
-                oAuthConfig={oAuthConfig}
-                blockchainDispatch={blockchainDispatch}
+                oAuth={oAuthProps}
                 {...contentBars.gitHubCreateAccount}
               />
             </Col>

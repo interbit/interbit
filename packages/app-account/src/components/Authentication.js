@@ -6,10 +6,7 @@ import OAuthButton from './OAuthButton'
 
 export default class Authentication extends Component {
   static propTypes = {
-    consumerChainId: PropTypes.string,
-    // eslint-disable-next-line
-    oAuthConfig: PropTypes.object,
-    blockchainDispatch: PropTypes.func,
+    oAuth: PropTypes.shape({}),
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     buttonText: PropTypes.string,
@@ -18,9 +15,7 @@ export default class Authentication extends Component {
   }
 
   static defaultProps = {
-    consumerChainId: '',
-    oAuthConfig: {},
-    blockchainDispatch: () => {},
+    oAuth: {},
     buttonText: '',
     content: ''
     // error: ''
@@ -28,9 +23,7 @@ export default class Authentication extends Component {
 
   render() {
     const {
-      consumerChainId,
-      oAuthConfig,
-      blockchainDispatch,
+      oAuth,
       title,
       image,
       buttonText,
@@ -48,13 +41,7 @@ export default class Authentication extends Component {
 
         <Divider />
 
-        <OAuthButton
-          text={buttonText}
-          consumerChainId={consumerChainId}
-          oAuthProvider="gitHub"
-          oAuthConfig={oAuthConfig}
-          blockchainDispatch={blockchainDispatch}
-        />
+        <OAuthButton text={buttonText} oAuth={oAuth} />
       </ContentBar>
     )
   }

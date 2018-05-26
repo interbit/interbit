@@ -8,18 +8,20 @@ import { IconButton } from 'interbit-ui-components'
 import { actionCreators } from '../interbit/my-account'
 
 const authenticationHandler = ({
-  consumerChainId,
-  oAuthProvider,
-  oAuthConfig,
-  blockchainDispatch
+  oAuth: {
+    consumerChainId,
+    blockChainDispatch,
+    oAuthConfig,
+    oAuthProvider
+  } = {}
 }) => async () => {
   const providerConfig = oAuthConfig[oAuthProvider] || {}
   const { serviceEndPoint, params } = providerConfig
 
-  console.log(oAuthProvider, oAuthConfig)
+  console.log(oAuthProvider, providerConfig)
   amplitude.getInstance().logEvent('INITIATE_GITHUB_OAUTH')
 
-  if (serviceEndPoint) {
+  if (serviceEndPoint && blockChainDispatch) {
     const queryOpts = { ...params, state: consumerChainId }
     const queryParams = queryString.stringify(queryOpts)
 
@@ -28,54 +30,34 @@ const authenticationHandler = ({
       oAuthProvider,
       requestId: consumerChainId
     })
-    await blockchainDispatch(action)
+    await blockChainDispatch(action)
     window.location = connectUrl
   }
 }
 
 export default class OAuthButton extends Component {
   static propTypes = {
-    consumerChainId: PropTypes.string,
-    oAuthProvider: PropTypes.string,
-    // eslint-disable-next-line
-    oAuthConfig: PropTypes.object,
+    oAuth: PropTypes.shape({}),
     text: PropTypes.string.isRequired,
     icon: PropTypes.string,
     image: PropTypes.string,
-    className: PropTypes.string,
-    blockchainDispatch: PropTypes.func
+    className: PropTypes.string
   }
 
   static defaultProps = {
-    consumerChainId: '',
-    oAuthProvider: 'gitHub',
-    oAuthConfig: {},
+    oAuth: {},
     icon: '',
     image: '',
-    className: '',
-    blockchainDispatch: () => {}
+    className: ''
   }
 
   render() {
-    const {
-      icon,
-      text,
-      image,
-      className,
-      consumerChainId,
-      oAuthProvider,
-      oAuthConfig,
-      blockchainDispatch,
-      ...rest
-    } = this.props
+    const { icon, text, image, className, oAuth, ...rest } = this.props
 
     return (
       <IconButton
         clickHandler={authenticationHandler({
-          consumerChainId,
-          oAuthProvider,
-          oAuthConfig,
-          blockchainDispatch
+          oAuth
         })}
         icon={icon}
         text={text}

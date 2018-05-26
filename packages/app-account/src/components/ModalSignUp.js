@@ -6,6 +6,7 @@ import { ModalWrapper } from 'interbit-ui-components'
 
 import Authentication from '../components/Authentication'
 import modalNames from '../constants/modalNames'
+import oAuthProviders from '../constants/oAuthProviders'
 
 const mapStateToProps = state => ({
   contentBars: state.content.contentBars
@@ -13,34 +14,21 @@ const mapStateToProps = state => ({
 
 export class ModalSignUp extends Component {
   static propTypes = {
-    blockchainDispatch: PropTypes.func,
-    consumerChainId: PropTypes.string,
     contentBars: PropTypes.shape({}),
-    // eslint-disable-next-line
-    oAuthConfig: PropTypes.object,
+    oAuth: PropTypes.shape({}),
     serviceName: PropTypes.string,
     show: PropTypes.bool.isRequired,
     toggleModal: PropTypes.func.isRequired
   }
 
   static defaultProps = {
-    blockchainDispatch: () => {},
-    consumerChainId: '',
     contentBars: {},
-    oAuthConfig: {},
+    oAuth: {},
     serviceName: ''
   }
 
   render() {
-    const {
-      blockchainDispatch,
-      consumerChainId,
-      contentBars,
-      oAuthConfig,
-      serviceName,
-      show,
-      toggleModal
-    } = this.props
+    const { contentBars, oAuth, serviceName, show, toggleModal } = this.props
 
     const header = (
       <div>
@@ -52,9 +40,7 @@ export class ModalSignUp extends Component {
 
     const body = (
       <Authentication
-        blockchainDispatch={blockchainDispatch}
-        consumerChainId={consumerChainId}
-        oAuthConfig={oAuthConfig}
+        oAuth={{ ...oAuth, provider: oAuthProviders.GITHUB }}
         {...contentBars.gitHubCreateAccount}
       />
     )

@@ -6,6 +6,7 @@ import { IconButton, Markdown, ModalWrapper } from 'interbit-ui-components'
 import OAuthButton from '../components/OAuthButton'
 import buttonNames from '../constants/buttonNames'
 import modalNames from '../constants/modalNames'
+import oAuthProviders from '../constants/oAuthProviders'
 
 export default class ModalAttention extends Component {
   static propTypes = {
@@ -55,8 +56,7 @@ export default class ModalAttention extends Component {
         <OAuthButton
           text="Continue"
           name="continue"
-          {...oAuth}
-          oAuthProvider="gitHub"
+          oAuth={{ ...oAuth, provider: oAuthProviders.GITHUB }}
           className={isEnabled ? '' : 'disabled'}
         />
         <IconButton

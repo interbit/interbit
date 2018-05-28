@@ -1,0 +1,12 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+<a name="0.4.28"></a>
+## [0.4.28](https://github.com/interbit/interbit/compare/v0.4.27...v0.4.28) (2018-05-28)
+
+
+
+
+**Note:** Version bump only for package interbit-e2e

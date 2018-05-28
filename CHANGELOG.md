@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.28"></a>
+## [0.4.28](https://github.com/interbit/interbit/compare/v0.4.27...v0.4.28) (2018-05-28)
+
+
+### Bug Fixes
+
+* update package tree to patch security vulnerabilities. Closes [#223](https://github.com/interbit/interbit/issues/223) ([8f8cbb4](https://github.com/interbit/interbit/commit/8f8cbb4))
+
+
+
+
 <a name="0.4.27"></a>
 ## [0.4.27](https://github.com/interbit/interbit/compare/v0.4.26...v0.4.27) (2018-05-16)
 

@@ -5,6 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+@import url(~react-virtualized/styles.css);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -5548,41 +5549,6 @@ a {
     .ibweb-modal-wrapper .modal-footer .ibweb-button.secondary {
       color: #17A6F2; }
 
-.ibweb .form-group {
-  margin-bottom: 16px; }
-  .ibweb .form-group label {
-    margin-bottom: 8px; }
-  .ibweb .form-group .form-control-static {
-    padding: 0;
-    min-height: 0; }
-.ibweb .form-control {
-  padding: 13px 16px;
-  margin-bottom: 16px;
-  font-size: 1rem;
-  border-radius: 16px;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  height: auto; }
-.ibweb select.form-control {
-  height: 48px;
-  -webkit-border-radius: 16px; }
-.ibweb .radio, .ibweb .checkbox {
-  margin: 0 0 16px 0; }
-.ibweb .radio label, .ibweb .checkbox label {
-  padding-left: 30px;
-  color: #666; }
-.ibweb .radio input[type="radio"],
-.ibweb .radio-inline input[type="radio"],
-.ibweb .checkbox input[type="checkbox"],
-.ibweb .checkbox-inline input[type="checkbox"] {
-  margin-left: -30px; }
-.ibweb .field-error .form-control {
-  border-color: #d0021b;
-  color: #d0021b; }
-.ibweb .field-error .error-msg {
-  padding: 0 16px;
-  color: #d0021b; }
-
 .ibweb-navbar-container {
   width: 100%;
   margin-bottom: 64px;
@@ -5812,6 +5778,163 @@ a {
 @media (max-width: 629px) {
   .ibweb-sidebar-nav {
     display: none; } }
+.ibweb .form-group {
+  margin-bottom: 16px; }
+  .ibweb .form-group label {
+    margin-bottom: 8px; }
+  .ibweb .form-group .form-control-static {
+    padding: 0;
+    min-height: 0; }
+.ibweb .form-control {
+  padding: 13px 16px;
+  margin-bottom: 16px;
+  font-size: 1rem;
+  border-radius: 16px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  height: auto; }
+.ibweb select.form-control {
+  height: 48px;
+  -webkit-border-radius: 16px; }
+.ibweb .radio, .ibweb .checkbox {
+  margin: 0 0 16px 0; }
+.ibweb .radio label, .ibweb .checkbox label {
+  padding-left: 30px;
+  color: #666; }
+.ibweb .radio input[type="radio"],
+.ibweb .radio-inline input[type="radio"],
+.ibweb .checkbox input[type="checkbox"],
+.ibweb .checkbox-inline input[type="checkbox"] {
+  margin-left: -30px; }
+.ibweb .field-error .form-control {
+  border-color: #d0021b;
+  color: #d0021b; }
+.ibweb .field-error .error-msg {
+  padding: 0 16px;
+  color: #d0021b; }
+
+.ReactVirtualized__Table {
+  background-color: #f9f9f9; }
+  .ReactVirtualized__Table :focus {
+    outline: none !important; }
+  .ReactVirtualized__Table .ReactVirtualized__Table__row {
+    cursor: pointer; }
+  .ReactVirtualized__Table .ReactVirtualized__Table__headerRow {
+    background-color: #333;
+    color: #f5f5f5;
+    font-weight: 300;
+    padding-top: 6px;
+    height: 36px;
+    cursor: default !important; }
+
+.ibweb-block-explorer {
+  height: calc(100vh - 50px - 92px - 15px - 30px);
+  margin-left: -15px;
+  margin-right: -15px; }
+  .ibweb-block-explorer h5 {
+    padding-left: 15px; }
+    .ibweb-block-explorer h5.heading {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      padding-top: 11px; }
+  .ibweb-block-explorer .explorerColumn {
+    height: 100%;
+    border-left: 1px solid #333;
+    border-bottom: 1px solid #333; }
+    .ibweb-block-explorer .explorerColumn:last-child {
+      border-right: 1px solid #333; }
+    .ibweb-block-explorer .explorerColumn p {
+      padding-top: 10px; }
+  .ibweb-block-explorer .explorerColumnHeading {
+    background-color: #333;
+    color: #f5f5f5;
+    font-weight: 300;
+    padding-top: 9px;
+    height: 40px; }
+  .ibweb-block-explorer .fillHeight {
+    height: 100%; }
+  .ibweb-block-explorer .search {
+    text-align: right; }
+    .ibweb-block-explorer .search :global(.input-group) {
+      margin-top: -6px; }
+  .ibweb-block-explorer .form {
+    vertical-align: middle;
+    height: 50px;
+    padding-top: 10px;
+    background-color: #f5f5f5; }
+    .ibweb-block-explorer .form label {
+      color: #333 !important; }
+  .ibweb-block-explorer .json {
+    width: calc(100% + 30px);
+    height: calc(100% - 40px);
+    margin-left: -15px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    padding-left: 15px; }
+    .ibweb-block-explorer .json pre {
+      overflow: initial;
+      font-size: 12px; }
+  .ibweb-block-explorer .tableHeader {
+    color: #333;
+    background-color: #E7E7E7;
+    font-size: 14px;
+    font-weight: 500; }
+  .ibweb-block-explorer .table {
+    background-color: #f9f9f9; }
+  .ibweb-block-explorer .tableHeight {
+    height: calc(100% - 40px);
+    overflow-y: auto; }
+  .ibweb-block-explorer .row {
+    cursor: pointer; }
+  .ibweb-block-explorer .blockTable {
+    height: calc(100% - 40px);
+    overflow-y: auto; }
+    .ibweb-block-explorer .blockTable .blockTableBody {
+      background-color: #f9f9f9; }
+    .ibweb-block-explorer .blockTable .blockTableRow {
+      cursor: pointer; }
+    .ibweb-block-explorer .blockTable .blockTableHeader {
+      color: #333;
+      background-color: #E7E7E7;
+      font-size: 14px;
+      font-weight: 500; }
+    .ibweb-block-explorer .blockTable .headerRow {
+      color: #333;
+      background-color: #E7E7E7 !important;
+      cursor: default !important;
+      text-transform: capitalize; }
+    .ibweb-block-explorer .blockTable .alternatingRow {
+      background-color: #f1f1f1; }
+    .ibweb-block-explorer .blockTable .selectedRow {
+      background-color: #dddddd; }
+  .ibweb-block-explorer .metadata, .ibweb-block-explorer .actions {
+    overflow-y: auto; }
+    .ibweb-block-explorer .metadata table, .ibweb-block-explorer .actions table {
+      font-size: 12px; }
+      .ibweb-block-explorer .metadata table th, .ibweb-block-explorer .actions table th {
+        font-size: 14px;
+        font-weight: 500; }
+      .ibweb-block-explorer .metadata table thead tr th:first-child,
+      .ibweb-block-explorer .metadata table tbody tr td:first-child, .ibweb-block-explorer .actions table thead tr th:first-child,
+      .ibweb-block-explorer .actions table tbody tr td:first-child {
+        vertical-align: middle;
+        padding-left: 15px;
+        padding-right: 8px; }
+  .ibweb-block-explorer .metadata {
+    height: calc(40% - 40px); }
+  .ibweb-block-explorer .actions {
+    height: calc(60% - 40px); }
+    .ibweb-block-explorer .actions .actionTitle {
+      background-color: #dddddd;
+      margin: 0px;
+      padding-top: 10px;
+      padding-bottom: 10px; }
+    .ibweb-block-explorer .actions table {
+      margin-bottom: 0px; }
+      .ibweb-block-explorer .actions table tbody tr:first-child td:first-child {
+        vertical-align: top;
+        padding-top: 18px; }
+
 .ibweb-dev-sidebar-list-row {
   position: relative;
   margin-bottom: 32px; }

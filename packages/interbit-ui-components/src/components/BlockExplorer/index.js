@@ -76,7 +76,7 @@ export default class BlockExplorer extends Component {
       : lastBlock
 
     return (
-      <Grid fluid className="explorerBody">
+      <Grid fluid className="ibweb-block-explorer explorerBody">
         <Row className="fillHeight">
           <Col sm={3} className="explorerColumn">
             <Row className="explorerColumnHeading">

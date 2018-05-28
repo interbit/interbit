@@ -1,54 +1,5 @@
 @import 'variables';
 
-.App {
-
-  .Account-sidebar {
-    margin-top: 10px;
-    padding: 0;
-    background-color: $white;
-    h4 {
-      margin: 15px;
-      font-weight: 900;
-      @media (max-width: $screen-sm - 1) {
-        margin-top: 0px;
-      }
-    }
-    .nav > li > a {
-      border-radius: 2px;
-      font-weight: 700;
-      font-size: 16px;
-      padding: 8px 15px;
-      &:hover {
-        color: $dark-gray;
-        background-color: transparent;
-      }
-    }
-    .nav-pills>li.active>a,
-    .nav-pills>li.active>a:focus,
-    .nav-pills>li.active>a:hover {
-      background-color: $light-gray;
-      color: $dark-gray;
-    }
-  }
-
-  .Update {
-    width: 130px;
-    @media (max-width: $screen-sm - 1) {
-      padding: 8px 20px;
-      width: 100%;
-    }
-  }
-
-  .My-providers {
-    th {
-      color: $dark-gray;
-    }
-    .Manage-provider > span.glyphicon:hover {
-      color: $dark-gray;
-    }
-  }
-}
-
 .ibweb.app-account {
   .ibweb-navbar {
     .ibweb-ib-icon {

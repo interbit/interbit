@@ -87,6 +87,13 @@
     .control-label {
       text-transform: capitalize;
     }
+
+    @media (max-width: $screen-sm - 1) {
+      .btn {
+        margin-bottom: 16px;
+        width: 200px;
+      }
+    }
   }
 
   .account-edit-button {
@@ -222,6 +229,14 @@
   .modal-footer {
     .text-button:last-child {
       float: right;
+    }
+  }
+
+  @media (max-width: $screen-sm - 1) {
+    .modal-header {
+      h2 {
+        margin-bottom: 0;
+      }
     }
   }
 }

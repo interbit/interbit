@@ -76,9 +76,9 @@ export default class BlockExplorer extends Component {
       : lastBlock
 
     return (
-      <Grid fluid className="explorerBody">
+      <Grid fluid className="ibweb-block-explorer explorerBody">
         <Row className="fillHeight">
-          <Col sm={3} className="explorerColumn">
+          <Col lg={3} className="explorerColumn col-blocks">
             <Row className="explorerColumnHeading">
               <Col sm={4}>Blocks</Col>
             </Row>
@@ -93,7 +93,7 @@ export default class BlockExplorer extends Component {
               />
             </Row>
           </Col>
-          <Col sm={5} className="explorerColumn">
+          <Col lg={5} className="explorerColumn col-state">
             <Row className="explorerColumnHeading">
               <Col sm={10}>State</Col>
               <Col sm={2}>
@@ -112,7 +112,7 @@ export default class BlockExplorer extends Component {
               this.renderJson(treeData)
             )}
           </Col>
-          <Col sm={4} className="explorerColumn">
+          <Col lg={4} className="explorerColumn col-metadata">
             <Row className="explorerColumnHeading">
               <Col sm={12}>Block Metadata</Col>
             </Row>

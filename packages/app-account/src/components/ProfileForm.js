@@ -133,7 +133,7 @@ class ProfileForm extends Component {
 
     if (isEditable) {
       return (
-        <div id="ib-test-profile">
+        <div id="ib-test-profile" className="account-profile-form">
           {sectionIntro}
           {editForm}
         </div>

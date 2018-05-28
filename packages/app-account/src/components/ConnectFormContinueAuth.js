@@ -55,16 +55,18 @@ export default class ConnectFormContinueAuth extends Component {
             ))}
           </tbody>
         </Table>
-        <IconButton
-          className={providerChainId ? '' : 'disabled'}
-          clickHandler={doConnectChains}
-          text="Accept"
-        />
-        <IconButton
-          text="Reject"
-          className="secondary"
-          clickHandler={() => onCancel()}
-        />
+        <div className="btn-container">
+          <IconButton
+            className={providerChainId ? '' : 'disabled'}
+            clickHandler={doConnectChains}
+            text="Accept"
+          />
+          <IconButton
+            text="Reject"
+            className="secondary"
+            clickHandler={() => onCancel()}
+          />
+        </div>
       </div>
     )
   }

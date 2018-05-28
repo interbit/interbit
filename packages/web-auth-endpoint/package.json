@@ -19,6 +19,7 @@
     "http-proxy": "^1.17.0",
     "interbit": "0.4.27",
     "interbit-cli": "0.4.27",
+    "interbit-ui-tools": "0.4.27",
     "query-string": "^5.0.1"
   },
   "devDependencies": {

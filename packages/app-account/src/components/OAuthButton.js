@@ -5,14 +5,17 @@ import queryString from 'query-string'
 import uuid from 'uuid'
 import amplitude from 'amplitude-js'
 import { IconButton } from 'interbit-ui-components'
+import { queryParams } from 'interbit-ui-tools'
 import { actionCreators } from '../interbit/my-account'
 
 const authenticationHandler = ({
   oAuth: {
-    consumerChainId,
     blockChainDispatch,
+    consumerChainId,
     oAuthConfig,
-    oAuthProvider
+    oAuthProvider,
+    publicKey,
+    redirectUrl = window.location.href
   } = {}
 }) => async () => {
   const providerConfig = oAuthConfig[oAuthProvider] || {}
@@ -22,13 +25,19 @@ const authenticationHandler = ({
   amplitude.getInstance().logEvent('INITIATE_GITHUB_OAUTH')
 
   if (serviceEndPoint && blockChainDispatch) {
-    const queryOpts = { ...params, state: consumerChainId }
-    const queryParams = queryString.stringify(queryOpts)
+    const requestId = uuid.v4()
+    const state = queryParams.packState({
+      requestId,
+      consumerChainId,
+      publicKey,
+      redirectUrl
+    })
+    const oAuthQueryParams = queryString.stringify({ ...params, state })
 
-    const connectUrl = `${serviceEndPoint}?${queryParams}`
+    const connectUrl = `${serviceEndPoint}?${oAuthQueryParams}`
     const action = actionCreators.startAuthentication({
       oAuthProvider,
-      requestId: consumerChainId
+      requestId
     })
     await blockChainDispatch(action)
     window.location = connectUrl

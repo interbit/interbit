@@ -25,9 +25,13 @@ const reducer = (state = initialState, action) => {
       const { title, description } = action.payload
       const todos = state.getIn(['todos'], Immutable.from([]))
       const id = todos.length
+      const completed = false
 
       return title
-        ? state.set('todos', todos.concat({ id, title, description }))
+        ? state.set(
+            'todos',
+            todos.concat({ id, title, description, completed })
+          )
         : state
     }
 

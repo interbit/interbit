@@ -11,6 +11,11 @@ export default {
       text: 'Block Explorer',
       to: paths.BLOCK_EXPLORER,
       eventKey: 'explore'
+    },
+    {
+      text: 'Todo List',
+      to: paths.TODO_LIST,
+      eventKey: 'todoList'
     }
   ]
 }

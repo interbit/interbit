@@ -6,18 +6,24 @@ describe('app-todo-list private covenant', () => {
     const validInputs = [
       {
         todo: { title: 'foo', description: 'bar' },
-        expectedTodos: [{ id: 0, title: 'foo', description: 'bar' }]
+        expectedTodos: [
+          { id: 0, title: 'foo', description: 'bar', completed: false }
+        ]
       },
       {
         todo: { title: 'foo' },
-        expectedTodos: [{ id: 0, title: 'foo', description: undefined }]
+        expectedTodos: [
+          { id: 0, title: 'foo', description: undefined, completed: false }
+        ]
       },
       {
         todo: { title: 'foo', description: 'bar' },
-        currentTodos: [{ id: 0, title: 'aaa', description: 'bbb' }],
+        currentTodos: [
+          { id: 0, title: 'aaa', description: 'bbb', completed: false }
+        ],
         expectedTodos: [
-          { id: 0, title: 'aaa', description: 'bbb' },
-          { id: 1, title: 'foo', description: 'bar' }
+          { id: 0, title: 'aaa', description: 'bbb', completed: false },
+          { id: 1, title: 'foo', description: 'bar', completed: false }
         ]
       }
     ]

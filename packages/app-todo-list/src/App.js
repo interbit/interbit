@@ -6,6 +6,7 @@ import { Switch, Route } from 'react-router-dom'
 import NotFound from './containers/NotFoundPage'
 import InteractiveChains from './containers/InteractiveChains'
 import ExploreChain from './containers/ExploreChain'
+import TodoList from './containers/TodoList'
 
 import './css/App.css'
 import navigation from './constants/navigation'
@@ -25,6 +26,7 @@ export default class App extends Component {
             <Route exact path={paths.HOME} component={InteractiveChains} />
             <Route exact path={paths.CHAINS} component={InteractiveChains} />
             <Route path={paths.BLOCK_EXPLORER} component={ExploreChain} />
+            <Route exact path={paths.TODO_LIST} component={TodoList} />
             <Route component={NotFound} />
           </Switch>
         </Grid>

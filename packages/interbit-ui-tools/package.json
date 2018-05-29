@@ -1,6 +1,6 @@
 {
   "name": "interbit-ui-tools",
-  "version": "0.4.28",
+  "version": "0.4.29",
   "description": "UI tools including Redux middleware that boots an Interbit hypervisor and syncs the blockchain in your Redux state.",
   "main": "dist/interbit-ui-tools.js",
   "license": "MIT",

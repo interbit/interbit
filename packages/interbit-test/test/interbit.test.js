@@ -1,7 +1,6 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const assert = require('assert')
 const interbit = require('interbit-core')
-const genesisBlock = require('./genesisBlock')
 
 const verifyApi = (api, expectedApi) => {
   const extras = Object.keys(api).reduce(
@@ -125,6 +124,7 @@ describe('interbit', () => {
       })
 
       it('will boot a chain that has the chain ID specified in the generated genesis block', async () => {
+        const genesisBlock = await cli.createGenesisBlock()
         const chainId = await cli.startChain({ genesisBlock })
         assert.equal(chainId, genesisBlock.blockHash)
       })
@@ -164,9 +164,10 @@ describe('interbit', () => {
           // Test needs to wait for at least 2 blocks
           // sleep timeout assumes a blocking frequency of 2 secs
           // test timeout needs to be longer than the sleep period
-          await sleep(4500)
+          // Added more wiggle room around timeouts for Heroku
+          await sleep(5000)
           assert.equal(count, 1)
-        }).timeout(5000)
+        }).timeout(8000)
 
         const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
       })

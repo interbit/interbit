@@ -8,9 +8,9 @@ const textParamLabel = 'Enter some text'
 const addActionLabel = 'Add-up some numbers'
 const numberParamLabel = 'Enter a number'
 
-const addItemActionLabel = 'Add a to do item'
-const addItemTitleLabel = 'Enter a title'
-const addItemDescriptionLabel = 'Enter a description'
+const addTodoActionLabel = 'Add a to do item'
+const addTodoTitleLabel = 'Enter a title *'
+const addTodoDescriptionLabel = 'Enter a description'
 
 const actionCreators = {
   memo: () => ({
@@ -30,15 +30,15 @@ const actionCreators = {
       covenant.actionCreators.add(number)
   }),
 
-  addItem: () => ({
-    type: addItemActionLabel,
+  addTodo: () => ({
+    type: addTodoActionLabel,
     arguments: {
-      [addItemTitleLabel]: '',
-      [addItemDescriptionLabel]: ''
+      [addTodoTitleLabel]: '',
+      [addTodoDescriptionLabel]: ''
     },
     invoke: ({
-      [addItemTitleLabel]: title,
-      [addItemDescriptionLabel]: description
+      [addTodoTitleLabel]: title,
+      [addTodoDescriptionLabel]: description
     }) => covenant.actionCreators.addTodo(title, description)
   })
 }

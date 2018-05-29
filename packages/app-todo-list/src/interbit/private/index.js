@@ -11,7 +11,7 @@ const { actionTypes, actionCreators } = require('./actions')
 const initialState = Immutable.from({
   chainMetadata: { name: `Todo list application - User's private chain` },
   memos: [],
-  items: [],
+  todos: [],
   runningTotal: 0
 })
 
@@ -42,11 +42,11 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.ADD_TODO: {
       const { title, description } = action.payload
-      const items = state.getIn(['items'], Immutable.from([]))
-      const id = items.length
+      const todos = state.getIn(['todos'], Immutable.from([]))
+      const id = todos.length
 
       return title
-        ? state.set('items', items.concat({ id, title, description }))
+        ? state.set('todos', todos.concat({ id, title, description }))
         : state
     }
 

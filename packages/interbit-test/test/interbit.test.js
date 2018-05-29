@@ -53,7 +53,8 @@ describe('interbit', () => {
     // regular function is required for before to honour timeout
     // eslint-disable-next-line prefer-arrow-callback
     before(async function() {
-      this.timeout(5000)
+      // Timeout extended for 2048 bit key generation
+      this.timeout(20000)
       keyPair = await interbit.generateKeyPair()
       hypervisor = await interbit.createHypervisor({ keyPair })
     })
@@ -117,7 +118,8 @@ describe('interbit', () => {
           startServer: 'function',
           stopServer: 'function',
           shutdown: 'function',
-          destroyChain: 'function'
+          destroyChain: 'function',
+          stats: 'function'
         }
 
         verifyApi(cli, expectedCliApi)

@@ -10,7 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "fs-extra": "^5.0.0",
-    "interbit-core": "0.8.2",
+    "interbit-core": "0.10.2",
     "interbit-covenant-tools": "0.4.28",
     "lodash": "^4.17.5",
     "path": "^0.12.7"

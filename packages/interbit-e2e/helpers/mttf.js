@@ -1,17 +1,12 @@
 const _ = require('lodash')
 const axios = require('axios')
 const { Builder } = require('selenium-webdriver')
-const { createAccount } = require('./create-account')
 const { getRandomCapabilities } = require('./browserStackCapabilities')
 
 const BROWSERSTACK_SERVER = 'http://hub-cloud.browserstack.com/wd/hub'
 
-const mttf = async () => {
-  await runBrowserStackTest()
-}
-
 /* eslint-disable no-cond-assign */
-const runBrowserStackTest = async () => {
+const runBrowserStackTest = async (test, maxFailedAttempts = 3) => {
   const startTime = Date.now()
   const sendTimeToFailure = startTimer(startTime)
 
@@ -27,12 +22,12 @@ const runBrowserStackTest = async () => {
       .withCapabilities(capabilities)
       .build()
     try {
-      await createAccount(driver)
+      await test(driver)
       failedAttempts = 0
     } catch (e) {
       console.log(e)
 
-      if (failedAttempts > 3) {
+      if (failedAttempts > maxFailedAttempts) {
         const url = await driver.getCurrentUrl()
         const errorMessage = formatError(e, capabilities, url, attemptNumber)
         sendTimeToFailure(errorMessage)
@@ -95,7 +90,7 @@ const sendMessageToSlack = (
 }
 
 module.exports = {
-  mttf,
+  runBrowserStackTest,
   formatError,
   startTimer,
   sendMessageToSlack

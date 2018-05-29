@@ -1,3 +1,4 @@
-const { mttf } = require('../helpers/mttf')
+const { runBrowserStackTest } = require('../helpers/mttf')
+const { reloadAccount } = require('../helpers/reload-account')
 
-mttf()
+runBrowserStackTest(reloadAccount, 10)

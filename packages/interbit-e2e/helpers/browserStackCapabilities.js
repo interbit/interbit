@@ -7,16 +7,16 @@ const metaCapabilities = {
 }
 
 const capabilities = [
-  {
-    browserName: 'chrome',
-    version: '63',
-    ...metaCapabilities
-  },
-  {
-    browserName: 'Firefox',
-    version: '57',
-    ...metaCapabilities
-  },
+  // {
+  //  browserName: 'chrome',
+  //  version: '63',
+  //  ...metaCapabilities
+  // },
+  // {
+  //  browserName: 'Firefox',
+  //  version: '57',
+  //  ...metaCapabilities
+  // },
   // {
   //   browserName: 'iPhone',
   //   os_version: '10.3',
@@ -41,15 +41,15 @@ const capabilities = [
     'browserstack.local': 'false',
     'browserstack.selenium_version': '3.5.2',
     ...metaCapabilities
-  },
-  {
-    browserName: 'Chrome',
-    os: 'Windows',
-    os_version: '7',
-    browser_version: '62.0',
-    'browserstack.local': 'false',
-    'browserstack.selenium_version': '3.5.2',
-    ...metaCapabilities
+    // },
+    // {
+    //  browserName: 'Chrome',
+    //  os: 'Windows',
+    //  os_version: '7',
+    //  browser_version: '62.0',
+    //  'browserstack.local': 'false',
+    //  'browserstack.selenium_version': '3.5.2',
+    //  ...metaCapabilities
   }
   // {
   //   browserName: 'Chrome',

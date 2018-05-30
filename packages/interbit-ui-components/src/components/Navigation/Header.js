@@ -70,13 +70,13 @@ export default class Header extends Component {
                   <Navbar.Brand>
                     {disableLogoLink ? (
                       <div>
-                        {logo}
-                        {logoSm}
+                        <div className="hidden-xs">{logo}</div>
+                        <div className="visible-xs hidden-sm">{logoSm}</div>
                       </div>
                     ) : (
                       <LinkWrapper to={logoUrl}>
-                        {logo}
-                        {logoSm}
+                        <div className="hidden-xs">{logo}</div>
+                        <div className="visible-xs hidden-sm">{logoSm}</div>
                       </LinkWrapper>
                     )}
                   </Navbar.Brand>

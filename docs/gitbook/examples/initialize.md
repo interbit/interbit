@@ -4,6 +4,12 @@ There are two ways to intitialize a node: by command line and by code.
 
 If you are using the CLI or code it is recommended that you configure your network using an [Interbit configuration file](../reference/interbit-cli/config.md). This file enables you to configure apps, peers, covenants, and chain joins all in one place.
 
+#### Version Requirements
+To develop Interbit applications, your development environment will need the following software:
+
+* <a href="https://nodejs.org" target="_blank">Node.js</a> 8.6 or higher
+* <a href="https://nodejs.org" target="_blank">NPM</a> 5.8 or higher
+
 ## Using the CLI
 
 Once you have setup your configuration file to your liking you can use the [`start`](../reference/interbit-cli.start.md) or [`build`](../reference/interbit-cli/build.md) and [`deploy`](../reference/interbit-cli/deploy.md) commands to start your node.
@@ -51,12 +57,12 @@ npm i --save interbit
 The package comes with a set of granular functions for starting a node as well as a handy dandy [deploy](../reference/interbit-cli/deploy.md) function that does all of the work of applying covenants, starting and loading chains, and creating an interbit instance and cli to interact with.
 
 ```js
-const { 
-  startInterbit, 
-  createChains: { 
+const {
+  startInterbit,
+  createChains: {
     createChainsFromConfig,
     createChainsFromManifest
-  } 
+  }
 } = require('interbit')
 
 const { cli, hypervisor } = startInterbit()

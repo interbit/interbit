@@ -42,7 +42,7 @@ export default {
   },
   weDoBlockChain: {
     title: 'We do blockchain differently',
-    content: `We realized nearly two years ago that a single blockchain would never scale to the requirements of enterprise applications. Nor could it meet the privacy demands of the enterprise. To solve these problems, Interbit uses many blockchains that can be joined to form many different solution architectures. Interbit applications can be designed to promote privacy, scalability, and resiliancy, all hallmarks of enterprise applications.`
+    content: `We realized nearly two years ago that a single blockchain would never scale to the requirements of enterprise applications. Nor could it meet the privacy demands of the enterprise. To solve these problems, Interbit uses many blockchains that can be joined to form many different solution architectures. Interbit applications can be designed to promote privacy, scalability, and resiliency - all hallmarks of enterprise applications.`
   },
   cardsSection: {
     cards: [

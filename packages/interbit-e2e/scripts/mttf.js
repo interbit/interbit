@@ -1,3 +1,4 @@
-const { mttf } = require('../helpers/mttf')
+const { runBrowserStackTest } = require('../helpers/mttf')
+const { createAccount } = require('../helpers/create-account')
 
-mttf()
+runBrowserStackTest(createAccount, 10)

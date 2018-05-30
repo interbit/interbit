@@ -1,48 +1,45 @@
 const _ = require('lodash')
 const axios = require('axios')
-const { Builder, By, until } = require('selenium-webdriver')
+const { Builder } = require('selenium-webdriver')
 const { getRandomCapabilities } = require('./browserStackCapabilities')
 
-const SITE = 'https://ib-dev-account.herokuapp.com/'
 const BROWSERSTACK_SERVER = 'http://hub-cloud.browserstack.com/wd/hub'
-const TIMEOUT = 300000
 
-const mttf = async () => {
+/* eslint-disable no-cond-assign */
+const runBrowserStackTest = async (test, maxFailedAttempts = 3) => {
   const startTime = Date.now()
   const sendTimeToFailure = startTimer(startTime)
-  let attemptNumber = 1
 
-  while (true) {
-    await runBrowserStackTest(sendTimeToFailure, attemptNumber)
-    attemptNumber += 1
-  }
-}
+  let failedAttempts = 0
+  for (let attemptNumber = 1; (attemptNumber += 1); ) {
+    const capabilities = getRandomCapabilities()
+    console.log(
+      'Running BrowserStack tests on ',
+      JSON.stringify(capabilities, null, 2)
+    )
+    const driver = new Builder()
+      .usingServer(BROWSERSTACK_SERVER)
+      .withCapabilities(capabilities)
+      .build()
+    try {
+      await test(driver)
+      failedAttempts = 0
+    } catch (e) {
+      console.log(e)
 
-const runBrowserStackTest = async (handleError, attemptNumber) => {
-  const capabilities = getRandomCapabilities()
-  console.log(
-    'Running BrowserStack tests on ',
-    JSON.stringify(capabilities, null, 2)
-  )
-  const driver = new Builder()
-    .usingServer(BROWSERSTACK_SERVER)
-    .withCapabilities(capabilities)
-    .build()
-
-  try {
-    await createAccount(driver)
-  } catch (e) {
-    const url = await driver.getCurrentUrl()
-
-    const errorMessage = formatError(e, capabilities, url, attemptNumber)
-    handleError(errorMessage)
-
-    await driver.quit()
-    process.exit(0)
-  } finally {
+      if (failedAttempts > maxFailedAttempts) {
+        const url = await driver.getCurrentUrl()
+        const errorMessage = formatError(e, capabilities, url, attemptNumber)
+        sendTimeToFailure(errorMessage)
+        await driver.quit()
+        throw e
+      }
+      failedAttempts += 1
+    }
     await driver.quit()
   }
 }
+/* eslint-enable no-cond-assign */
 
 const startTimer = () => {
   const startTime = Date.now()
@@ -51,14 +48,10 @@ const startTimer = () => {
     const endTime = Date.now()
     const elapsedTimeMs = endTime - startTime
 
-    let elapsedTimeSecs = Math.round(elapsedTimeMs / 1000)
-    let elapsedTimeMins = Math.round(elapsedTimeSecs / 60)
-    let elapsedTimeHours = Math.round(elapsedTimeMins / 60)
+    const elapsedTimeSecs = Math.round(elapsedTimeMs / 1000) % 60
+    const elapsedTimeMins = Math.round(elapsedTimeSecs / 60) % 60
+    const elapsedTimeHours = Math.round(elapsedTimeMins / 60) % 24
     const elapsedTimeDays = Math.round(elapsedTimeHours / 24)
-
-    elapsedTimeSecs %= 60
-    elapsedTimeMins %= 60
-    elapsedTimeHours %= 24
 
     const message = `:fire: :fire: :thisisfine: :fire: :fire: \n\nMTTF Test on Accounts has Failed.\n_Check the server logs..._\n\n*Mean Time To Failure*\n ${elapsedTimeDays}d ${elapsedTimeHours}h ${elapsedTimeMins}m ${elapsedTimeSecs}s\n*Start:* ${new Date(
       startTime
@@ -96,57 +89,8 @@ const sendMessageToSlack = (
   })
 }
 
-const createAccount = async driver => {
-  await driver.get(SITE)
-
-  await driver.wait(
-    until.elementLocated(By.id('ib-test-create-account')),
-    TIMEOUT
-  )
-  await driver.findElement(By.id('ib-test-create-account')).click()
-
-  await driver.wait(
-    until.elementLocated(By.id('ib-test-github-create')),
-    TIMEOUT
-  )
-  await driver.findElement(By.id('ib-test-github-create')).click()
-
-  await driver.wait(until.elementLocated(By.name('check')), TIMEOUT)
-  await driver.findElement(By.name('check')).click()
-  await driver.findElement(By.name('continue')).click()
-
-  await driver.wait(until.elementLocated(By.name('commit')), TIMEOUT)
-  await driver.wait(
-    until.elementIsEnabled(driver.findElement(By.name('commit'))),
-    TIMEOUT
-  )
-  await driver
-    .findElement(By.id('login_field'))
-    .sendKeys(process.env.GITHUB_USER)
-  await driver.findElement(By.id('password')).sendKeys(process.env.GITHUB_PASS)
-  await driver.findElement(By.name('commit')).click()
-
-  // Only need to authorize if the user has never ever authed before
-  try {
-    await driver.wait(until.elementLocated(By.name('authorize')), TIMEOUT)
-    await driver.wait(
-      until.elementIsEnabled(driver.findElement(By.name('authorize'))),
-      TIMEOUT
-    )
-    await driver.findElement(By.name('authorize')).click()
-  } catch (e) {
-    console.log('User was already authenticated')
-  }
-
-  await driver.wait(until.elementLocated(By.id('ib-test-signed-in')), TIMEOUT)
-
-  await driver.getTitle().then(title => {
-    console.log(`Successfully created account and loaded "${title}"`)
-  })
-}
-
 module.exports = {
-  mttf,
+  runBrowserStackTest,
   formatError,
   startTimer,
   sendMessageToSlack

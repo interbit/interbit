@@ -6,6 +6,14 @@
   <p>TODO: Write a saga implementation that handles randomness.</p>
 </div>
 
+#### Version Requirements
+To develop Interbit applications, your development environment will need the following software:
+
+* <a href="https://nodejs.org" target="_blank">Node.js</a> 8.6 or higher
+* <a href="https://nodejs.org" target="_blank">NPM</a> 5.8 or higher
+
+## The Example
+
 This example will cover the topic of determinism in Smart Contract development. Determinism in software development means that given a particular state and a specific set of input, the result will always be the same.  This is an important concept to understand before developing an Interbit application.
 
 Determinism is very important when writing smart contracts.

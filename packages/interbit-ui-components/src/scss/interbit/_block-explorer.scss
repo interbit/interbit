@@ -1,0 +1,196 @@
+
+.ibweb-block-explorer {
+  // Make the table 50vh tall, and have the history use remaining space  (less than 50vh)
+  $form-height: 50px;
+  $explorer-height: calc(100vh - #{$form-height} - #{$nav-height} - #{$bottom-margin} - 30px);
+  $column-border: 1px solid #333;
+  $explorer-header-height: 40px;
+
+  height: $explorer-height;
+  margin-left: -15px;
+  margin-right: -15px;
+  margin-bottom: $margin-lg;
+
+  h5 {
+    padding-left: 15px;
+    &.heading {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      padding-top: 11px;
+    }
+  }
+
+  .explorerColumn {
+    height: 100%;
+    border-left: $column-border;
+    border-bottom: $column-border;
+    &:last-child {
+      border-right: $column-border;
+    }
+    p {
+      padding-top: 10px;
+    }
+  }
+
+  .explorerColumnHeading {
+    @include header;
+    padding-top: 9px;
+    height: 40px;
+  }
+
+  .fillHeight {
+    height: 100%;
+  }
+
+  .search {
+    :global(.input-group) {
+      margin-top: -6px;
+    }
+
+    text-align: right
+  }
+
+  .form {
+    label {
+      color: $dark-gray !important
+    }
+    vertical-align: middle;
+    height: $form-height;
+    padding-top: 10px;
+    background-color: $white-smoke;
+  }
+
+  .json {
+    width: calc(100% + 30px);
+    height: calc(100% - #{$explorer-header-height});
+    margin-left: -15px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    padding-left: 15px;
+    pre {
+      overflow: initial;
+      font-size: $font-size-small;
+    }
+  }
+
+  .tableHeader {
+    color: $dark-gray;
+    background-color: $light-gray;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .table {
+    background-color: $alt-gray;
+  }
+
+  .tableHeight {
+    height: calc(100% - 40px);
+    overflow-y: auto;
+  }
+
+  .row {
+    cursor: pointer;
+  }
+
+  .blockTable {
+    height: calc(100% - 40px);
+    overflow-y: auto;
+
+    .blockTableBody {
+      background-color: $alt-gray;
+    }
+
+    .blockTableRow {
+      cursor: pointer;
+    }
+
+    .blockTableHeader {
+      color: $dark-gray;
+      background-color: $light-gray;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .headerRow {
+      color: $dark-gray;
+      background-color: $light-gray !important;
+      cursor: default !important;
+      text-transform: capitalize;
+    }
+
+    .alternatingRow {
+      background-color: $bs-tbl-gray;
+    }
+
+    .selectedRow {
+      background-color: $tbl-border-gray;
+    }
+  }
+
+  .metadata, .actions {
+    overflow-y: auto;
+    table {
+      font-size: $font-size-small;
+      th {
+        font-size: $font-size-base;
+        font-weight: $medium-font-weight;
+      }
+      thead tr th:first-child,
+      tbody tr td:first-child {
+        vertical-align: middle;
+        padding-left: 15px;
+        padding-right: 8px;
+      }
+    }
+  }
+
+  .metadata {
+    height: calc(40% - #{$explorer-header-height});
+  }
+
+  .actions {
+    height: calc(60% - #{$explorer-header-height});
+    .actionTitle {
+      background-color: $tbl-border-gray;
+      margin: 0px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    table {
+      margin-bottom: 0px;
+      tbody tr:first-child td:first-child {
+        vertical-align: top;
+        padding-top: 18px;
+      }
+    }
+  }
+
+  @media (max-width: $screen-lg-min - 1) {
+    height: auto;
+
+    .col-blocks {
+      height: 400px;
+      border-right: 1px solid #333;
+    }
+
+    .col-state {
+      height: 800px;
+      border-right: 1px solid #333;
+    }
+
+    .col-state {
+      height: 800px;
+    }
+  }
+
+  @media (max-width: $screen-sm-min - 1) {
+    .col-state {
+      height: 500px;
+    }
+
+    .col-metadata {
+      height: 600px;
+    }
+  }
+}

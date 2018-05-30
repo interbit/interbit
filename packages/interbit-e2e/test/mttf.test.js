@@ -3,7 +3,7 @@ const {
   startTimer,
   sendMessageToSlack,
   formatError
-} = require('../helpers/mttf')
+} = require('../helpers/runTimedBrowserStackTest')
 const {
   getRandomCapabilities,
   metaCapabilities

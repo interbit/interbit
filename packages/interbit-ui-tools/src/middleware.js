@@ -83,10 +83,7 @@ const dispatchToChain = (chainAlias, action) => {
     )
   }
 
-  console.log(
-    `${LOG_PREFIX}: dispatchToChain(): `,
-    JSON.stringify({ chainAlias, action }, null, 2)
-  )
+  console.log(`${LOG_PREFIX}: dispatchToChain(): `, { chainAlias, action })
   return chain.dispatch(action)
 }
 

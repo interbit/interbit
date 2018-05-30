@@ -60,9 +60,7 @@ function* loadPrivateChain({
       throw new Error('User does not own private chain')
     }
   } catch (error) {
-    console.error(
-      `${LOG_PREFIX}: ${JSON.stringify({ chainAlias, error }, null, 2)}`
-    )
+    console.error(`${LOG_PREFIX}: `, { chainAlias, error })
     yield put(actionCreators.chainError({ chainAlias, error: error.message }))
     chainId = undefined
   }
@@ -123,13 +121,7 @@ function* sponsorChain({
 }
 
 function* loadChain({ cli, chainAlias, chainId }) {
-  console.log(
-    `${LOG_PREFIX}: *loadChain() ${JSON.stringify(
-      { chainAlias, chainId },
-      null,
-      2
-    )}`
-  )
+  console.log(`${LOG_PREFIX}: *loadChain()`, { chainAlias, chainId })
 
   yield put(actionCreators.chainLoading({ chainAlias }))
 
@@ -141,9 +133,7 @@ function* loadChain({ cli, chainAlias, chainId }) {
 }
 
 function* tryLoadChain({ cli, chainAlias, chainId }) {
-  console.log(
-    `${LOG_PREFIX}: *tryLoadChain() ${JSON.stringify({ chainAlias, chainId })}`
-  )
+  console.log(`${LOG_PREFIX}: *tryLoadChain()`, { chainAlias, chainId })
 
   let chain
   try {
@@ -153,9 +143,7 @@ function* tryLoadChain({ cli, chainAlias, chainId }) {
 
     yield put.resolve(actionCreators.chainLoaded({ chainAlias, chainId }))
   } catch (error) {
-    console.warn(
-      `${LOG_PREFIX}: ${JSON.stringify({ chainAlias, error }, null, 2)}`
-    )
+    console.warn(`${LOG_PREFIX}:`, { chainAlias, error })
     yield put(actionCreators.chainError({ chainAlias, error: error.message }))
     chain = undefined
   }

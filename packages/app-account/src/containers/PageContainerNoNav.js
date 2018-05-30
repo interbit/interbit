@@ -28,7 +28,8 @@ export default class PageContainer extends Component {
       {
         content: (
           <div id="ib-test-signed-in" className="username">
-            {userName} <span>(Signed in)</span>
+            <i className="fa fa-user" />&nbsp;
+            {userName}
           </div>
         ),
         key: 'username'
@@ -40,6 +41,7 @@ export default class PageContainer extends Component {
         <Header
           className="nav-main-menu"
           logo={<LogoAccount />}
+          logoSm={<LogoAccount />}
           textNavItems={isLoggedIn ? headerTextNav : []}
           disableLogoLink
         />

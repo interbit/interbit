@@ -1,5 +1,9 @@
 # Glossary
 
+## ACL
+
+Access Control List. This list indicates who is permitted to do what on any given blockchain.
+
 ## Action Creator
 Action creators are precisely named - they are functions that create Actions.
 

@@ -32,13 +32,19 @@
 @import './interbit/metrics';
 @import './interbit/modal-wrapper';
 
-// Overrides for react-bootstrap components
-@import './interbit/form';
-
-// TODO: maybe move to app-interbit-io
 @import './interbit/navbar';
 @import './interbit/footer';
 @import './interbit/sidebar-nav';
+
+
+// Overrides for react-bootstrap components
+@import './interbit/form';
+
+
+// Block Explorer CSS
+@import '~react-virtualized/styles.css';
+@import '_react-virtualized.overrides';
+@import './interbit/block-explorer';
 
 
 // Page level overrides for app-interbit-io

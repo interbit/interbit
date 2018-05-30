@@ -33,7 +33,7 @@ describe('The Build Must Not be Tampered With: It', () => {
           break
 
         default: {
-          const defaultMessage = `App name does not match s/^(app|interbit)(-[a-z0-9]+)+$/ and is not in allowed exclusions whitelist: ${name}`
+          const defaultMessage = `App name does not match regex s/^(app|interbit)(-[a-z0-9]+)+$/ and is not in allowed exclusions whitelist: ${name}`
           assert(name.match(/^(app|interbit)(-[a-z0-9]+)+$/), defaultMessage)
         }
       }

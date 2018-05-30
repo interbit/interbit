@@ -87,12 +87,14 @@ export class ConnectFormAddMissingProfileField extends Component {
             ))}
           </tbody>
         </Table>
-        <IconButton text="Continue" className="disabled" />
-        <IconButton
-          text="Go Back"
-          className="secondary"
-          clickHandler={() => onCancel()}
-        />
+        <div className="btn-container">
+          <IconButton text="Continue" className="disabled" />
+          <IconButton
+            text="Go Back"
+            className="secondary"
+            clickHandler={() => onCancel()}
+          />
+        </div>
       </div>
     )
 
@@ -130,19 +132,21 @@ export class ConnectFormAddMissingProfileField extends Component {
           These field(s) will be added to your Interbit identity and can be used
           in other apps that require them.
         </p>
-        <IconButton
-          text="Save"
-          type="submit"
-          className={`ibweb-button ${!valid && `disabled`}`}
-          clickHandler={() => handleSubmit()}
-        />
-        <IconButton
-          text="Cancel"
-          className="secondary"
-          clickHandler={() => {
-            toggleForm(formNames.CAUTH_ADD_REQUESTED_TOKENS)
-          }}
-        />
+        <div className="btn-container">
+          <IconButton
+            text="Save"
+            type="submit"
+            className={`ibweb-button ${!valid && `disabled`}`}
+            clickHandler={() => handleSubmit()}
+          />
+          <IconButton
+            text="Cancel"
+            className="secondary"
+            clickHandler={() => {
+              toggleForm(formNames.CAUTH_ADD_REQUESTED_TOKENS)
+            }}
+          />
+        </div>
       </form>
     )
 

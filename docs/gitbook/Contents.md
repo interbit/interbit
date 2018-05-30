@@ -10,6 +10,10 @@ The contents of the Interbit SDK are as follows:
  * Description of key concepts relating to the Interbit platform and blockchain technology
 
 
+#### [Examples](examples/README.md)
+ * Examples of how to use Interbit with explanations and code snippets.
+
+
 #### [Architecture](architecture/README.md)
  * Architectural overview and description of major components
 

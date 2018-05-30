@@ -3,6 +3,7 @@ const axios = require('axios')
 const { Builder } = require('selenium-webdriver')
 const { getRandomCapabilities } = require('./browserStackCapabilities')
 
+const webhook = process.env.WEBHOOK
 const BROWSERSTACK_SERVER = 'http://hub-cloud.browserstack.com/wd/hub'
 
 /* eslint-disable no-cond-assign */
@@ -82,7 +83,7 @@ const sendMessageToSlack = (
   channel = 'errors',
   username = 'MTTF Bot'
 ) => {
-  axios.post(process.env.WEBHOOK, {
+  axios.post(webhook, {
     channel,
     username,
     text

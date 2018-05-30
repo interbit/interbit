@@ -1,6 +1,9 @@
+const browserStackUser = process.env.BROWSERSTACK_USER
+const browserStackKey = process.env.BROWSERSTACK_KEY
+
 const metaCapabilities = {
-  'browserstack.user': process.env.BROWSERSTACK_USER,
-  'browserstack.key': process.env.BROWSERSTACK_KEY,
+  'browserstack.user': browserStackUser,
+  'browserstack.key': browserStackKey,
   'browserstack.console': 'verbose',
   'browserstack.networkLogs': true,
   'browserstack.debug': true

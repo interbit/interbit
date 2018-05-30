@@ -1,4 +1,4 @@
-const { runBrowserStackTest } = require('../helpers/mttf')
-const { createAccount } = require('../helpers/create-account')
+const { runBrowserStackTest } = require('../helpers/runTimedBrowserStackTest')
+const { createAccount } = require('../e2eSeleniumTests/create-account')
 
 runBrowserStackTest(createAccount, 10)

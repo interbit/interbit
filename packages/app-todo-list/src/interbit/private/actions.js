@@ -7,6 +7,13 @@ const actionCreators = {
       title,
       description
     }
+  }),
+
+  toggleTodo: id => ({
+    type: actionTypes.TOGGLE_TODO,
+    payload: {
+      id
+    }
   })
 }
 

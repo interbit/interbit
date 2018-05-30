@@ -1,24 +1,28 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { selectors } from 'interbit-ui-tools'
+import { chainDispatch, selectors } from 'interbit-ui-tools'
 import { Checkbox, Table } from 'react-bootstrap'
 
 import chainAliases from '../constants/chainAliases'
+import { actionCreators } from '../interbit/private/actions'
 
 const mapStateToProps = (state, ownProps) => {
   const chainState = selectors.getPrivateChain(state, {
     privateChainAlias: chainAliases.PRIVATE
   })
-
   const todos = chainState.getIn(['todos'])
-  console.log('private chain state: ', chainState)
-  console.log('todos: ', todos)
   return { todos }
 }
 
+const mapDispatchToProps = dispatch => ({
+  blockchainDispatch: action =>
+    dispatch(chainDispatch(chainAliases.PRIVATE, action))
+})
+
 export class TodoList extends Component {
   static propTypes = {
+    blockchainDispatch: PropTypes.func.isRequired,
     todos: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number,
@@ -32,6 +36,12 @@ export class TodoList extends Component {
   static defaultProps = {
     todos: []
   }
+
+  toggleTodo = id => {
+    const action = actionCreators.toggleTodo(id)
+    this.props.blockchainDispatch(action)
+  }
+
   render() {
     const { todos } = this.props
 
@@ -52,7 +62,10 @@ export class TodoList extends Component {
               <td>{item.title}</td>
               <td>{item.description}</td>
               <td>
-                <Checkbox checked={item.completed} />
+                <Checkbox
+                  checked={item.completed}
+                  onClick={() => this.toggleTodo(item.id)}
+                />
               </td>
             </tr>
           ))}
@@ -62,4 +75,4 @@ export class TodoList extends Component {
   }
 }
 
-export default connect(mapStateToProps)(TodoList)
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList)

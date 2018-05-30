@@ -51,4 +51,46 @@ describe('app-todo-list private covenant', () => {
       assert.deepEqual(newState.todos, startState.todos)
     })
   })
+
+  it('TOGGLE_TODO action', () => {
+    const validInputs = [
+      {
+        id: 0,
+        currentTodos: [
+          { id: 0, title: 'foo', description: 'bar', completed: false }
+        ],
+        expectedTodos: [
+          { id: 0, title: 'foo', description: 'bar', completed: true }
+        ]
+      }
+    ]
+
+    const invalidInputs = [
+      {},
+      { id: undefined },
+      { id: 'foo' },
+      { id: Number.NaN },
+      { id: Number.POSITIVE_INFINITY },
+      { id: Number.NEGATIVE_INFINITY }
+    ]
+
+    validInputs.forEach(testCase => {
+      const { id, currentTodos, expectedTodos } = testCase
+      const action = actionCreators.toggleTodo(id)
+      const startState = initialState.set('todos', currentTodos)
+      const newState = reducer(startState, action)
+      assert.deepEqual(newState.todos, expectedTodos)
+    })
+
+    invalidInputs.forEach(testCase => {
+      const { id } = testCase
+      const action = actionCreators.toggleTodo(id)
+      const currentTodos = [
+        { id: 0, title: 'foo', description: 'bar', completed: false }
+      ]
+      const startState = initialState.set('todos', currentTodos)
+      const newState = reducer(startState, action)
+      assert.deepEqual(newState.todos, startState.todos)
+    })
+  })
 })

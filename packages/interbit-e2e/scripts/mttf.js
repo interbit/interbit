@@ -1,4 +1,4 @@
 const { runBrowserStackTest } = require('../helpers/mttf')
-const { reloadAccount } = require('../helpers/reload-account')
+const { createAccount } = require('../helpers/create-account')
 
-runBrowserStackTest(reloadAccount, 10)
+runBrowserStackTest(createAccount, 10)

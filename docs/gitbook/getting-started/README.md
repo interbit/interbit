@@ -42,10 +42,10 @@ git clone git@github.com:interbit/interbit.git
 ### Make a new Interbit site by creating a new package
 Let's call the new site `app-the-new-thing`
 
-1. Copy the `packages/template` folder to `packages/app-the-new-thing`
+1. Copy the `packages/interbit-template` folder to `packages/app-the-new-thing`
 
 ```sh
-cp -R interbit/packages/template interbit/packages/app-the-new-thing
+cp -R interbit/packages/interbit-template interbit/packages/app-the-new-thing
 ```
 
 ### Make the following changes in `packages/app-the-new-thing`:

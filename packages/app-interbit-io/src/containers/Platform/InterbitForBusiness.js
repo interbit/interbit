@@ -152,7 +152,7 @@ class InterbitForBusiness extends Component {
               <Divider />
               <Media>
                 <Media.Left>
-                  <div className="img-container">
+                  <div>
                     <img
                       src={content.quoteETH.image}
                       alt={content.quoteETH.author}

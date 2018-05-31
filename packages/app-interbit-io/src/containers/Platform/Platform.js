@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Media } from 'react-bootstrap'
 import {
   Card,
   ContentBox,
   Markdown,
-  Quote,
+  Divider,
   LinkBar
 } from 'interbit-ui-components'
 
@@ -54,7 +54,28 @@ class Platform extends Component {
 
         <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
-            <Quote {...platform.quote} />
+            <div className="ibweb-quote">
+              {platform.quote.content}
+              <Divider />
+              <Media>
+                <Media.Left>
+                  <div>
+                    <img
+                      src={platform.quote.image}
+                      alt={platform.quote.author}
+                    />
+                  </div>
+                </Media.Left>
+                <Media.Body>
+                  <h4>{platform.quote.author}</h4>
+                  {platform.quote.callToActions.map(c => (
+                    <p key={c.text}>
+                      <a href={c.to}>{c.text}</a>
+                    </p>
+                  ))}
+                </Media.Body>
+              </Media>
+            </div>
           </Col>
         </Row>
 

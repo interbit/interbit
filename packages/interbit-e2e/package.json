@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.5",
     "selenium-webdriver": "^4.0.0-alpha.1"
   },
   "devDependencies": {

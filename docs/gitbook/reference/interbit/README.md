@@ -2,7 +2,7 @@
 
 Interbit offers the same features as the `interbit-cli` but in small functions requireable for programmatically managing your chains.
 
-The Interbit package contains function to help you
+The `interbit` package contains function to help you
  - gather `interbit-cli` specific command line arguments
  - start Interbit nodes
  - create chains
@@ -18,7 +18,7 @@ Reference
 
 #### Options
 
-The main functions available in Interbit all accept a uniform `options` object that correspond to the CLI options used in the [`interbit-cli`](../interbit-cli/README.md) package.
+The main functions available in `interbit` all accept a uniform `options` object that correspond to the CLI options used in the [`interbit-cli`](../interbit-cli/README.md) package.
 
 Some options are not supported in every script and will be ignored. See the specific script/cli reference for supported options
 

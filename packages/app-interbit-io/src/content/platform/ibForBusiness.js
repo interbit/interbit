@@ -96,8 +96,6 @@ Unlike the monolithic public blockchains that slow down (the time to reach conse
   quoteETH: {
     content:
       'Public chains have transaction confirmation times ranging from 15 seconds to hours.',
-    author: 'ETH Gas Station',
-    publication: 'https://ethgasstation.info/index.php',
     image: iconLink,
     callToActions: [
       {

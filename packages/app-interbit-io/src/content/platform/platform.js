@@ -3,7 +3,7 @@ import constants from '../../constants'
 import iconChainJoin from '../../assets/icons/iconChainJoin.svg'
 import iconDollar from '../../assets/icons/iconDollar.svg'
 import iconGitHub from '../../assets/icons/iconGitHub.svg'
-import iconHowyl from '../../assets/icons/iconHowyl.png'
+import iconForbes from '../../assets/icons/iconForbes.svg'
 import iconIdentityChain from '../../assets/icons/iconIdentityChain.svg'
 import iconManyChains from '../../assets/icons/iconManyChains.svg'
 import iconMarketplace from '../../assets/icons/iconMarketplace.svg'
@@ -80,10 +80,16 @@ export default {
 
   quote: {
     content:
-      'Our experience with Interbit has been exciting. It significantly increases our development velocity, enabling us to do more with less.',
-    author: 'Marc Low',
-    publication: 'CEO, Howyl',
-    image: iconHowyl
+      'BTL’s architecture is like no other I’ve seen, and it is the only one that succinctly deals with the GDPR ‘right to be forgotten’ requirement: to forget a user, simply delete their blockchains.',
+    author: 'Jason Bloomberg, Forbes',
+    image: iconForbes,
+    callToActions: [
+      {
+        to:
+          'https://www-forbes-com.cdn.ampproject.org/c/s/www.forbes.com/sites/jasonbloomberg/2018/05/17/massive-consensus-conference-succumbs-to-blockchain-echo-chamber/amp/',
+        text: 'See the article on forbes.com'
+      }
+    ]
   },
 
   takeAdvantage: {

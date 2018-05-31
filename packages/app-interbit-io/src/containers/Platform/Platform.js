@@ -5,8 +5,8 @@ import {
   Card,
   ContentBox,
   Markdown,
-  Quote,
-  LinkBar
+  LinkBar,
+  Quote
 } from 'interbit-ui-components'
 
 import layout from '../../constants/layout'

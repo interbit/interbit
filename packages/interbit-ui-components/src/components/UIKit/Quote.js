@@ -9,39 +9,52 @@ export default class Quote extends Component {
     author: PropTypes.string,
     publication: PropTypes.string,
     image: PropTypes.string.isRequired,
-    callToAction: PropTypes.shape({
-      to: PropTypes.string,
-      text: PropTypes.string
-    })
+    className: PropTypes.string,
+    callToActions: PropTypes.arrayOf(
+      PropTypes.shape({
+        to: PropTypes.string,
+        text: PropTypes.string
+      })
+    )
   }
 
   static defaultProps = {
     author: '',
     publication: '',
-    callToAction: undefined
+    className: '',
+    callToActions: []
   }
 
   render() {
-    const { content, author, publication, image, callToAction } = this.props
+    const {
+      content,
+      author,
+      publication,
+      image,
+      callToActions,
+      className
+    } = this.props
     return (
-      <div className="ibweb-quote">
+      <div className={`ibweb-quote ${className}`}>
         {content}
         <Divider />
         <Media>
           <Media.Left>
             <div className="img-container">
-              <img src={image} alt={author} />
+              <img src={image} alt={author || publication} />
             </div>
           </Media.Left>
           <Media.Body>
-            <h4>{author}</h4>
-            {callToAction ? (
-              <p>
-                <a href={callToAction.to}>{callToAction.text}</a>
-              </p>
-            ) : (
-              <p>{publication}</p>
-            )}
+            {author && <h4>{author}</h4>}
+
+            {!!callToActions.length &&
+              callToActions.map(c => (
+                <p key={c.text}>
+                  <a href={c.to}>{c.text}</a>
+                </p>
+              ))}
+
+            {publication && <p>{publication}</p>}
           </Media.Body>
         </Media>
       </div>

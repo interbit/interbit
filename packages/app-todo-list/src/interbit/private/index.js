@@ -35,6 +35,19 @@ const reducer = (state = initialState, action) => {
         : state
     }
 
+    case actionTypes.EDIT_TODO: {
+      const { id: maybeNumber } = action.payload
+      const id = Number(maybeNumber)
+      const todos = state.getIn(['todos'], Immutable.from([]))
+
+      if (!Number.isFinite(id) || id >= todos.length || !action.payload.title) {
+        return state
+      }
+
+      const nextState = state.setIn(['todos', id], action.payload)
+      return nextState
+    }
+
     case actionTypes.TOGGLE_TODO: {
       const { id: maybeNumber } = action.payload
       const id = Number(maybeNumber)

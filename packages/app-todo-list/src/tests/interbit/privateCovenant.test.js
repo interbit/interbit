@@ -52,6 +52,42 @@ describe('app-todo-list private covenant', () => {
     })
   })
 
+  it('EDIT_TODO action', () => {
+    const currentTodos = [
+      { id: 0, title: 'cat', description: 'woof', completed: false }
+    ]
+
+    const validInputs = [
+      { id: 0, title: 'cat', description: 'meow', completed: false },
+      { id: 0, title: 'cat', description: undefined, completed: false },
+      { id: 0, title: 'cat', description: '', completed: false },
+      { id: 0, title: 'dog', description: 'meow', completed: false }
+    ]
+
+    const invalidInputs = [{ todo: {} }, { todo: { id: 0 } }]
+
+    validInputs.forEach(testCase => {
+      const { id, title, description, completed } = testCase
+      const action = actionCreators.editTodo(id, title, description, completed)
+      const startState = initialState.set('todos', currentTodos)
+      const newState = reducer(startState, action)
+      assert.deepEqual(newState.todos, [{ id, title, description, completed }])
+    })
+
+    invalidInputs.forEach(testCase => {
+      const { todo } = testCase
+      const action = actionCreators.editTodo(
+        todo.id,
+        todo.title,
+        todo.description,
+        todo.completed
+      )
+      const startState = initialState.set('todos', currentTodos)
+      const newState = reducer(startState, action)
+      assert.deepEqual(newState.todos, startState.todos)
+    })
+  })
+
   it('TOGGLE_TODO action', () => {
     const validInputs = [
       {

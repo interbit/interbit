@@ -9,6 +9,16 @@ const actionCreators = {
     }
   }),
 
+  editTodo: (id, title, description, completed) => ({
+    type: actionTypes.EDIT_TODO,
+    payload: {
+      id,
+      title,
+      description,
+      completed
+    }
+  }),
+
   toggleTodo: id => ({
     type: actionTypes.TOGGLE_TODO,
     payload: {

@@ -36,15 +36,27 @@ const reducer = (state = initialState, action) => {
     }
 
     case actionTypes.EDIT_TODO: {
-      const { id: maybeNumber } = action.payload
+      const {
+        id: maybeNumber,
+        title,
+        description,
+        completed: maybeDefined
+      } = action.payload
       const id = Number(maybeNumber)
       const todos = state.getIn(['todos'], Immutable.from([]))
 
-      if (!Number.isFinite(id) || id >= todos.length || !action.payload.title) {
+      if (!Number.isFinite(id) || id >= todos.length || !title) {
         return state
       }
 
-      const nextState = state.setIn(['todos', id], action.payload)
+      const completed =
+        maybeDefined === undefined ? todos[id].completed : maybeDefined
+      const nextState = state.setIn(['todos', id], {
+        id,
+        title,
+        description,
+        completed
+      })
       return nextState
     }
 

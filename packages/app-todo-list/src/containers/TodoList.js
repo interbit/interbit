@@ -77,6 +77,7 @@ export class TodoList extends Component {
               <th>Title</th>
               <th>Description</th>
               <th>Completed</th>
+              <th>Edit</th>
             </tr>
           </thead>
           <tbody>
@@ -90,6 +91,9 @@ export class TodoList extends Component {
                     checked={item.completed}
                     onClick={() => this.toggleTodo(item.id)}
                   />
+                </td>
+                <td>
+                  <i className="fa fa-pencil" />
                 </td>
               </tr>
             ))}

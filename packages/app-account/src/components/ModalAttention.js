@@ -56,7 +56,7 @@ export default class ModalAttention extends Component {
         <OAuthButton
           text="Continue"
           name="continue"
-          oAuth={{ ...oAuth, provider: oAuthProviders.GITHUB }}
+          oAuth={{ ...oAuth, oAuthProvider: oAuthProviders.GITHUB }}
           className={isEnabled ? '' : 'disabled'}
         />
         <IconButton

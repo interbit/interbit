@@ -10,7 +10,7 @@ import { actionCreators } from '../interbit/my-account'
 
 const authenticationHandler = ({
   oAuth: {
-    blockChainDispatch,
+    blockchainDispatch,
     consumerChainId,
     oAuthConfig,
     oAuthProvider,
@@ -21,10 +21,9 @@ const authenticationHandler = ({
   const providerConfig = oAuthConfig[oAuthProvider] || {}
   const { serviceEndPoint, params } = providerConfig
 
-  console.log(oAuthProvider, providerConfig)
   amplitude.getInstance().logEvent('INITIATE_GITHUB_OAUTH')
 
-  if (serviceEndPoint && blockChainDispatch) {
+  if (serviceEndPoint && blockchainDispatch) {
     const requestId = uuid.v4()
     const state = queryParams.packState({
       requestId,
@@ -39,7 +38,7 @@ const authenticationHandler = ({
       oAuthProvider,
       requestId
     })
-    await blockChainDispatch(action)
+    await blockchainDispatch(action)
     window.location = connectUrl
   }
 }

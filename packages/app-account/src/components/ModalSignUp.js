@@ -40,7 +40,7 @@ export class ModalSignUp extends Component {
 
     const body = (
       <Authentication
-        oAuth={{ ...oAuth, provider: oAuthProviders.GITHUB }}
+        oAuth={{ ...oAuth, oAuthProvider: oAuthProviders.GITHUB }}
         {...contentBars.gitHubCreateAccount}
       />
     )

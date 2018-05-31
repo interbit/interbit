@@ -5332,9 +5332,7 @@ a {
         -webkit-box-align: center;
         align-items: center;
         width: 64px;
-        height: 64px;
-        border-radius: 16px;
-        border: 1px solid #E6E6E6; }
+        height: 64px; }
       .ibweb-quote .media .media-left img {
         margin: 0 auto; }
     .ibweb-quote .media .media-body {
@@ -5345,6 +5343,9 @@ a {
         line-height: 1.17; }
       .ibweb-quote .media .media-body p {
         font-weight: 400; }
+  .ibweb-quote.img-with-border .media .media-left .img-container {
+    border-radius: 16px;
+    border: 1px solid #E6E6E6; }
 
 @media (max-width: 629px) {
   .ibweb-quote {

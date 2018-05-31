@@ -35,6 +35,7 @@ const redeployBuffer = {
 }
 
 const redeployCovenants = async (cli, interbitConfig, chainManifest) => {
+  console.log('attempted to redeploy')
   if (redeployBuffer.isDeploying) {
     redeployBuffer.isDeployPending = true
     return undefined
@@ -67,12 +68,12 @@ const applyUpdates = (cli, chainManifest, interbitConfig, covenantHashes) => {
     const isDefaultChain = aliasedChain.isDefaultChain
     if (isDefaultChain) {
       const defaultChain = await cli.getChain(chainEntry.chainId)
-      updateProdConfig(chainManifest, covenantHashes, defaultChain)
+      updateManifest(chainManifest, covenantHashes, defaultChain)
     }
   })
 }
 
-const updateProdConfig = (chainManifest, covenantHashes, defaultChain) => {
+const updateManifest = (chainManifest, covenantHashes, defaultChain) => {
   const deploymentDetails = generateDeploymentDetails(
     chainManifest,
     covenantHashes

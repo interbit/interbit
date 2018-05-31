@@ -19,7 +19,7 @@ Coming soon:
 1. `--manifest` *(filepath)*: *Coming soon* the manifest file to use for variable resolution. If the manifest file contains genesis blocks they will be used to resolve the chain IDs of the started node. Default `[--artifacts]/interbit.manifest.json`
 1. `--artifacts` *(dirpath)*: the directory to search for a manifest in. Default `/dist`
 1. `--port` *(number)*: the port number Interbit will communicate on. Default 5000
-1. `--dev-mode` *(empty)*: a switch to indicate running in development mode. Development mode does not output an updated manifest and it watches covenants for updates, deploying the new covenants to the chains on change.
+1. `--dev-mode` *(empty)*: a switch to indicate running in development mode. Development mode does not output an updated manifest and it watches covenants for updates, deploying the new covenants to the configured static chains on change. *This does not update covenants applied to dynamic chains.*
 1. `--no-watch` *(empty)*: used only with `--dev-mode` this option stops the automatic covenant updates.
 
 #### Example

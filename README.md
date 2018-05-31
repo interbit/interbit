@@ -13,6 +13,13 @@ The Interbit Platform is currently a test environment provided for information, 
 
 We will be updating this environment regularly - adding functionality, applications, and addressing issues. Our Slack community is open for reporting issues, feedback, and announcements of updates to the platform.
 
+#### Version Requirements
+To develop Interbit applications, your development environment will need the following software:
+
+* <a href="https://nodejs.org" target="_blank">Node.js</a> 8.6 or higher
+* <a href="https://nodejs.org" target="_blank">NPM</a> 5.8 or higher
+
 ## To get started, make a new Interbit site
 
 See our [Getting Started Guide](https://github.com/interbit/interbit/tree/master/docs/gitbook/getting-started)
+

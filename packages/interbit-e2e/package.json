@@ -1,6 +1,6 @@
 {
   "name": "interbit-e2e",
-  "version": "0.4.27",
+  "version": "0.4.28",
   "description": "End to end tests for the Interbit platform",
   "private": true,
   "scripts": {

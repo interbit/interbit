@@ -1,3 +1,4 @@
-const { mttf } = require('../helpers/mttf')
+const { runBrowserStackTest } = require('../helpers/runTimedBrowserStackTest')
+const { createAccount } = require('../e2eSeleniumTests/create-account')
 
-mttf()
+runBrowserStackTest(createAccount, 10)

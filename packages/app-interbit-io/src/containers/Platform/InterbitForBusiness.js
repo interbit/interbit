@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Row, Col, Media } from 'react-bootstrap'
-import { Card, Divider, LinkBar, Markdown, Quote } from 'interbit-ui-components'
+import { Row, Col } from 'react-bootstrap'
+import { Card, LinkBar, Markdown, Quote } from 'interbit-ui-components'
 
 import layout from '../../constants/layout'
 
@@ -65,7 +65,7 @@ class InterbitForBusiness extends Component {
 
         <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
-            <Quote {...content.quoteBTL} />
+            <Quote {...content.quoteBTL} className="img-with-border" />
           </Col>
         </Row>
 
@@ -131,7 +131,7 @@ class InterbitForBusiness extends Component {
 
         <Row>
           <Col {...colLayout}>
-            <Quote {...content.quoteHowyl} />
+            <Quote {...content.quoteHowyl} className="img-with-border" />
           </Col>
         </Row>
 
@@ -147,27 +147,7 @@ class InterbitForBusiness extends Component {
 
         <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
-            <div className="ibweb-quote">
-              {content.quoteETH.content}
-              <Divider />
-              <Media>
-                <Media.Left>
-                  <div>
-                    <img
-                      src={content.quoteETH.image}
-                      alt={content.quoteETH.author}
-                    />
-                  </div>
-                </Media.Left>
-                <Media.Body>
-                  {content.quoteETH.callToActions.map(c => (
-                    <p key={c.text}>
-                      <a href={c.to}>{c.text}</a>
-                    </p>
-                  ))}
-                </Media.Body>
-              </Media>
-            </div>
+            <Quote {...content.quoteETH} />
           </Col>
         </Row>
 

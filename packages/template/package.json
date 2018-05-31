@@ -36,7 +36,7 @@
         "serve": "cross-env serve --single build",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
-        "interbit:start": "interbit start --db-path ./db-interbit --port 5000 --dev --no-watch",
+        "interbit:start": "interbit start --db-path ./db-interbit --port 5000 --dev",
         "interbit:create": "interbit create --dev",
         "interbit:build": "interbit build",
         "interbit:deploy": "interbit deploy --admin-keys keyPair.js"

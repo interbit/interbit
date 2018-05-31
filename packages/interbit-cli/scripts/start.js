@@ -21,6 +21,9 @@ const startInterbitNode = async () => {
     console.log(logo)
 
     const options = getOptions(process.argv)
+
+    console.log('Running with options', JSON.stringify(options, null, 2))
+
     const interbitConfig = getConfig()
 
     // eslint-disable-next-line

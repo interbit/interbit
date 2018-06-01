@@ -5,7 +5,7 @@ const path = require('path')
 
 const startInterbit = require('../chainManagement/startInterbit')
 const { generateManifest } = require('../manifest/generateManifest')
-const { updateIndexHtmls } = require('../chainManagement/updateIndexHtml')
+const { updateIndexHtmls } = require('../file/updateIndexHtml')
 const writeJsonFile = require('../file/writeJsonFile')
 
 const build = async options => {

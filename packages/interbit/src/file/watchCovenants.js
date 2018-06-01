@@ -1,7 +1,7 @@
 const watch = require('watch')
 const { getCovenants, getChainByAlias } = require('../config/configSelectors')
-const generateDeploymentDetails = require('./generateDeploymentDetails')
-const deployCovenants = require('./deployCovenants')
+const generateDeploymentDetails = require('../chainManagement/generateDeploymentDetails')
+const deployCovenants = require('../chainManagement/deployCovenants')
 
 const watchCovenants = (cli, interbitConfig, chainManifest) => {
   const covenants = getCovenants(interbitConfig)

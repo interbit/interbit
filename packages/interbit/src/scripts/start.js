@@ -3,9 +3,9 @@ const { createChainsFromConfig } = require('../chainManagement/createChains')
 const generateDeploymentDetails = require('../chainManagement/generateDeploymentDetails')
 const startInterbit = require('../chainManagement/startInterbit')
 const setRootChainManifest = require('../chainManagement/setRootChainManifest')
-const { updateIndexHtmls } = require('../chainManagement/updateIndexHtml')
+const { updateIndexHtmls } = require('../file/updateIndexHtml')
 const validateConfig = require('../config/validateConfig')
-const watchCovenants = require('../chainManagement/watchCovenants')
+const watchCovenants = require('../file/watchCovenants')
 
 const start = async options => {
   const { config, dev, noWatch } = options

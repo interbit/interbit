@@ -11,7 +11,7 @@ const getManifest = require('./args/getManifest')
 const configureChains = require('./chainManagement/configureChains')
 const constants = require('./chainManagement/constants')
 const createChains = require('./chainManagement/createChains')
-const watchCovenants = require('./chainManagement/watchCovenants')
+const watchCovenants = require('./file/watchCovenants')
 const generateDeploymentDetails = require('./chainManagement/generateDeploymentDetails')
 const startInterbit = require('./chainManagement/startInterbit')
 const setRootChainManifest = require('./chainManagement/setRootChainManifest')
@@ -23,7 +23,7 @@ const {
   updateIndexHtmls,
   updateDom,
   camelCaseToHyphenated
-} = require('./chainManagement/updateIndexHtml')
+} = require('./file/updateIndexHtml')
 
 const configSelectors = require('./config/configSelectors')
 const validateConfig = require('./config/validateConfig')

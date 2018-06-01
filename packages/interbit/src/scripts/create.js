@@ -13,44 +13,45 @@ const create = async options => {
 
   console.log(`interbit create: Creating ${appName} in ${newAppDir}`)
 
-  if (!appName) {
-    console.error('interbit create: appName must be provided')
+  try {
+    if (!appName) {
+      throw new Error('interbit create: appName must be provided')
+    }
+
+    if (!appName.match(/^([a-z0-9-]+)+$/)) {
+      throw new Error(
+        'interbit create: app name must match regex /^(app|interbit)(-[a-z0-9]+)+$/'
+      )
+    }
+
+    if (fs.existsSync(newAppDir)) {
+      throw new Error(
+        `interbit create: Can not create app. Something already exists at location ${newAppDir}`
+      )
+    }
+
+    console.log('Pulling template file from npm...')
+    const tmpDir = path.join(newAppDir, 'tmp')
+    const expectedTemplateLocation = await installTemplate(tmpDir)
+
+    if (!fs.existsSync(expectedTemplateLocation)) {
+      throw new Error('interbit create: Problem installing template from npm')
+    }
+
+    console.log(`Customizing ${appName}...`)
+    process.chdir(location)
+    fs.copySync(expectedTemplateLocation, newAppDir)
+
+    console.log('Cleaning up...')
+    cleanupPackageJson(newAppDir, appName)
+    await npmInstall(newAppDir)
+    fs.removeSync(tmpDir)
+
+    console.log('... done!')
+  } catch (e) {
+    console.error(e)
     process.exit(1)
   }
-
-  if (!appName.match(/^([a-z0-9-]+)+$/)) {
-    console.error(
-      'interbit create: app name must match regex /^(app|interbit)(-[a-z0-9]+)+$/'
-    )
-    process.exit(1)
-  }
-
-  if (fs.existsSync(newAppDir)) {
-    console.error(
-      `interbit create: Can not create app. Something already exists at location ${newAppDir}`
-    )
-    process.exit(1)
-  }
-
-  console.log('Pulling template file from npm...')
-  const tmpDir = path.join(newAppDir, '/tmp')
-  const expectedTemplateLocation = await installTemplate(tmpDir)
-
-  if (!fs.existsSync(expectedTemplateLocation)) {
-    console.error('interbit create: Problem installing template from npm')
-    process.exit(1)
-  }
-
-  console.log(`Customizing ${appName}...`)
-  process.chdir(location)
-  fs.copySync(expectedTemplateLocation, newAppDir)
-
-  console.log('Cleaning up...')
-  cleanupPackageJson(newAppDir, appName)
-  await npmInstall(newAppDir)
-
-  fs.removeSync(tmpDir)
-  console.log('... done!')
 }
 
 const installTemplate = async dir => {
@@ -64,6 +65,8 @@ const installTemplate = async dir => {
   return expectedTemplateLocation
 }
 
+// Cleanup the package.json from format pulled in from NPM to dev/working format by removing
+// the fields added during npm i step
 const cleanupPackageJson = (newAppDir, appName) => {
   const packageJsonPath = `${newAppDir}/package.json`
   // eslint-disable-next-line

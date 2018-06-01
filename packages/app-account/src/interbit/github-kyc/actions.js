@@ -66,21 +66,13 @@ const actionCreators = {
     )
   }),
 
-  oAuthCallbackSaga: ({
-    requestId,
-    consumerChainId,
-    temporaryToken,
-    error,
-    errorDescription
-  }) => ({
+  oAuthCallbackSaga: ({ requestId, consumerChainId, temporaryToken }) => ({
     type: actionTypes.OAUTH_CALLBACK_SAGA,
     payload: validate(
       {
         requestId,
         consumerChainId,
-        temporaryToken,
-        error,
-        errorDescription
+        temporaryToken
       },
       {
         requestId: required()

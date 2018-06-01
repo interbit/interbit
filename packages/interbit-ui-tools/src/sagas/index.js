@@ -10,12 +10,7 @@ const {
 const { LOG_PREFIX } = require('../constants')
 const { connectToPeers } = require('./connections')
 const { interbitContext } = require('./interbit')
-const {
-  loadPrivateChain,
-  tryLoadChain,
-  loadChain,
-  sponsorChain
-} = require('./chains')
+const { loadPrivateChain, loadChain, sponsorChain } = require('./chains')
 
 function* rootSaga() {
   console.log(`${LOG_PREFIX}: *rootSaga(): loading interbit`)
@@ -27,8 +22,8 @@ function* rootSaga() {
   yield takeEvery(actionTypes.PRIVATE_CHAIN_SAGA, privateChainSaga)
 }
 
-function* loadInterbitSaga(action) {
-  console.log(`${LOG_PREFIX}: *loadInterbitSaga()`, action)
+function* loadInterbitSaga() {
+  console.log(`${LOG_PREFIX}: *loadInterbitSaga()`)
 
   try {
     const { cli } = yield call(interbitContext)
@@ -41,7 +36,7 @@ function* loadInterbitSaga(action) {
 
     const chainsToLoad = getConfiguredChains(config, { root: interbitAtRoot })
     for (const [chainAlias, { chainId }] of Object.entries(chainsToLoad)) {
-      yield call(tryLoadChain, { cli, chainAlias, chainId })
+      yield call(loadChain, { cli, chainAlias, chainId })
     }
 
     yield put(actionCreators.interbitReady())

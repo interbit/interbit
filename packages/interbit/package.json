@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "aws-sdk": "^2.245.1",
     "fs-extra": "^5.0.0",
     "interbit-core": "0.8.2",
     "interbit-covenant-tools": "0.4.28",

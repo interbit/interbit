@@ -3,9 +3,10 @@ const {
   createChains: { createChainsFromManifest },
   configureChains
 } = require('../chainManagement')
+const { logChainsFromManifest } = require('../chainManagement/logChains')
 
 const deploy = async options => {
-  const { keyPair, port, location, manifest, connect } = options
+  const { keyPair, port, location, manifest, connect, logging } = options
 
   const { cli } = await startInterbit(keyPair, { port })
   // TODO: Refactor deployCovenants to its own function and move options up into here
@@ -14,8 +15,10 @@ const deploy = async options => {
   await createChainsFromManifest(location, cli, manifest, options)
 
   if (!connect) {
-    await configureChains(cli, manifest, options)
+    await configureChains({ cli, manifest, logging })
   }
+
+  if (logging) await logChainsFromManifest({ ...logging, cli, manifest })
 
   // TODO: Once deployed, watch the root chain for manifest updates and reconfigure #267
 

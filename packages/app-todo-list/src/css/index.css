@@ -1,5 +1,24 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
+.app-todo-list .todo-table .col-id {
+  width: 10%; }
+.app-todo-list .todo-table .col-title {
+  width: 20%; }
+.app-todo-list .todo-table .col-description {
+  width: 40%; }
+.app-todo-list .todo-table .col-completed {
+  width: 20%; }
+.app-todo-list .todo-table .col-form .form-title {
+  width: 20%;
+  margin-right: 10px; }
+  .app-todo-list .todo-table .col-form .form-title input {
+    width: 100%; }
+.app-todo-list .todo-table .col-form .form-description {
+  width: 45%;
+  margin-right: 10px; }
+  .app-todo-list .todo-table .col-form .form-description input {
+    width: 100%; }
+.app-todo-list .todo-table .col-form .form-completed {
+  width: 8%; }
+.app-todo-list .todo-table .col-form .form-buttons .ibweb-button {
+  padding: 0 15px; }
+
+/*# sourceMappingURL=index.css.map */

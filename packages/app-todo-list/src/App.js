@@ -8,14 +8,14 @@ import InteractiveChains from './containers/InteractiveChains'
 import ExploreChain from './containers/ExploreChain'
 import TodoList from './containers/TodoList'
 
-import './css/App.css'
+import './css/index.css'
 import navigation from './constants/navigation'
 import paths from './constants/paths'
 
 export default class App extends Component {
   render() {
     return (
-      <div className="App ibweb app-interbit-io">
+      <div className="App ibweb app-todo-list">
         <Header
           navItems={navigation.headerNav}
           logo={<Logo className="sm hidden-xs" />}

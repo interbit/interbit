@@ -1,0 +1,50 @@
+.app-todo-list {
+  .todo-table {
+    .col-id {
+      width: 10%;
+    }
+
+    .col-title {
+      width: 20%;
+    }
+
+    .col-description {
+      width: 40%;
+    }
+
+    .col-completed {
+      width: 20%;
+    }
+
+    .col-form {
+      .form-title {
+        width: 20%;
+        margin-right: 10px;
+
+        input {
+          width: 100%;
+        }
+      }
+
+      .form-description {
+        width: 45%;
+        margin-right: 10px;
+
+        input {
+          width: 100%;
+        }
+      }
+
+      .form-completed {
+        width: 8%;
+      }
+
+      .form-buttons {
+        .ibweb-button {
+          padding: 0 15px;
+        }
+      }
+    }
+
+  }
+}

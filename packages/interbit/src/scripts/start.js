@@ -1,11 +1,12 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
-const { createChainsFromConfig } = require('../chainManagement/createChains')
-const generateDeploymentDetails = require('../chainManagement/generateDeploymentDetails')
-const startInterbit = require('../chainManagement/startInterbit')
-const setRootChainManifest = require('../chainManagement/setRootChainManifest')
-const { updateIndexHtmls } = require('../file/updateIndexHtml')
-const validateConfig = require('../config/validateConfig')
-const watchCovenants = require('../file/watchCovenants')
+const {
+  createChains: { createChainsFromConfig },
+  generateDeploymentDetails,
+  startInterbit,
+  setRootChainManifest
+} = require('../chainManagement')
+const { updateIndexHtmls, watchCovenants } = require('../file')
+const { validateConfig } = require('../config')
 
 const start = async options => {
   const { config, dev, noWatch } = options

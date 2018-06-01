@@ -3,10 +3,9 @@ const promisify = require('util').promisify
 const exec = promisify(require('child_process').exec)
 const path = require('path')
 
-const startInterbit = require('../chainManagement/startInterbit')
-const { generateManifest } = require('../manifest/generateManifest')
-const { updateIndexHtmls } = require('../file/updateIndexHtml')
-const writeJsonFile = require('../file/writeJsonFile')
+const { startInterbit } = require('../chainManagement')
+const { generateManifest } = require('../manifest')
+const { updateIndexHtmls, writeJsonFile } = require('../file')
 
 const build = async options => {
   const { config, manifest, artifacts } = options

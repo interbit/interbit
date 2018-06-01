@@ -1,73 +1,20 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
-const { getArg, getArgs, isArg } = require('./args/getArg')
-const argOptions = require('./args/argOptions')
-const getArtifactsLocation = require('./args/getArtifactsLocation')
-const { getConfig, getConfigLocation } = require('./args/getConfig')
-const getConnect = require('./args/getConnect')
-const getPort = require('./args/getPort')
-const { getKeyPair } = require('./args/getKeyPair')
-const getManifest = require('./args/getManifest')
 
-const configureChains = require('./chainManagement/configureChains')
-const constants = require('./chainManagement/constants')
-const createChains = require('./chainManagement/createChains')
-const watchCovenants = require('./file/watchCovenants')
-const generateDeploymentDetails = require('./chainManagement/generateDeploymentDetails')
-const startInterbit = require('./chainManagement/startInterbit')
-const setRootChainManifest = require('./chainManagement/setRootChainManifest')
-const watchChain = require('./chainManagement/watchChain')
-
-const build = require('./scripts/build')
-const manifestSelectors = require('./manifest/manifestSelectors')
-const {
-  updateIndexHtmls,
-  updateDom,
-  camelCaseToHyphenated
-} = require('./file/updateIndexHtml')
-
-const configSelectors = require('./config/configSelectors')
-const validateConfig = require('./config/validateConfig')
-
-const { hoistPackages, hoistAllCovenantPackages } = require('./scripts/hoist')
-const deploy = require('./scripts/deploy')
-const start = require('./scripts/start')
-const keys = require('./scripts/keys')
-const create = require('./scripts/create')
+const args = require('./args')
+const chainManagement = require('./chainManagement')
+const config = require('./config')
+const file = require('./file')
+const manifest = require('./manifest')
+const scripts = require('./scripts')
 
 const logo = require('./logo')
 
 module.exports = {
-  argOptions,
-  build,
-  camelCaseToHyphenated,
-  configSelectors,
-  configureChains,
-  constants,
-  create,
-  createChains,
-  deploy,
-  keys,
-  generateDeploymentDetails,
-  getArg,
-  getArgs,
-  getArtifactsLocation,
-  getConfig,
-  getConfigLocation,
-  getConnect,
-  getKeyPair,
-  getManifest,
-  getPort,
-  isArg,
-  hoistPackages,
-  hoistAllCovenantPackages,
   logo,
-  manifestSelectors,
-  start,
-  startInterbit,
-  setRootChainManifest,
-  updateDom,
-  updateIndexHtmls,
-  validateConfig,
-  watchChain,
-  watchCovenants
+  ...args,
+  ...chainManagement,
+  ...config,
+  ...file,
+  ...manifest,
+  ...scripts
 }

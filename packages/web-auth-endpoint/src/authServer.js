@@ -1,4 +1,7 @@
 const express = require('express')
+const {
+  queryParams: { parseState }
+} = require('interbit-ui-tools')
 
 const { AUTH_PORT } = require('./networkConfig')
 const waitForOAuth = require('./oAuth')
@@ -54,12 +57,13 @@ const startAuthServer = async (cli, manifest) => {
 
 const parseQueryParameters = query => {
   const {
-    state: requestId,
-    state: consumerChainId,
+    state,
     code: temporaryToken,
     error,
     error_description: errorDescription
   } = query
+
+  const { requestId, consumerChainId } = parseState(state)
 
   return {
     requestId,

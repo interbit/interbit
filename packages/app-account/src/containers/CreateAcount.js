@@ -18,6 +18,7 @@ import ModalAttentionMoreInfo from '../components/ModalAttentionMoreInfo'
 import layout from '../constants/layout'
 import buttonNames from '../constants/buttonNames'
 import modalNames from '../constants/modalNames'
+import oAuthProviders from '../constants/oAuthProviders'
 import { PUBLIC, PRIVATE } from '../constants/chainAliases'
 
 const mapStateToProps = state => {
@@ -47,6 +48,7 @@ const mapStateToProps = state => {
 
   const publicChainState = selectors.getChain(state, { chainAlias: PUBLIC })
   return {
+    publicKey: selectors.getPublicKey(state),
     consumerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
     oAuthConfig: getOAuthConfig(publicChainState),
     content: state.content.createAccount,
@@ -68,9 +70,9 @@ const mapDispatchToProps = dispatch => ({
 
 export class CreateAccount extends Component {
   static propTypes = {
+    publicKey: PropTypes.string,
     consumerChainId: PropTypes.string,
-    // eslint-disable-next-line
-    oAuthConfig: PropTypes.object,
+    oAuthConfig: PropTypes.shape({}),
     blockchainDispatch: PropTypes.func,
     content: PropTypes.shape({}).isRequired,
     contentBars: PropTypes.shape({}).isRequired,
@@ -84,6 +86,7 @@ export class CreateAccount extends Component {
   }
 
   static defaultProps = {
+    publicKey: undefined,
     consumerChainId: '',
     oAuthConfig: {},
     blockchainDispatch: () => {},
@@ -95,6 +98,7 @@ export class CreateAccount extends Component {
 
   render() {
     const {
+      publicKey,
       consumerChainId,
       oAuthConfig,
       blockchainDispatch,
@@ -114,7 +118,8 @@ export class CreateAccount extends Component {
       blockchainDispatch,
       consumerChainId,
       oAuthConfig,
-      oAuthProvider: 'gitHub'
+      oAuthProvider: oAuthProviders.GITHUB,
+      publicKey
     }
 
     return (

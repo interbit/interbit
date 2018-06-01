@@ -6,9 +6,7 @@ const {
   getPublicKey
 } = require('../selectors')
 
-const parseState = state => JSON.parse(Buffer.from(state, 'base64'))
-
-const packState = state => Buffer.from(JSON.stringify(state)).toString('base64')
+const { parseState, packState } = require('../queryParams')
 
 const requestParams = (
   state,

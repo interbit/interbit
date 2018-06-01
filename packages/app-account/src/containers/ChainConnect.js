@@ -16,6 +16,7 @@ import ModalSignUp from '../components/ModalSignUp'
 import { toggleForm, toggleModal } from '../redux/uiReducer'
 import formNames from '../constants/formNames'
 import modalNames from '../constants/modalNames'
+import oAuthProviders from '../constants/oAuthProviders'
 import { PRIVATE, PUBLIC } from '../constants/chainAliases'
 
 const MODES = {
@@ -60,6 +61,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 
   const publicChainState = selectors.getChain(state, { chainAlias: PUBLIC })
+
   return {
     consumerChainAlias: chainAlias,
     consumerChainId: chainId,
@@ -72,6 +74,7 @@ const mapStateToProps = (state, ownProps) => {
     profileFields: chainState ? chainState.profile : {},
     profileFormProps,
     providerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
+    publicKey: selectors.getPublicKey(state),
     redirectUrl,
     requestedTokens
   }
@@ -97,11 +100,11 @@ export class ChainConnect extends Component {
     isSignUpModalVisible: PropTypes.bool,
     missingFields: PropTypes.arrayOf(PropTypes.string),
     mode: PropTypes.number,
-    // eslint-disable-next-line
-    oAuthConfig: PropTypes.object,
+    oAuthConfig: PropTypes.shape({}),
     profileFields: PropTypes.shape({}),
     profileFormProps: PropTypes.shape({}),
     providerChainId: PropTypes.string,
+    publicKey: PropTypes.string,
     redirectUrl: PropTypes.string,
     requestedTokens: PropTypes.arrayOf(PropTypes.string),
     toggleFormFunction: PropTypes.func.isRequired,
@@ -124,6 +127,7 @@ export class ChainConnect extends Component {
     profileFields: {},
     profileFormProps: {},
     providerChainId: '',
+    publicKey: undefined,
     redirectUrl: '',
     requestedTokens: []
   }
@@ -184,10 +188,19 @@ export class ChainConnect extends Component {
       profileFields,
       profileFormProps,
       providerChainId,
+      publicKey,
       requestedTokens,
       toggleFormFunction,
       toggleModalFunction
     } = this.props
+
+    const oAuthProps = {
+      blockchainDispatch,
+      consumerChainId,
+      oAuthConfig,
+      oAuthProvider: oAuthProviders.GITHUB,
+      publicKey
+    }
 
     const colLayout = {
       lg: 8,
@@ -251,17 +264,13 @@ export class ChainConnect extends Component {
 
         {/* TODO: consolidate these two modals */}
         <ModalSignIn
-          blockchainDispatch={blockchainDispatch}
-          consumerChainId={consumerChainId}
-          oAuthConfig={oAuthConfig}
+          oAuth={oAuthProps}
           serviceName={consumerChainAlias}
           show={isSignInModalVisible}
           toggleModal={toggleModalFunction}
         />
         <ModalSignUp
-          blockchainDispatch={blockchainDispatch}
-          consumerChainId={consumerChainId}
-          oAuthConfig={oAuthConfig}
+          oAuth={oAuthProps}
           serviceName={consumerChainAlias}
           show={isSignUpModalVisible}
           toggleModal={toggleModalFunction}

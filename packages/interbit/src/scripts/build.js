@@ -6,6 +6,7 @@ const path = require('path')
 const startInterbit = require('../chainManagement/startInterbit')
 const { generateManifest } = require('../manifest/generateManifest')
 const { updateIndexHtmls } = require('../chainManagement/updateIndexHtml')
+const writeJsonFile = require('../file/writeJsonFile')
 
 const build = async options => {
   const { config, manifest, artifacts } = options
@@ -23,7 +24,7 @@ const build = async options => {
     manifest
   )
 
-  writeManifestToFile(location, newManifest)
+  writeJsonFile(`${location}/interbit.manifest.json`, newManifest)
 
   updateIndexHtmls({
     config,
@@ -70,16 +71,6 @@ const packCovenants = async (location, covenantConfig) => {
   cli.stopServer()
 
   return packedCovenants
-}
-
-const writeManifestToFile = (location, manifest) => {
-  fs.writeFileSync(
-    `${location}/interbit.manifest.json`,
-    JSON.stringify(manifest, null, 2),
-    {
-      encoding: 'utf8'
-    }
-  )
 }
 
 module.exports = build

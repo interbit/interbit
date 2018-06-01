@@ -2,7 +2,7 @@
 const { getArg, getArgs, isArg } = require('./args/getArg')
 const argOptions = require('./args/argOptions')
 const getArtifactsLocation = require('./args/getArtifactsLocation')
-const getConfig = require('./args/getConfig')
+const { getConfig, getConfigLocation } = require('./args/getConfig')
 const getConnect = require('./args/getConnect')
 const getPort = require('./args/getPort')
 const { getKeyPair } = require('./args/getKeyPair')
@@ -17,7 +17,7 @@ const startInterbit = require('./chainManagement/startInterbit')
 const setRootChainManifest = require('./chainManagement/setRootChainManifest')
 const watchChain = require('./chainManagement/watchChain')
 
-const buildManifest = require('./manifest/buildManifest')
+const build = require('./scripts/build')
 const manifestSelectors = require('./manifest/manifestSelectors')
 const {
   updateIndexHtmls,
@@ -30,23 +30,27 @@ const validateConfig = require('./config/validateConfig')
 
 const { hoistPackages, hoistAllCovenantPackages } = require('./scripts/hoist')
 const deploy = require('./scripts/deploy')
+const start = require('./scripts/start')
+const keys = require('./scripts/keys')
 
 const logo = require('./logo')
 
 module.exports = {
   argOptions,
-  buildManifest,
+  build,
   camelCaseToHyphenated,
   configSelectors,
   configureChains,
   constants,
   createChains,
   deploy,
+  keys,
   generateDeploymentDetails,
   getArg,
   getArgs,
   getArtifactsLocation,
   getConfig,
+  getConfigLocation,
   getConnect,
   getKeyPair,
   getManifest,
@@ -56,6 +60,7 @@ module.exports = {
   hoistAllCovenantPackages,
   logo,
   manifestSelectors,
+  start,
   startInterbit,
   setRootChainManifest,
   updateDom,

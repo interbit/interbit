@@ -4,39 +4,29 @@ const exec = promisify(require('child_process').exec)
 const path = require('path')
 
 const startInterbit = require('../chainManagement/startInterbit')
-const getArtifactsLocation = require('../args/getArtifactsLocation')
-const getManifest = require('../args/getManifest')
-const getConfig = require('../args/getConfig')
-const { generateManifest } = require('./generateManifest')
+const { generateManifest } = require('../manifest/generateManifest')
 const { updateIndexHtmls } = require('../chainManagement/updateIndexHtml')
 
-const build = async () => {
-  const interbitConfig = getConfig()
-  const interbitManifest = getManifest()
+const build = async options => {
+  const { config, manifest, artifacts } = options
 
-  const artifactsLocation = getArtifactsLocation()
-  const location = path.relative(process.cwd(), artifactsLocation)
-
-  // TODO: Copy the specified app builds into dist/builds/dirname #9
+  const location = path.relative(process.cwd(), artifacts)
 
   setupDist(location)
 
-  const covenantFilenames = await packCovenants(
-    location,
-    interbitConfig.covenants
-  )
+  const covenantFilenames = await packCovenants(location, config.covenants)
 
   const newManifest = generateManifest(
     location,
-    interbitConfig,
+    config,
     covenantFilenames,
-    interbitManifest
+    manifest
   )
 
   writeManifestToFile(location, newManifest)
 
   updateIndexHtmls({
-    config: interbitConfig,
+    config,
     chains: newManifest.chains
   })
 

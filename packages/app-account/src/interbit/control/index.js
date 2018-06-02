@@ -1,5 +1,11 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
-const { rootCovenant } = require('interbit-covenant-tools')
+const {
+  rootCovenant,
+  coreCovenant: {
+    remoteRedispatch,
+    actionCreators: { addToAcl }
+  }
+} = require('interbit-covenant-tools')
 const Immutable = require('seamless-immutable')
 
 const {
@@ -32,6 +38,16 @@ const reducer = (state = initialState, action) => {
         sponsorChainId: nextState.getIn(['interbit', 'chainId']),
         covenantHash
       })
+    }
+
+    case actionTypes.ADD_KEY_TO_SPONSORED_CHAIN: {
+      const { sponsoredChainId, publicKey } = action.payload
+      const actionToForward = addToAcl({
+        actionPermissions: { '*': ['authenticatedUsers'] },
+        roles: { authenticatedUsers: [publicKey] }
+      })
+
+      return remoteRedispatch(nextState, sponsoredChainId, actionToForward)
     }
 
     default:

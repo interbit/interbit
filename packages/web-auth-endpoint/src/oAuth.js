@@ -1,5 +1,8 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const queryString = require('query-string')
+const {
+  queryParams: { parseState }
+} = require('interbit-ui-tools')
 
 const {
   githubOAuthCovenant: { actionTypes, actionCreators, selectors }
@@ -7,13 +10,16 @@ const {
 
 const waitForOAuth = async (
   githubChain,
-  { requestId, consumerChainId, temporaryToken, error, errorDescription }
+  { requestId, state, temporaryToken, error, errorDescription }
 ) => {
   try {
+    const { browserChainId, publicKey } = parseState(state)
+
     // Trigger the oAuth saga
     const action = actionCreators.oAuthCallback({
       requestId,
-      consumerChainId,
+      publicKey,
+      browserChainId,
       temporaryToken,
       error,
       errorDescription
@@ -82,18 +88,25 @@ const oAuthCompleted = requestId => (state, block) => {
     })
   }
 
-  const { joinName, error } = action.payload
-
   if (action.type === actionTypes.AUTH_FAILED) {
+    const { error } = action.payload
     return getRedirectUrl(state, {
       requestId,
       error
     })
   }
 
-  const providerChainId = state.getIn(['interbit', 'chainId'])
+  const {
+    browserChainId,
+    privateChainId,
+    providerChainId,
+    joinName
+  } = action.payload
+
   return getRedirectUrl(state, {
     requestId,
+    browserChainId,
+    privateChainId,
     providerChainId,
     joinName
   })

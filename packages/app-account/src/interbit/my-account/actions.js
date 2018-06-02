@@ -1,14 +1,14 @@
 const uuid = require('uuid')
 
-const covenantName = 'app-account-my-account'
+const actionPrefix = 'app-account-my-account'
 
 const actionTypes = {
-  UPDATE_PROFILE: `${covenantName}/UPDATE_PROFILE`,
-  SHARE_PROFILE_TOKENS: `${covenantName}/SHARE_PROFILE_TOKENS`,
-  STOP_SHARING: `${covenantName}/STOP_SHARING`,
-  START_AUTHENTICATION: `${covenantName}/START_AUTHENTICATION`,
-  CANCEL_AUTHENTICATION: `${covenantName}/CANCEL_AUTHENTICATION`,
-  COMPLETE_AUTHENTICATION: `${covenantName}/COMPLETE_AUTHENTICATION`
+  UPDATE_PROFILE: `${actionPrefix}/UPDATE_PROFILE`,
+  SHARE_PROFILE_TOKENS: `${actionPrefix}/SHARE_PROFILE_TOKENS`,
+  STOP_SHARING: `${actionPrefix}/STOP_SHARING`,
+  START_AUTHENTICATION: `${actionPrefix}/START_AUTHENTICATION`,
+  CANCEL_AUTHENTICATION: `${actionPrefix}/CANCEL_AUTHENTICATION`,
+  COMPLETE_AUTHENTICATION: `${actionPrefix}/COMPLETE_AUTHENTICATION`
 }
 
 const generateJoinName = () => `PROFILE-${uuid.v4().toUpperCase()}`

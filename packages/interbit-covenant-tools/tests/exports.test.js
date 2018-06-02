@@ -18,6 +18,8 @@ describe('module exports expected API', () => {
     assert.ok(api.coreCovenant.actionCreators.createChildChain)
     assert.ok(api.coreCovenant.actionCreators.sponsorChainRequest)
     assert.ok(api.coreCovenant.actionCreators.sponsorChain)
+    assert.ok(api.coreCovenant.actionCreators.destroy)
+    assert.ok(api.coreCovenant.actionCreators.applyCovenant)
     assert.ok(api.coreCovenant.actionTypes)
     assert.ok(api.coreCovenant.constants)
     assert.ok(api.coreCovenant.redispatch)

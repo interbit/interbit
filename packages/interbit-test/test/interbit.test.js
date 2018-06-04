@@ -119,7 +119,8 @@ describe('interbit', () => {
           stopServer: 'function',
           shutdown: 'function',
           destroyChain: 'function',
-          stats: 'function'
+          stats: 'function',
+          test: 'function'
         }
 
         verifyApi(cli, expectedCliApi)

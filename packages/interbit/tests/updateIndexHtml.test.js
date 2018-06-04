@@ -4,7 +4,7 @@ const cheerio = require('cheerio')
 const {
   updateDom,
   camelCaseToHyphenated
-} = require('../src/chainManagement/updateIndexHtml')
+} = require('../src/file/updateIndexHtml')
 
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">

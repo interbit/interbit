@@ -12,6 +12,6 @@ Don't forget to put these pubkeys in your config before you build and in your hy
 
 ## Want to boot a node, hot shot?
 
-`interbit deploy --admin-keys keys.json`
+`interbit deploy --key-pair keys.json`
 
 See how I didn't forget my keys? That means we can BLOCK. :+1:

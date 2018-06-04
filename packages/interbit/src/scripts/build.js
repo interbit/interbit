@@ -3,40 +3,30 @@ const promisify = require('util').promisify
 const exec = promisify(require('child_process').exec)
 const path = require('path')
 
-const startInterbit = require('../chainManagement/startInterbit')
-const getArtifactsLocation = require('../args/getArtifactsLocation')
-const getManifest = require('../args/getManifest')
-const getConfig = require('../args/getConfig')
-const { generateManifest } = require('./generateManifest')
-const { updateIndexHtmls } = require('../chainManagement/updateIndexHtml')
+const { startInterbit } = require('../chainManagement')
+const { generateManifest } = require('../manifest')
+const { updateIndexHtmls, writeJsonFile } = require('../file')
 
-const build = async () => {
-  const interbitConfig = getConfig()
-  const interbitManifest = getManifest()
+const build = async options => {
+  const { config, manifest, artifacts } = options
 
-  const artifactsLocation = getArtifactsLocation()
-  const location = path.relative(process.cwd(), artifactsLocation)
-
-  // TODO: Copy the specified app builds into dist/builds/dirname #9
+  const location = path.relative(process.cwd(), artifacts)
 
   setupDist(location)
 
-  const covenantFilenames = await packCovenants(
-    location,
-    interbitConfig.covenants
-  )
+  const covenantFilenames = await packCovenants(location, config.covenants)
 
   const newManifest = generateManifest(
     location,
-    interbitConfig,
+    config,
     covenantFilenames,
-    interbitManifest
+    manifest
   )
 
-  writeManifestToFile(location, newManifest)
+  writeJsonFile(`${location}/interbit.manifest.json`, newManifest)
 
   updateIndexHtmls({
-    config: interbitConfig,
+    config,
     chains: newManifest.chains
   })
 
@@ -80,16 +70,6 @@ const packCovenants = async (location, covenantConfig) => {
   cli.stopServer()
 
   return packedCovenants
-}
-
-const writeManifestToFile = (location, manifest) => {
-  fs.writeFileSync(
-    `${location}/interbit.manifest.json`,
-    JSON.stringify(manifest, null, 2),
-    {
-      encoding: 'utf8'
-    }
-  )
 }
 
 module.exports = build

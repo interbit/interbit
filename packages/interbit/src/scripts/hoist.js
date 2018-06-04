@@ -2,6 +2,7 @@ const fs = require('fs-extra')
 const promisify = require('util').promisify
 const exec = promisify(require('child_process').exec)
 const { getArg } = require('../args/getArg')
+const writeJsonFile = require('../file/writeJsonFile')
 
 const hoistPackages = async ({ appLocation, covenantConfig }) => {
   console.log('interbit-hoist: Hoisting covenant packages', {
@@ -46,8 +47,7 @@ const hoistPackages = async ({ appLocation, covenantConfig }) => {
   }
   console.log('interbit-hoist: Writing new dependencies', hoistedPackageJson)
 
-  const writeData = `${JSON.stringify(hoistedPackageJson, null, 4)}\r\n`
-  fs.writeFileSync(appPackageJsonPath, writeData, 'utf8')
+  writeJsonFile(appPackageJsonPath, hoistedPackageJson)
 
   // run npm i after all off the covenants have been hoisted
   const installDirectory = getArg(process.argv, '--install-dir') || appLocation

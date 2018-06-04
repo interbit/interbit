@@ -5,6 +5,14 @@ const { getArg } = require('interbit')
 
 const keys = async () => {
   const filenameOption = getArg(process.argv, '--filename')
+
+  if (!filenameOption) {
+    console.error(
+      '"interbit keys" command must be used with a --filename option'
+    )
+    process.exit(1)
+  }
+
   const keyPair = await interbit.generateKeyPair()
   const filename = filenameOption.endsWith('.json')
     ? path.resolve(filenameOption)

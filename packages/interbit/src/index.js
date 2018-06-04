@@ -30,6 +30,7 @@ const validateConfig = require('./config/validateConfig')
 
 const { hoistPackages, hoistAllCovenantPackages } = require('./scripts/hoist')
 const deploy = require('./scripts/deploy')
+const create = require('./scripts/create')
 
 const logo = require('./logo')
 
@@ -40,6 +41,7 @@ module.exports = {
   configSelectors,
   configureChains,
   constants,
+  create,
   createChains,
   deploy,
   generateDeploymentDetails,

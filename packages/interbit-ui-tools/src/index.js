@@ -4,8 +4,8 @@ const createMiddleware = require('./middleware')
 const reducer = require('./reducer')
 const { rootSaga } = require('./sagas')
 const selectors = require('./selectors')
-const { INTERBIT_REDUCER_KEY } = require('./constants')
 const cAuthRequests = require('./cAuth')
+const queryParams = require('./queryParams')
 
 module.exports = {
   actionTypes,
@@ -15,6 +15,6 @@ module.exports = {
   reducer,
   rootSaga,
   selectors,
-  INTERBIT_REDUCER_KEY,
-  cAuthRequests
+  cAuthRequests,
+  queryParams
 }

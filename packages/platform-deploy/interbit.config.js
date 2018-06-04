@@ -1,7 +1,7 @@
 const _ = require('lodash')
 
 const accountConfig = require('../app-account/interbit.config')
-const templateConfig = require('../template/interbit.config')
+const templateConfig = require('../interbit-template/interbit.config')
 
 const init = {
   peers: [],

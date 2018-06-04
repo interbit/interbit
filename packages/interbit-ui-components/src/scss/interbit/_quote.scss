@@ -24,8 +24,6 @@
         align-items: center;
         width: 64px;
         height: 64px;
-        border-radius: $border-radius-md;
-        border: 1px solid $ib-med-grey;
       }
 
       img {
@@ -45,6 +43,13 @@
       p {
         font-weight: 400;
       }
+    }
+  }
+
+  &.img-with-border {
+    .media .media-left .img-container {
+      border-radius: $border-radius-md;
+      border: 1px solid $ib-med-grey;
     }
   }
 }

@@ -1,4 +1,3 @@
-const _ = require('lodash')
 const { LOG_PREFIX } = require('./constants')
 const { actionTypes, actionCreators } = require('./actions')
 const { getInterbit } = require('./interbitGlobal')
@@ -92,22 +91,15 @@ const subscribeToChain = (store, chainAlias, chain) => {
   console.log(`${LOG_PREFIX}: Connecting chain '${chainAlias}' to store`)
 
   const initialState = chain.getState()
-  let lastState = initialState
   let firstBlock = true
 
   chain.subscribe(() => {
     const appState = chain.getState()
-    const isStateUpdated = !_.isEqual(lastState, appState)
+    store.dispatch(actionCreators.chainUpdated(chainAlias, appState))
 
-    if (isStateUpdated) {
-      store.dispatch(actionCreators.chainUpdated(chainAlias, appState))
-
-      if (firstBlock) {
-        store.dispatch(actionCreators.chainBlocking(chainAlias))
-        firstBlock = false
-      }
-
-      lastState = appState
+    if (firstBlock) {
+      store.dispatch(actionCreators.chainBlocking(chainAlias))
+      firstBlock = false
     }
   })
 

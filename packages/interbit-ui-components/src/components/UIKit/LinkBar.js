@@ -48,8 +48,6 @@ export default class LinkBar extends Component {
       </Media>
     )
 
-    console.log('rest of the props', rest)
-
     return isExternalLink || isMailto ? (
       <a
         href={to}

@@ -13,6 +13,7 @@ It offers three main commands as well as several helper commands to make things 
  - [start](start.md)
  - [build](build.md)
  - [deploy](deploy.md)
+ - [create](create.md)
 
 There are two important files used to manage the chain application lifecycle
 

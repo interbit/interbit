@@ -85,7 +85,7 @@ const mapDispatchToProps = dispatch => ({
 
 export class ChainConnect extends Component {
   static propTypes = {
-    blockchainDispatch: PropTypes.func.isRequired,
+    blockchainDispatch: PropTypes.func,
     consumerChainAlias: PropTypes.string,
     consumerChainId: PropTypes.string,
     content: PropTypes.shape({
@@ -104,11 +104,12 @@ export class ChainConnect extends Component {
     providerChainId: PropTypes.string,
     redirectUrl: PropTypes.string,
     requestedTokens: PropTypes.arrayOf(PropTypes.string),
-    toggleFormFunction: PropTypes.func.isRequired,
-    toggleModalFunction: PropTypes.func.isRequired
+    toggleFormFunction: PropTypes.func,
+    toggleModalFunction: PropTypes.func
   }
 
   static defaultProps = {
+    blockchainDispatch: () => {},
     consumerChainAlias: '',
     consumerChainId: '',
     content: {
@@ -125,7 +126,9 @@ export class ChainConnect extends Component {
     profileFormProps: {},
     providerChainId: '',
     redirectUrl: '',
-    requestedTokens: []
+    requestedTokens: [],
+    toggleFormFunction: () => {},
+    toggleModalFunction: () => {}
   }
 
   doConnectChains = async () => {

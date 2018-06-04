@@ -25,6 +25,20 @@ const run = async () => {
       console.warn(
         'interbit start: --dbPath option was not provided. This may cause database LOCK errors on some systems.'
       )
+    } else {
+      console.warn(
+        'interbit start: --dbPath option will set $DB_PATH environment variable.'
+      )
+    }
+
+    if (
+      process.env.DB_PATH &&
+      options.dbPath &&
+      process.env.DB_PATH !== options.dbPath
+    ) {
+      console.warn(
+        'interbit start: $DB_PATH enviroment variable is different than --dbPath. --dbPath will overwrite $DB_PATH'
+      )
     }
 
     await start(options)

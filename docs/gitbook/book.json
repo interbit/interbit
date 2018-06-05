@@ -8,7 +8,7 @@
         "exercises",
         "expandable-chapters-small",
         "prism",
-        "theme-interbit"
+        "theme-interbit@../gitbook-plugin-theme-interbit"
     ],
     "variables": {
         "themeInterbit": {

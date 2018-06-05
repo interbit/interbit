@@ -25,7 +25,7 @@ class AddTodoForm extends Component {
 
     return (
       <form onSubmit={handleSubmit}>
-        <h3>Add a new to do item</h3>
+        <h3>Add a new to-do item</h3>
         <FormGroup>
           <ControlLabel>Title *</ControlLabel>
           <Field

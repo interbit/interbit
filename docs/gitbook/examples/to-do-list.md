@@ -1,9 +1,9 @@
 
-# To Do List Example Application
+# To-do List Example Application
 
-In the `packages/app-todo-list` directory, we have provided a simple To Do List application running on an Interbit blockchain. The application can add items to the to do list, edit existing items, and toggle the completed state of items.
+In the `packages/app-todo-list` directory, we provide a simple To-do List application running on an Interbit blockchain. The application can add items to the to-do list, edit existing items, and toggle the completed state of items.
 
-This application is created using the Interbit [Template app](./template), and what follows is a description of the app and how to recreate it from the template. The To Do List uses the same Interbit configuration as the template. As such, to do items are added to the user's private chain.
+This application was created using the Interbit [Template app](./template), and what follows is a description of the app and how to recreate it from the template. The To-do List uses the same Interbit configuration as the template. As such, to-do items are added to the user's private chain.
 
 #### Requirements
 
@@ -12,40 +12,42 @@ This application is created using the Interbit [Template app](./template), and w
 
 ## Run the Application
 
-To get started, run the following commands in your console:
+To get started, run the following commands in your console from the `interbit` repo's root:
 
 ```bash
-$ cd packages/app-todo-list
-$ npm install
-$ npm run build:modules
-$ npm run interbit:start
+npm install
+npm run build:modules
+cd packages/app-todo-list
+npm run interbit:start
 ```
 
 The `interbit:start` command fires up an Interbit node which runs the blockchain. The chain statuses and blocking actions are printed in the console, and the message 'Updating index.html with chain data' indicates that the blockchain node is ready. Leave this process running.
 
 In another console run:
 ```bash
-$ npm start
+cd packages/app-todo-list
+npm start
 ```
 
-The `start` command runs the React application which has an UI to interact with the blockchain. Open your browser to `localhost:3055` to view the To Do List app. There are 3 pages in the application, which are accessible from the main navigation menu.
+The `start` command runs the React application which has a UI to interact with the blockchain. Open your browser to `localhost:3055` to view the To-do List app. There are 3 pages in the application, which are accessible from the main navigation menu.
 
-The To Do List page shows a friendly UI with a form to add items and a table displaying them. The table is initially empty, but once an item is added you can mark the it as completed and edit the item's title and description.
+The To-do List page shows a friendly UI with a form to add items and a table displaying them. The table is initially empty, but once an item is added you can mark it as completed and edit the item's title and description.
 
-The Private Chain page prints the private chain's state and also provides a UI for adding and editing to do items. Try adding a to do item on this page and you will see the item added to the `todos` array on the left.
+The Private Chain page displays the private chain's state and also provides a UI for adding and editing to-do items. Try adding a to-do item on this page and you will see the item added to the `todos` array on the left.
 
 The Block Explorer page is an interactive tool for viewing the private chain's blocks, the chain state, actions that were dispatched to the chain, and block metadata.
 
 You can optionally run
 ```bash
-$ npm test
+cd packages/app-todo-list
+npm test
 ```
-in another console to run a test watcher. The To Do List app comes with all the tests from the template and tests for the to do list private chain actions.
+in another console to run a test watcher. The To-do List app comes with all the tests from the template app and tests for the to-do list private chain actions.
 
 
 ## Application Structure
 
-If you look in the `packages/app-todo-list` directory, you will see a basic application built on Interbit. Refer to the [template docs](./template#application-structure) for detailed information on these directories and files. This document will only cover the changes we made to the template files to build our To Do List app. Specifically, we will take a closer look at the private chain actions in `src/interbit/private`, the tests in `src/tests/privateCovenant.test.js`, `src/adapters/privateChainAdapter.js`, and the React components in `src/components`.
+If you look in the `packages/app-todo-list` directory, you will see a basic application built on Interbit. Refer to the [template docs](./template.md#application-structure) for detailed information on these directories and files. This document only covers the changes we made to the template files to build our To-do List app. Specifically, we take a closer look at the private chain actions in `src/interbit/private`, the tests in `src/tests/privateCovenant.test.js`, `src/adapters/privateChainAdapter.js`, and the React components in `src/components`.
 
 Directory | Purpose
 ----------|-----------
@@ -69,9 +71,9 @@ Directory | Purpose
 `static.json`             | Used to serve a single page application (SPA) in Heroku. This describes where to fallback if routes are not matched (Returning 404)
 
 
-## Walk Through
+## Walk-through
 
-In this section, we'll step through the code that is specific to the To Do List app. This app is a modified clone of the template app, so we'll highlight any changes that were made to the template files and any new files we've added.
+In this section, we step through the code that is specific to the To-do List app. This app is a modified clone of the template app, so we highlight any changes that were made to the template files and any new files we've added.
 
 ### Set Up and Configuration
 
@@ -81,13 +83,13 @@ We named our app `app-todo-list` and updated our public and private covenant nam
 - `interbit.config.js`
 - `interbit.prod.config.js`
 
-The public, private, and control chain configurations are exactly as they are in the template app&mdash;all we've done is rename things here. The template app is configured so that users can dispatch actions to their private chain, so our To Do List app does the same. User's have their own private to do lists. In the future, we may extend this example so that users can have shared lists.
+The public, private, and control chain configurations are exactly as they are in the template app&mdash;all we've done is rename things here. The template app is configured so that users can dispatch actions to their private chain, so our To-do List app does the same. Users have their own private to-do lists. In the future, we may extend this example so that users can have shared lists.
 
 ### Modifying the Private Covenant
 
-Our To Do List app allows users to add items, edit items, and mark items as complete in their to do list. These actions are described in the app's private covenant in `src/interbit/private`. We've removed the actions included in the Template app and added the `ADD_TODO`, `EDIT_TODO`, and `TOGGLE_TODO` actions.
+Our To-do List app allows users to add items, edit items, and mark items as complete in their to-do list. These actions are described in the app's private covenant in `src/interbit/private`. We've removed the actions included in the Template app and added the `ADD_TODO`, `EDIT_TODO`, and `TOGGLE_TODO` actions.
 
-Actions are dispatched to the chain during operation, and are passed to the [smart contract](../key-concepts#smart-contracts) to change the [application state](../key-concepts#application-state). Interbit follows the Redux design pattern, so actions in the Interbit covenenants are essentially the same as actions in Redux. All the same, we'll go through each of the files in `src/interbit/privagte`.
+Actions are dispatched to the chain during operation, and are passed to the [smart contract](../key-concepts/README.md#smart-contracts) to change the [application state](../key-concepts/README.md#application-state). Interbit follows the Redux design pattern, so actions in the Interbit covenants are essentially the same as actions in Redux. All the same, we'll go through each of the files in `src/interbit/private`.
 
 
 <div class="filename">actionTypes.js</div>
@@ -194,12 +196,12 @@ module.exports = mergeCovenants([covenant, cAuthConsumerCovenant])
 
 ### Tests for the Private Covenant
 
-Jest tests for private and control covenants are located in `src/tests/interbit`. We've written updated `privateCovenant.test.js` with tests for the To Do List actions which have a watcher. Run `npm test` from the `app-todo-list` directory to view the results of the tests as you make changes to the code.
+Jest tests for private and control covenants are located in `src/tests/interbit`. We've updated `privateCovenant.test.js` with tests for the To-do List actions which have a watcher. Run `npm test` from the `app-todo-list` directory to view the results of the tests as you make changes to the code.
 
 
 ### The Private Chain Adapter and the Private Chain Page
 
-As described above, the Private Chain page displays the private chain's state and has some rudimentary UI for adding and editing to do items. This is a handy development tool to interact with the private chain and verify that the application state is updating correctly. We use the `<Covenant />` component from the `interbit-ui-components` package to easily connect UI forms to the covenant actions.
+As described above, the Private Chain page displays the private chain's state and has some rudimentary UI for adding and editing toddo items. This is a handy development tool to interact with the private chain and verify that the application state is updating correctly. We use the `<Covenant />` component from the `interbit-ui-components` package to easily connect UI forms to the covenant actions.
 
 The Template app comes with the scaffolding to connect the private covenant actions to the `<Covenant />` component. We modified `src/adapters/privateChainAdapter.js` so that we can dispatch the `ADD_TODO` and `EDIT_TODO` actions from the Private Chains page.
 
@@ -208,14 +210,14 @@ The Template app comes with the scaffolding to connect the private covenant acti
 ```js
 const covenant = require('../interbit/private')
 
-const covenantName = 'Interbit To Do List Private Chain'
+const covenantName = 'Interbit To-do List Private Chain'
 
-const addTodoActionLabel = 'Add a to do item'
+const addTodoActionLabel = 'Add a to-do item'
 const addTodoTitleLabel = 'Enter a title *'
 const addTodoDescriptionLabel = 'Enter a description'
 
-const editTodoActionLabel = 'Edit a todo item'
-const editTodoIdLabel = 'Enter the ID of the todo to edit'
+const editTodoActionLabel = 'Edit a to-do item'
+const editTodoIdLabel = 'Enter the ID of the to-do to edit'
 const editTodoTitleLabel = 'Enter a new title *'
 const editTodoDescriptionLabel = 'Enter a new description'
 
@@ -254,4 +256,4 @@ module.exports = {
 
 ## Further Work
 
-The to do list could still use some work. At the moment, there is no error checking, and the Smart Contract will accept any Action with an appropriate type just fine, whether you supplied meaningful data or not. This is a very basic example of what Interbit can do. If you want to forge ahead, and write your own Interbit application, you can go ahead and do that now, or, if you are not sure what you want to try next, you can try adding another action and case statement to this To Do List application.
+The to-do list app could still use some work. At the moment, there is no error checking, and the smart contract will accept any action with an appropriate type just fine, whether you supplied meaningful data or not. This is a very basic example of what Interbit can do. If you want to forge ahead, and write your own Interbit application, you can go ahead and do that now, or if you are not sure what you want to try next, you can try adding another action and case statement to this To-do List application.

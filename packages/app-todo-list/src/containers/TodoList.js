@@ -6,6 +6,7 @@ import { Table } from 'react-bootstrap'
 import { chainDispatch, selectors } from 'interbit-ui-tools'
 
 import chainAliases from '../constants/chainAliases'
+import formNames from '../constants/formNames'
 import { actionCreators } from '../interbit/private/actions'
 import { toggleTodoRow } from '../redux/uiReducer'
 import AddTodoForm from '../components/AddTodoForm'
@@ -73,7 +74,7 @@ export class TodoList extends Component {
         formValues.description
       )
       this.props.blockchainDispatch(action)
-      this.props.resetForm('add-todo-form')
+      this.props.resetForm(formNames.ADD_TODO)
     } catch (error) {
       console.log(error)
       throw new SubmissionError({

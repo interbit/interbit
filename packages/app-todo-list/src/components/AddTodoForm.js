@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 
+import formNames from '../constants/formNames'
+
 // eslint-disable-next-line
 const renderInput = ({onChange, props, placeholder, type, input, meta: {touched, error, warning}}) => (
   <div className={touched && error ? 'field-error' : ''}>
@@ -55,5 +57,5 @@ class AddTodoForm extends Component {
 }
 
 export default reduxForm({
-  form: 'add-todo-form'
+  form: formNames.ADD_TODO
 })(AddTodoForm)

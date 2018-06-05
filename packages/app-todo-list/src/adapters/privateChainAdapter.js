@@ -1,6 +1,6 @@
 const covenant = require('../interbit/private')
 
-const covenantName = 'Interbit Template Private Chain'
+const covenantName = 'Interbit To Do List Private Chain'
 
 const addTodoActionLabel = 'Add a to do item'
 const addTodoTitleLabel = 'Enter a title *'

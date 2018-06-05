@@ -23,7 +23,7 @@ export default class App extends Component {
         />
         <Grid>
           <Switch>
-            <Route exact path={paths.HOME} component={InteractiveChains} />
+            <Route exact path={paths.HOME} component={TodoList} />
             <Route exact path={paths.CHAINS} component={InteractiveChains} />
             <Route path={paths.BLOCK_EXPLORER} component={ExploreChain} />
             <Route exact path={paths.TODO_LIST} component={TodoList} />

@@ -1,24 +1,33 @@
 # Getting Started
 
+This section demonstrates how to install the Interbit SDK, install its
+dependencies, build the SDK's modules, and create and run a demonstration
+application. Once complete, you have everything you need to start developing
+with Interbit!
+
 Review the prerequisites and setup instructions in their entirety. Install any missing prerequisites before installing Interbit.
 
-#### Version Requirements
-To develop Interbit applications, your development environment will need the following software:
+## Version requirements
+
+To develop Interbit applications, your development environment needs the
+following software:
 
 * <a href="https://nodejs.org" target="_blank">Node.js</a> 8.6 or higher
 * <a href="https://nodejs.org" target="_blank">NPM</a> 5.8 or higher
 
-#### Recommended
-We also recommend the following npm packages for developing Interbit applications, although they are not required:
+We also recommend the following, optional npm packages for developing Interbit
+applications:
 
 * <a href="https://babeljs.io" target="_blank">Babel</a> 6 or higher  (eventually 7)
 * <a href="https://lernajs.io/" target="_blank">Lerna</a> 2.5.1 or higher
 * <a href="https://mochajs.org/" target="_blank">Mocha</a> 3.3 or higher
 * <a href="https://facebook.github.io/jest/" target="_blank">Jest</a> 20.0.4 (specifically)
 
-Familiarity with the following technologies, tools, and concepts will greatly accelerate your ability to develop on Interbit:
+## Useful skills
+Familiarity with the following technologies, tools, and concepts greatly
+accelerates your ability to develop on Interbit:
 
-* JavaScript
+* JavaScript, especially ECMAScript 6 (ES6)
 * <a href="https://nodejs.org" target="_blank">Node.js</a> & npm
 * <a href="https://redux.js.org" target="_blank">Redux</a>
 * Functional Programming
@@ -29,118 +38,153 @@ Familiarity with the following technologies, tools, and concepts will greatly ac
 	<a class="download-btn" href="https://github.com/interbit/interbit" target="_blank">Interbit on Github</a>
 </div>
 
-### Setup
 
-### Get the source code
-1. Fork the Interbit repository
-1. Clone the forked repository on your PC
+## Installation
 
-```sh
-git clone git@github.com:interbit/interbit.git
-```
+These steps install the Interbit SDK, all of its dependencies, and builds the
+modules that your applications require.
 
-### Make a new Interbit site by creating a new package
-Let's call the new site `app-the-new-thing`
+1.  **Clone the Interbit repository:**
 
-1. Copy the `packages/interbit-template` folder to `packages/app-the-new-thing`
+    ```sh
+    git clone git@github.com:interbit/interbit.git
+    ```
 
-```sh
-cp -R interbit/packages/interbit-template interbit/packages/app-the-new-thing
-```
+1.  <a name="dependencies"></a>**Install the dependencies:**
 
-### Make the following changes in `packages/app-the-new-thing`:
+    ```sh
+    cd interbit
+    npm i
+    ```
 
-1. `package.json` Change the name
-   ```
-   {
-     "name": "app-the-new-thing",
-     "version": "0.1.0",
-     ...
-   }
-   ```
+1.  <a name="modules"></a>**Build the modules:**
 
-1. Tweak `src/App.js` so that you can identify your site
+    ```sh
+    npm run build:modules
+    ```
 
-If you are running other apps at the same time, you will need to change the port that your node runs on as well as the port in the configuration.
+## Create a new Interbit application
 
+These steps create a copy of the included _template_ application that you can
+use as a starting point for working with the Interbit SDK.
 
-#### Adjusting the Port (Optional)
+1.  **Copy the `packages/interbit-template` folder to `packages/app-first`:**
 
-> This step is only required if you will run more than one interbit node locally.
+    ```sh
+    cp -R packages/interbit-template packages/app-first`
+    ```
 
-The port will need to be adjusted in both the command line script that starts your development node as well as in the apps configuration that tells your browser app which port to connect to.
+1.  **Customize the app configuration:**
 
-Inside of `package.json` update the `interbit:start` command. We will use 6000 in this example.
-```
-    "scripts": {
-        "interbit:start": "interbit start --db-path ./db-interbit --port 6000 --dev --no-watch",
+    In `packages/app-first/package.json`, change the name of your app and the
+    version string:
+
+    ```json
+    {
+      "name": "app-the-new-thing",
+      "version": "0.1.0",
+      ...
     }
-```
+    ```
 
-Inside of the interbit.config.js file, update the apps configuration with the new port. Note that this will only work for local development and a new configuration will be needed to specify peers if you decide to deploy your application. Read more [here](../reference/interbit-cli/config.md)
+1.  **Optional: Specify the app's port:**
 
-Update the `interbit/packages/app-the-new-thing/interbit.config.js` file like so:
+    To avoid port conflicts when running multiple nodes, the port specification
+    for an Interbit application must be specified in two locations.
 
-```js
-  // Leave the rest of the config unchanged.
-  apps: {
-    theNewThing: { // Name our app config something more appropriate.
-      peers: ['localhost:6000'], // Change the peer connection
-      // ...
-      // Leave the rest of the template app config unchanged
-    }
-  }
-```
+    1.  Edit `packages/app-first/package.json` and revise the line containing
+        `interbit:start` to change `--port 5000` to `--port 6000`, and save the
+        file.
 
-## Install the dependencies
-Run `npm i` from the repository root.  This will take care of all the lerna dependencies and set up for you
+        For example:
 
-```sh
-cd interbit
-npm i
-```
+        ```json
+            "scripts": {
+                "interbit:start": "interbit start --db-path ./db-interbit --port 6000 --dev --no-watch",
+            }
+        ```
 
-## Build the Modules
-1. From the repository root, run
+    1.  Edit `packages/app-first/interbit.config.js` and revise the
+        configuration with the new port.
 
-`cwd interbit`
-```sh
-npm run build:modules
-```
+        Locate the following section of configuration:
 
-## Run it
-From within the `packages/app-the-new-thing` folder, run `npm run interbit:start` to start the Interbit blockchain node.  This command will keep running until interrupted.  Let it continue to run.
+        ```js
+          apps: {
+            template: {
+              peers: ['localhost:5000'],
+              ...
+            }
+          }
+        ```
 
-`cwd interbit`
-```sh
-cd packages/app-the-new-thing
-npm run interbit:start
-```
+        Change the `5000` to `6000` and save the file.
 
-Open a new terminal.  From within the `packages/app-the-new-thing` folder, run `npm run start`.  This runs the development server and will cause a browser window to open to http://localhost:3000 You should see your site load in the browser.
+    > In these examples, we change the port to `6000` but any value between
+    > `1024` and `65000`, that is not already in use by another process, should
+    > work.
 
-`cwd interbit/packages/app-the-new-thing`
-```sh
-npm start
-```
+1.  **Optional: Add an identifer to the app's UI:**
 
-The development server continues to run.  Changes made to the Interbit website will be automatically reflected in the browser.
+    > This step is only helpful if you run multiple Interbit nodes locally.
+
+    Add some identifying markup to `packages/app-first/src/App.js`. For example,
+    immediately before the `<Grid>` tag, insert `<p>My first
+    app!</p>`.
+
+
+## Run the new application
+
+Now all we need to do is run the new application:
+
+1.  **Start the Interbit blockchain node:**
+
+    ```sh
+    npm run interbit:start
+    ```
+
+    > This command continues to run until interrupted. Your application will not
+    > run unless this command is running.
+
+1.  **Start your application in a new terminal:**
+
+    ```sh
+    cd interbit/packages/app-first
+    npm run start
+    ```
+
+    A new browser window opens to `http://localhost:3000/` and displays your
+    application. Any updates made to the application while it is running
+    automatically refreshes the browser view.
+
+Congratulations! Your first Interbit application is now running.
+
+For more details, see the [Template App Walkthrough](/examples/template.md)
 
 ## Problems?
 
-If you have run into any issues please double check the version requirements at the top of this page.
+* Double check the version requirements at the top of this page.
 
-Then, clean up any extra `package-lock.json` files and `node_modules` folder and rerun `npm i` from the root.
+* The following steps should get your application into a clean state:
 
-```sh
-cd interbit
-node_modules/.bin/lerna clean # removes all node_modules folders in the entire monorepo
-rm -f package-lock.json
-npm i
-```
+  1.  Stop the application processes (type `Ctrl-C` into each terminal).
+  1.  Remove all `node_modules` folders:
 
-If this does not help, please contact us for assistance on our [Slack Channel](https://interbitdev.slack.com)
+      ```sh
+      cwd interbit
+      node_modules/.bin/lerna clean
+      ```
 
-## Continue...
+  1.  Remove the top-level `package-lock.json` file:
 
-[Walkthrough the Template App](../examples/template.md)
+      ```sh
+      rm -f package-lock.json
+      ```
+
+  1.  Repeat the [dependency installation](#dependencies) and [module
+      build](#modules) steps.
+
+  1.  [Run your app](#run-the-new-application) again.
+
+If these suggestions do not help, contact us for assistance on our [Slack
+Channel](https://interbitdev.slack.com)

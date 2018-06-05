@@ -19,6 +19,7 @@ const config = {
   staticChains: { // Chain configuration
     hub: {
       covenant: 'hub',
+      childChains: ['spoke1']
       config: {
         // The first validator listed is the blockMaster
         validators: [process.env.PUBKEY_1, process.env.PUBKEY_2],
@@ -137,6 +138,17 @@ The validators configuration for a static chain indicates public keys for blocki
 The covenant configuration for a static chain determines which configured covenant will be applied to the chain.
 
 The covenant is described with a string that points to a key in the [covenants](#covenants) congifuration. The covenant must be configured for the confguration to be valid.
+
+### childChains
+
+<div class="tips danger">
+  <p><span></span>Feature Unimplemented</p>
+  <p>This part of config supports an unimplemented feature.</p>
+</div>
+
+The chains that are children of this chain. Being children of this chain means that when the chain is redeployed, these chains will receive the manifest on SET_MANIFEST and forward the manifest to their children so that Interbit can apply necessary configuration changes.
+
+Refer to [Cascading Deployment](../../chain-management/cascading-deployment.md) for more information.
 
 ### Joins
 

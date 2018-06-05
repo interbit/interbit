@@ -1,85 +1,165 @@
-const assert = require('assert')
-const { resolveGenesisBlocks } = require('../../manifest/generateManifest')
+const should = require('should')
+const { generateManifest } = require('../../manifest/generateManifest')
 const { ROOT_CHAIN_ALIAS } = require('../../chainManagement/constants')
 const {
   defaultConfig,
   defaultManifest,
   defaultCovenants
-} = require('./testData')
+} = require('../testData')
+
+const location = '/tmp'
 
 describe('generateManifest(location, interbitConfig, covenants, originalManifest)', () => {
-  it('replaces apps config')
-  it('replaces peers list')
-  it('replaces covenants')
+  it('replaces apps config but not genesis blocks if apps config changes', () => {
+    const apps = {
+      ...defaultConfig.apps,
+      newApp: {
+        peers: ['meowmeowmeow.com'],
+        chains: ['control'],
+        appChain: 'control',
+        indexLocation: 'public/index.html',
+        buildLocation: 'build/'
+      }
+    }
+    const config = {
+      ...defaultConfig,
+      apps
+    }
+    const manifest = generateManifest(
+      location,
+      config,
+      defaultCovenants,
+      defaultManifest
+    )
 
-  describe('resolveGenesisBlocks(config, originalManifest, covenants)', () => {
-    it('makes all new genesis blocks when there is no existing manifest', () => {
-      const config = { ...defaultConfig }
-      const originalManifest = undefined
-      const covenants = { ...defaultCovenants }
+    should.ok(manifest.apps.newApp)
+    should.ok(manifest.apps.newApp.buildLocation)
+    should.equal(manifest.apps.newApp.appChain, apps.newApp.appChain)
+    should.deepEqual(manifest.apps.newApp.browserChains, apps.newApp.chains)
+    should.deepEqual(manifest.genesisBlocks, defaultManifest.genesisBlocks)
+  })
 
-      const result = resolveGenesisBlocks(config, originalManifest, covenants)
+  it('replaces peers list but not genesis blocks if just the peers list has changed', () => {
+    const peers = ['meowmeowmeow.com', 'baobaobao.com']
+    const config = {
+      ...defaultConfig,
+      peers
+    }
+    const manifest = generateManifest(
+      location,
+      config,
+      defaultCovenants,
+      defaultManifest
+    )
 
-      const actualGenesisKeys = Object.keys(result)
-      const expectedGenesisKeys = Object.keys(config.staticChains).concat(
-        ROOT_CHAIN_ALIAS
-      )
+    should.deepEqual(peers, manifest.peers)
+    should.deepEqual(manifest.genesisBlocks, defaultManifest.genesisBlocks)
+  })
 
-      assert.ok(result)
-      assert.deepEqual(actualGenesisKeys, expectedGenesisKeys)
-    })
+  it('replaces covenants but not genesis blocks if only covenants have changed', () => {
+    const covenants = {
+      ...defaultCovenants,
+      public: {
+        hash: 'meowmeowmeowmeowmeowmeow',
+        filename: 'newCovenantFilename/meowmeowmeowmeowmeowmeow.tgz'
+      }
+    }
+    const manifest = generateManifest(
+      location,
+      defaultConfig,
+      covenants,
+      defaultManifest
+    )
 
-    it('makes new genesis blocks when some are present in existing manifest', () => {
-      const expectedRootGenesisBlock =
-        defaultManifest.genesisBlocks[ROOT_CHAIN_ALIAS]
+    should.deepEqual(covenants, manifest.covenants)
+    should.deepEqual(manifest.genesisBlocks, defaultManifest.genesisBlocks)
+  })
 
-      const config = { ...defaultConfig }
-      const originalManifest = {
-        ...defaultManifest,
-        chains: {
-          [ROOT_CHAIN_ALIAS]: defaultManifest.chains[ROOT_CHAIN_ALIAS]
+  it('throws when there is no adult present to cascade manifest changes', () => {
+    const config = {
+      ...defaultConfig,
+      staticChains: {
+        public: {
+          ...defaultConfig.staticChains.public,
+          childChains: ['control']
         },
-        genesisBlocks: {
-          [ROOT_CHAIN_ALIAS]: expectedRootGenesisBlock
+        control: {
+          ...defaultConfig.staticChains.control,
+          childChains: ['public']
         }
       }
-      const covenants = { ...defaultCovenants }
+    }
 
-      const result = resolveGenesisBlocks(config, originalManifest, covenants)
+    should(() => {
+      generateManifest(location, config, defaultCovenants)
+    }).throw(
+      /Config contains malformed childChains structure. ChildChains must form one or many trees when constructed./
+    )
+  })
 
-      const actualGenesisKeys = Object.keys(result)
-      const expectedGenesisKeys = Object.keys(config.staticChains).concat(
-        ROOT_CHAIN_ALIAS
-      )
-
-      assert.ok(result)
-      assert.deepEqual(actualGenesisKeys, expectedGenesisKeys)
-      assert.deepEqual(result[ROOT_CHAIN_ALIAS], expectedRootGenesisBlock)
-    })
-
-    it('does not include chains in existing manifest that are not in config', () => {
-      const config = {
-        ...defaultConfig,
-        staticChains: {
-          public: {
-            ...defaultConfig.staticChains.public
-          }
+  it('throws when there is a cycle and an unattached chain', () => {
+    const config = {
+      ...defaultConfig,
+      staticChains: {
+        public: {
+          ...defaultConfig.staticChains.public,
+          childChains: ['control']
+        },
+        control: {
+          ...defaultConfig.staticChains.control,
+          childChains: ['public']
+        },
+        unattached: {
+          ...defaultConfig.staticChains.control,
+          childChains: ['public']
         }
       }
-      const originalManifest = { ...defaultManifest }
-      const covenants = { ...defaultCovenants }
+    }
 
-      const result = resolveGenesisBlocks(config, originalManifest, covenants)
+    should(() => {
+      generateManifest(location, config, defaultCovenants)
+    }).throw(
+      /Config contains malformed childChains structure and must form one or many trees. "public" was referenced twice./
+    )
+  })
 
-      const actualGenesisKeys = Object.keys(result)
-      const expectedGenesisKeys = [ROOT_CHAIN_ALIAS, 'public']
-
-      assert.ok(result)
-      assert.equal(actualGenesisKeys.length, expectedGenesisKeys.length)
-      for (const key of actualGenesisKeys) {
-        const isExpectedKey = expectedGenesisKeys.indexOf(key) > -1
-        assert.equal(isExpectedKey, true)
+  it('forms a tree structure based on childChains', () => {
+    const config = {
+      ...defaultConfig,
+      staticChains: {
+        control: {
+          ...defaultConfig.staticChains.control,
+          childChains: ['public']
+        },
+        public: {
+          ...defaultConfig.staticChains.public,
+          childChains: ['grandchild']
+        },
+        grandchild: {
+          ...defaultConfig.staticChains.public
+        }
       }
-    })
+    }
+
+    console.log(config)
+    const manifest = generateManifest(location, config, defaultCovenants)
+
+    should.ok(manifest.manifest)
+    should.ok(manifest.manifest[ROOT_CHAIN_ALIAS])
+    should.ok(manifest.manifest[ROOT_CHAIN_ALIAS].chains.control)
+    should.ok(manifest.manifest[ROOT_CHAIN_ALIAS].chains.control.chains.public)
+    should.ok(
+      manifest.manifest[ROOT_CHAIN_ALIAS].chains.control.chains.public.chains
+        .grandchild
+    )
+  })
+
+  it('makes unattached static chains children of the root', () => {
+    const manifest = generateManifest(location, defaultConfig, defaultCovenants)
+
+    should.ok(manifest.manifest)
+    should.ok(manifest.manifest[ROOT_CHAIN_ALIAS])
+    should.ok(manifest.manifest[ROOT_CHAIN_ALIAS].chains.control)
+    should.ok(manifest.manifest[ROOT_CHAIN_ALIAS].chains.public)
   })
 })

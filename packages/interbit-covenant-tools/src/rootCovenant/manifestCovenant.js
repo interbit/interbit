@@ -80,8 +80,8 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_MANIFEST: {
       const { manifest } = action.payload
-      // TODO: Probably don't do this. Use the individual methods instead.
-      // TODO (OR): Check this config with the previous version and apply changes
+      // TODO: Test to make sure it's a real manifest.
+
       return state.setIn(PATHS.MANIFEST, manifest)
     }
 

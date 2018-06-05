@@ -1,5 +1,5 @@
 const assert = require('assert')
-const generateProdConfig = require('../src/chainManagement/generateDeploymentDetails')
+const generateProdConfig = require('../chainManagement/generateDeploymentDetails')
 
 describe('generateProdConfig(chainManifest, covenantHashes)', () => {
   it('transforms the manifest into the prod configuration', () => {

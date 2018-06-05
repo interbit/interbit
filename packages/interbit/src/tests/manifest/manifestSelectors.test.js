@@ -1,5 +1,5 @@
 const assert = require('assert')
-const manifestSelectors = require('../../src/manifest/manifestSelectors')
+const manifestSelectors = require('../../manifest/manifestSelectors')
 const { defaultManifest } = require('./testData')
 
 const chainAlias = 'control'

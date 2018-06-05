@@ -1,4 +1,4 @@
-const _ = require('lodash')
+const { diff } = require('deep-diff')
 
 const watchChain = (cli, chainInterface) => {
   let prevManifest = {}
@@ -8,7 +8,7 @@ const watchChain = (cli, chainInterface) => {
     if (isManifestUpdated(rootState, prevManifest)) {
       const currManifest = getManifestFromState(rootState)
       applyManifestUpdates(cli, prevManifest, currManifest)
-      prevManifest = currManifest
+      prevManifest = currManifest``
     }
   })
 }
@@ -21,27 +21,15 @@ const isManifestUpdated = (rootState, prevManifest) => {
 const getManifestFromState = rootState => rootState.manifest
 
 const applyManifestUpdates = (cli, prevManifest, currManifest) => {
-  const difference = diffManifest(prevManifest, currManifest)
+  // What are we diffing? The whole thing? Not helpful
+
+  const difference = diff(prevManifest, currManifest)
 
   applyCovenantChanges(cli, difference)
   applyJoinChanges(cli, difference)
   applyRemovedChains(cli, difference)
   applyNewChains(cli, difference)
   applyChildChanges(cli, difference)
-}
-
-const diffManifest = (prevManifest, currManifest) => {
-  const changes = (object, base) =>
-    _.transform(object, (result, value, key) => {
-      if (!_.isEqual(value, base[key])) {
-        // eslint-disable-next-line
-        result[key] =
-          _.isObject(value) && _.isObject(base[key])
-            ? changes(value, base[key])
-            : value
-      }
-    })
-  return changes(currManifest, prevManifest)
 }
 
 const applyCovenantChanges = (cli, difference) => {
@@ -62,6 +50,7 @@ const applyCovenantChanges = (cli, difference) => {
 
 const applyJoinChanges = (cli, difference) => {
   // TODO: Actually use the specified chainInterfaces
+  // This will actually get the cli chain's ID, not the chain we are supposed to currently be changing
   const rootState = cli.getState()
   const MY_CHAIN_ID = rootState.interbit.chainId
   const isJoinsDifferent = difference.manifest[MY_CHAIN_ID].joins
@@ -82,8 +71,6 @@ const applyJoinChanges = (cli, difference) => {
 }
 
 const applyRemovedChains = (cli, difference) => {
-  // TODO: This is not included in the diffing function hmmmm...
-  //
   // Re: Blocked on #258
   // This belongs in the root cli watcher
 }
@@ -101,6 +88,5 @@ const applyChildChanges = (cli, difference) => {
 }
 
 module.exports = {
-  watchChain,
-  diffManifest
+  watchChain
 }

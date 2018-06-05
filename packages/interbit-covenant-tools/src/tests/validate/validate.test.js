@@ -17,7 +17,7 @@ const {
     equalTo,
     func
   }
-} = require('../../src')
+} = require('../../validate')
 
 describe('validate', () => {
   const validInputs = [

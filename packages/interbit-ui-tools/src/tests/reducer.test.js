@@ -1,7 +1,7 @@
 const assert = require('assert')
 const Immutable = require('seamless-immutable')
-const { actionCreators } = require('../src/actions')
-const reducer = require('../src/reducer')
+const { actionCreators } = require('../actions')
+const reducer = require('../reducer')
 
 describe('chainReducer', () => {
   it('adds more than one chain to state', () => {

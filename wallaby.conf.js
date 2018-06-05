@@ -14,7 +14,7 @@ module.exports = function(wallaby) {
     files: [
       'packages/**/src/**/*.+(js|jsx|json|snap|css|less|sass|scss|jpg|jpeg|gif|png|svg)',
       '!packages/**/src/**/*.test.js?(x)',
-      'vendor/**',
+      '!packages/utils/**', // This is a test
       '!packages/**/node_modules/**',
       '!vendor/**/node_modules/**'
     ],
@@ -23,8 +23,7 @@ module.exports = function(wallaby) {
       'packages/**/src/**/*.test.js?(x)',
       '!packages/utils/**/*.test.js', // Wallaby doesn't reference monorepo paths correctly
       '!packages/**/src/chain/**',
-      '!packages/**/node_modules/**',
-      '!vendor/**/node_modules/**'
+      '!packages/**/node_modules/**'
     ],
 
     env: {

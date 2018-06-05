@@ -1,6 +1,6 @@
 const should = require('should')
-const { ROOT_CHAIN_ALIAS } = require('../../src/chainManagement/constants')
-const validateManifest = require('../../src/manifest/validateManifest')
+const { ROOT_CHAIN_ALIAS } = require('../../chainManagement/constants')
+const validateManifest = require('../../manifest/validateManifest')
 const { defaultManifest } = require('./testData')
 
 const rootGenesis = defaultManifest.genesisBlocks[ROOT_CHAIN_ALIAS]

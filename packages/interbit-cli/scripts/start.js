@@ -1,76 +1,47 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const {
   argOptions,
-  createChains: { createChainsFromConfig },
-  generateDeploymentDetails,
   getConfig,
   getManifest,
   isArg,
   getArg,
   logo,
-  startInterbit,
-  setRootChainManifest,
-  updateIndexHtmls,
-  validateConfig,
-  // watchChain,
-  watchCovenants
+  start
 } = require('interbit')
 
-const startInterbitNode = async () => {
+const run = async () => {
   try {
     console.log(logo)
-
     const options = getOptions(process.argv)
 
-    console.log('Running with options', JSON.stringify(options, null, 2))
-
-    const interbitConfig = getConfig()
-
-    // eslint-disable-next-line
-    const interbitManifest = getManifest()
-    // TODO: Use the manifest as initial variable resolution for generating the new one #262
-
-    validateConfig(interbitConfig)
-
-    const { cli } = await startInterbit(undefined, options)
-    // TODO: This create based on config should only run in dev mode, else run chains based on manifest #276
-    const { chainManifest, covenantHashes } = await createChainsFromConfig(
-      cli,
-      interbitConfig
-    )
-
-    // TODO: This manifest mock is no longer required
-    const deploymentDetails = generateDeploymentDetails(
-      chainManifest,
-      covenantHashes
-    )
-
-    console.log('available chains + covenants: ', deploymentDetails)
-
-    setRootChainManifest(cli, deploymentDetails, interbitConfig)
-
-    if (options.isDevModeEnabled && options.isWatchModeEnabled) {
-      watchCovenants(cli, interbitConfig, chainManifest)
+    if (!options.config) {
+      console.error(
+        'interbit start: Could not find a config file to start with'
+      )
+      process.exit(1)
     }
 
-    if (!options.isDevModeEnabled) {
-      // TODO: We are not in dev mode so output the diff'd manifest
-
-      // TODO: Use the manifest to update index.html instead of "deploymentDetails"
-      updateIndexHtmls({
-        config: interbitConfig, // manifest here
-        chains: deploymentDetails.chains
-      })
+    if (!options.dbPath) {
+      console.warn(
+        'interbit start: --dbPath option was not provided. This may cause database LOCK errors on some systems.'
+      )
     } else {
-      updateIndexHtmls({
-        config: interbitConfig,
-        chains: deploymentDetails.chains
-      })
+      console.warn(
+        'interbit start: --dbPath option will set $DB_PATH environment variable.'
+      )
     }
 
-    // TODO: Watch the chains for manifest changes #267
-    // Blocked by #258 #336
-    // watchChain(cli, chainInterface)
+    if (
+      process.env.DB_PATH &&
+      options.dbPath &&
+      process.env.DB_PATH !== options.dbPath
+    ) {
+      console.warn(
+        'interbit start: $DB_PATH enviroment variable is different than --dbPath. --dbPath will overwrite $DB_PATH'
+      )
+    }
+
+    await start(options)
   } catch (e) {
     console.error(`ERROR: ${e.message}`)
     process.exit(1)
@@ -78,10 +49,12 @@ const startInterbitNode = async () => {
 }
 
 const getOptions = argv => ({
-  isDevModeEnabled: isArg(argv, argOptions.DEV),
-  isWatchModeEnabled: !isArg(argv, argOptions.NO_WATCH),
+  dev: isArg(argv, argOptions.DEV),
+  noWatch: isArg(argv, argOptions.NO_WATCH),
   port: getArg(argv, argOptions.PORT),
-  dbPath: getArg(argv, argOptions.DB_PATH)
+  dbPath: getArg(argv, argOptions.DB_PATH),
+  config: getConfig(),
+  manifest: getManifest()
 })
 
-startInterbitNode()
+run()

@@ -8,7 +8,7 @@ const watchChain = (cli, chainInterface) => {
     if (isManifestUpdated(rootState, prevManifest)) {
       const currManifest = getManifestFromState(rootState)
       applyManifestUpdates(cli, prevManifest, currManifest)
-      prevManifest = currManifest``
+      prevManifest = currManifest
     }
   })
 }

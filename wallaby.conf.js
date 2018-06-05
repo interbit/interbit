@@ -1,6 +1,6 @@
 const path = require('path')
 
-module.exports = function(wallaby) {
+module.exports = function (wallaby) {
   // Babel, jest-cli and some other modules may be located under
   // react-scripts/node_modules, so need to let node.js know about it
   process.env.NODE_PATH +=
@@ -14,7 +14,7 @@ module.exports = function(wallaby) {
     files: [
       'packages/**/src/**/*.+(js|jsx|json|snap|css|less|sass|scss|jpg|jpeg|gif|png|svg)',
       '!packages/**/src/**/*.test.js?(x)',
-      '!packages/utils/**', // This is a test
+      '!packages/utils/**', // This is a test-only package
       '!packages/**/node_modules/**',
       '!vendor/**/node_modules/**'
     ],
@@ -49,7 +49,7 @@ module.exports = function(wallaby) {
         ...jestConfig.moduleNameMapper,
         '^@btlgroup/(.+)': `${w.projectCacheDir}${path2.sep}vendor${
           path2.sep
-        }mock${path2.sep}$1`
+          }mock${path2.sep}$1`
       }
       Object.keys(jestConfig.transform || {}).forEach(
         k => ~k.indexOf('^.+\\.(js|jsx') && void delete jestConfig.transform[k]

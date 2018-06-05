@@ -339,7 +339,7 @@ img.support-icon {
 }
 
 .info span:not(.token) {
-  content: url('/assets/img/info.png');
+  content: url('../../assets/img/info.png');
 }
 
 
@@ -354,7 +354,7 @@ img.support-icon {
 }
 
 .warning span {
-  content: url('/assets/img/warning.png');
+  content: url('../../assets/img/warning.png');
 }
 
 /*TIPS -WARNING STYLE*/
@@ -368,7 +368,7 @@ img.support-icon {
 }
 
 .danger span {
-  content: url('/assets/img/danger.png');
+  content: url('../../assets/img/danger.png');
 }
 
 /*TIPS -WARNING STYLE*/
@@ -382,7 +382,7 @@ img.support-icon {
 }
 
 .success span {
-  content: url('/assets/img/success.png');
+  content: url('../../assets/img/success.png');
 }
 
 pre.exercise-pre {

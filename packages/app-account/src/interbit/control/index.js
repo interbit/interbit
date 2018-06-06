@@ -23,35 +23,52 @@ const initialState = Immutable.from({
 })
 
 const reducer = (state = initialState, action) => {
-  const nextState = rootCovenant.reducer(state, action)
+  let nextState = rootCovenant.reducer(state, action)
   if (action.type.endsWith('STROBE')) {
     return nextState
   }
 
   switch (action.type) {
     case rootCovenant.actionTypes.SET_MANIFEST: {
+      console.log('DISPATCH: ', action)
+
       const { manifest } = action.payload
       const covenantHash = getCovenantHash(MY_ACCOUNT, manifest)
 
-      return nextState.setIn(['privateChainHosting', 'shared', PRIVATE], {
+      nextState = nextState.setIn(['privateChainHosting', 'shared', PRIVATE], {
         blockMaster: nextState.getIn(['interbit', 'config', 'blockMaster']),
         sponsorChainId: nextState.getIn(['interbit', 'chainId']),
         covenantHash
       })
+
+      return nextState
     }
 
     case actionTypes.ADD_KEY_TO_SPONSORED_CHAIN: {
-      const { sponsoredChainId, publicKey } = action.payload
+      console.log('DISPATCH: ', action)
+
+      const {
+        sponsoredChainId,
+        role,
+        authorizedActions,
+        publicKey
+      } = action.payload
+
       const actionToForward = addToAcl({
-        actionPermissions: { '*': ['authenticatedUsers'] },
-        roles: { authenticatedUsers: [publicKey] }
+        actionPermissions: { [authorizedActions]: [role] },
+        roles: { [role]: [publicKey] }
       })
 
-      return remoteRedispatch(nextState, sponsoredChainId, actionToForward)
+      console.log('REMOTE DISPATCH: ', actionToForward)
+      nextState = remoteRedispatch(nextState, sponsoredChainId, actionToForward)
+
+      return nextState
     }
 
-    default:
+    default: {
+      console.log('NOT HANDLED: ', action)
       return nextState
+    }
   }
 }
 

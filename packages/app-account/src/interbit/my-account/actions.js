@@ -53,7 +53,7 @@ const actionCreators = {
   }),
 
   cancelAuthentication: ({ requestId }) => ({
-    type: actionTypes.START_AUTHENTICATION,
+    type: actionTypes.CANCEL_AUTHENTICATION,
     payload: {
       requestId
     }

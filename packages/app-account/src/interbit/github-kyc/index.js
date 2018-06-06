@@ -189,6 +189,8 @@ const reducer = (state = initialState, action) => {
 
       const actionToForward = actionCreators.addKeyToSponsoredChain({
         sponsoredChainId: privateChainId,
+        authorizedActions: '*',
+        role: `GITHUB-${userId}`,
         publicKey
       })
 
@@ -290,8 +292,7 @@ const hasPublicKey = (state, { userId, publicKey }) => {
 const getPrivateChainId = (state, { userId }) =>
   state.getIn(['users', userId, 'privateChainId'])
 
-// TODO: Read this from the read join state
-const getControlChainId = state => undefined
+const getControlChainId = state => state.getIn(['controlChainId'])
 
 const findExistingJoin = (state, { privateChainId }) => {
   const joinProviders = selectors.joinProviders(state)
@@ -475,6 +476,7 @@ function* enablePrivateChain({ userId, publicKey, browserChainId }) {
     // Make sure the user can access it
     yield put(
       actionCreators.updatePrivateChainAcl({
+        userId,
         privateChainId: existingPrivateChainId,
         publicKey
       })

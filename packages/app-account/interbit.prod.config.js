@@ -1,6 +1,6 @@
 const path = require('path')
 const chainAliases = require('./src/constants/chainAliases')
-const actionTypes = require('./src/constants/actionTypes')
+const { controlActionTypes } = require('./src/constants/actionTypes')
 
 const PUB_KEY =
   'xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q='
@@ -24,12 +24,17 @@ const config = {
               alias: chainAliases.PUBLIC,
               path: ['privateChainHosting', 'shared'],
               joinName: 'HOSTING_SPONSOR'
+            },
+            {
+              alias: chainAliases.GITHUB,
+              path: ['interbit', 'chainId'],
+              joinName: 'CONTROL_CHAIN_ID'
             }
           ],
           receiveActionFrom: [
             {
               alias: chainAliases.GITHUB,
-              authorizedActions: [actionTypes.ADD_KEY_TO_SPONSORED_CHAIN]
+              authorizedActions: [controlActionTypes.ADD_KEY_TO_SPONSORED_CHAIN]
             }
           ]
         }
@@ -60,6 +65,13 @@ const config = {
       config: {
         validators: [PUB_KEY, WEB_AUTH_PUB_KEY],
         joins: {
+          consume: [
+            {
+              alias: chainAliases.CONTROL,
+              path: ['controlChainId'],
+              joinName: 'CONTROL_CHAIN_ID'
+            }
+          ],
           provide: [
             {
               alias: chainAliases.PUBLIC,

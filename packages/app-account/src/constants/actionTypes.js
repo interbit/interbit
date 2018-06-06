@@ -1,7 +1,11 @@
-const {
-  actionTypes: { ADD_KEY_TO_SPONSORED_CHAIN }
-} = require('../interbit/control/actions')
+const { actionTypes: controlActionTypes } = require('../interbit/control')
+const { actionTypes: githubActionTypes } = require('../interbit/github-kyc')
+const { actionTypes: privateActionTypes } = require('../interbit/my-account')
+const { actionTypes: publicActionTypes } = require('../interbit/public')
 
 module.exports = {
-  ADD_KEY_TO_SPONSORED_CHAIN
+  controlActionTypes,
+  githubActionTypes,
+  privateActionTypes,
+  publicActionTypes
 }

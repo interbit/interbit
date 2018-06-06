@@ -217,15 +217,24 @@ const actionCreators = {
     )
   }),
 
-  addKeyToSponsoredChain: ({ sponsoredChainId, publicKey }) => ({
+  addKeyToSponsoredChain: ({
+    sponsoredChainId,
+    role,
+    authorizedActions = '*',
+    publicKey
+  }) => ({
     type: actionTypes.ADD_KEY_TO_SPONSORED_CHAIN,
     payload: validate(
       {
         sponsoredChainId,
+        role,
+        authorizedActions,
         publicKey
       },
       {
         sponsoredChainId: chainIdPattern(),
+        role: required(),
+        authorizedActions: required(),
         publicKey: required()
       }
     )

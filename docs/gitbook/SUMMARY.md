@@ -2,7 +2,15 @@
 
 * [Introduction](README.md)
   * [Contents](Contents.md)
+
 * [Getting Started](getting-started/README.md)
+  * [Requirements](getting-started/requirements.md)
+  * [Useful Skills](getting-started/skills.md)
+  * [Install the Interbit SDK](getting-started/install.md)
+  * [Create your first Interbit app](getting-started/create.md)
+  * [Run your Interbit app](getting-started/run.md)
+  * [Support](getting-started/support.md)
+
 * [Key Concepts](key-concepts/README.md#key-concepts)
   * [Actions](key-concepts/README.md#actions)
   * [Application State](key-concepts/README.md#application-state)
@@ -10,14 +18,17 @@
   * [Smart Contracts](key-concepts/README.md#smart-contracts)
   * [Sagas](/key-concepts/README.md#sagas)
   * [Chain Joining](/key-concepts/README.md#chain-joining)
+
 * [Examples](/examples/README.md)
   * [Chain Joining](/examples/joining.md)
   * [Initializing a Chain](/examples/initialize.md)
   * [Destroying a Chain](/examples/destroy.md)
   * [Determinism](/examples/determinism.md)
   * [Template App Walkthrough](/examples/template.md)
+
 * [Architecture](architecture/README.md)
   * [Chain Architecture](architecture/chain-architecture.md)
+
 * [Reference](reference/README.md)
   * [interbit](reference/interbit/README.md)
   * [interbit-cli](reference/interbit-cli/README.md)

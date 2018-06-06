@@ -85,7 +85,7 @@ describe('configureJoins(chainInterface, joins, manifest)', () => {
       type: '@@interbit/AUTHORIZE_RECEIVE_ACTIONS',
       payload: {
         senderChainId: manifest.chains.lemongrasschicken,
-        permittedActions: joins.receiveActionFrom[0].path
+        permittedActions: joins.receiveActionFrom[0].authorizedActions
       }
     }
 

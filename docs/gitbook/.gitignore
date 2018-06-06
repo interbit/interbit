@@ -8,3 +8,9 @@ packages/*/npm-debug.log
 **/build
 **/.lock
 **/dist
+
+# Vim ignores
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]

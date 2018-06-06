@@ -2,7 +2,7 @@
 const Immutable = require('seamless-immutable')
 
 const initialState = Immutable.from({
-  chainMetadata: { name: `To do list application - public chain` }
+  chainMetadata: { name: `To-do list application - public chain` }
 })
 
 const actionTypes = {}

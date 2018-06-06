@@ -3,7 +3,7 @@
 
 In the `packages/app-todo-list` directory, we provide a simple To-do List application running on an Interbit blockchain. The application can add items to the to-do list, edit existing items, and toggle the completed state of items.
 
-This application was created using the Interbit [Template app](./template), and what follows is a description of the app and how to recreate it from the template. The To-do List uses the same Interbit configuration as the template. As such, to-do items are added to the user's private chain.
+This application was created using the Interbit [Template app](./template), and what follows is a description of the app and how to recreate it from the Template. The To-do List uses the same Interbit configuration as the Template. As such, to-do items are added to the user's private chain.
 
 #### Requirements
 
@@ -42,12 +42,12 @@ You can optionally run
 cd packages/app-todo-list
 npm test
 ```
-in another console to run a test watcher. The To-do List app comes with all the tests from the template app and tests for the to-do list private chain actions.
+in another console to run a test watcher. The To-do List app comes with all the tests from the Template app and tests for the to-do list private chain actions.
 
 
 ## Application Structure
 
-If you look in the `packages/app-todo-list` directory, you will see a basic application built on Interbit. Refer to the [template docs](./template.md#application-structure) for detailed information on these directories and files. This document only covers the changes we made to the template files to build our To-do List app. Specifically, we take a closer look at the private chain actions in `src/interbit/private`, the tests in `src/tests/privateCovenant.test.js`, `src/adapters/privateChainAdapter.js`, and the React components in `src/components`.
+If you look in the `packages/app-todo-list` directory, you will see a basic application built on Interbit. Refer to the [Template docs](./template.md#application-structure) for detailed information on these directories and files. This document only covers the changes we made to the Template files to build our To-do List app. Specifically, we take a closer look at the private chain actions in `src/interbit/private`, the tests in `src/tests/privateCovenant.test.js`, `src/adapters/privateChainAdapter.js`, and the React components in `src/components`.
 
 Directory | Purpose
 ----------|-----------
@@ -56,10 +56,10 @@ Directory | Purpose
 `src/adapters`            | A set of adapters to fill UI details for the covenant forms
 `src/components`          | React components
 `src/constants`           | A file of constants that are used throughout the application (Ex. URLs)
-`src/containers`          | React components that are connected to redux state
+`src/containers`          | React components that are connected to Redux state
 `src/css`                 | The css
 `src/interbit`            | All of the covenants needed for this application
-`src/redux`               | Reudcers and any other redux related files
+`src/redux`               | Reducers and any other Redux related files
 `tests`                   | Jest tests
 `App.js`                  | The main React component that loads the SPA
 `exports.js`              | A file to export anything that may be needed outside of this project (Ex. covenant action creators)
@@ -73,7 +73,7 @@ Directory | Purpose
 
 ## Walk-through
 
-In this section, we step through the code that is specific to the To-do List app. This app is a modified clone of the template app, so we highlight any changes that were made to the template files and any new files we've added.
+In this section, we step through the code that is specific to the To-do List app. This app is a modified clone of the Template app, so we highlight any changes that were made to the Template files and any new files we've added.
 
 ### Set Up and Configuration
 
@@ -83,7 +83,7 @@ We named our app `app-todo-list` and updated our public and private covenant nam
 - `interbit.config.js`
 - `interbit.prod.config.js`
 
-The public, private, and control chain configurations are exactly as they are in the template app&mdash;all we've done is rename things here. The template app is configured so that users can dispatch actions to their private chain, so our To-do List app does the same. Users have their own private to-do lists. In the future, we may extend this example so that users can have shared lists.
+The public, private, and control chain configurations are exactly as they are in the Template app&mdash;all we've done is rename things here. The Template app is configured so that users can dispatch actions to their private chain, so our To-do List app does the same. Users have their own private to-do lists. In the future, we may extend this example so that users can have shared lists.
 
 ### Modifying the Private Covenant
 
@@ -152,7 +152,7 @@ const {
 const { actionTypes, actionCreators } = require('./actions')
 
 const initialState = Immutable.from({
-  chainMetadata: { name: `Todo list application - User's private chain` },
+  chainMetadata: { name: `To-do list application - User's private chain` },
   todos: []
 })
 
@@ -201,7 +201,7 @@ Jest tests for private and control covenants are located in `src/tests/interbit`
 
 ### The Private Chain Adapter and the Private Chain Page
 
-As described above, the Private Chain page displays the private chain's state and has some rudimentary UI for adding and editing toddo items. This is a handy development tool to interact with the private chain and verify that the application state is updating correctly. We use the `<Covenant />` component from the `interbit-ui-components` package to easily connect UI forms to the covenant actions.
+As described above, the Private Chain page displays the private chain's state and has some rudimentary UI for adding and editing to-do items. This is a handy development tool to interact with the private chain and verify that the application state is updating correctly. We use the `<Covenant />` component from the `interbit-ui-components` package to easily connect UI forms to the covenant actions.
 
 The Template app comes with the scaffolding to connect the private covenant actions to the `<Covenant />` component. We modified `src/adapters/privateChainAdapter.js` so that we can dispatch the `ADD_TODO` and `EDIT_TODO` actions from the Private Chains page.
 

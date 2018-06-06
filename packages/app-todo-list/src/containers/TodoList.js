@@ -112,7 +112,7 @@ export class TodoList extends Component {
       <div>
         <AddTodoForm onSubmit={this.addTodoSubmitHandler} />
 
-        <h3>To Do List </h3>
+        <h3>To-do List </h3>
         <Table className="todo-table">
           <thead>
             <tr>

@@ -65,14 +65,17 @@ const configureReceive = (receive, interbitManifest) => {
   if (!Array.isArray(receive)) {
     return []
   }
-  return receive.reduce((prev, { alias: chainAlias, authorizedActions }) => {
-    const senderChainId = getChainIdByAlias(chainAlias, interbitManifest)
-    const receiveAction = authorizeReceiveActions({
-      senderChainId,
-      authorizedActions
-    })
-    return prev.concat(receiveAction)
-  }, [])
+  return receive.reduce(
+    (prev, { alias: chainAlias, authorizedActions: permittedActions }) => {
+      const senderChainId = getChainIdByAlias(chainAlias, interbitManifest)
+      const receiveAction = authorizeReceiveActions({
+        senderChainId,
+        permittedActions
+      })
+      return prev.concat(receiveAction)
+    },
+    []
+  )
 }
 
 const configureSend = (send, interbitManifest) => {

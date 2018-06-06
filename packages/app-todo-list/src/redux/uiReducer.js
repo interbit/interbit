@@ -17,14 +17,10 @@ export const reducer = (state = Immutable.from(initialState), action) => {
   switch (action.type) {
     case TOGGLE_TODO_ROW: {
       const { id } = action.payload
-      const editableTodos = state.getIn(['editableTodos'])
-      const oldId = Object.keys(editableTodos).find(key => editableTodos[key])
-      const nextState =
-        id !== oldId
-          ? state
-              .setIn(['editableTodos', oldId], false)
-              .setIn(['editableTodos', id], !state.editableTodos[id])
-          : state.setIn(['editableTodos', id], !state.setIn[id])
+      const isTodoEditable = state.getIn(['editableTodos', id], false)
+      const nextState = state
+        .setIn(['editableTodos'], {})
+        .setIn(['editableTodos', id], !isTodoEditable)
 
       return nextState
     }

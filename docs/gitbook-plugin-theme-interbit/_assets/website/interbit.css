@@ -431,3 +431,117 @@ code.exercise-code span {
 .markdown-section pre > code {
   font-weight: normal;
 }
+
+/* Fancier ordered list styling ----------------------------------- */
+
+.markdown-section ul,
+.markdown-section ol {
+  padding: 0;
+  margin: 0 0 0.85em 1.5em;
+  position: relative;
+}
+
+.markdown-section ol {
+  counter-reset: li;
+  margin-top: 0.25em;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.markdown-section ol > li {
+  position: relative;
+  margin: 0 0 0.5em 1.6em;
+  padding: 0.15em 0 0 1.25em;
+  list-style: none;
+  border-left: 2px dotted #fcd7a4;
+}
+
+.markdown-section ol > li + li {
+  margin-top: 0.85em;
+}
+
+.markdown-section ol > li:before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  top: 0px;
+  left: -1.75em;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 1.75em;
+  height: 1.75em;
+  margin-right: 0.5em;
+  -webkit-border-top-left-radius: 1em;
+  -webkit-border-bottom-left-radius: 1em;
+     -moz-border-top-left-radius: 1em;
+     -moz-border-bottom-left-radius: 1em;
+          border-top-left-radius: 1em;
+          border-bottom-left-radius: 1em;
+  padding: 0.05em 0 0 0.2em;
+  border: 2px solid #fcd7a4;
+  color: #555;
+  background: #fcecd6;
+  font-weight: bold;
+  text-align: center;
+  font-family: proxima-nova,sans-serif;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+.markdown-section .clear:after,
+.markdown-section ol > li:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.markdown-section ol.loweralpha > li:before, ol[type=a] > li:before {
+  content: counter(li, lower-alpha)
+}
+
+.markdown-section ol.upperalpha > li:before {
+  content: counter(li, upper-alpha)
+}
+
+.markdown-section ol.lowerroman > li:before, ol[type=i] > li:before {
+  content: counter(li, lower-roman)
+}
+
+.markdown-section ol.upperroman > li:before {
+  content: counter(li, upper-roman)
+}
+
+.markdown-section li ol {
+  margin-top: 0.5em;
+}
+
+.markdown-section li ul {
+  list-style-type: disc;
+}
+
+.markdown-section ol.procedure li.step > p:first-child {
+  font-weight: bold;
+}
+
+.markdown-section ul.itemizedlist li + li {
+  margin-top: 0.85em;
+}
+
+.markdown-section ol li > *:last-child,
+.markdown-section ol li > .paragraph:last-child p {
+  margin-bottom: 0;
+}
+
+.markdown-section ol ol,
+.markdown-section ol ul,
+.markdown-section ul ol,
+.markdown-section ul ul {
+  margin-bottom: 0.85em;
+}
+
+/* Hide the prev/next page navigation arrows */
+
+a.navigation {
+  display: none;
+}

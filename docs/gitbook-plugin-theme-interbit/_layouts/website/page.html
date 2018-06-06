@@ -39,7 +39,7 @@
 			{% endblock %}
 		</div>
 
-		<!-- {% block book_navigation %}
+		{% block book_navigation %}
 		{% if page.previous and page.previous.path %}
 		<a href="{{ page.previous.path|resolveFile }}{{ page.previous.anchor }}" class="navigation navigation-prev {% if not (page.next and page.next.path) %}navigation-unique{% endif %}" aria-label="Previous page: {{ page.previous.title }}">
 			<i class="fa fa-angle-left"></i>
@@ -50,7 +50,7 @@
 			<i class="fa fa-angle-right"></i>
 		</a>
 		{% endif %}
-		{% endblock %} -->
+		{% endblock %}
 		{% endblock %}
 	</div>
 

@@ -1,9 +1,11 @@
 # Create your first Interbit application
 
 These steps create a copy of the included _template_ application that you can
-use as a starting point for working with the Interbit SDK. Make sure that you
-have the [requirements](requirements.md) and the [Interbit SDK](install.md)
-installed.
+use as a starting point for working with the Interbit SDK.
+
+> To complete this section, make sure that you already have the
+> [requirements](requirements.md) and the [Interbit SDK](install.md)
+> installed.
 
 1.  **Copy the `packages/interbit-template` folder to `packages/app-first`:**
 

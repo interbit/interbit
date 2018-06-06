@@ -1,4 +1,7 @@
-# Run the new application
+# Run your new application
+
+> To complete this section, make sure that you have already [created a
+> new Interbit application](create.md).
 
 Now all we need to do is run the new application:
 

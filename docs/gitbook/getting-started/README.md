@@ -11,5 +11,6 @@ using Interbit. The topics include:
 * [Support information](support.md)
 
 If you are looking for additional information, see the
-[Examples](/examples/), [Architecture](/architecture/), and
-[Reference](/reference/) sections.
+[Examples](/examples/README.md),
+[Architecture](/architecture/README.md), and
+[Reference](/reference/README.md) sections.

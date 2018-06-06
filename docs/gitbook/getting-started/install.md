@@ -1,8 +1,10 @@
 # Install the Interbit SDK
 
 These steps install the Interbit SDK, all of its dependencies, and
-builds the modules that your applications require. Make sure that your
-system already has the [requirements](requirements.md) installed.
+builds the modules that your applications require.
+
+> To complete this section, make sure that your system already has the
+> [requirements](requirements.md) installed.
 
 The [Interbit SDK](https://github.com/interbit/interbit) is open source
 software, which is available on [GitHub](https://github.com/):

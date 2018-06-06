@@ -1,6 +1,6 @@
 const should = require('should')
 
-const { rootCovenant } = require('../../src/rootCovenant')
+const { rootCovenant } = require('../../rootCovenant')
 
 describe('rootCovenant', () => {
   it('merges initial state', () => {

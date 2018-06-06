@@ -1,5 +1,5 @@
 const assert = require('assert')
-const configureJoins = require('../../src/chainManagement/configureJoins')
+const configureJoins = require('../../chainManagement/configureJoins')
 
 const mockChainInterface = assertionCallback => ({
   dispatch: action => assertionCallback(action)

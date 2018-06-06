@@ -1,5 +1,5 @@
 const assert = require('assert')
-const api = require('../src')
+const api = require('../../src')
 
 describe('module exports expected API', () => {
   it('createAction', () => {

@@ -66,7 +66,8 @@ describe('chain sponsorship', () => {
         [`chain-${sponsorChainId}`]: [sponsorChainId]
       }
     },
-    blockMaster: blockMasterPublicKey
+    blockMaster: blockMasterPublicKey,
+    sponsorChainId: 'chn_349dejiepajifiesr3krda9dca'
   }
 
   it('makes a sponsored chain config', async () => {

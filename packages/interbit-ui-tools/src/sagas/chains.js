@@ -90,6 +90,9 @@ function* sponsorChain({
       'public chain does not contain expected chain sponsorship configuration'
     )
   }
+  if (blockMaster === publicKey) {
+    throw new Error('public key cannot be the block master')
+  }
 
   const genesisConfig = interbit.createDefaultSponsoredChainConfig({
     blockMaster,

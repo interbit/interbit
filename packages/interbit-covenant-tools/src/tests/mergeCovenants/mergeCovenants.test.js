@@ -1,6 +1,6 @@
 const assert = require('assert')
 const Immutable = require('seamless-immutable')
-const mergeCovenants = require('../../src/mergeCovenants')
+const mergeCovenants = require('../../mergeCovenants')
 
 describe('chainServices/mergeCovenants', () => {
   it('merges covenants', () => {

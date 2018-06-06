@@ -1,6 +1,6 @@
 const assert = require('assert')
-const { resolveGenesisBlocks } = require('../../src/manifest/generateManifest')
-const { ROOT_CHAIN_ALIAS } = require('../../src/chainManagement/constants')
+const { resolveGenesisBlocks } = require('../../manifest/generateManifest')
+const { ROOT_CHAIN_ALIAS } = require('../../chainManagement/constants')
 const {
   defaultConfig,
   defaultManifest,

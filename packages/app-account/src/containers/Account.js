@@ -96,7 +96,7 @@ const mapDispatchToProps = dispatch => ({
 
 export class Account extends Component {
   static propTypes = {
-    blockchainDispatch: PropTypes.func.isRequired,
+    blockchainDispatch: PropTypes.func,
     content: PropTypes.shape({}).isRequired,
     contentBars: PropTypes.shape({}).isRequired,
     isAttentionMoreInfoModalVisible: PropTypes.bool,
@@ -112,13 +112,14 @@ export class Account extends Component {
     }),
     profileFormProps: PropTypes.shape({}),
     providerChainId: PropTypes.string,
-    publicChainDispatch: PropTypes.func.isRequired,
+    publicChainDispatch: PropTypes.func,
     requestId: PropTypes.string,
-    toggleFormFunction: PropTypes.func.isRequired,
-    toggleModalFunction: PropTypes.func.isRequired
+    toggleFormFunction: PropTypes.func,
+    toggleModalFunction: PropTypes.func
   }
 
   static defaultProps = {
+    blockchainDispatch: () => {},
     isAttentionMoreInfoModalVisible: false,
     isAuthenticating: false,
     joinName: undefined,
@@ -131,7 +132,10 @@ export class Account extends Component {
     },
     profileFormProps: {},
     providerChainId: undefined,
-    requestId: undefined
+    publicChainDispatch: () => {},
+    requestId: undefined,
+    toggleFormFunction: () => {},
+    toggleModalFunction: () => {}
   }
 
   componentDidUpdate() {

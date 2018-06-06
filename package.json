@@ -3,7 +3,8 @@
   "private": true,
   "dependencies": {
     "cross-env": "^5.1.4",
-    "lerna": "^2.10.2"
+    "lerna": "^2.10.2",
+    "tar": "^4.4.2"
   },
   "scripts": {
     "build": "cross-env-shell lerna run --scope $APP_NAME build",

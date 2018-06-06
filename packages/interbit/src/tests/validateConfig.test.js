@@ -1,6 +1,6 @@
 const path = require('path')
 const should = require('should')
-const validateConfig = require('../src/config/validateConfig')
+const validateConfig = require('../config/validateConfig')
 
 const defaultConfig = {
   peers: ['localhost:5000', 'localhost:5050'], // First peers to connect to

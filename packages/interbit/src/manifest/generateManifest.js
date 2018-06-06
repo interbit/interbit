@@ -1,4 +1,5 @@
 const path = require('path')
+const objectHash = require('object-hash')
 
 const { getApps } = require('../config/configSelectors')
 const {
@@ -34,9 +35,16 @@ const generateManifest = (
 
   const manifestTree = createManifestTree(interbitConfig, manifestTemplate)
 
-  return {
+  const manifest = {
     ...manifestTemplate,
     manifest: manifestTree
+  }
+
+  const hash = objectHash(manifest)
+
+  return {
+    ...manifest,
+    hash
   }
 }
 

@@ -1,4 +1,5 @@
 const should = require('should')
+const objectHash = require('object-hash')
 const { generateManifest } = require('../../manifest/generateManifest')
 const { ROOT_CHAIN_ALIAS } = require('../../chainManagement/constants')
 const {
@@ -10,6 +11,22 @@ const {
 const location = '/tmp'
 
 describe('generateManifest(location, interbitConfig, covenants, originalManifest)', () => {
+  it('generates a verifiable manifest hash', () => {
+    const manifest = generateManifest(
+      location,
+      defaultConfig,
+      defaultCovenants,
+      defaultManifest
+    )
+
+    const hash = manifest.hash
+    delete manifest.hash
+
+    const compareHash = objectHash(manifest)
+
+    should.equal(hash, compareHash)
+  })
+
   it('replaces apps config but not genesis blocks if apps config changes', () => {
     const apps = {
       ...defaultConfig.apps,

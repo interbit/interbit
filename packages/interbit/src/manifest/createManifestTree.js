@@ -13,7 +13,7 @@ const createManifestTree = (config, manifest) => {
   const { genesisBlocks } = manifest
   const chainId = getChainId(genesisBlocks[ROOT_CHAIN_ALIAS])
   const validators = getAdminValidators(config) // I suspect this should not be getting the admin validators but the ones for the chain, specifically
-  const chains = getChildren(ROOT_CHAIN_ALIAS, config, manifest)
+  const chains = getRootSubtrees(ROOT_CHAIN_ALIAS, config, manifest)
   const covenants = getSubtreeCovenants(
     ROOT_CHAIN_ALIAS,
     'rootCovenant', // TODO: Always deploy the root covenant and know what it is
@@ -30,7 +30,7 @@ const createManifestTree = (config, manifest) => {
   }
 }
 
-const getChildren = (chainAlias, config, manifest) => {
+const getRootSubtrees = (chainAlias, config, manifest) => {
   const staticChainEntries = Object.entries(config.staticChains)
   const allChildren = staticChainEntries.reduce((accum, [, v]) => {
     if (Array.isArray(v.childChains)) {

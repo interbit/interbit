@@ -10,7 +10,9 @@ function* loadPrivateChain({
   cli,
   publicKey,
   publicChainAlias,
-  chainAlias
+  chainAlias,
+  sponsoredChainId,
+  privateChainId
 }) {
   console.log(`${LOG_PREFIX}: *privateChain()`)
 
@@ -23,18 +25,43 @@ function* loadPrivateChain({
     })
 
     const privateChainKey = kvPrivateChainKey(publicChainId, chainAlias)
-    chainId = yield call(cli.kvGet, privateChainKey)
+    const savedChainId = yield call(cli.kvGet, privateChainKey)
 
-    if (chainId) {
+    if (
+      savedChainId &&
+      privateChainId &&
+      savedChainId === sponsoredChainId &&
+      savedChainId !== privateChainId
+    ) {
+      // Load chain specified by oAuth callback
       privateChain = yield call(tryLoadChain, {
         cli,
         chainAlias,
-        chainId
+        chainId: privateChainId
       })
+
+      if (privateChain) {
+        yield call(cli.kvPut, privateChainKey, privateChainId)
+        chainId = privateChainId
+      }
+    }
+
+    if (!privateChain && savedChainId) {
+      // Reload chain from local storage
+      privateChain = yield call(tryLoadChain, {
+        cli,
+        chainAlias,
+        chainId: savedChainId
+      })
+
+      if (privateChain) {
+        chainId = savedChainId
+      }
     }
 
     if (!privateChain) {
-      chainId = yield call(sponsorChain, {
+      // Create a new private chain
+      const newChainId = yield call(sponsorChain, {
         interbit,
         cli,
         publicKey,
@@ -45,10 +72,11 @@ function* loadPrivateChain({
       privateChain = yield call(loadChain, {
         cli,
         chainAlias,
-        chainId
+        chainId: newChainId
       })
 
-      yield call(cli.kvPut, privateChainKey, chainId)
+      yield call(cli.kvPut, privateChainKey, newChainId)
+      chainId = newChainId
     }
 
     const userOwnsChain = call(userHasRole, {

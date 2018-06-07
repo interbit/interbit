@@ -1,10 +1,10 @@
 const path = require('path')
 
 const { getArg } = require('./getArg')
-const { ADMIN_KEYS } = require('./argOptions')
+const { KEY_PAIR } = require('./argOptions')
 
 const getKeyPairLocation = () => {
-  const adminKeysArg = getArg(process.argv, ADMIN_KEYS)
+  const adminKeysArg = getArg(process.argv, KEY_PAIR)
   const keyPairLocation = adminKeysArg
     ? path.resolve(adminKeysArg)
     : `${process.cwd()}/keyPair.json`

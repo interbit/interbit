@@ -1,6 +1,8 @@
-const startInterbit = require('../chainManagement/startInterbit')
-const { createChainsFromManifest } = require('../chainManagement/createChains')
-const configureChains = require('../chainManagement/configureChains')
+const {
+  startInterbit,
+  createChains: { createChainsFromManifest },
+  configureChains
+} = require('../chainManagement')
 
 const deploy = async options => {
   const { keyPair, port, location, manifest, connect } = options

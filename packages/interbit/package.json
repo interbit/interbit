@@ -1,18 +1,19 @@
 {
   "name": "interbit",
-  "version": "0.4.28",
+  "version": "0.4.31",
   "description": "Requireable deployment utilities for interbit-cli",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha \"tests/**/*.test.js\""
+    "test": "mocha \"src/tests/**/*.test.js\""
   },
   "author": "BTL GROUP LTD",
   "license": "MIT",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "deep-diff": "^1.0.1",
     "fs-extra": "^5.0.0",
-    "interbit-core": "0.8.2",
-    "interbit-covenant-tools": "0.4.28",
+    "interbit-core": "0.13.0",
+    "interbit-covenant-tools": "0.4.31",
     "lodash": "^4.17.5",
     "path": "^0.12.7"
   },

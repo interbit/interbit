@@ -18,8 +18,7 @@ const getConfig = () => {
 
   const doesConfigExist = fs.existsSync(configLocation)
   if (!doesConfigExist) {
-    console.error(`Config file does not exist at location ${configLocation}`)
-    process.exit(1)
+    return undefined
   }
 
   console.log(`Loading config at ${configLocation}`)
@@ -30,4 +29,7 @@ const getConfig = () => {
   return interbitConfig
 }
 
-module.exports = getConfig
+module.exports = {
+  getConfig,
+  getConfigLocation
+}

@@ -6,5 +6,11 @@ packages/*/npm-debug.log
 **/db-*
 **/_book
 **/build
-**.lock
+**/.lock
 **/dist
+
+# Vim ignores
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]

@@ -2,6 +2,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const promisify = require('util').promisify
 const exec = promisify(require('child_process').exec)
+const writeJsonFile = require('../file/writeJsonFile')
 
 const TEMPLATE_VERSION = '0.4.27'
 
@@ -13,52 +14,47 @@ const create = async options => {
 
   console.log(`interbit create: Creating ${appName} in ${newAppDir}`)
 
-  try {
-    if (!appName) {
-      throw new Error('interbit create: appName must be provided')
-    }
-
-    if (!appName.match(/^([a-z0-9-]+)+$/)) {
-      throw new Error(
-        'interbit create: app name must match regex /^(app|interbit)(-[a-z0-9]+)+$/'
-      )
-    }
-
-    if (fs.existsSync(newAppDir)) {
-      throw new Error(
-        `interbit create: Can not create app. Something already exists at location ${newAppDir}`
-      )
-    }
-
-    console.log('Pulling template file from npm...')
-    const tmpDir = path.join(newAppDir, 'tmp')
-    const expectedTemplateLocation = await installTemplate(tmpDir)
-
-    if (!fs.existsSync(expectedTemplateLocation)) {
-      throw new Error('interbit create: Problem installing template from npm')
-    }
-
-    console.log(`Customizing ${appName}...`)
-    process.chdir(location)
-    fs.copySync(expectedTemplateLocation, newAppDir)
-
-    console.log('Cleaning up...')
-    cleanupPackageJson(newAppDir, appName)
-    await npmInstall(newAppDir)
-    fs.removeSync(tmpDir)
-
-    console.log('... done!')
-  } catch (e) {
-    console.error(e)
-    process.exit(1)
+  if (!appName) {
+    throw new Error('interbit create: appName must be provided')
   }
+
+  if (!appName.match(/^([a-z0-9-]+)+$/)) {
+    throw new Error(
+      'interbit create: app name must match regex /^(app|interbit)(-[a-z0-9]+)+$/'
+    )
+  }
+
+  if (fs.existsSync(newAppDir)) {
+    throw new Error(
+      `interbit create: Can not create app. Something already exists at location ${newAppDir}`
+    )
+  }
+
+  console.log('Pulling template file from npm...')
+  const tmpDir = path.join(newAppDir, 'tmp')
+  const expectedTemplateLocation = await installTemplate(tmpDir)
+
+  if (!fs.existsSync(expectedTemplateLocation)) {
+    throw new Error('interbit create: Problem installing template from npm')
+  }
+
+  console.log(`Customizing ${appName}...`)
+  process.chdir(location)
+  fs.copySync(expectedTemplateLocation, newAppDir)
+
+  console.log('Cleaning up...')
+  cleanupPackageJson(newAppDir, appName)
+  await npmInstall(newAppDir)
+  fs.removeSync(tmpDir)
+
+  console.log('... done!')
 }
 
 const installTemplate = async dir => {
   fs.mkdirpSync(dir)
   process.chdir(dir)
 
-  writePackageJson(dir, basicPackageJson)
+  writeJsonFile(`${dir}/package.json`, basicPackageJson)
   await npmInstall(dir)
 
   const expectedTemplateLocation = `${dir}/node_modules/interbit-template`
@@ -84,17 +80,11 @@ const cleanupPackageJson = (newAppDir, appName) => {
     }
   }, {})
 
-  writePackageJson(newAppDir, newJson)
+  writeJsonFile(packageJsonPath, newJson)
 }
 
 const npmInstall = async dir => {
   await exec('npm install', { cwd: dir })
-}
-
-const writePackageJson = (dir, obj) => {
-  fs.writeFileSync(`${dir}/package.json`, JSON.stringify(obj, null, 2), {
-    encoding: 'utf8'
-  })
 }
 
 const basicPackageJson = {

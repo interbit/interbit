@@ -21,10 +21,14 @@ const {
 
 const emptyObject = Immutable.from({})
 
-const immutable = state =>
-  Immutable.isImmutable(state) ? state : Immutable.from(state || {})
+const isImmutableObject = state =>
+  state && typeof state === 'object' && Immutable.isImmutable(state)
 
-const fromStoreRoot = state => immutable(state[INTERBIT_REDUCER_KEY])
+const immutable = state =>
+  isImmutableObject(state) ? state : Immutable.from(state || {})
+
+const fromStoreRoot = state =>
+  immutable(state).getIn([INTERBIT_REDUCER_KEY], emptyObject)
 
 const interbitAtRoot = state => immutable(state)
 

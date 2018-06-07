@@ -11,10 +11,17 @@ const run = async () => {
     process.exit(1)
   }
 
-  await create(options)
-  console.log(
-    `interbit create: Successfully created new Interbit app ${options.appName}!`
-  )
+  try {
+    await create(options)
+    console.log(
+      `interbit create: Successfully created new Interbit app ${
+        options.appName
+      }!`
+    )
+  } catch (e) {
+    console.error(`interbit create: ERROR ${e}`)
+    process.exit(1)
+  }
 }
 
 run()

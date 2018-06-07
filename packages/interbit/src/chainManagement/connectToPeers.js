@@ -1,4 +1,4 @@
-// Port 443 appropriate for heroku deployment
+// Port 443 appropriate for https deployment
 const DEFAULT_PORT = 443
 
 const connectToPeers = async (

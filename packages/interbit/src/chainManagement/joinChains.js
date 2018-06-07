@@ -115,6 +115,10 @@ const establishReceiveActions = async (
       console.warn(`Unknown alias: ${alias}`)
       continue
     }
+    if (!authorizedActions) {
+      console.warn(`No authorized actions for write join to: ${alias}`)
+      continue
+    }
     const { chainId: senderChainId } = manifest[alias]
     const authorizeReceiveAction = authorizeReceiveActions({
       senderChainId,

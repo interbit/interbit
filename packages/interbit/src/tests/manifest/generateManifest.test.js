@@ -158,7 +158,6 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
       }
     }
 
-    console.log(config)
     const manifest = generateManifest(location, config, defaultCovenants)
 
     should.ok(manifest.manifest)
@@ -178,5 +177,55 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
     should.ok(manifest.manifest[ROOT_CHAIN_ALIAS])
     should.ok(manifest.manifest[ROOT_CHAIN_ALIAS].chains.control)
     should.ok(manifest.manifest[ROOT_CHAIN_ALIAS].chains.public)
+  })
+
+  it('creates a write join from parent to child authorizing the SET_MANIFEST action', () => {
+    const config = {
+      ...defaultConfig,
+      staticChains: {
+        control: {
+          ...defaultConfig.staticChains.control,
+          childChains: ['public']
+        },
+        public: {
+          ...defaultConfig.staticChains.public
+        }
+      }
+    }
+
+    const manifest = generateManifest(location, config, defaultCovenants)
+
+    should.ok(manifest.manifest)
+    should.ok(manifest.manifest[ROOT_CHAIN_ALIAS])
+
+    const rootJoins = manifest.manifest[ROOT_CHAIN_ALIAS].joins
+    should.ok(rootJoins)
+    should.ok(rootJoins.sendActionTo)
+    should.equal(rootJoins.sendActionTo[0].alias, 'control')
+
+    const controlChain = manifest.manifest[ROOT_CHAIN_ALIAS].chains.control
+    should.ok(controlChain)
+
+    const controlJoins = controlChain.joins
+    should.ok(controlJoins)
+    should.ok(controlJoins.sendActionTo)
+    should.equal(controlJoins.sendActionTo[0].alias, 'public')
+    should.ok(controlJoins.receiveActionFrom)
+    console.log(JSON.stringify(controlJoins, null, 2))
+    should.equal(controlJoins.receiveActionFrom[0].alias, ROOT_CHAIN_ALIAS)
+    should.deepEqual(controlJoins.receiveActionFrom[0].authorizedActions, [
+      '@@MANIFEST/SET_MANIFEST'
+    ])
+
+    const publicChain = controlChain.chains.public
+    should.ok(publicChain)
+
+    const publicJoins = publicChain.joins
+    should.ok(publicJoins)
+    should.ok(publicJoins.receiveActionFrom)
+    should.equal(publicJoins.receiveActionFrom[0].alias, 'control')
+    should.deepEqual(publicJoins.receiveActionFrom[0].authorizedActions, [
+      '@@MANIFEST/SET_MANIFEST'
+    ])
   })
 })

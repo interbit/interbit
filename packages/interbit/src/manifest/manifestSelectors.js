@@ -43,9 +43,45 @@ const getRootChildren = manifest => {
   return manifestTree[ROOT_CHAIN_ALIAS].chains
 }
 
+const getChildChainByAlias = (chainAlias, manifest) => {
+  const manifestTree = getManifest(manifest)
+  const rootTree = manifestTree[ROOT_CHAIN_ALIAS]
+  if (chainAlias === ROOT_CHAIN_ALIAS) {
+    return rootTree
+  }
+
+  return findAliasInSubtree(chainAlias, rootTree)
+}
+
+const findAliasInSubtree = (chainAlias, subtree) => {
+  const children = subtree.chains
+  if (!children) {
+    return undefined
+  }
+
+  for (const childChainAlias of Object.keys(children)) {
+    if (childChainAlias === chainAlias) {
+      return subtree.chains[chainAlias]
+    }
+
+    const childChain = subtree.chains[childChainAlias]
+    if (childChain.chains) {
+      for (const grandChildChain of Object.values(childChain.chains)) {
+        const found = findAliasInSubtree(chainAlias, grandChildChain)
+        if (found) {
+          return found
+        }
+      }
+    }
+  }
+  return undefined
+}
+
 module.exports = {
+  findAliasInSubtree,
   getApps,
   getChains,
+  getChildChainByAlias,
   getCovenants,
   getGenesisBlocks,
   getPeers,

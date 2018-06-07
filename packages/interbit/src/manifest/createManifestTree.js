@@ -1,8 +1,13 @@
 const _ = require('lodash')
 const {
+  rootCovenant: { actionTypes }
+} = require('interbit-covenant-tools')
+
+const {
+  getAdminValidators,
   getChainCovenant,
   getChainJoins,
-  getAdminValidators
+  getParentByChainAlias
 } = require('../config/configSelectors')
 const {
   genesisBlockSelectors: { getChainId }
@@ -20,11 +25,14 @@ const createManifestTree = (config, manifest) => {
     chains
   )
 
+  const joins = configureCascadingJoins(undefined, Object.keys(chains), {})
+
   return {
     [ROOT_CHAIN_ALIAS]: {
       chainId,
       validators,
       covenants,
+      joins,
       chains
     }
   }
@@ -73,12 +81,21 @@ const getManifestEntry = (chainAlias, config, manifest, visited) => {
 
   const nowVisited = visited.concat(chainAlias)
 
-  const joins = getChainJoins(chainAlias, config)
+  const existingJoins = getChainJoins(chainAlias, config)
   const chains = getChainsChildren(chainAlias, config, manifest, nowVisited)
   const covenants = getSubtreeCovenants(
     chainAlias,
     getChainCovenant(chainAlias, config),
     chains
+  )
+
+  const childAliases = Object.keys(chains) || []
+  const parentAlias =
+    getParentByChainAlias(chainAlias, config) || ROOT_CHAIN_ALIAS
+  const joins = configureCascadingJoins(
+    parentAlias,
+    childAliases,
+    existingJoins
   )
 
   return {
@@ -99,6 +116,29 @@ const getSubtreeCovenants = (chainAlias, myCovenant, chains) => ({
     {}
   )
 })
+
+const configureCascadingJoins = (parentAlias, childAliases, existingJoins) => {
+  const childJoins = childAliases
+    ? childAliases.map(childAlias => ({
+        alias: childAlias
+      }))
+    : []
+  const parentJoin = parentAlias
+    ? {
+        alias: parentAlias,
+        authorizedActions: [actionTypes.SET_MANIFEST]
+      }
+    : []
+
+  const existingSend = existingJoins.sendActionTo || []
+  const existingReceive = existingJoins.receiveActionFrom || []
+
+  return {
+    ...existingJoins,
+    sendActionTo: existingSend.concat(childJoins),
+    receiveActionFrom: existingReceive.concat(parentJoin)
+  }
+}
 
 const getChainsChildren = (chainAlias, config, manifest, visited) => {
   const chainConfig = config.staticChains[chainAlias]

@@ -1,6 +1,7 @@
 const assert = require('assert')
 const manifestSelectors = require('../../manifest/manifestSelectors')
-const { defaultManifest } = require('./testData')
+const { ROOT_CHAIN_ALIAS } = require('../../chainManagement/constants')
+const { defaultManifest } = require('../testData')
 
 const chainAlias = 'control'
 
@@ -44,6 +45,17 @@ describe('Manifest Selectors', () => {
       defaultManifest
     )
 
-    assert.equal(expectedCovenantHash, actualCovenantHash)
+    assert.equal(actualCovenantHash, expectedCovenantHash)
+  })
+
+  it('gets a child chain from the manifestTree by chain alias', () => {
+    const expectedChildChain =
+      defaultManifest.manifest[ROOT_CHAIN_ALIAS].chains.public
+    const actualChildChain = manifestSelectors.getChildChainByAlias(
+      'public',
+      defaultManifest
+    )
+
+    assert.equal(actualChildChain, expectedChildChain)
   })
 })

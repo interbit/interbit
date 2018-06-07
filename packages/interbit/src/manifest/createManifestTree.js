@@ -19,11 +19,8 @@ const createManifestTree = (config, manifest) => {
   const chainId = getChainId(genesisBlocks[ROOT_CHAIN_ALIAS])
   const validators = getAdminValidators(config) // I suspect this should not be getting the admin validators but the ones for the chain, specifically
   const chains = getRootSubtrees(ROOT_CHAIN_ALIAS, config, manifest)
-  const covenants = getSubtreeCovenants(
-    ROOT_CHAIN_ALIAS,
-    'rootCovenant', // TODO: Always deploy the root covenant and know what it is
-    chains
-  )
+  const covenant = ROOT_CHAIN_ALIAS
+  const covenants = getSubtreeCovenants(ROOT_CHAIN_ALIAS, covenant, chains)
 
   const joins = configureCascadingJoins(undefined, Object.keys(chains), {})
 
@@ -31,6 +28,7 @@ const createManifestTree = (config, manifest) => {
     [ROOT_CHAIN_ALIAS]: {
       chainId,
       validators,
+      covenant,
       covenants,
       joins,
       chains
@@ -83,11 +81,8 @@ const getManifestEntry = (chainAlias, config, manifest, visited) => {
 
   const existingJoins = getChainJoins(chainAlias, config)
   const chains = getChainsChildren(chainAlias, config, manifest, nowVisited)
-  const covenants = getSubtreeCovenants(
-    chainAlias,
-    getChainCovenant(chainAlias, config),
-    chains
-  )
+  const covenant = getChainCovenant(chainAlias, config)
+  const covenants = getSubtreeCovenants(chainAlias, covenant, chains)
 
   const childAliases = Object.keys(chains) || []
   const parentAlias =
@@ -101,6 +96,7 @@ const getManifestEntry = (chainAlias, config, manifest, visited) => {
   return {
     chainId: getChainId(manifest.genesisBlocks[chainAlias]),
     validators: getAdminValidators(config),
+    covenant,
     covenants,
     joins,
     chains

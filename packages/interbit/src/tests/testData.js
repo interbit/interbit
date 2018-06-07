@@ -59,7 +59,7 @@ const defaultManifest = {
   apps: {
     template: {
       appChain: 'public',
-      buildLocation: '..\\build',
+      buildLocation: 'build/',
       browserChains: ['public']
     }
   },
@@ -234,12 +234,32 @@ const defaultManifest = {
     interbitRoot: {
       chainId:
         '1f86d89a3109b0bc2c3706dc104302b33625955e74774c2ab77d0341744186a6',
-      validators: [
-        '-----BEGIN PGP PUBLIC KEY BLOCK-----\nVersion: OpenPGP.js v2.5.2\nComment: http://openpgpjs.org\n\nxk0EWN0/BQEB/1R8H/WSzYR97uXnm7XpynjIlo6WK+qTuzQr3Gtb5Q6jV/HO\n7Yl9BjCbpbA4OXdT/1CImJ53zvJBZAcNUrW9Wc8AEQEAAc0RQlRMIDxpbmZv\nQGJ0bC5jbz7CdQQQAQgAKQUCWN0/BQYLCQcIAwIJEEq0xDiCCwdsBBUICgID\nFgIBAhkBAhsDAh4BAAAO7AH9E9DuIPDCDGAmREffEDtbP4JOjzIl45VqoH5M\nPThXGWNuYVb9Nn7GD8iCqBHRFhhhaXMVuDr7e68qd/I+CvKX0c5NBFjdPwUB\nAf9soNyJh4Sv3zuh2kG0byjTtGMFwTZ+QmnEYtlm/q4F59J5gmlv52OTY+bH\na2HLGmzuTFxwr1jkSOA8CfYp85/nABEBAAHCXwQYAQgAEwUCWN0/BQkQSrTE\nOIILB2wCGwwAAHHIAf9Ohcudsms6N9d6uGRXfLy/Ltu8uR37fmG242zjCLg4\nfT2QuwcZCN8hKMUuD2kvbh502ov9Kdr8cE81Mxs+pkPC\n=yjbz\n-----END PGP PUBLIC KEY BLOCK-----'
-      ],
-      covenants: {},
+      validators: ['SuperSecurePubKey'],
+      covenant: 'interbitRoot',
+      covenants: {
+        interbitRoot: 'interbitRoot',
+        control: 'control'
+      },
+      joins: {
+        sendActionTo: [
+          {
+            alias: 'public'
+          },
+          {
+            alias: 'control'
+          }
+        ],
+        receiveActionFrom: []
+      },
       chains: {
         public: {
+          chainId:
+            '065fecd743c758700c052cb4d8ba42a4e1df17d0e02061bfb2e9820abcac270f',
+          validators: ['SuperSecurePubKey'],
+          covenant: 'public',
+          covenants: {
+            public: 'public'
+          },
           joins: {
             consume: [
               {
@@ -247,11 +267,25 @@ const defaultManifest = {
                 path: ['interbitServices'],
                 joinName: 'INTERBIT_SERVICES'
               }
+            ],
+            sendActionTo: [],
+            receiveActionFrom: [
+              {
+                alias: 'interbitRoot',
+                authorizedActions: ['@@MANIFEST/SET_MANIFEST']
+              }
             ]
           },
-          covenant: 'public'
+          chains: {}
         },
         control: {
+          chainId:
+            'fd23cdf36dc48c9a968bad4fcb85d036aad747daf2b044db7a254a24fbc9e969',
+          validators: ['SuperSecurePubKey'],
+          covenant: 'control',
+          covenants: {
+            control: 'control'
+          },
           joins: {
             provide: [
               {
@@ -259,9 +293,16 @@ const defaultManifest = {
                 path: ['interbitServices', 'shared'],
                 joinName: 'INTERBIT_SERVICES'
               }
+            ],
+            sendActionTo: [],
+            receiveActionFrom: [
+              {
+                alias: 'interbitRoot',
+                authorizedActions: ['@@MANIFEST/SET_MANIFEST']
+              }
             ]
           },
-          covenant: 'control'
+          chains: {}
         }
       }
     }

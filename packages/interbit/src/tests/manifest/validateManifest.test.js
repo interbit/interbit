@@ -1,7 +1,7 @@
 const should = require('should')
 const { ROOT_CHAIN_ALIAS } = require('../../chainManagement/constants')
 const validateManifest = require('../../manifest/validateManifest')
-const { defaultManifest } = require('./testData')
+const { defaultManifest } = require('../testData')
 
 const rootGenesis = defaultManifest.genesisBlocks[ROOT_CHAIN_ALIAS]
 
@@ -191,9 +191,6 @@ describe('validateManifest', () => {
       validateManifest(manifest)
     }).throw(/Genesis block for "interbitRoot" has no blockMaster/)
   })
-
-  // TODO: Implement this for issue #267
-  it('throws when chains do not allow root chain to SET_MANIFEST')
 
   it('throws when chain IDs do not have corresponding genesis blocks', () => {
     const manifest = {

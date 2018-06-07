@@ -21,7 +21,6 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
 
     const hash = manifest.hash
     delete manifest.hash
-
     const compareHash = objectHash(manifest)
 
     should.equal(hash, compareHash)
@@ -179,6 +178,33 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
     should.ok(manifest.manifest[ROOT_CHAIN_ALIAS].chains.public)
   })
 
+  it('includes necessary configuration data in manifest tree', () => {
+    const manifest = generateManifest(location, defaultConfig, defaultCovenants)
+
+    should.ok(manifest.manifest)
+    should.ok(manifest.manifest[ROOT_CHAIN_ALIAS])
+
+    const rootChain = manifest.manifest[ROOT_CHAIN_ALIAS]
+    should.ok(rootChain)
+    should.ok(rootChain.chainId)
+    should.ok(rootChain.validators)
+    should.ok(rootChain.covenants)
+    should.ok(rootChain.joins)
+    should.ok(rootChain.chains)
+    should.ok(rootChain.covenant)
+    // should.ok(rootChain.acl)
+
+    const controlChain = rootChain.chains.control
+    should.ok(controlChain)
+    should.ok(controlChain.chainId)
+    should.ok(controlChain.validators)
+    should.ok(controlChain.covenants)
+    should.ok(controlChain.joins)
+    should.ok(controlChain.chains)
+    should.ok(controlChain.covenant)
+    // should.ok(controlChain.acl)
+  })
+
   it('creates a write join from parent to child authorizing the SET_MANIFEST action', () => {
     const config = {
       ...defaultConfig,
@@ -211,7 +237,6 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
     should.ok(controlJoins.sendActionTo)
     should.equal(controlJoins.sendActionTo[0].alias, 'public')
     should.ok(controlJoins.receiveActionFrom)
-    console.log(JSON.stringify(controlJoins, null, 2))
     should.equal(controlJoins.receiveActionFrom[0].alias, ROOT_CHAIN_ALIAS)
     should.deepEqual(controlJoins.receiveActionFrom[0].authorizedActions, [
       '@@MANIFEST/SET_MANIFEST'

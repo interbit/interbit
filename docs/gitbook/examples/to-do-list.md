@@ -1,425 +1,259 @@
 
-## To Do List
+# To-do List Example Application
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>This example needs a shiny new UI</p>
-</div>
+In the `packages/app-todo-list` directory, we provide a simple To-do List application running on an Interbit blockchain. The application can add items to the to-do list, edit existing items, and toggle the completed state of items.
 
-
-In the `InterbitSDK/examples/to-do-list` directory, we have provided a simple To Do List application running on an Interbit blockchain. The application can add items that need to be done to the list, however those items cannot be toggled.
-
-The following is a brief description of the example To Do application as it currently exists, followed by a tutorial on how to add functionality to toggle To Do items.
+This application was created using the Interbit [Template app](./template), and what follows is a description of the app and how to recreate it from the Template. The To-do List uses the same Interbit configuration as the Template. As such, to-do items are added to the user's private chain.
 
 #### Requirements
 
-<div class="tips danger">
-  <p><span></span>TODO</p>
-  <p>Versions need updating.</p>
-</div>
+* <a href="https://nodejs.org" target="_blank">Node.js</a> 8.6 or higher
+* <a href="https://nodejs.org" target="_blank">NPM</a> 5.8 or higher
 
-* <a href="https://nodejs.org" target="_blank">Node.js</a> 7.10 or higher
-* npm 4.2.0
-* mocha
+## Run the Application
 
-### Run the Application
-
-To get started, run the following commands in your console:
+To get started, run the following commands in your console from the `interbit` repo's root:
 
 ```bash
-$ cd /InterbitSDK/examples/to-do-list/
-$ npm install
-$ npm test
-$ npm start
+npm install
+npm run build:modules
+cd packages/app-todo-list
+npm run interbit:start
 ```
 
-The `npm test` command runs a Mocha test suite designed to ensure the Smart Contract works correctly. The `npm start` command fires up an Interbit blockchain and makes it work, printing actions and the resulting state to the console.
+The `interbit:start` command fires up an Interbit node which runs the blockchain. The chain statuses and blocking actions are printed in the console, and the message 'Updating index.html with chain data' indicates that the blockchain node is ready. Leave this process running.
+
+In another console run:
+```bash
+cd packages/app-todo-list
+npm start
+```
+
+The `start` command runs the React application which has a UI to interact with the blockchain. Open your browser to `localhost:3055` to view the To-do List app. There are 3 pages in the application, which are accessible from the main navigation menu.
+
+The To-do List page shows a friendly UI with a form to add items and a table displaying them. The table is initially empty, but once an item is added you can mark it as completed and edit the item's title and description.
+
+The Private Chain page displays the private chain's state and also provides a UI for adding and editing to-do items. Try adding a to-do item on this page and you will see the item added to the `todos` array on the left.
+
+The Block Explorer page is an interactive tool for viewing the private chain's blocks, the chain state, actions that were dispatched to the chain, and block metadata.
+
+You can optionally run
+```bash
+cd packages/app-todo-list
+npm test
+```
+in another console to run a test watcher. The To-do List app comes with all the tests from the Template app and tests for the to-do list private chain actions.
 
 
-<div class="tips warning">
-  <p><span></span>Help: Localhost instance is asking for a username and password</p>
-  <p><strong>Problem:</strong> After running <code>npm install</code>, the console printed that the app was serving on localhost, so I went there and was asked for a username and password.</p>
-  <p><strong>Solution:</strong> It sounds like you ran <code>npm install</code> from the SDK root directory. Before you run an example, make sure that have switched into the example's root directory.</p>
-</div>
+## Application Structure
+
+If you look in the `packages/app-todo-list` directory, you will see a basic application built on Interbit. Refer to the [Template docs](./template.md#application-structure) for detailed information on these directories and files. This document only covers the changes we made to the Template files to build our To-do List app. Specifically, we take a closer look at the private chain actions in `src/interbit/private`, the tests in `src/tests/privateCovenant.test.js`, `src/adapters/privateChainAdapter.js`, and the React components in `src/components`.
+
+Directory | Purpose
+----------|-----------
+`public`                  | Website's public directory
+`src`                     | Source code for the app
+`src/adapters`            | A set of adapters to fill UI details for the covenant forms
+`src/components`          | React components
+`src/constants`           | A file of constants that are used throughout the application (Ex. URLs)
+`src/containers`          | React components that are connected to Redux state
+`src/css`                 | The css
+`src/interbit`            | All of the covenants needed for this application
+`src/redux`               | Reducers and any other Redux related files
+`tests`                   | Jest tests
+`App.js`                  | The main React component that loads the SPA
+`exports.js`              | A file to export anything that may be needed outside of this project (Ex. covenant action creators)
+`index.js`                | The file that creates the Redux store, attaches the [Interbit middleware](../reference/interbit-middleware/README.md), and runs the SPA
+`registerServiceWorker.js` | A file used by create-react-app to register a [service worker](https://developers.google.com/web/fundamentals/primers/service-workers/)
+`interbit.config.js`      | The [Interbit configuration file](../reference/interbit-cli/config.md)
+`interbit.prod.config.js` | The production environment interbit configuration file
+`keyPair.js`              | A file to import a public private key pair from environment variables when in production
+`static.json`             | Used to serve a single page application (SPA) in Heroku. This describes where to fallback if routes are not matched (Returning 404)
 
 
-### Example
+## Walk-through
 
-Some key concepts used in this example are:
-* [Actions](../key-concepts/README.md#action)
-* [Application State (or State)](../key-concepts/README.md#application-state)
-* [Blockchain](../GLOSSARY.md#blockchain)
-* [Smart Contracts](../key-concepts/README.md#smart-contracts)
-* [Strobe](../GLOSSARY.md#strobe)
+In this section, we step through the code that is specific to the To-do List app. This app is a modified clone of the Template app, so we highlight any changes that were made to the Template files and any new files we've added.
 
-If you look in the `examples/to-do-list` directory, you will see a basic application built on Interbit. Along with a few files, there are three subdirectories: build, src, and tests.
+### Set Up and Configuration
 
-Directory/File | Purpose
--------------- | -------
-build          | compiled ES6 files
-src            | source code that will run on the Interbit blockchain
-tests          | Mocha test suite to make sure the Smart Contracts work correctly
-.babelrc       | configuration for ES6 compiler
-index.js       | app entry point - the run script that starts a blockchain with the code in `src`
-package.json   | NPM configuration file
+We named our app `app-todo-list` and updated our public and private covenant names correspondingly. See:
 
-In this example, we are only going to examine `src`, `tests`, and `index.js`. In the `src` directory, we will pay special
-attention to `actions.js` and `smartContracts.js`. There is also a `src/keys.js` file, which contains the private and public keys for initializing the chain. That file is not relevant for this tutorial since it does not play a key role in the application's functionality.
+- `package.json`
+- `interbit.config.js`
+- `interbit.prod.config.js`
+
+The public, private, and control chain configurations are exactly as they are in the Template app&mdash;all we've done is rename things here. The Template app is configured so that users can dispatch actions to their private chain, so our To-do List app does the same. Users have their own private to-do lists. In the future, we may extend this example so that users can have shared lists.
+
+### Modifying the Private Covenant
+
+Our To-do List app allows users to add items, edit items, and mark items as complete in their to-do list. These actions are described in the app's private covenant in `src/interbit/private`. We've removed the actions included in the Template app and added the `ADD_TODO`, `EDIT_TODO`, and `TOGGLE_TODO` actions.
+
+Actions are dispatched to the chain during operation, and are passed to the [smart contract](../key-concepts/README.md#smart-contracts) to change the [application state](../key-concepts/README.md#application-state). Interbit follows the Redux design pattern, so actions in the Interbit covenants are essentially the same as actions in Redux. All the same, we'll go through each of the files in `src/interbit/private`.
 
 
-This To Do List example is setup as an interactive tutorial. If you want to skip ahead to the interactive part of the tutorial, [go ahead](to-do-list.md#adding-toggle-functionality).
+<div class="filename">actionTypes.js</div>
 
-In this example,
-1. we will step through the components of the example as it is now, and address what each component does, and how each works.
-  1. [Actions](to-do-list.md#actions)
-  1. [Smart Contract](to-do-list.md#smart-contract)
-  1. [Testing](to-do-list.md#testing)
-  1. [Script](to-do-list.md#script)
-1. we will add new code to each of the sections covered in order to add toggling functionality to the To Do List.
-  1. [Adding an Action](to-do-list.md#adding-a-new-action)
-  1. [Handling the Action](to-do-list.md#handling-the-action-in-the-smart-contract)
-  1. [Testing the Action](to-do-list.md#testing-the-action)
-  1. [Dispatching the Action](to-do-list.md#dispatching-the-action-to-the-chain)
-
-
-
-#### Actions
-
-Actions serve two purposes:
-* They are dispatched to the chain during operation, and passed to the Smart Contracts to change the Application State.
-* They are passed to the chain on initialization to inform it of which operations are valid.
-
-To ensure that we always have a consistent Action format, we describe our Action types and use a set of functions to generate our Actions with a consistent format. This file is called `actions.js` by convention, and is located in `/src/actions.js` in this example.
-
-Once the Action types are defined and passed to the chain on initialization, you can dispatch them to the chain, which then passes them through the Smart Contracts with the current state.
-
-<div class="filename">src/actions.js</div>
+This is a constants file that names each of our actions, a.k.a. our action types.
 
 ```js
-let actions = {
-  ADD_ITEM: 'ADD_ITEM',
-  addItem: (id, label, description) => {
-    return {
-      type: actions.ADD_ITEM,
-      payload: {
-        id,
-        label,
-        description
-      }
+const covenantName = 'app-todo-list-private'
+
+const actionTypes = {
+  ADD_TODO: `${covenantName}/ADD_TODO`,
+  EDIT_TODO: `${covenantName}/EDIT_TODO`,
+  TOGGLE_TODO: `${covenantName}/TOGGLE_TODO`
+}
+
+module.exports = actionTypes
+```
+
+
+<div class="filename">action.js</div>
+
+We define the [action creators](../reference/interbit-middleware/actionCreators) here, each with an action type (e.g. `ADD_TODO`) and a payload.
+
+```js
+const actionTypes = require('./actionTypes')
+
+const actionCreators = {
+  addTodo: (title, description) => ({
+    type: actionTypes.ADD_TODO,
+    payload: {
+      title,
+      description
     }
-  },
+  })
   // ...
 }
+
+module.exports = {
+  actionTypes,
+  actionCreators
+}
 ```
 
-<div class="tips info">
-  <p><span></span>The <code>ADD_ITEM</code> Action Type and Creator</p>
-  <p>In the snippet above, an Action type and creator function for that item are shown. The creator function accepts parameters we need to process this Action, so that when we make an Action anywhere in our application or tests, we know we are always supplying the Smart Contract with the required payload.</p>
-</div>
 
-#### Smart Contract
+<div class="filename">index.js</div>
 
-The Smart Contract has several responsibilities. These include:
-* accepting Actions and a current state to generate a new state
-* defining the state changes to occur for each Action type
+This file defines the initial private chain state and the smart contract, which is implemented as a Redux reducer. The smart contract defines how each action changes the application's state. It accepts actions and a current state then generates a new state. In other words, the smart contract does "the stuff" in an application and contains most of the business logic. In our app, the `ADD_TODO` action adds an object such as `{id: 0, title: 'foo', description: 'bar', completed: false}` to the `todos` array in the private chain state.
 
-In our example, we have defined an Action to add an item that is handled by our Smart Contract. When the Smart Contract receives an `ADD_ITEM` Action, it updates the state to include the item described by the Action. The results of this operation are deterministic. If the same inputs are passed to the Smart Contract, it will repeat its output exactly.
+Note that the state is immutable so we enforce this with the `seamless-immutable` library.
 
-<div class="filename">src/smartContracts.js</div>
 
 ```js
-// ...
-(itemsState = Immutable.from(initialState.items), action) => {
+const Immutable = require('seamless-immutable')
+
+const {
+  cAuthConsumerCovenant,
+  mergeCovenants
+} = require('interbit-covenant-tools')
+
+const { actionTypes, actionCreators } = require('./actions')
+
+const initialState = Immutable.from({
+  chainMetadata: { name: `To-do list application - User's private chain` },
+  todos: []
+})
+
+const reducer = (state = initialState, action) => {
+  if (action.type.endsWith('STROBE')) {
+    return state
+  }
+
+  console.log('REDUCING: ', action)
+
   switch (action.type) {
-    case actions.ADD_ITEM:
-      action.payload.isDone = false
-      itemsState = itemsState.concat(action.payload)
-      break
+    case actionTypes.ADD_TODO: {
+      const { title, description } = action.payload
+      const todos = state.getIn(['todos'], Immutable.from([]))
+      const id = todos.length
+      const completed = false
 
+      return title
+        ? state.set(
+            'todos',
+            todos.concat({ id, title, description, completed })
+          )
+        : state
+    }
     // ...
-
     default:
-      break
-  }
-  return itemsState
-}
-// ...
-```
-
-<div class="tips info">
-  <p><span></span>Snippet of Smart Contract to Add a New To Do Item</p>
-  <p>Above, you can see the part of the Smart Contract that updates the state based on the Action type that was just received. In this case, the <code>ADD_ITEM</code> Action contains the To Do item that is being added in the payload. We are ensuring that the item is not marked done, and then adding that item to the state.</p>
-  <p>Because the state is immutable, we are are enforcing this in our Smart Contract with the <code>seamless-immutable</code> library. The Action, however, is mutable, and you can see in the snippet that we are setting done to false before including the payload in the state.</p>
-</div>
-
-#### Testing
-
-This example demonstrates two types of testing:  integration testing and unit testing.
-* The integration tests use the reduce function to simulate the process of the chain passing the previous state and the series of Actions into the Smart Contract, and asserts on the resulting state.
-* The unit tests supply one mocked Action at a time to the Smart Contract, and asserts specific results on output state to ensure each Action does not produce extraneous edge cases in our integration tests.
-
-Although other systems are not integrated into the integration tests, the integration tests are named as such because the other systems integrate with the Smart Contracts and chain by dispatching Actions. This means that calling the reduce function as such is essentially mocking the integration of other parts of the system.
-
-The delineation between these two types of tests is not obvious in an example as simple as the one above. However, we hope it inspires you to use these types of tests on your own in more interesting circumstances.
-
-#### index.js
-
-The simple script in our example moves through a series of tasks to set up an application chain and send Actions to it, each time printing the resulting state to the console.  The series of tasks is as follows:
-
-1. It ties Actions, Smart Contracts, and the application chain together.
-1. It creates a chain based on the Actions and Smart Contract.
-1. It creates a [genesis block](../GLOSSARY.html#genesis-block).
-1. It animates the chain. An animated blockchain is one which has a running strobe, is connecting to other available nodes, and is creating blocks.
-1. It subscribes to the chain with a callback that will be called when the chain state changes.
-1. It dispatches an Action every few seconds to the chain to initiate state changes.
-1. When the chain updates its To Do List item state, it logs the resulting state to the console.
-
-While the script is running, it prints output to the console from the subscribed function. Every time the To Do List updates, it prints the list, and every time an Action is handled by the chain, it prints the Action so that you can see how the Actions affect the chain as they are processed.
-
-<div class="filename">index.js</div>
-
-```js
-//...
-  animatedChain.subscribe(() => {
-    const appState = animatedChain.getState()
-
-    if (previousItems !== appState.items) {
-      console.log('\r\nCurrent To Do list:')
-      appState.items.forEach((item, index) => {
-        const isDoneLabel = item.isDone ? 'Done' : '    '
-        console.log(' ' + isDoneLabel + ' | ' + item.label + ': ' + item.description)
-      })
-      console.log('\r\n')
-
-      previousItems = appState.items
-    }
-  })
-//...
-```
-
-<div class="tips info">
-  <p><span></span>The Chain Subscription</p>
-  <p>The subscribe function takes a callback that is called when the Application State changes. This is a very simple example of a subscription that checks to see if a specific portion of the state has updated, and then prints the state if it has changed. The subscribe function is very useful, enabling asynchronous requests based on certain state conditions, the dispatch of the results back to the chain, or the displaying of data to the user.</p>
-</div>
-
-There are several Actions that belong to Interbit, including an init Action and the strobe that fires periodically. Because the Smart Contracts do not define app state changes for these Actions, they do not affect the To Do List. They do trigger the subscription function though, which is why we check that the portion of the state that we are interested in has changed before printing it.
-
-### Tutorial: Adding Toggle Functionality
-
-After covering the parts of the application, we can now add greater functionality. To mark items as done, we need to find out what a To Do item looks like in the state. Below is a sample piece of item data used as a mock in the unit tests.
-
-<div class="filename">tests/unit.Test.js</div>
-
-```js
-// Sample of what a To Do Item looks like in Application State
-const itemData = {
-  id: 1,
-  label: 'Add toggle to the todo list example',
-  description: 'A todo list is not terribly useful if you can\'t mark items done. Implement the toggle feature',
-  isDone: false
-}
-```
-
-<div class="tips info">
-  <p><span></span>Did you notice the <code>isDone</code> property?</p>
-  <p>The <code>isDone</code> property looks like a good option for a toggle feature.</p>
-</div>
-
-You can use the following test for quick feedback on whether the toggle feature is changing the isDone property.
-
-<div class="filename">tests/integration.Test.js</div>
-
-```js
-  it('toggles items back and forth several times, twice, and once', function () {
-    const actionsToTake = [].concat(addItemActions[0], toggleItemAction, toggleItemAction, toggleItemAction)
-    const result = actionsToTake.reduce(smartContracts.items, initialState.items)
-
-    should.equal(true, result[0].isDone)
-
-    const moreActionsTaken = [].concat(toggleItemAction, toggleItemAction)
-    const secondResult = moreActionsTaken.reduce(smartContracts.items, result)
-
-    should.equal(true, secondResult[0].isDone)
-
-    const evenMoreActions = [].concat(toggleItemAction)
-    const thirdResult = evenMoreActions.reduce(smartContracts.items, secondResult)
-
-    should.equal(false, thirdResult[0].isDone)
-  })
-```
-
-<div class="tips info">
-  <p><span></span>Failing Tests</p>
-  <p>The new test will currently fail. Copy &amp; paste the snippet into <code>tests/integration.Test.js</code> to get started!</p>
-</div>
-
-#### Adding a New Action
-
-All Action information is stored in `/src/actions.js`, so this file needs to be updated with information relevant to our new Action.
-
-First, define a new Action type so that it can be dispatched to the chain. To ensure you can mark and unmark an item as done, define a `TOGGLE_ITEM` Action type in the exported Actions object.
-
-An Action creator is needed to define an Action to dispatch in an app or in tests. Supply the item id of the item to be toggled. The only relevant data in the Action payload to toggle an item is which item is to be toggled.
-
-<div class="filename">src/actions.js</div>
-
-```js
-TOGGLE_ITEM: 'TOGGLE_ITEM',
-toggleItem: (id) => {
-  return {
-    type: actions.TOGGLE_ITEM,
-    payload: {
-      id
-    }
+      return state
   }
 }
+
+const covenant = {
+  actionTypes,
+  actionCreators,
+  initialState,
+  reducer
+}
+
+module.exports = mergeCovenants([covenant, cAuthConsumerCovenant])
 ```
 
-<div class="tips info">
-  <p><span></span>The Action Type and Creator</p>
-  <p>We have defined a type and creator function above, which you can copy &amp; paste into <code>/src/actions.js</code>. To use it in your tests, go to <code>tests/unit.Test.js</code> and <code>tests/integration.Test.js</code>, and uncomment the calls to the toggle creators before the test suites</p>
-</div>
 
-#### Handling the Action in the Smart Contract
+### Tests for the Private Covenant
 
-An Action is of no use unless you define how it affects the state. Define this behavior in the Smart Contract. In this case, it is located in `/src/smartContracts.js`. In this file, there is a switch statement managing Action types (with one lonely Action being handled). Handle the `TOGGLE_TODO` Action here.
-
-It is important to use an immutable data structure to manage the state. Make sure you only use the data passed into the Smart Contract to influence the Smart Contract's output. In this case, we have already included the `seamless-immutable` library. You should try to use it or another immutable data library to make sure you do not change the state object passed into the Smart Contract every time you write one.
-
-Using an immutable object structure, and containing state in Smart Contract parameters instead of objects, is an easy way to keep the Smart Contract deterministic.
+Jest tests for private and control covenants are located in `src/tests/interbit`. We've updated `privateCovenant.test.js` with tests for the To-do List actions which have a watcher. Run `npm test` from the `app-todo-list` directory to view the results of the tests as you make changes to the code.
 
 
-<div class="filename">src/smartContracts.js</div>
+### The Private Chain Adapter and the Private Chain Page
+
+As described above, the Private Chain page displays the private chain's state and has some rudimentary UI for adding and editing to-do items. This is a handy development tool to interact with the private chain and verify that the application state is updating correctly. We use the `<Covenant />` component from the `interbit-ui-components` package to easily connect UI forms to the covenant actions.
+
+The Template app comes with the scaffolding to connect the private covenant actions to the `<Covenant />` component. We modified `src/adapters/privateChainAdapter.js` so that we can dispatch the `ADD_TODO` and `EDIT_TODO` actions from the Private Chains page.
+
+<div class="filename">src/adapters/privateChainAdapter.js</div>
 
 ```js
-      case actions.TOGGLE_ITEM:
-        const itemIndex = itemsState.findIndex(item => item.id === action.payload.id)
-        if (itemIndex !== -1) {
-          const isDone = !itemsState[itemIndex].isDone
-          itemsState = itemsState.setIn([itemIndex, 'isDone'], isDone)
-        }
-        break
-```
+const covenant = require('../interbit/private')
 
-<div class="tips info">
-  <p><span></span>The Case for <code>TOGGLE_TODO</code> in the Smart Contract</p>
-  <p>We have written a simple switch case for the <code>TOGGLE_TODO</code> Action above. It finds the index of the To Do item with the correct ID, then returns a new object with the item's <code>isDone</code> property toggled.</p>
-  <p>Copy &amp; paste this switch case into the switch statement in <code>/src/smartContracts.js</code>.</p>
-</div>
+const covenantName = 'Interbit To-do List Private Chain'
 
-#### Testing the Action
+const addTodoActionLabel = 'Add a to-do item'
+const addTodoTitleLabel = 'Enter a title *'
+const addTodoDescriptionLabel = 'Enter a description'
 
-Now the provided tests should pass! Run them and see.
+const editTodoActionLabel = 'Edit a to-do item'
+const editTodoIdLabel = 'Enter the ID of the to-do to edit'
+const editTodoTitleLabel = 'Enter a new title *'
+const editTodoDescriptionLabel = 'Enter a new description'
 
-```bash
-$ npm test
-```
-
-Look at `tests/unit.Test.js`. It only tests that an item was added on  `ADD_ITEM`. It also has an empty test for `TOGGLE_ITEM` that is currently being skipped.
-
-Clearly, an unwritten test is not a suitable unit test. We will add one to the suite, and run the tests again. The unit test should set up by adding an item to the initial state that has not been done, and by creating a `TOGGLE_ITEM` Action with that item's ID. The test will act by passing the state and Action that were made during setup to the items Smart Contract. Finally, it will assert that the only item in the returned state is the initial item, and that it has been marked done.
-
-
-<div class="filename">tests/unit.Test.js</div>
-
-```js
-  it('toggles the isDone property of an item on TOGGLE_ITEM action', function () {
-    const toggleItemAction = actions.toggleItem(itemData.id)
-    const state = initialState.setIn(['items', 0], itemData)
-
-    const itemsState = smartContracts.items(state.items, toggleItemAction)
-
-    should.equal(1, itemsState.length)
-    should.equal(itemData.id, itemsState[0].id)
-    should.equal(itemData.label, itemsState[0].label)
-    should.equal(itemData.description, itemsState[0].description)
-    should.equal(true, itemsState[0].isDone)
+const actionCreators = {
+  addTodo: () => ({
+    type: addTodoActionLabel,
+    arguments: {
+      [addTodoTitleLabel]: '',
+      [addTodoDescriptionLabel]: ''
+    },
+    invoke: ({
+      [addTodoTitleLabel]: title,
+      [addTodoDescriptionLabel]: description
+    }) => covenant.actionCreators.addTodo(title, description)
+  }),
+  editTodo: () => ({
+    type: editTodoActionLabel,
+    arguments: {
+      [editTodoIdLabel]: '',
+      [editTodoTitleLabel]: '',
+      [editTodoDescriptionLabel]: ''
+    },
+    invoke: ({
+      [editTodoIdLabel]: id,
+      [editTodoTitleLabel]: title,
+      [editTodoDescriptionLabel]: description
+    }) => covenant.actionCreators.editTodo(id, title, description)
   })
+}
+
+module.exports = {
+  covenantName,
+  actionCreators
+}
 ```
 
-<div class="tips info">
-  <p><span></span>A Unit Test for Item Toggling</p>
-  <p>This snippet is a unit test for item toggling, and can be copy &amp; pasted into the unit test suite to replace the empty test in  <code>/tests/unit.Test.js</code>.</p>
-</div>
+## Further Work
 
-#### Dispatching the Action to the Chain
-
-Now, we want to see this Action working on the Interbit blockchain. To do so, add the Action to the array that Interbit runs through in the   `index.js` script with the other Actions being dispatched.
-
-We will make two toggle items, and add them to our `actionsToTake` array near the bottom of the script.
-
-
-<div class="filename">index.js</div>
-
-```js
-  const toggleItem2 = actions.toggleItem(2)
-  const toggleItem3 = actions.toggleItem(3)
-
-  const actionsToTake = [].concat(addAction1, addAction2, addAction3, toggleItem2, toggleItem3)
-```
-
-<div class="tips info">
-  <p><span></span>Adding Some Toggle Actions</p>
-  <p>In this snippet, we have created items to toggle by the ID of the listed items. In this case, we are going to toggle Renew passport and Plan vacation. Maybe the vacation was planned while waiting in line at the passport office.</p>
-  <p>Move this code into the example, and run the app with <code>npm start</code>. It should dispatch our new Action to the Smart Contract and update the state as intended.</p>
-</div>
-
-Finally, we will run the application again to see our toggling in action.
-
-```bash
-$ npm start
-```
-
-### Putting it All Together
-
-This example has gone through the primary components of an Interbit application: the Actions, the Smart Contracts, the run script, and the tests. Hopefully, it is all starting to make more sense, and you have the basic tools you need to begin making your own Interbit  applications.
-
-If you have also added the toggle To Do functionality, then congratulations! You have just written your first Interbit Smart Contract, added it to the blockchain, and made it run by dispatching an Action. This is the basis of all Interbit application development -using the Smart Contract logic to process Action data to move the application state forward.
-
-
-<div class="tips success">
-  <p><span></span>The Solution</p>
-  <p>There is a copy of a possible solution for toggling and editing the To Do items in <code>InterbitSDK/examples/example-solutions/to-do-list</code>.</p>
-</div>
-
-### Further Work
-
-The list could still use some work. At the moment, there is no error checking, and the Smart Contract will accept any Action with an appropriate type just fine, whether you supplied meaningful data or not. This is a very basic example of what Interbit can do. If you want to forge ahead, and write your own Interbit application, you can go ahead and do that now, or, if you are not sure what you want to try next, you can try adding another Action and case statement to this To Do application.
-
-If you wish to add another Action, below are a couple of integration tests to include in your `tests/integration.Test.js` suite. These will get you started on adding an EDIT_ITEM Action to the To Do List example. There are a few To Do items in the `index.js` file that could use a description. Remember that state is immutable when editing the To Do item.
-
-
-<div class="filename">tests/integration.Test.js</div>
-
-```js
-  const editItemActions = [1, 2, 3, 4, 5].map(id => {
-    return actions.editItem(id, 'item' + id, 'Do something else', false)
-  })
-
-  it('edits items it has just added to the list', function () {
-    const actionsToTake = [].concat(addItemActions, editItemActions)
-    const result = actionsToTake.reduce(smartContracts.items, initialState.items)
-
-    should.equal('Do something else', result[0].description)
-    should.equal('Do something else', result[1].description)
-    should.equal('Do something else', result[2].description)
-    should.equal('Do something else', result[3].description)
-    should.equal('Do something else', result[4].description)
-  })
-
-  it('adds, edits, and toggles an item', function () {
-    const actionsToTake = [].concat(addItemActions[0], editItemActions[0], toggleItemAction)
-    const result = actionsToTake.reduce(smartContracts.items, initialState.items)
-    const item = result[0]
-
-    should.equal(1, item.id)
-    should.equal('item1', item.label)
-    should.equal('Do something else', item.description)
-    should.equal(true, item.isDone)
-  })
-```
-
-<div class="tips info">
-  <p><span></span>More Tests!</p>
-  <p>Copy &amp; paste these into <code>tests/integration.Test.js</code> to get started on adding an <code>EDIT_ITEM</code> action to the To Do List example.</p>
-</div>
+The to-do list app could still use some work. At the moment, there is no error checking, and the smart contract will accept any action with an appropriate type just fine, whether you supplied meaningful data or not. This is a very basic example of what Interbit can do. If you want to forge ahead, and write your own Interbit application, you can go ahead and do that now, or if you are not sure what you want to try next, you can try adding another action and case statement to this To-do List application.

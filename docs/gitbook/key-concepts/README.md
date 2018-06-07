@@ -61,7 +61,7 @@ switch (action.type) {
 
 <div class="tips info">
   <p><span></span>Example</p>
-  <p>To see actions in practice, please see the actions in the <a href="/examples/to-do-list.md#the-actions">To Do List</a> example.</p>
+  <p>To see actions in practice, please see the actions in the <a href="/examples/to-do-list.md#the-actions">To-do List</a> example.</p>
 </div>
 
 ## Application State
@@ -72,7 +72,7 @@ The initial Application State that you define for your application is the first 
 
 Below are samples of the various contexts in which you will work with the Application State.
 
-The initial Application State taken from the To Do List example:
+The initial Application State taken from the To-do List example:
 ```js
 import Immutable from 'seamless-immutable'
 

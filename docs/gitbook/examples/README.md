@@ -13,3 +13,4 @@ To develop Interbit applications, your development environment will need the fol
 - [Joining Chains](./joining.md)
 - [The Template App Walkthrough](./template.md)
 - [Determinism in Interbit](./determinism.md)
+- [To-do List App](./to-do-list.md)

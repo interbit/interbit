@@ -21,9 +21,6 @@ export { default as ContentBar } from './components/UIKit/ContentBar'
 export {
   default as ContentBarDefault
 } from './components/UIKit/ContentBarDefault'
-export {
-  default as ContentBarWithButton
-} from './components/UIKit/ContentBarWithButton'
 export { default as Divider } from './components/UIKit/Divider'
 export { default as Quote } from './components/UIKit/Quote'
 export { default as SidebarList } from './components/UIKit/SidebarList'

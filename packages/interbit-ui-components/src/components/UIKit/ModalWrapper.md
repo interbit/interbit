@@ -10,12 +10,12 @@ const header = (
 );
 const body = (
   <div>
-    <ContentBar image="chairmanmeow.jpg" className="image-sm" title="Email">
+    <ContentBar image="placeholder-md.png" className="image-sm" title="Email">
       <FormControl type="text" placeholder="Enter your email address to sign in" />
       <Checkbox inline={false}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</Checkbox>
       <IconButton text="Continue" />
     </ContentBar>
-    <ContentBar image="chairmanmeow.jpg" className="image-sm" title="Sign-up with GitHub">
+    <ContentBar image="placeholder-md.png" className="image-sm" title="Sign-up with GitHub">
       <Checkbox inline={false}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</Checkbox>
       <IconButton text="Continue" />
     </ContentBar>
@@ -34,7 +34,7 @@ Account App permissions modal
 ```js
 const header2 = (
   <div>
-    <ContentBar image="chairmanmeow.jpg" className="image-sm" title="App Name">
+    <ContentBar image="placeholder-md.png" className="image-sm" title="App Name">
       <p>This information is being shared with (app name). Control access to your information, etc adipiscing elit, sed do eiusmod tempor inc.</p>
     </ContentBar>
   </div>

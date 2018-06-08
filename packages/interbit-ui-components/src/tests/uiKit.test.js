@@ -10,7 +10,7 @@ import ConnectingTo from '../components/UIKit/ConnectingTo'
 import ContentBar from '../components/UIKit/ContentBar'
 import IconButton from '../components/UIKit/IconButton'
 import LinkWrapper from '../components/UIKit/LinkWrapper'
-import chairmanmeow from '../assets/chairmanmeow.jpg'
+import placeholder from '../assets/placeholder.svg'
 
 configure({ adapter: new Adapter() })
 
@@ -45,7 +45,7 @@ describe('<Card />', () => {
     const props = {
       title: "Ceci n'est pas un carte",
       content: 'foo',
-      image: chairmanmeow,
+      image: placeholder,
       callToActions: [
         {
           text: 'foo',
@@ -65,12 +65,12 @@ describe('<ConnectingTo />', () => {
   })
 
   it('renders an image if there is one', () => {
-    countChildren(<ConnectingTo image={chairmanmeow} {...props} />, 'img', 1)
+    countChildren(<ConnectingTo image={placeholder} {...props} />, 'img', 1)
   })
 
   it('renders a spinner if there is one', () => {
     countChildren(
-      <ConnectingTo spinner={chairmanmeow} {...props} />,
+      <ConnectingTo spinner={placeholder} {...props} />,
       'div.spinner',
       1
     )
@@ -81,7 +81,7 @@ describe('<ContentBar />', () => {
   const props = {}
   beforeEach(() => {
     props.title = 'foo'
-    props.image = chairmanmeow
+    props.image = placeholder
   })
 
   it('renders an <a /> if it has a titleTo', () => {

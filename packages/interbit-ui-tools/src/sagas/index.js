@@ -49,7 +49,13 @@ function* loadInterbitSaga() {
 function* privateChainSaga(action) {
   console.log(`${LOG_PREFIX}: *privateChainSaga()`, action)
 
-  const { privateChainAlias, publicChainAlias } = action.payload || {}
+  const {
+    privateChainAlias,
+    publicChainAlias,
+    sponsoredChainId,
+    privateChainId
+  } =
+    action.payload || {}
 
   try {
     const { interbit, cli, publicKey } = yield call(interbitContext)
@@ -59,7 +65,9 @@ function* privateChainSaga(action) {
       cli,
       publicKey,
       publicChainAlias,
-      chainAlias: privateChainAlias
+      chainAlias: privateChainAlias,
+      sponsoredChainId,
+      privateChainId
     })
   } catch (error) {
     console.error(`${LOG_PREFIX}: `, error)

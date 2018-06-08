@@ -5,6 +5,7 @@ const uuid = require('uuid')
 const {
   coreCovenant: {
     redispatch,
+    remoteRedispatch,
     actionCreators: { startProvideState },
     selectors: coreSelectors
   }
@@ -40,10 +41,11 @@ const initialState = Immutable.from({
     profileUrl: 'https://api.github.com/user',
     callbackUrl: process.env.OAUTH_CALLBACK_URL
   },
+
   // User profiles by chain ID. State shape is:
   //
   // profiles: {
-  //   [consumerChainId]: {
+  //   [privateChainId]: {
   //     sharedProfile: {
   //       id: 1234567,
   //       login: 'joeb',
@@ -54,6 +56,19 @@ const initialState = Immutable.from({
   //   }
   // }
   profiles: {},
+
+  // Users by GitHub ID: State shape is:
+  //
+  // users: {
+  //   [1234567]: {
+  //     privateChainId: 'abcdef123...',
+  //     publicKeys: [
+  //       '----BEGIN PUBLIC KEY...'
+  //     ]
+  //   }
+  // }
+  users: {},
+
   // Authentication requests in progress
   // (to prevent re-entrant authorization requests)
   authenticationRequests: {}
@@ -97,7 +112,8 @@ const reducer = (state = initialState, action) => {
       console.log('DISPATCH: ', action)
       const {
         requestId,
-        consumerChainId,
+        publicKey,
+        browserChainId,
         temporaryToken,
         error,
         errorDescription
@@ -106,7 +122,7 @@ const reducer = (state = initialState, action) => {
       if (error) {
         const failedAction = actionCreators.authFailed({
           requestId,
-          consumerChainId,
+          browserChainId,
           error: errorDescription || error
         })
 
@@ -131,7 +147,8 @@ const reducer = (state = initialState, action) => {
 
       const sagaAction = actionCreators.oAuthCallbackSaga({
         requestId,
-        consumerChainId,
+        publicKey,
+        browserChainId,
         temporaryToken
       })
 
@@ -142,17 +159,53 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.UPDATE_PROFILE: {
       console.log('DISPATCH: ', action)
-      const { consumerChainId, profile } = action.payload
+      const { privateChainId, profile } = action.payload
 
-      nextState = saveProfile(nextState, { consumerChainId, profile })
+      nextState = saveProfile(nextState, { privateChainId, profile })
+      return nextState
+    }
+
+    case actionTypes.REGISTER_PRIVATE_CHAIN: {
+      console.log('DISPATCH: ', action)
+      const { userId, privateChainId, publicKey } = action.payload
+
+      nextState = registerPrivateChain(nextState, {
+        userId,
+        privateChainId,
+        publicKey
+      })
+      return nextState
+    }
+
+    case actionTypes.UPDATE_PRIVATE_CHAIN_ACL: {
+      console.log('DISPATCH: ', action)
+      const { userId, privateChainId, publicKey } = action.payload
+
+      if (hasPublicKey(state, { userId, publicKey })) {
+        return state
+      }
+
+      const controlChainId = getControlChainId(state)
+
+      const actionToForward = actionCreators.addKeyToSponsoredChain({
+        sponsoredChainId: privateChainId,
+        authorizedActions: '*',
+        role: `GITHUB-${userId}`,
+        publicKey
+      })
+
+      console.log('REMOTE DISPATCH: ', actionToForward)
+      nextState = remoteRedispatch(nextState, controlChainId, actionToForward)
+
+      nextState = registerPublicKey(nextState, { userId, publicKey })
       return nextState
     }
 
     case actionTypes.REMOVE_PROFILE: {
       console.log('DISPATCH: ', action)
-      const { consumerChainId } = action.payload
+      const { privateChainId } = action.payload
 
-      nextState = removeProfile(nextState, { consumerChainId })
+      nextState = removeProfile(nextState, { privateChainId })
       return nextState
     }
 
@@ -177,20 +230,20 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.AUTH_FAILED: {
       console.log('DISPATCH: ', action)
-      const { requestId, consumerChainId } = action.payload
+      const { requestId, browserChainId } = action.payload
 
       nextState = removeAuthenticationRequest(nextState, { requestId })
-      nextState = removeProfile(nextState, { consumerChainId })
+      nextState = removeProfile(nextState, { privateChainId: browserChainId })
       return nextState
     }
 
     case actionTypes.SIGN_OUT: {
       console.log('DISPATCH: ', action)
-      const { consumerChainId } = action.payload
+      const { privateChainId } = action.payload
 
       // TODO: Consider what should happen when a user signs out
       // May want a separate token
-      nextState = removeProfile(nextState, { consumerChainId })
+      nextState = removeProfile(nextState, { privateChainId })
       return nextState
     }
 
@@ -212,17 +265,40 @@ const saveAuthenticationRequest = (state, { requestId, temporaryToken }) =>
 const removeAuthenticationRequest = (state, { requestId }) =>
   state.updateIn(['authenticationRequests'], Immutable.without, requestId)
 
-const saveProfile = (state, { consumerChainId, profile }) =>
-  state.setIn(['profiles', consumerChainId, 'sharedProfile'], profile)
+const saveProfile = (state, { privateChainId, profile }) =>
+  state.setIn(['profiles', privateChainId, 'sharedProfile'], profile)
 
-const removeProfile = (state, { consumerChainId }) =>
-  state.updateIn(['profiles'], Immutable.without, consumerChainId)
+const removeProfile = (state, { privateChainId }) =>
+  state.updateIn(['profiles'], Immutable.without, privateChainId)
 
-const findExistingJoin = (state, { consumerChainId }) => {
+const registerPrivateChain = (state, { userId, privateChainId, publicKey }) =>
+  state.setIn(['users', userId], { privateChainId, publicKeys: [publicKey] })
+
+const registerPublicKey = (state, { userId, publicKey }) => {
+  const path = ['users', userId, 'publicKeys']
+  const publicKeys = state.getIn(path, [])
+  if (publicKeys.includes(publicKey)) {
+    return state
+  }
+
+  return state.setIn(path, [...publicKeys, publicKey])
+}
+
+const hasPublicKey = (state, { userId, publicKey }) => {
+  const publicKeys = state.getIn(['users', userId, 'publicKeys'], [])
+  return publicKeys.includes(publicKey)
+}
+
+const getPrivateChainId = (state, { userId }) =>
+  state.getIn(['users', userId, 'privateChainId'])
+
+const getControlChainId = state => state.getIn(['controlChainId'])
+
+const findExistingJoin = (state, { privateChainId }) => {
   const joinProviders = selectors.joinProviders(state)
   return joinProviders.find(
     join =>
-      join.consumer === consumerChainId && join.joinName.startsWith('GITHUB-')
+      join.consumer === privateChainId && join.joinName.startsWith('GITHUB-')
   )
 }
 
@@ -235,7 +311,12 @@ function* rootSaga() {
 function* oAuthCallbackSaga(action, fetchApi = axios) {
   console.log('SAGA: ', action)
 
-  const { requestId, consumerChainId, temporaryToken } = action.payload
+  const {
+    requestId,
+    publicKey,
+    browserChainId,
+    temporaryToken
+  } = action.payload
 
   try {
     const providerChainId = yield select(coreSelectors.chainId)
@@ -268,18 +349,25 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
       fetchApi
     )
 
-    // TODO: Use profile.id to see if we already have a private chain for this user
-    // If so, return the chain id with an instruction to load it
-    // if not, return the join name with an instruction to load it (or could create the chain)
+    // Use profile.id to see if we already have a private chain for this user
+    const { id: userId } = profile
+    const privateChainId = yield call(enablePrivateChain, {
+      userId,
+      publicKey,
+      browserChainId
+    })
 
     // Make the github profile sharable to complete the cAuth loop
-    const joinName = yield call(shareProfile, { consumerChainId })
+    const joinName = yield call(shareProfile, { privateChainId })
 
-    yield put(actionCreators.updateProfile({ consumerChainId, profile }))
+    yield put(actionCreators.updateProfile({ privateChainId, profile }))
+
+    // This action will be picked up by waitForOAuth
     yield put(
       actionCreators.authSuceeded({
         requestId,
-        consumerChainId,
+        browserChainId,
+        privateChainId,
         providerChainId,
         joinName
       })
@@ -289,7 +377,7 @@ function* oAuthCallbackSaga(action, fetchApi = axios) {
     yield put(
       actionCreators.authFailed({
         requestId,
-        consumerChainId,
+        browserChainId,
         error: e.message
       })
     )
@@ -378,23 +466,55 @@ const extractProfile = ({ login, id, name, avatar_url }) => ({
   timestamp: Date.now()
 })
 
-function* shareProfile({ consumerChainId }) {
-  const existingJoin = yield select(findExistingJoin, { consumerChainId })
+function* enablePrivateChain({ userId, publicKey, browserChainId }) {
+  const existingPrivateChainId = yield select(getPrivateChainId, {
+    userId
+  })
+
+  if (existingPrivateChainId) {
+    // The GitHub user ID is already associated with a private chain
+    // Make sure the user can access it
+    yield put(
+      actionCreators.updatePrivateChainAcl({
+        userId,
+        privateChainId: existingPrivateChainId,
+        publicKey
+      })
+    )
+
+    return existingPrivateChainId
+  }
+
+  // The GitHub user ID is not yet associated with a private chain
+  // Use the chain created in the browser
+  yield put(
+    actionCreators.registerPrivateChain({
+      userId,
+      privateChainId: browserChainId,
+      publicKey
+    })
+  )
+
+  return browserChainId
+}
+
+function* shareProfile({ privateChainId }) {
+  const existingJoin = yield select(findExistingJoin, { privateChainId })
   if (existingJoin) {
-    console.log(`Already providing GitHub profile to ${consumerChainId}.`)
+    console.log(`Already providing GitHub profile to ${privateChainId}.`)
     return existingJoin.joinName
   }
 
   const joinName = yield call(generateJoinName)
   yield put(
     startProvideState({
-      consumer: consumerChainId,
-      statePath: ['profiles', consumerChainId, 'sharedProfile'],
+      consumer: privateChainId,
+      statePath: ['profiles', privateChainId, 'sharedProfile'],
       joinName
     })
   )
 
-  console.log(`Providing GitHub profile to ${consumerChainId}.`)
+  console.log(`Providing GitHub profile to ${privateChainId}.`)
   return joinName
 }
 

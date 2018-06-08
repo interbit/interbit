@@ -11,7 +11,7 @@ import { actionCreators } from '../interbit/my-account'
 const authenticationHandler = ({
   oAuth: {
     blockchainDispatch,
-    consumerChainId,
+    browserChainId,
     oAuthConfig,
     oAuthProvider,
     publicKey,
@@ -27,7 +27,7 @@ const authenticationHandler = ({
     const requestId = uuid.v4()
     const state = queryParams.packState({
       requestId,
-      consumerChainId,
+      browserChainId,
       publicKey,
       redirectUrl
     })

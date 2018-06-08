@@ -28,12 +28,12 @@ function* loadPrivateChain({
     const savedChainId = yield call(cli.kvGet, privateChainKey)
 
     if (
-      savedChainId &&
-      privateChainId &&
-      savedChainId === sponsoredChainId &&
-      savedChainId !== privateChainId
+      shouldLoadPrivateChainFromOtherDevice({
+        savedChainId,
+        sponsoredChainId,
+        privateChainId
+      })
     ) {
-      // Load chain specified by oAuth callback
       privateChain = yield call(tryLoadChain, {
         cli,
         chainAlias,
@@ -46,8 +46,10 @@ function* loadPrivateChain({
       }
     }
 
-    if (!privateChain && savedChainId) {
-      // Reload chain from local storage
+    if (
+      !privateChain &&
+      shouldLoadPrivateChainFromLocalStorage({ savedChainId })
+    ) {
       privateChain = yield call(tryLoadChain, {
         cli,
         chainAlias,
@@ -84,6 +86,7 @@ function* loadPrivateChain({
       publicKey,
       role: 'root'
     })
+
     if (!userOwnsChain) {
       throw new Error('User does not own private chain')
     }
@@ -94,6 +97,19 @@ function* loadPrivateChain({
   }
   return chainId
 }
+
+const shouldLoadPrivateChainFromOtherDevice = ({
+  savedChainId,
+  sponsoredChainId,
+  privateChainId
+}) =>
+  savedChainId &&
+  savedChainId === sponsoredChainId &&
+  privateChainId &&
+  savedChainId !== privateChainId
+
+const shouldLoadPrivateChainFromLocalStorage = ({ savedChainId }) =>
+  !!savedChainId
 
 const kvPrivateChainKey = (parentChainId, chainAlias) =>
   `chainId-${chainAlias}-${parentChainId}`

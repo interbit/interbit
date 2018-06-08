@@ -203,6 +203,6 @@ To continue learning about Interbit, please check out our other examples:
 
  * [Determinism](determinism.md)
 
- * [To Do List](to-do-list.md)
+ * [To-do List](to-do-list.md)
 
  * [Order Books](order-books.md)

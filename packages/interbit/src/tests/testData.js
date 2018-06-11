@@ -60,7 +60,7 @@ const defaultManifest = {
     template: {
       appChain: 'public',
       buildLocation:
-        '../home/btl/Documents/Repositories/interbit/packages/interbit/build',
+        '../home/btl/.vscode/extensions/WallabyJs.wallaby-vscode-1.0.86/projects/501f5e2f952dfe56/instrumented/build',
       browserChains: ['public']
     }
   },
@@ -298,7 +298,7 @@ const defaultManifest = {
       hash: '11e3653946edd5ff9c0b0d66f8e1b92739ae2a20'
     }
   },
-  hash: '1198fac62f12081651cb00b88081117a3085f593'
+  hash: 'e7369218f1b45250f17d9d57c58abdca54e39eb7'
 }
 
 const defaultCovenants = defaultManifest.covenants

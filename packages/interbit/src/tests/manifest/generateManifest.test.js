@@ -27,7 +27,7 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
     should.equal(hash, otherHash)
   })
 
-  it.only('generates a verifiable manifest hash for all levels', () => {
+  it('generates a verifiable manifest hash for all levels', () => {
     const manifest = generateManifest(
       location,
       defaultConfig,

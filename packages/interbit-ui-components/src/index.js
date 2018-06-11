@@ -23,7 +23,6 @@ export {
 } from './components/UIKit/ContentBarDefault'
 export { default as Divider } from './components/UIKit/Divider'
 export { default as Quote } from './components/UIKit/Quote'
-export { default as SidebarList } from './components/UIKit/SidebarList'
 export { default as TitledList } from './components/UIKit/TitledList'
 
 // Interactive Components

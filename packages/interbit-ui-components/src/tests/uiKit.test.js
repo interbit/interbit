@@ -1,7 +1,8 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow } from 'enzyme'
-import { Button } from 'react-bootstrap'
+import { Button, Modal } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 import ButtonLink from '../components/UIKit/ButtonLink'
 import CallToAction from '../components/UIKit/CallToAction'
@@ -11,7 +12,13 @@ import ContentBar from '../components/UIKit/ContentBar'
 import ContentBarDefault from '../components/UIKit/ContentBarDefault'
 import ContentBox from '../components/UIKit/ContentBox'
 import IconButton from '../components/UIKit/IconButton'
+import LaunchPad from '../components/UIKit/LaunchPad'
+import LaunchPadRow from '../components/UIKit/LaunchPadRow'
+import LinkBar from '../components/UIKit/LinkBar'
 import LinkWrapper from '../components/UIKit/LinkWrapper'
+import ModalWrapper from '../components/UIKit/ModalWrapper'
+import Quote from '../components/UIKit/Quote'
+import TitledList from '../components/UIKit/TitledList'
 import Markdown from '../components/Markdown'
 import placeholder from '../assets/placeholder.svg'
 
@@ -188,5 +195,148 @@ describe('<IconButton />', () => {
       <IconButton clickHandler={mockFn} {...props} />
     )
     expect(wrapperWithHandler.find(Button).prop('href')).toBe(undefined)
+  })
+})
+
+describe('<LaunchPad />', () => {
+  const props = {}
+  beforeEach(() => {
+    props.title = 'foo'
+    props.text = 'bar'
+    props.image = placeholder
+  })
+
+  it('renders a <LinkWrapper />', () => {
+    countChildren(<LaunchPad {...props} />, LinkWrapper, 1)
+  })
+
+  it('renders an <img />', () => {
+    countChildren(<LaunchPad {...props} />, 'img', 1)
+  })
+
+  it('renders an <h3 />', () => {
+    countChildren(<LaunchPad {...props} />, 'h3', 1)
+  })
+})
+
+describe('<LaunchPadRow />', () => {
+  it('renders 4 <LaunchPad />s', () => {
+    const buttonLink = {
+      title: 'foo',
+      text: 'bar',
+      image: placeholder
+    }
+    const buttonLinks = []
+    for (let i = 0; i < 4; i += 1) {
+      buttonLinks.push(buttonLink)
+    }
+    countChildren(<LaunchPadRow buttonLinks={buttonLinks} />, LaunchPad, 4)
+  })
+})
+
+describe('<LinkBar />', () => {
+  const props = {}
+  beforeEach(() => {
+    props.title = 'foo'
+    props.content = 'bar'
+  })
+
+  it('renders an <a /> for external links and mailtos', () => {
+    countChildren(<LinkBar {...props} to="https://interbit.io" />, 'a', 1)
+    countChildren(<LinkBar {...props} to="https://interbit.io" />, Link, 0)
+  })
+
+  it('renders a <Link /> for internal links', () => {
+    countChildren(<LinkBar {...props} to="/foo" />, Link, 1)
+    countChildren(<LinkBar {...props} to="/foo" />, 'a', 0)
+  })
+})
+
+describe('<LinkWrapper />', () => {
+  const externalTo = 'https://interbit.io'
+  const internalTo = '/foo'
+  const mockFn = jest.fn()
+
+  it('renders an <a /> for external links', () => {
+    countChildren(<LinkWrapper to={externalTo} />, 'a', 1)
+    countChildren(<LinkWrapper to={externalTo} />, Link, 0)
+  })
+
+  it('renders a <Link /> for internal links', () => {
+    countChildren(<LinkWrapper to={internalTo} />, Link, 1)
+    countChildren(<LinkWrapper to={internalTo} />, 'a', 0)
+  })
+
+  it('passes clickHandler to <a/>', () => {
+    const wrapper = shallow(
+      <LinkWrapper to={externalTo} clickHandler={mockFn} />
+    )
+    expect(wrapper.find('a').prop('onClick')).toBeDefined()
+  })
+
+  it('passes clickHandler to <Link />', () => {
+    const wrapper = shallow(
+      <LinkWrapper to={internalTo} clickHandler={mockFn} />
+    )
+    expect(wrapper.find(Link).prop('onClick')).toBeDefined()
+  })
+})
+
+describe('<ModalWrapper />', () => {
+  const props = {}
+  beforeEach(() => {
+    props.body = <div>foo</div>
+  })
+
+  it('renders a <Modal.Header /> if header prop is provided', () => {
+    countChildren(
+      <ModalWrapper header={<div>header</div>} {...props} />,
+      Modal.Header,
+      1
+    )
+    countChildren(<ModalWrapper {...props} />, Modal.Header, 0)
+  })
+
+  it('renders a <Modal.Footer /> if footer prop is provided', () => {
+    countChildren(
+      <ModalWrapper footer={<div>footer</div>} {...props} />,
+      Modal.Footer,
+      1
+    )
+    countChildren(<ModalWrapper {...props} />, Modal.Footer, 0)
+  })
+})
+
+describe('<Quote />', () => {
+  const props = {}
+  beforeEach(() => {
+    props.content = 'foo'
+    props.image = placeholder
+  })
+
+  it('renders an <h4/> when an author is provided', () => {
+    countChildren(<Quote author="John Donne" {...props} />, 'h4', 1)
+    countChildren(<Quote {...props} />, 'h4', 0)
+  })
+
+  it('renders an <a /> for each callToAction', () => {
+    const ctas = [{ text: 'foo', to: '/bar' }]
+    countChildren(<Quote {...props} callToActions={ctas} />, 'p a', ctas.length)
+  })
+
+  it('renders publication info when publication prop is provided', () => {
+    countChildren(<Quote {...props} publication="baz" />, 'p.publication', 1)
+    countChildren(<Quote {...props} />, 'p.publication', 0)
+  })
+})
+
+describe('<TitledList />', () => {
+  it('renders a <li /> for each item', () => {
+    const props = {
+      title: 'foo',
+      items: [{ text: 'meow', to: '/woof' }]
+    }
+
+    countChildren(<TitledList {...props} />, 'li', props.items.length)
   })
 })

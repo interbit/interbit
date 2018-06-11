@@ -54,7 +54,7 @@ export default class Quote extends Component {
                 </p>
               ))}
 
-            {publication && <p>{publication}</p>}
+            {publication && <p className="publication">{publication}</p>}
           </Media.Body>
         </Media>
       </div>

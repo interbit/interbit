@@ -9,7 +9,7 @@ builds the modules that your applications require.
 The [Interbit SDK](https://github.com/interbit/interbit) is open source
 software, which is available on [GitHub](https://github.com/):
 
-<div class="hidden-on-print">
+<div class="hidden-on-print padb">
   <p>
     <a class="download-btn" href="https://github.com/interbit/interbit" target="_blank">Interbit on Github</a>
   </p>
@@ -20,6 +20,10 @@ software, which is available on [GitHub](https://github.com/):
     ```sh
     git clone git@github.com:interbit/interbit.git
     ```
+
+    > This creates a folder called `interbit` in the current folder.
+    > Throughout the Getting Started section, this folder is called the
+    > _repository root_.
 
 1.  <a name="dependencies"></a>**Install the dependencies:**
 

@@ -10,7 +10,7 @@ use as a starting point for working with the Interbit SDK.
 1.  **Copy the `packages/interbit-template` folder to `packages/app-first`:**
 
     ```sh
-    cp -R packages/interbit-template packages/app-first`
+    cp -R packages/interbit-template packages/app-first
     ```
 
 1.  **Customize the app configuration:**

@@ -6,7 +6,11 @@
     "standard-react",
     "prettier-standard"
   ],
+  "env": {
+    "jest/globals": true
+  },
   "plugins": [
+    "jest",
     "react"
   ],
   "rules": {

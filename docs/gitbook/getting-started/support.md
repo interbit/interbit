@@ -8,11 +8,13 @@ Channel](https://interbitdev.slack.com).
 
 * The following steps should get your application into a clean state:
 
+  > The shell commands need to be executed from the _repository root_
+  > folder.
+
   1.  Stop the application processes (type `Ctrl-C` into each terminal).
   1.  Remove all `node_modules` folders:
 
       ```sh
-      cwd interbit
       node_modules/.bin/lerna clean
       ```
 

@@ -1,59 +1,3 @@
-const PUBLIC_KEY = 'SuperSecurePubKey'
-const defaultConfig = {
-  peers: ['localhost:5000'],
-  adminValidators: [PUBLIC_KEY],
-  staticChains: {
-    public: {
-      covenant: 'public',
-      config: {
-        validators: [PUBLIC_KEY],
-        joins: {
-          consume: [
-            {
-              alias: 'control',
-              path: ['interbitServices'],
-              joinName: 'INTERBIT_SERVICES'
-            }
-          ]
-        }
-      }
-    },
-    control: {
-      covenant: 'control',
-      defaultChain: true,
-      config: {
-        validators: [PUBLIC_KEY],
-        joins: {
-          provide: [
-            {
-              alias: 'public',
-              path: ['interbitServices', 'shared'],
-              joinName: 'INTERBIT_SERVICES'
-            }
-          ]
-        }
-      }
-    }
-  },
-  covenants: {
-    public: {
-      location: 'src/interbit/public'
-    },
-    control: {
-      location: 'src/interbit/public'
-    }
-  },
-  apps: {
-    template: {
-      peers: ['localhost:5000'],
-      chains: ['public'],
-      appChain: 'public',
-      indexLocation: 'public/index.html',
-      buildLocation: 'build/'
-    }
-  }
-}
-
 const defaultManifest = {
   peers: ['localhost:5000'],
   apps: {
@@ -298,14 +242,9 @@ const defaultManifest = {
       hash: '11e3653946edd5ff9c0b0d66f8e1b92739ae2a20'
     }
   },
-  hash: '1198fac62f12081651cb00b88081117a3085f593'
+  hash: '2ab21dfdfad2f9b23edb2c5624b6434dd805748c'
 }
 
-const defaultCovenants = defaultManifest.covenants
-
 module.exports = {
-  PUBLIC_KEY,
-  defaultConfig,
-  defaultManifest,
-  defaultCovenants
+  defaultManifest
 }

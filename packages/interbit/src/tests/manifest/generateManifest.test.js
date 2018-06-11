@@ -11,7 +11,23 @@ const {
 const location = '/tmp'
 
 describe('generateManifest(location, interbitConfig, covenants, originalManifest)', () => {
-  it('generates a verifiable manifest hash', () => {
+  it('objectHash ignores order', () => {
+    const object = {
+      one: 1,
+      two: 2
+    }
+    const hash = objectHash(object)
+
+    const otherObject = {
+      ...object
+    }
+
+    const otherHash = objectHash(otherObject)
+
+    should.equal(hash, otherHash)
+  })
+
+  it.only('generates a verifiable manifest hash for all levels', () => {
     const manifest = generateManifest(
       location,
       defaultConfig,
@@ -19,11 +35,37 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
       defaultManifest
     )
 
+    console.log('THE MANIFEST')
+    console.log(JSON.stringify(manifest, null, 2))
+    // e7369218f1b45250f17d9d57c58abdca54e39eb7
+
+    console.log('THE (????) MANIFEST')
+    console.log(JSON.stringify(defaultManifest, null, 2))
+    // 1198fac62f12081651cb00b88081117a3085f593
+
     const hash = manifest.hash
     delete manifest.hash
     const compareHash = objectHash(manifest)
-
     should.equal(hash, compareHash)
+
+    const rootHash = manifest.manifest.interbitRoot.hash
+    delete manifest.manifest.interbitRoot.hash
+    const compareRootHash = objectHash(manifest.manifest.interbitRoot)
+    should.equal(rootHash, compareRootHash)
+
+    const publicHash = manifest.manifest.interbitRoot.chains.public.hash
+    delete manifest.manifest.interbitRoot.chains.public.hash
+    const comparePublicHash = objectHash(
+      manifest.manifest.interbitRoot.chains.public
+    )
+    should.equal(publicHash, comparePublicHash)
+
+    const controlHash = manifest.manifest.interbitRoot.chains.control.hash
+    delete manifest.manifest.interbitRoot.chains.control.hash
+    const compareControlHash = objectHash(
+      manifest.manifest.interbitRoot.chains.control
+    )
+    should.equal(controlHash, compareControlHash)
   })
 
   it('replaces apps config but not genesis blocks if apps config changes', () => {

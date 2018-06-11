@@ -1,7 +1,7 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow } from 'enzyme'
-import assert from 'assert'
+import { Button } from 'react-bootstrap'
 
 import ButtonLink from '../components/UIKit/ButtonLink'
 import CallToAction from '../components/UIKit/CallToAction'
@@ -19,7 +19,7 @@ configure({ adapter: new Adapter() })
 
 const countChildren = (parent, child, count) => {
   const wrapper = shallow(parent)
-  assert.equal(wrapper.find(child).length, count)
+  expect(wrapper.find(child).length).toBe(count)
 }
 
 describe('<ButtonLink />', () => {
@@ -182,5 +182,11 @@ describe('<IconButton />', () => {
     countChildren(<IconButton {...props} />, 'i', 0)
   })
 
-  it('passes href prop to <Button /> only if clickHandler is undefined', () => {})
+  it('passes href prop to <Button /> only if clickHandler is undefined', () => {
+    const mockFn = jest.fn()
+    const wrapperWithHandler = shallow(
+      <IconButton clickHandler={mockFn} {...props} />
+    )
+    expect(wrapperWithHandler.find(Button).prop('href')).toBe(undefined)
+  })
 })

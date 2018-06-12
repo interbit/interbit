@@ -1,11 +1,11 @@
 const Immutable = require('seamless-immutable')
-// const hashObject = require('object-hash')
+const objectHash = require('object-hash')
+const { remoteRedispatch } = require('../coreCovenant')
 const { PATHS } = require('./constants')
 
 const prefix = '@@MANIFEST'
 
 const actionTypes = {
-  // Update basic account details about the owner of these projects
   SET_MANIFEST: `${prefix}/SET_MANIFEST`
 }
 
@@ -18,76 +18,63 @@ const actionCreators = {
   })
 }
 
-/*
- State shape
-{
-  // manifest must be fully resolved
-  // contains all chains that are defined statically in the molecule/configuration
-  // Joins need to go in here too
-  manifest: {
-    root: {
-      chainId: chn_6547,
-      manifestHash: 'mft_1234'
-    },
-    validatorPool: [
-      pubkey1,
-      pubkey2
-    ],
-    covenants: {
-      root: cov_000,
-      public: cov_123,
-      private: cov_456,
-      control: cov_789,
-      oAuth: cov_412
-    },
-    chains: {
-      public: {
-        chainId: chn_18723,
-        covenant: public,
-        acl: []
-      },
-      control: {
-        // If a chain id is provided, chain must exist
-        chainId: chn_98123,
-        covenant: control,
-        acl: [],
-        manifest: {
-          covenants: {
-            oAuth: cov_412,
-            private: cov_456
-          },
-          chains: {
-            githubOauth: {
-              // If a genesis block is provided, chain can be created
-              // with a known chainId, or refer to an existing chain
-              // with the chainId corresponding to the hash of the genesis block
-              genesis: {...},
-              covenant: oAuth,
-              acl: []
-            }
-          },
-          manifestHash: 'mft_7634'
-        }
-      }
-    },
-    manifestHash: 'mft_1234'
-  }
-*/
-
 const initialState = Immutable.from({}).setIn(PATHS.MANIFEST, {})
 
 const reducer = (state = initialState, action) => {
+  let nextState = state
+
   switch (action.type) {
     case actionTypes.SET_MANIFEST: {
       const { manifest } = action.payload
-      // TODO: Probably don't do this. Use the individual methods instead.
-      // TODO (OR): Check this config with the previous version and apply changes
-      return state.setIn(PATHS.MANIFEST, manifest)
+      console.log(manifest.hash)
+      if (!verifyManifestHash(manifest)) {
+        return nextState
+      }
+
+      const chainAlias = getOwnChainAlias(manifest)
+      nextState = redispatchManifest(state, manifest[chainAlias])
+      return nextState.setIn(PATHS.MANIFEST, manifest)
     }
 
     default:
       return state
   }
+}
+
+const verifyManifestHash = manifest => {
+  const verifiableManifest = { ...manifest }
+  delete verifiableManifest.hash
+  const hash = objectHash(verifiableManifest)
+
+  // const hash = manifest.hash
+  // delete manifest.hash
+  // const compareHash = objectHash(manifest)
+
+  // console.log(compareHash)
+  console.log(hash)
+  console.log(manifest.hash)
+  return hash === manifest.hash
+}
+
+const getOwnChainAlias = manifest => Object.keys(manifest)[0]
+
+const redispatchManifest = (state, manifestTree) => {
+  let nextState = state
+  const childEntries = Object.entries(manifestTree.chains)
+
+  for (const [childAlias, childManifest] of childEntries) {
+    const manifest = {
+      [childAlias]: childManifest
+    }
+    const setManifestAction = actionCreators.setManifest(manifest)
+    nextState = remoteRedispatch(
+      nextState,
+      childManifest.chainId,
+      setManifestAction
+    )
+  }
+
+  return nextState
 }
 
 module.exports = {

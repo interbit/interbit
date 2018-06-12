@@ -44,6 +44,17 @@ const getJoinTypeForChain = (chainAlias, joinType, config) => {
   return joinConfig[joinType] ? joinConfig[joinType] : []
 }
 
+const getParentByChainAlias = (chainAlias, config) => {
+  const staticChainEntries = Object.entries(getChains(config))
+  for (const [alias, chainConfig] of staticChainEntries) {
+    const childChains = chainConfig.childChains || []
+    if (childChains.indexOf(chainAlias) > -1) {
+      return alias
+    }
+  }
+  return undefined
+}
+
 module.exports = {
   getAdminValidators,
   getApps,
@@ -54,6 +65,7 @@ module.exports = {
   getChainValidators,
   getJoinTypeForChain,
   getCovenants,
+  getParentByChainAlias,
   getPeers,
   joinTypes
 }

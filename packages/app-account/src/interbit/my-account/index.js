@@ -94,7 +94,8 @@ const reducer = (state = initialState, action) => {
       const request = state.getIn([...PATHS.AUTH_REQUESTS, requestId])
 
       if (!request) {
-        throw new Error('You did not originate this request')
+        console.log(`Request ${requestId} not found.`)
+        return state
       }
 
       nextState = removeAuthenticationRequest(nextState, requestId)

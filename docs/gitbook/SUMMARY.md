@@ -25,7 +25,7 @@
   * [Destroying a Chain](/examples/destroy.md)
   * [Determinism](/examples/determinism.md)
   * [Template App Walkthrough](/examples/template.md)
-
+  * [To-do List App](/examples/to-do-list.md)
 * [Architecture](architecture/README.md)
   * [Chain Architecture](architecture/chain-architecture.md)
 

@@ -49,7 +49,7 @@ const mapStateToProps = state => {
   const publicChainState = selectors.getChain(state, { chainAlias: PUBLIC })
   return {
     publicKey: selectors.getPublicKey(state),
-    consumerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
+    browserChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
     oAuthConfig: getOAuthConfig(publicChainState),
     content: state.content.createAccount,
     contentBars: state.content.contentBars,
@@ -71,7 +71,7 @@ const mapDispatchToProps = dispatch => ({
 export class CreateAccount extends Component {
   static propTypes = {
     publicKey: PropTypes.string,
-    consumerChainId: PropTypes.string,
+    browserChainId: PropTypes.string,
     oAuthConfig: PropTypes.shape({}),
     blockchainDispatch: PropTypes.func,
     content: PropTypes.shape({}).isRequired,
@@ -87,7 +87,7 @@ export class CreateAccount extends Component {
 
   static defaultProps = {
     publicKey: undefined,
-    consumerChainId: '',
+    browserChainId: '',
     oAuthConfig: {},
     blockchainDispatch: () => {},
     isAttentionButtonEnabled: false,
@@ -99,7 +99,7 @@ export class CreateAccount extends Component {
   render() {
     const {
       publicKey,
-      consumerChainId,
+      browserChainId,
       oAuthConfig,
       blockchainDispatch,
       content,
@@ -116,7 +116,7 @@ export class CreateAccount extends Component {
 
     const oAuthProps = {
       blockchainDispatch,
-      consumerChainId,
+      browserChainId,
       oAuthConfig,
       oAuthProvider: oAuthProviders.GITHUB,
       publicKey

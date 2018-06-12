@@ -4,7 +4,9 @@ const { getInterbit } = require('./interbitGlobal')
 
 const createMiddleware = ({
   publicChainAlias,
-  privateChainAlias
+  privateChainAlias,
+  sponsoredChainId,
+  privateChainId
 } = {}) => store => {
   const blockingChains = []
   let chainDispatchBuffer = []
@@ -24,7 +26,9 @@ const createMiddleware = ({
           store.dispatch(
             actionCreators.privateChainSaga({
               publicChainAlias,
-              privateChainAlias
+              privateChainAlias,
+              sponsoredChainId,
+              privateChainId
             })
           )
         }

@@ -26,7 +26,6 @@ export { default as Quote } from './components/UIKit/Quote'
 export { default as TitledList } from './components/UIKit/TitledList'
 
 // Interactive Components
-export { default as ButtonLink } from './components/UIKit/ButtonLink'
 export { default as CallToAction } from './components/UIKit/CallToAction'
 export { default as IconButton } from './components/UIKit/IconButton'
 export { default as LaunchPad } from './components/UIKit/LaunchPad'

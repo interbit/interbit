@@ -4,7 +4,6 @@ import { configure, shallow } from 'enzyme'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-import ButtonLink from '../components/UIKit/ButtonLink'
 import CallToAction from '../components/UIKit/CallToAction'
 import Card from '../components/UIKit/Card'
 import ConnectingTo from '../components/UIKit/ConnectingTo'
@@ -29,24 +28,18 @@ const countChildren = (parent, child, count) => {
   expect(wrapper.find(child).length).toBe(count)
 }
 
-describe('<ButtonLink />', () => {
-  it('renders an <IconButton />', () => {
-    countChildren(<ButtonLink text="foo" />, IconButton, 1)
-  })
-})
-
 describe('<CallToAction />', () => {
   const props = {}
   beforeEach(() => (props.text = 'Click me meow'))
 
-  it('renders a <ButtonLink /> when CTA type is button', () => {
-    countChildren(<CallToAction type="button" {...props} />, ButtonLink, 1)
+  it('renders a <IconButton /> when CTA type is button', () => {
+    countChildren(<CallToAction type="button" {...props} />, IconButton, 1)
     countChildren(<CallToAction type="button" {...props} />, 'a', 0)
   })
 
   it('renders an <a /> when CTA type is link', () => {
     countChildren(<CallToAction type="link" {...props} />, 'a', 1)
-    countChildren(<CallToAction type="link" {...props} />, ButtonLink, 0)
+    countChildren(<CallToAction type="link" {...props} />, IconButton, 0)
   })
 })
 

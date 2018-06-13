@@ -9,8 +9,8 @@ createChainsFromConfig
   <p><span></span>TODO</p>
   <p>
     This function signature and name is set to change in a future
-    release. It will be renamed to `createChains` and its location will
-    be moved into options. Other changes may occur.
+    release. It will be renamed to <code>createChains</code> and its
+    location will be moved into options. Other changes may occur.
   </p>
 </div>
 
@@ -54,7 +54,7 @@ const { ??? } = await createChainsFromManifest(cli, manifest)
   <p><span></span>TODO</p>
   <p>
     This function is set for deprecation in a future release. Try to use
-    `createChainsByManifest` wherever possible.
+    <code>createChainsByManifest</code> wherever possible.
   </p>
 </div>
 

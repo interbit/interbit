@@ -15,10 +15,12 @@
   * [Initializing a Chain](/examples/initialize.md)
   * [Destroying a Chain](/examples/destroy.md)
   * [Determinism](/examples/determinism.md)
-  * [Template App Walkthrough](/examples/template.md)
+  * [Template App Walk-through](/examples/template.md)
   * [To-do List App](/examples/to-do-list.md)
 * [Architecture](architecture/README.md)
   * [Chain Architecture](architecture/chain-architecture.md)
+  * [PPC](architecture/public-private-control-model.md)
+
 * [Reference](reference/README.md)
   * [interbit](reference/interbit/README.md)
   * [interbit-cli](reference/interbit-cli/README.md)

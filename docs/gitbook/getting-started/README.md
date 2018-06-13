@@ -26,7 +26,7 @@ Familiarity with the following technologies, tools, and concepts will greatly ac
 
 <div class="hidden-on-print">
 	<h3 id="download">Get Interbit</h3>
-	<a class="download-btn" href="https://github.com/interbit/interbit" target="_blank">Interbit on Github</a>
+	<a class="download-btn" href="https://github.com/interbit/interbit" target="_blank">Interbit on GitHub</a>
 </div>
 
 ### Setup
@@ -143,4 +143,4 @@ If this does not help, please contact us for assistance on our [Slack Channel](h
 
 ## Continue...
 
-[Walkthrough the Template App](../examples/template.md)
+[Walk-through the Template App](../examples/template.md)

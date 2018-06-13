@@ -1,24 +1,24 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { SubmissionError } from 'redux-form'
-import EditableTable from '../../FormTable/EditableTable'
-import { buildDefinition } from './definition'
+// import EditableTable from '../../FormTable/EditableTable'
+// import { buildDefinition } from './definition'
 
 export default class ActionForm extends Component {
   static propTypes = {
-    payloadFields: PropTypes.arrayOf(PropTypes.string).isRequired,
+    // payloadFields: PropTypes.arrayOf(PropTypes.string).isRequired,
     type: PropTypes.string.isRequired,
-    isConnected: PropTypes.bool,
-    isCreating: PropTypes.bool,
+    // isConnected: PropTypes.bool,
+    // isCreating: PropTypes.bool,
     reset: PropTypes.func.isRequired,
     actionCreator: PropTypes.func.isRequired,
     blockchainDispatch: PropTypes.func.isRequired
   }
 
-  static defaultProps = {
-    isCreating: false,
-    isConnected: true
-  }
+  // static defaultProps = {
+  // isCreating: false,
+  // isConnected: true
+  // }
 
   handleSubmit = formValues => {
     try {
@@ -37,12 +37,13 @@ export default class ActionForm extends Component {
   }
 
   render() {
-    const { type, payloadFields, isConnected, isCreating } = this.props
+    // const { type, payloadFields, isConnected, isCreating } = this.props
+    const { type } = this.props
 
     return (
       <div>
         <h4>{type}</h4>
-        <EditableTable
+        {/* <EditableTable
           form={type}
           styles={{}}
           onSubmit={this.handleSubmit}
@@ -51,7 +52,7 @@ export default class ActionForm extends Component {
           bodyWidth={8}
           submitLabel="Dispatch Action"
           definition={buildDefinition(payloadFields, isConnected)}
-        />
+        /> */}
       </div>
     )
   }

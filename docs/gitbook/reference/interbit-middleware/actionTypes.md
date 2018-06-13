@@ -5,20 +5,18 @@
   <p>Incomplete content.</p>
 </div>
 
-...
 
-
-#### Arguments
+## Arguments
 
 1. `?` *(Object)*: ?
 
-#### Returns
+## Returns
 
 *(Object)*: ?
 
-#### Example
+## Example
 
 ```js
-const middleware = require('interbit-middlware')
+const middleware = require('interbit-middleware')
 const actionTypes = middleware.actionTypes
 ```

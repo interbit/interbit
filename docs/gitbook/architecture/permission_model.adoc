@@ -6,6 +6,7 @@ for understanding how Interbit manages permissions. Follow the cross
 reference links for implementation details.
 
 
+[[chain_access]]
 == Chain Access
 
 Interbit uses permissioned blockchains; all access to a blockchain is
@@ -22,6 +23,7 @@ blockchain is permanently removed**.
 =========
 
 
+[[acl]]
 == Access Control List (ACL)
 
 Interbit uses a role-based access control list, or ACL, to manage
@@ -31,6 +33,7 @@ the specific blockchain actions that each user, or group of users, is
 permitted to dispatch.
 
 
+[[roles]]
 === Roles
 
 In an organization, each person has a job-based function, or _role_. For
@@ -61,6 +64,7 @@ blockchains (which is a key part of how <<chain_joins,chain joins>>
 work).
 
 
+[[permissions]]
 === Permissions
 
 Permissions are the specific actions that your application supports
@@ -73,7 +77,9 @@ dispatch the `add_vote` action.
 
 Each Interbit application includes a special permission called `*` (the
 _star_ permission). The `*` means _any action_, and is typically
-assigned only to the `root` role.
+assigned only to the `root` role. In addition, the `*` can be used as a
+wildcard for defining permissions. For example, a `USER_*` permission
+would match all actions that start with `USER_`.
 
 Also, there are typically two permissions for managing the ACL itself:
 `addToAcl` and `replaceAcl`. These are included in addition to any
@@ -132,20 +138,24 @@ information in one blockchain to be connected with information in
 another blockchain. There are two kinds of chain joins: read joins and
 write joins.
 
-A read join means that one blockchain, the _sender_, has access to a
+A read join means that one blockchain, the _provider_, has access to a
 copy of the state -- the collection of data stored on the blockchain --
-of another blockchain, the _recipient_, at a specific point in time. Any
-updates to the recipient's state is not reflected in the sender's
+of another blockchain, the _consumer_, at a specific point in time. Any
+updates to the consumer's state is not reflected in the provider's
 blockchain.
 
-A write join means that, in addition to the capabilities of a read join,
-that the sender receives updates whenever the recipient's state
-changes.
+A write join is implemented as a pair of read joins and so, to reduce
+confusion (because there would be two providers and two consumers), the
+blockchain that initiates a write join is called the _sender_ and the other
+blockchain is called the _receiver_. In addition to the capabilities of
+a read join, a write join allows the sender to receive updates whenever
+the receiver's state changes and to dispatch actions to the receiver.
 
 After a join has been established, the join can be revoked and the
-sender no longer has access to the recipient's state.
+provider no longer has access to the consumer's state.
 
 
+[[join_permissions]]
 == Join Permissions
 
 Each blockchain has its own ACL. To permit read or write joins, Interbit

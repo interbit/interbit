@@ -59,8 +59,9 @@ export class InteractiveChains extends Component {
 
   render() {
     const { selectedChain, resetForm, blockchainDispatch } = this.props
+    const chainName = generateChainName(selectedChain)
 
-    if (!selectedChain) {
+    if (!selectedChain || !chainName) {
       return <div>Loading...</div>
     }
 
@@ -69,7 +70,7 @@ export class InteractiveChains extends Component {
         <Row>
           <LinkedCovenant
             chainId={selectedChain.chainId}
-            chainName={generateChainName(selectedChain)}
+            chainName={chainName}
             raw={selectedChain.state}
             covenant={{ actionCreators }}
             reset={resetForm}

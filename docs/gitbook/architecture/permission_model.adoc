@@ -1,0 +1,172 @@
+= Permission Model
+
+This section describes the permission model used by applications built
+with Interbit. The following discussion provides a conceptual framework
+for understanding how Interbit manages permissions. Follow the cross
+reference links for implementation details.
+
+
+== Chain Access
+
+Interbit uses permissioned blockchains; all access to a blockchain is
+controlled with public key cryptography. If you hold a private key that
+corresponds to a public key added to an Interbit blockchain, you can
+access that blockchain. If not, you have no access.
+
+[WARNING]
+=========
+If you are the last user on a blockchain that has the permission to
+add or remove public keys, do not remove your own public key from the
+blockchain. If you do remove your own public key, **your access to that
+blockchain is permanently removed**.
+=========
+
+
+== Access Control List (ACL)
+
+Interbit uses a role-based access control list, or ACL, to manage
+permissions on a blockchain. An ACL uses the concepts of _roles_ and
+_permissions_ (also known as privileges, or capabilities) to describe
+the specific blockchain actions that each user, or group of users, is
+permitted to dispatch.
+
+
+=== Roles
+
+In an organization, each person has a job-based function, or _role_. For
+example, developers, senior developers, managers, etc. Each person is
+permitted to, or prohibited from, dispatching specific actions according
+to their role in the organization. Some roles apply to many people, and
+some roles apply to specific people.
+
+Roles work the same way for Interbit blockchains. Your application built
+on Interbit has various actions that can be dispatched to a
+blockchain. Some actions may be common to most users with access to
+the blockchain, others may be restricted to specific individuals.
+
+For example, in a voting application you might create a `can_vote` role, which
+permits users with that role to add their vote to the blockchain and to
+see voting results, and an `auditor` role, which permits users with that
+role to see all of the individual votes but not to vote.
+
+Each Interbit blockchain has a `root` role, which permits users with
+that role to dispatch any action. Typically, the creator of a
+blockchain would have the `root` role, but each blockchain can have
+custom roles assigned at creation.
+
+Users can be assigned to multiple roles. Assignment simply involves
+adding a user's public key to the role declaration. A blockchain's
+identifier can be added to a role, to permit actions from other
+blockchains (which is a key part of how <<chain_joins,chain joins>>
+work).
+
+
+=== Permissions
+
+Permissions are the specific actions that your application supports
+that can be assigned to roles.
+
+For example, in a voting application, the `add_vote` action which
+records a single vote on a blockchain could be assigned to the
+`can_vote` role, permitting any user with the `can_vote` role to
+dispatch the `add_vote` action.
+
+Each Interbit application includes a special permission called `*` (the
+_star_ permission). The `*` means _any action_, and is typically
+assigned only to the `root` role.
+
+Also, there are typically two permissions for managing the ACL itself:
+`addToAcl` and `replaceAcl`. These are included in addition to any
+actions that your Interbit application implements.
+
+[WARNING]
+=========
+You must be careful when adjusting permissions. Removing your own
+permissions prevents you from performing actions. Removing the
+permission to adjust the ACL means that nobody can change the
+blockchain's permission in the future. Removing the `*` permission could
+render your blockchain **permanently unusable**.
+=========
+
+[NOTE]
+======
+At this time, all users with access to a blockchain can read from the
+blockchain. Future versions of the Interbit framework will provide the
+ability to control read access.
+======
+
+
+[[action_dispatch]]
+== Action Dispatch
+
+When an action is dispatched to a blockchain, the following operations
+are performed:
+
+- The application constructs a _payload_ that represents all of the
+  information required to successfully complete the action.
+
+- The payload is then combined with its cryptographic hash and the
+  result is signed with the user's private key. This makes the action
+  _verifiable_.
+
+- The blockchain's smart contract then checks the signature to verify
+  that the user has access.
+
+- The blockchain's smart contract then compares the payload to the hash
+  to verify that the payload has not been modified. This makes actions
+  _tamper resistant_.
+
+- The blockchain's smart contract then evaluates the ACL to determine
+  whether the user has the permission to perform the action.
+
+If all of these steps complete successfully, the smart contract performs
+the action and updates the blockchain accordingly, and propagates the
+changes to all participating nodes in the blockchain's network.
+
+
+[[chain_joins]]
+== Chain Joins
+
+Chain joins are an Interbit-specific feature. They permit the
+information in one blockchain to be connected with information in
+another blockchain. There are two kinds of chain joins: read joins and
+write joins.
+
+A read join means that one blockchain, the _sender_, has access to a
+copy of the state -- the collection of data stored on the blockchain --
+of another blockchain, the _recipient_, at a specific point in time. Any
+updates to the recipient's state is not reflected in the sender's
+blockchain.
+
+A write join means that, in addition to the capabilities of a read join,
+that the sender receives updates whenever the recipient's state
+changes.
+
+After a join has been established, the join can be revoked and the
+sender no longer has access to the recipient's state.
+
+
+== Join Permissions
+
+Each blockchain has its own ACL. To permit read or write joins, Interbit
+provides methods to easily create blockchains with the appropriate ACLs
+so that sender and recipient blockchains can accept join actions.
+Essentially, each blockchain initially provides permission to request
+access via a join. To complete an access request successfully, the
+sender specifies which portion, or slice, of the state is to be
+accessed. If the recipient approves the request, it updates its ACL to
+permit access to the state slice.
+
+In addition, your application can manage the ACLs to restrict access to
+specific portions of each blockchain's state. This is important for
+implementing privacy considerations in your application.
+
+For example, you might create a blockchain for each user in your
+application that contains all personally-identifiable information about
+that user, including preferences, medical records, location information,
+etc. Your application would create a join between the blockchains
+between the user blockchain and blockchains representing other data.
+Should a user wish to delete their "account", you could delete the
+user-specific blockchain and trigger a cascading delete to request
+removal of any copies of that user's personal information that may exist
+in other blockchains.

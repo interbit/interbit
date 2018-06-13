@@ -147,9 +147,13 @@ blockchain.
 A write join is implemented as a pair of read joins and so, to reduce
 confusion (because there would be two providers and two consumers), the
 blockchain that initiates a write join is called the _sender_ and the other
-blockchain is called the _receiver_. In addition to the capabilities of
-a read join, a write join allows the sender to receive updates whenever
-the receiver's state changes and to dispatch actions to the receiver.
+blockchain is called the _receiver_. A write join allows the sender to
+receive updates whenever the receiver's state changes and to dispatch
+actions to the receiver. Specifically, one of the read joins is a queue
+of actions from the sender to the receiver; the term _remote redispatch_
+covers the sender's addition of its action to the queue so the that
+receiver can dispatch that action to itself. The other read join
+provides the results of the receiver's action to the sender.
 
 After a join has been established, the join can be revoked and the
 provider no longer has access to the consumer's state.

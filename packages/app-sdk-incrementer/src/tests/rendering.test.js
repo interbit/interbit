@@ -26,11 +26,6 @@ describe('Renders without crashing:', () => {
   })
 
   describe('containers:', () => {
-    it('InteractiveChains', () => {
-      const props = { resetForm: () => {} }
-      renderWithContext(<InteractiveChains {...props} />)
-    })
-
     it('InteractiveChains with chain data', () => {
       const props = {
         exploreChain: {
@@ -55,6 +50,11 @@ describe('Renders without crashing:', () => {
             spoke3: {}
           }
         },
+        selectedChain: {
+          chainId: '12345',
+          state: {}
+        },
+        blockchainDispatch: () => {},
         resetForm: () => {}
       }
       renderWithContext(<InteractiveChains {...props} />)

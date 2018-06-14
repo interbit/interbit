@@ -61,10 +61,10 @@ const mapStateToProps = (state, ownProps) => {
     match: { params }
   } = ownProps
   const query = queryString.parse(search)
-  const { requestId, providerChainId, joinName } = query
+  const { requestId, privateChainId, providerChainId, joinName } = query
   const { oAuthProvider } = params
 
-  if (!(oAuthProvider && requestId && providerChainId && joinName)) {
+  if (!(oAuthProvider && requestId)) {
     return notAuthenticating
   }
 
@@ -79,11 +79,14 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     ...notAuthenticating,
-    oAuthProvider,
-    providerChainId,
-    joinName,
-    requestId,
-    isAuthenticating: true
+    oAuth: {
+      oAuthProvider,
+      requestId,
+      browserChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
+      privateChainId,
+      providerChainId,
+      joinName
+    }
   }
 }
 
@@ -100,10 +103,15 @@ export class Account extends Component {
     content: PropTypes.shape({}).isRequired,
     contentBars: PropTypes.shape({}).isRequired,
     isAttentionMoreInfoModalVisible: PropTypes.bool,
-    isAuthenticating: PropTypes.bool,
-    joinName: PropTypes.string,
     modals: PropTypes.shape({}).isRequired,
-    oAuthProvider: PropTypes.string,
+    oAuth: PropTypes.shape({
+      oAuthProvider: PropTypes.string,
+      requestId: PropTypes.string,
+      browserChainId: PropTypes.string,
+      privateChainId: PropTypes.string,
+      providerChainId: PropTypes.string,
+      joinName: PropTypes.string
+    }),
     profile: PropTypes.shape({
       alias: PropTypes.string,
       name: PropTypes.string,
@@ -111,9 +119,7 @@ export class Account extends Component {
       'gitHub-identity': PropTypes.shape({})
     }),
     profileFormProps: PropTypes.shape({}),
-    providerChainId: PropTypes.string,
     publicChainDispatch: PropTypes.func,
-    requestId: PropTypes.string,
     toggleFormFunction: PropTypes.func,
     toggleModalFunction: PropTypes.func
   }
@@ -121,9 +127,7 @@ export class Account extends Component {
   static defaultProps = {
     blockchainDispatch: () => {},
     isAttentionMoreInfoModalVisible: false,
-    isAuthenticating: false,
-    joinName: undefined,
-    oAuthProvider: undefined,
+    oAuth: undefined,
     profile: {
       alias: '',
       name: '',
@@ -131,34 +135,37 @@ export class Account extends Component {
       'gitHub-identity': {}
     },
     profileFormProps: {},
-    providerChainId: undefined,
     publicChainDispatch: () => {},
-    requestId: undefined,
     toggleFormFunction: () => {},
     toggleModalFunction: () => {}
   }
 
   componentDidUpdate() {
-    const {
-      isAuthenticating,
-      oAuthProvider,
-      joinName,
-      requestId,
-      blockchainDispatch,
-      providerChainId
-    } = this.props
+    const { oAuth, blockchainDispatch } = this.props
 
-    if (isAuthenticating) {
-      const tokenName = `${oAuthProvider}-identity`
-
-      const privateChainAction = actionCreators.completeAuthentication({
+    if (oAuth) {
+      const {
         oAuthProvider,
-        providerChainId,
-        tokenName,
         joinName,
-        requestId
-      })
-      blockchainDispatch(privateChainAction)
+        requestId,
+        browserChainId,
+        privateChainId,
+        providerChainId
+      } = oAuth
+
+      if (browserChainId === privateChainId) {
+        // Complete the join to the private chain
+        const tokenName = `${oAuthProvider}-identity`
+
+        const privateChainAction = actionCreators.completeAuthentication({
+          oAuthProvider,
+          providerChainId,
+          tokenName,
+          joinName,
+          requestId
+        })
+        blockchainDispatch(privateChainAction)
+      }
     }
   }
 

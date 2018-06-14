@@ -1,38 +1,39 @@
-const logo = `
+const logo = `[100m
+
                         cqqqqqqq
                      dqqqqqqqqqqqqc
-                    qqqqd        qqqq
-                   qqq             qqq
-                  qqq               qqq
-                  qqc               qqq
-                  qqq               qqq
-                  qqq              qqq
-                   qqqq           qqqd
-                    dqqqqq    cqqqqq
+                    qqqqd[107m        [100mqqqq
+                   qqq[107m             [100mqqq
+                  qqq[107m               [100mqqq
+                  qqc[107m               [100mqqq
+                  qqq[107m               [100mqqq
+                  qqq[107m              [100mqqq
+                   qqqq[107m           [100mqqqd
+                    dqqqqq[107m    [100mcqqqqq
                         qqqqqqqqcd        cqqqqqqqqqq
-                                        qqqqqc    cqqqqq
-                                      qqqq          dqqqq
-                                     qqqq              qqq
-                                    qqqq               qqq
-                                    qqqq               qqq
-                                    qqqq              qqq
-                                     qqqq           dqqqq
-                                     qqqqqc       cqqqqq
+                                        qqqqqc[101m    [100mcqqqqq
+                                      qqqq[101m          [100mdqqqq
+                                     qqqq[101m              [100mqqq
+                                    qqqq[101m               [100mqqq
+                                    qqqq[101m               [100mqqq
+                                    qqqq[101m              [100mqqq
+                                     qqqq[101m           [100mdqqqq
+                                     qqqqqc[101m       [100mcqqqqq
                       .gqqqqqq.   sdaidd7qqqqqqqqqqqqq
                     dqqqqqqqqqqqqqqqqdasd   ^^^^^^
-                   qqqq^        *qqqq
-                  qqqq             qqq
-                  qqq              cqq
-                  qqqd             cqq
-                  qqqc            dqqq
-                   qqqc.          qqq
-                    qqqqq      .qqqq
+                   qqqq^[104m        [100m*qqqq
+                  qqqq[104m             [100mqqq
+                  qqq[104m              [100mcqq
+                  qqqd[104m             [100mcqq
+                  qqqc[104m            [100mdqqq
+                   qqqc.[104m          [100mqqq
+                    qqqqq[104m      [100m.qqqq
                      dqqqqqqqqqqqq
                          qqqqqqq
-
+[0m
 
                           BOOTING INTERBIT
-                           .please wait.
+                           [5m.[0mplease wait[5m.[0m
 
 
 

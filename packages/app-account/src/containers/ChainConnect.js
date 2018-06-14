@@ -181,7 +181,6 @@ export class ChainConnect extends Component {
     const {
       blockchainDispatch,
       consumerChainAlias,
-      consumerChainId,
       content,
       isSignInModalVisible,
       isSignUpModalVisible,
@@ -199,7 +198,7 @@ export class ChainConnect extends Component {
 
     const oAuthProps = {
       blockchainDispatch,
-      consumerChainId,
+      browserChainId: providerChainId,
       oAuthConfig,
       oAuthProvider: oAuthProviders.GITHUB,
       publicKey

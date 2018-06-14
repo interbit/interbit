@@ -30,11 +30,18 @@ const actionCreators = {
     payload: {}
   }),
 
-  privateChainSaga: ({ publicChainAlias, privateChainAlias }) => ({
+  privateChainSaga: ({
+    publicChainAlias,
+    privateChainAlias,
+    sponsoredChainId,
+    privateChainId
+  }) => ({
     type: actionTypes.PRIVATE_CHAIN_SAGA,
     payload: {
       publicChainAlias,
-      privateChainAlias
+      privateChainAlias,
+      sponsoredChainId,
+      privateChainId
     }
   }),
 

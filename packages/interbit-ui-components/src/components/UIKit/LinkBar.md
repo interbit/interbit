@@ -11,7 +11,7 @@ const store = createStore(() => {}, composeWithDevTools());
 
 <Provider store={store}>
   <BrowserRouter>
-    <LinkBar to="http://google.com" image="chairmanmeow.jpg" title="Interaction Bar" content="Lorem ipsum dolor sit amet." />
+    <LinkBar to="http://google.com" image="placeholder-md.png" title="Interaction Bar" content="Lorem ipsum dolor sit amet." />
   </BrowserRouter>
 </Provider>
 ```

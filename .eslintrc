@@ -7,6 +7,7 @@
     "prettier-standard"
   ],
   "plugins": [
+    "jest",
     "react"
   ],
   "rules": {
@@ -57,7 +58,8 @@
         "*.test.js"
       ],
       "env": {
-        "mocha": true
+        "mocha": true,
+        "jest/globals": true
       },
       "rules": {
         "func-names": "off" // <-- Avoids "unexpected unnamed async function" in async mocha tests

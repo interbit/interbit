@@ -1,10 +1,17 @@
 # The Interbit Configuration File
 
-The interbit configuration file containts instructions for the [build](build.md) script. It details how to read and bundle your covenants and deploy them to a network. The build script will consume a configuration and file and resolve the variables inside of it to generate a manifest file used to deploy your network.
+The interbit configuration file contains instructions for the
+[build](build.md) script. It details how to read and bundle your
+covenants and deploy them to a network. The build script will consume a
+configuration and file and resolve the variables inside of it to
+generate a manifest file used to deploy your network.
 
 It is a JS file and can be altered at any time.
 
-It contains network information such as peers, validator public keys, and the different chains your network may run. It also contains a list of [covenants](../../key-concepts/README.md#covenants) and which blockchains they will run on.
+It contains network information such as peers, validator public keys,
+and the different chains your network may run. It also contains a list
+of [covenants](key-concepts/README.md#covenants) and which blockchains
+they will run on.
 
 ## Example
 
@@ -85,7 +92,9 @@ module.exports = config
 }
 ```
 
-The peers configuration specifies the peers list that all of the nodes in your network should connect to. This peers list is specifically for nodes only.
+The peers configuration specifies the peers list that all of the nodes
+in your network should connect to. This peers list is specifically for
+nodes only.
 
 Each peer must specify a host and a port in the format `'host:port'`
 
@@ -100,7 +109,10 @@ Each peer must specify a host and a port in the format `'host:port'`
 }
 ```
 
-The static chains configuration specifies how each chain that is configured statically (meaning they exist when the network is intially deployed and are not created at runtime, through code, dynamically) is setup.
+The static chains configuration specifies how each chain that is
+configured statically (meaning they exist when the network is initially
+deployed and are not created at runtime, through code, dynamically) is
+setup.
 
 This includes their covenants, public keys, and chain joins.
 
@@ -118,7 +130,10 @@ This includes their covenants, public keys, and chain joins.
 }
 ```
 
-The validators configuration for a static chain indicates public keys for blocking nodes. In the PoA implementation, the first pulic key is the blockmaster and forms the blocks.
+The validators configuration for a static chain indicates public keys
+for blocking nodes. In the PoA implementation, the first public key is
+the blockmaster and forms the blocks.
+
 
 ### Covenant
 
@@ -135,9 +150,12 @@ The validators configuration for a static chain indicates public keys for blocki
 }
 ```
 
-The covenant configuration for a static chain determines which configured covenant will be applied to the chain.
+The covenant configuration for a static chain determines which
+configured covenant will be applied to the chain.
 
-The covenant is described with a string that points to a key in the [covenants](#covenants) congifuration. The covenant must be configured for the confguration to be valid.
+The covenant is described with a string that points to a key in the
+[covenants](#covenants) configuration. The covenant must be configured
+for the configuration to be valid.
 
 ### childChains
 
@@ -186,10 +204,13 @@ Refer to [Cascading Deployment](../../chain-management/cascading-deployment.md) 
 }
 ```
 
-The join configuration for a pair of static chains determines whether they will be authorized to share state or dispatch actions to each other. The joins must correspond to eachother.
+The join configuration for a pair of static chains determines whether
+they will be authorized to share state or dispatch actions to each
+other. The joins must correspond to each other.
 
 Reference:
  - [Chain Joining](../../examples/joining.md)
+
 
 ## Covenants
 
@@ -203,9 +224,12 @@ Reference:
 }
 ```
 
-The covenants configuration specifies where local covenant packages can be found for packing and deploying to your blockchains.
+The covenants configuration specifies where local covenant packages can
+be found for packing and deploying to your blockchains.
 
-These covenants must be npm packable from an external location due to the distribution of covenants across the network. This means no external, local, file references.
+These covenants must be npm packable from an external location due to
+the distribution of covenants across the network. This means no
+external, local, file references.
 
 ## Apps
 
@@ -221,12 +245,24 @@ These covenants must be npm packable from an external location due to the distri
 }
 ```
 
-The apps configuration contains peers that browser nodes should connect to, chains that browser applications should load, and an index.html file location to write this browser configuration to so it is available once the app is served at runtime.
+The apps configuration contains peers that browser nodes should connect
+to, chains that browser applications should load, and an index.html file
+location to write this browser configuration to so it is available once
+the app is served at runtime.
 
-When start or build are run, the configuration for each app will be writted into the corresponding index.html file on a dom element with `id="interbit"`.
+When start or build are run, the configuration for each app will be
+written into the corresponding index.html file on a dom element with
+`id="interbit"`.
 
-If you wish to manage browser nodes yourself you may omit the apps configuration.
+If you wish to manage browser nodes yourself you may omit the apps
+configuration.
 
-Peers in the apps configuration should not specify a port. The port should be selected in the app itself based on the protocol it was served over. For example, if your app is served at https://yourApp.com it should connect to localhost:443. Otherwise it should use localhost:80. The magic of the internet and dns routing will do the rest for browser nodes.
+Peers in the apps configuration should not specify a port. The port
+should be selected in the app itself based on the protocol it was served
+over. For example, if your app is served at `https://yourApp.com` it
+should connect to `localhost:443`. Otherwise it should use `localhost:80`.
+The magic of the internet and DNS routing will do the rest for browser
+nodes.
 
-It is still possible for a browser node to connect directly to the desired port and host.
+It is still possible for a browser node to connect directly to the
+desired port and host.

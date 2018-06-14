@@ -31,7 +31,7 @@ const startAuthServer = async (cli, manifest) => {
 
     const {
       requestId,
-      consumerChainId,
+      state,
       temporaryToken,
       error,
       errorDescription
@@ -40,7 +40,7 @@ const startAuthServer = async (cli, manifest) => {
     // Trigger the oAuth saga
     const redirectUrl = await waitForOAuth(githubChain, {
       requestId,
-      consumerChainId,
+      state,
       temporaryToken,
       error,
       errorDescription
@@ -63,11 +63,11 @@ const parseQueryParameters = query => {
     error_description: errorDescription
   } = query
 
-  const { requestId, consumerChainId } = parseState(state)
+  const { requestId } = parseState(state)
 
   return {
     requestId,
-    consumerChainId,
+    state,
     temporaryToken,
     error,
     errorDescription

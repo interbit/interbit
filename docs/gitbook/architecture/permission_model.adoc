@@ -142,10 +142,10 @@ image:img/read_join.svg["An Interbit read join between a provider
 blockchain and a consumer blockchain", 478, 111, role="center"]
 
 A read join means that one blockchain, the _provider_, has access to a
-copy of the state -- the collection of data stored on the blockchain --
-of another blockchain, the _consumer_, at a specific point in time. Any
-updates to the consumer's state is not reflected in the provider's
-blockchain.
+copy of a portion of the state -- the collection of data stored on the
+blockchain -- of another blockchain, the _consumer_, at a specific point
+in time. Any updates to the consumer's state is not reflected in the
+provider's blockchain.
 
 image:img/write_join.svg["An Interbit write join between a sender
 blockchain and a receiver blockchain", 458, 111, role="center"]

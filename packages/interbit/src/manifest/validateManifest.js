@@ -128,7 +128,7 @@ const genesisBlockContentRules = {
   timestamp: numeric(),
   seed: numeric(),
   configChanged: required(),
-  timeToCreateBlock: equalTo(0),
+  timeToCreateBlock: required(),
   state: required()
 }
 

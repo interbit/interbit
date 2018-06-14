@@ -1,7 +1,6 @@
 const path = require('path')
-const objectHash = require('object-hash')
-
 const { getApps } = require('../config/configSelectors')
+const hashObject = require('./hash')
 const {
   resolveGenesisBlocks,
   resolveChainIdsFromGenesis
@@ -40,7 +39,7 @@ const generateManifest = (
     manifest: manifestTree
   }
 
-  const hash = objectHash(manifest)
+  const hash = hashObject(manifest)
 
   return {
     ...manifest,

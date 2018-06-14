@@ -1,4 +1,5 @@
 const _ = require('lodash')
+const hashObject = require('./hash')
 const {
   rootCovenant: { actionTypes }
 } = require('interbit-covenant-tools')
@@ -24,14 +25,20 @@ const createManifestTree = (config, manifest) => {
 
   const joins = configureCascadingJoins(undefined, Object.keys(chains), {})
 
+  const manifestEntry = {
+    chainId,
+    validators,
+    covenant,
+    covenants,
+    joins,
+    chains
+  }
+  const hash = hashObject(manifestEntry)
+
   return {
     [ROOT_CHAIN_ALIAS]: {
-      chainId,
-      validators,
-      covenant,
-      covenants,
-      joins,
-      chains
+      ...manifestEntry,
+      hash
     }
   }
 }
@@ -46,13 +53,13 @@ const getRootSubtrees = (chainAlias, config, manifest) => {
   }, [])
 
   const visited = []
-  const subtrees = staticChainEntries.reduce((accum, [k]) => {
-    if (allChildren.indexOf(k) > -1) {
+  const subtrees = staticChainEntries.reduce((accum, [childAlias]) => {
+    if (allChildren.indexOf(childAlias) > -1) {
       return accum
     }
     return {
       ...accum,
-      [k]: getManifestEntry(k, config, manifest, visited)
+      [childAlias]: getManifestEntry(childAlias, config, manifest, visited)
     }
   }, {})
 
@@ -93,13 +100,20 @@ const getManifestEntry = (chainAlias, config, manifest, visited) => {
     existingJoins
   )
 
-  return {
+  const manifestEntry = {
     chainId: getChainId(manifest.genesisBlocks[chainAlias]),
     validators: getAdminValidators(config),
     covenant,
     covenants,
     joins,
     chains
+  }
+
+  const hash = hashObject(manifestEntry)
+
+  return {
+    ...manifestEntry,
+    hash
   }
 }
 

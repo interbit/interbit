@@ -1,5 +1,6 @@
 const should = require('should')
-const objectHash = require('object-hash')
+
+const hashObject = require('../../manifest/hash')
 const { generateManifest } = require('../../manifest/generateManifest')
 const { ROOT_CHAIN_ALIAS } = require('../../chainManagement/constants')
 const {
@@ -11,7 +12,7 @@ const {
 const location = '/tmp'
 
 describe('generateManifest(location, interbitConfig, covenants, originalManifest)', () => {
-  it('generates a verifiable manifest hash', () => {
+  it('generates a verifiable manifest hash for all levels', () => {
     const manifest = generateManifest(
       location,
       defaultConfig,
@@ -21,9 +22,27 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
 
     const hash = manifest.hash
     delete manifest.hash
-    const compareHash = objectHash(manifest)
-
+    const compareHash = hashObject(manifest)
     should.equal(hash, compareHash)
+
+    const rootHash = manifest.manifest.interbitRoot.hash
+    delete manifest.manifest.interbitRoot.hash
+    const compareRootHash = hashObject(manifest.manifest.interbitRoot)
+    should.equal(rootHash, compareRootHash)
+
+    const publicHash = manifest.manifest.interbitRoot.chains.public.hash
+    delete manifest.manifest.interbitRoot.chains.public.hash
+    const comparePublicHash = hashObject(
+      manifest.manifest.interbitRoot.chains.public
+    )
+    should.equal(publicHash, comparePublicHash)
+
+    const controlHash = manifest.manifest.interbitRoot.chains.control.hash
+    delete manifest.manifest.interbitRoot.chains.control.hash
+    const compareControlHash = hashObject(
+      manifest.manifest.interbitRoot.chains.control
+    )
+    should.equal(controlHash, compareControlHash)
   })
 
   it('replaces apps config but not genesis blocks if apps config changes', () => {

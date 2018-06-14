@@ -127,12 +127,14 @@ const getSubtreeCovenants = (chainAlias, myCovenant, chains) => ({
   )
 })
 
-const configureCascadingJoins = (parentAlias, childAliases, existingJoins) => {
-  const childJoins = childAliases
-    ? childAliases.map(childAlias => ({
-        alias: childAlias
-      }))
-    : []
+const configureCascadingJoins = (
+  parentAlias,
+  childAliases = [],
+  existingJoins
+) => {
+  const childJoins = childAliases.map(childAlias => ({
+    alias: childAlias
+  }))
   const parentJoin = parentAlias
     ? {
         alias: parentAlias,

@@ -27,6 +27,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SET_MANIFEST: {
       const { manifest } = action.payload
 
+      // chainId property is only available within subtree manifests, whereas the
+      // root receives ALL manifests, and doesn't have chainId at the top lvl
       const isRootChain = !manifest.chainId
 
       if (isRootChain && !verifyManifestHash(manifest)) {

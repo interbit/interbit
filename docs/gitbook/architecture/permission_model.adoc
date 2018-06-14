@@ -88,7 +88,7 @@ actions that your Interbit application implements.
 [WARNING]
 =========
 You must be careful when adjusting permissions. Removing your own
-permissions prevents you from performing actions. Removing the
+permissions prevents you from processing actions. Removing the
 permission to adjust the ACL means that nobody can change the
 blockchain's permission in the future. Removing the `*` permission could
 render your blockchain **permanently unusable**.
@@ -105,8 +105,8 @@ ability to control read access.
 [[action_dispatch]]
 == Action Dispatch
 
-When an action is dispatched to a blockchain, the following operations
-are performed:
+When an action is dispatched to a blockchain, the following steps are
+executed:
 
 - The application constructs a _payload_ that represents all of the
   information required to successfully complete the action.
@@ -123,11 +123,12 @@ are performed:
   _tamper resistant_.
 
 - The blockchain's smart contract then evaluates the ACL to determine
-  whether the user has the permission to perform the action.
+  whether the user has the permission to process the action.
 
-If all of these steps complete successfully, the smart contract performs
-the action and updates the blockchain accordingly, and propagates the
-changes to all participating nodes in the blockchain's network.
+If all of these steps complete successfully, the smart contract
+processes the action and updates the blockchain accordingly, and
+propagates the changes to all participating nodes in the blockchain's
+network.
 
 
 [[chain_joins]]

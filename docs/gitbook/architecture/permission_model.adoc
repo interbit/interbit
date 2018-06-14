@@ -2,13 +2,13 @@
 
 This section describes the permission model used by applications built
 with Interbit. The following discussion provides a conceptual framework
-for understanding how Interbit manages permissions. Follow the cross
-reference links for implementation details.
-
+for understanding how Interbit manages permissions.
 
 [[chain_access]]
 == Chain Access
 
+image:img/chain_key.svg["Interbit blockchains are permissioned, and
+require public keys for access", 59, 59, role="right"]
 Interbit uses permissioned blockchains; all access to a blockchain is
 controlled with public key cryptography. If you hold a private key that
 corresponds to a public key added to an Interbit blockchain, you can
@@ -75,9 +75,9 @@ records a single vote on a blockchain could be assigned to the
 `can_vote` role, permitting any user with the `can_vote` role to
 dispatch the `add_vote` action.
 
-Each Interbit application includes a special permission called `*` (the
+Each Interbit application includes a special permission called `\*` (the
 _star_ permission). The `*` means _any action_, and is typically
-assigned only to the `root` role. In addition, the `*` can be used as a
+assigned only to the `root` role. In addition, the `\*` can be used as a
 wildcard for defining permissions. For example, a `USER_*` permission
 would match all actions that start with `USER_`.
 
@@ -119,7 +119,7 @@ are performed:
   that the user has access.
 
 - The blockchain's smart contract then compares the payload to the hash
-  to verify that the payload has not been modified. This makes actions
+  to verify that the payload has not been modified. This makes the action
   _tamper resistant_.
 
 - The blockchain's smart contract then evaluates the ACL to determine
@@ -138,11 +138,17 @@ information in one blockchain to be connected with information in
 another blockchain. There are two kinds of chain joins: read joins and
 write joins.
 
+image:img/read_join.svg["An Interbit read join between a provider
+blockchain and a consumer blockchain", 478, 111, role="center"]
+
 A read join means that one blockchain, the _provider_, has access to a
 copy of the state -- the collection of data stored on the blockchain --
 of another blockchain, the _consumer_, at a specific point in time. Any
 updates to the consumer's state is not reflected in the provider's
 blockchain.
+
+image:img/write_join.svg["An Interbit write join between a sender
+blockchain and a receiver blockchain", 458, 111, role="center"]
 
 A write join is implemented as a pair of read joins and so, to reduce
 confusion (because there would be two providers and two consumers), the
@@ -155,8 +161,8 @@ covers the sender's addition of its action to the queue so the that
 receiver can dispatch that action to itself. The other read join
 provides the results of the receiver's action to the sender.
 
-After a join has been established, the join can be revoked and the
-provider no longer has access to the consumer's state.
+After a join, read or write, has been established, the join can be
+revoked and the provider no longer has access to the consumer's state.
 
 
 [[join_permissions]]

@@ -28,6 +28,7 @@
   * [To-do List App](/examples/to-do-list.md)
 * [Architecture](architecture/README.md)
   * [Chain Architecture](architecture/chain-architecture.md)
+  * [Permission Model](architecture/permission_model.adoc)
 
 * [Reference](reference/README.md)
   * [interbit](reference/interbit/README.md)

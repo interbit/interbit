@@ -558,6 +558,12 @@ img.support-icon {
   margin-left: 1em;
 }
 
+.center, span.image.center {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .markdown-section .glossary-term {
   text-decoration: none;
   color: inherit;

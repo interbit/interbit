@@ -1,5 +1,5 @@
 const objectHash = require('object-hash')
-const stringify = require('json-stringify-deterministic')
+const stringify = require('json-stable-stringify')
 
 const hash = obj => objectHash(stringify(obj))
 

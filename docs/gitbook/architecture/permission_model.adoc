@@ -47,7 +47,7 @@ on Interbit has various actions that can be dispatched to a
 blockchain. Some actions may be common to most users with access to
 the blockchain, others may be restricted to specific individuals.
 
-For example, in a voting application you might create a `can_vote` role, which
+For example, in a voting application you might create a `canVote` role, which
 permits users with that role to add their vote to the blockchain and to
 see voting results, and an `auditor` role, which permits users with that
 role to see all of the individual votes but not to vote.
@@ -70,10 +70,10 @@ work).
 Permissions are the specific actions that your application supports
 that can be assigned to roles.
 
-For example, in a voting application, the `add_vote` action which
+For example, in a voting application, the `ADD_VOTE` action which
 records a single vote on a blockchain could be assigned to the
-`can_vote` role, permitting any user with the `can_vote` role to
-dispatch the `add_vote` action.
+`canVote` role, permitting any user with the `can_vote` role to
+dispatch the `ADD_VOTE` action.
 
 Each Interbit application includes a special permission called `\*` (the
 _star_ permission). The `*` means _any action_, and is typically
@@ -94,13 +94,6 @@ blockchain's permission in the future. Removing the `*` permission could
 render your blockchain **permanently unusable**.
 =========
 
-[NOTE]
-======
-At this time, all users with access to a blockchain can read from the
-blockchain. Future versions of the Interbit framework will provide the
-ability to control read access.
-======
-
 
 [[action_dispatch]]
 == Action Dispatch
@@ -109,11 +102,11 @@ When an action is dispatched to a blockchain, the following steps are
 executed:
 
 - The application constructs a _payload_ that represents all of the
-  information required to successfully complete the action.
+  information required to successfully process the action.
 
-- The payload is then combined with its cryptographic hash and the
-  result is signed with the user's private key. This makes the action
-  _verifiable_.
+- The action, with its payload, is then combined with its cryptographic
+  hash and the result is signed with the user's private key. This makes
+  the action _verifiable_.
 
 - The blockchain's smart contract then checks the signature to verify
   that the user has access.

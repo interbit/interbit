@@ -101,27 +101,30 @@ render your blockchain **permanently unusable**.
 When an action is dispatched to a blockchain, the following steps are
 executed:
 
-- The application constructs a _payload_ that represents all of the
+. The application constructs a _payload_ that represents all of the
   information required to successfully process the action.
 
-- The action, with its payload, is then combined with its cryptographic
-  hash and the result is signed with the user's private key. This makes
-  the action _verifiable_.
+. The action, with its payload, is then combined with its
+  cryptographic hash and the result is signed with the user's private
+  key. This makes the action _verifiable_.
 
-- The blockchain's smart contract then checks the signature to verify
-  that the user has access.
+. The application then dispatches the signed action to the blockchain
+   where:
 
-- The blockchain's smart contract then compares the payload to the hash
-  to verify that the payload has not been modified. This makes the action
-  _tamper resistant_.
+.. The signature is checked to determine whether the user has access to
+   dispatch the action. This ensure that the action's user
+   _authenticated_.
 
-- The blockchain's smart contract then evaluates the ACL to determine
-  whether the user has the permission to process the action.
+.. The payload is compared to the hash to test for modifications.
+   This makes the action _tamper resistant_.
 
-If all of these steps complete successfully, the smart contract
-processes the action and updates the blockchain accordingly, and
-propagates the changes to all participating nodes in the blockchain's
-network.
+.. The ACL is evaluated to determine whether the user has the permission
+  to process the action. This ensures that the action is _authorized_.
+
+If all of these steps complete successfully, the action is processed and
+the blockchain is updated accordingly. Once the blockchain has been
+updated, the changes are propogated to all participating nodes in the
+blockchain's network.
 
 
 [[chain_joins]]

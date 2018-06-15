@@ -142,17 +142,17 @@ write joins.
 image:img/read_join.svg["An Interbit read join between a provider
 blockchain and a consumer blockchain", 478, 111, role="center"]
 
-A read join means that one blockchain, the _provider_, has access to a
+A read join means that one blockchain, the _consumer_, has access to a
 copy of a portion of the state -- the collection of data stored on the
-blockchain -- of another blockchain, the _consumer_, at a specific point
-in time. Any updates to the consumer's state is not reflected in the
-provider's blockchain.
+blockchain -- of another blockchain, the _provider_, at a specific point
+in time. Any updates to the provider's state are not reflected in the
+consumer's blockchain.
 
 image:img/write_join.svg["An Interbit write join between a sender
 blockchain and a receiver blockchain", 458, 111, role="center"]
 
 A write join is implemented as a pair of read joins and so, to reduce
-confusion (because there would be two providers and two consumers), the
+confusion (because there would be two consumers and two providers), the
 blockchain that initiates a write join is called the _sender_ and the other
 blockchain is called the _receiver_. A write join allows the sender to
 receive updates whenever the receiver's state changes and to dispatch
@@ -163,7 +163,7 @@ receiver can dispatch that action to itself. The other read join
 provides the results of the receiver's action to the sender.
 
 After a join, read or write, has been established, the join can be
-revoked and the provider no longer has access to the consumer's state.
+revoked and the consumer no longer has access to the provider's state.
 
 
 [[join_permissions]]

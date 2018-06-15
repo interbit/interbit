@@ -42,7 +42,11 @@ We will handle generating randomness in an Interbit application in 2 ways:
 
 ### Pseudo Randomness Dispatched to Chain
 
-The standard way to generate random data in JavaScript is with `Math.random()`. Although it is a pseudorandom number generator (PRNG), it cannot be deterministic because it does not accept a seed value. To handle this oddness, we can simply dispatch a value from `Math.random()` to the blockchain.
+The standard way to generate random data in JavaScript is with
+`Math.random()`. Although it is a pseudo-random number generator (PRNG),
+it cannot be deterministic because it does not accept a seed value. To
+handle this oddness, we can simply dispatch a value from `Math.random()`
+to the blockchain.
 
 In the following sample is a simple smart contract that accepts an action called `RANDOM` and replaces the random value in state with the one it received from the action.
 

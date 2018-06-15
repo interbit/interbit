@@ -1,8 +1,11 @@
 # Introductory Project
 
-This example project continues where [Getting Started](../getting-started/README.md) left off. Please refer to that page to start this example if you have not already.
+This example project continues where [Getting
+Started](../getting-started/README.md) left off. Please refer to that
+page to start this example if you have not already.
 
-After following the getting started guide your project directory should have the following structure:
+After following the getting started guide your project directory should
+have the following structure:
 
 Directory/File     | Purpose
 -------------------| -------
@@ -10,21 +13,27 @@ node_modules/      | Installed npm packages
 index.js           | Entry point to your application
 package.json       | Configuration file for the Node.js project
 
+
 ## Tutorial
 
-In order to make a basic Interbit application (or a complex one), there are several basic steps you must follow.
+In order to make a basic Interbit application (or a complex one), there
+are several basic steps you must follow:
 
-1. You must add a start script to package.json.
+1. You must add a start script to `package.json`.
 1. You must generate a set of keys.
 1. You must set up configuration values for the blockchain.
-1. You must create a covenant consisting of Smart Contracts, Actions, and initial Application State.
+1. You must create a covenant consisting of Smart Contracts, Actions,
+   and initial Application State.
 1. You must initialize the blockchain.
 
-Finally, you can do something with the Application State like displaying it in a UI, or using it to drive business decisions.
+Finally, you can do something with the Application State like displaying
+it in a UI, or using it to drive business decisions.
+
 
 ### Running the Project
 
-To run the project, you will need to add the start command to the scripts section in `package.json`.
+To run the project, you will need to add the start command to the
+scripts section in `package.json`.
 
 <div class="filename">package.json</div>
 
@@ -35,18 +44,23 @@ To run the project, you will need to add the start command to the scripts sectio
   }
 ```
 
-
-This script will enable you to use npm to start your application. To run it, enter the following command in your terminal:
+This script will enable you to use npm to start your application. To run
+it, enter the following command in your terminal:
 
 ```bash
-$ npm start
+npm start
 ```
 
-If you have used the index.js file from [Getting Started](../getting-started/README.md), this command logs the imported Interbit library to the console.
+If you have used the index.js file from [Getting
+Started](../getting-started/README.md), this command logs the imported
+Interbit library to the console.
+
 
 ### Preparing Chain Configuration
 
-To prepare to initialize your chain you must generate some PGP keys and setup a basic chain configuration object. To make things easier, we have supplied a key pair and basic configuration below.
+To prepare to initialize your chain you must generate some PGP keys and
+setup a basic chain configuration object. To make things easier, we have
+supplied a key pair and basic configuration below.
 
 <div class="filename">keys.js</div>
 
@@ -99,11 +113,21 @@ module.exports = {
 
 <div class="tips info">
   <p><span></span>PGP Keys</p>
-  <p>This release of Interbit supports OpenPGP.js v2.5.2 keys. You can copy &amp; paste the entire snippet above into a file called keys.js for any test and prototype projects you make on the Alpha release, but we recommend generating your own key pair for other uses.</p>
+  <p>
+    This release of Interbit supports OpenPGP.js v2.5.2 keys. You can
+    copy &amp; paste the entire snippet above into a file called keys.js
+    for any test and prototype projects you make on the Alpha release,
+    but we recommend generating your own key pair for other uses.
+  </p>
 </div>
 
 
-In addition to the keys, we've included the most basic chain configuration Interbit will accept to run a chain. At minimum it must contain a chain name, description, network configuration, and consensus configuration. The consensus configuration must include a list of all public keys that are allowed to participate in the chain with the property name validators.
+In addition to the keys, we've included the most basic chain
+configuration Interbit will accept to run a chain. At minimum it must
+contain a chain name, description, network configuration, and consensus
+configuration. The consensus configuration must include a list of all
+public keys that are allowed to participate in the chain with the
+property name validators.
 
 <div class="filename">index.js</div>
 
@@ -121,14 +145,22 @@ const chainConfig = {
 
 <div class="tips info">
   <p><span></span>Chain Configuration</p>
-  <p>Copy &amp; paste this snippet into index.js to use to initialize an Interbit blockchain.</p>
+  <p>
+    Copy &amp; paste this snippet into index.js to use to initialize an
+    Interbit blockchain.
+  </p>
 </div>
+
 
 ### Making a Covenant
 
-A convenant consists of a Smart Contract, Actions, and an Initial State. The Smart Contract reacts according to the Actions that are dispatched to the blockchain to update the Application State. The Initial State is the first application state that the blockchain ever has.
+A covenant consists of a Smart Contract, Actions, and an Initial State.
+The Smart Contract reacts according to the Actions that are dispatched
+to the blockchain to update the Application State. The Initial State is
+the first application state that the blockchain ever has.
 
-We have included a very basic covenant below that simply adds numbers and stores the sum in the blockchain state.
+We have included a very basic covenant below that simply adds numbers
+and stores the sum in the blockchain state.
 
 <div class="filename">index.js</div>
 
@@ -158,12 +190,27 @@ const smartContract = {
 
 <div class="tips info">
   <p><span></span>Covenants</p>
-  <p>The snippet above is a basic covenant. It contains one Action to dispatch to the blockchain: <code>ADD</code>. When the action is dispatched to the blockchain it is received by the defined Smart Contract which receives the current Application State and the action. It adds the number with the current sum in state and returns the updated Application State to be stored on the blockchain. The Initial State provides the first values to use for the blockchain, before any Actions are dispatched and any blocks are formed. Copy &amp; paste this snippet into index.js.</p>
+  <p>
+    The snippet above is a basic covenant. It contains one Action to
+    dispatch to the blockchain: <code>ADD</code>. When the action is
+    dispatched to the blockchain it is received by the defined Smart
+    Contract which receives the current Application State and the
+    action. It adds the number with the current sum in state and returns
+    the updated Application State to be stored on the blockchain. The
+    Initial State provides the first values to use for the blockchain,
+    before any Actions are dispatched and any blocks are formed. Copy
+    &amp; paste this snippet into index.js.
+  </p>
 </div>
+
 
 ### Initializing and Using the Blockchain
 
-Intitializing the blockchain is a simple matter of following the API reference steps and then using the chain in your application. Below we've included some code to initialize a new blockchain with the covenant that we just created. Copy &amp; paste the following into your application.
+Initializing the blockchain is a simple matter of following the API
+reference steps and then using the chain in your application. Below
+we've included some code to initialize a new blockchain with the
+covenant that we just created. Copy &amp; paste the following into your
+application.
 
 <div class="filename">index.js</div>
 
@@ -174,7 +221,12 @@ const chainId = Interbit.createGenesis(baseChain)
 const chainPromise = Interbit.animateChain({ baseChain, crypto, isCreator: true, chainId })
 ```
 
-Now that you have a chain promise, you can wait for it to resolve to your animated blockchain and then use it however you like. We've included an example below that subscribes to the chain and logs it on any change and dispatches an `ADD` action to make sure our Smart Contract updates. Copy &amp; paste it into `index.js` and now the whole app should work.
+Now that you have a chain promise, you can wait for it to resolve to
+your animated blockchain and then use it however you like. We've
+included an example below that subscribes to the chain and logs it on
+any change and dispatches an `ADD` action to make sure our Smart
+Contract updates. Copy &amp; paste it into `index.js` and now the whole
+app should work.
 
 <div class="filename">index.js</div>
 
@@ -197,12 +249,15 @@ chainPromise.then(animatedChain => {
 
 ## Conclusion
 
-At this point, you will have created your first Interbit application. Although it is simple this application contains all of the building blocks necessary to create more complex applications. It initializes a new blockchain, accepts Actions, updates Application State using Smart Contracts, and fetches and logs data from the blockchain.
+At this point, you will have created your first Interbit application.
+Although it is simple this application contains all of the building
+blocks necessary to create more complex applications. It initializes a
+new blockchain, accepts Actions, updates Application State using Smart
+Contracts, and fetches and logs data from the blockchain.
 
-To continue learning about Interbit, please check out our other examples:
+To continue learning about Interbit, please check out our other
+examples:
 
- * [Determinism](determinism.md)
-
- * [To-do List](to-do-list.md)
-
- * [Order Books](order-books.md)
+* [Determinism](determinism.md)
+* [To-do List](to-do-list.md)
+* [Order Books](order-books.md)

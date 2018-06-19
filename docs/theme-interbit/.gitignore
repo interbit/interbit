@@ -6,4 +6,4 @@ packages/*/npm-debug.log
 **/db-*
 **/_book
 **/build
-**.lock
+**/.lock

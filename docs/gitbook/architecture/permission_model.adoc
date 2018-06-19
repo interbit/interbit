@@ -67,7 +67,7 @@ custom roles assigned at creation.
 
 When the membership entity is a blockchain identifier, that blockchain
 is permitted to dispatch actions to the current blockchain (which is a
-key part of how <<chain_joins,chain joins>> work).
+crucial part of how <<chain_joins,chain joins>> work).
 
 
 [[permissions]]

@@ -1,0 +1,173 @@
+= Permission Model
+
+This section describes the permission model used by applications built
+with Interbit. The following discussion provides a conceptual framework
+for understanding how Interbit manages permissions.
+
+[[chain_access]]
+== Chain Access
+
+image:img/chain_key.svg["Interbit blockchains are permissioned, and
+require public keys for access", 59, 59, role="right"]
+Interbit uses permissioned blockchains; all access to a blockchain is
+controlled with public key cryptography. If you hold a private key that
+corresponds to a public key added to an Interbit blockchain, you can
+access that blockchain. If not, you have no access.
+
+[WARNING]
+=========
+If you are the last user on a blockchain that has the permission to
+add or remove public keys, do not remove your own public key from the
+blockchain. If you do remove your own public key, **your access to that
+blockchain is permanently removed**.
+=========
+
+
+[[acl]]
+== Access Control List (ACL)
+
+Interbit uses a role-based access control list, or ACL, to manage
+permissions on a blockchain. An ACL uses the concepts of _roles_ and
+_permissions_ (also known as privileges, or capabilities) to describe
+the specific blockchain actions that each user, or group of users, is
+permitted to dispatch.
+
+
+[[roles]]
+=== Roles
+
+In an organization, each person has a job-based function, or _role_. For
+example, developers, senior developers, managers, etc. Each person is
+permitted to, or prohibited from, dispatching specific actions according
+to their role in the organization. Some roles apply to many people, and
+some roles apply to specific people.
+
+Roles work in a very similar fashion in Interbit blockchains. Your
+application built on Interbit implements various actions that can be
+dispatched to a blockchain. Such actions could be dispatched by users
+directly, or could dispatched as part of automated processing between
+the blockchains or between the nodes in the blockchain network. The
+various dispatchers are called _entities_, and roles define the actions
+that each entity is permitted to dispatch.
+
+When an entity is assigned to a role, it becomes a _member_ of that
+role. Membership is very flexible: any single entity can be assigned to
+one or more roles, and roles can have any number of members.
+
+For example, in a voting application you might create a `canVote` role,
+which permits entities with that role to add their vote to the
+blockchain and to see voting results, and an `auditor` role, which
+permits entities with that role to see all of the individual votes but
+not to vote.
+
+Each Interbit blockchain has a `root` role, which permits entities with
+that role to dispatch any action. Typically, the creator of a
+blockchain would have the `root` role, but each blockchain can have
+custom roles assigned at creation.
+
+When the membership entity is a blockchain identifier, that blockchain
+is permitted to dispatch actions to the current blockchain (which is a
+crucial part of how <<chain_joins,chain joins>> work).
+
+
+[[permissions]]
+=== Permissions
+
+Permissions are the specific actions that your application supports
+that can be assigned to roles.
+
+For example, in a voting application, the `ADD_VOTE` action which
+records a single vote on a blockchain could be assigned to the
+`canVote` role, permitting any entity with the `can_vote` role to
+dispatch the `ADD_VOTE` action.
+
+Each Interbit application includes a special permission called `\*` (the
+_star_ permission). The `*` means _any action_, and is typically
+assigned only to the `root` role. In addition, the `\*` can be used as a
+wildcard for defining permissions. For example, a `USER_*` permission
+would match all actions that start with `USER_`.
+
+Also, there are typically two permissions for managing the ACL itself:
+`addToAcl` and `replaceAcl`. These are included in addition to any
+actions that your Interbit application implements.
+
+[WARNING]
+=========
+You must be careful when adjusting permissions. Removing your own
+permissions prevents you from processing actions. Removing the
+permission to adjust the ACL means that nobody can change the
+blockchain's permission in the future. Removing the `*` permission could
+render your blockchain **permanently unusable**.
+=========
+
+
+[[action_dispatch]]
+== Action Dispatch
+
+When an action is dispatched to a blockchain, the following steps are
+executed:
+
+. The application constructs a _payload_ that represents all of the
+  information required to successfully process the action.
+
+. The action, with its payload, is then combined with its
+  cryptographic hash and the result is signed with the entity's private
+  key. This makes the action _verifiable_.
+
+. The signed action is then sent to the target blockchain where:
+
+.. The signature is checked to determine whether the entity has access
+   to dispatch the action. This ensure that the action's entity
+   _authenticated_.
+
+.. The payload is compared to the hash to test for modifications.
+   This makes the action _tamper resistant_.
+
+.. The ACL is evaluated to determine whether the dispatching entity has
+   permission to process the action. This ensures that the action is
+   _authorized_.
+
+If all of these steps complete successfully, the action is processed and
+the blockchain is updated accordingly. Once the blockchain has been
+updated, the changes are propagated to all participating nodes in the
+blockchain's network.
+
+
+[[chain_joins]]
+== Chain Joins
+
+Chain joins are an Interbit-specific feature. They permit some (or all)
+of the information in one blockchain to be connected with information in
+another blockchain. These connections are controlled via ACLs, and so
+are explicit and purposeful.
+
+There are two kinds of chain joins: read joins and write joins.
+
+image:img/read_join.svg["An Interbit read join between a provider
+blockchain and a consumer blockchain", 478, 111, role="center"]
+
+A read join means that one blockchain, the _consumer_, has access to a
+copy of a portion of the state -- the collection of data stored on the
+blockchain -- of another blockchain, the _provider_. Any updates to the
+provider's state are automatically updated in the consumer's blockchain.
+
+[NOTE]
+======
+Blockchain updates are not immediate and take some time to propagate
+throughout the network of nodes supporting the blockchain.
+======
+
+image:img/write_join.svg["An Interbit write join between a sender
+blockchain and a receiver blockchain", 458, 111, role="center"]
+
+A write join is implemented as a pair of read joins and so, to reduce
+confusion (because there would be two consumers and two providers), the
+blockchain that initiates a write join is called the _sender_ and the other
+blockchain is called the _receiver_.
+
+The purpose of a write join is to allow the sender to dispatch actions
+to the receiver, and for the receiver to provide the results of the
+actions to the sender.
+
+After a join, read or write, has been established, the join can be
+revoked and the consumer no longer has access to the provider's state.

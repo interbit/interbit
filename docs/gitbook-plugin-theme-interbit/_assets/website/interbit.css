@@ -439,6 +439,137 @@ img.support-icon {
   content: url('../../assets/img/success.png');
 }
 
+/* Asciidoctor admonition styling */
+
+/* admonitions ---------------------------------------------------- */
+
+.admonitionblock {
+  border: 1px solid rgba(152, 152, 152, 0.2);
+  border-radius: 3px;
+  border-left: 4px solid rgba(152, 152, 152, 1);
+  background-color: rgba(152, 152, 152, 0.02);
+  margin-bottom: 1.5em;
+  padding: 12px 0;
+}
+
+.markdown-section .admonitionblock table,
+.markdown-section .admonitionblock table td,
+.markdown-section .admonitionblock table th,
+.markdown-section .admonitionblock table tr {
+  border: 0 none;
+  background-color: transparent;
+  margin: 0;
+}
+
+.admonitionblock td.icon {
+  width: 45px;
+  position: relative;
+}
+
+.admonitionblock td.icon:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 15px;
+  width: 28px;
+  height: 28px;
+  background: url("images/icon-note.svg") no-repeat;
+  z-index: 1;
+}
+
+.admonitionblock td.icon .title {
+  display: none;
+}
+
+.admonitionblock td.content p {
+  color: inherit;
+}
+
+.admonitionblock td.content > :last-child,
+.admonitionblock td.content .paragraph:last-child p {
+  margin-bottom: 0;
+}
+
+/* caution */
+
+.admonitionblock.caution {
+  border-color: rgba(246, 166, 35, 0.2);
+  border-left-color: rgba(246, 166, 35, 1);
+  background-color: rgba(246, 166, 35, 0.02);
+}
+
+.admonitionblock.caution td.icon:before {
+  background: url("images/icon-caution.svg") no-repeat;
+  width: 32px;
+  top: 4px;
+  left: 11px;
+}
+
+/* important */
+
+.admonitionblock.important {
+  border-color: rgba(217, 83, 79, 0.2);
+  border-left-color: rgba(217, 83, 79, 1);
+  background-color: rgba(217, 83, 79, 0.02);
+}
+
+.admonitionblock.important td.icon:before {
+  background: url("images/icon-important.svg") no-repeat;
+}
+
+/* note */
+
+.admonitionblock.note {
+  border-color: rgba(31, 152, 222, 0.2);
+  border-left-color: rgba(31, 152, 222, 1);
+  background-color: rgba(31, 152, 222, 0.02);
+}
+
+.admonitionblock.note td.icon:before {
+  background: url("images/icon-note.svg") no-repeat;
+}
+
+/* tip */
+
+.admonitionblock.tip {
+  border-color: rgba(31, 152, 222, 0.2);
+  border-left-color: rgba(31, 152, 222, 1);
+  background-color: rgba(31, 152, 222, 0.02);
+}
+
+.admonitionblock.tip td.icon:before {
+  background: url("images/icon-tip.svg") no-repeat;
+}
+
+/* warning */
+
+.admonitionblock.warning {
+  border-color: rgba(217, 83, 79, 0.2);
+  border-left-color: rgba(217, 83, 79, 1);
+  background-color: rgba(217, 83, 79, 0.02);
+}
+
+.admonitionblock.warning td.icon:before {
+  background: url("images/icon-warning.svg") no-repeat;
+}
+
+.right, span.image.right {
+  float: right;
+  margin-left: 1em;
+}
+
+.center, span.image.center {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.markdown-section .glossary-term {
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px dotted #aaa;
+}
+
 pre.exercise-pre {
   padding: 0px 1em;
   height: 174px;

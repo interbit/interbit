@@ -1,20 +1,27 @@
 # `destroy()`
 
-When redispatched from within a covenant or dispatched to a chain, it destroys this chain in the same manner as the cli method [`destroyChain(chainId)`](../interbit-core/cli/destroyChain.md).
+When redispatched from within a covenant or dispatched to a chain, it
+destroys this chain in the same manner as the cli method
+[`destroyChain(chainId)`](../interbit-core/cli/destroyChain.md).
 
-To destroy means removing chain related resources from all hypervisors that host the chain except if other chains have a join with the deleted chain. Their join config is not cleaned up automatically.
+To destroy means removing chain related resources from all hypervisors
+that host the chain except if other chains have a join with the deleted
+chain. Their join config is not cleaned up automatically.
 
 except: any chain related data in the kv store is not being deleted yet
 
-#### Arguments
+
+## Arguments
 
 None
 
-#### Returns
+
+## Returns
 
 An action that can be dispatched to a chain to destroy it.
 
-#### Example
+
+## Example
 
 ```js
 const { destroy, redispatch } = require('interbit-covenant-utils')
@@ -25,5 +32,4 @@ const reducer = (state, action) => {
 
   return nextState
 }
-
 ```

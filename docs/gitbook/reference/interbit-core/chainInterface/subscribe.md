@@ -1,18 +1,22 @@
 # `subscribe(callback)`
 
-Subscribes to state changes from a chain. When the state of a chain changes, the callback passed into params will be called.
+Subscribes to state changes from a chain. When the state of a chain
+changes, the callback passed into params will be called.
 
 This is a method that is called from a running chain.
 
-#### Arguments
+
+## Arguments
 
 1. `callback` *(Function)*: a callback with no parameters.
 
-#### Returns
+
+## Returns
 
 This function does not return anything.
 
-#### Example
+
+## Example
 
 ```js
 chainInterface.subscribe(() => {
@@ -20,6 +24,8 @@ chainInterface.subscribe(() => {
 })
 ```
 
-#### Tips
 
-* To get the state from within the callback, you must call the `chain.getState()` function.
+## Tips
+
+* To get the state from within the callback, you must call the
+  `chain.getState()` function.

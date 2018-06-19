@@ -1,11 +1,12 @@
 # `redispatches()`
 
-Adds an action from within a reducer to the redispatch queue to be processed by the reducer later.
+Adds an action from within a reducer to the redispatch queue to be
+processed by the reducer later.
 
 #### Arguments
 
 1. `state` *(Object)*: the state to attach the action to
-2. `redispatchAction` *(Object)*: The action to redispatch
+2. `redispatchAction` *(Object)*: the action to redispatch
 
 
 #### Returns

@@ -5,23 +5,25 @@
   <p>Incomplete content.</p>
 </div>
 
-Returns the number of actions still in the action pool for this hypervisor. The action pool contains any actions that exist in this node's memory but have not been blocked yet.
+Returns the number of actions still in the action pool for this
+hypervisor. The action pool contains any actions that exist in this
+node's memory but have not been blocked yet.
 
-#### Arguments
+
+## Arguments
 
 1. `?` *(Object)*: ?
 
 
-#### Returns
+## Returns
 
 *(Object)*: ?
 
 
-#### Example
+## Example
 
 ```js
 const hypervisor = interbit.createHypervisor()
 
 const actionPoolLength = hypervisor.getActionPoolLength()
 ```
-

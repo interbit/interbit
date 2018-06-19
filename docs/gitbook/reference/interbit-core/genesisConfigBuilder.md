@@ -1,8 +1,10 @@
 # `genesisConfigBuilder()`
 
-Returns an object containing a set of functions that can be used to build a valid genesis block configuration.
+Returns an object containing a set of functions that can be used to
+build a valid genesis block configuration.
 
-#### Returns
+
+## Returns
 
 *(Object)*: A builder object for creating a valid genesis block config.
 
@@ -14,7 +16,7 @@ Returns an object containing a set of functions that can be used to build a vali
 }
 ```
 
-#### Example
+## Example
 
 ```js
 const genesisConfig = interbit.genesisConfigBuilder()
@@ -22,4 +24,3 @@ const genesisConfig = interbit.genesisConfigBuilder()
                               .addRootKey({ rootKey: 'publicKey' })
                               .build()
 ```
-

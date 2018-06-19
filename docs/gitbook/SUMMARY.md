@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-  * [Contents](Contents.md)
 
 * [Getting Started](getting-started/README.md)
   * [Requirements](getting-started/requirements.md)

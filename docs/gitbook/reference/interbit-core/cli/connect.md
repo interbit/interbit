@@ -2,18 +2,20 @@
 
 Attempts to connect to a peer at the address host:port
 
-#### Arguments
+
+## Arguments
 
 1. `port` *int*: The port to connect to
 1. `host` *string*: The host to connect to
 
 
-#### Returns
+## Returns
 
-*(Promise)*: A promise that will resolve when the connection succeeds or reject on failure
+*(Promise)*: A promise that will resolve when the connection succeeds or
+reject on failure
 
 
-#### Example
+## Example
 
 ```js
 const hypervisor = interbit.createHypervisor()
@@ -24,4 +26,3 @@ const host = 'localhost'
 
 await cli.connect(port, host)
 ```
-

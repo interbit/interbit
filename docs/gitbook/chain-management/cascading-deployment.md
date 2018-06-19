@@ -2,7 +2,10 @@
 
 <div class="tips info">
   <p><span></span>Coming soon...</p>
-  <p>The cascading release managed by a root node with a set of admin keys is not available yet.</p>
+  <p>
+    The cascading release managed by a root node with a set of admin
+    keys is not available yet.
+  </p>
 </div>
 
 Managing an entire blockchain system that exists on many nodes with

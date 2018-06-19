@@ -151,8 +151,13 @@ Further Reading:
 
 <div class="tips warning">
   <p><span></span>Incomplete Content</p>
-  <p>We will be updating our documentation with a deep dive into sponsorship in the coming weeks.</p>
-  <p>TODO: Add a link to Sponsorship Docs</p>
+  <p>
+    We will be updating our documentation with a deep dive into
+    sponsorship in the coming weeks.
+  </p>
+  <p>
+    TODO: Add a link to Sponsorship Docs
+  </p>
 </div>
 
 
@@ -164,7 +169,10 @@ covenants, one application, and one peer.
 
 <div class="tips info">
   <p><span></span>Updating the Config</p>
-  <p>When you update the config you will need to restart the Interbit node using <code>npm run interbit:start</code>.</p>
+  <p>
+    When you update the config you will need to restart the Interbit
+    node using <code>npm run interbit:start</code>.
+  </p>
 </div>
 
 
@@ -288,8 +296,14 @@ npm package.
 
 <div class="tips info">
   <p><span></span>Changing the Covenants</p>
-  <p>When you change the covenants you will need to turn the Interbit node off and on again.</p>
-  <p>There is an open issue to restore the covenant watch and deploy feature. (#181)</p>
+  <p>
+    When you change the covenants you will need to turn the Interbit
+    node off and on again.
+  </p>
+  <p>
+    There is an open issue to restore the covenant watch and deploy
+    feature. (#181)
+  </p>
 </div>
 
 

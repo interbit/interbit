@@ -1,18 +1,21 @@
 # `createGenesisBlock(genesisConfig)`
 
-Creates a genesis block based on the passed in configuration. 
-
-#### Arguments
-
-1. `genesisConfig` *(Object)*: The genesis block configuration. See [tips](#tips) section for more information.
+Creates a genesis block based on the passed in configuration.
 
 
-#### Returns
+## Arguments
 
-*(Object)*: A genesis block that can be used to [startChain](startChain.md)
+1. `genesisConfig` *(Object)*: The genesis block configuration. See
+   [tips](#tips) section for more information.
 
 
-#### Example
+## Returns
+
+*(Object)*: A genesis block that can be used to
+[startChain](startChain.md)
+
+
+## Example
 
 ```js
 const hypervisor = interbit.createHypervisor()
@@ -23,6 +26,8 @@ const cli = interbit.createCli(hypervisor)
 const genesisBlock = cli.createGenesisBlock(genesisConfig)
 ```
 
-#### Tips
 
- - The genesis block configuration can be created using the [Genesis Config Builder](../genesisConfigBuilder.md)
+## Tips
+
+ - The genesis block configuration can be created using the [Genesis
+   Config Builder](../genesisConfigBuilder.md)

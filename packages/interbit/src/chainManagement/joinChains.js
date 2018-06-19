@@ -6,13 +6,11 @@ const {
       authorizeReceiveActions,
       authorizeSendActions
     }
+  },
+  config: {
+    selectors: { getChainJoins, getJoinTypeForChain, joinTypes }
   }
 } = require('interbit-covenant-tools')
-const {
-  getChainJoins,
-  getJoinTypeForChain,
-  joinTypes
-} = require('../config/configSelectors')
 
 // SET FOR DEPRECATION: Pending issue #79
 const joinChains = async (manifest, cli, config) => {

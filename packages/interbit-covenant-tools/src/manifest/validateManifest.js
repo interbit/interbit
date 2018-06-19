@@ -6,11 +6,12 @@ const {
   getGenesisBlockByAlias,
   getBlockMasterByAlias,
   getChainIdByAlias
-} = require('../../src/manifest/manifestSelectors')
+} = require('./manifestSelectors')
+
 const {
   validate,
   objectValidationRules: { required, matches, chainIdPattern, equalTo, numeric }
-} = require('interbit-covenant-tools')
+} = require('../validate')
 
 const validateManifest = manifest => {
   validate(manifest, manifestRules)

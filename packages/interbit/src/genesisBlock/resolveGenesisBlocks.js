@@ -1,12 +1,12 @@
 const interbit = require('interbit-core')
 
 const {
-  getChains,
-  getChainValidators,
-  getAdminValidators
-} = require('../config/configSelectors')
+  config: {
+    selectors: { getChains, getChainValidators, getAdminValidators }
+  },
+  constants: { ROOT_CHAIN_ALIAS }
+} = require('interbit-covenant-tools')
 const { getChainId } = require('./genesisBlockSelectors')
-const { ROOT_CHAIN_ALIAS } = require('../chainManagement/constants')
 
 const resolveGenesisBlocks = (config, originalManifest, covenants) => {
   const chainsConfig = getChains(config)

@@ -1,7 +1,10 @@
 const watch = require('watch')
 const {
-  configSelectors: { getCovenants, getChainByAlias }
-} = require('../config')
+  config: {
+    selectors: { getCovenants, getChainByAlias }
+  }
+} = require('interbit-covenant-tools')
+
 const {
   generateDeploymentDetails,
   deployCovenants

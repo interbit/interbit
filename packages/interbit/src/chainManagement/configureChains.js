@@ -1,15 +1,13 @@
 const {
   manifestCovenant: {
     actionCreators: { setManifest }
+  },
+  manifest: {
+    selectors: { getRootChildren, getChainIdByAlias, getCovenantHashByAlias }
   }
 } = require('interbit-covenant-tools')
 
 const configureJoins = require('./configureJoins')
-const {
-  getRootChildren,
-  getChainIdByAlias,
-  getCovenantHashByAlias
-} = require('../manifest/manifestSelectors')
 
 process.on('unhandledRejection', reason => {
   console.log(`Reason: ${reason}`)

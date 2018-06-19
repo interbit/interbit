@@ -1,14 +1,12 @@
 const path = require('path')
 const should = require('should')
-const { validateConfig } = require('../../rootCovenant/validateConfig')
+const validateConfig = require('../../config/validateConfig')
 
 const defaultConfig = {
   peers: ['localhost:5000', 'localhost:5050'], // First peers to connect to
-  masterChain: 'hub',
-  chains: {
+  staticChains: {
     hub: {
       covenant: 'hub',
-      runsInBrowser: true, // Insert chain ID into index.html,
       config: {
         maxBlockSize: 9001,
         validators: ['pubKey1', 'pubKey2'],
@@ -64,6 +62,16 @@ const defaultConfig = {
   }
 }
 
+const apps = {
+  hub: {
+    peers: ['localhost:5000'],
+    chains: ['hub', 'spoke'],
+    appChain: 'hub',
+    indexLocation: path.join(__dirname, 'public/index.html'),
+    buildLocation: path.join(__dirname, 'build')
+  }
+}
+
 describe('validateConfig(config)', () => {
   it('passes when all joins are paired', () => {
     const config = { ...defaultConfig }
@@ -75,7 +83,7 @@ describe('validateConfig(config)', () => {
   it('fails when join is missing an alias', () => {
     const config = {
       ...defaultConfig,
-      chains: {
+      staticChains: {
         hub: {
           covenant: 'hub',
           config: {
@@ -94,7 +102,7 @@ describe('validateConfig(config)', () => {
   it('fails when aliased join is missing a pair', () => {
     const config = {
       ...defaultConfig,
-      chains: {
+      staticChains: {
         hub: {
           covenant: 'hub',
           config: {
@@ -117,7 +125,7 @@ describe('validateConfig(config)', () => {
   it('fails when corresponding aliased join is not correctly configured', () => {
     const config = {
       ...defaultConfig,
-      chains: {
+      staticChains: {
         hub: {
           covenant: 'hub',
           config: {
@@ -148,7 +156,7 @@ describe('validateConfig(config)', () => {
   it('fails when consume join is not properly formed', () => {
     const config = {
       ...defaultConfig,
-      chains: {
+      staticChains: {
         hub: {
           covenant: 'hub',
           config: {
@@ -183,7 +191,7 @@ describe('validateConfig(config)', () => {
   it('fails when provide join is not properly formed', () => {
     const config = {
       ...defaultConfig,
-      chains: {
+      staticChains: {
         hub: {
           covenant: 'hub',
           config: {
@@ -219,7 +227,7 @@ describe('validateConfig(config)', () => {
   it('fails when receiveActionFrom join is not properly formed', () => {
     const config = {
       ...defaultConfig,
-      chains: {
+      staticChains: {
         hub: {
           covenant: 'hub',
           config: {
@@ -254,7 +262,7 @@ describe('validateConfig(config)', () => {
   it('passes when required props are present', () => {
     const config = {
       peers: [],
-      chains: {},
+      staticChains: {},
       covenants: {}
     }
     const isValid = validateConfig(config)
@@ -263,7 +271,7 @@ describe('validateConfig(config)', () => {
 
   it('fails when missing peers', () => {
     const config = {
-      chains: { ...defaultConfig.chains },
+      staticChains: { ...defaultConfig.chains },
       covenants: { ...defaultConfig.covenants }
     }
 
@@ -272,20 +280,20 @@ describe('validateConfig(config)', () => {
     }, /"peers" property is required in config$/)
   })
 
-  it('fails when missing chains', () => {
+  it('fails when missing staticChains', () => {
     const config = {
       peers: [...defaultConfig.peers],
       covenants: { ...defaultConfig.covenants }
     }
     should.throws(() => {
       validateConfig(config)
-    }, /"chains" property is required in config$/)
+    }, /"staticChains" property is required in config$/)
   })
 
   it('fails when missing covenants', () => {
     const config = {
       peers: [...defaultConfig.peers],
-      chains: { ...defaultConfig.chains }
+      staticChains: { ...defaultConfig.chains }
     }
     should.throws(() => {
       validateConfig(config)
@@ -295,7 +303,7 @@ describe('validateConfig(config)', () => {
   it('fails when chain does not reference a covenant', () => {
     const config = {
       peers: [],
-      chains: {
+      staticChains: {
         chain1: {}
       },
       covenants: {}
@@ -329,40 +337,21 @@ describe('validateConfig(config)', () => {
     }, /Config contains unsupported props: meow,bao$/)
   })
 
-  it('passes when there is no master chain', () => {
+  it.skip('fails when chain structure contains cycles', () => {
     const config = {
       peers: [...defaultConfig.peers],
-      chains: { ...defaultConfig.chains },
-      covenants: { ...defaultConfig.covenants }
-    }
-    const isValid = validateConfig(config)
-
-    should.equal(isValid, true)
-  })
-
-  it('passes when there is a master chain', () => {
-    const config = { ...defaultConfig }
-    const isValid = validateConfig(config)
-
-    should.equal(isValid, true)
-  })
-
-  it('fails when chain structure contains cycles', () => {
-    const config = {
-      peers: [...defaultConfig.peers],
-      masterChain: 'chain1',
-      chains: {
+      staticChains: {
         chain1: {
           covenant: 'hub',
-          parentChain: 'chain3'
+          childChains: ['chain3']
         },
         chain2: {
           covenant: 'hub',
-          parentChain: 'chain1'
+          childChains: ['chain1']
         },
         chain3: {
           covenant: 'hub',
-          parentChain: 'chain2'
+          childChains: ['chain2']
         },
         chain4: {
           covenant: 'hub'
@@ -376,37 +365,34 @@ describe('validateConfig(config)', () => {
     }, /"chain1" cannot be added to manifest again: it is already a parent node$/)
   })
 
-  it('passes when chain structure is a tree', () => {
+  it.skip('passes when chain structure is a tree', () => {
     const config = {
       ...defaultConfig,
-      masterChain: 'chain1',
-      chains: {
+      staticChains: {
         chain1: {
-          covenant: 'hub'
+          covenant: 'hub',
+          childChains: ['chain2', 'chain4']
         },
         chain2: {
           covenant: 'hub',
-          parentChain: 'chain1'
+          childChains: ['chain3']
         },
         chain3: {
-          covenant: 'hub',
-          parentChain: 'chain2'
+          covenant: 'hub'
         },
         chain4: {
           covenant: 'hub',
-          parentChain: 'chain1'
+          childChains: ['chain5', 'chain6']
         },
         chain5: {
-          covenant: 'hub',
-          parentChain: 'chain4'
+          covenant: 'hub'
         },
         chain6: {
           covenant: 'hub',
-          parentChain: 'chain4'
+          childChains: ['chain7']
         },
         chain7: {
-          covenant: 'hub',
-          parentChain: 'chain6'
+          covenant: 'hub'
         }
       }
     }
@@ -418,8 +404,7 @@ describe('validateConfig(config)', () => {
   it('passes when chain structure is a single chain', () => {
     const config = {
       ...defaultConfig,
-      masterChain: 'chain',
-      chains: {
+      staticChains: {
         chain: {
           covenant: 'hub'
         }
@@ -429,5 +414,77 @@ describe('validateConfig(config)', () => {
     const isValid = validateConfig(config)
 
     should.equal(isValid, true)
+  })
+
+  it('passes when apps are correctly configured', () => {
+    const config = {
+      ...defaultConfig,
+      apps: {
+        ...apps
+      }
+    }
+
+    const isValid = validateConfig(config)
+
+    should.equal(isValid, true)
+  })
+
+  it('fails when apps are missing props', () => {
+    const config = {
+      ...defaultConfig,
+      apps: {
+        app: {}
+      }
+    }
+
+    should.throws(() => {
+      validateConfig(config)
+    }, /"peers" property is required in app config$/)
+  })
+
+  it('fails when apps reference unconfigured chains', () => {
+    const config = {
+      ...defaultConfig,
+      apps: {
+        hub: {
+          ...apps.hub,
+          chains: ['incorrect']
+        }
+      }
+    }
+
+    should.throws(() => {
+      validateConfig(config)
+    }, /app "hub" references unconfigured chain "incorrect"$/)
+  })
+
+  it('returns true when apps reference unconfigured peers', () => {
+    const config = {
+      ...defaultConfig,
+      apps: {
+        hub: {
+          ...apps.hub,
+          peers: ['localhost']
+        }
+      }
+    }
+    const result = validateConfig(config)
+    should.equal(result, true)
+  })
+
+  it('fails when apps reference unconfigured appChain', () => {
+    const config = {
+      ...defaultConfig,
+      apps: {
+        hub: {
+          ...apps.hub,
+          appChain: 'meowmeowmeow'
+        }
+      }
+    }
+
+    should.throws(() => {
+      validateConfig(config)
+    }, /app "hub" references unconfigured appChain "meowmeowmeow"$/)
   })
 })

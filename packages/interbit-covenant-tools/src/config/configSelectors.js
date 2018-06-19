@@ -1,5 +1,3 @@
-const { joinTypes } = require('../chainManagement/constants')
-
 const getApps = config => config.apps
 const getAdminValidators = config => config.adminValidators || []
 const getChains = config => config.staticChains
@@ -66,6 +64,5 @@ module.exports = {
   getJoinTypeForChain,
   getCovenants,
   getParentByChainAlias,
-  getPeers,
-  joinTypes
+  getPeers
 }

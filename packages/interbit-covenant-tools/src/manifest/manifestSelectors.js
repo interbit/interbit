@@ -1,4 +1,4 @@
-const { ROOT_CHAIN_ALIAS } = require('../chainManagement/constants')
+const { ROOT_CHAIN_ALIAS } = require('../constants')
 const _ = require('lodash')
 
 const getApps = manifest => manifest.apps

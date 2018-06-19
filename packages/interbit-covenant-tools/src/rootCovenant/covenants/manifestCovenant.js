@@ -1,7 +1,7 @@
 const Immutable = require('seamless-immutable')
-const hashObject = require('./hash')
-const { remoteRedispatch } = require('../coreCovenant')
-const { PATHS } = require('./constants')
+const hashObject = require('../hash')
+const { remoteRedispatch } = require('../../coreCovenant')
+const { PATHS } = require('../constants')
 
 const prefix = '@@MANIFEST'
 

@@ -1,8 +1,10 @@
 const should = require('should')
+const {
+  constants: { ROOT_CHAIN_ALIAS }
+} = require('interbit-covenant-tools')
 
 const hashObject = require('../../manifest/hash')
 const { generateManifest } = require('../../manifest/generateManifest')
-const { ROOT_CHAIN_ALIAS } = require('../../chainManagement/constants')
 const {
   defaultConfig,
   defaultManifest,

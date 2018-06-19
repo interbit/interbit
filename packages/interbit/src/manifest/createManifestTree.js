@@ -1,19 +1,21 @@
 const _ = require('lodash')
 const hashObject = require('./hash')
 const {
-  rootCovenant: { actionTypes }
+  rootCovenant: { actionTypes },
+  config: {
+    selectors: {
+      getAdminValidators,
+      getChainCovenant,
+      getChainJoins,
+      getParentByChainAlias
+    }
+  },
+  constants: { ROOT_CHAIN_ALIAS }
 } = require('interbit-covenant-tools')
 
 const {
-  getAdminValidators,
-  getChainCovenant,
-  getChainJoins,
-  getParentByChainAlias
-} = require('../config/configSelectors')
-const {
   genesisBlockSelectors: { getChainId }
 } = require('../genesisBlock')
-const { ROOT_CHAIN_ALIAS } = require('../chainManagement/constants')
 
 const createManifestTree = (config, manifest) => {
   const { genesisBlocks } = manifest

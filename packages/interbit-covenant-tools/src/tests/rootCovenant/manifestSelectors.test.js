@@ -1,8 +1,8 @@
 const assert = require('assert')
 const manifestSelectors = require('../../manifest/manifestSelectors')
-const { ROOT_CHAIN_ALIAS } = require('../../chainManagement/constants')
-const { defaultManifest } = require('../testData')
+const defaultManifest = require('../testManifest')
 
+const ROOT_CHAIN_ALIAS = 'interbitRoot'
 const chainAlias = 'control'
 
 describe('Manifest Selectors', () => {

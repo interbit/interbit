@@ -1,5 +1,9 @@
 const path = require('path')
-const { getApps } = require('../config/configSelectors')
+const {
+  config: {
+    selectors: { getApps }
+  }
+} = require('interbit-covenant-tools')
 const hashObject = require('./hash')
 const {
   resolveGenesisBlocks,

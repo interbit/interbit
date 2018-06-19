@@ -1,8 +1,8 @@
 const should = require('should')
-const { ROOT_CHAIN_ALIAS } = require('../../chainManagement/constants')
 const validateManifest = require('../../manifest/validateManifest')
-const { defaultManifest } = require('../testData')
+const defaultManifest = require('../testManifest')
 
+const ROOT_CHAIN_ALIAS = 'interbitRoot'
 const rootGenesis = defaultManifest.genesisBlocks[ROOT_CHAIN_ALIAS]
 
 describe('validateManifest', () => {

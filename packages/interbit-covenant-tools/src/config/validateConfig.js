@@ -1,3 +1,4 @@
+const _ = require('lodash')
 const {
   getChains,
   getApps,
@@ -15,22 +16,53 @@ const joinMap = {
 }
 
 const validateConfig = config => {
-  const requiredProps = ['peers', 'staticChains', 'covenants']
-  const allowedProps = requiredProps.concat(['apps', 'adminValidators'])
+  const requiredProps = ['covenants', 'staticChains']
+  const allowedProps = requiredProps.concat([
+    'peers',
+    'apps',
+    'adminValidators'
+  ])
 
   validateRequiredProps(requiredProps, config)
   validateAllowedProps(allowedProps, config)
   validateChains(config)
+  validateCovenants(config)
   validateApps(config)
   validateMoleculeShape(config)
 
-  const wellFormedConfig = fillOutConfig(config)
-
-  // return wellFormedConfig
-  return true
+  return prettifyConfig(config)
 }
 
-const fillOutConfig = config => config
+const prettifyConfig = config => {
+  const chainEntries = Object.entries(getChains(config))
+
+  const wellFormedStaticChains = chainEntries.reduce(
+    (accum, [chainAlias, chainConfig]) => ({
+      ...accum,
+      [chainAlias]: _.merge({}, chainConfig, minimumChainConfig)
+    }),
+    {}
+  )
+
+  return {
+    ...config,
+    apps: config.apps || {},
+    peers: config.peers || [],
+    staticChains: wellFormedStaticChains
+  }
+}
+
+const minimumChainConfig = {
+  config: {
+    validators: [],
+    joins: {
+      consume: [],
+      provide: [],
+      receiveActionFrom: [],
+      sendActionTo: []
+    }
+  }
+}
 
 const validateChains = config => {
   Object.entries(getChains(config)).forEach(([chainAlias, chainConfig]) => {
@@ -53,6 +85,20 @@ const validateChains = config => {
 
     validateJoins(chainAlias, config)
   })
+}
+
+const validateCovenants = config => {
+  const covenantEntries = Object.entries(config.covenants)
+
+  for (const [covenantAlias, covenantConfig] of covenantEntries) {
+    console.log(covenantAlias, covenantConfig)
+    if (
+      !covenantConfig.location ||
+      typeof covenantConfig.location !== 'string'
+    ) {
+      throw new Error(`Covenant "${covenantAlias}" does not contain a location`)
+    }
+  }
 }
 
 const validateApps = config => {

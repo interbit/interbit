@@ -1,0 +1,13 @@
+= Key Concepts
+
+Interbit applies a number of blockchain-related concepts that are useful
+to understand:
+
+- link:covenants.adoc[Covenants]
+- link:actions.adoc[Actions]
+- link:state.adoc[Application State]
+- link:smart_contracts.adoc[Smart Contracts]
+- link:sagas.adoc[Root Saga]
+- link:chain_joining.adoc[Chain Joining]
+- link:configuration.adoc[Configuration and Manifest File]
+- link:hypervisor.adoc[Hypervisor]

@@ -1,4 +1,3 @@
-
 # To-do List Example Application
 
 In the `packages/app-todo-list` directory, we provide a simple To-do List application running on an Interbit blockchain. The application can add items to the to-do list, edit existing items, and toggle the completed state of items.
@@ -89,7 +88,12 @@ The public, private, and control chain configurations are exactly as they are in
 
 Our To-do List app allows users to add items, edit items, and mark items as complete in their to-do list. These actions are described in the app's private covenant in `src/interbit/private`. We've removed the actions included in the Template app and added the `ADD_TODO`, `EDIT_TODO`, and `TOGGLE_TODO` actions.
 
-Actions are dispatched to the chain during operation, and are passed to the [smart contract](../key-concepts/README.md#smart-contracts) to change the [application state](../key-concepts/README.md#application-state). Interbit follows the Redux design pattern, so actions in the Interbit covenants are essentially the same as actions in Redux. All the same, we'll go through each of the files in `src/interbit/private`.
+Actions are dispatched to the chain during operation, and are passed to
+the [smart contract](/key-concepts/smart_contracts.adoc) to change the
+[application state](/key-concepts/state.adoc). Interbit follows the
+Redux design pattern, so actions in the Interbit covenants are
+essentially the same as actions in Redux. All the same, we'll go through
+each of the files in `src/interbit/private`.
 
 
 <div class="filename">actionTypes.js</div>

@@ -214,8 +214,8 @@ users to add memos that only they can see as well as sum numbers
 together.
 
 Further Reading
- - [What is a Covenant](../key-concepts/README.md#covenants)
- - [Writing Covenants](./covenants.md)
+ - [What is a Covenant](/key-concepts/covenants.adoc)
+ - [Writing Covenants](covenants.md)
 
 
 ### Configured Joins
@@ -239,8 +239,8 @@ browser. This information will be provided by the browser's hypervisor
 to the host so that the private chain can be sponsored.
 
 Further Reading
- - [What is a Join](../key-concepts/README.md#chain-joining)
- - [How to Join](./joining.md)
+ - [What is a Join](/key-concepts/chain_joining.adoc)
+ - [How to Join](joining.md)
 
 
 ### Configured Apps
@@ -504,7 +504,7 @@ interact directly with the chain, but instead can use the redux store.
 
 Further Reading
  - [interbit-middleware](/reference/interbit-middleware/README.md)
- - [actions](/key-concepts/README.md#actions)
+ - [actions](/key-concepts/actions.adoc)
  - [Interbit Manifest File](/reference/interbit-cli/manifest.md)
  - [build](/reference/interbit-cli/build.md)
  - [deploy](/reference/interbit-cli/deploy.md)

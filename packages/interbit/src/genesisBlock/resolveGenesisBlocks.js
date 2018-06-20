@@ -27,7 +27,7 @@ const resolveGenesisBlocks = (config, originalManifest, covenants) => {
     config
   )
 
-  if (resolvedChainAliases.indexOf(ROOT_CHAIN_ALIAS) === -1) {
+  if (!resolvedChainAliases.find(alias => alias === ROOT_CHAIN_ALIAS)) {
     const rootGenesisBlock = createGenesisBlock(ROOT_CHAIN_ALIAS, config)
     newlyResolvedChains[ROOT_CHAIN_ALIAS] = rootGenesisBlock
   }
@@ -101,11 +101,11 @@ const createGenesisBlock = (chainAlias, config) => {
     .genesisConfigBuilder()
     .setBlockMaster({ blockMaster })
 
-  validators.forEach(validator => {
-    if (validator !== blockMaster) {
+  validators
+    .filter(validator => validator !== blockMaster)
+    .forEach(validator => {
       configBuilder = configBuilder.addRootKey({ rootKey: validator })
-    }
-  })
+    })
 
   // NOTE: We cannot add joins here because they are a two way operation and both
   // side requires the other's chain ID to resolve its join. This means that the
@@ -117,7 +117,6 @@ const createGenesisBlock = (chainAlias, config) => {
   // ... try it and see if it messes with the chain IDs and it's better to apply the
   // covenants in the watcher
   const builtConfig = configBuilder.build()
-  console.log(builtConfig)
   return interbit.createGenesisBlock({ config: builtConfig })
 }
 

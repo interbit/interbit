@@ -68,7 +68,9 @@ const getRootSubtrees = (chainAlias, config, manifest) => {
 
   const visited = []
   const subtrees = staticChainEntries.reduce((accum, [childAlias]) => {
-    const isChainSubtreeRoot = allChildChains.indexOf(childAlias) === -1
+    const isChainSubtreeRoot = !allChildChains.find(
+      childChain => childChain === childAlias
+    )
     if (isChainSubtreeRoot) {
       return {
         ...accum,
@@ -127,7 +129,7 @@ const getManifestEntry = (chainAlias, config, manifest, visited) => {
 }
 
 const checkForCycles = (chainAlias, visited) => {
-  if (visited.indexOf(chainAlias) > -1) {
+  if (visited.find(node => node === chainAlias)) {
     throw new Error(
       `Config contains malformed childChains structure and must form one or many trees. "${chainAlias}" was referenced twice.`
     )

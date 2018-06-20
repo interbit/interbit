@@ -107,6 +107,7 @@ describe('validateConfig(config)', () => {
       staticChains: {
         hub: {
           covenant: 'one',
+          childChains: [],
           config: {
             validators: [],
             joins: {
@@ -119,6 +120,7 @@ describe('validateConfig(config)', () => {
         },
         spoke: {
           covenant: 'one',
+          childChains: [],
           config: {
             validators: [],
             joins: {

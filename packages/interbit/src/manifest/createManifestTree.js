@@ -8,7 +8,8 @@ const {
       getChainCovenant,
       getChainJoins,
       getParentByChainAlias
-    }
+    },
+    validateConfig
   },
   constants: { ROOT_CHAIN_ALIAS }
 } = require('interbit-covenant-tools')
@@ -17,15 +18,21 @@ const {
   genesisBlockSelectors: { getChainId }
 } = require('../genesisBlock')
 
-const createManifestTree = (config, manifest) => {
+const createManifestTree = (interbitConfig, manifest) => {
+  const config = validateConfig(interbitConfig)
+
   const { genesisBlocks } = manifest
   const chainId = getChainId(genesisBlocks[ROOT_CHAIN_ALIAS])
-  const validators = getAdminValidators(config) // I suspect this should not be getting the admin validators but the ones for the chain, specifically
+  const validators = getAdminValidators(config)
   const chains = getRootSubtrees(ROOT_CHAIN_ALIAS, config, manifest)
   const covenant = ROOT_CHAIN_ALIAS
   const covenants = getSubtreeCovenants(ROOT_CHAIN_ALIAS, covenant, chains)
 
-  const joins = configureCascadingJoins(undefined, Object.keys(chains), {})
+  const joins = configureCascadingJoins(
+    undefined,
+    Object.keys(chains),
+    minimumJoinconfig
+  )
 
   const manifestEntry = {
     chainId,
@@ -45,24 +52,30 @@ const createManifestTree = (config, manifest) => {
   }
 }
 
+const minimumJoinconfig = {
+  consume: [],
+  provide: [],
+  receiveActionFrom: [],
+  sendActionTo: []
+}
+
 const getRootSubtrees = (chainAlias, config, manifest) => {
   const staticChainEntries = Object.entries(config.staticChains)
-  const allChildren = staticChainEntries.reduce((accum, [, v]) => {
-    if (Array.isArray(v.childChains)) {
-      return accum.concat(v.childChains)
-    }
-    return accum
-  }, [])
+  const allChildChains = staticChainEntries.reduce(
+    (accum, [, chainConfig]) => accum.concat(chainConfig.childChains),
+    []
+  )
 
   const visited = []
   const subtrees = staticChainEntries.reduce((accum, [childAlias]) => {
-    if (allChildren.indexOf(childAlias) > -1) {
-      return accum
+    const isChainSubtreeRoot = allChildChains.indexOf(childAlias) === -1
+    if (isChainSubtreeRoot) {
+      return {
+        ...accum,
+        [childAlias]: getManifestEntry(childAlias, config, manifest, visited)
+      }
     }
-    return {
-      ...accum,
-      [childAlias]: getManifestEntry(childAlias, config, manifest, visited)
-    }
+    return accum
   }, {})
 
   if (_.isEmpty(subtrees)) {
@@ -75,30 +88,24 @@ const getRootSubtrees = (chainAlias, config, manifest) => {
 }
 
 const getManifestEntry = (chainAlias, config, manifest, visited) => {
-  const chainConfig = config.staticChains[chainAlias]
-  if (!chainConfig) {
-    return {}
-  }
+  const nowVisited = checkForCycles(chainAlias, visited)
 
-  if (visited.indexOf(chainAlias) > -1) {
-    throw new Error(
-      `Config contains malformed childChains structure and must form one or many trees. "${chainAlias}" was referenced twice.`
-    )
-  }
-
-  const nowVisited = visited.concat(chainAlias)
-
-  const existingJoins = getChainJoins(chainAlias, config)
-  const chains = getChainsChildren(chainAlias, config, manifest, nowVisited)
-  const covenant = getChainCovenant(chainAlias, config)
-  const covenants = getSubtreeCovenants(chainAlias, covenant, chains)
-
-  const childAliases = Object.keys(chains) || []
   const parentAlias =
     getParentByChainAlias(chainAlias, config) || ROOT_CHAIN_ALIAS
+  const childChains = getChainsChildren(
+    chainAlias,
+    config,
+    manifest,
+    nowVisited
+  )
+
+  const covenant = getChainCovenant(chainAlias, config)
+  const covenants = getSubtreeCovenants(chainAlias, covenant, childChains)
+
+  const existingJoins = getChainJoins(chainAlias, config)
   const joins = configureCascadingJoins(
     parentAlias,
-    childAliases,
+    Object.keys(childChains),
     existingJoins
   )
 
@@ -108,7 +115,7 @@ const getManifestEntry = (chainAlias, config, manifest, visited) => {
     covenant,
     covenants,
     joins,
-    chains
+    chains: childChains
   }
 
   const hash = hashObject(manifestEntry)
@@ -117,6 +124,16 @@ const getManifestEntry = (chainAlias, config, manifest, visited) => {
     ...manifestEntry,
     hash
   }
+}
+
+const checkForCycles = (chainAlias, visited) => {
+  if (visited.indexOf(chainAlias) > -1) {
+    throw new Error(
+      `Config contains malformed childChains structure and must form one or many trees. "${chainAlias}" was referenced twice.`
+    )
+  }
+
+  return visited.concat(chainAlias)
 }
 
 const getSubtreeCovenants = (chainAlias, myCovenant, chains) => ({
@@ -129,43 +146,28 @@ const getSubtreeCovenants = (chainAlias, myCovenant, chains) => ({
   )
 })
 
-const configureCascadingJoins = (
-  parentAlias,
-  childAliases = [],
-  existingJoins
-) => {
-  const childJoins = childAliases.map(childAlias => ({
-    alias: childAlias
-  }))
+const configureCascadingJoins = (parentAlias, childAliases, existingJoins) => {
   const parentJoin = parentAlias
     ? {
         alias: parentAlias,
         authorizedActions: [actionTypes.SET_MANIFEST]
       }
     : []
-
-  const existingSend = existingJoins.sendActionTo || []
-  const existingReceive = existingJoins.receiveActionFrom || []
+  const childJoins = childAliases.map(childAlias => ({
+    alias: childAlias
+  }))
 
   return {
     ...existingJoins,
-    sendActionTo: existingSend.concat(childJoins),
-    receiveActionFrom: existingReceive.concat(parentJoin)
+    sendActionTo: existingJoins.sendActionTo.concat(childJoins),
+    receiveActionFrom: existingJoins.receiveActionFrom.concat(parentJoin)
   }
 }
 
 const getChainsChildren = (chainAlias, config, manifest, visited) => {
   const chainConfig = config.staticChains[chainAlias]
-  if (!chainConfig) {
-    return {}
-  }
 
-  const childAliases = chainConfig.childChains
-  if (!Array.isArray(childAliases) || childAliases.length === 0) {
-    return {}
-  }
-
-  return childAliases.reduce(
+  return chainConfig.childChains.reduce(
     (accum, childAlias) => ({
       ...accum,
       [childAlias]: getManifestEntry(childAlias, config, manifest, visited)

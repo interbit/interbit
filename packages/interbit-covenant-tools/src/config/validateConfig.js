@@ -53,6 +53,7 @@ const prettifyConfig = config => {
 }
 
 const minimumChainConfig = {
+  childChains: [],
   config: {
     validators: [],
     joins: {

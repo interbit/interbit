@@ -1,7 +1,8 @@
 const path = require('path')
 const {
   config: {
-    selectors: { getApps }
+    selectors: { getApps },
+    validateConfig
   }
 } = require('interbit-covenant-tools')
 const hashObject = require('./hash')
@@ -20,23 +21,25 @@ const generateManifest = (
 ) => {
   console.log('GENERATING A MANIFEST')
   console.log({ location, interbitConfig, covenants, originalManifest })
+  const config = validateConfig(interbitConfig)
+
   const genesisBlocks = resolveGenesisBlocks(
-    interbitConfig,
+    config,
     originalManifest,
     covenants
   )
   const chains = resolveChainIdsFromGenesis(genesisBlocks)
-  const apps = generateAppsManifest(location, interbitConfig)
+  const apps = generateAppsManifest(location, config)
 
   const manifestTemplate = {
-    peers: interbitConfig.peers,
+    peers: config.peers,
     apps,
     covenants,
     chains,
     genesisBlocks
   }
 
-  const manifestTree = createManifestTree(interbitConfig, manifestTemplate)
+  const manifestTree = createManifestTree(config, manifestTemplate)
 
   const manifest = {
     ...manifestTemplate,

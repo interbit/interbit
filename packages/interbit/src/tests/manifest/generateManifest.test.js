@@ -148,6 +148,10 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
         },
         unattached: {
           ...defaultConfig.staticChains.control,
+          config: {
+            ...defaultConfig.staticChains.control.config,
+            joins: {}
+          },
           childChains: ['public']
         }
       }
@@ -173,7 +177,11 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
           childChains: ['grandchild']
         },
         grandchild: {
-          ...defaultConfig.staticChains.public
+          ...defaultConfig.staticChains.public,
+          config: {
+            ...defaultConfig.staticChains.control.config,
+            joins: {}
+          }
         }
       }
     }

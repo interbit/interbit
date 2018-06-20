@@ -10,21 +10,21 @@ together through redirects.
 
 In this walk-through we will cover:
 
-  - [Version requirements](./template.md#version-requirements)
-  - [Application structure](./template.md#application-structure)
+  - [Version requirements](template.md#version-requirements)
+  - [Application structure](template.md#application-structure)
     - Directory structure
     - Chain architecture
-  - [Sponsored Chains](./template.md#sponsored-chains)
-  - [The Interbit Config](./template.md#the-interbit-config)
+  - [Sponsored Chains](template.md#sponsored-chains)
+  - [The Interbit Config](template.md#the-interbit-config)
     - Static chains
     - Covenants
     - Joins
     - Apps
-  - [The Covenants](./template.md#the-covenants)
+  - [The Covenants](template.md#the-covenants)
     - The Private Covenant
     - The Public Covenant
     - The Control Covenant
-  - [The Application](./template.md#the-application)
+  - [The Application](template.md#the-application)
     - index.js
     - Connecting the Chain to a UI Component
 
@@ -192,23 +192,23 @@ Further Reading:
 There are three covenants used in this application.
 
 The [public
-covenant](https://github.com/interbit/interbit/tree/master/packages/template/src/interbit/public)
+covenant](https://github.com/interbit/interbit/tree/master/packages/interbit-template/src/interbit/public)
 is an identity reducer. Much like an identity function, it always
 returns its state. Because anyone can load it in the browser it supports
 no actions at all.
 
 The [control
-covenant](https://github.com/interbit/interbit/tree/master/packages/template/src/interbit/control)
+covenant](https://github.com/interbit/interbit/tree/master/packages/interbit-template/src/interbit/control)
 does not do much either, as the functionality required to sponsor chains
 comes with [`interbit-core`](../reference/interbit-core/README.md). When
 this chain is initially deployed and receives a SET_MANIFEST action,
 which contains covenant hashes and chain IDs for the network, it sets up
 information about how it would like sponsored chains to apply for
 sponsorship. This is shared with the public chain via read join in the
-[Interbit configuration](./template.md#configured-joins).
+[Interbit configuration](template.md#configured-joins).
 
 The [private
-covenant](https://github.com/interbit/interbit/tree/master/packages/template/src/interbit/private)
+covenant](https://github.com/interbit/interbit/tree/master/packages/interbit-template/src/interbit/private)
 describes how the users interact with the application. They allow the
 users to add memos that only they can see as well as sum numbers
 together.

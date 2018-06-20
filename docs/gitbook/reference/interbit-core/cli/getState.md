@@ -14,7 +14,7 @@ None.
 ## Returns
 
 *(Object)*: an object representing the [Application
-State](/key-concepts/-state.adoc).
+State](/key-concepts/state.adoc).
 
 
 ## Example

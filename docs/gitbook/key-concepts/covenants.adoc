@@ -1,6 +1,6 @@
 = Covenants
 
-A covenant is a set of link:action.adoc[action] creators and types, a
+A covenant is a set of link:actions.adoc[action] creators and types, a
 reducer (which is a link:smart_contracts.adoc[smart contract], and a
 Redux link:sagas.adoc[saga] that together indicate the functioning of an
 Interbit blockchain. These actions, smart contract, and saga work

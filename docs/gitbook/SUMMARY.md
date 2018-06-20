@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-  * [Contents](Contents.md)
 
 * [Getting Started](getting-started/README.md)
   * [Requirements](getting-started/requirements.md)
@@ -28,6 +27,7 @@
   * [Determinism](/examples/determinism.md)
   * [Template App Walk-through](/examples/template.md)
   * [To-do List App](/examples/to-do-list.md)
+
 * [Architecture](architecture/README.md)
   * [Chain Architecture](architecture/chain-architecture.md)
   * [Permission Model](architecture/permission_model.adoc)

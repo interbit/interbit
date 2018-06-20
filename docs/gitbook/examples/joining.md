@@ -1,30 +1,45 @@
 # Joining Example
 
-#### Version Requirements
-To develop Interbit applications, your development environment will need the following software:
+## Version Requirements
 
-* <a href="https://nodejs.org" target="_blank">Node.js</a> 8.6 or higher
-* <a href="https://nodejs.org" target="_blank">NPM</a> 5.8 or higher
+To develop Interbit applications, your development environment will need
+the following software:
+
+* [Node.js](https://nodejs.org/) 8.6 or higher
+* [NPM](https://nodejs.org/) 5.8 or higher
+
 
 ## Summary
 
-To join two chains together the corresponding Interbit join actions must be dispatched to each chain.
+To join two chains together the corresponding Interbit join actions must
+be dispatched to each chain.
 
-Send and receive action types correspond. Consume and provide action types correspond.
+Send and receive action types correspond. Consume and provide action
+types correspond.
 
-These actions can also be [redispatched](../reference/interbit-covenant-utils/redispatch.md) from within a smart contract.
+These actions can also be
+[redispatched](/reference/interbit-covenant-utils/redispatch.md) from
+within a smart contract.
 
-There are two ways to join chains together. Statically when the node is started from the configuration file and dynamically by dispatching an action during chain operation.
+There are two ways to join chains together. Statically when the node is
+started from the configuration file and dynamically by dispatching an
+action during chain operation.
 
-When creating a join both sides must agree on the join name and both sides must dispatch a corresponding action.
+When creating a join both sides must agree on the join name and both
+sides must dispatch a corresponding action.
+
 
 ## By Configuration File
 
-Ultimately, the joins set up in the configuration file are dispatched by the admin keys to the chain during start and deployment.
+Ultimately, the joins set up in the configuration file are dispatched by
+the admin keys to the chain during start and deployment.
 
-Join configuration is set in each individual chain's config and both sides of the join must be properly configured. A join name will automatically be created for the join.
+Join configuration is set in each individual chain's config and both
+sides of the join must be properly configured. A join name will
+automatically be created for the join.
 
-The friendly alias is used to set up the join in configuration and the chain specified by alias must be configured.
+The friendly alias is used to set up the join in configuration and the
+chain specified by alias must be configured.
 
 ```js
 const config = {
@@ -58,9 +73,12 @@ const config = {
 }
 ```
 
+
 ## By Action Dispatch
 
-When dynamically dispatching join actions to a chain you must be sure to match the join names. Chain IDs must be used, as the friendly alias is only available in the configuration file and the middleware.
+When dynamically dispatching join actions to a chain you must be sure to
+match the join names. Chain IDs must be used, as the friendly alias is
+only available in the configuration file and the middleware.
 
 ```js
 const {
@@ -94,4 +112,4 @@ const provideAction = startProvideState({
 chainAInterface.dispatch(provideAction)
 ```
 
-[Read more...](../key-concepts.md#chain-joining)
+[Read more...](/key-concepts/chain_joining.adoc)

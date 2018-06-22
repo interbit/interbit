@@ -14,14 +14,6 @@ controlled with public key cryptography. If you hold a private key that
 corresponds to a public key added to an Interbit blockchain, you can
 access that blockchain. If not, you have no access.
 
-[WARNING]
-=========
-If you are the last user on a blockchain that has the permission to
-add or remove public keys, do not remove your own public key from the
-blockchain. If you do remove your own public key, **your access to that
-blockchain is permanently removed**.
-=========
-
 
 [[acl]]
 == Access Control List (ACL)
@@ -90,15 +82,6 @@ would match all actions that start with `USER_`.
 Also, there are typically two permissions for managing the ACL itself:
 `addToAcl` and `replaceAcl`. These are included in addition to any
 actions that your Interbit application implements.
-
-[WARNING]
-=========
-You must be careful when adjusting permissions. Removing your own
-permissions prevents you from processing actions. Removing the
-permission to adjust the ACL means that nobody can change the
-blockchain's permission in the future. Removing the `*` permission could
-render your blockchain **permanently unusable**.
-=========
 
 
 [[action_dispatch]]

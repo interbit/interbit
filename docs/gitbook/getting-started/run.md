@@ -27,4 +27,4 @@ Now all we need to do is run the new application:
 
 Congratulations! Your first Interbit application is now running.
 
-For more details, see the [Template App Walkthrough](/examples/template.md)
+For more details, see the [Template App Walk-through](/examples/template.md)

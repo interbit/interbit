@@ -1,0 +1,258 @@
+= Chain Joins: How they work
+
+link:/key-concepts/chain_joins.adoc[Chain joins] are an
+Interbit-specific feature. A join permits some (or all) of the
+information stored in one blockchain -- its
+link:/key-concepts/state.adoc[_state_] -- to be connected with
+information in another blockchain. These connections are controlled via
+link:permission_model.adoc[access control lists, or ACLs], and so are
+explicit and purposeful.
+
+This section describes how chain joins work:
+
+* <<create>>
+** <<via_configuration>>
+** <<via_dispatch>>
+* <<slices>>
+* <<authorization>>
+
+For background information, see:
+
+* link:/key-concepts/state.adoc[Application State]
+* link:/key-concepts/chain_joins.adoc[Chain Joins]
+
+
+[[create]]
+== Creating a Join
+
+There are two ways to join Interbit blockchains together:
+
+1. _statically_ <<via_configuration,via configuration
+   file>>, or
+2. _dynamically_ <<via_dispatch,via action dispatch>>
+
+When creating a join, both sides must agree on the join name, and both
+side must dispatch a corresponding action. Sender and receiver action
+types correspond, and consumer and provider action types correspond.
+These actions can also be
+link:/reference/interbit-covenant-utils/redispatch.md[redispatched] from
+within a smart contract.
+
+
+[[via_configuration]]
+=== Via Configuration File
+
+Chain joins described by the configuration file are automatically
+create, when necessary during startup and deployment of your Interbit
+application.
+
+Both the provider and consumer must configure their respective sides of
+the join, and a name for the join is automatically created. The `alias`
+key allows you to coordinate the joins without using each blockchain's
+chain ID.
+
+[source,js]
+----
+const config = {
+  // ...
+  staticChains: {
+    chainA: {
+      config: {
+        joins: {
+          consume: [],
+          provide: [],
+          receiveActionFrom: [
+            {
+              alias: 'chainB',
+              authorizedActions: ['DO_A_THING']
+            }
+          ],
+          sendActionTo: []
+        }
+      },
+      // ...
+    },
+    chainB: {
+      config: {
+        joins: {
+          sendActionTo: [{ alias: 'chainA' }]
+        }
+      }
+    }
+  }
+  // ...
+}
+----
+
+
+[[via_dispatch]]
+=== Via Action Dispatch
+
+To establish a join via action dispatch, both the provider and consumer
+must use the same join name. Chain IDs must be used as the alias is only
+available in the configuration file and the middleware.
+
+[source,js]
+----
+{% include "code/create_chain-dispatch.js" %}
+----
+
+
+[[slices]]
+== Slices
+
+A state slice is a portion of the
+link:/key-concepts/state.adoc[Application State] on a blockchain. For
+example, in the following state:
+
+[source,json]
+----
+state: {
+  private: {
+    data: {
+      // ...
+    }
+  },
+  public: {
+    likes: {
+      cats: true
+    }
+  }
+}
+----
+
+The `public` slice is:
+
+[source,json]
+----
+  public: {
+    likes: {
+      cats: true
+    }
+  }
+----
+
+In a chain join, a shared state slice is called a _mount_; the
+provider's state within the slice is _mounted_ on the consumer's state.
+
+For example, before a join is established, two blockchains might
+have the following states:
+
+.**Before join**
+[cols="1a,1a", options="header"]
+|===
+| Chain A
+| Chain B
+
+|
+[source,json]
+----
+state: {
+  private: {
+    data: {
+      // ...
+    }
+  },
+  public: {
+    likes: {
+      cats: true
+    }
+  }
+}
+----
+
+|
+[source,json]
+----
+state: {
+  shopping: [
+    "milk",
+    "bread",
+    // ...
+  ]
+}
+----
+
+|===
+
+If a read join is established between the two blockchains using the
+`public` slice, with Chain A as the provider and Chain B as the
+consumer, those blockchains would then have the following states:
+
+.**After join with slice**
+[cols="1a,1a", options="header"]
+|===
+| Chain A
+| Chain B
+
+|
+[source,json]
+----
+state: {
+  private: {
+    data: {
+      // ...
+    }
+  },
+  public: {
+    likes: {
+      cats:    true,
+      dogs:    true,
+      spiders: false
+    }
+  }
+}
+----
+
+|
+[source,json]
+----
+state: {
+  shopping: [
+    "milk",
+    "bread",
+    // ...
+  ],
+  public: {
+    likes: {
+      cats:    true,
+      dogs:    true,
+      spiders: false
+    }
+  }
+}
+----
+
+|===
+
+A slice is specified as an array of keys that are to be extracted from the
+state. Each item in the array specifies a nested key within any previous
+item. For example, a slice pointing to the `likes` key within `public`
+is specified like this:
+
+[source,js]
+----
+const consumeAction = startConsumeState({
+  provider: chainAChainID,
+  mount: ['public', 'likes'],
+  joinName: 'MeowMeowMeow'
+})
+----
+
+
+[[authorization]]
+== Authorization
+
+A read join is authorized on the provider blockchain with an
+link:/reference/interbit-covenant-utils/startProvideState.md[`@@interbit/START_PROVIDE_STATE`]
+action and on the receiver blockchain by an
+link:/reference/interbit-covenant-utils/startConsumeState.md[`@@interbit/START_CONSUME_STATE`].
+Once both actions have been recorded -- or _blocked_ -- to both
+blockchains, the state is shared.
+
+A write join is authorized on the sender blockchain with an
+link:/reference/interbit-covenant-utils/authorizeSendActions.md[`@@interbit/AUTHORIZE_SEND_ACTIONS`]
+action and on the receiver blockchain with an
+link:/reference/interbit-covenant-utils/authorizeReceiveActions.md[`@@interbit/AUTHORIZE_RECEIVE_ACTIONS`]
+action.
+

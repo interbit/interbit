@@ -239,8 +239,8 @@ browser. This information will be provided by the browser's hypervisor
 to the host so that the private chain can be sponsored.
 
 Further Reading
- - [What is a Join](/key-concepts/chain_joining.adoc)
- - [How to Join](joining.md)
+ - [Chain Joins](/key-concepts/chain_joins.adoc)
+ - [Chain Joins: How They Work](/architecture/chain_joins.adoc)
 
 
 ### Configured Apps

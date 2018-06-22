@@ -11,11 +11,35 @@ metadata.
 The initial Application State that you define for your application is
 the first Application State that you give to the Smart Contracts. The
 initial Application State is akin to the data model in traditional
-application development. It details what data the application will store
-as well as the initial values.
+application development. It details what data the application stores as
+well as the initial values.
 
-Below are samples of the various contexts in which you will work with
-the Application State.
+Application State exits as an immutable version of a normal JSON object
+(implemented with the
+link:https://github.com/rtfeldman/seamless-immutable[seamless-immutable]
+package). For example:
+
+[source,json]
+----
+state: {
+  private: {
+    data: {
+      // ...
+    }
+  },
+  public: {
+    likes: {
+      cats: true
+    }
+  }
+}
+----
+
+The Application Can contain any information that is in a JSON-compatible
+format, for example when using base64 encoding. There are no
+restrictions on how the Application State is organized. In the example
+above, the data under the `private` key is not intended to be shared
+with other blockchains.
 
 The initial Application State taken from the To-do List example:
 

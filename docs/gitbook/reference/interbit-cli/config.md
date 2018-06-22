@@ -198,7 +198,7 @@ they will be authorized to share state or dispatch actions to each
 other. The joins must correspond to each other.
 
 Reference:
- - [Chain Joining](../../examples/joining.md)
+ - [Chain Joins](/architecture/chain_joins.adoc)
 
 
 ## Covenants

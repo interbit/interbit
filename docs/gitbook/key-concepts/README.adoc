@@ -8,6 +8,6 @@ to understand:
 - link:state.adoc[Application State]
 - link:smart_contracts.adoc[Smart Contracts]
 - link:sagas.adoc[Root Saga]
-- link:chain_joining.adoc[Chain Joining]
+- link:chain_joins.adoc[Chain Joins]
 - link:configuration.adoc[Configuration and Manifest File]
 - link:hypervisor.adoc[Hypervisor]

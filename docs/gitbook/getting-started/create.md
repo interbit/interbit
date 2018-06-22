@@ -63,7 +63,7 @@ use as a starting point for working with the Interbit SDK.
     > `1024` and `65000`, that is not already in use by another process, should
     > work.
 
-1.  **Optional: Add an identifer to the app's UI:**
+1.  **Optional: Add an identifier to the app's UI:**
 
     > This step is only helpful if you run multiple Interbit nodes locally.
 

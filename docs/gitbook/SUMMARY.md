@@ -114,3 +114,4 @@
       * [subscribe](reference/interbit-core/cli/subscribe.md)
 * [Support](support/README.md)
 * [Glossary](GLOSSARY.md)
+* [Design](design.adoc)

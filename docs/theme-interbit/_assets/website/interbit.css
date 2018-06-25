@@ -350,7 +350,7 @@ img.support-icon {
 .filename {
   background-color: #ccc;
   padding: 3px 16px;
-  margin-bottom: -8px;
+  margin-top: 0.5em;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
@@ -358,6 +358,7 @@ img.support-icon {
 .filename + pre {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
+  margin-top: 0;
 }
 
 .markdown-section pre {
@@ -781,7 +782,7 @@ pre > code.highlight {
   font-family: RobotoMono;
   font-size: 14px;
   font-weight: normal;
-  background-color: #f9f9f9;
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .markdown-section pre > code {
@@ -897,6 +898,11 @@ pre > code.highlight {
   margin-bottom: 0.85em;
 }
 
+.markdown-section .ulist.tight ul li ul,
+.markdown-section .ulist.tight ul li p {
+  margin-bottom: 0;
+}
+
 /* Hide the prev/next page navigation arrows */
 
 a.navigation {
@@ -905,4 +911,32 @@ a.navigation {
 
 .padb {
   margin-bottom: 2em;
+}
+
+/* A few Asciidoctor-specific styles */
+
+.valign-top {
+  vertical-align: top;
+}
+
+.halign-left {
+  text-align: left;
+}
+
+.markdown-section table caption {
+  text-align: left;
+}
+
+.markdown-section table thead tr {
+  background: #e8f5f4;
+}
+
+.markdown-section table.frame-h th,
+.markdown-section table.frame-h td {
+  border-left: 0 none;
+  border-right: 0 none;
+}
+
+.markdown-section video {
+  max-width: 100%;
 }

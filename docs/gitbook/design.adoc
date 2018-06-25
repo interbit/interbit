@@ -406,18 +406,12 @@ This is a literal block.
 === Sidebar
 
 ****
-Sidebar content.
+**Sidebar content**
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec sem
 vitae sem tincidunt bibendum in vitae risus. Vivamus ultrices accumsan
 facilisis. Nam vel semper nulla. Suspendisse ut diam sed sem sagittis
-molestie ut ac justo. Suspendisse at varius arcu. Praesent eu enim sit
-amet ipsum malesuada egestas. Quisque arcu mi, scelerisque ut massa
-viverra, feugiat varius lectus. Nulla maximus, massa eget consequat
-gravida, quam justo vulputate metus, et cursus elit lorem ac felis. Ut
-sed erat a lacus semper congue sit amet a nunc. Pellentesque eget nunc
-vel dui hendrerit eleifend at et purus.
-
+molestie ut ac justo.
 ****
 
 Vestibulum consectetur libero sagittis dolor vulputate dictum. Aliquam

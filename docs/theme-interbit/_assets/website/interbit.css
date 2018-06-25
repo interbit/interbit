@@ -940,3 +940,11 @@ a.navigation {
 .markdown-section video {
   max-width: 100%;
 }
+
+.markdown-section .sidebarblock {
+  float: right;
+  width: 40%;
+  margin-left: 1em;
+  padding: 1em 1em 0.5em 1em;
+  background: #eee;
+}

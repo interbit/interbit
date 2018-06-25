@@ -8,11 +8,12 @@ plain JavaScript objects that must have a `type` and a `payload`
 property. Types should be defined as string constants. The contents of
 the `payload` property are completely up to you.
 
-Actions are sent to the blockchain by calling the `dispatch()` method.
-You define your own application actions, and at runtime they originate
-from either user or system activity. Your
-link:smart_contracts.adoc[Smart Contracts] (reducers) typically
-evaluate the incoming Action type to determine appropriate behavior.
+Actions are sent to the blockchain by calling the `dispatch()`,
+`redispatch()`, and `remote_dispatch()` methods. You define your own
+application actions, and at runtime they originate from either user or
+system activity. Your link:smart_contracts.adoc[Smart Contracts]
+(reducers) typically evaluate the incoming Action type to determine
+appropriate behavior.
 
 Below are the various contexts in which you will work with actions.
 

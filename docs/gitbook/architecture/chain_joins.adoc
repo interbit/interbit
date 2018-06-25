@@ -1,12 +1,13 @@
 = Chain Joins: How they work
 
 link:/key-concepts/chain_joins.adoc[Chain joins] are an
-Interbit-specific feature. A join permits some (or all) of the
+Interbit-specific feature. A _read_ join permits some (or all) of the
 information stored in one blockchain -- its
 link:/key-concepts/state.adoc[_state_] -- to be connected with
-information in another blockchain. These connections are controlled via
-link:permission_model.adoc[access control lists, or ACLs], and so are
-explicit and purposeful.
+information in another blockchain. A _write_ join permits one blockchain
+to send actions to another blockchain. These connections are controlled
+via link:permission_model.adoc[access control lists, or ACLs], and so
+are explicit and purposeful.
 
 This section describes how chain joins work:
 
@@ -32,7 +33,7 @@ There are two ways to join Interbit blockchains together:
 2. _dynamically_ <<via_dispatch,via action dispatch>>
 
 When creating a join, both sides must agree on the join name, and both
-side must dispatch a corresponding action. Sender and receiver action
+sides must dispatch a corresponding action. Sender and receiver action
 types correspond, and consumer and provider action types correspond.
 These actions can also be
 link:/reference/interbit-covenant-utils/redispatch.md[redispatched] from
@@ -43,7 +44,7 @@ within a smart contract.
 === Via Configuration File
 
 Chain joins described by the configuration file are automatically
-create, when necessary during startup and deployment of your Interbit
+created, when necessary during startup and deployment of your Interbit
 application.
 
 Both the provider and consumer must configure their respective sides of
@@ -90,7 +91,8 @@ const config = {
 
 To establish a join via action dispatch, both the provider and consumer
 must use the same join name. Chain IDs must be used as the alias is only
-available in the configuration file and the middleware.
+available in the configuration file and the
+link:/reference/interbit-middleware/README.md[`interbit-middleware`].
 
 [source,js]
 ----
@@ -101,9 +103,13 @@ available in the configuration file and the middleware.
 [[slices]]
 == Slices
 
-A state slice is a portion of the
-link:/key-concepts/state.adoc[Application State] on a blockchain. For
-example, in the following state:
+When a chain join is created, some or all of the
+link:/key-concepts/state.adoc[Application State] (or just _state_) on
+the provider blockchain is shared with the consumer blockchain. The
+specification of which portion(s) of the state to share is called a
+_slice_.
+
+For example, in the following state:
 
 [source,json]
 ----
@@ -115,7 +121,9 @@ state: {
   },
   public: {
     likes: {
-      cats: true
+      cats:    true,
+      dogs:    true,
+      spiders: false
     }
   }
 }
@@ -127,13 +135,39 @@ The `public` slice is:
 ----
   public: {
     likes: {
-      cats: true
+      cats:    true,
+      dogs:    true,
+      spiders: false
     }
   }
 ----
 
-In a chain join, a shared state slice is called a _mount_; the
-provider's state within the slice is _mounted_ on the consumer's state.
+Once a join has been established, the shared state is called a _mount_;
+the provider's state within the slice is _mounted_ on the consumer's
+state. Any number of mounts can co-exist on a blockchain, provided that
+there are no name collisions.
+
+[TIP]
+=====
+A best practice for organizing state data that is intended to be shared
+is to adopt a "prefix" that reflects your corporate domain name, in
+reverse. For example:
+
+[source,json]
+----
+  tld: {
+    companyName: {
+      concern1: {
+      },
+      concern2: {
+      }
+    }
+  }
+----
+
+This example demonstrates two concerns that have their own information
+from the `companyName.tld` domain.
+=====
 
 For example, before a join is established, two blockchains might
 have the following states:
@@ -155,7 +189,9 @@ state: {
   },
   public: {
     likes: {
-      cats: true
+      cats:    true,
+      dogs:    true,
+      spiders: false
     }
   }
 }

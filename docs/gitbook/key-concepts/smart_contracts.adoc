@@ -12,16 +12,16 @@ For context, the action and state are also given.
 
 [source,jsx]
 ----
-var state = { sum: 5 }
+let state = { sum: 5 }
 
-var action = {
+let action = {
   type: 'ADD',
   payload: { amount: 5 }
 }
 
-var smartContract = {
+let smartContract = {
   incrementSum: (state, action) => {
-    var newState = {
+    let newState = {
         sum: state.sum + action.payload.amount
     }
     return newState
@@ -42,9 +42,9 @@ when it is received. For context, the action and state are given.
 
 [source,js]
 ----
-  var state = { sum: 5 }
+  let state = { sum: 5 }
 
-  var action = {
+  let action = {
     type: 'ADD',
     payload: { amount: 5 }
   }
@@ -56,7 +56,7 @@ Write a smart contract to increment the sum contained in the state for
 the action described above.
 
 {% initial %}
-  var smartContract = {
+  let smartContract = {
     incrementSum: (state, action) => {
       // TODO
 
@@ -65,9 +65,9 @@ the action described above.
   }
 
 {% solution %}
-  var smartContract = {
+  let smartContract = {
     incrementSum: (state, action) => {
-      var newState = {
+      let newState = {
           sum: state.sum + action.payload.amount
       }
       return newState
@@ -78,14 +78,14 @@ the action described above.
   assert(smartContract.incrementSum(state, action).sum === 10 && state.sum === 5)
 
 {% context %}
-  var action = {
+  let action = {
     type: 'ADD',
     payload: {
       amount: 5
     }
   }
 
-  var state = {
+  let state = {
     sum: 5
   }
 

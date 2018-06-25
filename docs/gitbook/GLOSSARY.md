@@ -11,7 +11,7 @@ any given blockchain.
 
 Action creators are precisely named - they are functions that create Actions.
 
-See [Redux Basics - Action Creators](http://redux.js.org/docs/basics/Actions.html#action-creators)
+See [Redux Basics - Action Creators](https://redux.js.org/docs/basics/Actions.html#action-creators)
 
 
 ## Action
@@ -22,9 +22,9 @@ See Key Concept entry for [Actions](/key-concepts/actions.adoc).
 
 Also see:
 
-- [Redux Basics - Actions](http://redux.js.org/docs/basics/Actions.html)
-- [Redux Glossary - Action](http://redux.js.org/docs/Glossary.html#action)
-- [Redux FAQ - Actions](http://redux.js.org/docs/faq/Actions.html)
+- [Redux Basics - Actions](https://redux.js.org/docs/basics/Actions.html)
+- [Redux Glossary - Action](https://redux.js.org/docs/Glossary.html#action)
+- [Redux FAQ - Actions](https://redux.js.org/docs/faq/Actions.html)
 
 
 ## Application
@@ -42,7 +42,7 @@ block.
 
 See Key Concept entry for [Application State](/key-concepts/state.adoc).
 
-See [Redux Glossary - State](http://redux.js.org/docs/Glossary.html#state)
+See [Redux Glossary - State](https://redux.js.org/docs/Glossary.html#state)
 
 
 ## Block
@@ -208,9 +208,9 @@ See [Smart Contract](#smart-contract)
 
 Also see:
 
-- [Redux Basics - Reducers](http://redux.js.org/docs/basics/Reducers.html)
-- [Redux Glossary - Reducer](http://redux.js.org/docs/Glossary.html#reducer)
-- [Redux FAQ - Reducers](http://redux.js.org/docs/faq/Reducers.html)
+- [Redux Basics - Reducers](https://redux.js.org/docs/basics/Reducers.html)
+- [Redux Glossary - Reducer](https://redux.js.org/docs/Glossary.html#reducer)
+- [Redux FAQ - Reducers](https://redux.js.org/docs/faq/Reducers.html)
 
 
 ## Saga

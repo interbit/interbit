@@ -1,0 +1,22 @@
+= Chain Topology
+
+Chain topology is an important aspect of the Interbit platform: the
+ability to manage multiple blockchains and their relationships provides
+great flexibility, privacy, security, modularity, and scalability.
+
+This section describes aspects of chain topology that are useful to
+understand when undertaking application development, as well as
+describing a variety of useful chain topologies and their benefits and
+deficits:
+
+* link:considerations.adoc[Key Considerations]
+* link:patterns.adoc[Topology Patterns]
+
+
+== Essential Information
+
+Chain joins are essential to any discussion of chain topology. For more
+information, see:
+
+* link:/key-concepts/chain_joins.adoc[Chain Joins]
+* link:chain_joins.adoc[Chain Joins: How They Work]

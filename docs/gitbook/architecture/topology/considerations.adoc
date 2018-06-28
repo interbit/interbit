@@ -1,0 +1,97 @@
+= Key Considerations
+
+This section describes the key considerations for blockchain topologies,
+which are:
+
+* <<_privacy>>
+* <<_security>>
+* <<_modularity>>
+* <<_scalability>>
+
+
+== Privacy
+
+For a single blockchain, all parties with access to the blockchain have
+access to all of its link:/key-concepts/state.adoc[application state].
+This means that privacy is not a core feature of this topology; privacy
+would only be somewhat achievable via obfuscation or anonymization.
+
+With multiple blockchains,
+link:/key-concepts/permission_model.adoc[fine-grained access controls],
+and the ability to be link:chain_joins.adoc#slices[selective about what
+data is shared], true privacy can be achieved using the Interbit
+platform.
+
+For example, if a user has a private blockchain containing all of their
+personal data, including (but not limited to) mailing address, health
+records, financial records, family and business relationships, that user
+can decide to share only their mailing address with the blockchain
+owned by another user, but could share specific health records with
+their insurance provider's blockchain, all without disclosing any other
+information.
+
+Privacy verification is also a key feature: each blockchain and its
+associated smart contract demonstrate which data is shared, when, and to
+which other party. All changes to data sharing, access, and the logic
+managing those capabilities is stored immutably on the associated
+blockchains.
+
+A best practice for privacy is to begin with the most granular privacy
+controls required, and then relax them where necessary. By contrast,
+beginning with no privacy concerns and then adding them later is
+significantly more challenging and error-prone. A thorough privacy
+analysis at the start of your project would reveal the appropriate
+blockchain topology to use.
+
+
+== Scalability
+
+"Traditional" blockchains suffer from one of two main scalability
+issues:
+
+- low transaction rate imposed by proof-of-work consensus
+- unified state managed by a single point in the network
+
+Proof-of-work consensus involves each node in the network performing
+CPU-intensive calculations that take a notable amount of time to
+perform, but a negligible amount of time to verify. New blocks are added
+to the blockchain only after proof-of-work consensus has been reached,
+which limits the overall transaction rate considerably.
+
+For blockchains that use a single "master" node for ordering block
+creation, transactions complete more quickly than with proof of work,
+but all transaction processing is limited by the speed of the master
+node.
+
+Interbit blockchains are permissioned, so the consensus mechanism is
+called proof-of-authority; if you have access to the blockchain, you can
+dispatch actions that create new blocks, and the action processing can
+be handled by any node in the network. This architectural design solves
+both kinds of performance issues.
+
+There is still overhead to process each new block and have the changes
+propagate throughout the network, but Interbit applications can complete
+actions significantly faster than traditional blockchains, often an
+order of magnitude faster (or more).
+
+
+== Security
+
+In traditional blockchains, the data integrity is maintained by the
+single ordering process. However, when you split up into several
+blockchains system data integrity is also split.
+
+Once data has been segregated to distinct blockchains for throughput and
+privacy, the responsibility for data integrity needs to be ensured. The
+data integrity of the system can be unified with a top-level blockchain
+that collects hashes periodically (this naturally occurs via
+Interbit backbone), making it easy to detect whether if any of the
+system blockchains have been tampered with.
+
+
+== Modularity
+
+Each Interbit blockchain can only ever have one smart contract, so the
+smart contract deal specifically with the concerns of its blockchain.
+This helps to modularize the smart contract's code, avoid repetition,
+and in testing the smart contract's logic.

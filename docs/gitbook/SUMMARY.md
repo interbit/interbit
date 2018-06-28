@@ -26,8 +26,11 @@
   * [Determinism](/examples/determinism.md)
   * [Template App Walk-through](/examples/template.md)
   * [To-do List App](/examples/to-do-list.md)
+
 * [Architecture](architecture/README.md)
-  * [Chain Architecture](architecture/chain-architecture.md)
+  * [Chain Topology](/architecture/topology/README.adoc)
+    * [Key Considerations](/architecture/topology/considerations.adoc)
+    * [Topology Patterns](/architecture/topology/patterns.adoc)
   * [Permission Model](architecture/permission_model.adoc)
 
 * [Reference](reference/README.md)

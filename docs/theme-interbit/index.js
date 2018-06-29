@@ -1,6 +1,6 @@
 module.exports = {
     book: {
-        assets: './assets/website/',
+        assets: './_assets/website/',
         js: [
             'interbit.js'
         ],

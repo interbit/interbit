@@ -53,26 +53,40 @@ issues:
 - unified state managed by a single point in the network
 
 Proof-of-work consensus involves each node in the network performing
-CPU-intensive calculations that take a notable amount of time to
+computation-intensive calculations that take a notable amount of time to
 perform, but a negligible amount of time to verify. New blocks are added
 to the blockchain only after proof-of-work consensus has been reached,
-which limits the overall transaction rate considerably.
+which limits the overall rate of adding to the blockchain considerably.
 
 For blockchains that use a single "master" node for ordering block
 creation, transactions complete more quickly than with proof of work,
 but all transaction processing is limited by the speed of the master
 node.
 
-Interbit blockchains are permissioned, so the consensus mechanism is
-called proof-of-authority; if you have access to the blockchain, you can
-dispatch actions that create new blocks, and the action processing can
-be handled by any node in the network. This architectural design solves
-both kinds of performance issues.
+Interbit blockchains use a consensus mechanism called
+link:https://dl.acm.org/citation.cfm?doid=571637.571640[Practical
+Byzantine Fault Tolerance] (PBFT), which can achieve concensus when no
+more than one third of the blockchain network's participating nodes
+disagree on a proposed change to the blockchain. Any node can propose a
+change -- dispatch an action -- and the network of nodes can very
+quickly reach consensus, often in less than a second. If a situation
+arises where consensus cannot be reached, the dispatched action is
+simply ignored. This architectural design solves both kinds of
+performance issues.
 
-There is still overhead to process each new block and have the changes
-propagate throughout the network, but Interbit applications can complete
-actions significantly faster than traditional blockchains, often an
-order of magnitude faster (or more).
+PBFT consensus imposes some processing overhead, as proposed changes to
+the blockchain must propagate to the supporting nodes, the smart
+contract must be executed, in order to reach consensus. However,
+consensus is isolated to the participating blockchains, so the
+processing concerns can easily be distributed by using multiple
+blockchains that are tightly constrained to the data and processing that
+they manage, and reaching consensus is limited only to network
+throughput and smart contract processing (typically, not
+computation-intensive).
+
+In practice, Interbit applications can complete
+dispatched actions significantly faster than traditional blockchains,
+often an order of magnitude faster (or more).
 
 
 == Security

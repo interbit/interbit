@@ -13,29 +13,29 @@ The <<_combinations>> section describes more advanced topologies.
 
 == Atom
 
-An _atom_ is a single Interbit blockchain with a single
-smart contract running on it.
+An _atom_ is a single Interbit blockchain with a single smart contract
+running on it.
 
-With Interbit different smart contracts
-are different atoms. As with atoms, Interbit blockchains can come in a
-variety of types (within a solution) based on what smart contract runs
-on that blockchain. It is an important part of architecting a solution
-to identify how many distinct smart contracts there are. This will
-enable you to specify how many different atom types there are and then
-the ways in which they go together.
+With Interbit, different smart contracts are different atoms. As with
+atoms, Interbit blockchains can come in a variety of types (within a
+solution) based on what smart contract runs on that blockchain.
+Identifying how many distinct smart contracts are required is an
+important part of architecting a solution. This enables you to specify
+how many different atom types there are and then the ways in which they
+go together.
 
-The Atom is the simplest form of chain architecture: A single blockchain
+The atom is the simplest form of chain architecture: a single blockchain
 with one smart contract. It has no concern for privacy or throughput,
-which is suitable in the simplest cases. (Ex. serving a static web app
-like a blog, or a grocery list chain shared by a family who all have
-equal access)
+which is suitable in the simplest cases -- for example, serving a static
+web app like a blog, or a grocery list blockchain shared by a family who
+all have equal access.
 
 
 == Molecules
 
-A _molecule_ two or more atoms joined together for a particular purpose,
-forming various kinds of blockchain networks for privacy, scalability,
-security, and modularity.
+A _molecule_ is two or more atoms joined together for a particular
+purpose, forming various kinds of blockchain networks for privacy,
+scalability, security, and modularity.
 
 Beyond the basic molecules, your Interbit application can connect atoms
 to form molecules, atoms to molecules, and molecules to molecules, to
@@ -46,7 +46,6 @@ The molecules described in this section include:
 * <<_hub_and_spoke>>
 * <<_hub_and_connected_spoke>>
 * <<_control_by_proxy>>
-* <<_examples>>
 
 
 === Hub and Spoke
@@ -54,7 +53,7 @@ The molecules described in this section include:
 image:img/hub_and_spoke.svg["The Hub and Spoke molecule", 175, 194,
 role="right"]
 The Hub and Spoke molecule contains at least two atom types. It is used
-to increase throughput or ensure privacy.
+to increase throughput and/or to ensure privacy.
 
 In this molecule, the spoke atoms (in green, surrounding the hub) do not
 connect to each other nor do they share data directly; the spokes only
@@ -109,8 +108,25 @@ providing the persistent association of the hospital patients with their
 
 image:img/hierarchical_throughput.svg["The Multi-tier Hub and Spoke
 Model", 175, 194, role="right"]
-In this model, a single layer of hub and spoke does not supply enough
-throughput to the system. Perhaps one branch in a bank is in the dense
+Using the Hub and Spoke molecule may present a performance problem if
+one or more spokes needs to dispatch more actions than the hub can
+handle. For example, in a blockchain network for a banking system,
+perhaps one branch in a bank is in the dense city center and processes
+triple the transactions of the other branches.
+
+The Multi-Tier Hub and Spoke molecule would be a good solution:
+the busy branch could be split into its own hub and spoke molecule,
+such as one blockchain for the branch itself and separate blockchains
+for each automated teller machine (ATM). The branch could then aggregate
+its data upwards to the hub at regular intervals. The splitting into
+multiple blockchains distributes the processing load -- provided that
+the new blockchains are hosted on separate nodes from the original node.
+
+
+In this model, a single layer of hub and spoke may not supply enough
+throughput to the system.
+
+Perhaps one branch in a bank is in the dense
 city center and processes triple the transactions of the other branches.
 This branch can then split into their own hierarchy, such as the branch
 itself and separate blockchains for each automated teller machine (ATM).

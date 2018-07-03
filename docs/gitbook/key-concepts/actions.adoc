@@ -1,0 +1,65 @@
+= Actions
+
+Actions are data payloads that provide information from your application
+to your Interbit blockchain. Interbit uses the
+link:http://redux.js.org/[Redux] design, so actions in Interbit are
+essentially the same as actions in Redux. Specifically, actions are
+plain JavaScript objects that must have a `type` and a `payload`
+property. Types should be defined as string constants. The contents of
+the `payload` property are completely up to you.
+
+Actions are sent to the blockchain by calling the `dispatch()`,
+`redispatch()`, and `remote_dispatch()` methods. You define your own
+application actions, and at runtime they originate from either user or
+system activity. Your link:smart_contracts.adoc[Smart Contracts]
+(reducers) typically evaluate the incoming Action type to determine
+appropriate behavior.
+
+Below are the various contexts in which you will work with actions.
+
+Defining your Action:
+
+[source,js]
+----
+let actions = {
+  EVENT_OCCURRED: 'EVENT_OCCURRED',
+  eventOccurred: (data) => {
+    return {
+      type: actions.EVENT_OCCURRED,
+      payload: {
+        data
+      }
+    }
+  }
+}
+----
+
+Dispatching an Action:
+
+[source,js]
+----
+chain.dispatch(action)
+----
+
+Evaluating an Action in a Smart Contract:
+
+[source,js]
+----
+if (action.type === actions.EVENT_OCCURRED) {
+  // Take appropriate behavior
+}
+
+//OR
+
+switch (action.type) {
+  // Case for each action type
+}
+----
+
+[NOTE]
+======
+**Example**
+
+To see actions in practice, please see the actions in the
+link:/examples/to-do-list.md#the-actions[To-do List] example.
+======

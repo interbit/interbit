@@ -12,7 +12,6 @@ the following software:
 
 - [Initializing Interbit](./initialize.md)
 - [Destroying Chains](./destroy.md)
-- [Joining Chains](./joining.md)
 - [The Template App Walk-through](./template.md)
 - [Determinism in Interbit](./determinism.md)
 - [To-do List App](./to-do-list.md)

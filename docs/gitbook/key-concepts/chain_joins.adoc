@@ -1,0 +1,51 @@
+= Chain Joins
+
+Chain joins are an Interbit-specific feature. They permit some (or all)
+of the information in one blockchain to be connected with information in
+another blockchain. These connections are controlled via ACLs, and so
+are explicit and purposeful.
+
+There are two kinds of chain joins: read joins and write joins.
+
+== Read Joins
+
+image:/architecture/img/read_join.svg["An Interbit read join between a
+provider blockchain and a consumer blockchain", 478, 111, role="center"]
+
+A read join means that one blockchain, the _consumer_, has access to a
+copy of a portion of the state -- the collection of data stored on the
+blockchain -- of another blockchain, the _provider_. Any updates to the
+provider's state are automatically updated in the consumer's blockchain.
+A provider can also be a consumer.
+
+[IMPORTANT]
+===========
+Once a consumer has data from a provider, it cannot be prevented from
+sharing that data with another blockchain.
+===========
+
+[NOTE]
+======
+Blockchain updates are not immediate and take some time to propagate
+throughout the network of nodes supporting the blockchain.
+======
+
+== Write Joins
+
+image:/architecture/img/write_join.svg["An Interbit write join between a
+sender blockchain and a receiver blockchain", 458, 111, role="center"]
+
+A write join is implemented as a pair of read joins and so, to reduce
+confusion (because there would be two consumers and two providers), the
+blockchain that initiates a write join is called the _sender_ and the other
+blockchain is called the _receiver_.
+
+The purpose of a write join is to allow the sender to dispatch actions
+to the receiver, and for the receiver to provide the results of the
+actions to the sender.
+
+After a join, read or write, has been established, the join can be
+revoked and the consumer no longer has access to the provider's state.
+
+A sender can also be a receiver, and either can also be a provider or
+consumer.

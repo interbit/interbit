@@ -1,0 +1,22 @@
+= Covenants
+
+A covenant is a set of link:actions.adoc[action] creators and types, a
+reducer (which is a link:smart_contracts.adoc[smart contract], and a
+Redux link:sagas.adoc[saga] that together indicate the functioning of an
+Interbit blockchain. These actions, smart contract, and saga work
+together to fulfill the functionality of a single Interbit blockchain.
+The `rootSaga` in a smart contract is optional.
+
+A covenant should be packaged as an npm module but does not necessarily
+have to be published anywhere to run on the Interbit blockchain.
+
+[source,js]
+----
+// Covenant exports
+module.exports = {
+  reducer,
+  actionCreators,
+  actionTypes,
+  rootSaga
+}
+----

@@ -4,7 +4,7 @@ There are two ways to initialize a node: by command line and by code.
 
 If you are using the CLI or code it is recommended that you configure
 your network using an [Interbit configuration
-file](../reference/interbit-cli/config.md). This file enables you to
+file](/reference/interbit-cli/config.md). This file enables you to
 configure apps, peers, covenants, and chain joins all in one place.
 
 
@@ -20,7 +20,7 @@ the following software:
 ## Using the CLI
 
 Once you have setup your configuration file to your liking you can use
-the [`start`](/reference/interbit-cli.start.md) or
+the [`start`](/reference/interbit-cli/start.md) or
 [`build`](/reference/interbit-cli/build.md) and
 [`deploy`](/reference/interbit-cli/deploy.md) commands to start your
 node.

@@ -1,7 +1,6 @@
 # Summary
 
 * [Introduction](README.md)
-  * [Contents](Contents.md)
 
 * [Getting Started](getting-started/README.md)
   * [Requirements](getting-started/requirements.md)
@@ -11,27 +10,29 @@
   * [Run your Interbit app](getting-started/run.md)
   * [Support](getting-started/support.md)
 
-* [Key Concepts](key-concepts/README.md#key-concepts)
-  * [Actions](key-concepts/README.md#actions)
-  * [Application State](key-concepts/README.md#application-state)
-  * [Interbit State](key-concepts/README.md#interbit-state)
-  * [Smart Contracts](key-concepts/README.md#smart-contracts)
-  * [Sagas](/key-concepts/README.md#sagas)
-  * [Chain Joining](/key-concepts/README.md#chain-joining)
+* [Key Concepts](/key-concepts/README.adoc)
+  * [Covenants](/key-concepts/covenants.adoc)
+  * [Actions](/key-concepts/actions.adoc)
+  * [Application State](/key-concepts/state.adoc)
+  * [Smart Contracts](/key-concepts/smart_contracts.adoc)
+  * [Root Saga](/key-concepts/sagas.adoc)
+  * [Chain Joins](/key-concepts/chain_joins.adoc)
+  * [Configuration and Manifest File](/key-concepts/configuration.adoc)
+  * [Hypervisor](/key-concepts/hypervisor.adoc)
 
 * [Examples](/examples/README.md)
-  * [Chain Joining](/examples/joining.md)
   * [Initializing a Chain](/examples/initialize.md)
   * [Destroying a Chain](/examples/destroy.md)
   * [Determinism](/examples/determinism.md)
   * [Template App Walk-through](/examples/template.md)
   * [To-do List App](/examples/to-do-list.md)
 
-* [Architecture](architecture/README.md)
+* [Architecture](/architecture/README.md)
+  * [Chain Joins: How They Work](/architecture/chain_joins.adoc)
   * [Chain Topology](/architecture/topology/README.adoc)
     * [Key Considerations](/architecture/topology/considerations.adoc)
     * [Topology Patterns](/architecture/topology/patterns.adoc)
-  * [Permission Model](architecture/permission_model.adoc)
+  * [Permission Model](/architecture/permission_model.adoc)
 
 * [Reference](reference/README.md)
   * [interbit](reference/interbit/README.md)

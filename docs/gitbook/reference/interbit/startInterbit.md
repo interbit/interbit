@@ -1,22 +1,26 @@
 # `startInterbit()`
 
-Starts a [hypervisor](../../key-concepts/README.md#hypervisor) and [cli](../interbit-core/cli/README.md) for hosting Interbit blockchains then returns both.
+Starts a [hypervisor](/key-concepts/hypervisor.adoc) and
+[cli](../interbit-core/cli/README.md) for hosting Interbit blockchains
+then returns both.
 
-#### Arguments
+
+## Arguments
 
 None.
 
-#### Returns
+
+## Returns
 
 *(Object)*: {
   cli: *(Object)* A [cli](../interbit-core/cli/README.md) to use to interact with the Interbit node
   hypervisor: *(Object)* A [hypervisor](../interbit-core/hypervisor/README.md) to use for hosting chains
 }
 
-#### Example
+
+## Example
 
 ```js
 const { startInterbit } = require('interbit')
-
 const { cli, hypervisor } = await startInterbit()
 ```

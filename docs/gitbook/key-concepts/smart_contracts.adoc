@@ -1,0 +1,101 @@
+= Smart Contracts
+
+Smart Contracts provide the programmability and customizability of
+Interbit. Smart Contracts must be written in JavaScript and must be
+developed using deterministic, functional programming methodology.
+
+[.hide-in-web]
+--
+Below is an implementation of a simple Smart Contract that increments a
+counter by an amount whenever an `ADD` action is received.
+For context, the action and state are also given.
+
+[source,jsx]
+----
+let state = { sum: 5 }
+
+let action = {
+  type: 'ADD',
+  payload: { amount: 5 }
+}
+
+let smartContract = {
+  incrementSum: (state, action) => {
+    let newState = {
+        sum: state.sum + action.payload.amount
+    }
+    return newState
+  }
+}
+----
+--
+
+[.hidden-on-print]
+--
+We have supplied a code exercise of a simple smart contract that should
+increment a counter by the amount defined in the `ADD` action payload
+when it is received. For context, the action and state are given.
+
+[NOTE]
+======
+**Exercise Context**
+
+[source,js]
+----
+  let state = { sum: 5 }
+
+  let action = {
+    type: 'ADD',
+    payload: { amount: 5 }
+  }
+----
+======
+
+{% exercise %}
+Write a smart contract to increment the sum contained in the state for
+the action described above.
+
+{% initial %}
+  let smartContract = {
+    incrementSum: (state, action) => {
+      // TODO
+
+      return state
+    }
+  }
+
+{% solution %}
+  let smartContract = {
+    incrementSum: (state, action) => {
+      let newState = {
+          sum: state.sum + action.payload.amount
+      }
+      return newState
+    }
+  }
+
+{% validation %}
+  assert(smartContract.incrementSum(state, action).sum === 10 && state.sum === 5)
+
+{% context %}
+  let action = {
+    type: 'ADD',
+    payload: {
+      amount: 5
+    }
+  }
+
+  let state = {
+    sum: 5
+  }
+
+{% endexercise %}
+
+[WARNING]
+=========
+**Assertion failed?**
+
+If your assertion has failed, double check that your smart contract is
+not mutating the existing state and is instead returning a new state.
+=========
+--

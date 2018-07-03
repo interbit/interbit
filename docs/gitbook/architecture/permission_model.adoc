@@ -119,38 +119,29 @@ blockchain's network.
 [[chain_joins]]
 == Chain Joins
 
-Chain joins are an Interbit-specific feature. They permit some (or all)
-of the information in one blockchain to be connected with information in
-another blockchain. These connections are controlled via ACLs, and so
-are explicit and purposeful.
+See the link:/key-concepts/chain_joins.adoc[Chain Joins] in the Key
+Concepts chapter for background on chain joins, or
+link:chain_joins.adoc[Chain Joins: How They Work] for more operational
+details.
 
-There are two kinds of chain joins: read joins and write joins.
+For both read and write joins, the ACLs of both blockchains must permit
+the join before it can be established.
 
-image:img/read_join.svg["An Interbit read join between a provider
-blockchain and a consumer blockchain", 478, 111, role="center"]
+Since joins can be established on a portion of the state, a join
+provides a cleaner, more granular way to manage access control than
+blockchain access via keys.
 
-A read join means that one blockchain, the _consumer_, has access to a
-copy of a portion of the state -- the collection of data stored on the
-blockchain -- of another blockchain, the _provider_. Any updates to the
-provider's state are automatically updated in the consumer's blockchain.
+A read join is authorized on the provider blockchain with an
+link:/reference/interbit-covenant-utils/startProvideState.md[`@@interbit/START_PROVIDE_STATE`]
+action and on the receiver blockchain by an
+link:/reference/interbit-covenant-utils/startConsumeState.md[`@@interbit/START_CONSUME_STATE`].
+Once both actions have been recorded -- or _blocked_ -- to both
+blockchains, the state is shared.
 
-[NOTE]
-======
-Blockchain updates are not immediate and take some time to propagate
-throughout the network of nodes supporting the blockchain.
-======
+A write join is authorized on the sender blockchain with an
+link:/reference/interbit-covenant-utils/authorizeSendActions.md[`@@interbit/AUTHORIZE_SEND_ACTIONS`]
+action and on the receiver blockchain with an
+link:/reference/interbit-covenant-utils/authorizeReceiveActions.md[`@@interbit/AUTHORIZE_RECEIVE_ACTIONS`]
+action.
 
-image:img/write_join.svg["An Interbit write join between a sender
-blockchain and a receiver blockchain", 458, 111, role="center"]
 
-A write join is implemented as a pair of read joins and so, to reduce
-confusion (because there would be two consumers and two providers), the
-blockchain that initiates a write join is called the _sender_ and the other
-blockchain is called the _receiver_.
-
-The purpose of a write join is to allow the sender to dispatch actions
-to the receiver, and for the receiver to provide the results of the
-actions to the sender.
-
-After a join, read or write, has been established, the join can be
-revoked and the consumer no longer has access to the provider's state.

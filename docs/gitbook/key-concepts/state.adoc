@@ -1,0 +1,84 @@
+= Application State
+
+The Application State is the most up-to-date state of
+application-specific data running on the blockchain. It is the result of
+all of the actions in the blockchain, from the
+link:/GLOSSARY.md#genesis-block[genesis block] and its initial
+Application State, having been processed by the Smart Contracts. The
+Application State does not include additional Interbit platform
+metadata.
+
+The initial Application State that you define for your application is
+the first Application State that you give to the Smart Contracts. The
+initial Application State is akin to the data model in traditional
+application development. It details what data the application stores as
+well as the initial values.
+
+Application State exists as an immutable version of a normal JSON object
+(implemented with the
+link:https://github.com/rtfeldman/seamless-immutable[seamless-immutable]
+package). For example:
+
+[source,json]
+----
+state: {
+  private: {
+    data: {
+      // ...
+    }
+  },
+  public: {
+    likes: {
+      cats: true
+    }
+  }
+}
+----
+
+The Application State can contain any information that is in a
+JSON-compatible format, for example when using base64 encoding. There
+are no restrictions on how the Application State is organized. In the
+example above, the data under the `private` key is not intended to be
+shared with other blockchains.
+
+The initial Application State taken from the To-do List example:
+
+[source,js]
+----
+import Immutable from 'seamless-immutable'
+
+const initialState = Immutable.from({
+  items: []
+})
+
+export default initialState
+----
+
+Retrieving the Application State:
+
+[source,js]
+----
+const appState = animatedChain.getState()
+----
+
+Using Application State in a Smart Contract:
+
+[source,js]
+----
+const smartContract = (state, action) => {
+  state = state.set('items', [])
+  return state
+}
+----
+
+[NOTE]
+======
+While the Redux design pattern recommends minimizing the amount of state
+that you send to reducers (smart contracts in our context), be aware
+that you have to manage your own state separation. Consider whether your
+application can be performance sensitive enough to require minimization
+of state passed to smart contracts, or if greater consolidation of state
+management is more valuable.
+======
+
+See also: link:/GLOSSARY.md#blockchain-state[Blockchain State]

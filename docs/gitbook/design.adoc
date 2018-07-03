@@ -275,7 +275,11 @@ One above, and one below
 
 * Three
 ** A
++
+Multi-paragraph
 ** B
++
+Multi-paragraph
 ** C
 --
 
@@ -442,7 +446,7 @@ ____
 
 Air quotes:
 
-[,Adam West as Batman]
+[,Adam West as Batman, role="quote"]
 ""
 Some days, you just can't get rid of a bomb!
 ""

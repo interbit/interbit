@@ -384,59 +384,59 @@ img.support-icon {
 }
 
 /*TIPS -INFO STYLE*/
-.info {
+.tips.info {
   border-left: 4px solid #42acf3;
   background-color: #eff5ff;
 }
 
-.info p:first-child {
+.tips.info p:first-child {
   color: #42acf3;
 }
 
-.info span:not(.token) {
+.tips.info span:not(.token) {
   content: url('../../assets/img/info.png');
 }
 
 
 /*TIPS -WARNING STYLE*/
-.warning {
+.tips.warning {
   border-left: 4px solid #f0ad4e;
   background-color: #fcf8f2;
 }
 
-.warning p:first-child {
+.tips.warning p:first-child {
   color: #f0ad4e;
 }
 
-.warning span {
+.tips.warning span {
   content: url('../../assets/img/warning.png');
 }
 
 /*TIPS -WARNING STYLE*/
-.danger {
+.tips.danger {
   border-left: 4px solid #d9534f;
   background-color: #fdf7f7;
 }
 
-.danger p:first-child {
+.tips.danger p:first-child {
   color: #d9534f;
 }
 
-.danger span {
+.tips.danger span {
   content: url('../../assets/img/danger.png');
 }
 
 /*TIPS -WARNING STYLE*/
-.success {
+.tips.success {
   border-left: 4px solid #50af51;
   background-color: #f3f8f3;
 }
 
-.success p:first-child {
+.tips.success p:first-child {
   color: #50af51;
 }
 
-.success span {
+.tips.success span {
   content: url('../../assets/img/success.png');
 }
 
@@ -494,9 +494,9 @@ img.support-icon {
 /* caution */
 
 .admonitionblock.caution {
-  border-color: rgba(246, 166, 35, 0.2);
-  border-left-color: rgba(246, 166, 35, 1);
-  background-color: rgba(246, 166, 35, 0.02);
+  border-color: rgba(243, 201, 76, 0.2);
+  border-left-color: rgba(243, 201, 76, 1);
+  background-color: rgba(243, 201, 76, 0.2);
 }
 
 .admonitionblock.caution td.icon:before {
@@ -509,9 +509,10 @@ img.support-icon {
 /* important */
 
 .admonitionblock.important {
-  border-color: rgba(217, 83, 79, 0.2);
-  border-left-color: rgba(217, 83, 79, 1);
-  background-color: rgba(217, 83, 79, 0.02);
+  border-color: rgba(235, 87, 87, 0.2);
+  border-left-color: rgba(235, 87, 87, 1);
+  background-color: rgba(235, 87, 87, 0.03);
+  background-size: 16 16;
 }
 
 .admonitionblock.important td.icon:before {
@@ -521,9 +522,9 @@ img.support-icon {
 /* note */
 
 .admonitionblock.note {
-  border-color: rgba(31, 152, 222, 0.2);
-  border-left-color: rgba(31, 152, 222, 1);
-  background-color: rgba(31, 152, 222, 0.02);
+  border-color: rgba(19, 133, 232, 0.2);
+  border-left-color: rgba(19, 133, 232, 1);
+  background-color: rgba(19, 133, 232, 0.03);
 }
 
 .admonitionblock.note td.icon:before {
@@ -533,9 +534,9 @@ img.support-icon {
 /* tip */
 
 .admonitionblock.tip {
-  border-color: rgba(31, 152, 222, 0.2);
-  border-left-color: rgba(31, 152, 222, 1);
-  background-color: rgba(31, 152, 222, 0.02);
+  border-color: rgba(19, 133, 232, 0.2);
+  border-left-color: rgba(19, 133, 232, 1);
+  background-color: rgba(19, 133, 232, 0.06);
 }
 
 .admonitionblock.tip td.icon:before {
@@ -545,9 +546,9 @@ img.support-icon {
 /* warning */
 
 .admonitionblock.warning {
-  border-color: rgba(217, 83, 79, 0.2);
-  border-left-color: rgba(217, 83, 79, 1);
-  background-color: rgba(217, 83, 79, 0.02);
+  border-color: rgba(235, 87, 87, 0.2);
+  border-left-color: rgba(235, 87, 87, 1);
+  background-color: rgba(235, 87, 87, 0.1);
 }
 
 .admonitionblock.warning td.icon:before {
@@ -593,9 +594,12 @@ Prism template by Bram de Haan (http://atelierbram.github.io/syntax-highlighting
 Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
 */
 code[class*="language-"],
-pre[class*="language-"] {
+pre[class*="language-"],
+.markdown-section pre,
+.markdown-section code {
   font-family: RobotoMono, Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: normal;
   line-height: 1.375;
   direction: ltr;
   text-align: left;
@@ -609,20 +613,22 @@ pre[class*="language-"] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
-  background: #f5f5f5;
+  background: rgba(0, 0, 0, 0.06);
   color: #5e6687;
+  text-shadow: none;
+}
+
+pre > code,
+.markdown-section pre > code {
+  background: transparent;
+  font-size: 14px;
 }
 
 pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
-  text-shadow: none;
-  background: #dfe2f1;
-}
-
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection,
 pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
 code[class*="language-"]::selection, code[class*="language-"] ::selection {
-  text-shadow: none;
-  background: #dfe2f1;
+  background: #acd8fc;
 }
 
 /* Code blocks */
@@ -778,18 +784,6 @@ pre > code.highlight {
   display: none;
 }
 
-.markdown-section code {
-  font-family: RobotoMono;
-  font-size: 14px;
-  font-weight: normal;
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.markdown-section pre > code {
-  font-weight: normal;
-  font-size: 14px;
-}
-
 /* Fancier ordered list styling ----------------------------------- */
 
 .markdown-section ul,
@@ -898,9 +892,12 @@ pre > code.highlight {
   margin-bottom: 0.85em;
 }
 
-.markdown-section .ulist.tight ul li ul,
-.markdown-section .ulist.tight ul li p {
-  margin-bottom: 0;
+.markdown-section .ulist ul li p {
+  margin: 0;
+}
+
+.markdown-section .ulist ul li p + p {
+  margin-top: 1em;
 }
 
 /* Hide the prev/next page navigation arrows */
@@ -928,7 +925,12 @@ a.navigation {
 }
 
 .markdown-section table thead tr {
-  background: #e8f5f4;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.markdown-section table td,
+.markdown-section table th {
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 .markdown-section table.frame-h th,
@@ -947,4 +949,72 @@ a.navigation {
   margin-left: 1em;
   padding: 1em 1em 0.5em 1em;
   background: #eee;
+  background-image: linear-gradient(to bottom, rgba(248, 248, 248, 1), rgba(200, 212, 224, 0.1));
+  border-radius: 0.25em;
+}
+
+.markdown-section hr {
+  height: 1px;
+  padding: 0;
+  margin: 1.25em 0;
+  overflow: visible;
+  border: 0 none;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.markdown-section hr:after {
+  content: "";
+  display: inline-block;
+  position: relative;
+  top: -8px;
+  width: 26px;
+  height: 20px;
+  padding: 0;
+  background: url("images/icon-bits.svg") no-repeat;
+  background-color: white;
+  background-size: 13px;
+  background-position: center center;
+  margin: 0 49%;
+}
+
+.markdown-section .title {
+  font-weight: bold;
+}
+
+
+
+.markdown-section blockquote p { margin: 0; }
+.markdown-section blockquote p + p { margin-top: 1em; }
+.markdown-section blockquote + .attribution {
+  margin-top: -0.85em;
+  margin-bottom: 0.85em;
+}
+
+.markdown-section .quoteblock.quote blockquote {
+  border: 0 none;
+  padding: 0;
+  color: #555;
+}
+
+.markdown-section .quoteblock.quote blockquote:before {
+  content: "\201c";
+  font-family: serif;
+  font-size: 3em;
+  font-weight: bold;
+  line-height: 1;
+  color: rgba(243, 201, 76, 1);
+  float: left;
+  padding-right: 0.25em;
+}
+
+.markdown-section .exampleblock {
+  border: 1px solid rgba(19, 133, 232, .5);
+  padding: 0.7em 1em;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(19, 133, 232, 0.1));
+  border-radius: 0.25em;
+}
+
+.markdown-section .exampleblock *:last-child,
+.markdown-section .exampleblock *:last-child p {
+  margin-bottom: 0
 }

@@ -10,8 +10,9 @@ It is a JS file and can be altered at any time.
 
 It contains network information such as peers, validator public keys,
 and the different chains your network may run. It also contains a list
-of [covenants](key-concepts/README.md#covenants) and which blockchains
-they will run on.
+of [covenants](/key-concepts/covenants.adoc) and which blockchains they
+will run on.
+
 
 ## Example
 
@@ -197,7 +198,7 @@ they will be authorized to share state or dispatch actions to each
 other. The joins must correspond to each other.
 
 Reference:
- - [Chain Joining](../../examples/joining.md)
+ - [Chain Joins](/architecture/chain_joins.adoc)
 
 
 ## Covenants

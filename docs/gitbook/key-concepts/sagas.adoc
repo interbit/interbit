@@ -1,0 +1,11 @@
+= Root Saga
+
+Because a smart contract must be deterministic a method of handling side
+effects on a blockchain must be used. Interbit uses the `redux-saga` API
+to manage side effects. If you require side effect management in your
+covenant simply export a `rootSaga` in your covenant package export in
+the same way you would export a Redux saga.
+
+Refer to the
+link:https://redux-saga.js.org/docs/introduction/BeginnerTutorial.html[redux-saga]
+documentation for implementation details.

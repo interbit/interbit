@@ -27,6 +27,32 @@ emphasis. E=mc^2^ and H~2~O, discuss!
 // A code sample
 var check = false
 ----
+
+[cols="1a,1a", options="header"]
+|===
+| Column A
+| Column B
+|
+a `specific term` and **various** __kinds__ of
+emphasis. E=mc^2^ and H~2~O, discuss!
+
+[source,js]
+----
+// A code sample
+var check = false
+----
+
+|
+a `specific term` and **various** __kinds__ of
+emphasis. E=mc^2^ and H~2~O, discuss!
+
+[source,js]
+----
+// A code sample
+var check = false
+----
+|===
+
 ======
 
 
@@ -40,6 +66,32 @@ emphasis. E=mc^2^ and H~2~O, discuss!
 // A code sample
 var check = false
 ----
+
+[cols="1a,1a", options="header"]
+|===
+| Column A
+| Column B
+|
+a `specific term` and **various** __kinds__ of
+emphasis. E=mc^2^ and H~2~O, discuss!
+
+[source,js]
+----
+// A code sample
+var check = false
+----
+
+|
+a `specific term` and **various** __kinds__ of
+emphasis. E=mc^2^ and H~2~O, discuss!
+
+[source,js]
+----
+// A code sample
+var check = false
+----
+|===
+
 =====
 
 
@@ -53,6 +105,32 @@ emphasis. E=mc^2^ and H~2~O, discuss!
 // A code sample
 var check = false
 ----
+
+[cols="1a,1a", options="header"]
+|===
+| Column A
+| Column B
+|
+a `specific term` and **various** __kinds__ of
+emphasis. E=mc^2^ and H~2~O, discuss!
+
+[source,js]
+----
+// A code sample
+var check = false
+----
+
+|
+a `specific term` and **various** __kinds__ of
+emphasis. E=mc^2^ and H~2~O, discuss!
+
+[source,js]
+----
+// A code sample
+var check = false
+----
+|===
+
 ===========
 
 
@@ -66,6 +144,32 @@ emphasis. E=mc^2^ and H~2~O, discuss!
 // A code sample
 var check = false
 ----
+
+[cols="1a,1a", options="header"]
+|===
+| Column A
+| Column B
+|
+a `specific term` and **various** __kinds__ of
+emphasis. E=mc^2^ and H~2~O, discuss!
+
+[source,js]
+----
+// A code sample
+var check = false
+----
+
+|
+a `specific term` and **various** __kinds__ of
+emphasis. E=mc^2^ and H~2~O, discuss!
+
+[source,js]
+----
+// A code sample
+var check = false
+----
+|===
+
 =========
 
 
@@ -79,6 +183,32 @@ emphasis. E=mc^2^ and H~2~O, discuss!
 // A code sample
 var check = false
 ----
+
+[cols="1a,1a", options="header"]
+|===
+| Column A
+| Column B
+|
+a `specific term` and **various** __kinds__ of
+emphasis. E=mc^2^ and H~2~O, discuss!
+
+[source,js]
+----
+// A code sample
+var check = false
+----
+
+|
+a `specific term` and **various** __kinds__ of
+emphasis. E=mc^2^ and H~2~O, discuss!
+
+[source,js]
+----
+// A code sample
+var check = false
+----
+|===
+
 =========
 
 The following demonstrates the markup currently used for Markdown

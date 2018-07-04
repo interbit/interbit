@@ -6,7 +6,9 @@ const {
   setRootChainManifest
 } = require('../chainManagement')
 const { updateIndexHtmls, watchCovenants } = require('../file')
-const { validateConfig } = require('../config')
+const {
+  config: { validateConfig }
+} = require('interbit-covenant-tools')
 
 const start = async options => {
   const { config, dev, noWatch } = options

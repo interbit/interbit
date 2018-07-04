@@ -1,6 +1,10 @@
 const fs = require('fs-extra')
 const cheerio = require('cheerio')
-const { getApps } = require('../config/configSelectors')
+const {
+  config: {
+    selectors: { getApps }
+  }
+} = require('interbit-covenant-tools')
 
 const updateIndexHtmls = ({ config, chains }) => {
   console.log({ config, chains })

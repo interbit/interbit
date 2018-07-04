@@ -1,6 +1,6 @@
 const Immutable = require('seamless-immutable')
 const hashObject = require('object-hash')
-const { PATHS } = require('./constants')
+const { PATHS } = require('../constants')
 
 const prefix = '@@FILELAYER'
 

@@ -1,10 +1,10 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
-const manifestCovenant = require('./manifestCovenant')
+const manifestCovenant = require('./covenants/manifestCovenant')
+const rootCovenant = require('./covenants/rootCovenant')
 const rootStateSelectors = require('./rootStateSelectors')
-const rootCovenant = require('./rootCovenant')
 
 module.exports = {
   manifestCovenant,
-  rootStateSelectors,
-  rootCovenant
+  rootCovenant,
+  rootStateSelectors
 }

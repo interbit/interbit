@@ -71,7 +71,7 @@
 
 .markdown-section a { color: #1385e8; }
 .markdown-section a:visited { color: #0a4274; }
-.markdown-section a:hover, .markdown-section a:focus { color: #89caf4; }
+.markdown-section a:hover, .markdown-section a:focus { color: #4585f0; }
 
 .page-inner {
   max-width: 850px;
@@ -614,7 +614,7 @@ pre[class*="language-"],
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
-  background: rgba(0, 0, 0, 0.04);
+  background: rgba(0, 0, 0, 0.05);
   color: #393a34;
   text-shadow: none;
 }
@@ -919,7 +919,7 @@ a.navigation {
   margin-left: 1em;
   padding: 1em 1em 0.5em 1em;
   background: rgba(0, 0, 0, 0.03);
-  border-radius: 0.25em;
+  border-radius: 0.5em;
 }
 
 .markdown-section hr {
@@ -962,7 +962,7 @@ a.navigation {
 
 .markdown-section .exampleblock {
   padding: 1em 1.25em;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.03);
   border-radius: 1em;
 }
 

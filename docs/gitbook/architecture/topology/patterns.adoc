@@ -28,7 +28,14 @@ The atom is the simplest form of chain architecture: a single blockchain
 with one smart contract. It has no concern for privacy or throughput,
 which is suitable in the simplest cases -- for example, serving a static
 web app like a blog, or a grocery list blockchain shared by a family who
-all have equal access.
+all have equal access to the data contained within.
+
+[NOTE]
+======
+Atoms do provide a certain amount of privacy -- access is restricted to
+authorized entities. However, with valid authorization, all of the
+blockchain's state is accessible.
+======
 
 
 == Molecules
@@ -59,6 +66,8 @@ In this molecule, the spoke atoms (in green, surrounding the hub) do not
 connect to each other nor do they share data directly; the spokes only
 connect with the hub (in blue). Each spoke can process actions
 dispatched from the hub, and the hub processes actions from every spoke.
+The hub and spokes can share data selectively, with the remainder of
+their respective data maintained privately.
 
 
 === Hub and Connected Spoke
@@ -74,9 +83,8 @@ spokes.
 
 In this molecule, the hub could act as a directory blockchain providing
 public details about all of the connected spokes. When spokes want to
-communicate privately, they can create and connect to an intermediate
-blockchain that allows them to share data that neither the hub nor the
-other spokes could know about or access.
+communicate privately, they connect to each other and share data that
+neither the hub nor the other spokes could know about or access.
 
 
 === Control by Proxy
@@ -85,21 +93,29 @@ image:img/control_by_proxy.svg["The Control By Proxy molecule", 175,
 194, role="right"]
 The Control by Proxy molecule is a more-versatile version of a Hub and
 Spoke molecule that uses at least three atom types. One of the spokes is
-of a different type -- the _control_ atom (in red). The hub (in blue)
-acts as an intermediary. The spokes (in green) may not see any part of
-the control atom, and the control atom can have additional permissions
-in the hub that the spokes would not. As a result, the most sensitive
-data can be placed in the control atom without worry.
+of a different type -- the _control_ atom (in red). The hub -- or
+_proxy_ -- (in blue) acts as an intermediary. The spokes (in green) may
+not see any part of the control atom, and the control atom can have
+additional permissions in the hub that the spokes would not. As a
+result, the most sensitive data can be placed in the control atom
+without worry.
 
 This topology is useful, for example, for
 link:https://en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act[HIPAA]
-compliance. Imagine that the control atom is managed by a hospital.
-Patient information could flow to the spokes, each of which would be
-managed by an insurance company. The hospital would know who the
-patients are, and the insurance companies need a reliable identifier for
-each patient. The hub would be managed by a compliance organization,
-providing the persistent association of the hospital patients with their
-"anonymous" insurance identifiers.
+compliance. Hospitals manage patient data, some of which needs to be
+shared with, for example, insurance companies. To comply with the HIPAA
+Privacy Rule, only a subset of patient data would be shared in a way
+that doesn't disclose the patient's identity. To comply with the HIPAA
+Security Rule, controlling and recording access is required.
+
+If the hospital is represented by the control atom, it could share the
+specific patient data required with the hub, which would be managed by a
+compliance organization. The compliance organization would create a
+persistent, anonymous identifier for each patient, and would then share
+specific, anonymized patient data with the spokes, each managed by an
+insurance company. At any time, the hospital can modify the patient
+data and which portions are shared, and specify which insurance
+company should receive the data.
 
 
 == Combinations
@@ -115,50 +131,40 @@ perhaps one branch in a bank is in the dense city center and processes
 triple the transactions of the other branches.
 
 The Multi-Tier Hub and Spoke molecule would be a good solution:
-the busy branch could be split into its own hub and spoke molecule,
+the busy bank branch could be split into its own hub and spoke molecule,
 such as one blockchain for the branch itself and separate blockchains
 for each automated teller machine (ATM). The branch could then aggregate
 its data upwards to the hub at regular intervals. The splitting into
-multiple blockchains distributes the processing load -- provided that
-the new blockchains are hosted on separate nodes from the original node.
-
-
-In this model, a single layer of hub and spoke may not supply enough
-throughput to the system.
-
-Perhaps one branch in a bank is in the dense
-city center and processes triple the transactions of the other branches.
-This branch can then split into their own hierarchy, such as the branch
-itself and separate blockchains for each automated teller machine (ATM).
-They could then aggregate their data upwards, becoming their own spoke
-and hub molecule.
-
-This allows them to gain another potential order of magnitude more
-throughput without affecting the other branches.
+multiple blockchains distributes the processing load .
 
 
 === The Spokes as Control Model
 
 image:img/spoke_control.svg["The Spokes as Control Model", 175, 235,
 role="right"]
-In this model, each company has a chain that holds the entirety of
-their data. Much of that data is private, and so they do not permit
-direct connections between companies. However, they do share common
-goals and wish to work together.
+In this model, the spokes are used to control the amount and nature of
+the data shared by creating intermediate blockchains between them. The
+hub represents a _directory_ chain, providing identification of all
+participating spokes and holding any other data required to maintain
+trust in the overall system.
 
-They form a consortium which manages a directory blockchain (the hub, in
-blue) which contains the hashes of the company chains participating in
-the consortium, and also maintains data integrity and trust system-wide.
+For companies operating in a consortium (to share common activities or
+resources to achieve common goals), they prefer to conduct their
+business in a way that maintains their privacy and shares the minimum
+data required to conduct that business.
 
-Whenever a company wishes to do business with another, they create and
-control an intermediary blockchain between them that contains all of
-the data required to conduct that business. None of the other parties
-are aware, maintaining privacy, and the structure of the intermediary
-blockchains, which could be atoms or other molecules, provides the
-processing required to perform all shared business operations.
+With each company as a spoke (in green), they would share the hash of
+their corporate blockchain with the hub (in blue) to maintain the
+directory of participating companies. Whenever a company wishes to do
+business with another, they create and control an intermediary
+blockchain (in red) between them that contains only the data required to
+conduct that business. None of the other parties are aware, maintaining
+privacy, and the structure of the intermediary blockchains, which could
+be atoms or other molecules, provides the data sharing and processing
+required to conduct their business.
 
 To satisfy compliance regulations, each company would share the hashes
-from their intermediary blockchains with the directory blockchain, to
-provide a verifiable timeline of their transactions without disclosing
-any details. An auditor could use this information to verify their
-compliance.
+from their intermediary blockchains with the directory blockchain at
+regular intervals (to avoid leaking per-transaction metadata). Such
+sharing would provide a verifiable timeline of the transactions that
+would help an auditor to verify compliance.

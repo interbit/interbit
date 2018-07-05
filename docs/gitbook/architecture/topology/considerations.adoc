@@ -66,25 +66,30 @@ node.
 
 Interbit blockchains use a consensus algorithm called
 link:https://en.wikipedia.org/wiki/Proof-of-authority[Proof of
-Authority] (or _PoA_). When a node in an Interbit blockchain network
-wants to change the state, it sends a list of one or more actions to the
-_validator_ node (or _block master_). The validator node has the
-authority to validate the actions and create new blocks. If, when the
-validator's execution of the blockchain's smart contract succeeds, a new
-block is created containing the list of actions. This block is
-propagated to all participating nodes, which execute the actions and
-update their state, achieving consensus. If the smart contract execution
-should fail for any reason, the validator node does not create a new
-block, and the state remains unchanged.
+Authority] (or _PoA_).
+
+When a node in an Interbit blockchain network wants to change the state,
+it sends a list of one or more actions to the _validator_ node (or
+_block master_). The validator node verifies that the request to change
+state comes from an authorized node, and if so, creates a new block
+containing the list of actions. The block is then propagated to all
+participating nodes, and every node executes the list of actions via the
+smart contract to update their respective state in the same way, thereby
+achieving consensus.
+
+If the smart contract execution should fail for any reason, it fails on
+all participating nodes (smart contract execution is always
+deterministic), and all nodes drop the block and their state remains
+unchanged.
 
 PoA solves both kinds of performance issues that traditional blockchains
 suffer; there is no computation-intensive mining and consensus is
 controlled by a single node.
 
 PoA consensus does impose some minor overhead, as proposed changes to
-the blockchain must be communicated to the validator node, the smart
-contract must be executed, and the resulting new block must be
-propagated to all participating nodes in order to reach consensus.
+the blockchain must be communicated to the validator node, the resulting
+new block must be propagated to all participating nodes, and each node
+must process the smart contract in order to reach consensus.
 
 Should a validator node get overloaded, the performance concerns can
 easily be distributed by using multiple blockchains that are tightly

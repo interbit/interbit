@@ -1,10 +1,9 @@
 const path = require('path')
 const should = require('should')
-const validateConfig = require('../config/validateConfig')
+const validateConfig = require('../../config/validateConfig')
 
 const defaultConfig = {
   peers: ['localhost:5000', 'localhost:5050'], // First peers to connect to
-  masterChain: 'hub',
   staticChains: {
     hub: {
       covenant: 'hub',
@@ -76,9 +75,83 @@ const apps = {
 describe('validateConfig(config)', () => {
   it('passes when all joins are paired', () => {
     const config = { ...defaultConfig }
-    const isValid = validateConfig(config)
+    const wellFormedConfig = validateConfig(config)
 
-    should.equal(isValid, true)
+    should.ok(wellFormedConfig)
+  })
+
+  it('returns a well formed config if parts are missing', () => {
+    const poorlyFormedValidConfig = {
+      staticChains: {
+        hub: {
+          covenant: 'one'
+        },
+        spoke: {
+          covenant: 'one'
+        }
+      },
+      covenants: {
+        one: {
+          location: 'covenantDir'
+        }
+      }
+    }
+
+    const expectedConfig = {
+      peers: [],
+      covenants: {
+        one: {
+          location: 'covenantDir'
+        }
+      },
+      staticChains: {
+        hub: {
+          covenant: 'one',
+          childChains: [],
+          config: {
+            validators: [],
+            joins: {
+              consume: [],
+              provide: [],
+              receiveActionFrom: [],
+              sendActionTo: []
+            }
+          }
+        },
+        spoke: {
+          covenant: 'one',
+          childChains: [],
+          config: {
+            validators: [],
+            joins: {
+              consume: [],
+              provide: [],
+              receiveActionFrom: [],
+              sendActionTo: []
+            }
+          }
+        }
+      },
+      apps: {}
+    }
+
+    const wellFormedConfig = validateConfig(poorlyFormedValidConfig)
+
+    should.deepEqual(wellFormedConfig, expectedConfig)
+  })
+
+  it('throws when covenant does not have a file location', () => {
+    const config = {
+      ...defaultConfig,
+      covenants: {
+        ...defaultConfig.covenants,
+        hub: {}
+      }
+    }
+
+    should.throws(() => {
+      validateConfig(config)
+    }, /Covenant "hub" does not contain a location/)
   })
 
   it('fails when join is missing an alias', () => {
@@ -266,19 +339,8 @@ describe('validateConfig(config)', () => {
       staticChains: {},
       covenants: {}
     }
-    const isValid = validateConfig(config)
-    should.equal(isValid, true)
-  })
-
-  it('fails when missing peers', () => {
-    const config = {
-      staticChains: { ...defaultConfig.chains },
-      covenants: { ...defaultConfig.covenants }
-    }
-
-    should.throws(() => {
-      validateConfig(config)
-    }, /"peers" property is required in config$/)
+    const wellFormedConfig = validateConfig(config)
+    should.ok(wellFormedConfig)
   })
 
   it('fails when missing staticChains', () => {
@@ -338,40 +400,21 @@ describe('validateConfig(config)', () => {
     }, /Config contains unsupported props: meow,bao$/)
   })
 
-  it('passes when there is no master chain', () => {
+  it.skip('fails when chain structure contains cycles', () => {
     const config = {
       peers: [...defaultConfig.peers],
-      staticChains: { ...defaultConfig.chains },
-      covenants: { ...defaultConfig.covenants }
-    }
-    const isValid = validateConfig(config)
-
-    should.equal(isValid, true)
-  })
-
-  it('passes when there is a master chain', () => {
-    const config = { ...defaultConfig }
-    const isValid = validateConfig(config)
-
-    should.equal(isValid, true)
-  })
-
-  it('fails when chain structure contains cycles', () => {
-    const config = {
-      peers: [...defaultConfig.peers],
-      masterChain: 'chain1',
       staticChains: {
         chain1: {
           covenant: 'hub',
-          parentChain: 'chain3'
+          childChains: ['chain3']
         },
         chain2: {
           covenant: 'hub',
-          parentChain: 'chain1'
+          childChains: ['chain1']
         },
         chain3: {
           covenant: 'hub',
-          parentChain: 'chain2'
+          childChains: ['chain2']
         },
         chain4: {
           covenant: 'hub'
@@ -385,49 +428,46 @@ describe('validateConfig(config)', () => {
     }, /"chain1" cannot be added to manifest again: it is already a parent node$/)
   })
 
-  it('passes when chain structure is a tree', () => {
+  // TODO: Validate shape of childChains in config
+  it.skip('passes when chain structure is a tree', () => {
     const config = {
       ...defaultConfig,
-      masterChain: 'chain1',
       staticChains: {
         chain1: {
-          covenant: 'hub'
+          covenant: 'hub',
+          childChains: ['chain2', 'chain4']
         },
         chain2: {
           covenant: 'hub',
-          parentChain: 'chain1'
+          childChains: ['chain3']
         },
         chain3: {
-          covenant: 'hub',
-          parentChain: 'chain2'
+          covenant: 'hub'
         },
         chain4: {
           covenant: 'hub',
-          parentChain: 'chain1'
+          childChains: ['chain5', 'chain6']
         },
         chain5: {
-          covenant: 'hub',
-          parentChain: 'chain4'
+          covenant: 'hub'
         },
         chain6: {
           covenant: 'hub',
-          parentChain: 'chain4'
+          childChains: ['chain7']
         },
         chain7: {
-          covenant: 'hub',
-          parentChain: 'chain6'
+          covenant: 'hub'
         }
       }
     }
-    const isValid = validateConfig(config)
+    const wellFormedConfig = validateConfig(config)
 
-    should.equal(isValid, true)
+    should.ok(wellFormedConfig)
   })
 
   it('passes when chain structure is a single chain', () => {
     const config = {
       ...defaultConfig,
-      masterChain: 'chain',
       staticChains: {
         chain: {
           covenant: 'hub'
@@ -435,9 +475,9 @@ describe('validateConfig(config)', () => {
       }
     }
 
-    const isValid = validateConfig(config)
+    const wellFormedConfig = validateConfig(config)
 
-    should.equal(isValid, true)
+    should.ok(wellFormedConfig)
   })
 
   it('passes when apps are correctly configured', () => {
@@ -448,9 +488,9 @@ describe('validateConfig(config)', () => {
       }
     }
 
-    const isValid = validateConfig(config)
+    const wellFormedConfig = validateConfig(config)
 
-    should.equal(isValid, true)
+    should.ok(wellFormedConfig)
   })
 
   it('fails when apps are missing props', () => {
@@ -492,8 +532,8 @@ describe('validateConfig(config)', () => {
         }
       }
     }
-    const result = validateConfig(config)
-    should.equal(result, true)
+    const wellFormedConfig = validateConfig(config)
+    should.ok(wellFormedConfig)
   })
 
   it('fails when apps reference unconfigured appChain', () => {

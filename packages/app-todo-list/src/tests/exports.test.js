@@ -1,5 +1,5 @@
 const assert = require('assert')
-const api = require('../..')
+const api = require('../exports')
 
 describe('module exports expected API', () => {
   it('publicCovenant', () => {

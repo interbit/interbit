@@ -1,7 +1,7 @@
-const configSelectors = require('./configSelectors')
+const selectors = require('./configSelectors')
 const validateConfig = require('./validateConfig')
 
 module.exports = {
-  configSelectors,
+  selectors,
   validateConfig
 }

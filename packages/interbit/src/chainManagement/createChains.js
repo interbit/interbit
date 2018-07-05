@@ -1,15 +1,17 @@
 const path = require('path')
 
 const {
-  getChains,
-  getCovenants,
-  getPeers
-} = require('../config/configSelectors')
-const {
-  getGenesisBlocks,
-  getCovenants: getCovenantsFromManifest,
-  getPeers: getPeersFromManifest
-} = require('../manifest/manifestSelectors')
+  config: {
+    selectors: { getChains, getCovenants, getPeers }
+  },
+  manifest: {
+    selectors: {
+      getGenesisBlocks,
+      getCovenants: getCovenantsFromManifest,
+      getPeers: getPeersFromManifest
+    }
+  }
+} = require('interbit-covenant-tools')
 
 const deployCovenants = require('./deployCovenants')
 const connectToPeers = require('./connectToPeers')

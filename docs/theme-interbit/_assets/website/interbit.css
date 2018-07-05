@@ -918,8 +918,7 @@ a.navigation {
   width: 40%;
   margin-left: 1em;
   padding: 1em 1em 0.5em 1em;
-  background: #eee;
-  background-image: linear-gradient(to bottom, rgba(248, 248, 248, 1), rgba(200, 212, 224, 0.1));
+  background: rgba(0, 0, 0, 0.03);
   border-radius: 0.25em;
 }
 
@@ -936,8 +935,6 @@ a.navigation {
 .markdown-section .title {
   font-weight: bold;
 }
-
-
 
 .markdown-section blockquote p { margin: 0; }
 .markdown-section blockquote p + p { margin-top: 1em; }

@@ -1,3 +1,4 @@
+const _ = require('lodash')
 const {
   getChains,
   getApps,
@@ -5,24 +6,19 @@ const {
   getChainJoins
 } = require('./configSelectors')
 
-const joinTypes = {
-  CONSUME: 'consume',
-  PROVIDE: 'provide',
-  RECEIVE: 'receiveActionFrom',
-  SEND: 'sendActionTo'
-}
+const { JOIN_TYPES } = require('../constants')
 
 const joinMap = {
-  [joinTypes.CONSUME]: joinTypes.PROVIDE,
-  [joinTypes.PROVIDE]: joinTypes.CONSUME,
-  [joinTypes.RECEIVE]: joinTypes.SEND,
-  [joinTypes.SEND]: joinTypes.RECEIVE
+  [JOIN_TYPES.CONSUME]: JOIN_TYPES.PROVIDE,
+  [JOIN_TYPES.PROVIDE]: JOIN_TYPES.CONSUME,
+  [JOIN_TYPES.RECEIVE]: JOIN_TYPES.SEND,
+  [JOIN_TYPES.SEND]: JOIN_TYPES.RECEIVE
 }
 
 const validateConfig = config => {
-  const requiredProps = ['peers', 'staticChains', 'covenants']
+  const requiredProps = ['covenants', 'staticChains']
   const allowedProps = requiredProps.concat([
-    'masterChain',
+    'peers',
     'apps',
     'adminValidators'
   ])
@@ -30,10 +26,43 @@ const validateConfig = config => {
   validateRequiredProps(requiredProps, config)
   validateAllowedProps(allowedProps, config)
   validateChains(config)
+  validateCovenants(config)
   validateApps(config)
   validateMoleculeShape(config)
 
-  return true
+  return prettifyConfig(config)
+}
+
+const prettifyConfig = config => {
+  const chainEntries = Object.entries(getChains(config))
+
+  const wellFormedStaticChains = chainEntries.reduce(
+    (accum, [chainAlias, chainConfig]) => ({
+      ...accum,
+      [chainAlias]: _.merge({}, chainConfig, minimumChainConfig)
+    }),
+    {}
+  )
+
+  return {
+    ...config,
+    apps: config.apps || {},
+    peers: config.peers || [],
+    staticChains: wellFormedStaticChains
+  }
+}
+
+const minimumChainConfig = {
+  childChains: [],
+  config: {
+    validators: [],
+    joins: {
+      consume: [],
+      provide: [],
+      receiveActionFrom: [],
+      sendActionTo: []
+    }
+  }
 }
 
 const validateChains = config => {
@@ -57,6 +86,20 @@ const validateChains = config => {
 
     validateJoins(chainAlias, config)
   })
+}
+
+const validateCovenants = config => {
+  const covenantEntries = Object.entries(config.covenants)
+
+  for (const [covenantAlias, covenantConfig] of covenantEntries) {
+    console.log(covenantAlias, covenantConfig)
+    if (
+      !covenantConfig.location ||
+      typeof covenantConfig.location !== 'string'
+    ) {
+      throw new Error(`Covenant "${covenantAlias}" does not contain a location`)
+    }
+  }
 }
 
 const validateApps = config => {
@@ -95,7 +138,7 @@ const validateApps = config => {
 }
 
 const validateJoins = (chainAlias, config) => {
-  Object.values(joinTypes).forEach(type => {
+  Object.values(JOIN_TYPES).forEach(type => {
     validateJoinType(type, chainAlias, config)
   })
 }
@@ -159,22 +202,22 @@ const hasCorrespondingJoin = (
 const validateJoinShape = (joinType, join) => {
   let requiredProps
   switch (joinType) {
-    case joinTypes.CONSUME: {
+    case JOIN_TYPES.CONSUME: {
       requiredProps = ['alias', 'path', 'joinName']
       break
     }
 
-    case joinTypes.PROVIDE: {
+    case JOIN_TYPES.PROVIDE: {
       requiredProps = ['alias', 'path', 'joinName']
       break
     }
 
-    case joinTypes.RECEIVE: {
+    case JOIN_TYPES.RECEIVE: {
       requiredProps = ['alias', 'authorizedActions']
       break
     }
 
-    case joinTypes.SEND: {
+    case JOIN_TYPES.SEND: {
       requiredProps = ['alias']
       break
     }
@@ -205,43 +248,7 @@ const validateAllowedProps = (allowedProps, config) => {
   }
 }
 
-const validateMoleculeShape = config => {
-  if (!config.masterChain) {
-    // It's not important that the molecule be a tree if we won't be cascading changes
-    return
-  }
-
-  const tree = {}
-  const visited = []
-  const chainsList = Object.entries(getChains(config))
-  buildChainTree(chainsList, tree, config.masterChain, visited)
-}
-
-const buildChainTree = (chains, tree, node, visited) => {
-  if (visited.indexOf(node) !== -1) {
-    throw new Error(
-      `"${node}" cannot be added to manifest again: it is already a parent node`
-    )
-  }
-  visited.push(node)
-
-  // eslint-disable-next-line
-  tree[node] = findChildren
-
-  chains.forEach(([chainAlias, chainEntry]) => {
-    if (chainEntry.parentChain === node) {
-      buildChainTree(chains, tree[node], chainAlias, visited)
-    }
-  })
-}
-
-const findChildren = (chains, node) =>
-  chains.reduce((foundLeaves, chain) => {
-    const [chainAlias, chainEntry] = chain
-    if (chainEntry.parentChain === node) {
-      return { ...foundLeaves, [chainAlias]: {} }
-    }
-    return foundLeaves
-  }, {})
+// TODO: Validate molecule shape with proper childChains config prop
+const validateMoleculeShape = config => true
 
 module.exports = validateConfig

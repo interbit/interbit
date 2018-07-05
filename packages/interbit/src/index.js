@@ -2,7 +2,6 @@
 
 const args = require('./args')
 const chainManagement = require('./chainManagement')
-const config = require('./config')
 const file = require('./file')
 const manifest = require('./manifest')
 const scripts = require('./scripts')
@@ -13,7 +12,6 @@ module.exports = {
   logo,
   ...args,
   ...chainManagement,
-  ...config,
   ...file,
   ...manifest,
   ...scripts

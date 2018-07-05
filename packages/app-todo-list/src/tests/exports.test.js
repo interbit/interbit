@@ -9,7 +9,7 @@ describe('module exports expected API', () => {
     assert.ok(api.publicCovenant.reducer)
   })
 
-  it('manifestCovenant', () => {
+  it('privateCovenant', () => {
     assert.ok(api.privateCovenant)
     assert.ok(api.privateCovenant.actionCreators)
     assert.ok(api.privateCovenant.actionTypes)

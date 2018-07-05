@@ -52,7 +52,7 @@ issues:
 - low transaction rate imposed by proof-of-work consensus
 - unified state managed by a single point in the network
 
-Proof-of-work consensus (or _PoC_) involves each _mining_ node in the
+Proof-of-work consensus (or _PoW_) involves each _mining_ node in the
 network performing computation-intensive calculations that take a
 notable amount of time to perform, but a negligible amount of time to
 verify. New blocks are added to the blockchain only after proof-of-work
@@ -66,29 +66,35 @@ node.
 
 Interbit blockchains use a consensus algorithm called
 link:https://en.wikipedia.org/wiki/Proof-of-authority[Proof of
-Authority] (or _PoA_). When a new block is to be added to the
-blockchain, it contains a series of actions required to update the
-blockchain's state. The new block is then propagated to all of the other
-nodes, which act as _validators_. Each validator node has the authority
-to accept or deny the new block. To do so, each validator node executes
-the smart contract, evaluating each of the new block's actions.  PoA
-solves both kinds of performance issues that traditional blockchains
-suffer; there is no computation-intensive mining and multiple nodes
-participate in block validation.
+Authority] (or _PoA_). When a node in an Interbit blockchain network
+wants to change the state, it sends a list of one or more actions to the
+_validator_ node (or _block master_). The validator node has the
+authority to validate the actions and create new blocks. If, when the
+validator's execution of the blockchain's smart contract succeeds, a new
+block is created containing the list of actions. This block is
+propagated to all participating nodes, which execute the actions and
+update their state, achieving consensus. If the smart contract execution
+should fail for any reason, the validator node does not create a new
+block, and the state remains unchanged.
 
-PoA consensus does impose some processing overhead, as proposed changes
-to the blockchain must propagate to the validator nodes, the smart
-contract must be executed, in order to reach consensus. However,
-consensus is isolated to the participating blockchains, so the
-performance concerns can easily be distributed by using multiple
-blockchains that are tightly constrained to the data and processing that
-they manage, and reaching consensus is limited only to network
-throughput and smart contract processing (typically, not
-computation-intensive).
+PoA solves both kinds of performance issues that traditional blockchains
+suffer; there is no computation-intensive mining and consensus is
+controlled by a single node.
+
+PoA consensus does impose some minor overhead, as proposed changes to
+the blockchain must be communicated to the validator node, the smart
+contract must be executed, and the resulting new block must be
+propagated to all participating nodes in order to reach consensus.
+
+Should a validator node get overloaded, the performance concerns can
+easily be distributed by using multiple blockchains that are tightly
+constrained to the data and processing that they manage, and reaching
+consensus is limited only to network throughput and smart contract
+processing (typically, not computation-intensive).
 
 In practice, Interbit applications can complete dispatched actions
 significantly faster than traditional blockchains, often an order of
-magnitude faster (or more).
+magnitude (or more) faster.
 
 
 == Security

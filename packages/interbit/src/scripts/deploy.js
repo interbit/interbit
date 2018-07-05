@@ -8,9 +8,11 @@ const deploy = async options => {
   const { keyPair, port, location, manifest, connect } = options
 
   const { cli } = await startInterbit(keyPair, { port })
+
   // TODO: Refactor deployCovenants to its own function and move options up into here
   // Rename connect to configure and invert it so it makes more sense. ATM this is backwards
-  // compatible with other uses of deploy throughout the code (Issue #39)
+  // compatible with other uses of deploy throughout the code
+
   await createChainsFromManifest(location, cli, manifest, options)
 
   if (!connect) {

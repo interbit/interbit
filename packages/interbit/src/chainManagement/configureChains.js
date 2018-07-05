@@ -1,5 +1,5 @@
 const {
-  manifestCovenant: {
+  rootCovenant: {
     actionCreators: { setManifest }
   },
   manifest: {

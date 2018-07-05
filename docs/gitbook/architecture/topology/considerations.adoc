@@ -75,12 +75,14 @@ state comes from an authorized node, and if so, creates a new block
 containing the list of actions. The block is then propagated to all
 participating nodes, and every node executes the list of actions via the
 smart contract to update their respective state in the same way, thereby
-achieving consensus.
+achieving consensus. If any particular action in the list should fail,
+it fails on all participating nodes, and the state remains unchanged.
+All other successful actions update the state as appropriate.
 
 If the smart contract execution should fail for any reason, it fails on
 all participating nodes (smart contract execution is always
-deterministic), and all nodes drop the block and their state remains
-unchanged.
+deterministic). The state is updated for all actions that successfully
+execute, and remains unchanged for any actions that fail.
 
 PoA solves both kinds of performance issues that traditional blockchains
 suffer; there is no computation-intensive mining and consensus is

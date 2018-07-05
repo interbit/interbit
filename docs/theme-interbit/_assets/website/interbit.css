@@ -69,6 +69,10 @@
        url('./fonts/RobotoMono-BoldItalic.svg#RobotoMono') format('svg'); /* Legacy iOS */
 }
 
+.markdown-section a { color: #1385e8; }
+.markdown-section a:visited { color: #0a4274; }
+.markdown-section a:hover, .markdown-section a:focus { color: #4585f0; }
+
 .page-inner {
   max-width: 850px;
   padding: 30px 50px 80px;
@@ -384,59 +388,59 @@ img.support-icon {
 }
 
 /*TIPS -INFO STYLE*/
-.info {
+.tips.info {
   border-left: 4px solid #42acf3;
   background-color: #eff5ff;
 }
 
-.info p:first-child {
+.tips.info p:first-child {
   color: #42acf3;
 }
 
-.info span:not(.token) {
+.tips.info span:not(.token) {
   content: url('../../assets/img/info.png');
 }
 
 
 /*TIPS -WARNING STYLE*/
-.warning {
+.tips.warning {
   border-left: 4px solid #f0ad4e;
   background-color: #fcf8f2;
 }
 
-.warning p:first-child {
+.tips.warning p:first-child {
   color: #f0ad4e;
 }
 
-.warning span {
+.tips.warning span {
   content: url('../../assets/img/warning.png');
 }
 
 /*TIPS -WARNING STYLE*/
-.danger {
+.tips.danger {
   border-left: 4px solid #d9534f;
   background-color: #fdf7f7;
 }
 
-.danger p:first-child {
+.tips.danger p:first-child {
   color: #d9534f;
 }
 
-.danger span {
+.tips.danger span {
   content: url('../../assets/img/danger.png');
 }
 
 /*TIPS -WARNING STYLE*/
-.success {
+.tips.success {
   border-left: 4px solid #50af51;
   background-color: #f3f8f3;
 }
 
-.success p:first-child {
+.tips.success p:first-child {
   color: #50af51;
 }
 
-.success span {
+.tips.success span {
   content: url('../../assets/img/success.png');
 }
 
@@ -494,9 +498,9 @@ img.support-icon {
 /* caution */
 
 .admonitionblock.caution {
-  border-color: rgba(246, 166, 35, 0.2);
-  border-left-color: rgba(246, 166, 35, 1);
-  background-color: rgba(246, 166, 35, 0.02);
+  border-color: rgba(243, 201, 76, 0.2);
+  border-left-color: rgba(243, 201, 76, 1);
+  background-color: rgba(243, 201, 76, 0.2);
 }
 
 .admonitionblock.caution td.icon:before {
@@ -509,9 +513,10 @@ img.support-icon {
 /* important */
 
 .admonitionblock.important {
-  border-color: rgba(217, 83, 79, 0.2);
-  border-left-color: rgba(217, 83, 79, 1);
-  background-color: rgba(217, 83, 79, 0.02);
+  border-color: rgba(235, 87, 87, 0.2);
+  border-left-color: rgba(235, 87, 87, 1);
+  background-color: rgba(235, 87, 87, 0.03);
+  background-size: 16 16;
 }
 
 .admonitionblock.important td.icon:before {
@@ -521,9 +526,9 @@ img.support-icon {
 /* note */
 
 .admonitionblock.note {
-  border-color: rgba(31, 152, 222, 0.2);
-  border-left-color: rgba(31, 152, 222, 1);
-  background-color: rgba(31, 152, 222, 0.02);
+  border-color: rgba(19, 133, 232, 0.2);
+  border-left-color: rgba(19, 133, 232, 1);
+  background-color: rgba(19, 133, 232, 0.03);
 }
 
 .admonitionblock.note td.icon:before {
@@ -533,9 +538,9 @@ img.support-icon {
 /* tip */
 
 .admonitionblock.tip {
-  border-color: rgba(31, 152, 222, 0.2);
-  border-left-color: rgba(31, 152, 222, 1);
-  background-color: rgba(31, 152, 222, 0.02);
+  border-color: rgba(19, 133, 232, 0.2);
+  border-left-color: rgba(19, 133, 232, 1);
+  background-color: rgba(19, 133, 232, 0.06);
 }
 
 .admonitionblock.tip td.icon:before {
@@ -545,9 +550,9 @@ img.support-icon {
 /* warning */
 
 .admonitionblock.warning {
-  border-color: rgba(217, 83, 79, 0.2);
-  border-left-color: rgba(217, 83, 79, 1);
-  background-color: rgba(217, 83, 79, 0.02);
+  border-color: rgba(235, 87, 87, 0.2);
+  border-left-color: rgba(235, 87, 87, 1);
+  background-color: rgba(235, 87, 87, 0.1);
 }
 
 .admonitionblock.warning td.icon:before {
@@ -587,15 +592,15 @@ code.exercise-code span {
 }
 
 /*
-Name:       Base16 Atelier Sulphurpool Light
-Author:     Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/sulphurpool)
-Prism template by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/prism/)
-Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
+ * PrismJS custom theme, mixing Atelier Sulphurpool Light and GHColors
 */
 code[class*="language-"],
-pre[class*="language-"] {
+pre[class*="language-"],
+.markdown-section pre,
+.markdown-section code {
   font-family: RobotoMono, Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: normal;
   line-height: 1.375;
   direction: ltr;
   text-align: left;
@@ -609,20 +614,22 @@ pre[class*="language-"] {
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
-  background: #f5f5f5;
-  color: #5e6687;
+  background: rgba(0, 0, 0, 0.05);
+  color: #393a34;
+  text-shadow: none;
+}
+
+pre > code,
+.markdown-section pre > code {
+  background: transparent;
+  font-size: 14px;
 }
 
 pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
-code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
-  text-shadow: none;
-  background: #dfe2f1;
-}
-
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection,
 pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
 code[class*="language-"]::selection, code[class*="language-"] ::selection {
-  text-shadow: none;
-  background: #dfe2f1;
+  background: #1385e8;
 }
 
 /* Code blocks */
@@ -642,98 +649,59 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #898ea4;
+  color: #998;
+  font-style: italic;
 }
 
-.token.punctuation {
-  color: #5e6687;
+.token.punctuation,
+.token.operator {
+  color: #393a34;
 }
 
 .token.namespace {
   opacity: .7;
 }
 
-.token.operator,
-.token.boolean,
-.token.number {
-  color: #c76b29;
-}
-
-.token.property {
-  color: #c08b30;
-}
-
-.token.tag {
-  color: #3d8fd1;
-}
-
-.token.string {
-  color: #22a2c9;
-}
-
-.token.selector {
-  color: #6679cc;
-}
-
-.token.attr-name {
-  color: #c76b29;
-}
-
 .token.entity,
 .token.url,
-.language-css .token.string,
-.style .token.string {
-  color: #22a2c9;
-}
-
-.token.attr-value,
-.token.keyword,
-.token.control,
-.token.directive,
-.token.unit {
-  color: #ac9739;
-}
-
-.token.statement,
+.token.symbol,
+.token.number,
+.token.boolean,
+.token.variable,
+.token.constant,
+.token.property,
 .token.regex,
-.token.atrule {
-  color: #22a2c9;
-}
-
-.token.placeholder,
-.token.variable {
-  color: #3d8fd1;
-}
-
-.token.deleted {
-  text-decoration: line-through;
-}
-
 .token.inserted {
-  border-bottom: 1px dotted #202746;
-  text-decoration: none;
+  color: #36acaa;
 }
 
-.token.italic {
-  font-style: italic;
+.token.atrule,
+.token.keyword,
+.token.attr-name,
+.language-autohotkey .token.selector {
+  color: #00a4db;
+}
+
+.token.function,
+.token.deleted,
+.language-autohotkey .token.tag {
+  color: #9a050f;
+}
+
+.token.tag,
+.token.selector,
+.language-autohotkey .token.keyword {
+  color: #00009f;
 }
 
 .token.important,
+.token.function,
 .token.bold {
   font-weight: bold;
 }
 
-.token.important {
-  color: #c94922;
-}
-
-.token.entity {
-  cursor: help;
-}
-
-pre > code.highlight {
-  outline: 0.4em solid #c94922;
-  outline-offset: .4em;
+.token.italic {
+  font-style: italic;
 }
 
 /* overrides color-values for the Line Numbers plugin
@@ -756,6 +724,11 @@ pre > code.highlight {
   background: linear-gradient(to right, rgba(107, 115, 148, 0.2) 70%, rgba(107, 115, 148, 0));
 }
 
+pre > code.highlight {
+  outline: 0.4em solid #c94922;
+  outline-offset: .4em;
+}
+
 /*Override Exercise Plugin Styling*/
 
 .book .book-body .page-wrapper .page-inner .exercise {
@@ -776,18 +749,6 @@ pre > code.highlight {
 
 .hide-in-web {
   display: none;
-}
-
-.markdown-section code {
-  font-family: RobotoMono;
-  font-size: 14px;
-  font-weight: normal;
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.markdown-section pre > code {
-  font-weight: normal;
-  font-size: 14px;
 }
 
 /* Fancier ordered list styling ----------------------------------- */
@@ -898,9 +859,12 @@ pre > code.highlight {
   margin-bottom: 0.85em;
 }
 
-.markdown-section .ulist.tight ul li ul,
-.markdown-section .ulist.tight ul li p {
-  margin-bottom: 0;
+.markdown-section .ulist ul li p {
+  margin: 0;
+}
+
+.markdown-section .ulist ul li p + p {
+  margin-top: 1em;
 }
 
 /* Hide the prev/next page navigation arrows */
@@ -927,8 +891,16 @@ a.navigation {
   text-align: left;
 }
 
-.markdown-section table thead tr {
-  background: #e8f5f4;
+.markdown-section table thead tr,
+.markdown-section .admonitionblock .content table thead tr {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.markdown-section table td,
+.markdown-section table th,
+.markdown-section .admonitionblock .content table td,
+.markdown-section .admonitionblock .content table th {
+  border: 1px solid rgba(0, 0, 0, 0.09);
 }
 
 .markdown-section table.frame-h th,
@@ -946,5 +918,55 @@ a.navigation {
   width: 40%;
   margin-left: 1em;
   padding: 1em 1em 0.5em 1em;
-  background: #eee;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 0.5em;
+}
+
+.markdown-section hr {
+  height: 1px;
+  background: transparent;
+  padding: 0;
+  margin: 0 0 0 .85em 0;
+  overflow: visible;
+  border: 0 none;
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.markdown-section .title {
+  font-weight: bold;
+}
+
+.markdown-section blockquote p { margin: 0; }
+.markdown-section blockquote p + p { margin-top: 1em; }
+.markdown-section blockquote + .attribution {
+  margin-top: -0.85em;
+  margin-bottom: 0.85em;
+}
+
+.markdown-section .quoteblock.quote blockquote {
+  border: 0 none;
+  padding: 0;
+  color: #555;
+}
+
+.markdown-section .quoteblock.quote blockquote:before {
+  content: "\201c";
+  font-family: serif;
+  font-size: 3em;
+  font-weight: bold;
+  line-height: 1;
+  color: rgba(243, 201, 76, 1);
+  float: left;
+  padding-right: 0.25em;
+}
+
+.markdown-section .exampleblock {
+  padding: 1em 1.25em;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 1em;
+}
+
+.markdown-section .exampleblock *:last-child,
+.markdown-section .exampleblock *:last-child p {
+  margin-bottom: 0
 }

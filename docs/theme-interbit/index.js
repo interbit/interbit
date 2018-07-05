@@ -1,5 +1,5 @@
 module.exports = {
-    website: {
+    book: {
         assets: './_assets/website/',
         js: [
             'interbit.js'

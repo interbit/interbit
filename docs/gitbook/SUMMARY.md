@@ -29,7 +29,9 @@
 
 * [Architecture](/architecture/README.md)
   * [Chain Joins: How They Work](/architecture/chain_joins.adoc)
-  * [Chain Architecture](/architecture/chain-architecture.md)
+  * [Chain Topology](/architecture/topology/README.adoc)
+    * [Key Considerations](/architecture/topology/considerations.adoc)
+    * [Topology Patterns](/architecture/topology/patterns.adoc)
   * [Permission Model](/architecture/permission_model.adoc)
 
 * [Reference](reference/README.md)

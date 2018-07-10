@@ -10,6 +10,9 @@
     "dev": "webpack --progress --colors --watch --env dev",
     "test": "mocha \"src/tests/**/*.test.js\""
   },
+  "files": [
+    "src/rootCovenant"
+  ],
   "author": "BTL GROUP LTD",
   "license": "MIT",
   "devDependencies": {

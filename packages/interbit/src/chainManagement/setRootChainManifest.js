@@ -1,5 +1,5 @@
 const {
-  manifestCovenant: { actionCreators },
+  rootCovenant: { actionCreators },
   manifest: {
     selectors: { getChainIdByAlias }
   },

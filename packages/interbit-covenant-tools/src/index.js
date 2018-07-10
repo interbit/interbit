@@ -4,11 +4,7 @@ const { createAction } = require('interbit-covenant-utils')
 const coreCovenant = require('./coreCovenant')
 const constants = require('./constants')
 
-const {
-  manifestCovenant,
-  rootCovenant,
-  rootStateSelectors
-} = require('./rootCovenant')
+const { rootStateSelectors, ...rest } = require('./rootCovenant')
 
 const cAuthConsumerCovenant = require('./cAuthConsumerCovenant')
 const config = require('./config')
@@ -27,8 +23,7 @@ module.exports = {
   constants,
   coreCovenant,
   manifest,
-  manifestCovenant,
-  rootCovenant,
+  rootCovenant: rest,
   rootStateSelectors,
   cAuthConsumerCovenant,
   mergeCovenants,

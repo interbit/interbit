@@ -3,7 +3,7 @@ const should = require('should')
 const {
   selectors: { pendingActionsForChain }
 } = require('../../coreCovenant')
-const { rootCovenant } = require('../../rootCovenant')
+const rootCovenant = require('../../rootCovenant')
 const defaultManifest = require('../testManifest.json')
 
 describe('rootCovenant', () => {

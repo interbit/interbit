@@ -34,17 +34,10 @@ describe('module exports expected API', () => {
     assert.ok(api.coreCovenant.selectors.config)
   })
 
-  it('manifestCovenant', () => {
-    assert.ok(api.manifestCovenant)
-    assert.ok(api.manifestCovenant.actionCreators)
-    assert.ok(api.manifestCovenant.actionTypes)
-    assert.ok(api.manifestCovenant.initialState)
-    assert.ok(api.manifestCovenant.reducer)
-  })
-
   it('rootCovenant', () => {
     assert.ok(api.rootCovenant)
     assert.ok(api.rootCovenant.actionCreators)
+    assert.ok(api.rootCovenant.actionCreators.setManifest)
     assert.ok(api.rootCovenant.actionTypes)
     assert.ok(api.rootCovenant.initialState)
     assert.ok(api.rootCovenant.reducer)

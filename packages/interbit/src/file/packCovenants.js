@@ -44,7 +44,7 @@ const packCovenant = async (cli, location, covenantFileLocation) => {
   }.tgz`
 
   const hash = await cli.deployCovenant(covenantFileLocation)
-  fs.moveSync(packedFilename, `${location}/covenants/${hash}.tgz`)
+  await fs.move(packedFilename, `${location}/covenants/${hash}.tgz`)
 
   return {
     hash,

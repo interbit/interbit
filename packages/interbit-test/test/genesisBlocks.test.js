@@ -59,7 +59,8 @@ describe('chain sponsorship', () => {
     ],
     acl: {
       actionPermissions: {
-        '*': ['root', `chain-${sponsorChainId}`]
+        '*': ['root', `chain-${sponsorChainId}`],
+        '@@interbit/REMOVE_JOIN_CONFIG': [`chain-${sponsorChainId}`]
       },
       roles: {
         root: [blockMasterPublicKey, myPublicKey],

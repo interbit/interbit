@@ -78,7 +78,8 @@ describe('interbit', () => {
         setHeavyBlockInterval: 'function',
         waitForState: 'function',
         chainId: 'string',
-        keyPair: 'object'
+        keyPair: 'object',
+        blockSubscribe: 'function'
       }
 
       verifyApi(hypervisor, expectedHypervisorApi)
@@ -110,8 +111,6 @@ describe('interbit', () => {
           createGenesisBlock: 'function',
           getState: 'function',
           subscribe: 'function',
-          kvPut: 'function',
-          kvGet: 'function',
           sendChainToSponsor: 'function',
           deployCovenant: 'function',
           applyCovenant: 'function',
@@ -120,7 +119,7 @@ describe('interbit', () => {
           shutdown: 'function',
           destroyChain: 'function',
           stats: 'function',
-          test: 'function'
+          kvGetKeys: 'function'
         }
 
         verifyApi(cli, expectedCliApi)
@@ -142,7 +141,9 @@ describe('interbit', () => {
             dispatch: 'function',
             getState: 'function',
             getCurrentBlock: 'function',
-            subscribe: 'function'
+            subscribe: 'function',
+            blockSubscribe: 'function',
+            getCachedBlocks: 'function'
           }
 
           verifyApi(chain, expectedChainApi)

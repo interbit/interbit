@@ -9,6 +9,10 @@ const storageConfig = {
   storeName: 'interbit_ui_tools'
 }
 
-const getDataStore = async () => localforage.createInstance(storageConfig)
+const getDataStore = async () => {
+  const datastore = await localforage.createInstance(storageConfig)
+  await datastore.ready()
+  return datastore
+}
 
 module.exports = { getDataStore, DATASTORE_KEYS }

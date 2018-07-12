@@ -26,7 +26,11 @@ function* loadPrivateChain({
     })
 
     const privateChainKey = getPrivateChainKey(publicChainId, chainAlias)
-    const savedChainId = yield call(localDataStore.getItem, privateChainKey)
+    const savedChainId = yield call(
+      getChainIdFromLocalDataStore,
+      localDataStore,
+      privateChainKey
+    )
 
     if (
       shouldLoadPrivateChainFromOtherDevice({
@@ -42,7 +46,12 @@ function* loadPrivateChain({
       })
 
       if (privateChain) {
-        yield call(localDataStore.setItem, privateChainKey, privateChainId)
+        yield call(
+          saveChainIdToLocalDataStore,
+          localDataStore,
+          privateChainKey,
+          privateChainId
+        )
         chainId = privateChainId
       }
     }
@@ -78,7 +87,12 @@ function* loadPrivateChain({
         chainId: newChainId
       })
 
-      yield call(localDataStore.setItem, privateChainKey, newChainId)
+      yield call(
+        saveChainIdToLocalDataStore,
+        localDataStore,
+        privateChainKey,
+        newChainId
+      )
       chainId = newChainId
     }
 
@@ -114,6 +128,17 @@ const shouldLoadPrivateChainFromLocalDataStore = ({ savedChainId }) =>
 
 const getPrivateChainKey = (parentChainId, chainAlias) =>
   `chainId-${chainAlias}-${parentChainId}`
+
+const getChainIdFromLocalDataStore = async (localDataStore, chainKey) =>
+  localDataStore.getItem(chainKey)
+
+const saveChainIdToLocalDataStore = async (
+  localDataStore,
+  chainKey,
+  chainId
+) => {
+  localDataStore.setItem(chainKey, chainId)
+}
 
 function* sponsorChain({
   interbit,

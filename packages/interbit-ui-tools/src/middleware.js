@@ -100,6 +100,11 @@ const subscribeToChain = (store, chainAlias, chain) => {
   chain.subscribe(() => {
     const appState = chain.getState()
     store.dispatch(actionCreators.chainUpdated(chainAlias, appState))
+  })
+
+  chain.blockSubscribe(() => {
+    const currentBlock = chain.getCurrentBlock()
+    store.dispatch(actionCreators.chainNewBlock(chainAlias, currentBlock))
 
     if (firstBlock) {
       store.dispatch(actionCreators.chainBlocking(chainAlias))

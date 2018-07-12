@@ -9,7 +9,7 @@
   "scripts": {
     "build": "cross-env-shell lerna run --scope $APP_NAME build",
     "build:modules": "lerna run --scope interbit-* build",
-    "postinstall": "lerna bootstrap --hoist --parallel",
+    "postinstall": "lerna bootstrap --hoist --parallel && npm run build:modules",
     "heroku-postbuild": "npm run build:modules && npm run build",
     "start": "cross-env-shell lerna run --scope $APP_NAME serve --stream",
     "test": "npm run lint && lerna run --parallel test -- -- --coverage",

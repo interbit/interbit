@@ -1,6 +1,6 @@
 {
   "name": "platform-deploy",
-  "version": "0.4.32",
+  "version": "0.4.33",
   "description": "Boots a platform node",
   "main": "src/index.js",
   "private": true,
@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "cross-env": "^5.1.4",
-    "interbit-cli": "0.4.32",
+    "interbit-cli": "0.4.33",
     "lodash": "^4.17.5"
   },
   "author": "BTL GROUP LTD",

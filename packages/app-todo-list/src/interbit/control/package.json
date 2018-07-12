@@ -9,7 +9,7 @@
   "author": "BTL GROUP LTD",
   "license": "MIT",
   "dependencies": {
-    "interbit-covenant-tools": "0.4.31",
+    "interbit-covenant-tools": "0.4.33",
     "seamless-immutable": "^7.1.2"
   }
 }

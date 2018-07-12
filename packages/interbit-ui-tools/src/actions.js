@@ -13,6 +13,7 @@ const actionTypes = {
   SPONSOR_CHAIN_SAGA: `${ACTION_PREFIX}/SPONSOR_CHAIN_SAGA`,
 
   CHAIN_UPDATED: `${ACTION_PREFIX}/CHAIN_UPDATED`,
+  CHAIN_NEW_BLOCK: `${ACTION_PREFIX}/CHAIN_NEW_BLOCK`,
   CHAIN_DISPATCH: `${ACTION_PREFIX}/CHAIN_DISPATCH`,
   CHAIN_SPONSORING: `${ACTION_PREFIX}/CHAIN_SPONSORING`,
   CHAIN_LOADING: `${ACTION_PREFIX}/CHAIN_LOADING`,
@@ -58,6 +59,14 @@ const actionCreators = {
     payload: {
       chainAlias,
       state
+    }
+  }),
+
+  chainNewBlock: (chainAlias, block) => ({
+    type: actionTypes.CHAIN_NEW_BLOCK,
+    payload: {
+      chainAlias,
+      block
     }
   }),
 

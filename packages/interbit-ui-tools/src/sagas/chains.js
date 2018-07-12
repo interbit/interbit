@@ -8,6 +8,7 @@ const { LOG_PREFIX } = require('../constants')
 function* loadPrivateChain({
   interbit,
   cli,
+  localDataStore,
   publicKey,
   publicChainAlias,
   chainAlias,
@@ -24,8 +25,12 @@ function* loadPrivateChain({
       publicChainAlias
     })
 
-    const privateChainKey = kvPrivateChainKey(publicChainId, chainAlias)
-    const savedChainId = yield call(cli.kvGet, privateChainKey)
+    const privateChainKey = getPrivateChainKey(publicChainId, chainAlias)
+    const savedChainId = yield call(
+      getChainIdFromLocalDataStore,
+      localDataStore,
+      privateChainKey
+    )
 
     if (
       shouldLoadPrivateChainFromOtherDevice({
@@ -41,14 +46,19 @@ function* loadPrivateChain({
       })
 
       if (privateChain) {
-        yield call(cli.kvPut, privateChainKey, privateChainId)
+        yield call(
+          saveChainIdToLocalDataStore,
+          localDataStore,
+          privateChainKey,
+          privateChainId
+        )
         chainId = privateChainId
       }
     }
 
     if (
       !privateChain &&
-      shouldLoadPrivateChainFromLocalStorage({ savedChainId })
+      shouldLoadPrivateChainFromLocalDataStore({ savedChainId })
     ) {
       privateChain = yield call(tryLoadChain, {
         cli,
@@ -77,7 +87,12 @@ function* loadPrivateChain({
         chainId: newChainId
       })
 
-      yield call(cli.kvPut, privateChainKey, newChainId)
+      yield call(
+        saveChainIdToLocalDataStore,
+        localDataStore,
+        privateChainKey,
+        newChainId
+      )
       chainId = newChainId
     }
 
@@ -108,11 +123,22 @@ const shouldLoadPrivateChainFromOtherDevice = ({
   privateChainId &&
   savedChainId !== privateChainId
 
-const shouldLoadPrivateChainFromLocalStorage = ({ savedChainId }) =>
+const shouldLoadPrivateChainFromLocalDataStore = ({ savedChainId }) =>
   !!savedChainId
 
-const kvPrivateChainKey = (parentChainId, chainAlias) =>
+const getPrivateChainKey = (parentChainId, chainAlias) =>
   `chainId-${chainAlias}-${parentChainId}`
+
+const getChainIdFromLocalDataStore = async (localDataStore, chainKey) =>
+  localDataStore.getItem(chainKey)
+
+const saveChainIdToLocalDataStore = async (
+  localDataStore,
+  chainKey,
+  chainId
+) => {
+  localDataStore.setItem(chainKey, chainId)
+}
 
 function* sponsorChain({
   interbit,

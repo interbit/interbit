@@ -1,4 +1,5 @@
 const { LOG_PREFIX } = require('./constants')
+const { getDataStore, DATASTORE_KEYS } = require('./localDataStorage')
 
 const isAvailable = () => !!(window && window.interbit)
 
@@ -9,27 +10,20 @@ const isConnected = () =>
     window.interbit.middleware.cli
   )
 
-const kvPrivateKey = 'interbit-keyPair-privateKey'
-const kvPublicKey = 'interbit-keyPair-publicKey'
-
 const createContext = async () => {
   // TODO: Store keys securely for production
   // Interbit will generate new keys automatically for us
   // However, we need to use the same keys to access
   // our existing chains
   const interbit = window.interbit
-  const localStorage = window.localStorage
 
-  let keyPair
-  const publicKey = localStorage[kvPublicKey]
-  const privateKey = localStorage[kvPrivateKey]
-  if (publicKey && privateKey) {
-    keyPair = { publicKey, privateKey }
-  } else {
+  const localDataStore = await getDataStore()
+
+  let keyPair = await localDataStore.getItem(DATASTORE_KEYS.KEY_PAIR)
+  if (!keyPair) {
     console.log(`${LOG_PREFIX}: Generating key pair`)
     keyPair = await interbit.generateKeyPair()
-    localStorage[kvPublicKey] = keyPair.publicKey
-    localStorage[kvPrivateKey] = keyPair.privateKey
+    await localDataStore.setItem(DATASTORE_KEYS.KEY_PAIR, keyPair)
   }
 
   console.log(`${LOG_PREFIX}: Starting interbit hypervisor`)
@@ -42,7 +36,8 @@ const createContext = async () => {
     hypervisor,
     cli,
     publicKey: keyPair.publicKey,
-    chains: {}
+    chains: {},
+    localDataStore
   }
 }
 

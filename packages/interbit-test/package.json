@@ -9,7 +9,7 @@
   "author": "BTL GROUP LTD",
   "license": "MIT",
   "dependencies": {
-    "interbit-core": "0.13.0"
+    "interbit-core": "0.14.0"
   },
   "devDependencies": {
     "assert": "^1.4.1",

@@ -58,11 +58,14 @@ function* privateChainSaga(action) {
     action.payload || {}
 
   try {
-    const { interbit, cli, publicKey } = yield call(interbitContext)
+    const { interbit, cli, localDataStore, publicKey } = yield call(
+      interbitContext
+    )
 
     yield call(loadPrivateChain, {
       interbit,
       cli,
+      localDataStore,
       publicKey,
       publicChainAlias,
       chainAlias: privateChainAlias,

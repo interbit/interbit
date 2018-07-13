@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.38"></a>
+## [0.4.38](https://github.com/interbit/interbit/compare/v0.4.37...v0.4.38) (2018-07-13)
+
+
+
+
+**Note:** Version bump only for package interbit-cli
+
 <a name="0.4.36"></a>
 ## [0.4.36](https://github.com/interbit/interbit/compare/v0.4.35...v0.4.36) (2018-07-13)
 

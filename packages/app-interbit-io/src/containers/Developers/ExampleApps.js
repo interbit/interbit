@@ -41,13 +41,14 @@ class DevelopersExampleApps extends Component {
                 title={a.title}
                 image={a.image}
                 className="image-sm">
-                <p>
+                {/* <p>
                   <a href={a.githubUrl}>View Source on GitHub</a>
-                </p>
+                </p> */}
                 <p>{a.text}</p>
                 <Divider />
                 {/* <IconButton to={a.appUrl} text="Open App" /> */}
-                <IconButton to={a.storeUrl} text="View in Store" />
+                {/* <IconButton to={a.storeUrl} text="View in Store" /> */}
+                <IconButton to={a.githubUrl} text="View Source" />
               </ContentBar>
             ))}
           </Col>

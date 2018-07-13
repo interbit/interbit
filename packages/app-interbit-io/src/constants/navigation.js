@@ -12,15 +12,15 @@ export const footerNav = [
       {
         text: 'Interbit for Business',
         to: paths.PLATFORM_INTERBIT_FOR_BUSINESS
-      },
-      {
-        text: 'Product Roadmap',
-        to: paths.PLATFORM_ROADMAP
-      },
-      {
-        text: 'Pricing',
-        to: paths.PRICING
       }
+      // {
+      //   text: 'Product Roadmap',
+      //   to: paths.PLATFORM_ROADMAP
+      // },
+      // {
+      //   text: 'Pricing',
+      //   to: paths.PRICING
+      // }
     ]
   },
   {
@@ -56,19 +56,19 @@ export const footerNav = [
       }
     ]
   },
-  {
-    title: 'Platform',
-    items: [
-      {
-        text: 'Accounts',
-        to: urls.APP_ACCOUNT
-      },
-      {
-        text: 'Store',
-        to: urls.APP_STORE
-      }
-    ]
-  },
+  // {
+  //   title: 'Platform',
+  //   items: [
+  //     {
+  //       text: 'Accounts',
+  //       to: urls.APP_ACCOUNT
+  //     },
+  //     {
+  //       text: 'Store',
+  //       to: urls.APP_STORE
+  //     }
+  //   ]
+  // },
   {
     title: 'Company',
     items: [
@@ -117,19 +117,19 @@ export const headerNav = [
     text: 'Developers',
     to: paths.DEVELOPERS,
     eventKey: 'developers'
-  },
-  {
-    text: 'Pricing',
-    to: paths.PRICING,
-    eventKey: 'pricing'
   }
+  // {
+  //   text: 'Pricing',
+  //   to: paths.PRICING,
+  //   eventKey: 'pricing'
+  // }
 ]
 
 export const headerRightNav = [
-  {
-    text: 'Go to Accounts',
-    to: urls.APP_ACCOUNT,
-    eventKey: 'accounts',
-    className: 'accounts-link'
-  }
+  // {
+  //   text: 'Go to Accounts',
+  //   to: urls.APP_ACCOUNT,
+  //   eventKey: 'accounts',
+  //   className: 'accounts-link'
+  // }
 ]

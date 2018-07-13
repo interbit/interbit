@@ -27,7 +27,7 @@ export default {
     image: iconExampleApp,
     content:
       'Explore the code and resources for existing applications demonstrating how different Interbit features are implemented.',
-    to: constants.urls.GITHUB_IB
+    to: constants.paths.DEVELOPERS_EXAMPLES
   },
   chainArchitecture: {
     title: 'Chain Architecture',

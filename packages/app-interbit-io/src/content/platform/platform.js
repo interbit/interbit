@@ -209,11 +209,11 @@ Control access to individual chains, and the information on each.`,
         {
           to: constants.urls.GITHUB_IB,
           text: 'View Source for \u201CCreate Interbit App\u201D'
-        },
-        {
-          to: constants.urls.APP_STORE_CREATE_IB_APP,
-          text: 'View \u201CCreate Interbit App\u201D in Store'
         }
+        // {
+        //   to: constants.urls.APP_STORE_CREATE_IB_APP,
+        //   text: 'View \u201CCreate Interbit App\u201D in Store'
+        // }
       ],
       image: platformAppCore,
       cards: [

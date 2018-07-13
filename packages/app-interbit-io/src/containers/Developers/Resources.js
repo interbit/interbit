@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { Markdown, LinkBar, Divider } from 'interbit-ui-components'
+import { Markdown } from 'interbit-ui-components'
 
 // import urls from '../../constants/urls'
 import layout from '../../constants/layout'
@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
 class DevelopersResources extends Component {
   render() {
     // eslint-disable-next-line react/prop-types
-    const { resources, linkBarContent } = this.props
+    const { resources } = this.props
     const colLayout = layout.colLayout.developers
 
     return (
@@ -26,7 +26,7 @@ class DevelopersResources extends Component {
           </Col>
         </Row>
 
-        <div className="sections">
+        <div className="sections ibweb-mg-xx-lg">
           {resources.sections.map(s => (
             <Row key={s.title} className="ibweb-mg-md">
               <Col {...colLayout}>
@@ -45,15 +45,6 @@ class DevelopersResources extends Component {
             </Row>
           ))}
         </div>
-
-        <Divider />
-
-        <Row className="ibweb-mg-xx-lg">
-          <Col {...colLayout}>
-            <LinkBar {...linkBarContent.gitHub} />
-            {/* <LinkBarSlack to={urls.SUPPORT_SLACK} /> */}
-          </Col>
-        </Row>
       </div>
     )
   }

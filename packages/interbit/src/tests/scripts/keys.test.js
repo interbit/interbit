@@ -26,7 +26,7 @@ describe('keys', () => {
 
     should.ok(file.publicKey)
     should.ok(file.privateKey)
-  })
+  }).timeout(5000)
 
   it('throws when filename already exists', async () => {
     await fs.writeFile(filepath, 'test')

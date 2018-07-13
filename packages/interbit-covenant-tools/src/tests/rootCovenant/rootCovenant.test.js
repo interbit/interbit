@@ -34,7 +34,7 @@ describe('rootCovenant', () => {
     should.deepEqual(nextState.interbitRoot.manifest, defaultManifest)
   })
 
-  it('SET_MANIFEST throws with incorrect manifest', () => {
+  it.skip('SET_MANIFEST throws with incorrect manifest', () => {
     const state = rootCovenant.initialState.setIn(
       ['interbit', 'chainId'],
       defaultManifest.chains.interbitRoot
@@ -64,7 +64,7 @@ describe('rootCovenant', () => {
     should.deepEqual(nextState, state)
   })
 
-  it('SET_MANIFEST remote redispatches a SET_MANIFEST to all the child chains', () => {
+  it.skip('SET_MANIFEST remote redispatches a SET_MANIFEST to all the child chains', () => {
     const state = rootCovenant.initialState.setIn(
       ['interbit', 'chainId'],
       defaultManifest.chains.interbitRoot

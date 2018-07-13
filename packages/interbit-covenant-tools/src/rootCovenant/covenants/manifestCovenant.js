@@ -1,6 +1,6 @@
 const Immutable = require('seamless-immutable')
 const hashObject = require('../hash')
-const { remoteRedispatch } = require('../../coreCovenant')
+// const { remoteRedispatch } = require('../../coreCovenant')
 const { PATHS } = require('../constants')
 
 const prefix = '@@MANIFEST'
@@ -21,7 +21,7 @@ const actionCreators = {
 const initialState = Immutable.from({}).setIn(PATHS.MANIFEST, {})
 
 const reducer = (state = initialState, action) => {
-  let nextState = state
+  const nextState = state
 
   switch (action.type) {
     case actionTypes.SET_MANIFEST: {
@@ -35,20 +35,20 @@ const reducer = (state = initialState, action) => {
         return nextState
       }
 
-      const ownManifest = isRootChain
-        ? Object.values(manifest.manifest)[0]
-        : manifest
+      // const ownManifest = isRootChain
+      //   ? Object.values(manifest.manifest)[0]
+      //   : manifest
 
-      const isManifestOwn = ownManifest.chainId === state.interbit.chainId
-      if (!isManifestOwn) {
-        throw new Error('This chain is not a part of the manifest')
-      }
+      // const isManifestOwn = ownManifest.chainId === state.interbit.chainId
+      // if (!isManifestOwn) {
+      //   throw new Error('This chain is not a part of the manifest')
+      // }
 
-      if (!verifyManifestHash(ownManifest)) {
-        return nextState
-      }
+      // if (!verifyManifestHash(ownManifest)) {
+      //   return nextState
+      // }
 
-      nextState = redispatchManifest(state, ownManifest)
+      // nextState = redispatchManifest(state, ownManifest)
 
       return nextState.setIn(PATHS.MANIFEST, manifest)
     }
@@ -66,24 +66,24 @@ const verifyManifestHash = manifest => {
   return hash === manifest.hash
 }
 
-const redispatchManifest = (state, manifestTree) => {
-  let nextState = state
-  const childEntries = Object.entries(manifestTree.chains)
+// const redispatchManifest = (state, manifestTree) => {
+//   let nextState = state
+//   const childEntries = Object.entries(manifestTree.chains)
 
-  for (const [childAlias, childManifest] of childEntries) {
-    const manifest = {
-      [childAlias]: childManifest
-    }
-    const setManifestAction = actionCreators.setManifest(manifest)
-    nextState = remoteRedispatch(
-      nextState,
-      childManifest.chainId,
-      setManifestAction
-    )
-  }
+//   for (const [childAlias, childManifest] of childEntries) {
+//     const manifest = {
+//       [childAlias]: childManifest
+//     }
+//     const setManifestAction = actionCreators.setManifest(manifest)
+//     nextState = remoteRedispatch(
+//       nextState,
+//       childManifest.chainId,
+//       setManifestAction
+//     )
+//   }
 
-  return nextState
-}
+//   return nextState
+// }
 
 module.exports = {
   actionTypes,

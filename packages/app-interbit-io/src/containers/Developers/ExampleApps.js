@@ -6,11 +6,11 @@ import {
   IconButton,
   Markdown,
   LinkBar,
-  LinkBarSlack,
+  // LinkBarSlack,
   Divider
 } from 'interbit-ui-components'
 
-import urls from '../../constants/urls'
+// import urls from '../../constants/urls'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({
@@ -58,7 +58,7 @@ class DevelopersExampleApps extends Component {
         <Row>
           <Col {...colLayout}>
             <LinkBar {...linkBarContent.resources} />
-            <LinkBarSlack to={urls.SUPPORT_SLACK} />
+            {/* <LinkBarSlack to={urls.SUPPORT_SLACK} /> */}
           </Col>
         </Row>
       </div>

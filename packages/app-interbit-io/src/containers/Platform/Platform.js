@@ -154,7 +154,7 @@ class Platform extends Component {
                 />
               </Col>
             </Row>
-            <Row>
+            <Row className="ibweb-mg-xx-lg">
               {p.cards.map((c, i) => (
                 <Col md={6} lg={4} lgOffset={i % 2 === 0 ? 2 : 0} key={c.title}>
                   <Card {...c} className="sm" />
@@ -164,11 +164,11 @@ class Platform extends Component {
           </div>
         ))}
 
-        <Row className="ibweb-mg-xx-lg">
+        {/* <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
             <LinkBar {...linkBarContent.productRoadmap} />
           </Col>
-        </Row>
+        </Row> */}
       </div>
     )
   }

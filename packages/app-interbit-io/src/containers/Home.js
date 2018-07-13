@@ -52,7 +52,7 @@ class Home extends Component {
             </Col>
           ))}
         </Row>
-        <Row>
+        <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
             <ContentBox
               title={home.weDoBlockChain.title}
@@ -60,7 +60,7 @@ class Home extends Component {
             />
           </Col>
         </Row>
-        <Row className="ibweb-mg-md ibweb-mg-sm-scr-xs">
+        {/* <Row className="ibweb-mg-md ibweb-mg-sm-scr-xs">
           {home.cardsSection.cards.map((c, i) => (
             <Col key={c.title} md={6} lg={4} lgOffset={i % 2 === 0 ? 2 : 0}>
               <Card {...c} />
@@ -71,7 +71,7 @@ class Home extends Component {
           <Col {...colLayout}>
             <LinkBar {...linkBarContent.productRoadmap} />
           </Col>
-        </Row>
+        </Row> */}
       </div>
     )
   }

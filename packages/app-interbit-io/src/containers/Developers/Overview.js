@@ -6,10 +6,10 @@ import {
   ContentBar,
   Markdown,
   LinkBar,
-  LinkBarSlack,
+  // LinkBarSlack,
   Divider
 } from 'interbit-ui-components'
-import urls from '../../constants/urls'
+// import urls from '../../constants/urls'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({
@@ -76,19 +76,19 @@ class DevelopersOverview extends Component {
           </Col>
         </Row>
 
-        <Row>
+        {/* <Row>
           <Col {...colLayout}>
             <LinkBar {...linkBarContent.accountChain} className="blue" />
           </Col>
-        </Row>
+        </Row> */}
 
         <Divider />
 
         <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
             <LinkBar {...linkBarContent.platformFeatures} />
-            <LinkBar {...linkBarContent.productRoadmap} />
-            <LinkBarSlack to={urls.SUPPORT_SLACK} />
+            {/* <LinkBar {...linkBarContent.productRoadmap} /> */}
+            {/* <LinkBarSlack to={urls.SUPPORT_SLACK} /> */}
           </Col>
         </Row>
       </div>

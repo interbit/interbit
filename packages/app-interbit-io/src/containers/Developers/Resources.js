@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { Markdown, LinkBarSlack, Divider } from 'interbit-ui-components'
+import { Markdown, LinkBar, Divider } from 'interbit-ui-components'
 
-import urls from '../../constants/urls'
+// import urls from '../../constants/urls'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({
+  linkBarContent: state.content.linkBars,
   ...state.content.developers
 })
 
 class DevelopersResources extends Component {
   render() {
     // eslint-disable-next-line react/prop-types
-    const { resources } = this.props
+    const { resources, linkBarContent } = this.props
     const colLayout = layout.colLayout.developers
 
     return (
@@ -49,7 +50,8 @@ class DevelopersResources extends Component {
 
         <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
-            <LinkBarSlack to={urls.SUPPORT_SLACK} />
+            <LinkBar {...linkBarContent.gitHub} />
+            {/* <LinkBarSlack to={urls.SUPPORT_SLACK} /> */}
           </Col>
         </Row>
       </div>

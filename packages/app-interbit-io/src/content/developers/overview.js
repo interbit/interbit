@@ -1,14 +1,14 @@
 import constants from '../../constants'
 
-import iconAccounts from '../../assets/icons/iconAccounts.svg'
+// import iconAccounts from '../../assets/icons/iconAccounts.svg'
 import iconBuild from '../../assets/icons/iconBuild.svg'
 import iconCreateIBApp from '../../assets/icons/iconCreateIBApp.png'
-import iconHosting from '../../assets/icons/iconHosting.svg'
+// import iconHosting from '../../assets/icons/iconHosting.svg'
 import iconIntegration from '../../assets/icons/iconIntegration.svg'
 import iconLightning from '../../assets/icons/iconLightning.svg'
 import iconManyChains from '../../assets/icons/iconManyChains.svg'
-import iconPayments from '../../assets/icons/iconPayments.svg'
-import iconStore from '../../assets/icons/iconStore.svg'
+// import iconPayments from '../../assets/icons/iconPayments.svg'
+// import iconStore from '../../assets/icons/iconStore.svg'
 
 export default {
   title: 'Overview',
@@ -127,71 +127,71 @@ Interbit enables you to use many blockchains, joined together, to build your app
             text: 'View Source on GitHub'
           }
         ]
-      },
-      {
-        title: 'Accounts',
-        image: iconAccounts,
-        content:
-          'Secure identity service with an easy-to-integrate Single Sign-On experience.',
-        callToActions: [
-          {
-            to: constants.urls.GITHUB_IB,
-            text: 'View Source on GitHub'
-          },
-          {
-            to: constants.urls.APP_ACCOUNT,
-            text: 'Open App'
-          }
-        ]
-      },
-      {
-        title: 'AccountKit',
-        image: iconAccounts,
-        content:
-          'Easily implement account creation and authentication functions within your app.',
-        callToActions: [
-          {
-            to: constants.urls.GITHUB_IB,
-            text: 'View Source on GitHub'
-          }
-        ]
-      },
-      {
-        title: 'Store',
-        image: iconStore,
-        content:
-          'A place to discover, promote, and distribute apps and application services.',
-        callToActions: [
-          {
-            to: constants.urls.APP_STORE,
-            text: 'Open App'
-          }
-        ]
-      },
-      {
-        title: 'Hosting',
-        image: iconHosting,
-        className: 'in-progress',
-        content: `Easy packaging and deployment of Interbit-powered apps. Get your project hosted within minutes.
-
-Coming Soon`
-      },
-      {
-        title: 'HostingKit',
-        image: iconHosting,
-        className: 'in-progress',
-        content: `Easily deploy projects to your host. HostingKit takes care of packaging Interbit apps for hosting providers.
-
-Coming Soon`
-      },
-      {
-        title: 'Payments',
-        image: iconPayments,
-        content: `Collect payments from your customers with Interbit. Micro-transactions have never been this easy.
-
-Coming Soon`,
-        className: 'in-progress'
       }
+//       {
+//         title: 'Accounts',
+//         image: iconAccounts,
+//         content:
+//           'Secure identity service with an easy-to-integrate Single Sign-On experience.',
+//         callToActions: [
+//           {
+//             to: constants.urls.GITHUB_IB,
+//             text: 'View Source on GitHub'
+//           },
+//           {
+//             to: constants.urls.APP_ACCOUNT,
+//             text: 'Open App'
+//           }
+//         ]
+//       },
+//       {
+//         title: 'AccountKit',
+//         image: iconAccounts,
+//         content:
+//           'Easily implement account creation and authentication functions within your app.',
+//         callToActions: [
+//           {
+//             to: constants.urls.GITHUB_IB,
+//             text: 'View Source on GitHub'
+//           }
+//         ]
+//       },
+//       {
+//         title: 'Store',
+//         image: iconStore,
+//         content:
+//           'A place to discover, promote, and distribute apps and application services.',
+//         callToActions: [
+//           {
+//             to: constants.urls.APP_STORE,
+//             text: 'Open App'
+//           }
+//         ]
+//       },
+//       {
+//         title: 'Hosting',
+//         image: iconHosting,
+//         className: 'in-progress',
+//         content: `Easy packaging and deployment of Interbit-powered apps. Get your project hosted within minutes.
+
+// Coming Soon`
+//       },
+//       {
+//         title: 'HostingKit',
+//         image: iconHosting,
+//         className: 'in-progress',
+//         content: `Easily deploy projects to your host. HostingKit takes care of packaging Interbit apps for hosting providers.
+
+// Coming Soon`
+//       },
+//       {
+//         title: 'Payments',
+//         image: iconPayments,
+//         content: `Collect payments from your customers with Interbit. Micro-transactions have never been this easy.
+
+// Coming Soon`,
+//         className: 'in-progress'
+//       }
     ]
   }
 }

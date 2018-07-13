@@ -1,6 +1,6 @@
 {
   "name": "interbit-covenant-tools",
-  "version": "0.4.33",
+  "version": "0.4.42",
   "description": "Interbit platform covenants and covenant components",
   "main": "dist/interbit-covenant-tools.js",
   "scripts": {
@@ -11,6 +11,7 @@
     "test": "mocha \"src/tests/**/*.test.js\""
   },
   "files": [
+    "dist",
     "src/rootCovenant"
   ],
   "author": "BTL GROUP LTD",

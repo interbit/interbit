@@ -1,6 +1,6 @@
 {
   "name": "interbit-test",
-  "version": "0.4.34",
+  "version": "0.4.35",
   "description": "Test the interbit package",
   "private": true,
   "scripts": {

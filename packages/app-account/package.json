@@ -1,6 +1,6 @@
 {
     "name": "app-account",
-    "version": "0.4.39",
+    "version": "0.4.41",
     "private": true,
     "main": "src/exports.js",
     "license": "MIT",
@@ -9,8 +9,8 @@
         "amplitude-js": "^4.2.1",
         "axios": "^0.18.0",
         "cross-env": "^5.1.4",
-        "interbit-cli": "0.4.39",
-        "interbit-covenant-tools": "0.4.39",
+        "interbit-cli": "^0.4.41",
+        "interbit-covenant-tools": "^0.4.41",
         "interbit-platform-tools": "0.4.39",
         "interbit-ui-components": "0.4.39",
         "interbit-ui-tools": "0.4.39",

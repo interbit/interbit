@@ -10,7 +10,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "interbit-covenant-tools": "0.4.34",
+    "interbit-covenant-tools": "0.4.42",
     "seamless-immutable": "^7.1.2",
     "uuid": "^3.1.0"
   }

@@ -12,7 +12,7 @@ const { startInterbit } = require('../chainManagement')
 // start a cli and deploy the covenants to get a valid hash that is in sync with interbit
 // TODO: update this to use the hashing function instead of starting a CLI -- Blocked until core releases hashing algo in API
 const packCovenants = async (location, covenantConfig) => {
-  const { cli } = await startInterbit()
+  const { cli, hypervisor } = await startInterbit()
 
   const packedCovenants = {}
   const covenants = Object.entries(covenantConfig)
@@ -27,7 +27,9 @@ const packCovenants = async (location, covenantConfig) => {
   packedCovenants[ROOT_CHAIN_ALIAS] = await packRootCovenant(cli, location)
 
   // TODO: Kill this thang properly (Blocked: #341)
-  cli.stopServer()
+  console.log('Stopping')
+  hypervisor.stopHyperBlocker()
+  console.log('stopped')
 
   return packedCovenants
 }

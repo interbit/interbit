@@ -1,0 +1,16 @@
+{
+  "name": "test-covenant",
+  "version": "1.0.0",
+  "description": "Simplest covenant for testing",
+  "main": "index.js",
+  "dependencies": {
+    "interbit-covenant-tools": "^0.4.33",
+    "seamless-immutable": "^7.1.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}

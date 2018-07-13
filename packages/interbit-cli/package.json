@@ -1,6 +1,6 @@
 {
   "name": "interbit-cli",
-  "version": "0.4.35",
+  "version": "0.4.36",
   "description": "The Interbit Blockchain Development Platform",
   "files": [
     "bin",
@@ -17,7 +17,7 @@
   "dependencies": {
     "cross-spawn": "5.1.0",
     "fs-extra": "^5.0.0",
-    "interbit": "0.4.35",
+    "interbit": "0.4.36",
     "interbit-core": "0.14.0"
   }
 }

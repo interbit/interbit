@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { getArg, getArgs, isArg } = require('../args/getArg')
+const { getArg, getArgs, isArg } = require('../../args/getArg')
 
 const argName = '--argname'
 const anotherArgName = '--another-argname'

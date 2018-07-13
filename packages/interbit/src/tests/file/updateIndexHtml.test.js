@@ -1,7 +1,10 @@
 const assert = require('assert')
 const cheerio = require('cheerio')
 
-const { updateDom, camelCaseToHyphenated } = require('../file/updateIndexHtml')
+const {
+  updateDom,
+  camelCaseToHyphenated
+} = require('../../file/updateIndexHtml')
 
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">

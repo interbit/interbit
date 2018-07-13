@@ -28,6 +28,7 @@ const packCovenants = async (location, covenantConfig) => {
 
   // TODO: Kill this thang properly (Blocked: #341)
   console.log('Stopping')
+  await cli.shutdown()
   hypervisor.stopHyperBlocker()
   console.log('stopped')
 

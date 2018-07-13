@@ -5,7 +5,10 @@ const { packCovenants } = require('../../file/packCovenants')
 
 const location = 'tmp'
 
-describe('packCovenants(location, covenantConfig)', () => {
+// Blocked: Skip until core #17 is resolved and packCovenants uses exposed hash func
+// starting a hypervisor here and running monorepo tests in parallel with the test-interbit
+// lib causes database and hypervisor collisions.
+describe.skip('packCovenants(location, covenantConfig)', () => {
   beforeEach(async () => {
     await fs.mkdirp(location)
   })
@@ -33,20 +36,15 @@ describe('packCovenants(location, covenantConfig)', () => {
     assert.ok(isPackedFileReal, 'Packed covenant file does not exist')
   }
 
-  it
-    .only(
-      'packs the configured covenant and root and puts it in location/covenants',
-      async () => {
-        const covenantConfig = {
-          testCovenant: {
-            location: path.join(__dirname, '../testData/covenant')
-          }
-        }
-        const result = await packCovenants(location, covenantConfig)
-
-        await assertCovenantCorrectness('testCovenant', result)
-        await assertCovenantCorrectness('interbitRoot', result)
+  it('packs the configured covenant and root and puts it in location/covenants', async () => {
+    const covenantConfig = {
+      testCovenant: {
+        location: path.join(__dirname, '../testData/covenant')
       }
-    )
-    .timeout(200000)
+    }
+    const result = await packCovenants(location, covenantConfig)
+
+    await assertCovenantCorrectness('testCovenant', result)
+    await assertCovenantCorrectness('interbitRoot', result)
+  }).timeout(5000)
 })

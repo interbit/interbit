@@ -4,11 +4,8 @@ import { Row, Col } from 'react-bootstrap'
 import {
   Markdown,
   LinkBar,
-  // LinkBarSlack,
   Divider
 } from 'interbit-ui-components'
-
-// import urls from '../../constants/urls'
 
 const mapStateToProps = state => ({
   linkBarContent: state.content.linkBars,
@@ -54,7 +51,6 @@ class DevelopersArchitecture extends Component {
         <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
             <LinkBar {...linkBarContent.architectureExample} />
-            {/* <LinkBarSlack to={urls.SUPPORT_SLACK} /> */}
           </Col>
         </Row>
       </div>

@@ -6,11 +6,9 @@ import {
   IconButton,
   Markdown,
   LinkBar,
-  // LinkBarSlack,
   Divider
 } from 'interbit-ui-components'
 
-// import urls from '../../constants/urls'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({
@@ -41,13 +39,8 @@ class DevelopersExampleApps extends Component {
                 title={a.title}
                 image={a.image}
                 className="image-sm">
-                {/* <p>
-                  <a href={a.githubUrl}>View Source on GitHub</a>
-                </p> */}
                 <p>{a.text}</p>
                 <Divider />
-                {/* <IconButton to={a.appUrl} text="Open App" /> */}
-                {/* <IconButton to={a.storeUrl} text="View in Store" /> */}
                 <IconButton to={a.githubUrl} text="View Source" />
               </ContentBar>
             ))}
@@ -59,7 +52,6 @@ class DevelopersExampleApps extends Component {
         <Row>
           <Col {...colLayout}>
             <LinkBar {...linkBarContent.resources} />
-            {/* <LinkBarSlack to={urls.SUPPORT_SLACK} /> */}
           </Col>
         </Row>
       </div>

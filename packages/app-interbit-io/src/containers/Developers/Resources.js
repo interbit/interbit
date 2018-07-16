@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
 import { Markdown } from 'interbit-ui-components'
 
-// import urls from '../../constants/urls'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({

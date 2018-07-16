@@ -24,15 +24,7 @@ class Platform extends Component {
 
     return (
       <div className="ibweb-page platform">
-        <Row>
-          <Col md={12}>
-            <img
-              src={platform.headerImage.image}
-              alt={platform.headerImage.title}
-              className="ibweb-image-full-width bleed header"
-            />
-          </Col>
-        </Row>
+        <Row />
 
         <Row className="ibweb-mg-sm-scr-xs">
           <Col {...colLayout}>
@@ -164,11 +156,6 @@ class Platform extends Component {
           </div>
         ))}
 
-        {/* <Row className="ibweb-mg-xx-lg">
-          <Col {...colLayout}>
-            <LinkBar {...linkBarContent.productRoadmap} />
-          </Col>
-        </Row> */}
       </div>
     )
   }

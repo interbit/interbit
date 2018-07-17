@@ -54,19 +54,19 @@ const actionCreators = {
     }
   }),
 
-  chainUpdated: (chainAlias, state) => ({
+  chainUpdated: (chainAlias, chainState) => ({
     type: actionTypes.CHAIN_UPDATED,
     payload: {
       chainAlias,
-      state
+      chainState
     }
   }),
 
-  chainBlockAdded: (chainAlias, blocks) => ({
+  chainBlockAdded: (chainAlias, newBlock) => ({
     type: actionTypes.CHAIN_BLOCK_ADDED,
     payload: {
       chainAlias,
-      blocks
+      newBlock
     }
   }),
 
@@ -78,12 +78,11 @@ const actionCreators = {
     }
   }),
 
-  chainSubscribed: (chainAlias, initialState, blocks) => ({
+  chainSubscribed: (chainAlias, chainState) => ({
     type: actionTypes.CHAIN_SUBSCRIBED,
     payload: {
       chainAlias,
-      initialState,
-      blocks
+      chainState
     }
   }),
 

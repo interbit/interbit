@@ -95,7 +95,6 @@ const subscribeToChain = (store, chainAlias, chain) => {
   console.log(`${LOG_PREFIX}: Connecting chain '${chainAlias}' to store`)
 
   const currentState = chain.getState()
-  const cachedBlocks = chain.getCachedBlocks()
   let firstBlock = true
 
   chain.subscribe(() => {
@@ -104,8 +103,8 @@ const subscribeToChain = (store, chainAlias, chain) => {
   })
 
   chain.blockSubscribe(() => {
-    const blocks = chain.getCachedBlocks()
-    store.dispatch(actionCreators.chainBlockAdded(chainAlias, blocks))
+    const newBlock = chain.getCurrentBlock()
+    store.dispatch(actionCreators.chainBlockAdded(chainAlias, newBlock))
 
     if (firstBlock) {
       store.dispatch(actionCreators.chainBlocking(chainAlias))
@@ -113,9 +112,7 @@ const subscribeToChain = (store, chainAlias, chain) => {
     }
   })
 
-  store.dispatch(
-    actionCreators.chainSubscribed(chainAlias, currentState, cachedBlocks)
-  )
+  store.dispatch(actionCreators.chainSubscribed(chainAlias, currentState))
   return chain
 }
 

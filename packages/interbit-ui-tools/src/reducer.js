@@ -27,7 +27,7 @@ const reducer = (state = initialState, action = {}) => {
 
   switch (action.type) {
     case actionTypes.CHAIN_UPDATED: {
-      const { chainAlias, state: chainState } = action.payload
+      const { chainAlias, chainState } = action.payload
       return state.setIn([CHAINS, chainAlias], chainState)
     }
 
@@ -38,8 +38,9 @@ const reducer = (state = initialState, action = {}) => {
         status: CHAIN_STATUS.LOADED
       })
     }
+
     case actionTypes.CHAIN_SUBSCRIBED: {
-      const { chainAlias, initialState: chainState } = action.payload
+      const { chainAlias, chainState } = action.payload
       return state
         .setIn([CHAINS, chainAlias], chainState)
         .setIn([CHAIN_DATA, chainAlias, STATUS], CHAIN_STATUS.SUBSCRIBED)

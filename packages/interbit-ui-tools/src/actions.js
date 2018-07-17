@@ -13,7 +13,7 @@ const actionTypes = {
   SPONSOR_CHAIN_SAGA: `${ACTION_PREFIX}/SPONSOR_CHAIN_SAGA`,
 
   CHAIN_UPDATED: `${ACTION_PREFIX}/CHAIN_UPDATED`,
-  CHAIN_NEW_BLOCK: `${ACTION_PREFIX}/CHAIN_NEW_BLOCK`,
+  CHAIN_BLOCK_ADDED: `${ACTION_PREFIX}/CHAIN_BLOCK_ADDED`,
   CHAIN_DISPATCH: `${ACTION_PREFIX}/CHAIN_DISPATCH`,
   CHAIN_SPONSORING: `${ACTION_PREFIX}/CHAIN_SPONSORING`,
   CHAIN_LOADING: `${ACTION_PREFIX}/CHAIN_LOADING`,
@@ -62,11 +62,11 @@ const actionCreators = {
     }
   }),
 
-  chainNewBlock: (chainAlias, block) => ({
-    type: actionTypes.CHAIN_NEW_BLOCK,
+  chainBlockAdded: (chainAlias, blocks) => ({
+    type: actionTypes.CHAIN_BLOCK_ADDED,
     payload: {
       chainAlias,
-      block
+      blocks
     }
   }),
 
@@ -78,11 +78,12 @@ const actionCreators = {
     }
   }),
 
-  chainSubscribed: (chainAlias, initialState) => ({
+  chainSubscribed: (chainAlias, initialState, blocks) => ({
     type: actionTypes.CHAIN_SUBSCRIBED,
     payload: {
       chainAlias,
-      initialState
+      initialState,
+      blocks
     }
   }),
 

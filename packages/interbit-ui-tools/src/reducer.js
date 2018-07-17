@@ -20,7 +20,7 @@ const reducer = (state = initialState, action = {}) => {
   if (
     action.type &&
     action.type.startsWith(ACTION_PREFIX) &&
-    action.type !== actionTypes.CHAIN_NEW_BLOCK
+    action.type !== actionTypes.CHAIN_BLOCK_ADDED
   ) {
     console.log(`${LOG_PREFIX}: reducer()`, action)
   }

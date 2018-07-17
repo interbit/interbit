@@ -7,19 +7,21 @@ let SortableTree = null
 
 export default class Tree extends Component {
   static propTypes = {
+    root: PropTypes.string,
     // This is a generic object renderer, so it takes a generic object as input
     // eslint-disable-next-line react/forbid-prop-types
     treeData: PropTypes.object
   }
 
   static defaultProps = {
+    root: 'Selected chain',
     treeData: {}
   }
 
   // TODO: Use a dedicated Redux store instead of setState
   constructor(props) {
     super(props)
-    this.state = { treeData: this.getTreeData(props.treeData) }
+    this.state = { treeData: this.getTreeData(props.root, props.treeData) }
 
     if (!SortableTree) {
       // The current version of this library does not support isomorphic rendering
@@ -34,13 +36,13 @@ export default class Tree extends Component {
   // }
 
   componentWillReceiveProps(props) {
-    const treeData = this.getTreeData(props.treeData)
+    const treeData = this.getTreeData(props.root, props.treeData)
     // eslint-disable-next-line react/no-set-state
     this.setState({ treeData })
   }
 
-  getTreeData = treeData => {
-    const converted = convertToTree('State', treeData, 0)
+  getTreeData = (root, treeData) => {
+    const converted = convertToTree(root, treeData, 0)
     return [converted]
   }
 
@@ -60,7 +62,7 @@ export default class Tree extends Component {
     // update the expanded cache
     // re-render all the data
     this.updateCache(treeData)
-    const newTreeData = this.getTreeData(this.props.treeData)
+    const newTreeData = this.getTreeData(this.props.root, this.props.treeData)
     // eslint-disable-next-line react/no-set-state
     this.setState({ treeData: newTreeData })
   }
@@ -90,12 +92,8 @@ export default class Tree extends Component {
 
 const expandedCache = {}
 
-const convertToTree = (key, value, depth, path) => {
-  // TODO: Fix this
-  // eslint-disable-next-line no-param-reassign
-  path = path || key
-  // TODO: Abstract this isChain logic; possibly pass in a predicate
-  const isChain = key === 'blocks' && depth === 2
+const convertToTree = (key, value, depth, path = key) => {
+  const isChain = key === 'blocks' && depth === 1
   const defaultExpanded = isChain ? true : depth < 2
   const cached = typeof expandedCache[path] !== typeof undefined
   const expanded = cached ? expandedCache[path] : defaultExpanded
@@ -105,7 +103,7 @@ const convertToTree = (key, value, depth, path) => {
   if (_.isArray(value)) {
     value.forEach((item, index) => {
       const child = convertToTree(
-        `[${index}]`,
+        isChain ? `${item.content.height}` : `[${index}]`,
         item,
         depth + 1,
         `${path}[${index}]`

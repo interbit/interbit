@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Col, Grid, Row } from 'react-bootstrap'
 import Toggle from 'react-toggle'
-import Immutable from 'seamless-immutable'
 import ObjectTree from '../ObjectTree'
 import Table from './Table'
 import Metadata from './Metadata'
@@ -65,8 +64,11 @@ export default class BlockExplorer extends Component {
 
     const blocks = selectedChain.blocks
     const treeData = {
-      ...selectedChain.state,
-      interbit: { ...selectedChain.interbit, blocks: selectedChain.blocks }
+      state: {
+        ...selectedChain.state,
+        interbit: selectedChain.interbit
+      },
+      blocks: selectedChain.blocks
     }
 
     const lastBlock =
@@ -84,10 +86,7 @@ export default class BlockExplorer extends Component {
             </Row>
             <Row className="blockTable">
               <Table
-                blocks={(Immutable.isImmutable(blocks)
-                  ? blocks.asMutable()
-                  : blocks
-                ).reverse()}
+                blocks={blocks}
                 selectedBlockHash={selectedBlock.blockHash}
                 doSetSelectedBlockHash={doSetSelectedBlockHash}
               />
@@ -107,7 +106,7 @@ export default class BlockExplorer extends Component {
             </Row>
             {!selectedChain.name && <p>No Chain Selected</p>}
             {!showRawData ? (
-              <ObjectTree treeData={treeData} />
+              <ObjectTree root={selectedChain.name} treeData={treeData} />
             ) : (
               this.renderJson(treeData)
             )}

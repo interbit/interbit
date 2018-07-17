@@ -12,62 +12,75 @@ export const NO_CHAIN_SELECTED = 'No Chain Selected'
 
 const dummyDispatch = () => {}
 
-export const emptyChainState = chainId => ({
-  chainId,
-  name: chainId,
+export const emptyChainState = chainAlias => ({
+  chainId: chainAlias,
+  name: chainAlias,
   state: {},
-  interbit: { chainId },
+  interbit: {},
   blocks: [],
   covenantName: undefined,
   chainDispatch: dummyDispatch
 })
 
-const ensureChainStateExists = (state, chainId) =>
-  state.chains && state.chains[chainId]
+const ensureChainStateExists = (state, chainAlias) =>
+  state.chains && state.chains[chainAlias]
     ? state
-    : state.setIn(['chains', chainId], emptyChainState(chainId))
+    : state.setIn(['chains', chainAlias], emptyChainState(chainAlias))
 
-const selectChain = (state, chainId) =>
-  chainId
-    ? ensureChainStateExists(state, chainId).setIn(['selectedChainId'], chainId)
+const selectChain = (state, chainAlias) =>
+  chainAlias
+    ? ensureChainStateExists(state, chainAlias).setIn(
+        ['selectedChain'],
+        chainAlias
+      )
     : state
 
-const updateChain = (state, action) => {
-  const {
-    payload: { chainAlias: chainId, state: rawChainState }
-  } = action
-  if (
-    rawChainState &&
-    rawChainState.interbit &&
-    rawChainState.interbit.blocks
-  ) {
-    const { interbit: interbitState, ...appState } = rawChainState
-    const { blocks, ...interbit } = interbitState
-
-    return ensureChainStateExists(state, chainId)
-      .setIn(['chains', chainId, 'state'], appState)
-      .setIn(['chains', chainId, 'interbit'], interbit)
-      .setIn(['chains', chainId, 'blocks'], blocks)
+const updateChainState = (state, { chainAlias, chainState, blocks }) => {
+  let nextState = ensureChainStateExists(state, chainAlias)
+  if (chainState && chainState.interbit) {
+    const { interbit: interbitConfig, ...appState } = chainState
+    nextState = nextState
+      .setIn(['chains', chainAlias, 'state'], appState)
+      .setIn(['chains', chainAlias, 'interbit'], interbitConfig)
   }
-  return state
+  if (blocks) {
+    nextState = nextState.setIn(['chains', chainAlias, 'blocks'], blocks)
+  }
+  return nextState
 }
 
 const initialState = Immutable.from({
   chains: {
     [NO_CHAIN_SELECTED]: emptyChainState(NO_CHAIN_SELECTED)
   },
-  selectedChainId: NO_CHAIN_SELECTED,
+  selectedChain: NO_CHAIN_SELECTED,
   showRawData: false,
   selectedBlockHash: null
 })
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    case middlewareActionTypes.CHAIN_UPDATED:
-      return updateChain(state, action)
+    case middlewareActionTypes.CHAIN_SUBSCRIBED: {
+      const { chainAlias, initialState: chainState, blocks } = action.payload
+      return updateChainState(state, {
+        chainAlias,
+        chainState,
+        blocks
+      })
+    }
+
+    case middlewareActionTypes.CHAIN_UPDATED: {
+      const { chainAlias, state: chainState } = action.payload
+      return updateChainState(state, { chainAlias, chainState })
+    }
+
+    case middlewareActionTypes.CHAIN_BLOCK_ADDED: {
+      const { chainAlias, blocks } = action.payload
+      return updateChainState(state, { chainAlias, blocks })
+    }
 
     case SET_SELECTED_CHAIN:
-      return selectChain(state, action.payload.chainId)
+      return selectChain(state, action.payload.chainAlias)
 
     case TOGGLE_RAW:
       return state.setIn(['showRawData'], !state.showRawData)
@@ -96,22 +109,22 @@ export function setSelectedBlockHash(hash) {
   }
 }
 
-export function setSelectedChain(chainId) {
+export function setSelectedChain(chainAlias) {
   return {
     type: SET_SELECTED_CHAIN,
     payload: {
-      chainId
+      chainAlias
     }
   }
 }
 
-export function getExploreChainState(state, chainId) {
+export function getExploreChainState(state, chainAlias) {
   const {
     exploreChain,
-    exploreChain: { selectedChainId }
+    exploreChain: { selectedChain }
   } = state
   return (
-    exploreChain.chains[chainId || selectedChainId] ||
+    exploreChain.chains[chainAlias || selectedChain] ||
     exploreChain.chains[NO_CHAIN_SELECTED] ||
     emptyChainState(NO_CHAIN_SELECTED)
   )

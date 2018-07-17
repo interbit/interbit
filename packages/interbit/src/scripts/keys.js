@@ -9,7 +9,7 @@ const keys = async options => {
     ? path.resolve(options.filename)
     : path.resolve(`${options.filename}.json`)
 
-  if (fs.existsSync(filename)) {
+  if (await fs.exists(filename)) {
     throw new Error(`Can't write keys. File already exists at ${filename}`)
   }
 

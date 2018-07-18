@@ -6,34 +6,18 @@ import platformFeatures from './platformFeatures'
 import resources from './resources'
 import support from './support'
 
-import iconChat from '../../assets/icons/iconChat.svg'
 import iconDownload from '../../assets/icons/iconDownload.svg'
 import iconPlatformFeatures from '../../assets/icons/iconPlatformFeatures.svg'
-import iconStartingBlock from '../../assets/icons/iconStartingBlock.svg'
 
 // TODO: move nav out to navigation constants
 export default {
   launchPads: [
-    {
-      title: 'Product Roadmap',
-      text:
-        'See what platform features we have planned to help you build better apps, faster.',
-      image: iconStartingBlock,
-      to: constants.paths.PLATFORM_ROADMAP
-    },
     {
       title: 'Platform Features',
       text:
         'A growing platform with services that integrate with Interbit applications.',
       image: iconPlatformFeatures,
       to: constants.paths.DEVELOPERS_PLATFORM_FEATURES
-    },
-    {
-      title: 'Support',
-      text:
-        'Join our Slack community for technical assistance, discussions, and updates.',
-      image: iconChat,
-      to: constants.urls.SUPPORT_SLACK
     },
     {
       title: 'Get the SDK',

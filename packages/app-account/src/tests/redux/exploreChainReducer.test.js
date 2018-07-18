@@ -4,11 +4,6 @@ import { actionCreators } from 'interbit-ui-tools'
 
 import exploreChainReducer from '../../redux/exploreChainReducer'
 
-const minimalChainState = { interbit: { blocks: [] } }
-
-const chainUpdateAction = (chainName, state) =>
-  actionCreators.chainUpdated(chainName, { ...minimalChainState, ...state })
-
 describe('chainReducer', () => {
   it('adds more than one chain to state', () => {
     const initialState = Immutable.from({ chains: {} })
@@ -18,8 +13,8 @@ describe('chainReducer', () => {
     const chainName2 = 'second'
     const chainState2 = { bun: 'bao' }
 
-    const action1 = chainUpdateAction(chainName1, chainState1)
-    const action2 = chainUpdateAction(chainName2, chainState2)
+    const action1 = actionCreators.chainUpdated(chainName1, chainState1)
+    const action2 = actionCreators.chainUpdated(chainName2, chainState2)
 
     const state = exploreChainReducer(initialState, action1)
     const result = exploreChainReducer(state, action2)
@@ -33,7 +28,7 @@ describe('chainReducer', () => {
       ramen: ['noodles', 'soup', 'love']
     })
     const chainName = 'chain'
-    const action = chainUpdateAction(chainName, newState)
+    const action = actionCreators.chainUpdated(chainName, newState)
 
     const state = Immutable.from({ chains: { ramen: { state: 'meh' } } })
 

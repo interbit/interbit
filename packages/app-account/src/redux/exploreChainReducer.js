@@ -8,18 +8,13 @@ const SET_SELECTED_BLOCK_HASH = 'Interbit/BlockExplorer/SET_SELECTED_BLOCK_HASH'
 
 const SET_SELECTED_CHAIN = 'Interbit/BlockExplorer/SET_CHAIN'
 
-export const NO_CHAIN_SELECTED = 'No Chain Selected'
-
-const dummyDispatch = () => {}
+export const NO_CHAIN_SELECTED = 'None selected'
 
 export const emptyChainState = chainAlias => ({
-  chainId: chainAlias,
-  name: chainAlias,
+  chainAlias,
   state: {},
   interbit: {},
-  blocks: [],
-  covenantName: undefined,
-  chainDispatch: dummyDispatch
+  blocks: []
 })
 
 const ensureChainStateExists = (state, chainAlias) =>
@@ -35,16 +30,29 @@ const selectChain = (state, chainAlias) =>
       )
     : state
 
-const updateChainState = (state, { chainAlias, chainState, blocks }) => {
+const updateChainState = (state, { chainAlias, chainState }) => {
   let nextState = ensureChainStateExists(state, chainAlias)
-  if (chainState && chainState.interbit) {
-    const { interbit: interbitConfig, ...appState } = chainState
+  if (chainState) {
+    const { interbit = {}, ...appState } = chainState
     nextState = nextState
       .setIn(['chains', chainAlias, 'state'], appState)
-      .setIn(['chains', chainAlias, 'interbit'], interbitConfig)
+      .setIn(['chains', chainAlias, 'interbit'], interbit)
   }
-  if (blocks) {
-    nextState = nextState.setIn(['chains', chainAlias, 'blocks'], blocks)
+  return nextState
+}
+
+const updateBlocks = (state, { chainAlias, block }) => {
+  let nextState = ensureChainStateExists(state, chainAlias)
+  if (block) {
+    const blocksPath = ['chains', chainAlias, 'blocks']
+    const blocks = nextState.getIn(blocksPath, [])
+    const appendBlock =
+      blocks.length === 0 ||
+      block.content.previousHash === blocks[blocks.length - 1].blockHash
+
+    nextState = appendBlock
+      ? nextState.setIn(blocksPath, [...blocks, block])
+      : nextState.setIn(blocksPath, [...blocks.slice(0, -1), block])
   }
   return nextState
 }
@@ -61,22 +69,18 @@ const initialState = Immutable.from({
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case middlewareActionTypes.CHAIN_SUBSCRIBED: {
-      const { chainAlias, initialState: chainState, blocks } = action.payload
-      return updateChainState(state, {
-        chainAlias,
-        chainState,
-        blocks
-      })
+      const { chainAlias, chainState } = action.payload
+      return updateChainState(state, { chainAlias, chainState })
     }
 
     case middlewareActionTypes.CHAIN_UPDATED: {
-      const { chainAlias, state: chainState } = action.payload
+      const { chainAlias, chainState } = action.payload
       return updateChainState(state, { chainAlias, chainState })
     }
 
     case middlewareActionTypes.CHAIN_BLOCK_ADDED: {
-      const { chainAlias, blocks } = action.payload
-      return updateChainState(state, { chainAlias, blocks })
+      const { chainAlias, newBlock: block } = action.payload
+      return updateBlocks(state, { chainAlias, block })
     }
 
     case SET_SELECTED_CHAIN:
@@ -128,4 +132,9 @@ export function getExploreChainState(state, chainAlias) {
     exploreChain.chains[NO_CHAIN_SELECTED] ||
     emptyChainState(NO_CHAIN_SELECTED)
   )
+}
+
+export function getExploreChainAliases(state) {
+  const { exploreChain } = state
+  return Object.keys(exploreChain.chains)
 }

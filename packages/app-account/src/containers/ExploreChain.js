@@ -4,7 +4,6 @@ import queryString from 'query-string'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { BlockExplorer } from 'interbit-ui-components'
-import { chainDispatch } from 'interbit-ui-tools'
 
 import {
   getExploreChainState,
@@ -31,25 +30,21 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => ({
   doToggleRawData: () => dispatch(toggleRawData()),
-  doSetSelectedBlockHash: hash => dispatch(setSelectedBlockHash(hash)),
-  blockchainDispatch: chainAlias => action =>
-    dispatch(chainDispatch(chainAlias, action))
+  doSetSelectedBlockHash: hash => dispatch(setSelectedBlockHash(hash))
 })
 
 export class ExploreChain extends Component {
   static propTypes = {
     selectedChain: PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      chainAlias: PropTypes.string.isRequired,
       state: PropTypes.object.isRequired,
       interbit: PropTypes.object.isRequired,
-      blocks: PropTypes.arrayOf(PropTypes.object).isRequired,
-      covenantName: PropTypes.string
+      blocks: PropTypes.arrayOf(PropTypes.object).isRequired
     }).isRequired,
     showRawData: PropTypes.bool,
     doToggleRawData: PropTypes.func.isRequired,
     selectedBlockHash: PropTypes.string,
-    doSetSelectedBlockHash: PropTypes.func.isRequired,
-    blockchainDispatch: PropTypes.func.isRequired
+    doSetSelectedBlockHash: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -63,17 +58,12 @@ export class ExploreChain extends Component {
       doToggleRawData,
       selectedChain,
       selectedBlockHash,
-      doSetSelectedBlockHash,
-      blockchainDispatch
+      doSetSelectedBlockHash
     } = this.props
-    const chain = selectedChain.set(
-      'blockchainDispatch',
-      blockchainDispatch(selectedChain.chainId)
-    )
 
     return (
       <BlockExplorer
-        selectedChain={chain}
+        selectedChain={selectedChain}
         showRawData={showRawData}
         doToggleRawData={doToggleRawData}
         selectedBlockHash={selectedBlockHash}

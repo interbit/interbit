@@ -40,8 +40,8 @@ const store = createStore(
 )
 sagaMiddleware.run(interbitSaga)
 
-// BlockExplorer will monitor the public chain
-store.dispatch(setSelectedChain(PUBLIC))
+// BlockExplorer will monitor this chain
+store.dispatch(setSelectedChain(PRIVATE))
 
 // eslint-disable-next-line react/no-render-return-value
 ReactDOM.render(

@@ -21,7 +21,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     selectedChain: {
-      chainAlias: exploreChainState.chainId,
+      chainAlias: exploreChainState.chainAlias,
       state: {
         ...exploreChainState.state,
         interbit: exploreChainState.interbit
@@ -37,11 +37,6 @@ const mapDispatchToProps = dispatch => ({
   blockchainDispatch: chainAlias => action =>
     dispatch(chainDispatch(chainAlias, action))
 })
-
-const generateChainName = chain =>
-  chain.state && chain.state.chainMetadata
-    ? chain.state.chainMetadata.chainName
-    : chain.chainAlias
 
 export class InteractiveChains extends Component {
   static propTypes = {
@@ -69,7 +64,7 @@ export class InteractiveChains extends Component {
         <Row>
           <LinkedCovenant
             chainId={selectedChain.chainAlias}
-            chainName={generateChainName(selectedChain)}
+            chainName={selectedChain.chainAlias}
             raw={selectedChain.state}
             covenant={{ actionCreators }}
             reset={resetForm}

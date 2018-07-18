@@ -9,18 +9,19 @@ import Metadata from './Metadata'
 export default class BlockExplorer extends Component {
   static propTypes = {
     selectedChain: PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      chainAlias: PropTypes.string.isRequired,
       state: PropTypes.object.isRequired,
       interbit: PropTypes.object.isRequired,
       blocks: PropTypes.arrayOf(PropTypes.object).isRequired
     }).isRequired,
     doToggleRawData: PropTypes.func.isRequired,
-    showRawData: PropTypes.bool.isRequired,
+    showRawData: PropTypes.bool,
     doSetSelectedBlockHash: PropTypes.func.isRequired,
     selectedBlockHash: PropTypes.string
   }
 
   static defaultProps = {
+    showRawData: false,
     selectedBlockHash: null
   }
 
@@ -104,9 +105,9 @@ export default class BlockExplorer extends Component {
                 />
               </Col>
             </Row>
-            {!selectedChain.name && <p>No Chain Selected</p>}
+            {!selectedChain.chainAlias && <p>No Chain Selected</p>}
             {!showRawData ? (
-              <ObjectTree root={selectedChain.name} treeData={treeData} />
+              <ObjectTree root={selectedChain.chainAlias} treeData={treeData} />
             ) : (
               this.renderJson(treeData)
             )}

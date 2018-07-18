@@ -155,7 +155,6 @@ class Platform extends Component {
             </Row>
           </div>
         ))}
-
       </div>
     )
   }

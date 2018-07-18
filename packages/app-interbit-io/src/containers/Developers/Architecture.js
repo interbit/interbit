@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import {
-  Markdown,
-  LinkBar,
-  Divider
-} from 'interbit-ui-components'
+import { Markdown, LinkBar, Divider } from 'interbit-ui-components'
 
 const mapStateToProps = state => ({
   linkBarContent: state.content.linkBars,

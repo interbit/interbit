@@ -1,31 +1,28 @@
-import Immutable from 'seamless-immutable'
-import { actionTypes as middlewareActionTypes } from 'interbit-ui-tools'
+const Immutable = require('seamless-immutable')
+const { actionTypes: middlewareActionTypes } = require('../middleware')
+const { actionTypes: blockExplorerActionTypes } = require('./actions')
+const { emptyChainState } = require('./selectors')
 
-// BlockExplorer specific actions
-const TOGGLE_RAW = 'Interbit/BlockExplorer/TOGGLE_RAW'
-
-const SET_SELECTED_BLOCK_HASH = 'Interbit/BlockExplorer/SET_SELECTED_BLOCK_HASH'
-
-const SET_SELECTED_CHAIN = 'Interbit/BlockExplorer/SET_CHAIN'
-
-export const NO_CHAIN_SELECTED = 'None selected'
-
-export const emptyChainState = chainAlias => ({
-  chainAlias,
-  state: {},
-  interbit: {},
-  blocks: []
-})
+const {
+  BLOCKS,
+  CHAINS,
+  INTERBIT,
+  NO_CHAIN_SELECTED,
+  SELECTED_BLOCK_HASH,
+  SELECTED_CHAIN,
+  SHOW_RAW_DATA,
+  STATE
+} = require('./constants')
 
 const ensureChainStateExists = (state, chainAlias) =>
   state.chains && state.chains[chainAlias]
     ? state
-    : state.setIn(['chains', chainAlias], emptyChainState(chainAlias))
+    : state.setIn([CHAINS, chainAlias], emptyChainState(chainAlias))
 
 const selectChain = (state, chainAlias) =>
   chainAlias
     ? ensureChainStateExists(state, chainAlias).setIn(
-        ['selectedChain'],
+        [SELECTED_CHAIN],
         chainAlias
       )
     : state
@@ -35,8 +32,8 @@ const updateChainState = (state, { chainAlias, chainState }) => {
   if (chainState) {
     const { interbit = {}, ...appState } = chainState
     nextState = nextState
-      .setIn(['chains', chainAlias, 'state'], appState)
-      .setIn(['chains', chainAlias, 'interbit'], interbit)
+      .setIn([CHAINS, chainAlias, STATE], appState)
+      .setIn([CHAINS, chainAlias, INTERBIT], interbit)
   }
   return nextState
 }
@@ -44,7 +41,7 @@ const updateChainState = (state, { chainAlias, chainState }) => {
 const updateBlocks = (state, { chainAlias, block }) => {
   let nextState = ensureChainStateExists(state, chainAlias)
   if (block) {
-    const blocksPath = ['chains', chainAlias, 'blocks']
+    const blocksPath = [CHAINS, chainAlias, BLOCKS]
     const blocks = nextState.getIn(blocksPath, [])
     const appendBlock =
       blocks.length === 0 ||
@@ -66,7 +63,7 @@ const initialState = Immutable.from({
   selectedBlockHash: null
 })
 
-export default function reducer(state = initialState, action = {}) {
+const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case middlewareActionTypes.CHAIN_SUBSCRIBED: {
       const { chainAlias, chainState } = action.payload
@@ -83,58 +80,18 @@ export default function reducer(state = initialState, action = {}) {
       return updateBlocks(state, { chainAlias, block })
     }
 
-    case SET_SELECTED_CHAIN:
+    case blockExplorerActionTypes.SET_SELECTED_CHAIN:
       return selectChain(state, action.payload.chainAlias)
 
-    case TOGGLE_RAW:
-      return state.setIn(['showRawData'], !state.showRawData)
+    case blockExplorerActionTypes.TOGGLE_RAW:
+      return state.setIn([SHOW_RAW_DATA], !state.showRawData)
 
-    case SET_SELECTED_BLOCK_HASH:
-      return state.setIn(['selectedBlockHash'], action.payload.hash)
+    case blockExplorerActionTypes.SET_SELECTED_BLOCK_HASH:
+      return state.setIn([SELECTED_BLOCK_HASH], action.payload.hash)
 
     default:
       return state
   }
 }
 
-export function toggleRawData() {
-  return {
-    type: TOGGLE_RAW,
-    payload: null
-  }
-}
-
-export function setSelectedBlockHash(hash) {
-  return {
-    type: SET_SELECTED_BLOCK_HASH,
-    payload: {
-      hash
-    }
-  }
-}
-
-export function setSelectedChain(chainAlias) {
-  return {
-    type: SET_SELECTED_CHAIN,
-    payload: {
-      chainAlias
-    }
-  }
-}
-
-export function getExploreChainState(state, chainAlias) {
-  const {
-    exploreChain,
-    exploreChain: { selectedChain }
-  } = state
-  return (
-    exploreChain.chains[chainAlias || selectedChain] ||
-    exploreChain.chains[NO_CHAIN_SELECTED] ||
-    emptyChainState(NO_CHAIN_SELECTED)
-  )
-}
-
-export function getExploreChainAliases(state) {
-  const { exploreChain } = state
-  return Object.keys(exploreChain.chains)
-}
+module.exports = reducer

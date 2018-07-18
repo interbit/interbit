@@ -1,30 +1,16 @@
 const queryString = require('query-string')
+const base64url = require('base64-url')
 
 const {
   getPublicChainId,
   getPrivateChainId,
   getPublicKey
-} = require('../selectors')
+} = require('../middleware/selectors')
 
-const { parseState, packState } = require('../queryParams')
+const packState = (state, whiteList) =>
+  base64url.encode(JSON.stringify(state, whiteList))
 
-const requestParams = (
-  state,
-  { privateChainAlias, tokens = [], redirectUrl = window.location.href }
-) => {
-  const params = {
-    redirectUrl,
-    chainId: getPrivateChainId(state, { privateChainAlias }),
-    chainAlias: privateChainAlias,
-    tokens
-  }
-
-  return queryString.stringify(params)
-}
-
-const parseRequestParams = query => queryString.parse(query)
-
-const cAuthRequestParams = (
+const packCAuthParams = (
   state,
   {
     publicChainAlias,
@@ -54,16 +40,16 @@ const cAuthRequestParams = (
   return queryString.stringify(params)
 }
 
-const parseCAuthRequestParams = query => {
+const parseState = state => JSON.parse(base64url.decode(state))
+
+const parseCAuthParams = query => {
   const { redirectUrl, state } = queryString.parse(query)
   return { redirectUrl, ...parseState(state) }
 }
 
 module.exports = {
-  parseState,
   packState,
-  requestParams,
-  parseRequestParams,
-  cAuthRequestParams,
-  parseCAuthRequestParams
+  parseState,
+  packCAuthParams,
+  parseCAuthParams
 }

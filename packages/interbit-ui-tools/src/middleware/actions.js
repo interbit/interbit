@@ -174,6 +174,5 @@ const actionCreators = {
 
 module.exports = {
   actionTypes,
-  actionCreators,
-  chainDispatch: actionCreators.chainDispatch
+  actionCreators
 }

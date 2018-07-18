@@ -1,10 +1,9 @@
-import assert from 'assert'
-import Immutable from 'seamless-immutable'
-import { actionCreators } from 'interbit-ui-tools'
+const assert = require('assert')
+const Immutable = require('seamless-immutable')
+const { actionCreators } = require('../../middleware')
+const { reducer: exploreChainReducer } = require('../../blockExplorer')
 
-import exploreChainReducer from '../../redux/exploreChainReducer'
-
-describe('chainReducer', () => {
+describe('blockExplorer.reducer', () => {
   it('adds more than one chain to state', () => {
     const initialState = Immutable.from({ chains: {} })
 

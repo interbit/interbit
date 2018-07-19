@@ -1,6 +1,6 @@
 const Immutable = require('seamless-immutable')
 const hashObject = require('../hash')
-const { remoteRedispatch } = require('../../coreCovenant')
+const { remoteRedispatch, redispatch } = require('../../coreCovenant')
 const { PATHS } = require('../constants')
 
 const prefix = '@@MANIFEST'
@@ -49,6 +49,7 @@ const reducer = (state = initialState, action) => {
       }
 
       nextState = redispatchManifest(state, ownManifest)
+      nextState = applyChanges(nextState, action)
 
       return nextState.setIn(PATHS.MANIFEST, manifest)
     }
@@ -57,6 +58,8 @@ const reducer = (state = initialState, action) => {
       return state
   }
 }
+
+const applyChanges = (state, action, ownManifest) => state
 
 const verifyManifestHash = manifest => {
   const verifiableManifest = { ...manifest }

@@ -3,10 +3,130 @@ const should = require('should')
 const {
   selectors: { pendingActionsForChain }
 } = require('../../coreCovenant')
+const hashObject = require('../../rootCovenant/hash')
 const rootCovenant = require('../../rootCovenant')
 const defaultManifest = require('../testManifest.json')
 
 describe('rootCovenant', () => {
+  it('adds files to the tmp layer for distribution')
+
+  it('applies join updates via redispatch', () => {
+    const state = rootCovenant.initialState
+      .setIn(['interbit', 'chainId'], defaultManifest.chains.interbitRoot)
+      .setIn(['manifest'], defaultManifest)
+
+    const interbitRoot = {
+      ...defaultManifest.manifest.interbitRoot,
+      joins: {
+        ...defaultManifest.manifest.interbitRoot.joins,
+        receiveActionFrom: [
+          {
+            alias: 'control',
+            authorizedActions: ['@@MANIFEST/SET_MANIFEST']
+          }
+        ]
+      }
+    }
+    delete interbitRoot.hash
+    interbitRoot.hash = hashObject(interbitRoot)
+
+    const manifest = {
+      ...defaultManifest,
+      manifest: {
+        ...defaultManifest.manifest,
+        interbitRoot
+      }
+    }
+    delete manifest.hash
+    manifest.hash = hashObject(manifest)
+
+    const action = rootCovenant.actionCreators.setManifest(manifest)
+
+    const nextState = rootCovenant.reducer(state, action)
+
+    should.ok(nextState)
+    // TODO: Find out the real admin action type
+    should.equal(nextState.sideEffects[0].type, '@@INTERBIT/JOIN_SMTH')
+  })
+
+  it('applies covenant changes via redispatch on covenant hash update', () => {
+    const covenantHash = 'testCovenantHash'
+    const state = rootCovenant.initialState
+      .setIn(['interbit', 'chainId'], defaultManifest.chains.interbitRoot)
+      .setIn(['manifest'], defaultManifest)
+
+    const manifest = {
+      ...defaultManifest,
+      covenants: {
+        ...defaultManifest,
+        interbitRoot: {
+          ...defaultManifest.covenants.interbitRoot,
+          hash: covenantHash
+        }
+      }
+    }
+    delete manifest.hash
+    manifest.hash = hashObject(manifest)
+    const action = rootCovenant.actionCreators.setManifest(manifest)
+
+    const nextState = rootCovenant.reducer(state, action)
+
+    should.ok(nextState)
+    // TODO: Find out the real config change and check for it (I suspect this is right??)
+    should.equal(nextState.interbit.covenantHash, covenantHash)
+  })
+
+  it('applies covenant changes via redispatch on configured covenant update', () => {
+    const state = rootCovenant.initialState
+      .setIn(['interbit', 'chainId'], defaultManifest.chains.interbitRoot)
+      .setIn(['manifest'], defaultManifest)
+
+    const interbitRoot = {
+      ...defaultManifest.manifest.interbitRoot,
+      covenant: 'control'
+    }
+    delete interbitRoot.hash
+    interbitRoot.hash = hashObject(interbitRoot)
+
+    const manifest = {
+      ...defaultManifest,
+      manifest: {
+        ...defaultManifest.manifest,
+        interbitRoot
+      }
+    }
+    delete manifest.hash
+    manifest.hash = hashObject(manifest)
+
+    const action = rootCovenant.actionCreators.setManifest(manifest)
+
+    const nextState = rootCovenant.reducer(state, action)
+
+    should.ok(nextState)
+    // TODO: Find out the real config change and check for it (I suspect this is right??)
+    should.equal(
+      nextState.interbit.covenantHash,
+      defaultManifest.covenants.control
+    )
+  })
+
+  it('applies ACL updates via redispatch', () => {
+    const state = rootCovenant.initialState
+      .setIn(['interbit', 'chainId'], defaultManifest.chains.interbitRoot)
+      .setIn(['manifest'], defaultManifest)
+
+    const manifest = {
+      ...defaultManifest
+      // TODO: update manifest.manifest.interbitRoot.acl with new permissions
+    }
+    const action = rootCovenant.actionCreators.setManifest(manifest)
+
+    const nextState = rootCovenant.reducer(state, action)
+
+    should.ok(nextState)
+    // TODO: check the redispatch queue for an ACL update action
+  })
+
   it('unsupported action does nothing', () => {
     const state = rootCovenant.initialState
     const action = {
@@ -61,7 +181,7 @@ describe('rootCovenant', () => {
 
     const nextState = rootCovenant.reducer(state, action)
 
-    should.deepEqual(nextState, state)
+    should.deepEqual(state, nextState)
   })
 
   it('SET_MANIFEST remote redispatches a SET_MANIFEST to all the child chains', () => {

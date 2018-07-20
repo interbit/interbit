@@ -31,13 +31,11 @@ const mapStateToProps = (state, ownProps) => {
   const {
     location: { search }
   } = ownProps
-  const query = queryString.parse(search)
-  const queryParams = parameterEncoding.parseCAuthParams(query)
+  const { redirectUrl, state: encodedState } = queryString.parse(search)
   const {
     appConsumer: { chainAlias, chainId },
-    redirectUrl,
     tokens
-  } = queryParams
+  } = parameterEncoding.parseState(encodedState)
 
   const isChainLoaded = selectors.isChainLoaded(state, { chainAlias: PRIVATE })
   const chainState = selectors.getChain(state, { chainAlias: PRIVATE })

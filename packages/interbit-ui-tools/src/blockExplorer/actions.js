@@ -1,26 +1,28 @@
 const { ACTION_PREFIX } = require('./constants')
 
 const actionTypes = {
-  TOGGLE_RAW: `${ACTION_PREFIX}/TOGGLE_RAW`,
-  SET_SELECTED_BLOCK_HASH: `${ACTION_PREFIX}/SET_SELECTED_BLOCK_HASH`,
-  SET_SELECTED_CHAIN: `${ACTION_PREFIX}/SET_CHAIN`
+  SHOW_RAW_STATE: `${ACTION_PREFIX}/SHOW_RAW_STATE`,
+  SELECT_BLOCK: `${ACTION_PREFIX}/SELECT_BLOCK`,
+  SELECT_CHAIN: `${ACTION_PREFIX}/SELECT_CHAIN`
 }
 
 const actionCreators = {
-  toggleRawData: () => ({
-    type: actionTypes.TOGGLE_RAW,
-    payload: null
+  showRawState: showRawState => ({
+    type: actionTypes.SHOW_RAW_STATE,
+    payload: {
+      showRawState
+    }
   }),
 
-  setSelectedBlockHash: hash => ({
-    type: actionTypes.SET_SELECTED_BLOCK_HASH,
+  selectBlock: hash => ({
+    type: actionTypes.SELECT_BLOCK,
     payload: {
       hash
     }
   }),
 
-  setSelectedChain: chainAlias => ({
-    type: actionTypes.SET_SELECTED_CHAIN,
+  selectChain: chainAlias => ({
+    type: actionTypes.SELECT_CHAIN,
     payload: {
       chainAlias
     }

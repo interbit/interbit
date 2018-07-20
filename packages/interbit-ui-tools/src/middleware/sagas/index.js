@@ -5,7 +5,7 @@ const getHtmlConfig = require('../getConfigFromStaticHtml')
 const {
   getConfiguredChains,
   getConfiguredPeers,
-  interbitAtRoot
+  entireTree
 } = require('../selectors')
 const { LOG_PREFIX } = require('../constants')
 const { connectToPeers } = require('./connections')
@@ -31,10 +31,12 @@ function* loadInterbitSaga() {
     const config = yield call(getHtmlConfig, document)
     yield put(actionCreators.initialConfig(config))
 
-    const peers = getConfiguredPeers(config, { root: interbitAtRoot })
+    const peers = getConfiguredPeers(config, { subtree: entireTree })
     yield call(connectToPeers, { cli, peers })
 
-    const chainsToLoad = getConfiguredChains(config, { root: interbitAtRoot })
+    const chainsToLoad = getConfiguredChains(config, {
+      subtree: entireTree
+    })
     for (const [chainAlias, { chainId }] of Object.entries(chainsToLoad)) {
       yield call(loadChain, { cli, chainAlias, chainId })
     }

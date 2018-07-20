@@ -7,10 +7,9 @@ const {
   BLOCKS,
   CHAINS,
   INTERBIT,
-  NO_CHAIN_SELECTED,
   SELECTED_BLOCK_HASH,
   SELECTED_CHAIN,
-  SHOW_RAW_DATA,
+  SHOW_RAW_STATE,
   STATE
 } = require('./constants')
 
@@ -55,12 +54,10 @@ const updateBlocks = (state, { chainAlias, block }) => {
 }
 
 const initialState = Immutable.from({
-  chains: {
-    [NO_CHAIN_SELECTED]: emptyChainState(NO_CHAIN_SELECTED)
-  },
-  selectedChain: NO_CHAIN_SELECTED,
-  showRawData: false,
-  selectedBlockHash: null
+  chains: {},
+  selectedChain: null,
+  selectedBlockHash: null,
+  showRawState: false
 })
 
 const reducer = (state = initialState, action = {}) => {
@@ -80,14 +77,14 @@ const reducer = (state = initialState, action = {}) => {
       return updateBlocks(state, { chainAlias, block })
     }
 
-    case blockExplorerActionTypes.SET_SELECTED_CHAIN:
+    case blockExplorerActionTypes.SELECT_CHAIN:
       return selectChain(state, action.payload.chainAlias)
 
-    case blockExplorerActionTypes.TOGGLE_RAW:
-      return state.setIn([SHOW_RAW_DATA], !state.showRawData)
-
-    case blockExplorerActionTypes.SET_SELECTED_BLOCK_HASH:
+    case blockExplorerActionTypes.SELECT_BLOCK:
       return state.setIn([SELECTED_BLOCK_HASH], action.payload.hash)
+
+    case blockExplorerActionTypes.SHOW_RAW_STATE:
+      return state.setIn([SHOW_RAW_STATE], action.payload.showRawState)
 
     default:
       return state

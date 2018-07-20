@@ -1,4 +1,3 @@
-const Immutable = require('seamless-immutable')
 const {
   BLOCK_MASTER,
   CHAINS,
@@ -19,21 +18,16 @@ const {
   STATUS
 } = require('./constants')
 
-const emptyObject = Immutable.from({})
+const { emptyObject, immutable, entireTree } = require('../selectorScope')
 
-const isImmutableObject = state =>
-  state && typeof state === 'object' && Immutable.isImmutable(state)
-
-const immutable = state =>
-  isImmutableObject(state) ? state : Immutable.from(state || {})
-
-const fromStoreRoot = state =>
+const interbitSubtree = state =>
   immutable(state).getIn([INTERBIT_REDUCER_KEY], emptyObject)
 
-const interbitAtRoot = state => immutable(state)
+const getChainAliases = (state, { subtree = interbitSubtree } = {}) =>
+  Object.keys(subtree(state).getIn([CHAINS], emptyObject))
 
-const isChainLoaded = (state, { root = fromStoreRoot, chainAlias }) => {
-  const chainStatus = root(state).getIn(
+const isChainLoaded = (state, { subtree = interbitSubtree, chainAlias }) => {
+  const chainStatus = subtree(state).getIn(
     [CHAIN_DATA, chainAlias, STATUS],
     CHAIN_STATUS.UNKNOWN
   )
@@ -42,74 +36,79 @@ const isChainLoaded = (state, { root = fromStoreRoot, chainAlias }) => {
 
 const isPublicChainLoaded = (
   state,
-  { root, publicChainAlias = PUBLIC_CHAIN_ALIAS } = {}
-) => isChainLoaded(state, { root, chainAlias: publicChainAlias })
+  { subtree, publicChainAlias = PUBLIC_CHAIN_ALIAS } = {}
+) => isChainLoaded(state, { subtree, chainAlias: publicChainAlias })
 
-const getChainId = (state, { root = fromStoreRoot, chainAlias } = {}) =>
-  root(state).getIn([CHAINS, chainAlias, INTERBIT, CHAIN_ID])
+const getChainId = (state, { subtree = interbitSubtree, chainAlias } = {}) =>
+  subtree(state).getIn([CHAINS, chainAlias, INTERBIT, CHAIN_ID])
 
 const getPublicChainId = (
   state,
-  { root, publicChainAlias = PUBLIC_CHAIN_ALIAS } = {}
-) => getChainId(state, { root, chainAlias: publicChainAlias })
+  { subtree, publicChainAlias = PUBLIC_CHAIN_ALIAS } = {}
+) => getChainId(state, { subtree, chainAlias: publicChainAlias })
 
 const getPrivateChainId = (
   state,
-  { root, privateChainAlias = PRIVATE_CHAIN_ALIAS } = {}
-) => getChainId(state, { root, chainAlias: privateChainAlias })
+  { subtree, privateChainAlias = PRIVATE_CHAIN_ALIAS } = {}
+) => getChainId(state, { subtree, chainAlias: privateChainAlias })
 
 const getChain = (
   state,
-  { root = fromStoreRoot, chainAlias, defaultValue = emptyObject }
-) => root(state).getIn([CHAINS, chainAlias], defaultValue)
+  { subtree = interbitSubtree, chainAlias, defaultValue = emptyObject }
+) => subtree(state).getIn([CHAINS, chainAlias], defaultValue)
 
 const getPublicChain = (
   state,
-  { root, publicChainAlias = PUBLIC_CHAIN_ALIAS, defaultValue } = {}
-) => getChain(state, { root, chainAlias: publicChainAlias, defaultValue })
+  { subtree, publicChainAlias = PUBLIC_CHAIN_ALIAS, defaultValue } = {}
+) => getChain(state, { subtree, chainAlias: publicChainAlias, defaultValue })
 
 const getPrivateChain = (
   state,
-  { root, privateChainAlias = PRIVATE_CHAIN_ALIAS, defaultValue } = {}
-) => getChain(state, { root, chainAlias: privateChainAlias, defaultValue })
+  { subtree, privateChainAlias = PRIVATE_CHAIN_ALIAS, defaultValue } = {}
+) => getChain(state, { subtree, chainAlias: privateChainAlias, defaultValue })
 
-const getBlockMaster = (state, { root = fromStoreRoot, chainAlias } = {}) =>
-  root(state).getIn([CHAINS, chainAlias, INTERBIT, CONFIG, BLOCK_MASTER])
+const getBlockMaster = (
+  state,
+  { subtree = interbitSubtree, chainAlias } = {}
+) => subtree(state).getIn([CHAINS, chainAlias, INTERBIT, CONFIG, BLOCK_MASTER])
 
 const getSponsorConfig = (
   state,
   {
-    root = fromStoreRoot,
+    subtree = interbitSubtree,
     publicChainAlias = PUBLIC_CHAIN_ALIAS,
     privateChainAlias = PRIVATE_CHAIN_ALIAS
   } = {}
 ) =>
-  root(state).getIn(
+  subtree(state).getIn(
     [CHAINS, publicChainAlias, SPONSOR_CONFIG, privateChainAlias],
     emptyObject
   )
 
-const getPublicKey = (state, { root = fromStoreRoot } = {}) =>
-  root(state).getIn([PUBLIC_KEY])
+const getPublicKey = (state, { subtree = interbitSubtree } = {}) =>
+  subtree(state).getIn([PUBLIC_KEY])
 
-const getInterbitStatus = (state, { root = fromStoreRoot } = {}) =>
-  root(state).getIn([STATUS], INTERBIT_STATUS.UNKNOWN)
+const getInterbitStatus = (state, { subtree = interbitSubtree } = {}) =>
+  subtree(state).getIn([STATUS], INTERBIT_STATUS.UNKNOWN)
 
-const getConnectionStatus = (state, { root = fromStoreRoot } = {}) =>
-  root(state).getIn([CONNECTION])
+const getConnectionStatus = (state, { subtree = interbitSubtree } = {}) =>
+  subtree(state).getIn([CONNECTION])
 
-const getCovenantHash = (state, { root = fromStoreRoot, covenantAlias }) =>
-  root(state).getIn([COVENANTS, covenantAlias])
+const getCovenantHash = (state, { subtree = interbitSubtree, covenantAlias }) =>
+  subtree(state).getIn([COVENANTS, covenantAlias])
 
-const getConfiguredChains = (state, { root = fromStoreRoot } = {}) =>
-  root(state).getIn([CHAIN_DATA], emptyObject)
+const getConfiguredChains = (state, { subtree = interbitSubtree } = {}) =>
+  subtree(state).getIn([CHAIN_DATA], emptyObject)
 
-const getConfiguredPeers = (state, { root = fromStoreRoot } = {}) =>
-  root(state).getIn([PEERS], [])
+const getConfiguredPeers = (state, { subtree = interbitSubtree } = {}) =>
+  subtree(state).getIn([PEERS], [])
 
 module.exports = {
+  entireTree,
+  interbitSubtree,
   getBlockMaster,
   getChain,
+  getChainAliases,
   getChainId,
   getConfiguredChains,
   getConfiguredPeers,
@@ -123,8 +122,5 @@ module.exports = {
   getPublicKey,
   getSponsorConfig,
   isChainLoaded,
-  isPublicChainLoaded,
-  immutable,
-  interbitAtRoot,
-  fromStoreRoot
+  isPublicChainLoaded
 }

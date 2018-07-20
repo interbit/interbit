@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 import { Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { cAuthRequests, selectors } from 'interbit-ui-tools'
+import { interbitRedux, parameterEncoding } from 'interbit-ui-tools'
 
 import urls from '../constants/urls'
 import chainAliases from '../constants/chainAliases'
+
+const { selectors } = interbitRedux
 
 const mapStateToProps = state => {
   const isChainLoaded = selectors.isChainLoaded(state, {
     chainAlias: chainAliases.PRIVATE
   })
-  const queryString = cAuthRequests.requestParams(state, {
+  const queryString = parameterEncoding.packCAuthParams(state, {
     publicChainAlias: chainAliases.PUBLIC,
     privateChainAlias: chainAliases.PRIVATE,
     tokens: ['name', 'email'],

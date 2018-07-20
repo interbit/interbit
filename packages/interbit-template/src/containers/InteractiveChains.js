@@ -4,27 +4,30 @@ import { Grid, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
 import queryString from 'query-string'
-import { chainDispatch } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
 
+import { PRIVATE } from '../constants/chainAliases'
 import LinkedCovenant from '../components/LinkedCovenant'
 import { actionCreators } from '../adapters/privateChainAdapter'
-import { getExploreChainState } from '../redux/exploreChainReducer'
+
+const { chainDispatch, selectors } = interbitRedux
 
 const mapStateToProps = (state, ownProps) => {
   const {
     location: { search }
   } = ownProps
   const query = queryString.parse(search)
-  const { alias: chainAlias } = query
+  const { alias } = query
 
-  const exploreChainState = getExploreChainState(state, chainAlias)
+  const chainAlias = alias || PRIVATE
+  const chainState = selectors.getChain(state, chainAlias)
 
   return {
     selectedChain: {
-      chainAlias: exploreChainState.chainId,
+      chainAlias,
       state: {
-        ...exploreChainState.state,
-        interbit: exploreChainState.interbit
+        ...chainState,
+        interbit: chainState.interbit
       }
     }
   }
@@ -37,11 +40,6 @@ const mapDispatchToProps = dispatch => ({
   blockchainDispatch: chainAlias => action =>
     dispatch(chainDispatch(chainAlias, action))
 })
-
-const generateChainName = chain =>
-  chain.state && chain.state.chainMetadata
-    ? chain.state.chainMetadata.chainName
-    : chain.chainAlias
 
 export class InteractiveChains extends Component {
   static propTypes = {
@@ -59,9 +57,8 @@ export class InteractiveChains extends Component {
 
   render() {
     const { selectedChain, resetForm, blockchainDispatch } = this.props
-    const chainName = generateChainName(selectedChain)
 
-    if (!selectedChain || !chainName) {
+    if (!selectedChain) {
       return <div>Loading...</div>
     }
 
@@ -70,7 +67,7 @@ export class InteractiveChains extends Component {
         <Row>
           <LinkedCovenant
             chainId={selectedChain.chainAlias}
-            chainName={chainName}
+            chainName={selectedChain.chainAlias}
             raw={selectedChain.state}
             covenant={{ actionCreators }}
             reset={resetForm}

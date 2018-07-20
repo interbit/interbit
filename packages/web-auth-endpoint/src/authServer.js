@@ -1,6 +1,6 @@
 const express = require('express')
 const {
-  queryParams: { parseState }
+  parameterEncoding: { parseState }
 } = require('interbit-ui-tools')
 
 const { AUTH_PORT } = require('./networkConfig')

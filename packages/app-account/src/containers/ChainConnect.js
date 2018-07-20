@@ -4,7 +4,7 @@ import queryString from 'query-string'
 import { Grid, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
-import { chainDispatch, selectors } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
 
 import { actionCreators } from '../interbit/my-account/actions'
 import { getOAuthConfig } from '../interbit/public/selectors'
@@ -18,6 +18,8 @@ import formNames from '../constants/formNames'
 import modalNames from '../constants/modalNames'
 import oAuthProviders from '../constants/oAuthProviders'
 import { PRIVATE, PUBLIC } from '../constants/chainAliases'
+
+const { chainDispatch, selectors } = interbitRedux
 
 const MODES = {
   NOT_LOGGED_IN: 0,

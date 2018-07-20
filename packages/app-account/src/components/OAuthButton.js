@@ -5,7 +5,7 @@ import queryString from 'query-string'
 import uuid from 'uuid'
 import amplitude from 'amplitude-js'
 import { IconButton } from 'interbit-ui-components'
-import { queryParams } from 'interbit-ui-tools'
+import { parameterEncoding } from 'interbit-ui-tools'
 import { actionCreators } from '../interbit/my-account'
 
 const authenticationHandler = ({
@@ -25,7 +25,7 @@ const authenticationHandler = ({
 
   if (serviceEndPoint && blockchainDispatch) {
     const requestId = uuid.v4()
-    const state = queryParams.packState({
+    const state = parameterEncoding.packState({
       requestId,
       browserChainId,
       publicKey,

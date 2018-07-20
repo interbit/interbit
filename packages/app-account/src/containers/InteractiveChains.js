@@ -4,27 +4,30 @@ import { Grid, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
 import queryString from 'query-string'
-import { chainDispatch } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
 
+import { PRIVATE } from '../constants/chainAliases'
 import LinkedCovenant from '../components/LinkedCovenant'
 import { actionCreators } from '../adapters/my-account.adapter'
-import { getExploreChainState } from '../redux/exploreChainReducer'
+
+const { chainDispatch, selectors } = interbitRedux
 
 const mapStateToProps = (state, ownProps) => {
   const {
     location: { search }
   } = ownProps
   const query = queryString.parse(search)
-  const { alias: chainAlias } = query
+  const { alias } = query
 
-  const exploreChainState = getExploreChainState(state, chainAlias)
+  const chainAlias = alias || PRIVATE
+  const chainState = selectors.getChain(state, chainAlias)
 
   return {
     selectedChain: {
-      chainAlias: exploreChainState.chainAlias,
+      chainAlias,
       state: {
-        ...exploreChainState.state,
-        interbit: exploreChainState.interbit
+        ...chainState,
+        interbit: chainState.interbit
       }
     }
   }

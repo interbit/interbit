@@ -1,7 +1,7 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const queryString = require('query-string')
 const {
-  queryParams: { parseState }
+  parameterEncoding: { parseState }
 } = require('interbit-ui-tools')
 
 const {

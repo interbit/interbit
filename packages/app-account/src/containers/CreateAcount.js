@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { chainDispatch, selectors } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
 import { Grid, Row, Col } from 'react-bootstrap'
 import {
   ContentBar,
@@ -20,6 +20,8 @@ import buttonNames from '../constants/buttonNames'
 import modalNames from '../constants/modalNames'
 import oAuthProviders from '../constants/oAuthProviders'
 import { PUBLIC, PRIVATE } from '../constants/chainAliases'
+
+const { chainDispatch, selectors } = interbitRedux
 
 const mapStateToProps = state => {
   const isPrivateChainLoaded = selectors.isChainLoaded(state, {

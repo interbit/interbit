@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Col, Grid, Row } from 'react-bootstrap'
 import Toggle from 'react-toggle'
-import ObjectTree from '../ObjectTree'
+import ObjectTree from './ObjectTree'
 import Table from './Table'
 import Metadata from './Metadata'
 
@@ -14,10 +14,10 @@ export default class BlockExplorer extends Component {
       interbit: PropTypes.object.isRequired,
       blocks: PropTypes.arrayOf(PropTypes.object).isRequired
     }).isRequired,
-    doToggleRawData: PropTypes.func.isRequired,
     showRawData: PropTypes.bool,
-    doSetSelectedBlockHash: PropTypes.func.isRequired,
-    selectedBlockHash: PropTypes.string
+    doShowRawData: PropTypes.func.isRequired,
+    selectedBlockHash: PropTypes.string,
+    doSelectBlock: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -39,8 +39,8 @@ export default class BlockExplorer extends Component {
     return false
   }
 
-  toggleRawData = () => {
-    this.props.doToggleRawData()
+  toggleRawData = e => {
+    this.props.doShowRawData(!e.target.checked)
   }
 
   renderJson = treeData => {
@@ -59,7 +59,7 @@ export default class BlockExplorer extends Component {
     const {
       selectedChain,
       showRawData,
-      doSetSelectedBlockHash,
+      doSelectBlock,
       selectedBlockHash
     } = this.props
 
@@ -89,7 +89,7 @@ export default class BlockExplorer extends Component {
               <Table
                 blocks={blocks}
                 selectedBlockHash={selectedBlock.blockHash}
-                doSetSelectedBlockHash={doSetSelectedBlockHash}
+                doSelectBlock={doSelectBlock}
               />
             </Row>
           </Col>

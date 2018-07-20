@@ -1,7 +1,6 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 export { default as Covenant } from './components/Covenant'
 export { default as BlockExplorer } from './components/BlockExplorer'
-export { default as ObjectTree } from './components/ObjectTree'
 export { default as Logo } from './components/UIKit/Logo'
 export { default as IBIcon } from './components/UIKit/IBIcon'
 export { default as IBWordmark } from './components/UIKit/IBWordmark'

@@ -4,5 +4,5 @@ const rootStateSelectors = require('./rootStateSelectors')
 
 module.exports = {
   rootStateSelectors,
-  ...rootCovenant
+  rootCovenant
 }

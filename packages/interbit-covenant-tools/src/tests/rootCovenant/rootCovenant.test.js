@@ -4,7 +4,7 @@ const {
   selectors: { pendingActionsForChain }
 } = require('../../coreCovenant')
 const hashObject = require('../../rootCovenant/hash')
-const rootCovenant = require('../../rootCovenant')
+const { rootCovenant } = require('../../rootCovenant')
 const defaultManifest = require('../testManifest.json')
 
 describe('rootCovenant', () => {
@@ -79,6 +79,10 @@ describe('rootCovenant', () => {
   it('applies covenant changes via redispatch on configured covenant update', () => {
     const state = rootCovenant.initialState
       .setIn(['interbit', 'chainId'], defaultManifest.chains.interbitRoot)
+      .setIn(
+        ['interbit', 'config', 'covenantHash'],
+        defaultManifest.covenants.interbitRoot.hash
+      )
       .setIn(['manifest'], defaultManifest)
 
     const interbitRoot = {
@@ -106,7 +110,7 @@ describe('rootCovenant', () => {
     // TODO: Find out the real config change and check for it (I suspect this is right??)
     should.equal(
       nextState.interbit.covenantHash,
-      defaultManifest.covenants.control
+      defaultManifest.covenants.control.hash
     )
   })
 

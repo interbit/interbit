@@ -28,7 +28,7 @@
         "redux-form": "^7.2.1",
         "redux-saga": "^0.16.0",
         "seamless-immutable": "^7.1.2",
-        "serve": "^6.5.5",
+        "serve": "^7.0.0",
         "uuid": "^3.1.0"
     },
     "devDependencies": {

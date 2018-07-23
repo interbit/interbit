@@ -23,6 +23,10 @@
     "public": {
       "filename": "covenants/72fe3ca61c3af35ecca31e58c33c368e1554dc1dab01ab8fc3aadc965f608775.tgz",
       "hash": "72fe3ca61c3af35ecca31e58c33c368e1554dc1dab01ab8fc3aadc965f608775"
+    },
+    "interbitRoot": {
+      "filename": "covenants/368e1554dc1dab01ab8fc3aadc965f60877572fe3ca61c3af35ecca31e58c33c.tgz",
+      "hash": "368e1554dc1dab01ab8fc3aadc965f60877572fe3ca61c3af35ecca31e58c33c"
     }
   },
   "chains": {
@@ -253,5 +257,5 @@
       "hash": "57b39212bdfacebbd29ee59b11a8c19452ff290e"
     }
   },
-  "hash": "8d33cd122fed0d374f1ef6e4b36e5043734920e0"
+  "hash": "709fd41d4fc72be3f361c6f3bcf91c6dce7ac62c"
 }

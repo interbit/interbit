@@ -1,6 +1,10 @@
 const Immutable = require('seamless-immutable')
 const hashObject = require('../hash')
-const { remoteRedispatch, redispatch } = require('../../coreCovenant')
+const {
+  remoteRedispatch,
+  redispatch,
+  selectors: { covenantHash }
+} = require('../../coreCovenant')
 const { PATHS } = require('../constants')
 
 const prefix = '@@MANIFEST'
@@ -49,7 +53,7 @@ const reducer = (state = initialState, action) => {
       }
 
       nextState = redispatchManifest(state, ownManifest)
-      nextState = applyChanges(nextState, action)
+      nextState = applyChanges(nextState, action, ownManifest)
 
       return nextState.setIn(PATHS.MANIFEST, manifest)
     }
@@ -59,7 +63,21 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-const applyChanges = (state, action, ownManifest) => state
+const applyChanges = (state, action, newManifest) => {
+  const nextState = state
+  const manifest = state.manifest
+  // check for own covenant alias change
+  console.log(newManifest)
+  const isCovenantAliasChanged = newManifest
+
+  const currCovenantHash = covenantHash(state)
+  console.log(currCovenantHash)
+  // check for existing covenant hash update
+  // check for own acl update
+  // check for own join updates
+
+  return nextState
+}
 
 const verifyManifestHash = manifest => {
   const verifiableManifest = { ...manifest }

@@ -4,21 +4,34 @@ import { Grid, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
 import queryString from 'query-string'
-import { chainDispatch } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
+import { LinkedCovenant } from 'interbit-ui-components'
 
-import LinkedCovenant from '../components/LinkedCovenant'
 import { actionCreators } from '../components/incrementCovenantAdapter'
-import { getExploreChainState } from '../redux/exploreChainReducer'
+
+const DEFAULT_CHAIN_ALIAS = 'increment'
+const { chainDispatch, selectors } = interbitRedux
 
 const mapStateToProps = (state, ownProps) => {
   const {
     location: { search }
   } = ownProps
   const query = queryString.parse(search)
-  const { chainId } = query
+  const { alias } = query
+
+  const chainAlias = alias || DEFAULT_CHAIN_ALIAS
+  const chainState = selectors.getChain(state, { chainAlias })
+  const chainId = selectors.getChainId(state, { chainAlias })
 
   return {
-    selectedChain: getExploreChainState(state, chainId || 'increment')
+    selectedChain: {
+      chainId,
+      chainAlias,
+      state: {
+        ...chainState,
+        interbit: chainState.interbit
+      }
+    }
   }
 }
 
@@ -30,23 +43,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch(chainDispatch(chainAlias, action))
 })
 
-const generateChainName = chain => {
-  const chainName =
-    chain.state && chain.state.chainMetadata
-      ? chain.state.chainMetadata.chainName
-      : undefined
-  const covenant =
-    chain.state && chain.state.chainMetadata
-      ? chain.state.chainMetadata.covenant
-      : undefined
-
-  return chainName || covenant || chain.covenantName
-}
-
 export class InteractiveChains extends Component {
   static propTypes = {
     selectedChain: PropTypes.shape({
-      chainId: PropTypes.string.isRequired,
+      chainId: PropTypes.string,
+      chainAlias: PropTypes.string.isRequired,
       state: PropTypes.object.isRequired
     }),
     resetForm: PropTypes.func.isRequired,
@@ -59,9 +60,8 @@ export class InteractiveChains extends Component {
 
   render() {
     const { selectedChain, resetForm, blockchainDispatch } = this.props
-    const chainName = generateChainName(selectedChain)
 
-    if (!selectedChain || !chainName) {
+    if (!selectedChain) {
       return <div>Loading...</div>
     }
 
@@ -70,11 +70,11 @@ export class InteractiveChains extends Component {
         <Row>
           <LinkedCovenant
             chainId={selectedChain.chainId}
-            chainName={chainName}
+            chainAlias={selectedChain.chainAlias}
             raw={selectedChain.state}
             covenant={{ actionCreators }}
             reset={resetForm}
-            blockchainDispatch={blockchainDispatch(selectedChain.chainId)}
+            blockchainDispatch={blockchainDispatch(selectedChain.chainAlias)}
           />
         </Row>
       </Grid>

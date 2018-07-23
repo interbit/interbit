@@ -3,7 +3,8 @@ const hashObject = require('../hash')
 const {
   remoteRedispatch,
   redispatch,
-  selectors: { covenantHash }
+  selectors: { covenantHash },
+  actionCreators: { applyCovenant }
 } = require('../../coreCovenant')
 const { PATHS } = require('../constants')
 
@@ -53,7 +54,7 @@ const reducer = (state = initialState, action) => {
       }
 
       nextState = redispatchManifest(state, ownManifest)
-      nextState = applyChanges(nextState, action, ownManifest)
+      nextState = applyChanges(nextState, ownManifest)
 
       return nextState.setIn(PATHS.MANIFEST, manifest)
     }
@@ -63,18 +64,46 @@ const reducer = (state = initialState, action) => {
   }
 }
 
-const applyChanges = (state, action, newManifest) => {
-  const nextState = state
-  const manifest = state.manifest
-  // check for own covenant alias change
-  console.log(newManifest)
-  const isCovenantAliasChanged = newManifest
+const applyChanges = (state, newManifest) => {
+  let nextState = state
+
+  nextState = applyCovenantChanges(nextState, newManifest)
+  nextState = applyAclChanges(nextState, newManifest)
+  nextState = applyJoinChanges(nextState, newManifest)
+
+  return nextState
+}
+
+const applyCovenantChanges = (state, newManifest) => {
+  let nextState = state
 
   const currCovenantHash = covenantHash(state)
-  console.log(currCovenantHash)
-  // check for existing covenant hash update
-  // check for own acl update
-  // check for own join updates
+  const newCovenantHash = newManifest.covenants[newManifest.covenant]
+  const isCovenantAliasChanged = newCovenantHash !== currCovenantHash
+
+  if (isCovenantAliasChanged) {
+    const applyCovenantAction = applyCovenant({ covenantHash: newCovenantHash })
+    nextState = redispatch(nextState, applyCovenantAction)
+  }
+
+  return nextState
+}
+
+const applyAclChanges = (state, newManifest) => {
+  const nextState = state
+
+  // It hasn't been totally decided how we will manage ACL updates in the
+  // manifest.
+
+  return nextState
+}
+
+const applyJoinChanges = (state, newManifest) => {
+  const nextState = state
+
+  // Get the diff of the joins
+  // Remove unused joins. (Blocked by #558)
+  // Dispatch new joins.
 
   return nextState
 }

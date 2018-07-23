@@ -46,7 +46,7 @@ describe('rootCovenant', () => {
 
     should.ok(nextState)
     // TODO: Find out the real admin action type
-    should.equal(nextState.sideEffects[0].type, '@@INTERBIT/JOIN_SMTH')
+    should.equal(nextState.sideEffects[0].type, '@@interbit/JOIN_SMTH')
   })
 
   it('applies covenant changes via redispatch on covenant hash update', () => {
@@ -54,6 +54,16 @@ describe('rootCovenant', () => {
     const state = rootCovenant.initialState
       .setIn(['interbit', 'chainId'], defaultManifest.chains.interbitRoot)
       .setIn(['manifest'], defaultManifest)
+
+    const interbitRoot = {
+      ...defaultManifest.manifest.interbitRoot,
+      covenants: {
+        ...defaultManifest.manifest.interbitRoot.covenants,
+        interbitRoot: covenantHash
+      }
+    }
+    delete interbitRoot.hash
+    interbitRoot.hash = hashObject(interbitRoot)
 
     const manifest = {
       ...defaultManifest,
@@ -63,6 +73,10 @@ describe('rootCovenant', () => {
           ...defaultManifest.covenants.interbitRoot,
           hash: covenantHash
         }
+      },
+      manifest: {
+        ...defaultManifest.manifest,
+        interbitRoot
       }
     }
     delete manifest.hash
@@ -72,8 +86,10 @@ describe('rootCovenant', () => {
     const nextState = rootCovenant.reducer(state, action)
 
     should.ok(nextState)
-    // TODO: Find out the real config change and check for it (I suspect this is right??)
-    should.equal(nextState.interbit.covenantHash, covenantHash)
+
+    const resultingAction = nextState.sideEffects[0]
+    should.equal(resultingAction.type, '@@interbit/DEPLOY_COVENANT')
+    should.equal(resultingAction.payload.covenantHash, covenantHash)
   })
 
   it('applies covenant changes via redispatch on configured covenant update', () => {
@@ -107,11 +123,10 @@ describe('rootCovenant', () => {
     const nextState = rootCovenant.reducer(state, action)
 
     should.ok(nextState)
-    // TODO: Find out the real config change and check for it (I suspect this is right??)
-    should.equal(
-      nextState.interbit.covenantHash,
-      defaultManifest.covenants.control.hash
-    )
+
+    const resultingAction = nextState.sideEffects[0]
+    should.equal(resultingAction.type, '@@interbit/DEPLOY_COVENANT')
+    should.equal(resultingAction.payload.covenantHash, 'control')
   })
 
   it('applies ACL updates via redispatch', () => {
@@ -129,6 +144,7 @@ describe('rootCovenant', () => {
 
     should.ok(nextState)
     // TODO: check the redispatch queue for an ACL update action
+    should.ok(false)
   })
 
   it('unsupported action does nothing', () => {

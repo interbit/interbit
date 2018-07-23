@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import { reset } from 'redux-form'
 import queryString from 'query-string'
 import { interbitRedux } from 'interbit-ui-tools'
+import { LinkedCovenant } from 'interbit-ui-components'
 
 import { PRIVATE } from '../constants/chainAliases'
-import LinkedCovenant from '../components/LinkedCovenant'
 import { actionCreators } from '../adapters/privateChainAdapter'
 
 const { chainDispatch, selectors } = interbitRedux
@@ -20,10 +20,12 @@ const mapStateToProps = (state, ownProps) => {
   const { alias } = query
 
   const chainAlias = alias || PRIVATE
-  const chainState = selectors.getChain(state, chainAlias)
+  const chainState = selectors.getChain(state, { chainAlias })
+  const chainId = selectors.getChainId(state, { chainAlias })
 
   return {
     selectedChain: {
+      chainId,
       chainAlias,
       state: {
         ...chainState,
@@ -44,6 +46,7 @@ const mapDispatchToProps = dispatch => ({
 export class InteractiveChains extends Component {
   static propTypes = {
     selectedChain: PropTypes.shape({
+      chainId: PropTypes.string,
       chainAlias: PropTypes.string.isRequired,
       state: PropTypes.object.isRequired
     }),
@@ -66,8 +69,8 @@ export class InteractiveChains extends Component {
       <Grid>
         <Row>
           <LinkedCovenant
-            chainId={selectedChain.chainAlias}
-            chainName={selectedChain.chainAlias}
+            chainId={selectedChain.chainId}
+            chainAlias={selectedChain.chainAlias}
             raw={selectedChain.state}
             covenant={{ actionCreators }}
             reset={resetForm}

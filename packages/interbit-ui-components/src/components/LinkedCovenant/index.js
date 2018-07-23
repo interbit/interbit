@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { Panel } from 'react-bootstrap'
-import { Covenant } from 'interbit-ui-components'
+import Covenant from '../Covenant'
 
 export default class LinkedCovenant extends Component {
   static propTypes = {
-    chainId: PropTypes.string.isRequired,
-    chainName: PropTypes.string.isRequired,
+    chainId: PropTypes.string,
+    chainAlias: PropTypes.string.isRequired,
     // Note: We do not know the state shape and thus cannot define it in props
     // eslint-disable-next-line react/forbid-prop-types
     raw: PropTypes.object,
@@ -18,13 +18,14 @@ export default class LinkedCovenant extends Component {
   }
 
   static defaultProps = {
+    chainId: undefined,
     raw: {}
   }
 
   render() {
     const {
       chainId,
-      chainName,
+      chainAlias,
       raw,
       covenant,
       blockchainDispatch,
@@ -33,9 +34,9 @@ export default class LinkedCovenant extends Component {
 
     return (
       <Panel>
-        <Link to={chainId ? `/explore?chainId=${chainId}` : '#'}>
+        <Link to={chainAlias ? `/explore?alias=${chainAlias}` : '#'}>
           <h3>
-            {chainName}
+            {chainAlias}
             {chainId ? ` (${chainId.substr(0, 16)}...)` : ''}
           </h3>
         </Link>

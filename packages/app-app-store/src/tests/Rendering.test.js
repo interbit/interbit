@@ -10,6 +10,7 @@ import AppDirectory from '../containers/AppDirectory'
 import MyApps from '../containers/MyApps'
 import FeaturedApps from '../containers/FeaturedApps'
 import NotFoundPage from '../containers/NotFoundPage'
+import ConnectedAppDetails, { AppDetails } from '../containers/AppDetails'
 import reducers from '../redux'
 
 const renderWithContext = component => {
@@ -33,6 +34,30 @@ describe('Renders without crashing:', () => {
     })
     it('My Apps', () => {
       renderWithContext(<MyApps />)
+    })
+    it('AppDetails', () => {
+      const props = {
+        appInfo: {
+          integratedApps: ['accounts']
+        },
+        match: {
+          params: {
+            appName: 'test'
+          }
+        }
+      }
+      renderWithContext(<AppDetails {...props} />)
+    })
+    it('AppDetails connect', () => {
+      const props = {
+        appDetails: {},
+        match: {
+          params: {
+            appName: 'test'
+          }
+        }
+      }
+      renderWithContext(<ConnectedAppDetails {...props} />)
     })
     it('Featured Apps', () => {
       renderWithContext(<FeaturedApps />)

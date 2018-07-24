@@ -24,7 +24,7 @@
         "redux-devtools-extension": "^2.13.2",
         "redux-saga": "^0.16.0",
         "seamless-immutable": "^7.1.2",
-        "serve": "^6.5.5"
+        "serve": "^7.0.0"
     },
     "devDependencies": {
         "react-scripts": "1.1.0"

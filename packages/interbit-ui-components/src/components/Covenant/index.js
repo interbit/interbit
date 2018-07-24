@@ -1,12 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-// import { connect } from 'react-redux'
 import { Grid, Row, Col } from 'react-bootstrap'
 import CovenantForm from './CovenantForm'
 
-// @connect(state => ({
-//   raw: state.chain.state.app
-// }))
 export default class Covenant extends Component {
   static propTypes = {
     // Note: We do not know the state shape and thus cannot define it in props

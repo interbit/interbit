@@ -2,26 +2,26 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Col, Grid, Row } from 'react-bootstrap'
 import Toggle from 'react-toggle'
-import Immutable from 'seamless-immutable'
-import ObjectTree from '../ObjectTree'
+import ObjectTree from './ObjectTree'
 import Table from './Table'
 import Metadata from './Metadata'
 
 export default class BlockExplorer extends Component {
   static propTypes = {
     selectedChain: PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      chainAlias: PropTypes.string.isRequired,
       state: PropTypes.object.isRequired,
       interbit: PropTypes.object.isRequired,
       blocks: PropTypes.arrayOf(PropTypes.object).isRequired
     }).isRequired,
-    doToggleRawData: PropTypes.func.isRequired,
-    showRawData: PropTypes.bool.isRequired,
-    doSetSelectedBlockHash: PropTypes.func.isRequired,
-    selectedBlockHash: PropTypes.string
+    showRawData: PropTypes.bool,
+    doShowRawData: PropTypes.func.isRequired,
+    selectedBlockHash: PropTypes.string,
+    doSelectBlock: PropTypes.func.isRequired
   }
 
   static defaultProps = {
+    showRawData: false,
     selectedBlockHash: null
   }
 
@@ -39,8 +39,8 @@ export default class BlockExplorer extends Component {
     return false
   }
 
-  toggleRawData = () => {
-    this.props.doToggleRawData()
+  toggleRawData = e => {
+    this.props.doShowRawData(!e.target.checked)
   }
 
   renderJson = treeData => {
@@ -59,14 +59,17 @@ export default class BlockExplorer extends Component {
     const {
       selectedChain,
       showRawData,
-      doSetSelectedBlockHash,
+      doSelectBlock,
       selectedBlockHash
     } = this.props
 
     const blocks = selectedChain.blocks
     const treeData = {
-      ...selectedChain.state,
-      interbit: { ...selectedChain.interbit, blocks: selectedChain.blocks }
+      state: {
+        ...selectedChain.state,
+        interbit: selectedChain.interbit
+      },
+      blocks: selectedChain.blocks
     }
 
     const lastBlock =
@@ -84,12 +87,9 @@ export default class BlockExplorer extends Component {
             </Row>
             <Row className="blockTable">
               <Table
-                blocks={(Immutable.isImmutable(blocks)
-                  ? blocks.asMutable()
-                  : blocks
-                ).reverse()}
+                blocks={blocks}
                 selectedBlockHash={selectedBlock.blockHash}
-                doSetSelectedBlockHash={doSetSelectedBlockHash}
+                doSelectBlock={doSelectBlock}
               />
             </Row>
           </Col>
@@ -105,9 +105,9 @@ export default class BlockExplorer extends Component {
                 />
               </Col>
             </Row>
-            {!selectedChain.name && <p>No Chain Selected</p>}
+            {!selectedChain.chainAlias && <p>No Chain Selected</p>}
             {!showRawData ? (
-              <ObjectTree treeData={treeData} />
+              <ObjectTree root={selectedChain.chainAlias} treeData={treeData} />
             ) : (
               this.renderJson(treeData)
             )}

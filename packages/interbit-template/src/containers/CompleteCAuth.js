@@ -3,10 +3,12 @@ import { Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
-import { chainDispatch, selectors } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
 import { cAuthConsumerCovenant as covenant } from 'interbit-covenant-tools'
 
 import chainAliases from '../constants/chainAliases'
+
+const { chainDispatch, selectors } = interbitRedux
 
 const mapStateToProps = (state, ownProps) => {
   const {
@@ -66,7 +68,7 @@ export class CompleteCAuth extends Component {
     if (!isChainLoaded) {
       return <div>Loading...</div>
     } else if (error) {
-      return <div>User cancelled the app&rsquo;s authoriztion request</div>
+      return <div>User cancelled the app&rsquo;s authorization request</div>
     }
 
     return (

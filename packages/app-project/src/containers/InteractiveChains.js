@@ -4,21 +4,34 @@ import { Grid, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { reset } from 'redux-form'
 import queryString from 'query-string'
-import { chainDispatch } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
+import { LinkedCovenant } from 'interbit-ui-components'
 
-import LinkedCovenant from '../components/LinkedCovenant'
+import { MY_PROJECTS } from '../constants/chainAliases'
 import { actionCreators } from '../adapters/my-projects.adapter'
-import { getExploreChainState } from '../redux/exploreChainReducer'
+
+const { chainDispatch, selectors } = interbitRedux
 
 const mapStateToProps = (state, ownProps) => {
   const {
     location: { search }
   } = ownProps
   const query = queryString.parse(search)
-  const { chainId } = query
+  const { alias } = query
+
+  const chainAlias = alias || MY_PROJECTS
+  const chainState = selectors.getChain(state, { chainAlias })
+  const chainId = selectors.getChainId(state, { chainAlias })
 
   return {
-    selectedChain: getExploreChainState(state, chainId)
+    selectedChain: {
+      chainId,
+      chainAlias,
+      state: {
+        ...chainState,
+        interbit: chainState.interbit
+      }
+    }
   }
 }
 
@@ -26,26 +39,15 @@ const mapDispatchToProps = dispatch => ({
   resetForm: form => {
     dispatch(reset(form))
   },
-  blockchainDispatch: action => dispatch(chainDispatch('myProjects', action))
+  blockchainDispatch: chainAlias => action =>
+    dispatch(chainDispatch(chainAlias, action))
 })
-
-const generateChainName = chain => {
-  const chainName =
-    chain.state && chain.state.chainMetadata
-      ? chain.state.chainMetadata.chainName
-      : undefined
-  const covenant =
-    chain.state && chain.state.chainMetadata
-      ? chain.state.chainMetadata.covenant
-      : undefined
-
-  return chainName || covenant || chain.covenantName
-}
 
 export class InteractiveChains extends Component {
   static propTypes = {
     selectedChain: PropTypes.shape({
-      chainId: PropTypes.string.isRequired,
+      chainId: PropTypes.string,
+      chainAlias: PropTypes.string.isRequired,
       state: PropTypes.object.isRequired
     }),
     resetForm: PropTypes.func.isRequired,
@@ -68,11 +70,11 @@ export class InteractiveChains extends Component {
         <Row>
           <LinkedCovenant
             chainId={selectedChain.chainId}
-            chainName={generateChainName(selectedChain)}
+            chainAlias={selectedChain.chainAlias}
             raw={selectedChain.state}
             covenant={{ actionCreators }}
             reset={resetForm}
-            blockchainDispatch={blockchainDispatch}
+            blockchainDispatch={blockchainDispatch(selectedChain.chainAlias)}
           />
         </Row>
       </Grid>

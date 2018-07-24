@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
-
-import { selectors } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
 
 import PageContainer from './containers/PageContainer'
 import PageContainerNoNav from './containers/PageContainerNoNav'
@@ -12,6 +11,8 @@ import CHAIN_ALIASES from './constants/chainAliases'
 import paths from './constants/paths'
 import './config/amplitude'
 import './css/App.css'
+
+const { selectors } = interbitRedux
 
 const mapStateToProps = state => {
   const chainAlias = CHAIN_ALIASES.PRIVATE

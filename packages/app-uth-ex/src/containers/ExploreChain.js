@@ -4,74 +4,71 @@ import queryString from 'query-string'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
 import { BlockExplorer } from 'interbit-ui-components'
-import {
-  NO_CHAIN_SELECTED,
-  emptyChainState,
-  toggleRawData,
-  setSelectedBlockHash
-} from '../redux/exploreChainReducer'
+import { blockExplorerRedux } from 'interbit-ui-tools'
+
+const DEFAULT_CHAIN_ALIAS = 'hub'
+const {
+  actionCreators: { selectBlock, showRawState },
+  selectors: { getChainState, getSelectedBlockHash, getShowRawState }
+} = blockExplorerRedux
 
 const mapStateToProps = (state, ownProps) => {
   const {
-    exploreChain,
-    exploreChain: { selectedChainId }
-  } = state
-  const {
     location: { search }
   } = ownProps
+
   const query = queryString.parse(search)
-  const { chainId } = query
+  const { alias: aliasFromUrl } = query
+
+  const chainAlias = aliasFromUrl || DEFAULT_CHAIN_ALIAS
 
   return {
-    ...exploreChain,
-    selectedChain:
-      exploreChain.chains[chainId || selectedChainId] ||
-      exploreChain.chains[NO_CHAIN_SELECTED] ||
-      emptyChainState(NO_CHAIN_SELECTED)
+    selectedChain: getChainState(state, { chainAlias }),
+    selectedBlockHash: getSelectedBlockHash(state),
+    showRawData: getShowRawState(state)
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  doToggleRawData: () => dispatch(toggleRawData()),
-  doSetSelectedBlockHash: hash => dispatch(setSelectedBlockHash(hash))
+  doShowRawData: showRaw => dispatch(showRawState(showRaw)),
+  doSelectBlock: hash => dispatch(selectBlock(hash))
 })
 
 export class ExploreChain extends Component {
   static propTypes = {
     selectedChain: PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      chainAlias: PropTypes.string.isRequired,
       state: PropTypes.object.isRequired,
       interbit: PropTypes.object.isRequired,
-      blocks: PropTypes.arrayOf(PropTypes.object).isRequired,
-      chainType: PropTypes.string,
-      chainDispatch: PropTypes.func
+      blocks: PropTypes.arrayOf(PropTypes.object).isRequired
     }).isRequired,
     showRawData: PropTypes.bool,
-    doToggleRawData: PropTypes.func.isRequired,
+    doShowRawData: PropTypes.func.isRequired,
     selectedBlockHash: PropTypes.string,
-    doSetSelectedBlockHash: PropTypes.func.isRequired
+    doSelectBlock: PropTypes.func.isRequired
   }
 
   static defaultProps = {
-    showRawData: true,
+    showRawData: false,
     selectedBlockHash: null
   }
 
   render() {
     const {
-      showRawData,
-      doToggleRawData,
       selectedChain,
+      showRawData,
+      doShowRawData,
       selectedBlockHash,
-      doSetSelectedBlockHash
+      doSelectBlock
     } = this.props
+
     return (
       <BlockExplorer
         selectedChain={selectedChain}
         showRawData={showRawData}
-        doToggleRawData={doToggleRawData}
+        doShowRawData={doShowRawData}
         selectedBlockHash={selectedBlockHash}
-        doSetSelectedBlockHash={doSetSelectedBlockHash}
+        doSelectBlock={doSelectBlock}
       />
     )
   }

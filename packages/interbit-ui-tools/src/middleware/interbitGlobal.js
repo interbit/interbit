@@ -27,7 +27,25 @@ const createContext = async () => {
   }
 
   console.log(`${LOG_PREFIX}: Starting interbit hypervisor`)
-  const hypervisor = await interbit.createHypervisor({ keyPair })
+  const hypervisorChainId = await localDataStore.getItem(
+    DATASTORE_KEYS.HYPERVISOR_CHAIN_ID
+  )
+  const hypervisor = await interbit.createHypervisor({
+    keyPair,
+    existingId: hypervisorChainId
+  })
+
+  console.log(`${LOG_PREFIX}: Hypervisor running:`, {
+    version: interbit.VERSION,
+    chainId: hypervisor.chainId
+  })
+
+  if (!hypervisorChainId) {
+    await localDataStore.setItem(
+      DATASTORE_KEYS.HYPERVISOR_CHAIN_ID,
+      hypervisor.chainId
+    )
+  }
 
   console.log(`${LOG_PREFIX}: Creating interbit client`)
   const cli = await interbit.createCli(hypervisor)

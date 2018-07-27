@@ -11,14 +11,17 @@ describe('middleware.reducer', () => {
   const assertExpectedState = (
     state,
     {
-      startingState = initialState,
+      startState = initialState,
+      expectedEndState,
       expectedStateChange = {},
       assertion = assert.deepEqual
     }
   ) => {
-    const expectedState = startingState.merge(expectedStateChange, {
-      deep: true
-    })
+    const expectedState =
+      expectedEndState ||
+      startState.merge(expectedStateChange, {
+        deep: true
+      })
 
     assertion(state, expectedState)
   }
@@ -72,6 +75,16 @@ describe('middleware.reducer', () => {
       status: 'REALLY_BAD'
     }
     const result = reducer(initialState, action)
+    assertExpectedState(result, { initialState, expectedStateChange })
+  })
+
+  it('interbitReady updates status', () => {
+    const action = actionCreators.interbitReady()
+    const expectedStateChange = {
+      status: 'READY'
+    }
+    const result = reducer(initialState, action)
+    console.log(result)
     assertExpectedState(result, { initialState, expectedStateChange })
   })
 
@@ -179,7 +192,7 @@ describe('middleware.reducer', () => {
   })
 
   it('chainBlocking updates chain status', () => {
-    const startingState = initialState.merge({
+    const startState = initialState.merge({
       chains: { [chainAlias]: { thingy: 'wotsit' } },
       chainData: { [chainAlias]: { chainId, status: 'SUBSCRIBED' } }
     })
@@ -187,13 +200,13 @@ describe('middleware.reducer', () => {
     const expectedStateChange = {
       chainData: { [chainAlias]: { status: 'BLOCKING' } }
     }
-    const result = reducer(startingState, action)
-    assertExpectedState(result, { startingState, expectedStateChange })
+    const result = reducer(startState, action)
+    assertExpectedState(result, { startState, expectedStateChange })
   })
 
   it('chainError updates chain status and error', () => {
     const error = { message: 'Something went wrong' }
-    const startingState = initialState.merge({
+    const startState = initialState.merge({
       chains: { [chainAlias]: { thingy: 'wotsit' } },
       chainData: { [chainAlias]: { chainId, status: 'SUBSCRIBED' } }
     })
@@ -201,7 +214,37 @@ describe('middleware.reducer', () => {
     const expectedStateChange = {
       chainData: { [chainAlias]: { status: 'ERROR', error } }
     }
-    const result = reducer(startingState, action)
-    assertExpectedState(result, { startingState, expectedStateChange })
+    const result = reducer(startState, action)
+    assertExpectedState(result, { startState, expectedStateChange })
+  })
+
+  it('chainDeleting updates chain status', () => {
+    const startState = initialState.merge({
+      chains: { [chainAlias]: { thingy: 'wotsit' } },
+      chainData: { [chainAlias]: { chainId, status: 'BLOCKING' } }
+    })
+    const action = actionCreators.chainDeleting({ chainAlias, chainId })
+    const expectedStateChange = {
+      chainData: { [chainAlias]: { status: 'DELETING' } }
+    }
+    const result = reducer(startState, action)
+    assertExpectedState(result, { startState, expectedStateChange })
+  })
+
+  it('chainDeleted remove chain data', () => {
+    const initialStateWithChains = initialState.merge({
+      chains: {},
+      chainData: {}
+    })
+    const startState = initialState.merge({
+      chains: { [chainAlias]: { thingy: 'wotsit' } },
+      chainData: { [chainAlias]: { chainId, status: 'DELETING' } }
+    })
+    const action = actionCreators.chainDeleted({ chainAlias, chainId })
+    const result = reducer(startState, action)
+    assertExpectedState(result, {
+      startState,
+      expectedEndState: initialStateWithChains
+    })
   })
 })

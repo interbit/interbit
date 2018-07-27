@@ -64,6 +64,10 @@ const reducer = (state = initialState, action = {}) => {
       return state.setIn([PUBLIC_KEY], publicKey)
     }
 
+    case actionTypes.INTERBIT_READY: {
+      return state.setIn([STATUS], INTERBIT_STATUS.READY)
+    }
+
     case actionTypes.INTERBIT_ERROR: {
       const { error } = action.payload
       return state.setIn([STATUS], INTERBIT_STATUS.ERROR).setIn([ERROR], error)
@@ -107,6 +111,21 @@ const reducer = (state = initialState, action = {}) => {
         genesisBlock,
         status: CHAIN_STATUS.GENESIS
       })
+    }
+
+    case actionTypes.CHAIN_DELETING: {
+      const { chainAlias, chainId } = action.payload
+      return mergeAtPath(state, [CHAIN_DATA, chainAlias], {
+        chainId,
+        status: CHAIN_STATUS.DELETING
+      })
+    }
+
+    case actionTypes.CHAIN_DELETED: {
+      const { chainAlias } = action.payload
+      return state
+        .updateIn([CHAIN_DATA], Immutable.without, chainAlias)
+        .updateIn([CHAINS], Immutable.without, chainAlias)
     }
 
     case actionTypes.CHAIN_DISPATCH:

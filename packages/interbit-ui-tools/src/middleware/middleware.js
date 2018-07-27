@@ -113,7 +113,7 @@ const subscribeToChain = (store, { chainAlias, chain }) => {
 const detectBlocking = (store, { chainAlias, chain }) => {
   console.log(`${LOG_PREFIX}: Detecting blocking on chain '${chainAlias}'`)
 
-  waitForBlocking(chain, {
+  waitForNewBlock(chain, {
     onNewBlock: () => store.dispatch(actionCreators.chainBlocking(chainAlias)),
     onTimeout: () => {
       console.warn(`${LOG_PREFIX}: Chain '${chainAlias}' is not blocking`)
@@ -127,15 +127,8 @@ const detectBlocking = (store, { chainAlias, chain }) => {
   })
 }
 
-const waitForBlocking = (chain, { onNewBlock, onTimeout, maxTime = 5000 }) => {
-  const startingBlockHeight = getCurrentBlockHeight(chain)
-
-  return new Promise((resolve, reject) => {
-    const tester = () => getCurrentBlockHeight(chain) > startingBlockHeight
-    if (tester()) {
-      resolve(onNewBlock())
-      return
-    }
+const waitForNewBlock = (chain, { onNewBlock, onTimeout, maxTime = 5000 }) =>
+  new Promise((resolve, reject) => {
     let unsubscribe = () => {}
     const timeout = onTimeout
       ? setTimeout(() => {
@@ -144,18 +137,10 @@ const waitForBlocking = (chain, { onNewBlock, onTimeout, maxTime = 5000 }) => {
         }, maxTime)
       : undefined
     unsubscribe = chain.blockSubscribe(() => {
-      if (tester()) {
-        unsubscribe()
-        timeout && clearTimeout(timeout)
-        resolve(onNewBlock())
-      }
+      unsubscribe()
+      timeout && clearTimeout(timeout)
+      resolve(onNewBlock())
     })
   })
-}
-
-const getCurrentBlockHeight = chain => getBlockHeight(chain.getCurrentBlock())
-
-const getBlockHeight = block =>
-  block ? block.getIn(['content', 'height'], 0) : 0
 
 module.exports = createMiddleware

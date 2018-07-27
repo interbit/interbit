@@ -52,11 +52,12 @@ const createMiddleware = ({
       case actionTypes.CHAIN_LOADED: {
         const { chainAlias, chainId } = action.payload
 
-        const { cli, chains } = getInterbit()
+        const { hypervisor, cli, chains } = getInterbit()
         const chain = cli.getChain(chainId)
 
         chains[chainAlias] = chain
-        subscribeToChain(store, chainAlias, chain)
+        subscribeToChain(store, { chainAlias, chain })
+        detectBlocking(store, { chainAlias, chainId, hypervisor, chain })
 
         return next(action)
       }
@@ -91,11 +92,10 @@ const dispatchToChain = (chainAlias, action) => {
   return chain.dispatch(action)
 }
 
-const subscribeToChain = (store, chainAlias, chain) => {
+const subscribeToChain = (store, { chainAlias, chain }) => {
   console.log(`${LOG_PREFIX}: Connecting chain '${chainAlias}' to store`)
 
   const currentState = chain.getState()
-  let firstBlock = true
 
   chain.subscribe(() => {
     const appState = chain.getState()
@@ -105,15 +105,50 @@ const subscribeToChain = (store, chainAlias, chain) => {
   chain.blockSubscribe(() => {
     const newBlock = chain.getCurrentBlock()
     store.dispatch(actionCreators.chainBlockAdded(chainAlias, newBlock))
-
-    if (firstBlock) {
-      store.dispatch(actionCreators.chainBlocking(chainAlias))
-      firstBlock = false
-    }
   })
 
   store.dispatch(actionCreators.chainSubscribed(chainAlias, currentState))
-  return chain
+}
+
+const detectBlocking = (store, { chainAlias, chainId, hypervisor, chain }) => {
+  console.log(`${LOG_PREFIX}: Detecting blocking on chain '${chainAlias}'`)
+
+  const currentBlock = chain.getCurrentBlock()
+  const currentBlockHeight = getBlockHeight(currentBlock)
+
+  // Use selector to get this from the store
+  const blockingTimeout = 5000
+  hypervisor
+    .waitForState(state => {
+      const newBlockHeight = getMostRecentBlockHeight(state, chainId)
+      return newBlockHeight > currentBlockHeight
+    }, blockingTimeout)
+    .then(
+      () => store.dispatch(actionCreators.chainBlocking(chainAlias)),
+      error => {
+        console.error(
+          `${LOG_PREFIX}: Chain '${chainAlias}' is not blocking: ${error}`
+        )
+        store.dispatch(
+          actionCreators.chainError({
+            chainAlias,
+            error: error.message || error
+          })
+        )
+      }
+    )
+}
+
+const getBlockHeight = block =>
+  block ? block.getIn(['content', 'height'], 0) : 0
+
+const getChainBlocks = (state, chainId) =>
+  state.getIn(['chainContainers', `chain-${chainId}`, 'blocks'], [])
+
+const getMostRecentBlockHeight = (state, chainId) => {
+  const blocks = getChainBlocks(state, chainId)
+  const lastBlock = blocks.slice(-1)[0]
+  return getBlockHeight(lastBlock)
 }
 
 module.exports = createMiddleware

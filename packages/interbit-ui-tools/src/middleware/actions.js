@@ -22,7 +22,9 @@ const actionTypes = {
   CHAIN_BLOCKING: `${ACTION_PREFIX}/CHAIN_BLOCKING`,
   CHAIN_ERROR: `${ACTION_PREFIX}/CHAIN_ERROR`,
   CHAIN_GENESIS: `${ACTION_PREFIX}/CHAIN_GENESIS`,
-  CHAIN_STATUS: `${ACTION_PREFIX}/CHAIN_STATUS`
+  CHAIN_STATUS: `${ACTION_PREFIX}/CHAIN_STATUS`,
+  CHAIN_DELETING: `${ACTION_PREFIX}/CHAIN_DELETING`,
+  CHAIN_DELETED: `${ACTION_PREFIX}/CHAIN_DELETED`
 }
 
 const actionCreators = {
@@ -137,6 +139,22 @@ const actionCreators = {
     payload: {
       chainAlias,
       error
+    }
+  }),
+
+  chainDeleting: ({ chainAlias, chainId }) => ({
+    type: actionTypes.CHAIN_DELETING,
+    payload: {
+      chainAlias,
+      chainId
+    }
+  }),
+
+  chainDeleted: ({ chainAlias, chainId }) => ({
+    type: actionTypes.CHAIN_DELETED,
+    payload: {
+      chainAlias,
+      chainId
     }
   }),
 

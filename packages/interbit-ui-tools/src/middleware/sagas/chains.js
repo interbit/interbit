@@ -46,6 +46,12 @@ function* loadPrivateChain({
       })
 
       if (privateChain) {
+        yield call(tryDeleteChain, {
+          cli,
+          chainAlias: `${chainAlias}-sponsor`,
+          chainId: sponsoredChainId
+        })
+
         yield call(
           saveChainIdToLocalDataStore,
           localDataStore,
@@ -221,6 +227,24 @@ function* tryLoadChain({ cli, chainAlias, chainId }) {
     chain = undefined
   }
   return chain
+}
+
+function* tryDeleteChain({ cli, chainAlias, chainId }) {
+  console.log(`${LOG_PREFIX}: *tryDeleteChain()`, { chainAlias, chainId })
+  try {
+    yield put(actionCreators.chainDeleting({ chainAlias, chainId }))
+
+    // Broadcast chain removal from the network
+    yield call(cli.destroyChain, chainId)
+
+    // Remove the chain locally from browser local storage
+    yield call(cli.removeChain, chainId)
+
+    yield put(actionCreators.chainDeleted({ chainAlias, chainId }))
+  } catch (error) {
+    console.warn(`${LOG_PREFIX}:`, { chainId, error })
+    yield put(actionCreators.chainError({ chainAlias, error: error.message }))
+  }
 }
 
 module.exports = {

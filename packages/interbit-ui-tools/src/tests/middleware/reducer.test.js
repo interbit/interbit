@@ -75,7 +75,7 @@ describe('middleware.reducer', () => {
       status: 'REALLY_BAD'
     }
     const result = reducer(initialState, action)
-    assertExpectedState(result, { initialState, expectedStateChange })
+    assertExpectedState(result, { expectedStateChange })
   })
 
   it('interbitReady updates status', () => {
@@ -84,7 +84,7 @@ describe('middleware.reducer', () => {
       status: 'READY'
     }
     const result = reducer(initialState, action)
-    assertExpectedState(result, { initialState, expectedStateChange })
+    assertExpectedState(result, { expectedStateChange })
   })
 
   it('interbitError updates status and error', () => {

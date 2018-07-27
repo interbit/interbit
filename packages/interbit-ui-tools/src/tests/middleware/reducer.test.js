@@ -84,7 +84,6 @@ describe('middleware.reducer', () => {
       status: 'READY'
     }
     const result = reducer(initialState, action)
-    console.log(result)
     assertExpectedState(result, { initialState, expectedStateChange })
   })
 

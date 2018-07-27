@@ -9,7 +9,7 @@ import Home from '../containers/Home'
 import NotFoundPage from '../containers/NotFoundPage'
 import InteractiveChains from '../containers/InteractiveChains'
 import ExploreChain from '../containers/ExploreChain'
-import CreateAccount from '../containers/CreateAcount'
+import CreateAccount from '../containers/CreateAccount'
 
 import LogoAccount from '../components/LogoAccounts'
 import LogoAccountSm from '../components/LogoAccountSm'

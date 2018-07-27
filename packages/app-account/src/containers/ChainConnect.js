@@ -4,7 +4,7 @@ import queryString from 'query-string'
 import { Grid, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
-import { chainDispatch, selectors } from 'interbit-ui-tools'
+import { interbitRedux, parameterEncoding } from 'interbit-ui-tools'
 
 import { actionCreators } from '../interbit/my-account/actions'
 import { getOAuthConfig } from '../interbit/public/selectors'
@@ -19,6 +19,8 @@ import modalNames from '../constants/modalNames'
 import oAuthProviders from '../constants/oAuthProviders'
 import { PRIVATE, PUBLIC } from '../constants/chainAliases'
 
+const { chainDispatch, selectors } = interbitRedux
+
 const MODES = {
   NOT_LOGGED_IN: 0,
   ADD_PROFILE_FIELDS: 1,
@@ -29,8 +31,11 @@ const mapStateToProps = (state, ownProps) => {
   const {
     location: { search }
   } = ownProps
-  const query = queryString.parse(search)
-  const { chainAlias, chainId, redirectUrl, tokens } = query
+  const { redirectUrl, state: encodedState } = queryString.parse(search)
+  const {
+    appConsumer: { chainAlias, chainId },
+    tokens
+  } = parameterEncoding.parseState(encodedState)
 
   const isChainLoaded = selectors.isChainLoaded(state, { chainAlias: PRIVATE })
   const chainState = selectors.getChain(state, { chainAlias: PRIVATE })

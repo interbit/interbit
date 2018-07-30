@@ -4,11 +4,11 @@ const {
   acl: getAcl,
   actionPermissions: getActionPermissions,
   paths
-} = require('./selectors')
+} = require('../selectors')
 
 const REMOVE_JOIN_CONFIG = '@@interbit/REMOVE_JOIN_CONFIG'
 
-const revokeJoin = (state, joinName) => {
+const revokeReadJoin = (state, joinName) => {
   let nextState = state
 
   const chainId = getChainIdForJoinName(state, joinName)
@@ -25,9 +25,6 @@ const revokeJoin = (state, joinName) => {
     const nextAcl = getAclWithoutPermissionsForChainId(nextState, chainId)
     nextState = nextState.setIn(paths.ACL, nextAcl)
   }
-
-  // TODO: if this is a write join, carefully figure out acl
-  // remove this specific join's actions
 
   return nextState
 }
@@ -99,6 +96,4 @@ const getAclWithoutPermissionsForChainId = (state, chainId) => {
   return nextAcl
 }
 
-module.exports = {
-  revokeJoin
-}
+module.exports = revokeReadJoin

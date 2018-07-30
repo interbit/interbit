@@ -1,6 +1,6 @@
 const assert = require('assert')
 const Immutable = require('seamless-immutable')
-const { revokeJoin } = require('../../coreCovenant/revokeJoin')
+const { revokeReadJoin } = require('../../coreCovenant/helpers/revokeJoin')
 const {
   paths,
   actionPermissions,
@@ -50,9 +50,9 @@ const initialState = Immutable.from({
   }
 })
 
-describe('revokeJoin(state, joinName)', () => {
+describe('revokeReadJoin(state, joinName)', () => {
   it('does nothing if the join does not exist', () => {
-    const nextState = revokeJoin(initialState, 'PHONY')
+    const nextState = revokeReadJoin(initialState, 'PHONY')
     assert.deepEqual(nextState, initialState)
   })
 
@@ -69,12 +69,10 @@ describe('revokeJoin(state, joinName)', () => {
         paths.ACTION_PERMISSIONS,
         actionPermissions(initialState).without('@@interbit/REMOVE_JOIN_CONFIG')
       )
-    const nextState = revokeJoin(initialState, READ_JOIN_NAME)
+    const nextState = revokeReadJoin(initialState, READ_JOIN_NAME)
 
     assert.deepEqual(nextState, expectedState)
   })
-
-  it('revokes a write join and associated permissions')
 
   it('does not revoke permission if joins remain for chain after removing', () => {
     const state = initialState
@@ -101,7 +99,7 @@ describe('revokeJoin(state, joinName)', () => {
         )
       )
 
-    const nextState = revokeJoin(state, OTHER_JOIN_NAME)
+    const nextState = revokeReadJoin(state, OTHER_JOIN_NAME)
 
     assert.deepEqual(initialState, nextState)
   })

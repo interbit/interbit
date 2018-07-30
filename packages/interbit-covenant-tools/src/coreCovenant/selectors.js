@@ -6,6 +6,7 @@ const paths = {
   CHAIN_ID: [INTERBIT, 'chainId'],
   CONFIG: [INTERBIT, CONFIG],
   CONSUMING: [INTERBIT, CONFIG, 'consuming'],
+  PROVIDING: [INTERBIT, CONFIG, 'providing'],
   ACL: [INTERBIT, CONFIG, ACL],
   ACTION_PERMISSIONS: [INTERBIT, CONFIG, ACL, 'actionPermissions'],
   ROLES: [INTERBIT, CONFIG, ACL, 'roles'],
@@ -24,5 +25,7 @@ module.exports = {
   sentActions: state => state.getIn(paths.SENT_ACTIONS),
   pendingActionsForChain: (state, chainId) =>
     state.getIn([...paths.SENT_ACTIONS, chainId, ...paths.PENDING_ACTIONS]),
+  providing: state => state.getIn(paths.PROVIDING),
+  consuming: state => state.getIn(paths.CONSUMING),
   roles: state => state.getIn(paths.ROLES)
 }

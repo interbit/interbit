@@ -1,7 +1,11 @@
 const assert = require('assert')
 const Immutable = require('seamless-immutable')
 const { revokeJoin } = require('../../coreCovenant/revokeJoin')
-const { paths, actionPermissions } = require('../../coreCovenant/selectors')
+const {
+  paths,
+  actionPermissions,
+  roles
+} = require('../../coreCovenant/selectors')
 
 // const WRITE_JOIN_NAME = 'WRITE_JOIN'
 const READ_JOIN_NAME = 'READ_JOIN'
@@ -54,15 +58,17 @@ describe('revokeJoin(state, joinName)', () => {
 
   it('revokes a read join and associated permissions', () => {
     const expectedState = initialState
-      .setIn([paths.CONSUMING], [])
+      .setIn(paths.CONSUMING, [])
       .setIn(
-        [
-          ...paths.ROLES,
+        paths.ROLES,
+        roles(initialState).without(
           'chain-e7d049846f5b4cf521d4508db4ed4321f09b36d98645a67e4e4445b02aca92ce'
-        ],
-        []
+        )
       )
-      .setIn([paths.ACTION_PERMISSIONS, '@@interbit/REMOVE_JOIN_CONFIG'], [])
+      .setIn(
+        paths.ACTION_PERMISSIONS,
+        actionPermissions(initialState).without('@@interbit/REMOVE_JOIN_CONFIG')
+      )
     const nextState = revokeJoin(initialState, READ_JOIN_NAME)
 
     assert.deepEqual(nextState, expectedState)
@@ -73,7 +79,7 @@ describe('revokeJoin(state, joinName)', () => {
   it('does not revoke permission if joins remain for chain after removing', () => {
     const state = initialState
       .setIn(
-        [paths.consuming],
+        paths.CONSUMING,
         initialState.interbit.config.consuming.concat({
           provider:
             '232a9eacc7029bb2790ced8672f7d5a3eb75df995b172ebb1aa41bb9c2580086',

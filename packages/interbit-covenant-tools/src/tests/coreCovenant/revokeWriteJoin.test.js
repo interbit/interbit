@@ -5,6 +5,7 @@ const {
   paths,
   consuming: getConsuming,
   providing: getProviding,
+  roles: getRoles,
   actionPermissions: getActionPermissions
 } = require('../../coreCovenant/selectors')
 const {
@@ -114,7 +115,7 @@ const initialState = Immutable.from({
   providerTokens: {}
 })
 
-describe.only('revokeReceiveAction(state, actionType, chainId', () => {
+describe.only('revokeReceiveAction(state, chainId, actionType', () => {
   it('revokes receive actions for chain, leaves other joins alone', () => {
     const expectedState = initialState
       .setIn(paths.CONSUMING, [getConsuming(initialState)[1]])
@@ -124,7 +125,7 @@ describe.only('revokeReceiveAction(state, actionType, chainId', () => {
         getActionPermissions(initialState).without(ACTION_TYPE)
       )
 
-    const nextState = revokeReceiveActions(initialState, ACTION_TYPE, CHAIN_ID)
+    const nextState = revokeReceiveActions(initialState, CHAIN_ID, ACTION_TYPE)
 
     assert.deepEqual(nextState, expectedState)
   })
@@ -137,12 +138,15 @@ describe.only('revokeReceiveAction(state, actionType, chainId', () => {
     const expectedState = state
       .setIn(
         paths.ACTION_PERMISSIONS,
-        getActionPermissions(state).without('@@interbit/REMOVE_JOIN_CONFIG')
+        getActionPermissions(state)
+          .without('@@interbit/REMOVE_JOIN_CONFIG')
+          .without(ACTION_TYPE)
       )
+      .setIn(paths.ROLES, getRoles(state).without(`chain-${CHAIN_ID}`))
       .setIn(paths.CONSUMING, [])
       .setIn(paths.PROVIDING, [])
 
-    const nextState = revokeReceiveActions(initialState, ACTION_TYPE, CHAIN_ID)
+    const nextState = revokeReceiveActions(state, CHAIN_ID, ACTION_TYPE)
 
     assert.deepEqual(nextState, expectedState)
   })
@@ -173,6 +177,7 @@ describe.only('revokeSendActions(chainId)', () => {
         paths.ACTION_PERMISSIONS,
         getActionPermissions(state).without('@@interbit/REMOVE_JOIN_CONFIG')
       )
+      .setIn(paths.ROLES, getRoles(state).without(`chain-${CHAIN_ID}`))
       .setIn(paths.CONSUMING, [])
       .setIn(paths.PROVIDING, [])
 

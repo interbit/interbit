@@ -1,13 +1,9 @@
 const {
   providing: getProviding,
-  consuming: getConsuming,
-  acl: getAcl,
-  actionPermissions: getActionPermissions
+  consuming: getConsuming
 } = require('../selectors')
 const { PATHS } = require('../constants')
-const { hasJoinsForChainId } = require('./revokeWriteJoin')
-
-const REMOVE_JOIN_CONFIG = '@@interbit/REMOVE_JOIN_CONFIG'
+const { cleanupAcl } = require('./revokeWriteJoin')
 
 const revokeReadJoin = (state, joinName) => {
   let nextState = state
@@ -18,13 +14,7 @@ const revokeReadJoin = (state, joinName) => {
   }
 
   nextState = removeJoinByName(nextState, joinName)
-
-  // If this is the last join for this chainID, remove permission
-  // to remotely revoke join
-  if (!hasJoinsForChainId(nextState, chainId)) {
-    const nextAcl = getAclWithoutPermissionsForChainId(nextState, chainId)
-    nextState = nextState.setIn(PATHS.ACL, nextAcl)
-  }
+  nextState = cleanupAcl(nextState, chainId)
 
   return nextState
 }
@@ -59,30 +49,6 @@ const removeJoinByName = (state, joinName) => {
       PATHS.CONSUMING,
       consuming.filter(join => join.joinName !== joinName)
     )
-}
-
-const getAclWithoutPermissionsForChainId = (state, chainId) => {
-  const aclAlias = `chain-${chainId}`
-  const acl = getAcl(state)
-  const actionPermissions = getActionPermissions(state)
-
-  let nextActionPermissions
-
-  const joinConfigActPerm = actionPermissions[REMOVE_JOIN_CONFIG]
-  if (joinConfigActPerm.length > 1) {
-    nextActionPermissions = actionPermissions.set(
-      REMOVE_JOIN_CONFIG,
-      joinConfigActPerm.filter(value => value !== aclAlias)
-    )
-  } else {
-    nextActionPermissions = actionPermissions.without(REMOVE_JOIN_CONFIG)
-  }
-
-  const nextAcl = acl
-    .set('roles', acl.roles.without(aclAlias))
-    .set('actionPermissions', nextActionPermissions)
-
-  return nextAcl
 }
 
 module.exports = revokeReadJoin

@@ -1,7 +1,7 @@
 const {
   providing: getProviding,
   consuming: getConsuming,
-  roles: getRoles,
+  acl: getAcl,
   actionPermissions: getActionPermissions
 } = require('../selectors')
 const { PATHS } = require('../constants')
@@ -60,7 +60,7 @@ const revokeReceiveActions = (state, chainId, actionType) => {
 const cleanupAcl = (state, chainId) => {
   let nextState = state
   if (!hasJoinsForChainId(nextState, chainId)) {
-    nextState = aclWithoutChainIdActionPermissions(nextState, chainId)
+    nextState = getAclWithoutPermissionsForChainId(nextState, chainId)
   }
   return nextState
 }
@@ -75,19 +75,38 @@ const hasJoinsForChainId = (state, chainId) => {
   )
 }
 
-const aclWithoutChainIdActionPermissions = (state, chainId) => {
-  const nextRoles = getRoles(state).without(`chain-${chainId}`)
-  const nextActionPermissions = getActionPermissions(state).without(
-    REMOVE_JOIN_CONFIG
-  )
+const getAclWithoutPermissionsForChainId = (state, chainId) => {
+  const aclAlias = `chain-${chainId}`
+  const acl = getAcl(state)
+  const actionPermissions = getActionPermissions(state)
 
-  return state
-    .setIn(PATHS.ROLES, nextRoles)
-    .setIn(PATHS.ACTION_PERMISSIONS, nextActionPermissions)
+  let nextActionPermissions
+
+  const joinConfigActPerm = actionPermissions[REMOVE_JOIN_CONFIG]
+  if (joinConfigActPerm.length > 1) {
+    nextActionPermissions = actionPermissions.set(
+      REMOVE_JOIN_CONFIG,
+      joinConfigActPerm.filter(value => value !== aclAlias)
+    )
+  } else {
+    nextActionPermissions = actionPermissions.without(REMOVE_JOIN_CONFIG)
+  }
+
+  const hasRemainingActionPermissions = Object.entries(
+    nextActionPermissions
+  ).some(actionPermission => actionPermission.indexOf(aclAlias) > -1)
+
+  if (!hasRemainingActionPermissions) {
+    return state
+      .setIn(PATHS.ROLES, acl.roles.without(aclAlias))
+      .setIn(PATHS.ACTION_PERMISSIONS, nextActionPermissions)
+  }
+
+  return state.setIn(PATHS.actionPermissions, nextActionPermissions)
 }
 
 module.exports = {
   revokeReceiveActions,
   revokeSendActions,
-  hasJoinsForChainId
+  cleanupAcl
 }

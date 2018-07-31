@@ -9,8 +9,8 @@ const WEB_AUTH_PUB_KEY =
 
 const config = {
   peers: [
-    'ib-dev----master.herokuapp.com:443',
-    'ib-dev-web-auth.herokuapp.com:443'
+    'citizens-master.interbit.io:443',
+    'citizens-web-auth.interbit.io:443'
   ],
   adminValidators: [PUB_KEY, WEB_AUTH_PUB_KEY],
   staticChains: {
@@ -100,7 +100,7 @@ const config = {
   },
   apps: {
     account: {
-      peers: ['ib-dev----master.herokuapp.com'], // the peers the browser should connect to
+      peers: ['citizens-master.interbit.io'], // the peers the browser should connect to
       chains: [chainAliases.PUBLIC], // the chains that need to load in the browser
       appChain: chainAliases.PUBLIC, // The chain that the static page is loaded on
       indexLocation: path.join(__dirname, 'public/index.html'), // the index.html to update with the app info

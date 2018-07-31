@@ -1,12 +1,8 @@
 const assert = require('assert')
 const Immutable = require('seamless-immutable')
 const { revokeReadJoin } = require('../../coreCovenant/helpers/revokeJoin')
-const {
-  paths,
-  actionPermissions,
-  roles
-} = require('../../coreCovenant/selectors')
-
+const { actionPermissions, roles } = require('../../coreCovenant/selectors')
+const { PATHS } = require('../../coreCovenant/constants')
 // const WRITE_JOIN_NAME = 'WRITE_JOIN'
 const READ_JOIN_NAME = 'READ_JOIN'
 const OTHER_JOIN_NAME = 'DONT_REMOVE'
@@ -58,15 +54,15 @@ describe('revokeReadJoin(state, joinName)', () => {
 
   it('revokes a read join and associated permissions', () => {
     const expectedState = initialState
-      .setIn(paths.CONSUMING, [])
+      .setIn(PATHS.CONSUMING, [])
       .setIn(
-        paths.ROLES,
+        PATHS.ROLES,
         roles(initialState).without(
           'chain-e7d049846f5b4cf521d4508db4ed4321f09b36d98645a67e4e4445b02aca92ce'
         )
       )
       .setIn(
-        paths.ACTION_PERMISSIONS,
+        PATHS.ACTION_PERMISSIONS,
         actionPermissions(initialState).without('@@interbit/REMOVE_JOIN_CONFIG')
       )
     const nextState = revokeReadJoin(initialState, READ_JOIN_NAME)
@@ -77,7 +73,7 @@ describe('revokeReadJoin(state, joinName)', () => {
   it('does not revoke permission if joins remain for chain after removing', () => {
     const state = initialState
       .setIn(
-        paths.CONSUMING,
+        PATHS.CONSUMING,
         initialState.interbit.config.consuming.concat({
           provider:
             '232a9eacc7029bb2790ced8672f7d5a3eb75df995b172ebb1aa41bb9c2580086',
@@ -87,13 +83,13 @@ describe('revokeReadJoin(state, joinName)', () => {
       )
       .setIn(
         [
-          ...paths.ROLES,
+          ...PATHS.ROLES,
           'chain-232a9eacc7029bb2790ced8672f7d5a3eb75df995b172ebb1aa41bb9c2580086'
         ],
         ['232a9eacc7029bb2790ced8672f7d5a3eb75df995b172ebb1aa41bb9c2580086']
       )
       .setIn(
-        [...paths.ACTION_PERMISSIONS, '@@interbit/REMOVE_JOIN_CONFIG'],
+        [...PATHS.ACTION_PERMISSIONS, '@@interbit/REMOVE_JOIN_CONFIG'],
         actionPermissions(initialState)['@@interbit/REMOVE_JOIN_CONFIG'].concat(
           'chain-232a9eacc7029bb2790ced8672f7d5a3eb75df995b172ebb1aa41bb9c2580086'
         )

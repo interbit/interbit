@@ -1,8 +1,8 @@
 const assert = require('assert')
 const Immutable = require('seamless-immutable')
 
+const { PATHS } = require('../../coreCovenant/constants')
 const {
-  paths,
   consuming: getConsuming,
   providing: getProviding,
   roles: getRoles,
@@ -115,15 +115,16 @@ const initialState = Immutable.from({
   providerTokens: {}
 })
 
-describe.only('revokeReceiveAction(state, chainId, actionType', () => {
+describe('revokeReceiveAction(state, chainId, actionType', () => {
   it('revokes receive actions for chain, leaves other joins alone', () => {
+    const expectedActionPermissions = getActionPermissions(
+      initialState
+    ).without(ACTION_TYPE)
+
     const expectedState = initialState
-      .setIn(paths.CONSUMING, [getConsuming(initialState)[1]])
-      .setIn(paths.PROVIDING, [getProviding(initialState)[1]])
-      .setIn(
-        paths.ACTION_PERMISSIONS,
-        getActionPermissions(initialState).without(ACTION_TYPE)
-      )
+      .setIn(PATHS.CONSUMING, [getConsuming(initialState)[1]])
+      .setIn(PATHS.PROVIDING, [getProviding(initialState)[1]])
+      .setIn(PATHS.ACTION_PERMISSIONS, expectedActionPermissions)
 
     const nextState = revokeReceiveActions(initialState, CHAIN_ID, ACTION_TYPE)
 
@@ -132,19 +133,18 @@ describe.only('revokeReceiveAction(state, chainId, actionType', () => {
 
   it('revokes ability to REMOVE_JOIN_CONFIG if this is the only join', () => {
     const state = initialState
-      .setIn(paths.CONSUMING, [getConsuming(initialState)[0]])
-      .setIn(paths.PROVIDING, [getProviding(initialState)[0]])
+      .setIn(PATHS.CONSUMING, [getConsuming(initialState)[0]])
+      .setIn(PATHS.PROVIDING, [getProviding(initialState)[0]])
+
+    const expectedActionPermissions = getActionPermissions(state)
+      .without('@@interbit/REMOVE_JOIN_CONFIG')
+      .without(ACTION_TYPE)
 
     const expectedState = state
-      .setIn(
-        paths.ACTION_PERMISSIONS,
-        getActionPermissions(state)
-          .without('@@interbit/REMOVE_JOIN_CONFIG')
-          .without(ACTION_TYPE)
-      )
-      .setIn(paths.ROLES, getRoles(state).without(`chain-${CHAIN_ID}`))
-      .setIn(paths.CONSUMING, [])
-      .setIn(paths.PROVIDING, [])
+      .setIn(PATHS.ACTION_PERMISSIONS, expectedActionPermissions)
+      .setIn(PATHS.ROLES, getRoles(state).without(`chain-${CHAIN_ID}`))
+      .setIn(PATHS.CONSUMING, [])
+      .setIn(PATHS.PROVIDING, [])
 
     const nextState = revokeReceiveActions(state, CHAIN_ID, ACTION_TYPE)
 
@@ -152,11 +152,11 @@ describe.only('revokeReceiveAction(state, chainId, actionType', () => {
   })
 })
 
-describe.only('revokeSendActions(chainId)', () => {
+describe('revokeSendActions(chainId)', () => {
   it('revokes own ability to sendActions to a chain, leaves other join', () => {
     const expectedState = initialState
-      .setIn(paths.CONSUMING, [getConsuming(initialState)[0]])
-      .setIn(paths.PROVIDING, [getProviding(initialState)[0]])
+      .setIn(PATHS.CONSUMING, [getConsuming(initialState)[0]])
+      .setIn(PATHS.PROVIDING, [getProviding(initialState)[0]])
 
     const nextState = revokeSendActions(initialState, CHAIN_ID)
 
@@ -165,21 +165,21 @@ describe.only('revokeSendActions(chainId)', () => {
 
   it('revokes ability to REMOVE_JOIN_CONFIG if this is the only join', () => {
     const state = initialState
-      .setIn(paths.CONSUMING, [getConsuming(initialState)[1]])
-      .setIn(paths.PROVIDING, [getProviding(initialState)[1]])
+      .setIn(PATHS.CONSUMING, [getConsuming(initialState)[1]])
+      .setIn(PATHS.PROVIDING, [getProviding(initialState)[1]])
       .setIn(
-        paths.ACTION_PERMISSIONS,
+        PATHS.ACTION_PERMISSIONS,
         getActionPermissions(initialState).without(ACTION_TYPE)
       )
 
+    const expectedActionPermissions = getActionPermissions(state).without(
+      '@@interbit/REMOVE_JOIN_CONFIG'
+    )
     const expectedState = state
-      .setIn(
-        paths.ACTION_PERMISSIONS,
-        getActionPermissions(state).without('@@interbit/REMOVE_JOIN_CONFIG')
-      )
-      .setIn(paths.ROLES, getRoles(state).without(`chain-${CHAIN_ID}`))
-      .setIn(paths.CONSUMING, [])
-      .setIn(paths.PROVIDING, [])
+      .setIn(PATHS.ACTION_PERMISSIONS, expectedActionPermissions)
+      .setIn(PATHS.ROLES, getRoles(state).without(`chain-${CHAIN_ID}`))
+      .setIn(PATHS.CONSUMING, [])
+      .setIn(PATHS.PROVIDING, [])
 
     const nextState = revokeSendActions(state, CHAIN_ID)
 

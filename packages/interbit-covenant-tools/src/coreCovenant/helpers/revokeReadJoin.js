@@ -2,9 +2,10 @@ const {
   providing: getProviding,
   consuming: getConsuming,
   acl: getAcl,
-  actionPermissions: getActionPermissions,
-  paths
+  actionPermissions: getActionPermissions
 } = require('../selectors')
+const { PATHS } = require('../constants')
+const { hasJoinsForChainId } = require('./revokeWriteJoin')
 
 const REMOVE_JOIN_CONFIG = '@@interbit/REMOVE_JOIN_CONFIG'
 
@@ -20,10 +21,9 @@ const revokeReadJoin = (state, joinName) => {
 
   // If this is the last join for this chainID, remove permission
   // to remotely revoke join
-  const remainingJoins = getJoinsForChainId(nextState, chainId)
-  if (!remainingJoins.length) {
+  if (!hasJoinsForChainId(nextState, chainId)) {
     const nextAcl = getAclWithoutPermissionsForChainId(nextState, chainId)
-    nextState = nextState.setIn(paths.ACL, nextAcl)
+    nextState = nextState.setIn(PATHS.ACL, nextAcl)
   }
 
   return nextState
@@ -31,30 +31,19 @@ const revokeReadJoin = (state, joinName) => {
 
 const getChainIdForJoinName = (state, joinName) => {
   const providing = getProviding(state)
-  const consuming = getConsuming(state)
 
   const providingJoin = providing.find(join => join.joinName === joinName)
-  const consumingJoin = consuming.find(join => join.joinName === joinName)
-
-  let chainId
   if (providingJoin) {
-    chainId = providingJoin.consumer
-  }
-  if (consumingJoin) {
-    chainId = consumingJoin.provider
+    return providingJoin.consumer
   }
 
-  return chainId
-}
-
-const getJoinsForChainId = (state, chainId) => {
-  const providing = getProviding(state)
   const consuming = getConsuming(state)
+  const consumingJoin = consuming.find(join => join.joinName === joinName)
+  if (consumingJoin) {
+    return consumingJoin.provider
+  }
 
-  const remainingProviding = providing.filter(join => join.consumer === chainId)
-  const remainingConsuming = consuming.filter(join => join.consumer === chainId)
-
-  return remainingProviding.concat(remainingConsuming)
+  return undefined
 }
 
 const removeJoinByName = (state, joinName) => {
@@ -63,11 +52,11 @@ const removeJoinByName = (state, joinName) => {
 
   return state
     .setIn(
-      paths.PROVIDING,
+      PATHS.PROVIDING,
       providing.filter(join => join.joinName !== joinName)
     )
     .setIn(
-      paths.CONSUMING,
+      PATHS.CONSUMING,
       consuming.filter(join => join.joinName !== joinName)
     )
 }

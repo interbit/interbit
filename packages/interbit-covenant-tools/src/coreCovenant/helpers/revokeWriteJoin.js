@@ -2,9 +2,9 @@ const {
   providing: getProviding,
   consuming: getConsuming,
   roles: getRoles,
-  actionPermissions: getActionPermissions,
-  paths
+  actionPermissions: getActionPermissions
 } = require('../selectors')
+const { PATHS } = require('../constants')
 
 const REMOVE_JOIN_CONFIG = '@@interbit/REMOVE_JOIN_CONFIG'
 const WRITE_JOIN_PENDING_ACTIONS = 'WRITE-JOIN-PENDING-ACTIONS'
@@ -22,8 +22,8 @@ const revokeSendActions = (state, chainId) => {
       join.provider !== chainId || join.joinName !== WRITE_JOIN_ACTION_STATUS
   )
 
-  nextState = nextState.setIn(paths.PROVIDING, nextProviding)
-  nextState = nextState.setIn(paths.CONSUMING, nextConsuming)
+  nextState = nextState.setIn(PATHS.PROVIDING, nextProviding)
+  nextState = nextState.setIn(PATHS.CONSUMING, nextConsuming)
 
   nextState = cleanupAcl(nextState, chainId)
 
@@ -44,15 +44,15 @@ const revokeReceiveActions = (state, chainId, actionType) => {
       join.provider !== chainId || join.joinName !== WRITE_JOIN_PENDING_ACTIONS
   )
 
-  nextState = nextState.setIn(paths.PROVIDING, nextProviding)
-  nextState = nextState.setIn(paths.CONSUMING, nextConsuming)
+  nextState = nextState.setIn(PATHS.PROVIDING, nextProviding)
+  nextState = nextState.setIn(PATHS.CONSUMING, nextConsuming)
 
   nextState = cleanupAcl(nextState, chainId)
 
   const nextActionPermissions = getActionPermissions(nextState).without(
     actionType
   )
-  nextState = nextState.setIn(paths.ACTION_PERMISSIONS, nextActionPermissions)
+  nextState = nextState.setIn(PATHS.ACTION_PERMISSIONS, nextActionPermissions)
 
   return nextState
 }
@@ -60,36 +60,34 @@ const revokeReceiveActions = (state, chainId, actionType) => {
 const cleanupAcl = (state, chainId) => {
   let nextState = state
   if (!hasJoinsForChainId(nextState, chainId)) {
-    nextState = removeChainIdRemoveJoinConfigFromAcl(nextState, chainId)
+    nextState = aclWithoutChainIdActionPermissions(nextState, chainId)
   }
   return nextState
 }
 
 const hasJoinsForChainId = (state, chainId) => {
-  const remainingProvidingForChainId = getProviding(state).filter(
-    join => join.consumer === chainId
-  )
-  const remainingConsumingForChainId = getConsuming(state).filter(
-    join => join.provider === chainId
-  )
+  const providing = getProviding(state)
+  const consuming = getConsuming(state)
 
   return (
-    remainingProvidingForChainId.length || remainingConsumingForChainId.length
+    providing.some(join => join.consumer === chainId) ||
+    consuming.some(join => join.provider === chainId)
   )
 }
 
-const removeChainIdRemoveJoinConfigFromAcl = (state, chainId) => {
+const aclWithoutChainIdActionPermissions = (state, chainId) => {
   const nextRoles = getRoles(state).without(`chain-${chainId}`)
   const nextActionPermissions = getActionPermissions(state).without(
     REMOVE_JOIN_CONFIG
   )
 
   return state
-    .setIn(paths.ROLES, nextRoles)
-    .setIn(paths.ACTION_PERMISSIONS, nextActionPermissions)
+    .setIn(PATHS.ROLES, nextRoles)
+    .setIn(PATHS.ACTION_PERMISSIONS, nextActionPermissions)
 }
 
 module.exports = {
   revokeReceiveActions,
-  revokeSendActions
+  revokeSendActions,
+  hasJoinsForChainId
 }

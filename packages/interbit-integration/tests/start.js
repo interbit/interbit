@@ -60,4 +60,4 @@ const testStart = async () => {
   hypervisor.stopHyperBlocker()
 }
 
-test('interbit.start(options)', testStart, 10000)
+module.exports = testStart

@@ -1,20 +1,19 @@
 const log = require('./log')
 
-const waitForBlock = (chainInterface, timeout = 2000) =>
+const waitForState = (chainInterface, predicate = () => {}, timeout = 2000) =>
   new Promise((resolve, reject) => {
     let unsubscribe = () => {}
-    let count = 0
     unsubscribe = chainInterface.subscribe(() => {
-      if (count === 0) {
+      const state = chainInterface.getState()
+      if (predicate(state)) {
         unsubscribe()
         resolve()
-        count += 1
       }
     })
 
     setTimeout(() => {
       unsubscribe()
-      reject()
+      reject(new Error(`Waiting for block timed out after ${timeout}ms`))
     }, timeout)
   })
 
@@ -23,7 +22,7 @@ const dispatchAction = async (chainInterface, action) => {
   await chainInterface.dispatch(action)
 }
 
-const getChainId = (alias, chains) => chains[alias].chainId
+const getChainId = (alias, chains) => chains[alias].chainId || chains[alias]
 
 const logStateUpdates = (alias, chainInterface) => {
   const logChainState = log.any(alias)
@@ -35,7 +34,7 @@ const logStateUpdates = (alias, chainInterface) => {
 }
 
 module.exports = {
-  waitForBlock,
+  waitForState,
   dispatchAction,
   getChainId,
   logStateUpdates

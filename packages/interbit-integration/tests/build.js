@@ -1,13 +1,13 @@
 const assert = require('assert')
 const fs = require('fs-extra')
 const path = require('path')
-const uuid = require('uuid')
 const interbit = require('interbit')
 
+const prepareTestLocation = require('./prepareTestLocation')
 const log = require('../log')
 
 const testBuild = async () => {
-  const location = path.join('tmp', uuid.v4())
+  const { location, cleanup } = prepareTestLocation('build')
   const options = {
     // eslint-disable-next-line
     config: require('../interbit.config'),
@@ -68,9 +68,7 @@ const testBuild = async () => {
   )
   log.success('Build was successful')
 
-  log.info('Cleaning up...')
-  await fs.remove('tmp')
-  log.info('... cleaned up.')
+  cleanup()
 }
 
 module.exports = testBuild

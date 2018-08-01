@@ -1,14 +1,13 @@
-const fs = require('fs-extra')
 const assert = require('assert')
 const path = require('path')
-const uuid = require('uuid')
 const interbit = require('interbit')
 
 const log = require('../log')
 const assertChainsConfigured = require('./assertChainsConfigured')
+const prepareTestLocation = require('./prepareTestLocation')
 
 const testDeploy = async () => {
-  const location = path.join('tmp', uuid.v4())
+  const { location, cleanup } = prepareTestLocation('deploy')
   const artifacts = path.join(location, 'dist')
 
   const keysOptions = {
@@ -62,10 +61,9 @@ const testDeploy = async () => {
 
   log.success('Deployed chains were responsive and configured')
 
-  await fs.remove('tmp')
-
   await cli.shutdown()
   hypervisor.stopHyperBlocker()
+  cleanup()
 }
 
 module.exports = testDeploy

@@ -5,13 +5,25 @@
   "main": "index.js",
   "scripts": {
     "start": "DEBUG=* DEBUG_DEPTH=6 node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "assert": "^1.4.1",
     "debug": "^3.1.0",
     "interbit": "0.4.44",
-    "interbit-covenant-tools": "0.4.44"
+    "interbit-covenant-tools": "0.4.44",
+    "jest": "20.0.4"
   }
 }

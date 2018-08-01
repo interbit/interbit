@@ -21,12 +21,7 @@ const config = {
             {
               alias: SECOND_CHAIN_ALIAS,
               path: ['shared'],
-              joinName: `${JOIN_NAME}1`
-            },
-            {
-              alias: SECOND_CHAIN_ALIAS,
-              path: ['shared'],
-              joinName: `${JOIN_NAME}2`
+              joinName: `${JOIN_NAME}`
             }
           ]
         }
@@ -40,13 +35,8 @@ const config = {
           consume: [
             {
               alias: FIRST_CHAIN_ALIAS,
-              path: ['sharedWithMe', '0'],
-              joinName: `${JOIN_NAME}1`
-            },
-            {
-              alias: FIRST_CHAIN_ALIAS,
-              path: ['sharedWithMe', '1'],
-              joinName: `${JOIN_NAME}2`
+              path: ['sharedWithMe'],
+              joinName: `${JOIN_NAME}`
             }
           ]
         }

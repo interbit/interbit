@@ -31,7 +31,6 @@ function* loadPrivateChain({
   console.log(`${LOG_PREFIX}: *loadPrivateChain()`, chainAlias)
 
   let privateChain
-  let chainId
 
   const publicChainId = yield select(selectors.getPublicChainId, {
     publicChainAlias
@@ -68,9 +67,8 @@ function* loadPrivateChain({
         saveChainIdToLocalDataStore,
         localDataStore,
         dataStoreKey,
-        privateChainId
+        privateChain.chainId
       )
-      chainId = privateChainId
     }
   }
 
@@ -84,16 +82,14 @@ function* loadPrivateChain({
       chainId: dataStoreChainId
     })
 
-    if (privateChain) {
-      chainId = dataStoreChainId
-    } else {
+    if (!privateChain) {
       yield call(removeChainIdFromLocalDataStore, localDataStore, dataStoreKey)
     }
   }
 
   if (!privateChain) {
     // Create a new private chain
-    const newChainId = yield call(sponsorChain, {
+    privateChain = yield call(sponsorChain, {
       interbit,
       cli,
       publicKey,
@@ -101,19 +97,12 @@ function* loadPrivateChain({
       chainAlias
     })
 
-    privateChain = yield call(loadChain, {
-      cli,
-      chainAlias,
-      chainId: newChainId
-    })
-
     yield call(
       saveChainIdToLocalDataStore,
       localDataStore,
       dataStoreKey,
-      newChainId
+      privateChain.chainId
     )
-    chainId = newChainId
   }
 
   const userOwnsChain = call(userHasRole, {
@@ -126,7 +115,7 @@ function* loadPrivateChain({
     throw new Error('User does not own private chain')
   }
 
-  return chainId
+  return privateChain
 }
 
 const shouldLoadPrivateChainFromOtherDevice = ({
@@ -209,7 +198,14 @@ function* sponsorChain({
     publicKeys: [publicKey, blockMaster],
     genesisBlock
   })
-  return chainId
+
+  const chain = yield call(loadChain, {
+    cli,
+    chainAlias,
+    chainId
+  })
+
+  return { chainAlias, chainId, ...chain }
 }
 
 function* loadChain({ cli, chainAlias, chainId }) {
@@ -225,7 +221,7 @@ function* loadChain({ cli, chainAlias, chainId }) {
 
   yield put.resolve(actionCreators.chainBlocking({ chainAlias }))
 
-  return chain
+  return { chainAlias, chainId, ...chain }
 }
 
 function* tryLoadChain({ cli, chainAlias, chainId }) {

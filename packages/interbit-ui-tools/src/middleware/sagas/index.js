@@ -5,12 +5,7 @@ const getHtmlConfig = require('../getConfigFromStaticHtml')
 const { LOG_PREFIX } = require('../constants')
 const { connectToPeers } = require('./connections')
 const { interbitContext } = require('./interbit')
-const {
-  loadStaticChains,
-  loadPrivateChain,
-  loadChain,
-  sponsorChain
-} = require('./chains')
+const { loadStaticChains, loadPrivateChain, sponsorChain } = require('./chains')
 
 function* rootSaga() {
   console.log(`${LOG_PREFIX}: *rootSaga(): loading interbit`)
@@ -108,15 +103,13 @@ function* sponsorChainSaga(action) {
 
     const { interbit, cli, publicKey } = yield call(interbitContext)
 
-    const chainId = yield call(sponsorChain, {
+    yield call(sponsorChain, {
       interbit,
       cli,
       publicKey,
       publicChainAlias,
       chainAlias
     })
-
-    yield call(loadChain, { cli, chainAlias, chainId })
   } catch (error) {
     console.error(`${LOG_PREFIX}: `, error)
     yield put(actionCreators.chainError({ chainAlias, error: error.message }))

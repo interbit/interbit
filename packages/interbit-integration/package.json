@@ -1,5 +1,6 @@
 {
-  "name": "@btlgroup/testalicious",
+  "name": "interbit-integration",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

@@ -8,6 +8,8 @@ const { LOG_PREFIX } = require('../constants')
 function* loadStaticChains({ cli }) {
   const chainsToLoad = yield select(selectors.getConfiguredChains)
 
+  console.log(`${LOG_PREFIX}: *loadStaticChains()`, chainsToLoad)
+
   const loadChainCalls = Object.entries(chainsToLoad).reduce(
     (acc, [chainAlias, { chainId }]) =>
       acc.concat(call(tryLoadChain, { cli, chainAlias, chainId })),
@@ -26,7 +28,7 @@ function* loadPrivateChain({
   sponsoredChainId,
   privateChainId
 }) {
-  console.log(`${LOG_PREFIX}: *loadPrivateChain()`)
+  console.log(`${LOG_PREFIX}: *loadPrivateChain()`, chainAlias)
 
   let privateChain
   let chainId
@@ -35,16 +37,16 @@ function* loadPrivateChain({
     publicChainAlias
   })
 
-  const privateChainKey = getPrivateChainKey(publicChainId, chainAlias)
-  const savedChainId = yield call(
+  const dataStoreKey = getDataStoreKey(publicChainId, chainAlias)
+  const dataStoreChainId = yield call(
     getChainIdFromLocalDataStore,
     localDataStore,
-    privateChainKey
+    dataStoreKey
   )
 
   if (
     shouldLoadPrivateChainFromOtherDevice({
-      savedChainId,
+      dataStoreChainId,
       sponsoredChainId,
       privateChainId
     })
@@ -65,7 +67,7 @@ function* loadPrivateChain({
       yield call(
         saveChainIdToLocalDataStore,
         localDataStore,
-        privateChainKey,
+        dataStoreKey,
         privateChainId
       )
       chainId = privateChainId
@@ -74,16 +76,18 @@ function* loadPrivateChain({
 
   if (
     !privateChain &&
-    shouldLoadPrivateChainFromLocalDataStore({ savedChainId })
+    shouldLoadPrivateChainFromLocalDataStore({ dataStoreChainId })
   ) {
     privateChain = yield call(tryLoadChain, {
       cli,
       chainAlias,
-      chainId: savedChainId
+      chainId: dataStoreChainId
     })
 
     if (privateChain) {
-      chainId = savedChainId
+      chainId = dataStoreChainId
+    } else {
+      yield call(removeChainIdFromLocalDataStore, localDataStore, dataStoreKey)
     }
   }
 
@@ -106,7 +110,7 @@ function* loadPrivateChain({
     yield call(
       saveChainIdToLocalDataStore,
       localDataStore,
-      privateChainKey,
+      dataStoreKey,
       newChainId
     )
     chainId = newChainId
@@ -126,19 +130,19 @@ function* loadPrivateChain({
 }
 
 const shouldLoadPrivateChainFromOtherDevice = ({
-  savedChainId,
+  dataStoreChainId,
   sponsoredChainId,
   privateChainId
 }) =>
-  savedChainId &&
-  savedChainId === sponsoredChainId &&
+  dataStoreChainId &&
+  dataStoreChainId === sponsoredChainId &&
   privateChainId &&
-  savedChainId !== privateChainId
+  dataStoreChainId !== privateChainId
 
-const shouldLoadPrivateChainFromLocalDataStore = ({ savedChainId }) =>
-  !!savedChainId
+const shouldLoadPrivateChainFromLocalDataStore = ({ dataStoreChainId }) =>
+  !!dataStoreChainId
 
-const getPrivateChainKey = (parentChainId, chainAlias) =>
+const getDataStoreKey = (parentChainId, chainAlias) =>
   `chainId-${chainAlias}-${parentChainId}`
 
 const getChainIdFromLocalDataStore = async (localDataStore, chainKey) =>
@@ -151,6 +155,9 @@ const saveChainIdToLocalDataStore = async (
 ) => {
   localDataStore.setItem(chainKey, chainId)
 }
+
+const removeChainIdFromLocalDataStore = async (localDataStore, chainKey) =>
+  localDataStore.removeItem(chainKey)
 
 function* sponsorChain({
   interbit,

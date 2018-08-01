@@ -11,14 +11,13 @@ const isConnected = () =>
   )
 
 const createContext = async () => {
-  // TODO: Store keys securely for production
-  // Interbit will generate new keys automatically for us
-  // However, we need to use the same keys to access
-  // our existing chains
   const interbit = window.interbit
+
+  console.log(`${LOG_PREFIX}: Initializing interbit API`)
 
   const localDataStore = await getDataStore()
 
+  // TODO: Store keys securely for production
   let keyPair = await localDataStore.getItem(DATASTORE_KEYS.KEY_PAIR)
   if (!keyPair) {
     console.log(`${LOG_PREFIX}: Generating key pair`)

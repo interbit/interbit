@@ -7,23 +7,20 @@ const {
 } = require('../interbitGlobal')
 
 const { actionCreators } = require('../actions')
-const { LOG_PREFIX, INTERBIT_STATUS } = require('../constants')
 
 function* interbitContext() {
   if (isConnected()) {
     return getInterbit()
   }
 
-  console.log(`${LOG_PREFIX}: Connecting to interbit API`)
-
-  yield put(actionCreators.interbitStatus(INTERBIT_STATUS.LOADING))
+  yield put(actionCreators.interbitLoading())
 
   const { interbit, hypervisor, cli, publicKey, chains } = yield call(
     waitForInterbit
   )
 
   yield put(actionCreators.interbitPublicKey(publicKey))
-  yield put(actionCreators.interbitStatus(INTERBIT_STATUS.LOADED))
+  yield put(actionCreators.interbitLoaded(interbit.VERSION))
 
   return { interbit, hypervisor, cli, publicKey, chains }
 }

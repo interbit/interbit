@@ -78,6 +78,25 @@ describe('middleware.reducer', () => {
     assertExpectedState(result, { expectedStateChange })
   })
 
+  it('interbitLoading updates status', () => {
+    const action = actionCreators.interbitLoading()
+    const expectedStateChange = {
+      status: 'LOADING'
+    }
+    const result = reducer(initialState, action)
+    assertExpectedState(result, { expectedStateChange })
+  })
+
+  it('interbitLoaded updates status and version', () => {
+    const action = actionCreators.interbitLoaded('0.14.0')
+    const expectedStateChange = {
+      status: 'LOADED',
+      version: '0.14.0'
+    }
+    const result = reducer(initialState, action)
+    assertExpectedState(result, { expectedStateChange })
+  })
+
   it('interbitReady updates status', () => {
     const action = actionCreators.interbitReady()
     const expectedStateChange = {
@@ -195,7 +214,7 @@ describe('middleware.reducer', () => {
       chains: { [chainAlias]: { thingy: 'wotsit' } },
       chainData: { [chainAlias]: { chainId, status: 'SUBSCRIBED' } }
     })
-    const action = actionCreators.chainBlocking(chainAlias)
+    const action = actionCreators.chainBlocking({ chainAlias })
     const expectedStateChange = {
       chainData: { [chainAlias]: { status: 'BLOCKING' } }
     }

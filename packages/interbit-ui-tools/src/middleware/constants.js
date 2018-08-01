@@ -23,6 +23,7 @@ const PUBLIC_KEY = 'publicKey'
 const SPONSOR_CONFIG = 'privateChainHosting'
 const SPONSOR_REQUESTS = 'sponsorRequests'
 const STATUS = 'status'
+const VERSION = 'version'
 
 const INTERBIT_REDUCER_KEY = 'interbit'
 
@@ -78,6 +79,7 @@ module.exports = {
   SPONSOR_CONFIG,
   SPONSOR_REQUESTS,
   STATUS,
+  VERSION,
   INTERBIT_REDUCER_KEY,
   DOM,
   INTERBIT_STATUS,

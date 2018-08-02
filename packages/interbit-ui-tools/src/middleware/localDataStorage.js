@@ -1,10 +1,5 @@
 const localforage = require('localforage')
 
-const DATASTORE_KEYS = {
-  KEY_PAIR: 'interbit-keypair',
-  HYPERVISOR_CHAIN_ID: 'hypervisor-chain-id'
-}
-
 const storageConfig = {
   name: 'interbit-ui-tools',
   storeName: 'interbit_ui_tools'
@@ -16,4 +11,4 @@ const getDataStore = async () => {
   return datastore
 }
 
-module.exports = { getDataStore, DATASTORE_KEYS }
+module.exports = getDataStore

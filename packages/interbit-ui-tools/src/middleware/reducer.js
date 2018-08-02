@@ -11,6 +11,7 @@ const {
   PUBLIC_KEY,
   STATUS,
   CHAIN_STATUS,
+  VERSION,
   INTERBIT_STATUS
 } = require('./constants')
 
@@ -62,6 +63,17 @@ const reducer = (state = initialState, action = {}) => {
     case actionTypes.INTERBIT_PUBLIC_KEY: {
       const { publicKey } = action.payload
       return state.setIn([PUBLIC_KEY], publicKey)
+    }
+
+    case actionTypes.INTERBIT_LOADING: {
+      return state.setIn([STATUS], INTERBIT_STATUS.LOADING)
+    }
+
+    case actionTypes.INTERBIT_LOADED: {
+      const { version } = action.payload
+      return state
+        .setIn([STATUS], INTERBIT_STATUS.LOADED)
+        .setIn([VERSION], version)
     }
 
     case actionTypes.INTERBIT_READY: {

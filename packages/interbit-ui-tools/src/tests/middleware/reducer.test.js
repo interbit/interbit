@@ -1,7 +1,6 @@
 const assert = require('assert')
 const Immutable = require('seamless-immutable')
-const { actionCreators } = require('../../middleware/actions')
-const reducer = require('../../middleware/reducer')
+const { actionCreators, reducer } = require('../../middleware')
 
 describe('middleware.reducer', () => {
   const initialState = Immutable.from({ status: 'PENDING' })
@@ -59,6 +58,7 @@ describe('middleware.reducer', () => {
     const result = reducer(intermediateState, action2)
 
     assertExpectedState(result, {
+      startState: intermediateState,
       expectedStateChange: { chains: { [chainAlias]: chainState2 } }
     })
   })

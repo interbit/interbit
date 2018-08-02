@@ -239,6 +239,7 @@ export class ChainConnect extends Component {
               onCancel={this.cancelConnectChains}
               profileFields={profileFields}
               {...profileFormProps}
+              requestedTokens={requestedTokens}
               onSubmit={this.submitMissingProfileFieldForm}
               title={componentTitle}
               toggleForm={toggleFormFunction}

@@ -22,12 +22,12 @@ const reducer = (state = initialState, action) => {
   if (action.type === actionTypes.ADD_STATE) {
     const { newState } = action.payload
     nextState = state.set('shared', newState)
-    return lastAction(nextState, action)
+    return setLastAction(nextState, action)
   }
-  return lastAction(nextState, action)
+  return setLastAction(nextState, action)
 }
 
-const lastAction = (state, action) => {
+const setLastAction = (state, action) => {
   if (action.type === '*/STROBE') {
     return state
   }

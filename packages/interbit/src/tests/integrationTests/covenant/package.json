@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "seamless-immutable": "^7.1.3"
+    "seamless-immutable": "7.1.2"
   }
 }

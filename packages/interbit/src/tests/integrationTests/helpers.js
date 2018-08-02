@@ -1,6 +1,10 @@
 const log = require('../../log')
 
-const waitForState = (chainInterface, predicate = () => {}, timeout = 2000) =>
+const waitForState = (
+  chainInterface,
+  predicate = () => false,
+  timeout = 2000
+) =>
   new Promise((resolve, reject) => {
     let unsubscribe = () => {}
     unsubscribe = chainInterface.subscribe(() => {
@@ -13,7 +17,7 @@ const waitForState = (chainInterface, predicate = () => {}, timeout = 2000) =>
 
     setTimeout(() => {
       unsubscribe()
-      reject(new Error(`Waiting for block timed out after ${timeout}ms`))
+      reject(new Error(`Waiting for state timed out after ${timeout}ms`))
     }, timeout)
   })
 

@@ -17,7 +17,7 @@ const testStart = async () => {
   assert.ok(hypervisor)
   assert.ok(chainManifest)
 
-  log.info('BOOTED THE INTERBITS WEOOOO')
+  log.info('BOOTED THE INTERBITS WEOOOO!!!')
   log.info(chainManifest)
 
   await assertChainsConfigured(cli, chainManifest)

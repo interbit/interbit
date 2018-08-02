@@ -18,8 +18,8 @@ const testBuild = async () => {
 
   log.info('Done building...')
 
-  const isBuildBuilt = await fs.exists(options.artifacts)
-  assert.ok(isBuildBuilt, 'Build dir does not exist')
+  const isBuildComplete = await fs.exists(options.artifacts)
+  assert.ok(isBuildComplete, 'Build dir does not exist')
 
   log.success('Build was build in correct location')
 
@@ -44,7 +44,7 @@ const testBuild = async () => {
 
     assert.ok(
       doesCovenantExist,
-      `${covenantAlias} was packed at specified filepath`
+      `${covenantAlias} was not packed at specified filepath`
     )
   }
 

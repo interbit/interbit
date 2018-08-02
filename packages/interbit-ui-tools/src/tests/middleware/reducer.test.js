@@ -75,7 +75,26 @@ describe('middleware.reducer', () => {
       status: 'REALLY_BAD'
     }
     const result = reducer(initialState, action)
-    assertExpectedState(result, { initialState, expectedStateChange })
+    assertExpectedState(result, { expectedStateChange })
+  })
+
+  it('interbitLoading updates status', () => {
+    const action = actionCreators.interbitLoading()
+    const expectedStateChange = {
+      status: 'LOADING'
+    }
+    const result = reducer(initialState, action)
+    assertExpectedState(result, { expectedStateChange })
+  })
+
+  it('interbitLoaded updates status and version', () => {
+    const action = actionCreators.interbitLoaded('0.14.0')
+    const expectedStateChange = {
+      status: 'LOADED',
+      version: '0.14.0'
+    }
+    const result = reducer(initialState, action)
+    assertExpectedState(result, { expectedStateChange })
   })
 
   it('interbitReady updates status', () => {
@@ -84,7 +103,7 @@ describe('middleware.reducer', () => {
       status: 'READY'
     }
     const result = reducer(initialState, action)
-    assertExpectedState(result, { initialState, expectedStateChange })
+    assertExpectedState(result, { expectedStateChange })
   })
 
   it('interbitError updates status and error', () => {
@@ -195,7 +214,7 @@ describe('middleware.reducer', () => {
       chains: { [chainAlias]: { thingy: 'wotsit' } },
       chainData: { [chainAlias]: { chainId, status: 'SUBSCRIBED' } }
     })
-    const action = actionCreators.chainBlocking(chainAlias)
+    const action = actionCreators.chainBlocking({ chainAlias })
     const expectedStateChange = {
       chainData: { [chainAlias]: { status: 'BLOCKING' } }
     }

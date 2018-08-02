@@ -1,13 +1,10 @@
 const {
-  BLOCK_MASTER,
   CHAINS,
-  CHAIN_ID,
   CHAIN_DATA,
   CHAIN_STATUS,
-  CONFIG,
   CONNECTION,
   COVENANTS,
-  INTERBIT,
+  INTERBIT_PATHS,
   INTERBIT_REDUCER_KEY,
   INTERBIT_STATUS,
   PEERS,
@@ -40,7 +37,7 @@ const isPublicChainLoaded = (
 ) => isChainLoaded(state, { subtree, chainAlias: publicChainAlias })
 
 const getChainId = (state, { subtree = interbitSubtree, chainAlias } = {}) =>
-  subtree(state).getIn([CHAINS, chainAlias, INTERBIT, CHAIN_ID])
+  subtree(state).getIn([CHAINS, chainAlias, ...INTERBIT_PATHS.CHAIN_ID])
 
 const getPublicChainId = (
   state,
@@ -70,7 +67,7 @@ const getPrivateChain = (
 const getBlockMaster = (
   state,
   { subtree = interbitSubtree, chainAlias } = {}
-) => subtree(state).getIn([CHAINS, chainAlias, INTERBIT, CONFIG, BLOCK_MASTER])
+) => subtree(state).getIn([CHAINS, chainAlias, ...INTERBIT_PATHS.BLOCK_MASTER])
 
 const getSponsorConfig = (
   state,

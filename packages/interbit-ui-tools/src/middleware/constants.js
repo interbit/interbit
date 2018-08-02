@@ -5,6 +5,7 @@ const LOG_PREFIX = 'interbit-middleware'
 const PUBLIC_CHAIN_ALIAS = 'public'
 const PRIVATE_CHAIN_ALIAS = 'private'
 
+const ACL = 'acl'
 const BLOCK_MASTER = 'blockMaster'
 const BOOT_REACT_APP = 'bootReactApp'
 const CHAINS = 'chains'
@@ -20,10 +21,11 @@ const HYPERVISOR = 'hypervisor'
 const INTERBIT = 'interbit'
 const PEERS = 'peers'
 const PUBLIC_KEY = 'publicKey'
+const ROLES = 'roles'
 const SPONSOR_CONFIG = 'privateChainHosting'
 const SPONSOR_REQUESTS = 'sponsorRequests'
 const STATUS = 'status'
-
+const VERSION = 'version'
 const INTERBIT_REDUCER_KEY = 'interbit'
 
 const DOM = {
@@ -31,6 +33,10 @@ const DOM = {
   CHAIN_ID_PREFIX: 'data-chain-id-',
   PEERS: 'data-peer-hints',
   BOOT_REACT_APP: 'data-boot-react-app'
+}
+
+const DATASTORE_KEYS = {
+  KEY_PAIR: 'interbit-keypair'
 }
 
 const INTERBIT_STATUS = {
@@ -55,11 +61,18 @@ const CHAIN_STATUS = {
   UNKNOWN: 'UNKNOWN'
 }
 
+const INTERBIT_PATHS = {
+  BLOCK_MASTER: [INTERBIT, CONFIG, BLOCK_MASTER],
+  CHAIN_ID: [INTERBIT, CHAIN_ID],
+  ROLES: [INTERBIT, CONFIG, ACL, ROLES]
+}
+
 module.exports = {
   ACTION_PREFIX,
   LOG_PREFIX,
   PUBLIC_CHAIN_ALIAS,
   PRIVATE_CHAIN_ALIAS,
+  ACL,
   BLOCK_MASTER,
   BOOT_REACT_APP,
   CHAINS,
@@ -75,11 +88,15 @@ module.exports = {
   INTERBIT,
   PEERS,
   PUBLIC_KEY,
+  ROLES,
   SPONSOR_CONFIG,
   SPONSOR_REQUESTS,
   STATUS,
+  VERSION,
   INTERBIT_REDUCER_KEY,
   DOM,
+  DATASTORE_KEYS,
+  INTERBIT_PATHS,
   INTERBIT_STATUS,
   CHAIN_STATUS
 }

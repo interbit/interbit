@@ -3,12 +3,15 @@ const { ACTION_PREFIX } = require('./constants')
 const actionTypes = {
   INTERBIT_STATUS: `${ACTION_PREFIX}/INTERBIT_STATUS`,
   INTERBIT_PUBLIC_KEY: `${ACTION_PREFIX}/INTERBIT_PUBLIC_KEY`,
+  INTERBIT_LOADING: `${ACTION_PREFIX}/INTERBIT_LOADING`,
+  INTERBIT_LOADED: `${ACTION_PREFIX}/INTERBIT_LOADED`,
   INTERBIT_READY: `${ACTION_PREFIX}/INTERBIT_READY`,
   INTERBIT_ERROR: `${ACTION_PREFIX}/INTERBIT_ERROR`,
 
   INITIAL_CONFIG: `${ACTION_PREFIX}/INITIAL_CONFIG`,
 
   LOAD_INTERBIT_SAGA: `${ACTION_PREFIX}/LOAD_INTERBIT_SAGA`,
+  STATIC_CHAINS_SAGA: `${ACTION_PREFIX}/STATIC_CHAINS_SAGA`,
   PRIVATE_CHAIN_SAGA: `${ACTION_PREFIX}/PRIVATE_CHAIN_SAGA`,
   SPONSOR_CHAIN_SAGA: `${ACTION_PREFIX}/SPONSOR_CHAIN_SAGA`,
 
@@ -30,6 +33,11 @@ const actionTypes = {
 const actionCreators = {
   loadInterbitSaga: () => ({
     type: actionTypes.LOAD_INTERBIT_SAGA,
+    payload: {}
+  }),
+
+  staticChainsSaga: () => ({
+    type: actionTypes.STATIC_CHAINS_SAGA,
     payload: {}
   }),
 
@@ -88,7 +96,7 @@ const actionCreators = {
     }
   }),
 
-  chainBlocking: chainAlias => ({
+  chainBlocking: ({ chainAlias }) => ({
     type: actionTypes.CHAIN_BLOCKING,
     payload: {
       chainAlias
@@ -162,6 +170,18 @@ const actionCreators = {
     type: actionTypes.INTERBIT_STATUS,
     payload: {
       status
+    }
+  }),
+
+  interbitLoading: () => ({
+    type: actionTypes.INTERBIT_LOADING,
+    payload: {}
+  }),
+
+  interbitLoaded: version => ({
+    type: actionTypes.INTERBIT_LOADED,
+    payload: {
+      version
     }
   }),
 

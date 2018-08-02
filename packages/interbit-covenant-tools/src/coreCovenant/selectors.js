@@ -1,16 +1,15 @@
-const paths = {
-  CHAIN_ID: ['interbit', 'chainId'],
-  CONFIG: ['interbit', 'config'],
-  BLOCKS: ['interbit', 'blocks'],
-  SENT_ACTIONS: ['interbit', 'sent-actions'],
-  PENDING_ACTIONS: ['pending-actions']
-}
+const { PATHS } = require('./constants')
 
 module.exports = {
-  chainId: state => state.getIn(paths.CHAIN_ID),
-  config: state => state.getIn(paths.CONFIG),
-  blocks: state => state.getIn(paths.BLOCKS),
-  sentActions: state => state.getIn(paths.SENT_ACTIONS),
+  acl: state => state.getIn(PATHS.ACL),
+  actionPermissions: state => state.getIn(PATHS.ACTION_PERMISSIONS),
+  chainId: state => state.getIn(PATHS.CHAIN_ID),
+  config: state => state.getIn(PATHS.CONFIG),
+  blocks: state => state.getIn(PATHS.BLOCKS),
+  sentActions: state => state.getIn(PATHS.SENT_ACTIONS),
   pendingActionsForChain: (state, chainId) =>
-    state.getIn([...paths.SENT_ACTIONS, chainId, ...paths.PENDING_ACTIONS])
+    state.getIn([...PATHS.SENT_ACTIONS, chainId, ...PATHS.PENDING_ACTIONS]),
+  providing: state => state.getIn(PATHS.PROVIDING),
+  consuming: state => state.getIn(PATHS.CONSUMING),
+  roles: state => state.getIn(PATHS.ROLES)
 }

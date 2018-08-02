@@ -10,7 +10,7 @@ const {
 const configureJoins = require('./configureJoins')
 
 process.on('unhandledRejection', reason => {
-  console.log(`Reason: ${reason}`)
+  console.log(`Caught unhandled rejection. Reason: ${reason}`)
   console.log(reason)
 })
 

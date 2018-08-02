@@ -6,10 +6,10 @@ const {
   dispatchAction,
   waitForState
 } = require('./helpers')
-const log = require('../log')
+const log = require('../../log')
 
-const covenant = require('../covenant')
-const { FIRST_CHAIN_ALIAS, SECOND_CHAIN_ALIAS } = require('../constants')
+const covenant = require('./covenant')
+const { FIRST_CHAIN_ALIAS, SECOND_CHAIN_ALIAS } = require('./constants')
 
 const assertChainsConfigured = async (cli, chainManifest) => {
   const firstChainId = getChainId(FIRST_CHAIN_ALIAS, chainManifest)

@@ -1,4 +1,4 @@
-const log = require('./log')
+const log = require('../log')
 
 const waitForState = (chainInterface, predicate = () => {}, timeout = 2000) =>
   new Promise((resolve, reject) => {

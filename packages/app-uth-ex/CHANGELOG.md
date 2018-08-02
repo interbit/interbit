@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.44"></a>
+## [0.4.44](https://github.com/interbit/interbit/compare/v0.4.43...v0.4.44) (2018-07-24)
+
+
+
+
+**Note:** Version bump only for package app-uth-ex
+
 <a name="0.4.43"></a>
 ## [0.4.43](https://github.com/interbit/interbit/compare/v0.4.42...v0.4.43) (2018-07-13)
 

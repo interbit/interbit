@@ -4,7 +4,7 @@ import { Grid, Row, Col } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { SubmissionError } from 'redux-form'
-import { chainDispatch, selectors } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
 import { Markdown } from 'interbit-ui-components'
 
 import ContentBarApp from '../components/ContentBarApp'
@@ -20,6 +20,8 @@ import { toggleForm, toggleModal } from '../redux/uiReducer'
 import formNames from '../constants/formNames'
 import modalNames from '../constants/modalNames'
 import { PUBLIC, PRIVATE } from '../constants/chainAliases'
+
+const { chainDispatch, selectors } = interbitRedux
 
 const mapStateToProps = (state, ownProps) => {
   const isAccountFormEditable =

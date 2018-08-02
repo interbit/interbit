@@ -1,0 +1,125 @@
+const { put, takeEvery, call } = require('redux-saga/effects')
+
+const { actionTypes, actionCreators } = require('../actions')
+const getHtmlConfig = require('../getConfigFromStaticHtml')
+const { LOG_PREFIX } = require('../constants')
+const { connectToPeers } = require('./connections')
+const { interbitContext } = require('./interbit')
+const { loadStaticChains, loadPrivateChain, sponsorChain } = require('./chains')
+
+function* rootSaga() {
+  console.log(`${LOG_PREFIX}: *rootSaga(): loading interbit`)
+  yield call(loadInterbitSaga)
+
+  console.log(`${LOG_PREFIX}: *rootSaga(): listening for: `, [
+    actionTypes.STATIC_CHAINS_SAGA,
+    actionTypes.PRIVATE_CHAIN_SAGA,
+    actionTypes.SPONSOR_CHAIN_SAGA
+  ])
+  yield takeEvery(actionTypes.STATIC_CHAINS_SAGA, staticChainsSaga)
+  yield takeEvery(actionTypes.PRIVATE_CHAIN_SAGA, privateChainSaga)
+  yield takeEvery(actionTypes.SPONSOR_CHAIN_SAGA, sponsorChainSaga)
+
+  yield put(actionCreators.staticChainsSaga())
+}
+
+function* loadInterbitSaga() {
+  console.log(`${LOG_PREFIX}: *loadInterbitSaga()`)
+
+  try {
+    const { cli } = yield call(interbitContext)
+
+    const config = yield call(getHtmlConfig, document)
+    yield put.resolve(actionCreators.initialConfig(config))
+
+    yield call(connectToPeers, { cli })
+
+    yield put(actionCreators.interbitReady())
+  } catch (error) {
+    console.error(`${LOG_PREFIX}: `, error)
+    yield put(actionCreators.interbitError(error.message))
+  }
+}
+
+function* staticChainsSaga() {
+  console.log(`${LOG_PREFIX}: *staticChainsSaga()`)
+
+  try {
+    const { cli } = yield call(interbitContext)
+
+    yield call(loadStaticChains, { cli })
+  } catch (error) {
+    console.error(`${LOG_PREFIX}: `, error)
+    yield put(actionCreators.interbitError(error.message))
+  }
+}
+
+function* privateChainSaga(action) {
+  console.log(`${LOG_PREFIX}: *privateChainSaga()`, action)
+
+  const {
+    privateChainAlias,
+    publicChainAlias,
+    sponsoredChainId,
+    privateChainId
+  } =
+    action.payload || {}
+
+  try {
+    const { interbit, cli, localDataStore, publicKey } = yield call(
+      interbitContext
+    )
+
+    yield call(loadPrivateChain, {
+      interbit,
+      cli,
+      localDataStore,
+      publicKey,
+      publicChainAlias,
+      chainAlias: privateChainAlias,
+      sponsoredChainId,
+      privateChainId
+    })
+  } catch (error) {
+    console.error(`${LOG_PREFIX}: `, error)
+    yield put(
+      actionCreators.chainError({
+        chainAlias: privateChainAlias,
+        error: error.message
+      })
+    )
+  }
+}
+
+function* sponsorChainSaga(action) {
+  console.log(`${LOG_PREFIX}: *sponsorChainSaga()`, action)
+
+  const { chainAlias, publicChainAlias } = action.payload || {}
+
+  try {
+    if (!chainAlias) {
+      throw new Error('chainAlias is required')
+    }
+
+    const { interbit, cli, publicKey } = yield call(interbitContext)
+
+    yield call(sponsorChain, {
+      interbit,
+      cli,
+      publicKey,
+      publicChainAlias,
+      chainAlias
+    })
+  } catch (error) {
+    console.error(`${LOG_PREFIX}: `, error)
+    yield put(actionCreators.chainError({ chainAlias, error: error.message }))
+  }
+}
+
+module.exports = {
+  rootSaga,
+  loadInterbitSaga,
+  staticChainsSaga,
+  privateChainSaga,
+  sponsorChainSaga
+}

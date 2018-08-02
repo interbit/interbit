@@ -1,6 +1,6 @@
 {
     "name": "app-account",
-    "version": "0.4.43",
+    "version": "0.4.44",
     "private": true,
     "main": "src/exports.js",
     "license": "MIT",
@@ -9,11 +9,11 @@
         "amplitude-js": "^4.2.1",
         "axios": "^0.18.0",
         "cross-env": "^5.1.4",
-        "interbit-cli": "0.4.43",
-        "interbit-covenant-tools": "0.4.43",
-        "interbit-platform-tools": "0.4.43",
-        "interbit-ui-components": "0.4.43",
-        "interbit-ui-tools": "0.4.43",
+        "interbit-cli": "0.4.44",
+        "interbit-covenant-tools": "0.4.44",
+        "interbit-platform-tools": "0.4.44",
+        "interbit-ui-components": "0.4.44",
+        "interbit-ui-tools": "0.4.44",
         "query-string": "^5.0.1",
         "react": "^16.2.0",
         "react-bootstrap": "^0.32.1",
@@ -28,7 +28,7 @@
         "redux-form": "^7.2.1",
         "redux-saga": "^0.16.0",
         "seamless-immutable": "^7.1.2",
-        "serve": "^6.5.5",
+        "serve": "^7.0.0",
         "uuid": "^3.1.0"
     },
     "devDependencies": {

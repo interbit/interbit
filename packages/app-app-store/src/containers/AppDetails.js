@@ -48,6 +48,8 @@ export class AppDetails extends Component {
       mdOffset: 2
     }
 
+    console.log(this.props)
+
     if (!appInfo) {
       return <NotFoundPage />
     }

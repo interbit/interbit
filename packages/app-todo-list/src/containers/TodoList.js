@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { SubmissionError, reset } from 'redux-form'
 import { Table } from 'react-bootstrap'
-import { chainDispatch, selectors } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
 
 import chainAliases from '../constants/chainAliases'
 import formNames from '../constants/formNames'
@@ -12,6 +12,8 @@ import { toggleTodoRow } from '../redux/uiReducer'
 import AddTodoForm from '../components/AddTodoForm'
 import EditTodoRow from '../components/EditTodoRow'
 import TodoRow from '../components/TodoRow'
+
+const { chainDispatch, selectors } = interbitRedux
 
 const mapStateToProps = (state, ownProps) => {
   const chainState = selectors.getPrivateChain(state, {

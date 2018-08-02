@@ -4,31 +4,36 @@ import { Row, Col, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
 import { SubmissionError } from 'redux-form'
+import { interbitRedux } from 'interbit-ui-tools'
 
 import { actionCreators as myProjectsActionCreators } from '../interbit/my-projects/actions'
 import { actionCreators as projectActionCreators } from '../interbit/project/actions'
 
+import { MY_PROJECTS } from '../constants/chainAliases'
+
 import ProjectPackages from '../components/ProjectPackages'
 import ProjectDetailsForm from '../components/ProjectDetailsForm'
 
-import { getExploreChainState } from '../redux/exploreChainReducer'
+const { chainDispatch, selectors } = interbitRedux
 
 const mapStateToProps = (state, ownProps) => {
-  const { state: chainState } = getExploreChainState(state)
-  if (!chainState) {
+  const chainState = selectors.getChain(state, { chainAlias: MY_PROJECTS })
+  if (!chainState || !chainState.myProjects) {
     return {
       project: {}
     }
   }
 
-  const urlParamProjectAlias = ownProps.match.params.projectAlias
+  const projectAlias = ownProps.match.params.projectAlias
+  const projectDetails = chainState.myProjects[projectAlias] || {}
+  const { name, description, faIcon, launchUrl } = projectDetails
 
   const project = {
-    projectAlias: urlParamProjectAlias,
-    name: chainState.myProjects[urlParamProjectAlias].projectName,
-    description: chainState.myProjects[urlParamProjectAlias].description,
-    faIcon: chainState.myProjects[urlParamProjectAlias].icon,
-    launchUrl: chainState.myProjects[urlParamProjectAlias].launchUrl
+    projectAlias,
+    name,
+    description,
+    faIcon,
+    launchUrl
   }
   return {
     project
@@ -36,7 +41,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  blockchainDispatch: action => dispatch('myProjects', action)
+  blockchainDispatch: action => chainDispatch(MY_PROJECTS, action)
 })
 
 export class ProjectDetails extends Component {

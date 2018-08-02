@@ -55,11 +55,11 @@ export default class Metadata extends Component {
           <h5 className="explorerColumnHeading">Block Actions</h5>
         </Row>
         <Row className="actions">
-          {actions.map(action => {
+          {actions.map((action, index) => {
             const title = action.type
             const actionKeys = Object.keys(action).filter(key => key !== 'type')
             return (
-              <div key={action.hash}>
+              <div key={index}>
                 <h5 className="actionTitle">{title}</h5>
                 <Table striped bordered condensed>
                   <tbody>

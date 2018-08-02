@@ -15,14 +15,12 @@ function* interbitContext() {
 
   yield put(actionCreators.interbitLoading())
 
-  const { interbit, hypervisor, cli, publicKey, chains } = yield call(
-    waitForInterbit
-  )
+  const { interbit, publicKey, ...rest } = yield call(waitForInterbit)
 
   yield put(actionCreators.interbitPublicKey(publicKey))
   yield put(actionCreators.interbitLoaded(interbit.VERSION))
 
-  return { interbit, hypervisor, cli, publicKey, chains }
+  return { interbit, publicKey, ...rest }
 }
 
 module.exports = {

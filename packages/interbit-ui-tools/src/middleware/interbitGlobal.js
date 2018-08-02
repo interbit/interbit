@@ -1,5 +1,5 @@
-const { LOG_PREFIX } = require('./constants')
-const { getDataStore, DATASTORE_KEYS } = require('./localDataStorage')
+const { LOG_PREFIX, DATASTORE_KEYS } = require('./constants')
+const getDataStore = require('./localDataStorage')
 
 const isAvailable = () => !!(window && window.interbit)
 

@@ -1,10 +1,8 @@
 const { call, put } = require('redux-saga/effects')
 
-const runtimeContext = require('../browser')
-
 const { actionCreators } = require('../actions')
 
-function* interbitContext() {
+function* getInterbitContext(runtimeContext) {
   const {
     getConfig,
     isInterbitLoaded,
@@ -30,5 +28,5 @@ function* interbitContext() {
 }
 
 module.exports = {
-  interbitContext
+  getInterbitContext
 }

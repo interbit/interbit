@@ -1,6 +1,6 @@
 const { LOG_PREFIX } = require('./constants')
 const { actionTypes, actionCreators } = require('./actions')
-const { getInterbit } = require('./interbitGlobal')
+const runtimeContext = require('./browser')
 
 const createMiddleware = ({
   publicChainAlias,
@@ -57,7 +57,7 @@ const createMiddleware = ({
       case actionTypes.CHAIN_LOADED: {
         const { chainAlias, chainId } = action.payload
 
-        const { cli, chains } = getInterbit()
+        const { cli, chains } = runtimeContext.getInterbit()
         const chain = cli.getChain(chainId)
 
         chains[chainAlias] = chain
@@ -95,7 +95,7 @@ const dispatchBufferedActions = (store, actions) =>
   })
 
 const dispatchToChain = (chainAlias, action) => {
-  const { chains } = getInterbit()
+  const { chains } = runtimeContext.getInterbit()
   const chain = chains[chainAlias]
 
   if (typeof chain === 'undefined') {

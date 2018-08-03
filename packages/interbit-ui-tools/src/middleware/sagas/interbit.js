@@ -1,17 +1,23 @@
 const { call, put } = require('redux-saga/effects')
 
-const {
-  isConnected,
-  getInterbit,
-  waitForInterbit
-} = require('../interbitGlobal')
+const runtimeContext = require('../browser')
 
 const { actionCreators } = require('../actions')
 
 function* interbitContext() {
-  if (isConnected()) {
+  const {
+    getConfig,
+    isInterbitLoaded,
+    getInterbit,
+    waitForInterbit
+  } = runtimeContext
+
+  if (isInterbitLoaded()) {
     return getInterbit()
   }
+
+  const config = yield call(getConfig)
+  yield put.resolve(actionCreators.initialConfig(config))
 
   yield put(actionCreators.interbitLoading())
 

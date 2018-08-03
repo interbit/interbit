@@ -1,7 +1,6 @@
 const { put, takeEvery, call } = require('redux-saga/effects')
 
 const { actionTypes, actionCreators } = require('../actions')
-const getHtmlConfig = require('../getConfigFromStaticHtml')
 const { LOG_PREFIX } = require('../constants')
 const { connectToPeers } = require('./connections')
 const { interbitContext } = require('./interbit')
@@ -28,9 +27,6 @@ function* loadInterbitSaga() {
 
   try {
     const { cli } = yield call(interbitContext)
-
-    const config = yield call(getHtmlConfig, document)
-    yield put.resolve(actionCreators.initialConfig(config))
 
     yield call(connectToPeers, { cli })
 

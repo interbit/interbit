@@ -28,13 +28,6 @@ const STATUS = 'status'
 const VERSION = 'version'
 const INTERBIT_REDUCER_KEY = 'interbit'
 
-const DOM = {
-  INTERBIT: 'interbit',
-  CHAIN_ID_PREFIX: 'data-chain-id-',
-  PEERS: 'data-peer-hints',
-  BOOT_REACT_APP: 'data-boot-react-app'
-}
-
 const DATASTORE_KEYS = {
   KEY_PAIR: 'interbit-keypair'
 }
@@ -94,7 +87,6 @@ module.exports = {
   STATUS,
   VERSION,
   INTERBIT_REDUCER_KEY,
-  DOM,
   DATASTORE_KEYS,
   INTERBIT_PATHS,
   INTERBIT_STATUS,

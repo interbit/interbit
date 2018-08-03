@@ -8,8 +8,6 @@ const {
   INTERBIT_REDUCER_KEY,
   INTERBIT_STATUS,
   PEERS,
-  PRIVATE_CHAIN_ALIAS,
-  PUBLIC_CHAIN_ALIAS,
   PUBLIC_KEY,
   SPONSOR_CONFIG,
   STATUS
@@ -31,38 +29,13 @@ const isChainLoaded = (state, { subtree = interbitSubtree, chainAlias }) => {
   return chainStatus === CHAIN_STATUS.BLOCKING
 }
 
-const isPublicChainLoaded = (
-  state,
-  { subtree, publicChainAlias = PUBLIC_CHAIN_ALIAS } = {}
-) => isChainLoaded(state, { subtree, chainAlias: publicChainAlias })
-
 const getChainId = (state, { subtree = interbitSubtree, chainAlias } = {}) =>
   subtree(state).getIn([CHAINS, chainAlias, ...INTERBIT_PATHS.CHAIN_ID])
-
-const getPublicChainId = (
-  state,
-  { subtree, publicChainAlias = PUBLIC_CHAIN_ALIAS } = {}
-) => getChainId(state, { subtree, chainAlias: publicChainAlias })
-
-const getPrivateChainId = (
-  state,
-  { subtree, privateChainAlias = PRIVATE_CHAIN_ALIAS } = {}
-) => getChainId(state, { subtree, chainAlias: privateChainAlias })
 
 const getChain = (
   state,
   { subtree = interbitSubtree, chainAlias, defaultValue = emptyObject }
 ) => subtree(state).getIn([CHAINS, chainAlias], defaultValue)
-
-const getPublicChain = (
-  state,
-  { subtree, publicChainAlias = PUBLIC_CHAIN_ALIAS, defaultValue } = {}
-) => getChain(state, { subtree, chainAlias: publicChainAlias, defaultValue })
-
-const getPrivateChain = (
-  state,
-  { subtree, privateChainAlias = PRIVATE_CHAIN_ALIAS, defaultValue } = {}
-) => getChain(state, { subtree, chainAlias: privateChainAlias, defaultValue })
 
 const getBlockMaster = (
   state,
@@ -71,11 +44,7 @@ const getBlockMaster = (
 
 const getSponsorConfig = (
   state,
-  {
-    subtree = interbitSubtree,
-    publicChainAlias = PUBLIC_CHAIN_ALIAS,
-    privateChainAlias = PRIVATE_CHAIN_ALIAS
-  } = {}
+  { subtree = interbitSubtree, publicChainAlias, privateChainAlias } = {}
 ) =>
   subtree(state).getIn(
     [CHAINS, publicChainAlias, SPONSOR_CONFIG, privateChainAlias],
@@ -112,12 +81,7 @@ module.exports = {
   getConnectionStatus,
   getCovenantHash,
   getInterbitStatus,
-  getPrivateChain,
-  getPrivateChainId,
-  getPublicChain,
-  getPublicChainId,
   getPublicKey,
   getSponsorConfig,
-  isChainLoaded,
-  isPublicChainLoaded
+  isChainLoaded
 }

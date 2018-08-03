@@ -1,10 +1,6 @@
 const ACTION_PREFIX = 'interbit-middleware'
 const LOG_PREFIX = 'interbit-middleware'
 
-// Chain aliases
-const PUBLIC_CHAIN_ALIAS = 'public'
-const PRIVATE_CHAIN_ALIAS = 'private'
-
 const ACL = 'acl'
 const BLOCK_MASTER = 'blockMaster'
 const BOOT_REACT_APP = 'bootReactApp'
@@ -63,8 +59,6 @@ const INTERBIT_PATHS = {
 module.exports = {
   ACTION_PREFIX,
   LOG_PREFIX,
-  PUBLIC_CHAIN_ALIAS,
-  PRIVATE_CHAIN_ALIAS,
   ACL,
   BLOCK_MASTER,
   BOOT_REACT_APP,

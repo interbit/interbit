@@ -1,6 +1,6 @@
 const { LOG_PREFIX } = require('./constants')
 const { actionTypes, actionCreators } = require('./actions')
-const browserContext = require('./browser')
+const browserContext = require('./browserContext')
 
 const createMiddleware = (
   {

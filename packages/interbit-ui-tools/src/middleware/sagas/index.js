@@ -1,6 +1,6 @@
 const { put, takeEvery, call } = require('redux-saga/effects')
 
-const browserContext = require('../browser')
+const browserContext = require('../browserContext')
 const { actionTypes, actionCreators } = require('../actions')
 const { LOG_PREFIX } = require('../constants')
 const { connectToPeers } = require('./connections')

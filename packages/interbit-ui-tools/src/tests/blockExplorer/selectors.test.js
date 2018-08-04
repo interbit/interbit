@@ -169,12 +169,6 @@ describe('blockExplorer.selectors', () => {
         blocks: []
       })
     })
-    it('getChainState()', () => {
-      assert.deepEqual(
-        getChainState(storeState, { chainAlias: chainAlias2 }),
-        chainState2
-      )
-    })
     it('getSelectedChainAlias()', () => {
       assert.equal(getSelectedChainAlias(), undefined)
     })

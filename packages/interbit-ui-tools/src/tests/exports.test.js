@@ -53,8 +53,6 @@ describe('module exports expected API', () => {
     assert.ok(api.interbitRedux.selectors.getChainId)
     assert.ok(api.interbitRedux.selectors.getConfiguredChains)
     assert.ok(api.interbitRedux.selectors.getConfiguredPeers)
-    assert.ok(api.interbitRedux.selectors.getConnectionStatus)
-    assert.ok(api.interbitRedux.selectors.getCovenantHash)
     assert.ok(api.interbitRedux.selectors.getInterbitStatus)
     assert.ok(api.interbitRedux.selectors.getPublicKey)
     assert.ok(api.interbitRedux.selectors.getSponsorConfig)

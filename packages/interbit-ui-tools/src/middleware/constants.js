@@ -9,9 +9,7 @@ const CHAIN_DATA = 'chainData'
 const CHAIN_ID = 'chainId'
 const CLI = 'cli'
 const CONFIG = 'config'
-const CONNECTION = 'connection'
 const COVENANT_HASH = 'covenantHash'
-const COVENANTS = 'covenants'
 const ERROR = 'error'
 const HYPERVISOR = 'hypervisor'
 const INTERBIT = 'interbit'
@@ -67,9 +65,7 @@ module.exports = {
   CHAIN_ID,
   CLI,
   CONFIG,
-  CONNECTION,
   COVENANT_HASH,
-  COVENANTS,
   ERROR,
   HYPERVISOR,
   INTERBIT,

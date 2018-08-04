@@ -2,8 +2,6 @@ const {
   CHAINS,
   CHAIN_DATA,
   CHAIN_STATUS,
-  CONNECTION,
-  COVENANTS,
   INTERBIT_PATHS,
   INTERBIT_REDUCER_KEY,
   INTERBIT_STATUS,
@@ -60,12 +58,6 @@ const getPublicKey = (state, { subtree = interbitSubtree } = {}) =>
 const getInterbitStatus = (state, { subtree = interbitSubtree } = {}) =>
   subtree(state).getIn([STATUS], INTERBIT_STATUS.UNKNOWN)
 
-const getConnectionStatus = (state, { subtree = interbitSubtree } = {}) =>
-  subtree(state).getIn([CONNECTION])
-
-const getCovenantHash = (state, { subtree = interbitSubtree, covenantAlias }) =>
-  subtree(state).getIn([COVENANTS, covenantAlias])
-
 const getConfiguredChains = (state, { subtree = interbitSubtree } = {}) =>
   subtree(state).getIn([CHAIN_DATA], emptyObject)
 
@@ -81,8 +73,6 @@ module.exports = {
   getChainId,
   getConfiguredChains,
   getConfiguredPeers,
-  getConnectionStatus,
-  getCovenantHash,
   getInterbitStatus,
   getPublicKey,
   getSponsorConfig,

@@ -74,16 +74,8 @@ describe('module exports expected components', () => {
     assert.ok(api.Quote)
   })
 
-  it('exports SidebarList component', () => {
-    assert.ok(api.SidebarList)
-  })
-
   it('exports TitledList component', () => {
     assert.ok(api.TitledList)
-  })
-
-  it('exports ButtonLink component', () => {
-    assert.ok(api.ButtonLink)
   })
 
   it('exports CallToAction component', () => {

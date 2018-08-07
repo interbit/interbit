@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import ButtonLink from './ButtonLink'
+import IconButton from './IconButton'
 
 export const callToActionTypes = {
   BUTTON: 'button',
@@ -24,7 +24,7 @@ export default class CallToAction extends Component {
 
     switch (type) {
       case callToActionTypes.BUTTON:
-        return <ButtonLink {...this.props} />
+        return <IconButton {...this.props} />
       case callToActionTypes.LINK:
       default:
         return <a href={to}>{text}</a>

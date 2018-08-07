@@ -15,18 +15,24 @@ describe('keys', () => {
   })
 
   // Note: Wallaby hides the secure RNG so this test fails, but only in wallaby.
-  it('generates a key pair at filename', async () => {
-    const options = {
-      filename: 'tmp/keys.json'
-    }
-    await keys(options)
+  // Note-II: I have heard whispers that you can get wallaby to mock the crypto
+  //  module. This may solve the open-pgp/keys failing in wallaby only thing.
+  it(
+    'generates a key pair at filename',
+    async () => {
+      const options = {
+        filename: 'tmp/keys.json'
+      }
+      await keys(options)
 
-    // eslint-disable-next-line
+      // eslint-disable-next-line
     const file = require(filepath)
 
-    should.ok(file.publicKey)
-    should.ok(file.privateKey)
-  }).timeout(5000)
+      should.ok(file.publicKey)
+      should.ok(file.privateKey)
+    },
+    5000
+  )
 
   it('throws when filename already exists', async () => {
     await fs.writeFile(filepath, 'test')

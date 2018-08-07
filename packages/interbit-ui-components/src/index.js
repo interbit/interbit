@@ -23,11 +23,9 @@ export {
 } from './components/UIKit/ContentBarDefault'
 export { default as Divider } from './components/UIKit/Divider'
 export { default as Quote } from './components/UIKit/Quote'
-export { default as SidebarList } from './components/UIKit/SidebarList'
 export { default as TitledList } from './components/UIKit/TitledList'
 
 // Interactive Components
-export { default as ButtonLink } from './components/UIKit/ButtonLink'
 export { default as CallToAction } from './components/UIKit/CallToAction'
 export { default as IconButton } from './components/UIKit/IconButton'
 export { default as LaunchPad } from './components/UIKit/LaunchPad'

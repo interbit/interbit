@@ -32,6 +32,7 @@ export class ConnectFormAddMissingProfileField extends Component {
     missingFields: PropTypes.arrayOf(PropTypes.string),
     onCancel: PropTypes.func,
     profileFields: PropTypes.shape({}),
+    requestedTokens: PropTypes.arrayOf(PropTypes.string),
     handleSubmit: PropTypes.func.isRequired,
     title: PropTypes.string,
     toggleForm: PropTypes.func.isRequired,
@@ -45,6 +46,7 @@ export class ConnectFormAddMissingProfileField extends Component {
     missingFields: [],
     onCancel: undefined,
     profileFields: {},
+    requestedTokens: [],
     title: ''
   }
 
@@ -56,20 +58,25 @@ export class ConnectFormAddMissingProfileField extends Component {
       missingFields,
       onCancel,
       profileFields,
+      requestedTokens,
       handleSubmit,
       title,
       toggleForm,
       valid
     } = this.props
 
+    const fulfilledTokens = requestedTokens.filter(
+      t => !missingFields.includes(t)
+    )
+
     const viewForm = (
       <div>
         <Table>
           <tbody>
-            {Object.keys(profileFields).map(key => (
-              <tr key={key}>
-                <td>{key}</td>
-                <td>{profileFields[key]}</td>
+            {fulfilledTokens.map(field => (
+              <tr key={field}>
+                <td>{field}</td>
+                <td>{profileFields[field]}</td>
               </tr>
             ))}
             {missingFields.map(field => (
@@ -102,12 +109,12 @@ export class ConnectFormAddMissingProfileField extends Component {
       <form onSubmit={handleSubmit}>
         <Table>
           <tbody>
-            {Object.keys(profileFields).map(key => (
-              <tr key={`${key}-value`}>
-                <td>{key}</td>
+            {fulfilledTokens.map(field => (
+              <tr key={`${field}-value`}>
+                <td>{field}</td>
                 <td>
-                  {profileFields[key]}
-                  <Field component={renderInput} name={key} type="hidden" />
+                  {profileFields[field]}
+                  <Field component={renderInput} name={field} type="hidden" />
                 </td>
               </tr>
             ))}

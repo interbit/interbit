@@ -13,6 +13,9 @@ const keys = async options => {
     throw new Error(`Can't write keys. File already exists at ${filename}`)
   }
 
+  const dir = path.dirname(filename)
+  await fs.mkdirp(dir)
+
   const keyPair = await interbit.generateKeyPair()
   writeJsonFile(filename, keyPair)
 }

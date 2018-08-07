@@ -36,15 +36,19 @@ describe.skip('packCovenants(location, covenantConfig)', () => {
     assert.ok(isPackedFileReal, 'Packed covenant file does not exist')
   }
 
-  it('packs the configured covenant and root and puts it in location/covenants', async () => {
-    const covenantConfig = {
-      testCovenant: {
-        location: path.join(__dirname, '../testData/covenant')
+  it(
+    'packs the configured covenant and root and puts it in location/covenants',
+    async () => {
+      const covenantConfig = {
+        testCovenant: {
+          location: path.join(__dirname, '../testData/covenant')
+        }
       }
-    }
-    const result = await packCovenants(location, covenantConfig)
+      const result = await packCovenants(location, covenantConfig)
 
-    await assertCovenantCorrectness('testCovenant', result)
-    await assertCovenantCorrectness('interbitRoot', result)
-  }).timeout(5000)
+      await assertCovenantCorrectness('testCovenant', result)
+      await assertCovenantCorrectness('interbitRoot', result)
+    },
+    5000
+  )
 })

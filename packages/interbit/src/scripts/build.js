@@ -26,8 +26,6 @@ const build = async options => {
     config,
     chains: newManifest.chains
   })
-
-  process.exit(0)
 }
 
 // Helpers

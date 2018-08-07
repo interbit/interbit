@@ -1,9 +1,9 @@
 const { LOG_PREFIX, DATASTORE_KEYS } = require('./constants')
-const getDataStore = require('./localDataStorage')
+const createDataStore = require('./dataStore')
 
 const isAvailable = () => !!(window && window.interbit)
 
-const isConnected = () =>
+const isInterbitLoaded = () =>
   !!(
     isAvailable() &&
     window.interbit.middleware &&
@@ -15,7 +15,7 @@ const createContext = async () => {
 
   console.log(`${LOG_PREFIX}: Initializing interbit API`)
 
-  const localDataStore = await getDataStore()
+  const localDataStore = await createDataStore()
 
   // TODO: Store keys securely for production
   let keyPair = await localDataStore.getItem(DATASTORE_KEYS.KEY_PAIR)
@@ -40,6 +40,11 @@ const createContext = async () => {
   }
 }
 
+const getContext = () => ({
+  interbit: window.interbit,
+  ...window.interbit.middleware
+})
+
 const waitForGlobal = async (timeout = 10000) => {
   const waitUntil = Date.now() + timeout
   const interval = setInterval(() => {
@@ -57,22 +62,21 @@ const waitForInterbit = async () => {
   if (!isAvailable()) {
     await waitForGlobal()
   }
-  if (!isConnected()) {
+  if (!isInterbitLoaded()) {
     await createContext()
   }
-  return { interbit: window.interbit, ...window.interbit.middleware }
+  return getContext()
 }
 
 const getInterbit = () => {
-  if (!isConnected()) {
+  if (!isInterbitLoaded()) {
     throw new Error('interbit is not available')
   }
-  return { interbit: window.interbit, ...window.interbit.middleware }
+  return getContext()
 }
 
 module.exports = {
   getInterbit,
   waitForInterbit,
-  isAvailable,
-  isConnected
+  isInterbitLoaded
 }

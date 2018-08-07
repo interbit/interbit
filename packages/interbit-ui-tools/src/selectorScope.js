@@ -2,6 +2,8 @@ const Immutable = require('seamless-immutable')
 
 const emptyObject = Immutable.from({})
 
+const emptyArray = Immutable.from([])
+
 const isImmutableObject = state =>
   state && typeof state === 'object' && Immutable.isImmutable(state)
 
@@ -12,6 +14,7 @@ const entireTree = state => immutable(state)
 
 module.exports = {
   emptyObject,
+  emptyArray,
   immutable,
   entireTree,
   isImmutableObject

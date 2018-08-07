@@ -26,7 +26,7 @@ describe('middleware.reducer', () => {
   }
 
   const assertUnchangedState = (state, expectedState = initialState) => {
-    assert.equal(state, expectedState)
+    assert.strictEqual(state, expectedState)
   }
 
   it('adds more than one chain to state', () => {

@@ -97,13 +97,13 @@ describe('blockExplorer.selectors', () => {
       )
     })
     it('getSelectedChainAlias()', () => {
-      assert.equal(getSelectedChainAlias(storeState), selectedChain)
+      assert.strictEqual(getSelectedChainAlias(storeState), selectedChain)
     })
     it('getSelectedBlockHash()', () => {
-      assert.equal(getSelectedBlockHash(storeState), selectedBlockHash)
+      assert.strictEqual(getSelectedBlockHash(storeState), selectedBlockHash)
     })
     it('getShowRawState()', () => {
-      assert.equal(getShowRawState(storeState), showRawState)
+      assert.strictEqual(getShowRawState(storeState), showRawState)
     })
   })
 
@@ -124,19 +124,19 @@ describe('blockExplorer.selectors', () => {
       )
     })
     it('getSelectedChainAlias()', () => {
-      assert.equal(
+      assert.strictEqual(
         getSelectedChainAlias(blockExplorerState, { subtree: entireTree }),
         selectedChain
       )
     })
     it('getSelectedBlockHash()', () => {
-      assert.equal(
+      assert.strictEqual(
         getSelectedBlockHash(blockExplorerState, { subtree: entireTree }),
         selectedBlockHash
       )
     })
     it('getShowRawState()', () => {
-      assert.equal(
+      assert.strictEqual(
         getShowRawState(blockExplorerState, { subtree: entireTree }),
         showRawState
       )
@@ -176,13 +176,13 @@ describe('blockExplorer.selectors', () => {
       })
     })
     it('getSelectedChainAlias()', () => {
-      assert.equal(getSelectedChainAlias(), undefined)
+      assert.strictEqual(getSelectedChainAlias(), undefined)
     })
     it('getSelectedBlockHash()', () => {
-      assert.equal(getSelectedBlockHash(), undefined)
+      assert.strictEqual(getSelectedBlockHash(), undefined)
     })
     it('getShowRawState()', () => {
-      assert.equal(getShowRawState(), false)
+      assert.strictEqual(getShowRawState(), false)
     })
   })
 })

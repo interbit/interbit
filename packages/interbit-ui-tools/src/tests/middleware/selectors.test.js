@@ -99,19 +99,22 @@ describe('middleware.selectors', () => {
       )
     })
     it('isChainLoaded() - chain has BLOCKING status', () => {
-      assert.equal(isChainLoaded(storeState, { chainAlias: chainAlias1 }), true)
+      assert.strictEqual(
+        isChainLoaded(storeState, { chainAlias: chainAlias1 }),
+        true
+      )
     })
     it('isChainLoaded() - chain has another status', () => {
-      assert.equal(
+      assert.strictEqual(
         isChainLoaded(storeState, { chainAlias: chainAlias2 }),
         false
       )
     })
     it('getPublicKey()', () => {
-      assert.equal(getPublicKey(storeState), middlewareState.publicKey)
+      assert.strictEqual(getPublicKey(storeState), middlewareState.publicKey)
     })
     it('getInterbitStatus()', () => {
-      assert.equal(getInterbitStatus(storeState), middlewareState.status)
+      assert.strictEqual(getInterbitStatus(storeState), middlewareState.status)
     })
     it('getConfiguredPeers()', () => {
       assert.deepStrictEqual(
@@ -172,7 +175,7 @@ describe('middleware.selectors', () => {
       )
     })
     it('isChainLoaded() - chain has BLOCKING status', () => {
-      assert.equal(
+      assert.strictEqual(
         isChainLoaded(middlewareState, {
           chainAlias: chainAlias1,
           subtree: entireTree
@@ -181,7 +184,7 @@ describe('middleware.selectors', () => {
       )
     })
     it('isChainLoaded() - chain has another status', () => {
-      assert.equal(
+      assert.strictEqual(
         isChainLoaded(middlewareState, {
           chainAlias: chainAlias2,
           subtree: entireTree
@@ -190,13 +193,13 @@ describe('middleware.selectors', () => {
       )
     })
     it('getPublicKey()', () => {
-      assert.equal(
+      assert.strictEqual(
         getPublicKey(middlewareState, { subtree: entireTree }),
         middlewareState.publicKey
       )
     })
     it('getInterbitStatus()', () => {
-      assert.equal(
+      assert.strictEqual(
         getInterbitStatus(middlewareState, { subtree: entireTree }),
         middlewareState.status
       )
@@ -231,17 +234,17 @@ describe('middleware.selectors', () => {
     })
     it('getChainId(): unknown chain alias', () => {
       const chainAlias = 'UNKNOWN'
-      assert.equal(getChainId(storeState, { chainAlias }), undefined)
+      assert.strictEqual(getChainId(storeState, { chainAlias }), undefined)
     })
     it('getChain()', () => {
-      assert.equal(getChainId(), undefined)
+      assert.strictEqual(getChainId(), undefined)
     })
     it('getBlockMaster(): unknown chain alias', () => {
       const chainAlias = 'UNKNOWN'
-      assert.equal(getBlockMaster(storeState, { chainAlias }), undefined)
+      assert.strictEqual(getBlockMaster(storeState, { chainAlias }), undefined)
     })
     it('getBlockMaster()', () => {
-      assert.equal(getBlockMaster(), undefined)
+      assert.strictEqual(getBlockMaster(), undefined)
     })
     it('getSponsorConfig(): unknown chain alias', () => {
       const chainAlias = 'UNKNOWN'
@@ -258,16 +261,16 @@ describe('middleware.selectors', () => {
     })
     it('isChainLoaded(): unknown chain alias', () => {
       const chainAlias = 'UNKNOWN'
-      assert.equal(isChainLoaded(storeState, { chainAlias }), false)
+      assert.strictEqual(isChainLoaded(storeState, { chainAlias }), false)
     })
     it('isChainLoaded()', () => {
-      assert.equal(isChainLoaded(), false)
+      assert.strictEqual(isChainLoaded(), false)
     })
     it('getPublicKey()', () => {
-      assert.equal(getPublicKey(), undefined)
+      assert.strictEqual(getPublicKey(), undefined)
     })
     it('getInterbitStatus()', () => {
-      assert.equal(getInterbitStatus(), 'UNKNOWN')
+      assert.strictEqual(getInterbitStatus(), 'UNKNOWN')
     })
     it('getConfiguredPeers()', () => {
       assert.deepStrictEqual(getConfiguredPeers(), [])

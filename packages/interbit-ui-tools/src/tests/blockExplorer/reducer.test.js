@@ -27,7 +27,7 @@ describe('blockExplorer.reducer', () => {
   }
 
   const assertUnchangedState = (state, expectedState = initialState) => {
-    assert.equal(state, expectedState)
+    assert.strictEqual(state, expectedState)
   }
 
   it('unknown action has no effect', () => {

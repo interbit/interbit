@@ -79,13 +79,19 @@ describe('blockExplorer.selectors', () => {
 
   describe('retrieves expected values from store', () => {
     it('blockExplorerSubtree()', () => {
-      assert.deepEqual(blockExplorerSubtree(storeState), blockExplorerState)
+      assert.deepStrictEqual(
+        blockExplorerSubtree(storeState),
+        blockExplorerState
+      )
     })
     it('getChainAliases()', () => {
-      assert.deepEqual(getChainAliases(storeState), [chainAlias1, chainAlias2])
+      assert.deepStrictEqual(getChainAliases(storeState), [
+        chainAlias1,
+        chainAlias2
+      ])
     })
     it('getChainState()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getChainState(storeState, { chainAlias: chainAlias2 }),
         chainState2
       )
@@ -103,13 +109,13 @@ describe('blockExplorer.selectors', () => {
 
   describe('can read values from reducer state', () => {
     it('getChainAliases()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getChainAliases(blockExplorerState, { subtree: entireTree }),
         [chainAlias1, chainAlias2]
       )
     })
     it('getChainState()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getChainState(blockExplorerState, {
           chainAlias: chainAlias2,
           subtree: entireTree
@@ -139,14 +145,14 @@ describe('blockExplorer.selectors', () => {
 
   describe('provides sensible default without throwing', () => {
     it('blockExplorerSubtree()', () => {
-      assert.deepEqual(blockExplorerSubtree(), {})
+      assert.deepStrictEqual(blockExplorerSubtree(), {})
     })
     it('getChainAliases()', () => {
-      assert.deepEqual(getChainAliases(), [])
+      assert.deepStrictEqual(getChainAliases(), [])
     })
     it('getChainState(): unknown chain alias', () => {
       const chainAlias = 'UNKNOWN'
-      assert.deepEqual(getChainState(storeState, { chainAlias }), {
+      assert.deepStrictEqual(getChainState(storeState, { chainAlias }), {
         chainAlias,
         state: {},
         interbit: {},
@@ -154,7 +160,7 @@ describe('blockExplorer.selectors', () => {
       })
     })
     it('getChainState(): chain alias not specified', () => {
-      assert.deepEqual(getChainState(storeState), {
+      assert.deepStrictEqual(getChainState(storeState), {
         chainAlias: 'No chain selected',
         state: {},
         interbit: {},
@@ -162,7 +168,7 @@ describe('blockExplorer.selectors', () => {
       })
     })
     it('getChainState(): no arguments', () => {
-      assert.deepEqual(getChainState(), {
+      assert.deepStrictEqual(getChainState(), {
         chainAlias: 'No chain selected',
         state: {},
         interbit: {},

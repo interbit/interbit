@@ -63,31 +63,34 @@ describe('middleware.selectors', () => {
 
   describe('retrieves expected values from store', () => {
     it('interbitSubtree()', () => {
-      assert.deepEqual(interbitSubtree(storeState), middlewareState)
+      assert.deepStrictEqual(interbitSubtree(storeState), middlewareState)
     })
     it('getChainAliases()', () => {
-      assert.deepEqual(getChainAliases(storeState), [chainAlias1, chainAlias2])
+      assert.deepStrictEqual(getChainAliases(storeState), [
+        chainAlias1,
+        chainAlias2
+      ])
     })
     it('getChain()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getChain(storeState, { chainAlias: chainAlias2 }),
         chainState2
       )
     })
     it('getChainId()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getChainId(storeState, { chainAlias: chainAlias2 }),
         chainId2
       )
     })
     it('getBlockMaster()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getBlockMaster(storeState, { chainAlias: chainAlias2 }),
         blockMaster
       )
     })
     it('getSponsorConfig()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getSponsorConfig(storeState, {
           publicChainAlias: chainAlias1,
           privateChainAlias: chainAlias2
@@ -111,10 +114,13 @@ describe('middleware.selectors', () => {
       assert.equal(getInterbitStatus(storeState), middlewareState.status)
     })
     it('getConfiguredPeers()', () => {
-      assert.deepEqual(getConfiguredPeers(storeState), middlewareState.peers)
+      assert.deepStrictEqual(
+        getConfiguredPeers(storeState),
+        middlewareState.peers
+      )
     })
     it('getConfiguredChains()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getConfiguredChains(storeState),
         middlewareState.chainData
       )
@@ -123,13 +129,13 @@ describe('middleware.selectors', () => {
 
   describe('can read values from reducer state', () => {
     it('getChainAliases()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getChainAliases(middlewareState, { subtree: entireTree }),
         [chainAlias1, chainAlias2]
       )
     })
     it('getChain()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getChain(middlewareState, {
           chainAlias: chainAlias2,
           subtree: entireTree
@@ -138,7 +144,7 @@ describe('middleware.selectors', () => {
       )
     })
     it('getChainId()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getChainId(middlewareState, {
           chainAlias: chainAlias2,
           subtree: entireTree
@@ -147,7 +153,7 @@ describe('middleware.selectors', () => {
       )
     })
     it('getBlockMaster()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getBlockMaster(middlewareState, {
           chainAlias: chainAlias2,
           subtree: entireTree
@@ -156,7 +162,7 @@ describe('middleware.selectors', () => {
       )
     })
     it('getSponsorConfig()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getSponsorConfig(middlewareState, {
           publicChainAlias: chainAlias1,
           privateChainAlias: chainAlias2,
@@ -196,13 +202,13 @@ describe('middleware.selectors', () => {
       )
     })
     it('getConfiguredPeers()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getConfiguredPeers(middlewareState, { subtree: entireTree }),
         middlewareState.peers
       )
     })
     it('getConfiguredChains()', () => {
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getConfiguredChains(middlewareState, { subtree: entireTree }),
         middlewareState.chainData
       )
@@ -211,17 +217,17 @@ describe('middleware.selectors', () => {
 
   describe('provides sensible default without throwing', () => {
     it('interbitSubtree()', () => {
-      assert.deepEqual(interbitSubtree(), {})
+      assert.deepStrictEqual(interbitSubtree(), {})
     })
     it('getChainAliases()', () => {
-      assert.deepEqual(getChainAliases(), [])
+      assert.deepStrictEqual(getChainAliases(), [])
     })
     it('getChain(): unknown chain alias', () => {
       const chainAlias = 'UNKNOWN'
-      assert.deepEqual(getChain(storeState, { chainAlias }), {})
+      assert.deepStrictEqual(getChain(storeState, { chainAlias }), {})
     })
     it('getChain()', () => {
-      assert.deepEqual(getChain(), {})
+      assert.deepStrictEqual(getChain(), {})
     })
     it('getChainId(): unknown chain alias', () => {
       const chainAlias = 'UNKNOWN'
@@ -239,7 +245,7 @@ describe('middleware.selectors', () => {
     })
     it('getSponsorConfig(): unknown chain alias', () => {
       const chainAlias = 'UNKNOWN'
-      assert.deepEqual(
+      assert.deepStrictEqual(
         getSponsorConfig(storeState, {
           publicChainAlias: chainAlias1,
           privateChainAlias: chainAlias
@@ -248,7 +254,7 @@ describe('middleware.selectors', () => {
       )
     })
     it('getSponsorConfig()', () => {
-      assert.deepEqual(getSponsorConfig(), {})
+      assert.deepStrictEqual(getSponsorConfig(), {})
     })
     it('isChainLoaded(): unknown chain alias', () => {
       const chainAlias = 'UNKNOWN'
@@ -264,10 +270,10 @@ describe('middleware.selectors', () => {
       assert.equal(getInterbitStatus(), 'UNKNOWN')
     })
     it('getConfiguredPeers()', () => {
-      assert.deepEqual(getConfiguredPeers(), [])
+      assert.deepStrictEqual(getConfiguredPeers(), [])
     })
     it('getConfiguredChains()', () => {
-      assert.deepEqual(getConfiguredChains(), {})
+      assert.deepStrictEqual(getConfiguredChains(), {})
     })
   })
 })

@@ -13,7 +13,7 @@ describe('middleware.reducer', () => {
       startState = initialState,
       expectedEndState,
       expectedStateChange = {},
-      assertion = assert.deepEqual
+      assertion = assert.deepStrictEqual
     }
   ) => {
     const expectedState =
@@ -40,8 +40,8 @@ describe('middleware.reducer', () => {
     const action2 = actionCreators.chainUpdated(chainAlias2, chainState2)
     const result = reducer(intermediateState, action2)
 
-    assert.deepEqual(result.chains[chainAlias1], chainState1)
-    assert.deepEqual(result.chains[chainAlias2], chainState2)
+    assert.deepStrictEqual(result.chains[chainAlias1], chainState1)
+    assert.deepStrictEqual(result.chains[chainAlias2], chainState2)
   })
 
   it('updates existing chain state', () => {

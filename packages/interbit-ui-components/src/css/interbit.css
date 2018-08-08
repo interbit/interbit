@@ -5625,6 +5625,16 @@ a {
       .ibweb-navbar-container .nav-right-menu li.accounts-link a:hover, .ibweb-navbar-container .nav-right-menu li.accounts-link a:active, .ibweb-navbar-container .nav-right-menu li.accounts-link a:focus {
         color: #FFFFFF;
         background: #17A6F2; } }
+.ibweb .ibweb-header {
+  width: 100%;
+  padding: 16px 0;
+  border-bottom: 1px solid #E6E6E6; }
+  .ibweb .ibweb-header .grid-cont {
+    display: grid;
+    grid-template-columns: min-content, 1fr, auto;
+    max-width: 1280px;
+    margin: 0 auto; }
+
 .ibweb-footer-container {
   margin-bottom: 64px; }
   .ibweb-footer-container .ibweb-footer {

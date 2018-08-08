@@ -1,0 +1,12 @@
+.ibweb .ibweb-header {
+  width: 100%;
+  padding: 16px 0;
+  border-bottom: 1px solid $ib-med-grey;
+
+  .grid-cont {
+    display: grid;
+    grid-template-columns: min-content, 1fr, auto;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+}

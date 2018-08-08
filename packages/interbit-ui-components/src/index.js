@@ -11,6 +11,7 @@ export { default as Markdown } from './components/Markdown'
 // Navigation Components
 export { default as Footer } from './components/Navigation/Footer'
 export { default as Header } from './components/Navigation/Header'
+export { default as HeaderGrid } from './components/Navigation/HeaderGrid'
 export { default as Sidebar } from './components/Navigation/Sidebar'
 
 // Content Components

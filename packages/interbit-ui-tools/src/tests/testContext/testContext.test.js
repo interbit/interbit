@@ -5,6 +5,8 @@ const assert = require('assert')
 
 const { createMockDataStore, createTestContext } = require('.')
 
+const CI_INTERBIT_KEY_GEN_TIMEOUT = 20000
+
 describe('testContext', () => {
   describe('createDatastore', () => {
     it('Can store Key/value pairs', () => {
@@ -50,7 +52,7 @@ describe('testContext', () => {
         assert.ok(interbitContext.chains)
         assert.ok(interbitContext.localDataStore)
       },
-      20000 // Extended timeout for CI
+      CI_INTERBIT_KEY_GEN_TIMEOUT
     )
   })
 })

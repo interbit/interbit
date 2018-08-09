@@ -2,6 +2,10 @@
 const assert = require('assert')
 const interbit = require('interbit-core')
 
+const CI_INTERBIT_KEY_GEN_TIMEOUT = 20000
+const CI_SUBSCRIBE_UNSUBSCRIBE_TIMEOUT = 8000
+const CI_2_BLOCK_SLEEP = 5000
+
 const verifyApi = (api, expectedApi) => {
   const extras = Object.keys(api).reduce(
     (acc, key) => (expectedApi[key] ? acc : acc.concat(key)),
@@ -53,7 +57,7 @@ describe('interbit', () => {
     beforeAll(async () => {
       keyPair = await interbit.generateKeyPair()
       hypervisor = await interbit.createHypervisor({ keyPair })
-    }, 20000) // Timeout extended for 2048 bit key generation
+    }, CI_INTERBIT_KEY_GEN_TIMEOUT)
 
     afterAll(async () => {
       if (hypervisor) {
@@ -167,10 +171,10 @@ describe('interbit', () => {
             // sleep timeout assumes a blocking frequency of 2 secs
             // test timeout needs to be longer than the sleep period
             // Added more wiggle room around timeouts for Heroku
-            await sleep(5000)
+            await sleep(CI_2_BLOCK_SLEEP)
             assert.equal(count, 1)
           },
-          8000
+          CI_SUBSCRIBE_UNSUBSCRIBE_TIMEOUT
         )
 
         const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))

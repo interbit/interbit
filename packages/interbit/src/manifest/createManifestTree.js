@@ -34,8 +34,12 @@ const createManifestTree = (interbitConfig, manifest) => {
     minimumJoinconfig
   )
 
+  const chainIds = mergeJoinAndChildChainIds(joins, chains, manifest)
+
   const manifestEntry = {
+    alias: ROOT_CHAIN_ALIAS,
     chainId,
+    chainIds,
     validators,
     covenant,
     covenants,
@@ -111,8 +115,12 @@ const getManifestEntry = (chainAlias, config, manifest, visited) => {
     existingJoins
   )
 
+  const chainIds = mergeJoinAndChildChainIds(joins, childChains, manifest)
+
   const manifestEntry = {
+    alias: chainAlias,
     chainId: getChainId(manifest.genesisBlocks[chainAlias]),
+    chainIds,
     validators: getAdminValidators(config),
     covenant,
     covenants,
@@ -125,6 +133,36 @@ const getManifestEntry = (chainAlias, config, manifest, visited) => {
   return {
     ...manifestEntry,
     hash
+  }
+}
+
+const mergeJoinAndChildChainIds = (joins, childChains, manifest) => {
+  const joinChainIds = Object.values(joins).reduce((accum, joinsOfType) => {
+    const joinedChainIds = joinsOfType.reduce(
+      (accumJoin, join) => ({
+        ...accumJoin,
+        [join.alias]: manifest.chains[join.alias]
+      }),
+      {}
+    )
+
+    return {
+      ...accum,
+      ...joinedChainIds
+    }
+  }, {})
+
+  const childChainIds = Object.values(childChains).reduce(
+    (accum, childChainEntry) => ({
+      ...accum,
+      [childChainEntry.alias]: manifest.chains[childChainEntry.alias]
+    }),
+    {}
+  )
+
+  return {
+    ...childChainIds,
+    ...joinChainIds
   }
 }
 

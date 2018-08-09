@@ -215,22 +215,26 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
 
     const rootChain = manifest.manifest[ROOT_CHAIN_ALIAS]
     should.ok(rootChain)
+    should.ok(rootChain.alias)
     should.ok(rootChain.chainId)
+    should.ok(rootChain.chainIds)
     should.ok(rootChain.validators)
+    should.ok(rootChain.covenant)
     should.ok(rootChain.covenants)
     should.ok(rootChain.joins)
     should.ok(rootChain.chains)
-    should.ok(rootChain.covenant)
     // should.ok(rootChain.acl)
 
     const controlChain = rootChain.chains.control
     should.ok(controlChain)
+    should.ok(controlChain.alias)
     should.ok(controlChain.chainId)
+    should.ok(controlChain.chainIds)
     should.ok(controlChain.validators)
+    should.ok(controlChain.covenant)
     should.ok(controlChain.covenants)
     should.ok(controlChain.joins)
     should.ok(controlChain.chains)
-    should.ok(controlChain.covenant)
     // should.ok(controlChain.acl)
   })
 

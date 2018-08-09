@@ -5,7 +5,7 @@ import { NavItem } from 'react-bootstrap'
 
 export default class NavLinkWrapper extends Component {
   static propTypes = {
-    to: PropTypes.string.isRequired,
+    to: PropTypes.string,
     text: PropTypes.string.isRequired,
     eventKey: PropTypes.string.isRequired,
     className: PropTypes.string,
@@ -14,6 +14,7 @@ export default class NavLinkWrapper extends Component {
 
   static defaultProps = {
     className: '',
+    to: '#',
     isDisabled: false
   }
 

@@ -21,11 +21,20 @@ describe('testContext', () => {
   })
 
   describe('createTestContext(dataStore)', () => {
-    it('Creates a testContext using interbit', async () => {
-      const config = { chainData: {}, peers: ['abc.com'] }
-      const testContext = createTestContext(config)
+    let testContext
 
-      try {
+    afterEach(() => {
+      if (testContext) {
+        testContext.unloadInterbit()
+      }
+    })
+
+    it(
+      'Creates a testContext using interbit',
+      async () => {
+        const config = { chainData: {}, peers: ['abc.com'] }
+        testContext = createTestContext(config)
+
         assert.deepStrictEqual(testContext.getConfig(), config)
         assert.strictEqual(testContext.isInterbitLoaded(), false)
         assert.throws(() => testContext.getInterbit())
@@ -40,9 +49,8 @@ describe('testContext', () => {
         assert.ok(interbitContext.publicKey)
         assert.ok(interbitContext.chains)
         assert.ok(interbitContext.localDataStore)
-      } finally {
-        testContext.unloadInterbit()
-      }
-    })
+      },
+      20000 // Extended timeout for CI
+    )
   })
 })

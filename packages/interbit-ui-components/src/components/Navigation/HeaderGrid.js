@@ -53,15 +53,15 @@ export default class Header extends Component {
     // TODO: adjust visibility based on new grid widths
     const logoMarkup = (
       <div>
-        <div className="hidden-xs">{logo.logoLg}</div>
-        <div className="visible-xs hidden-sm">{logo.logoSm}</div>
+        {logo.logoLg}
+        {logo.logoSm}
       </div>
     )
 
     return (
       <div className={`ibweb-header ${className}`}>
         <div className="grid-cont">
-          <div className="header-logo">
+          <div className="logo">
             {logo.isDisabled ? (
               logoMarkup
             ) : (
@@ -69,21 +69,17 @@ export default class Header extends Component {
             )}
           </div>
 
-          <Navbar>
-            <Nav className="left-nav">
-              {// !!leftNavItems.length &&
-              leftNavItems.map(
-                navItem =>
-                  !navItem.isHidden && (
-                    <NavLinkWrapper key={navItem.eventKey} {...navItem} />
-                  )
-              )}
-            </Nav>
-          </Navbar>
+          <Nav className="left-navbar">
+            {leftNavItems.map(
+              navItem =>
+                !navItem.isHidden && (
+                  <NavLinkWrapper key={navItem.eventKey} {...navItem} />
+                )
+            )}
+          </Nav>
 
-          <Nav className="right-nav">
-            {// !!rightNavItems.length &&
-            rightNavItems.map(
+          <Nav className="right-navbar">
+            {rightNavItems.map(
               navItem =>
                 !navItem.isHidden && (
                   <NavLinkWrapper key={navItem.eventKey} {...navItem} />

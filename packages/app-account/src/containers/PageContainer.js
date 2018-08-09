@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { Grid } from 'react-bootstrap'
-import { Header, Footer } from 'interbit-ui-components'
+import { HeaderGrid, Footer } from 'interbit-ui-components'
 
 import Account from '../containers/Account'
 import Home from '../containers/Home'
@@ -29,33 +29,25 @@ export default class PageContainer extends Component {
   }
 
   render() {
-    const { userName, isLoggedIn } = this.props
+    const { isLoggedIn } = this.props
 
     const redirectToSignIn = renderComponent =>
       isLoggedIn ? renderComponent : <Redirect to={paths.CREATE_ACCOUNT} />
 
-    const headerTextNav = [
-      {
-        content: (
-          <div id="ib-test-signed-in" className="username">
-            <i className="fa fa-user" />&nbsp;
-            {userName}
-          </div>
-        ),
-        key: 'username'
-      }
-    ]
+    const logo = {
+      logoLg: <LogoAccount />,
+      logoSm: <LogoAccountSm />,
+      to: '/'
+    }
 
     return (
       <div>
-        <Header
-          className="nav-main-menu"
-          logo={<LogoAccount />}
-          logoSm={<LogoAccountSm />}
-          navItems={
+        <HeaderGrid
+          logo={logo}
+          leftNavItems={
             isLoggedIn ? navigation.headerNav : navigation.headerNavLoggedOut
           }
-          textNavItems={isLoggedIn ? headerTextNav : []}
+          rightNavItems={isLoggedIn ? navigation.rightHeaderNav : []}
         />
 
         <Grid>

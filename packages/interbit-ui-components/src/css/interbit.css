@@ -5631,9 +5631,22 @@ a {
   border-bottom: 1px solid #E6E6E6; }
   .ibweb .ibweb-header .grid-cont {
     display: grid;
-    grid-template-columns: min-content, 1fr, auto;
+    grid-template-columns: min-content 1fr auto;
     max-width: 1280px;
     margin: 0 auto; }
+    .ibweb .ibweb-header .grid-cont .nav li {
+      display: inline-block;
+      margin-bottom: 0; }
+      .ibweb .ibweb-header .grid-cont .nav li.disabled a {
+        color: #828282; }
+      .ibweb .ibweb-header .grid-cont .nav li a {
+        padding: 5px 16px;
+        color: #1385E8;
+        font-weight: 700; }
+      .ibweb .ibweb-header .grid-cont .nav li a:hover {
+        background-color: transparent; }
+    .ibweb .ibweb-header .grid-cont .logo {
+      padding-right: 16px; }
 
 .ibweb-footer-container {
   margin-bottom: 64px; }

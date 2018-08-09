@@ -6,12 +6,12 @@ const { jsdom } = require('jsdom')
 
 const getHtmlConfig = require('../../middleware/browserContext/staticHtml')
 
-const chainIdPublic = '323423h23g4234e2329e3592040f87a60...'
-const chainIdGithubOauth = '044625fa3898cc55fc22243b329e35920...'
-const peer1 = 'myapp.com'
-const peer2 = 'buffer.myapp.com'
-const peer3 = 'us-west.iws.interbit.io'
-const appName = 'myApp'
+const CHAIN_ID_PUBLIC = '323423h23g4234e2329e3592040f87a60...'
+const CHAIN_ID_GITHUB_OAUTH = '044625fa3898cc55fc22243b329e35920...'
+const PEER1 = 'myapp.com'
+const PEER2 = 'buffer.myapp.com'
+const PEER3 = 'us-west.iws.interbit.io'
+const APP_NAME = 'myApp'
 
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -26,10 +26,10 @@ You need to enable JavaScript to run this app.
 </noscript>
 <script src="/bundle.browser.js"
   id="interbit"
-  data-chain-id-public="${chainIdPublic}"
-  data-chain-id-github-oauth="${chainIdGithubOauth}"
-  data-peer-hints="${peer1},${peer2},${peer3}"
-  data-boot-react-app="${appName}"
+  data-chain-id-public="${CHAIN_ID_PUBLIC}"
+  data-chain-id-github-oauth="${CHAIN_ID_GITHUB_OAUTH}"
+  data-peer-hints="${PEER1},${PEER2},${PEER3}"
+  data-boot-react-app="${APP_NAME}"
 >
 </script>
 </body>
@@ -43,16 +43,16 @@ describe('staticHtml', () => {
       assert.deepStrictEqual(config, {
         chainData: {
           public: {
-            chainId: chainIdPublic,
+            chainId: CHAIN_ID_PUBLIC,
             status: 'PENDING'
           },
           githubOauth: {
-            chainId: chainIdGithubOauth,
+            chainId: CHAIN_ID_GITHUB_OAUTH,
             status: 'PENDING'
           }
         },
-        peers: [peer1, peer2, peer3],
-        bootReactApp: appName
+        peers: [PEER1, PEER2, PEER3],
+        bootReactApp: APP_NAME
       })
     })
   })

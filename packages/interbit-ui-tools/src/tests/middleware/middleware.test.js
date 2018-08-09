@@ -51,7 +51,7 @@ const instrumentedStore = (params = MIDDLEWARE_PARAMS.PUBLIC_ONLY) => {
   const stateAfterActions = []
   const chainActions = []
 
-  const clearBuffers = () => {
+  const resetSpy = () => {
     actions.length = 0
     stateAfterActions.length = 0
     chainActions.length = 0
@@ -115,7 +115,7 @@ const instrumentedStore = (params = MIDDLEWARE_PARAMS.PUBLIC_ONLY) => {
     stateAfterActions,
     chainActions,
     dispatch: store.dispatch,
-    setupDone: clearBuffers,
+    resetSpy,
     simulateChainStateChange: notifySubscribers,
     simulateNewBlock: notifyBlockSubscribers
   }
@@ -319,7 +319,7 @@ describe('middleware', () => {
       })
     )
 
-    store.setupDone()
+    store.resetSpy()
 
     store.simulateChainStateChange()
 
@@ -341,7 +341,7 @@ describe('middleware', () => {
       })
     )
 
-    store.setupDone()
+    store.resetSpy()
 
     store.simulateNewBlock()
 
@@ -370,7 +370,7 @@ describe('middleware', () => {
       })
     )
 
-    store.setupDone()
+    store.resetSpy()
 
     const chainAction1 = {
       type: 'CHAIN_ACTION',
@@ -430,7 +430,7 @@ describe('middleware', () => {
       })
     )
 
-    store.setupDone()
+    store.resetSpy()
 
     const chainAction1 = {
       type: 'CHAIN_ACTION',

@@ -50,16 +50,12 @@ describe('interbit', () => {
     let hypervisor
     let keyPair
 
-    // regular function is required for before to honour timeout
-    // eslint-disable-next-line prefer-arrow-callback
-    before(async function() {
-      // Timeout extended for 2048 bit key generation
-      this.timeout(20000)
+    beforeAll(async () => {
       keyPair = await interbit.generateKeyPair()
       hypervisor = await interbit.createHypervisor({ keyPair })
-    })
+    }, 20000) // Timeout extended for 2048 bit key generation
 
-    after(async () => {
+    afterAll(async () => {
       if (hypervisor) {
         hypervisor.stopHyperBlocker()
       }
@@ -92,7 +88,7 @@ describe('interbit', () => {
     describe('cli', () => {
       let cli
 
-      before(async () => {
+      beforeAll(async () => {
         cli = await interbit.createCli(hypervisor)
       })
 
@@ -150,28 +146,32 @@ describe('interbit', () => {
         })
 
         // interbit-core 0.7.0 regression - unsubscribe() does not unsubscribe #186
-        it('subscribe and unsubscribe work', async () => {
-          const chainId = await cli.createChain()
-          const chain = await cli.getChain(chainId)
-          let unsubscribe = () => {}
-          let count = 0
-          console.time('Time to unsubscribe')
-          unsubscribe = chain.subscribe(() => {
-            console.log(`Subscribe callback: ${count}`)
-            count += 1
-            if (count === 1) {
-              unsubscribe()
-              console.timeEnd('Time to unsubscribe')
-            }
-          })
-          // Potentially brittle
-          // Test needs to wait for at least 2 blocks
-          // sleep timeout assumes a blocking frequency of 2 secs
-          // test timeout needs to be longer than the sleep period
-          // Added more wiggle room around timeouts for Heroku
-          await sleep(5000)
-          assert.equal(count, 1)
-        }).timeout(8000)
+        it(
+          'subscribe and unsubscribe work',
+          async () => {
+            const chainId = await cli.createChain()
+            const chain = await cli.getChain(chainId)
+            let unsubscribe = () => {}
+            let count = 0
+            console.time('Time to unsubscribe')
+            unsubscribe = chain.subscribe(() => {
+              console.log(`Subscribe callback: ${count}`)
+              count += 1
+              if (count === 1) {
+                unsubscribe()
+                console.timeEnd('Time to unsubscribe')
+              }
+            })
+            // Potentially brittle
+            // Test needs to wait for at least 2 blocks
+            // sleep timeout assumes a blocking frequency of 2 secs
+            // test timeout needs to be longer than the sleep period
+            // Added more wiggle room around timeouts for Heroku
+            await sleep(5000)
+            assert.equal(count, 1)
+          },
+          8000
+        )
 
         const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
       })

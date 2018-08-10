@@ -14,7 +14,7 @@ describe('blockExplorer.reducer', () => {
       startState = initialState,
       expectedEndState,
       expectedStateChange = {},
-      assertion = assert.deepEqual
+      assertion = assert.deepStrictEqual
     }
   ) => {
     const expectedState =
@@ -27,7 +27,7 @@ describe('blockExplorer.reducer', () => {
   }
 
   const assertUnchangedState = (state, expectedState = initialState) => {
-    assert.equal(state, expectedState)
+    assert.strictEqual(state, expectedState)
   }
 
   it('unknown action has no effect', () => {
@@ -118,8 +118,8 @@ describe('blockExplorer.reducer', () => {
     )
     const result = reducer(intermediateState, action2)
 
-    assert.deepEqual(result.chains[chainAlias1].state, chainState1)
-    assert.deepEqual(result.chains[chainAlias2].state, chainState2)
+    assert.deepStrictEqual(result.chains[chainAlias1].state, chainState1)
+    assert.deepStrictEqual(result.chains[chainAlias2].state, chainState2)
   })
 
   it('CHAIN_BLOCK_ADDED adds chain to state if not present', () => {

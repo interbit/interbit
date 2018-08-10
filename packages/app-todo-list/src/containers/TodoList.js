@@ -16,8 +16,8 @@ import TodoRow from '../components/TodoRow'
 const { chainDispatch, selectors } = interbitRedux
 
 const mapStateToProps = (state, ownProps) => {
-  const chainState = selectors.getPrivateChain(state, {
-    privateChainAlias: chainAliases.PRIVATE
+  const chainState = selectors.getChain(state, {
+    chainAlias: chainAliases.PRIVATE
   })
   const todos = chainState.getIn(['todos'])
 

@@ -29,8 +29,8 @@ const mapStateToProps = (state, ownProps) => {
   const isAttentionMoreInfoModalVisible =
     state.ui.modals[modalNames.ATTENTION_MORE_INFO_MODAL_NAME]
 
-  const chainState = selectors.getPrivateChain(state, {
-    privateChainAlias: PRIVATE
+  const chainState = selectors.getChain(state, {
+    chainAlias: PRIVATE
   })
   const profileFormProps = {
     isEditable: isAccountFormEditable

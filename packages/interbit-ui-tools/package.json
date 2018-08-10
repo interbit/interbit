@@ -9,7 +9,7 @@
     "build": "webpack --env dev && webpack --env build",
     "build:watch": "webpack --env dev && webpack --env build --watch",
     "dev": "webpack --progress --colors --watch --env dev",
-    "test": "mocha \"src/tests/**/*.test.js\""
+    "test": "jest"
   },
   "keywords": [
     "Interbit",
@@ -25,7 +25,8 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "mocha": "^4.0.1",
+    "interbit-core": "0.14.0",
+    "jest": "20.0.4",
     "webpack": "^3.10.0",
     "yargs": "^10.0.3"
   },
@@ -37,5 +38,15 @@
     "query-string": "^5.0.1",
     "redux-saga": "^0.16.0",
     "seamless-immutable": "^7.1.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

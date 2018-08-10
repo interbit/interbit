@@ -13,6 +13,7 @@
     "deep-diff": "^1.0.1",
     "fs-extra": "^5.0.0",
     "interbit-core": "0.14.0",
+    "interbit-root-covenant": "0.4.43",
     "interbit-covenant-tools": "0.4.44",
     "json-stable-stringify": "^1.0.1",
     "lodash": "^4.17.5",

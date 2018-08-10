@@ -56,11 +56,10 @@ const packCovenant = async (cli, location, covenantFileLocation) => {
 }
 
 const packRootCovenant = async (cli, location) => {
-  const packageName = 'interbit-covenant-tools'
+  const packageName = 'interbit-root-covenant'
 
   const rootCovenantLocation = path.join(
-    getPackageDirFromFilePath(packageName, require.resolve(packageName)),
-    '/src/rootCovenant'
+    getPackageDirFromFilePath(packageName, require.resolve(packageName))
   )
 
   const covenantInfo = await packCovenant(cli, location, rootCovenantLocation)

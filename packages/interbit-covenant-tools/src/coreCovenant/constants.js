@@ -12,7 +12,8 @@ const PATHS = {
   ROLES: [INTERBIT, CONFIG, ACL, 'roles'],
   BLOCKS: [INTERBIT, 'blocks'],
   SENT_ACTIONS: [INTERBIT, 'sent-actions'],
-  PENDING_ACTIONS: ['pending-actions']
+  PENDING_ACTIONS: ['pending-actions'],
+  COVENANT_HASH: [INTERBIT, CONFIG, 'covenantHash']
 }
 
 module.exports = {

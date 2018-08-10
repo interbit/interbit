@@ -23,6 +23,10 @@
     "public": {
       "filename": "covenants/72fe3ca61c3af35ecca31e58c33c368e1554dc1dab01ab8fc3aadc965f608775.tgz",
       "hash": "72fe3ca61c3af35ecca31e58c33c368e1554dc1dab01ab8fc3aadc965f608775"
+    },
+    "interbitRoot": {
+      "filename": "covenants/368e1554dc1dab01ab8fc3aadc965f60877572fe3ca61c3af35ecca31e58c33c.tgz",
+      "hash": "368e1554dc1dab01ab8fc3aadc965f60877572fe3ca61c3af35ecca31e58c33c"
     }
   },
   "chains": {
@@ -214,7 +218,12 @@
             ]
           },
           "chains": {},
-          "hash": "a148428c2d25c66cc58eefded8a678d4b297c041"
+          "alias": "public",
+          "chainIds": {
+            "interbitRoot": "56399770d33b17fe3ba20a1d911cc56c3cc47ed11fc8f6935543c2b25da96f47",
+            "control": "7988dc0fe96bf5371909781b9cab0de21fcca8a740573267b1134e6889922162"
+          },
+          "hash": "bb4a98395b62269d5b7249d9da0ed6cbb2b8dd40"
         },
         "control": {
           "chainId": "7988dc0fe96bf5371909781b9cab0de21fcca8a740573267b1134e6889922162",
@@ -247,11 +256,21 @@
             ]
           },
           "chains": {},
-          "hash": "210bb9dd2ace3a902688b77b4ec0e92b2c9e983c"
+          "alias": "control",
+          "chainIds": {
+            "interbitRoot": "56399770d33b17fe3ba20a1d911cc56c3cc47ed11fc8f6935543c2b25da96f47",
+            "public": "28884c86bb5f73e48726ebdc466d45f4034a22c7ce9b69e5b75bd94d55f78d7f"
+          },
+          "hash": "a3539c3807e7664c3637a2b74515be70576c7f88"
         }
       },
-      "hash": "57b39212bdfacebbd29ee59b11a8c19452ff290e"
+      "alias": "interbitRoot",
+      "chainIds": {
+        "control": "7988dc0fe96bf5371909781b9cab0de21fcca8a740573267b1134e6889922162",
+        "public": "28884c86bb5f73e48726ebdc466d45f4034a22c7ce9b69e5b75bd94d55f78d7f"
+      },
+      "hash": "b21450b289f30145e5da730810ac184541dca39b"
     }
   },
-  "hash": "8d33cd122fed0d374f1ef6e4b36e5043734920e0"
+  "hash": "aaa3d1448887ae6815a8c92249cc11258981987a"
 }

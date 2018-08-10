@@ -5209,7 +5209,7 @@ a {
   -webkit-box-shadow: none;
   box-shadow: none;
   background: #FFFFFF;
-  color: #057514; }
+  color: #00A451; }
 
 .subsection {
   margin: 0 32px 32px 0;
@@ -5587,7 +5587,7 @@ a {
     font-weight: 400;
     color: #666666; }
     .ibweb-navbar .username span {
-      color: #057514; }
+      color: #00A451; }
 
 @media (max-width: 1023px) {
   .ibweb-navbar-container .col-md-3 {
@@ -5635,7 +5635,7 @@ a {
         background: #17A6F2; } }
 .ibweb .ibweb-header {
   width: 100%;
-  padding: 16px 0;
+  padding: 16px 32px;
   border-bottom: 1px solid #E6E6E6; }
   .ibweb .ibweb-header .grid-cont {
     display: grid;
@@ -5647,6 +5647,8 @@ a {
       margin-bottom: 0; }
       .ibweb .ibweb-header .grid-cont .nav li.disabled a {
         color: #828282; }
+      .ibweb .ibweb-header .grid-cont .nav li.disabled.signed-in a {
+        color: #00A451; }
       .ibweb .ibweb-header .grid-cont .nav li a {
         padding: 5px 16px;
         color: #1385E8;

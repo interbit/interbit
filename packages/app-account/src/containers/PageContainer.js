@@ -43,7 +43,11 @@ export default class PageContainer extends Component {
           leftNavItems={
             isLoggedIn ? navigation.headerNav : navigation.headerNavLoggedOut
           }
-          rightNavItems={isLoggedIn ? navigation.headerRightNav : []}
+          rightNavItems={
+            isLoggedIn
+              ? navigation.headerRightNav
+              : navigation.headerRightNavLoggedOut
+          }
         />
 
         <Grid>

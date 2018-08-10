@@ -32,8 +32,8 @@ function* loadPrivateChain({
 
   let privateChain
 
-  const publicChainId = yield select(selectors.getPublicChainId, {
-    publicChainAlias
+  const publicChainId = yield select(selectors.getChainId, {
+    chainAlias: publicChainAlias
   })
 
   const dataStoreKey = getDataStoreKey(publicChainId, chainAlias)

@@ -1,11 +1,7 @@
 const queryString = require('query-string')
 const base64url = require('base64-url')
 
-const {
-  getPublicChainId,
-  getPrivateChainId,
-  getPublicKey
-} = require('../middleware/selectors')
+const { getChainId, getPublicKey } = require('../middleware/selectors')
 
 const packState = (state, whiteList) =>
   base64url.encode(JSON.stringify(state, whiteList))
@@ -22,11 +18,11 @@ const packCAuthParams = (
   const requestState = {
     appPublic: {
       chainAlias: publicChainAlias,
-      chainId: getPublicChainId(state, { publicChainAlias })
+      chainId: getChainId(state, { chainAlias: publicChainAlias })
     },
     appConsumer: {
       chainAlias: privateChainAlias,
-      chainId: getPrivateChainId(state, { privateChainAlias })
+      chainId: getChainId(state, { chainAlias: privateChainAlias })
     },
     publicKey: getPublicKey,
     tokens

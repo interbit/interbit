@@ -18,7 +18,16 @@ export default {
     {
       text: 'Create Account / Sign-in',
       to: paths.CREATE_ACCOUNT,
+      url: paths.CREATE_ACCOUNT,
       eventKey: 'create-account'
+    }
+  ],
+  headerRightNav: [
+    {
+      text: 'Signed-in',
+      eventKey: 'signed-in',
+      id: 'ib-test-signed-in',
+      isDisabled: true
     }
   ],
   footerNav: [

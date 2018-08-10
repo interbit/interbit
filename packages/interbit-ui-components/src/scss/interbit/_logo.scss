@@ -18,3 +18,17 @@
 .ibweb-logo {
   margin-top: -4px;
 }
+
+// New CSS Grid style icon and wordmark combo
+.ibweb-app-logo {
+  display: inline-block;
+
+  .icon {
+    display: inline-block;
+    margin-right: 16px;
+  }
+
+  .wordmark {
+    display: inline-block;
+  }
+}

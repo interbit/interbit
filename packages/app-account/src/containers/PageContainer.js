@@ -12,19 +12,16 @@ import ExploreChain from '../containers/ExploreChain'
 import CreateAccount from '../containers/CreateAccount'
 
 import LogoAccount from '../components/LogoAccounts'
-import LogoAccountSm from '../components/LogoAccountSm'
 import navigation from '../constants/navigation'
 import paths from '../constants/paths'
 import urls from '../constants/urls'
 
 export default class PageContainer extends Component {
   static propTypes = {
-    userName: PropTypes.string,
     isLoggedIn: PropTypes.bool
   }
 
   static defaultProps = {
-    userName: 'anonymous user',
     isLoggedIn: false
   }
 
@@ -35,8 +32,7 @@ export default class PageContainer extends Component {
       isLoggedIn ? renderComponent : <Redirect to={paths.CREATE_ACCOUNT} />
 
     const logo = {
-      logoLg: <LogoAccount />,
-      logoSm: <LogoAccountSm />,
+      logoEl: <LogoAccount />,
       to: '/'
     }
 
@@ -47,7 +43,7 @@ export default class PageContainer extends Component {
           leftNavItems={
             isLoggedIn ? navigation.headerNav : navigation.headerNavLoggedOut
           }
-          rightNavItems={isLoggedIn ? navigation.rightHeaderNav : []}
+          rightNavItems={isLoggedIn ? navigation.headerRightNav : []}
         />
 
         <Grid>

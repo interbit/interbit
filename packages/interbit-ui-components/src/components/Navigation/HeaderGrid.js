@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Nav, Navbar } from 'react-bootstrap'
+import { Nav } from 'react-bootstrap'
 
 import NavLinkWrapper from './NavLinkWrapper'
 import LinkWrapper from '../UIKit/LinkWrapper'
@@ -10,8 +10,7 @@ export default class Header extends Component {
   static propTypes = {
     className: PropTypes.string,
     logo: PropTypes.shape({
-      logoLg: PropTypes.element,
-      logoSm: PropTypes.element,
+      logoEl: PropTypes.element,
       to: PropTypes.string,
       isDisabled: PropTypes.bool
     }),
@@ -38,8 +37,7 @@ export default class Header extends Component {
   static defaultProps = {
     className: '',
     logo: {
-      logoLg: <Logo className="sm hidden-xs" />,
-      logoSm: <div />,
+      logoEl: <Logo className="sm hidden-xs" />,
       to: '',
       isDisabled: false
     },
@@ -50,22 +48,15 @@ export default class Header extends Component {
   render() {
     const { leftNavItems, rightNavItems, logo, className } = this.props
 
-    // TODO: adjust visibility based on new grid widths
-    const logoMarkup = (
-      <div>
-        {logo.logoLg}
-        {logo.logoSm}
-      </div>
-    )
-
     return (
       <div className={`ibweb-header ${className}`}>
         <div className="grid-cont">
           <div className="logo">
             {logo.isDisabled ? (
-              logoMarkup
+              /* TODO: adjust wordmark visibility based on new grid widths */
+              logo.logoEl
             ) : (
-              <LinkWrapper to={logo.to}>{logoMarkup}</LinkWrapper>
+              <LinkWrapper to={logo.to}>{logo.logoEl}</LinkWrapper>
             )}
           </div>
 

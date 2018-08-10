@@ -9,30 +9,33 @@ export default class NavLinkWrapper extends Component {
     text: PropTypes.string.isRequired,
     eventKey: PropTypes.string.isRequired,
     className: PropTypes.string,
+    id: PropTypes.string,
     isDisabled: PropTypes.bool
   }
 
   static defaultProps = {
     className: '',
+    id: '',
     to: '#',
     isDisabled: false
   }
 
   render() {
-    const { to, text, className, eventKey, isDisabled } = this.props
+    const { to, text, className, id, eventKey, isDisabled } = this.props
     const isExternalLink = /^https?:\/\//.test(to)
 
     return isExternalLink || isDisabled ? (
       <NavItem
         href={to}
         className={className}
+        id={id}
         eventKey={eventKey}
         disabled={isDisabled}>
         {text}
       </NavItem>
     ) : (
       <li role="presentation">
-        <NavLink to={to} className={className}>
+        <NavLink to={to} className={className} id={id}>
           {text}
         </NavLink>
       </li>

@@ -53,16 +53,27 @@ describe('interbit', () => {
   describe('hypervisor', () => {
     let hypervisor
     let keyPair
+    const env = Object.assign({}, process.env)
 
-    beforeAll(async () => {
+    beforeAll(async done => {
+      console.log('Generating key pair...')
       keyPair = await interbit.generateKeyPair()
+
+      console.log('Creating hypervisor...')
+      process.env.DB_PATH = `./db-${Date.now()}`
       hypervisor = await interbit.createHypervisor({ keyPair })
+
+      done()
     }, CI_INTERBIT_KEY_GEN_TIMEOUT)
 
-    afterAll(async () => {
+    afterAll(async done => {
       if (hypervisor) {
+        console.log('Stopping hyperblocker...')
         hypervisor.stopHyperBlocker()
+        hypervisor = undefined
       }
+      process.env = env
+      done()
     })
 
     it('has expected API', () => {
@@ -93,7 +104,16 @@ describe('interbit', () => {
       let cli
 
       beforeAll(async () => {
+        console.log('Creating cli...')
         cli = await interbit.createCli(hypervisor)
+      })
+
+      afterAll(async () => {
+        if (cli) {
+          console.log('Shutting down cli...')
+          await cli.shutdown()
+          cli = undefined
+        }
       })
 
       it('has expected API', async () => {

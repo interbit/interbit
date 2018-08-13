@@ -11,6 +11,7 @@ const testDeploy = async () => {
     cli: { shutdown: () => {} },
     hypervisor: { stopHyperBlocker: () => {} }
   }
+  const env = { ...{}, ...process.env }
 
   try {
     const { location, cleanup } = prepareTestLocation('deploy')
@@ -52,7 +53,10 @@ const testDeploy = async () => {
       keyPair
     }
 
-    log.info(deployOptions)
+    const dbPath = `./db-${Date.now()}`
+    process.env.DB_PATH = dbPath
+
+    log.info({ ...deployOptions, dbPath })
 
     const { cli, hypervisor } = await interbit.deploy(deployOptions)
     deployedInterbit = { cli, hypervisor }
@@ -70,6 +74,7 @@ const testDeploy = async () => {
   } finally {
     await deployedInterbit.cli.shutdown()
     deployedInterbit.hypervisor.stopHyperBlocker()
+    process.env = env
   }
 }
 

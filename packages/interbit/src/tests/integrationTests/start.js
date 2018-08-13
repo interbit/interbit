@@ -9,12 +9,16 @@ const testStart = async () => {
     cli: { shutdown: () => {} },
     hypervisor: { stopHyperBlocker: () => {} }
   }
+  const env = { ...{}, ...process.env }
+
   try {
     const options = {
       // eslint-disable-next-line
       config: require('./interbit.config'),
       noWatch: true
     }
+
+    process.env.DB_PATH = `./db-${Date.now()}`
 
     const { cli, hypervisor, chainManifest } = await interbit.start(options)
     startedInterbit = {
@@ -37,6 +41,7 @@ const testStart = async () => {
   } finally {
     await startedInterbit.cli.shutdown()
     startedInterbit.hypervisor.stopHyperBlocker()
+    process.env = env
   }
 }
 

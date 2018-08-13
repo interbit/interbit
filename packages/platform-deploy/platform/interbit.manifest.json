@@ -1,7 +1,7 @@
 {
   "peers": [
-    "ib-dev----master.herokuapp.com",
-    "ib-dev-web-auth.herokuapp.com"
+    "ib-dev----master.herokuapp.com:443",
+    "ib-dev-web-auth.herokuapp.com:443"
   ],
   "apps": {
     "account": {
@@ -13,7 +13,7 @@
     },
     "template": {
       "appChain": "templatePublic",
-      "buildLocation": "../../template/build",
+      "buildLocation": "../../interbit-template/build",
       "browserChains": [
         "templatePublic"
       ]
@@ -21,53 +21,274 @@
   },
   "covenants": {
     "app-account-my-account": {
-      "hash": "895ff2f04a4e28f50547f07c557cb84f256babdec7668f98296a747823975440",
-      "filename": "covenants/895ff2f04a4e28f50547f07c557cb84f256babdec7668f98296a747823975440.tgz"
+      "hash": "d1f7b3bbb750648659fe8a9f6ef34384d869ee9e3be2f3c131624fe51102a513",
+      "filename": "covenants/d1f7b3bbb750648659fe8a9f6ef34384d869ee9e3be2f3c131624fe51102a513.tgz"
     },
     "app-account-public": {
-      "hash": "9590aa510ddcc392dda2b0fe2b014c83fb3f02cb0e01f408a00b395de3343f89",
-      "filename": "covenants/9590aa510ddcc392dda2b0fe2b014c83fb3f02cb0e01f408a00b395de3343f89.tgz"
+      "hash": "70e55fc52184f26912df7323846b50eab9083472264ce9ce1e5b9b5630709761",
+      "filename": "covenants/70e55fc52184f26912df7323846b50eab9083472264ce9ce1e5b9b5630709761.tgz"
     },
     "app-account-control": {
-      "hash": "684306b81be8db6c2983db7f7d05199e49357cd5e086e6da3cc65834f6723eb7",
-      "filename": "covenants/684306b81be8db6c2983db7f7d05199e49357cd5e086e6da3cc65834f6723eb7.tgz"
+      "hash": "a27ee4f97ca2250d23674827f97f4c05841e676be0e63f5b045de236aec113e7",
+      "filename": "covenants/a27ee4f97ca2250d23674827f97f4c05841e676be0e63f5b045de236aec113e7.tgz"
     },
     "app-account-github-kyc": {
-      "hash": "dd65478113bc811aec07691476f890f1d185bf66afe2c64dfb89a9bfa742d810",
-      "filename": "covenants/dd65478113bc811aec07691476f890f1d185bf66afe2c64dfb89a9bfa742d810.tgz"
+      "hash": "73ecaffed952f266276c29074fbfae1ebc7b925477b885902d9d9f8c85cf8bf8",
+      "filename": "covenants/73ecaffed952f266276c29074fbfae1ebc7b925477b885902d9d9f8c85cf8bf8.tgz"
     },
-    "public": {
-      "hash": "266e97c95e154402d1b9be397476ec9d5da2409aa13f3988aa99472040bcd36d",
-      "filename": "covenants/266e97c95e154402d1b9be397476ec9d5da2409aa13f3988aa99472040bcd36d.tgz"
+    "template-public": {
+      "hash": "4327a99f83f4c1a48b2ecb82fff4f829dfe1fe84c0babd9c8ae4b9253c6dd245",
+      "filename": "covenants/4327a99f83f4c1a48b2ecb82fff4f829dfe1fe84c0babd9c8ae4b9253c6dd245.tgz"
     },
-    "control": {
-      "hash": "0da4a1aafe19b4446a5ec3c870aeebfa84f80a7b4beaeb94a5649779b9e7fb34",
-      "filename": "covenants/0da4a1aafe19b4446a5ec3c870aeebfa84f80a7b4beaeb94a5649779b9e7fb34.tgz"
+    "template-control": {
+      "hash": "4a90ef10c64bf51114640c6ef1e58a780b3fdb7f8457bf83fd86c3f741d3a0c7",
+      "filename": "covenants/4a90ef10c64bf51114640c6ef1e58a780b3fdb7f8457bf83fd86c3f741d3a0c7.tgz"
     },
-    "private": {
-      "hash": "d9abab37f42b0793de0b469c5a1699a71f84508b550f3ef318d6ddda1dbabf39",
-      "filename": "covenants/d9abab37f42b0793de0b469c5a1699a71f84508b550f3ef318d6ddda1dbabf39.tgz"
+    "template-private": {
+      "hash": "019cb3ff270de9c86a1724d43980c7580b9b4030adea59b389e39967e7dc31f8",
+      "filename": "covenants/019cb3ff270de9c86a1724d43980c7580b9b4030adea59b389e39967e7dc31f8.tgz"
+    },
+    "interbitRoot": {
+      "hash": "ea78da93b297f8cc0f352af934e29736296585fb1e9b61d3266dd7a8518f7b82",
+      "filename": "covenants/ea78da93b297f8cc0f352af934e29736296585fb1e9b61d3266dd7a8518f7b82.tgz"
     }
   },
   "chains": {
-    "accountsControl": "9f58584c030c7c366ac7730796806870dcd90c8fb415ba629e0bcaaa792c40cf",
-    "accountsPublic": "6cffd9f24329c49d3a5047aa187c805e20e39923a15d7f9c427bc659225c08d2",
-    "accountsGithubAuth": "7ee48aef5d991f0659261f256332ae3a5354502f7910350bdd0171e98c9dfbd3",
-    "templatePublic": "32b9365f325da189439f6d453593cf4e0a5a06ead7e6bbecc1d0814c578df452",
-    "templateControl": "3d05bbff1087a5c51748b9f23e5720721541abc4dacaa4bf4ea3bedafb51e4b9",
-    "interbitRoot": "d8b872656a90f66507c5acd24f2b9c3cb20f399b9bd296c62967671a1ef65c6a"
+    "accountsControl": "79045db6c953c57b67bb74c3bda4f7c7e46c23309572066e01854c48ab6bb77b",
+    "accountsPublic": "7bb53e1e7740707bb37feccb65a9de237ade84ae60329590a25d6d545b99d9cd",
+    "accountsGithubAuth": "8626c5cebb01fa511fd56dcee743f215a00c9475517cef7777bb65e1ecb4a559",
+    "templatePublic": "b39b9fd2e4b3cb91686d060056b55dd6d95b095763799b47906c03ef7771f1a2",
+    "templateControl": "ef28bf3cbb0c6b135b52176ec4b108e2b80bfe6e7ee2c0135e06f45cc9dec1ac",
+    "interbitRoot": "fb4f09f3d3abdf2c98ae8dcb41dcf6d070fd0dd77f0cd0119b1e2daa09243d1c"
   },
   "genesisBlocks": {
     "accountsControl": {
       "content": {
         "previousHash": "genesis",
-        "stateHash": "bec34387e5bd0aa5db5a1c3d33b00cc2a024ad2bfed4f9016f45a8a075b4697c",
+        "stateHash": "430a06932fcb915576ef9452262bd16c242c1257f39ee2df644b7cf485ad0327",
         "actions": [],
         "errors": {},
         "redispatches": {},
         "height": 0,
-        "timestamp": 1525470577795,
-        "seed": 0.4605513442751523,
+        "timestamp": 1533851731882,
+        "seed": 0.9076968428983985,
+        "configChanged": true,
+        "timeToCreateBlock": 0,
+        "state": {
+          "interbit": {
+            "config": {
+              "consensus": "PoA",
+              "providing": [],
+              "consuming": [],
+              "acl": {
+                "actionPermissions": {
+                  "*": [
+                    "root"
+                  ]
+                },
+                "roles": {
+                  "root": [
+                    "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q=",
+                    "xk0EWxXMKAECAI+weRG4JyZaoxsFX8TQDQtQXVYk2gabygm7as4+f+0+py+FErkKIbz8m0r6A+UrmKYaD/fksj2DGRKn/7Ohv7EAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcwoBgsJBwgDAgkQmTQy2zEs+JUEFQgKAgMWAgEC\nGQECGwMCHgEAAOr4Af4sl2I7QkkJvdTSMPeUJNKtj45ArxBHmbLjpYuVTpnM\nLr2DJmlNFiYgZlZkExYEI5Gm3CxyHJeq/elBSe5V613Ozk0EWxXMKAEB/3LI\nfXPVHtBtHKVE+Zveb29bmDK/l6t0w+UYIw0qpJekjaFrrLtHm5ML9BwJCBei\nea1VCL/SGTf478lZZ7My+K0AEQEAAcJfBBgBCAATBQJbFcwoCRCZNDLbMSz4\nlQIbDAAA7U8B/iloThYXFYC7IU45OqWcr5uT72ZlSaUmxKcktcjA9DRH4GVg\nZysmi4/kjUvb+qoA9GIoc7MfXxw32zkNL8YjW9c="
+                  ]
+                }
+              },
+              "blockMaster": "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+            },
+            "configChanges": {}
+          }
+        }
+      },
+      "contentHash": "a93775322da2175a6eedb4a00d4163afdeb270a63355584f9c90e123605e3898",
+      "signatures": {
+        "GENESIS": "GENESIS"
+      },
+      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
+      "blockHash": "79045db6c953c57b67bb74c3bda4f7c7e46c23309572066e01854c48ab6bb77b"
+    },
+    "accountsPublic": {
+      "content": {
+        "previousHash": "genesis",
+        "stateHash": "57bc1b5c2de7f57968c9f993e50e51bad3f81759f4f03b7c471e044c1207be3b",
+        "actions": [],
+        "errors": {},
+        "redispatches": {},
+        "height": 0,
+        "timestamp": 1533851731883,
+        "seed": 0.3796188923810617,
+        "configChanged": true,
+        "timeToCreateBlock": 0,
+        "state": {
+          "interbit": {
+            "config": {
+              "consensus": "PoA",
+              "providing": [],
+              "consuming": [],
+              "acl": {
+                "actionPermissions": {
+                  "*": [
+                    "root"
+                  ]
+                },
+                "roles": {
+                  "root": [
+                    "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+                  ]
+                }
+              },
+              "blockMaster": "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+            },
+            "configChanges": {}
+          }
+        }
+      },
+      "contentHash": "30078c5e46dce12176d8e4f150df74dd2c46c14bf767a3e1508181ed6daa07dc",
+      "signatures": {
+        "GENESIS": "GENESIS"
+      },
+      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
+      "blockHash": "7bb53e1e7740707bb37feccb65a9de237ade84ae60329590a25d6d545b99d9cd"
+    },
+    "accountsGithubAuth": {
+      "content": {
+        "previousHash": "genesis",
+        "stateHash": "430a06932fcb915576ef9452262bd16c242c1257f39ee2df644b7cf485ad0327",
+        "actions": [],
+        "errors": {},
+        "redispatches": {},
+        "height": 0,
+        "timestamp": 1533851731885,
+        "seed": 0.8650081594773871,
+        "configChanged": true,
+        "timeToCreateBlock": 0,
+        "state": {
+          "interbit": {
+            "config": {
+              "consensus": "PoA",
+              "providing": [],
+              "consuming": [],
+              "acl": {
+                "actionPermissions": {
+                  "*": [
+                    "root"
+                  ]
+                },
+                "roles": {
+                  "root": [
+                    "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q=",
+                    "xk0EWxXMKAECAI+weRG4JyZaoxsFX8TQDQtQXVYk2gabygm7as4+f+0+py+FErkKIbz8m0r6A+UrmKYaD/fksj2DGRKn/7Ohv7EAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcwoBgsJBwgDAgkQmTQy2zEs+JUEFQgKAgMWAgEC\nGQECGwMCHgEAAOr4Af4sl2I7QkkJvdTSMPeUJNKtj45ArxBHmbLjpYuVTpnM\nLr2DJmlNFiYgZlZkExYEI5Gm3CxyHJeq/elBSe5V613Ozk0EWxXMKAEB/3LI\nfXPVHtBtHKVE+Zveb29bmDK/l6t0w+UYIw0qpJekjaFrrLtHm5ML9BwJCBei\nea1VCL/SGTf478lZZ7My+K0AEQEAAcJfBBgBCAATBQJbFcwoCRCZNDLbMSz4\nlQIbDAAA7U8B/iloThYXFYC7IU45OqWcr5uT72ZlSaUmxKcktcjA9DRH4GVg\nZysmi4/kjUvb+qoA9GIoc7MfXxw32zkNL8YjW9c="
+                  ]
+                }
+              },
+              "blockMaster": "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+            },
+            "configChanges": {}
+          }
+        }
+      },
+      "contentHash": "09a826340b1519a3ef6934fa0d8e8d92c65a5aca9126752ecb852b85d1f7c6f3",
+      "signatures": {
+        "GENESIS": "GENESIS"
+      },
+      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
+      "blockHash": "8626c5cebb01fa511fd56dcee743f215a00c9475517cef7777bb65e1ecb4a559"
+    },
+    "templatePublic": {
+      "content": {
+        "previousHash": "genesis",
+        "stateHash": "57bc1b5c2de7f57968c9f993e50e51bad3f81759f4f03b7c471e044c1207be3b",
+        "actions": [],
+        "errors": {},
+        "redispatches": {},
+        "height": 0,
+        "timestamp": 1533851731886,
+        "seed": 0.1440573496786357,
+        "configChanged": true,
+        "timeToCreateBlock": 0,
+        "state": {
+          "interbit": {
+            "config": {
+              "consensus": "PoA",
+              "providing": [],
+              "consuming": [],
+              "acl": {
+                "actionPermissions": {
+                  "*": [
+                    "root"
+                  ]
+                },
+                "roles": {
+                  "root": [
+                    "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+                  ]
+                }
+              },
+              "blockMaster": "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+            },
+            "configChanges": {}
+          }
+        }
+      },
+      "contentHash": "d507977149b32911ab0114793e6771a79055cac2fc4ef6ce14d2f1f71bf59122",
+      "signatures": {
+        "GENESIS": "GENESIS"
+      },
+      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
+      "blockHash": "b39b9fd2e4b3cb91686d060056b55dd6d95b095763799b47906c03ef7771f1a2"
+    },
+    "templateControl": {
+      "content": {
+        "previousHash": "genesis",
+        "stateHash": "57bc1b5c2de7f57968c9f993e50e51bad3f81759f4f03b7c471e044c1207be3b",
+        "actions": [],
+        "errors": {},
+        "redispatches": {},
+        "height": 0,
+        "timestamp": 1533851731887,
+        "seed": 0.21540853907877433,
+        "configChanged": true,
+        "timeToCreateBlock": 0,
+        "state": {
+          "interbit": {
+            "config": {
+              "consensus": "PoA",
+              "providing": [],
+              "consuming": [],
+              "acl": {
+                "actionPermissions": {
+                  "*": [
+                    "root"
+                  ]
+                },
+                "roles": {
+                  "root": [
+                    "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+                  ]
+                }
+              },
+              "blockMaster": "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+            },
+            "configChanges": {}
+          }
+        }
+      },
+      "contentHash": "4192bad1e79f3a7d3d6b0c207fe1fff1fda57c67b0382b220023aed8ee342631",
+      "signatures": {
+        "GENESIS": "GENESIS"
+      },
+      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
+      "blockHash": "ef28bf3cbb0c6b135b52176ec4b108e2b80bfe6e7ee2c0135e06f45cc9dec1ac"
+    },
+    "interbitRoot": {
+      "content": {
+        "previousHash": "genesis",
+        "stateHash": "430a06932fcb915576ef9452262bd16c242c1257f39ee2df644b7cf485ad0327",
+        "actions": [],
+        "errors": {},
+        "redispatches": {},
+        "height": 0,
+        "timestamp": 1533851731889,
+        "seed": 0.7000438987271005,
         "configChanged": true,
         "timeToCreateBlock": 1,
         "state": {
@@ -84,253 +305,72 @@
                 },
                 "roles": {
                   "root": [
-                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
-                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWut+NgECAI4y80VaEfL6tTbyECqE2rx4fmxsLc2dxQaGAIbiHjY15gaf\nHTF4zv7nWz0JNJbeN6K9/EsfPmiqXOEiUMdwvXEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa6342BgsJBwgDAgkQ1/MBdYQZN78EFQgKAgMWAgEC\nGQECGwMCHgEAAIZAAf94MBDqmbohRdBDAubCyzD0f39vYCz6ysNsOgVPVw5l\nOXjnwlsHSW3B0TixvQhrtfuSO2E1ec8mRQYZJJwvaNDEzk0EWut+NgEB/1oZ\nnEY3VWhW1+v4va/Yul6PCADi3L6kTXOA37Tu/zfVLrMXZBm4Er39i3KF1PK5\ny5BpE49vqgmIXm1wFXBXRv8AEQEAAcJfBBgBCAATBQJa6342CRDX8wF1hBk3\nvwIbDAAAevwCAIWOItKogE8OLAnGyhS3heS9oMG8/hbysWB0+5aTcO0FGyir\n28wOiF+LdzmvcYu4oo3YcDEPZHQt6FfqK1OHr4U=\r\n=zedb\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+                    "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q=",
+                    "xk0EWxXMKAECAI+weRG4JyZaoxsFX8TQDQtQXVYk2gabygm7as4+f+0+py+FErkKIbz8m0r6A+UrmKYaD/fksj2DGRKn/7Ohv7EAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcwoBgsJBwgDAgkQmTQy2zEs+JUEFQgKAgMWAgEC\nGQECGwMCHgEAAOr4Af4sl2I7QkkJvdTSMPeUJNKtj45ArxBHmbLjpYuVTpnM\nLr2DJmlNFiYgZlZkExYEI5Gm3CxyHJeq/elBSe5V613Ozk0EWxXMKAEB/3LI\nfXPVHtBtHKVE+Zveb29bmDK/l6t0w+UYIw0qpJekjaFrrLtHm5ML9BwJCBei\nea1VCL/SGTf478lZZ7My+K0AEQEAAcJfBBgBCAATBQJbFcwoCRCZNDLbMSz4\nlQIbDAAA7U8B/iloThYXFYC7IU45OqWcr5uT72ZlSaUmxKcktcjA9DRH4GVg\nZysmi4/kjUvb+qoA9GIoc7MfXxw32zkNL8YjW9c="
                   ]
                 }
               },
-              "blockMaster": "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+              "blockMaster": "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
             },
             "configChanges": {}
           }
         }
       },
-      "contentHash": "994059e5b9960e351a82fb22e9ebad499ffe2e59464b66f95c07db1490f7a244",
+      "contentHash": "3cc4a35b27b95346c67925767050c586d96cac2c10021e2041295ab6fdf01241",
       "signatures": {
         "GENESIS": "GENESIS"
       },
       "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
-      "blockHash": "9f58584c030c7c366ac7730796806870dcd90c8fb415ba629e0bcaaa792c40cf"
-    },
-    "accountsPublic": {
-      "content": {
-        "previousHash": "genesis",
-        "stateHash": "cf4a4db0ba7c7c1a67cc42ddba18859b8117bea26d4011ae708ce9a42f79a78e",
-        "actions": [],
-        "errors": {},
-        "redispatches": {},
-        "height": 0,
-        "timestamp": 1525470577796,
-        "seed": 0.5010602554835246,
-        "configChanged": true,
-        "timeToCreateBlock": 0,
-        "state": {
-          "interbit": {
-            "config": {
-              "consensus": "PoA",
-              "providing": [],
-              "consuming": [],
-              "acl": {
-                "actionPermissions": {
-                  "*": [
-                    "root"
-                  ]
-                },
-                "roles": {
-                  "root": [
-                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
-                  ]
-                }
-              },
-              "blockMaster": "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
-            },
-            "configChanges": {}
-          }
-        }
-      },
-      "contentHash": "74f3101d429f8dd8557e53be949168711a2f8f2c4f403dc1246abff22c50e3cc",
-      "signatures": {
-        "GENESIS": "GENESIS"
-      },
-      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
-      "blockHash": "6cffd9f24329c49d3a5047aa187c805e20e39923a15d7f9c427bc659225c08d2"
-    },
-    "accountsGithubAuth": {
-      "content": {
-        "previousHash": "genesis",
-        "stateHash": "bec34387e5bd0aa5db5a1c3d33b00cc2a024ad2bfed4f9016f45a8a075b4697c",
-        "actions": [],
-        "errors": {},
-        "redispatches": {},
-        "height": 0,
-        "timestamp": 1525470577797,
-        "seed": 0.28104409215019444,
-        "configChanged": true,
-        "timeToCreateBlock": 0,
-        "state": {
-          "interbit": {
-            "config": {
-              "consensus": "PoA",
-              "providing": [],
-              "consuming": [],
-              "acl": {
-                "actionPermissions": {
-                  "*": [
-                    "root"
-                  ]
-                },
-                "roles": {
-                  "root": [
-                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
-                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWut+NgECAI4y80VaEfL6tTbyECqE2rx4fmxsLc2dxQaGAIbiHjY15gaf\nHTF4zv7nWz0JNJbeN6K9/EsfPmiqXOEiUMdwvXEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa6342BgsJBwgDAgkQ1/MBdYQZN78EFQgKAgMWAgEC\nGQECGwMCHgEAAIZAAf94MBDqmbohRdBDAubCyzD0f39vYCz6ysNsOgVPVw5l\nOXjnwlsHSW3B0TixvQhrtfuSO2E1ec8mRQYZJJwvaNDEzk0EWut+NgEB/1oZ\nnEY3VWhW1+v4va/Yul6PCADi3L6kTXOA37Tu/zfVLrMXZBm4Er39i3KF1PK5\ny5BpE49vqgmIXm1wFXBXRv8AEQEAAcJfBBgBCAATBQJa6342CRDX8wF1hBk3\nvwIbDAAAevwCAIWOItKogE8OLAnGyhS3heS9oMG8/hbysWB0+5aTcO0FGyir\n28wOiF+LdzmvcYu4oo3YcDEPZHQt6FfqK1OHr4U=\r\n=zedb\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
-                  ]
-                }
-              },
-              "blockMaster": "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
-            },
-            "configChanges": {}
-          }
-        }
-      },
-      "contentHash": "ee9b3471f0befb445d74fc3f10521fe00ba89db844a6b8c5493e4304bf9f4907",
-      "signatures": {
-        "GENESIS": "GENESIS"
-      },
-      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
-      "blockHash": "7ee48aef5d991f0659261f256332ae3a5354502f7910350bdd0171e98c9dfbd3"
-    },
-    "templatePublic": {
-      "content": {
-        "previousHash": "genesis",
-        "stateHash": "cf4a4db0ba7c7c1a67cc42ddba18859b8117bea26d4011ae708ce9a42f79a78e",
-        "actions": [],
-        "errors": {},
-        "redispatches": {},
-        "height": 0,
-        "timestamp": 1525470577798,
-        "seed": 0.4275372482582187,
-        "configChanged": true,
-        "timeToCreateBlock": 0,
-        "state": {
-          "interbit": {
-            "config": {
-              "consensus": "PoA",
-              "providing": [],
-              "consuming": [],
-              "acl": {
-                "actionPermissions": {
-                  "*": [
-                    "root"
-                  ]
-                },
-                "roles": {
-                  "root": [
-                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
-                  ]
-                }
-              },
-              "blockMaster": "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
-            },
-            "configChanges": {}
-          }
-        }
-      },
-      "contentHash": "a3c39849285fb6c610e0f95845f8f488c305f3111f92dc7b914cdca4fa4a9ce8",
-      "signatures": {
-        "GENESIS": "GENESIS"
-      },
-      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
-      "blockHash": "32b9365f325da189439f6d453593cf4e0a5a06ead7e6bbecc1d0814c578df452"
-    },
-    "templateControl": {
-      "content": {
-        "previousHash": "genesis",
-        "stateHash": "cf4a4db0ba7c7c1a67cc42ddba18859b8117bea26d4011ae708ce9a42f79a78e",
-        "actions": [],
-        "errors": {},
-        "redispatches": {},
-        "height": 0,
-        "timestamp": 1525470577798,
-        "seed": 0.7065613937907986,
-        "configChanged": true,
-        "timeToCreateBlock": 0,
-        "state": {
-          "interbit": {
-            "config": {
-              "consensus": "PoA",
-              "providing": [],
-              "consuming": [],
-              "acl": {
-                "actionPermissions": {
-                  "*": [
-                    "root"
-                  ]
-                },
-                "roles": {
-                  "root": [
-                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
-                  ]
-                }
-              },
-              "blockMaster": "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
-            },
-            "configChanges": {}
-          }
-        }
-      },
-      "contentHash": "8ad2584abcd81d4edb1c3aedbc5ec6d0f009276aad28bdca149fbfea44080aab",
-      "signatures": {
-        "GENESIS": "GENESIS"
-      },
-      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
-      "blockHash": "3d05bbff1087a5c51748b9f23e5720721541abc4dacaa4bf4ea3bedafb51e4b9"
-    },
-    "interbitRoot": {
-      "content": {
-        "previousHash": "genesis",
-        "stateHash": "bec34387e5bd0aa5db5a1c3d33b00cc2a024ad2bfed4f9016f45a8a075b4697c",
-        "actions": [],
-        "errors": {},
-        "redispatches": {},
-        "height": 0,
-        "timestamp": 1525470577799,
-        "seed": 0.6056140449995393,
-        "configChanged": true,
-        "timeToCreateBlock": 0,
-        "state": {
-          "interbit": {
-            "config": {
-              "consensus": "PoA",
-              "providing": [],
-              "consuming": [],
-              "acl": {
-                "actionPermissions": {
-                  "*": [
-                    "root"
-                  ]
-                },
-                "roles": {
-                  "root": [
-                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
-                    "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWut+NgECAI4y80VaEfL6tTbyECqE2rx4fmxsLc2dxQaGAIbiHjY15gaf\nHTF4zv7nWz0JNJbeN6K9/EsfPmiqXOEiUMdwvXEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa6342BgsJBwgDAgkQ1/MBdYQZN78EFQgKAgMWAgEC\nGQECGwMCHgEAAIZAAf94MBDqmbohRdBDAubCyzD0f39vYCz6ysNsOgVPVw5l\nOXjnwlsHSW3B0TixvQhrtfuSO2E1ec8mRQYZJJwvaNDEzk0EWut+NgEB/1oZ\nnEY3VWhW1+v4va/Yul6PCADi3L6kTXOA37Tu/zfVLrMXZBm4Er39i3KF1PK5\ny5BpE49vqgmIXm1wFXBXRv8AEQEAAcJfBBgBCAATBQJa6342CRDX8wF1hBk3\nvwIbDAAAevwCAIWOItKogE8OLAnGyhS3heS9oMG8/hbysWB0+5aTcO0FGyir\n28wOiF+LdzmvcYu4oo3YcDEPZHQt6FfqK1OHr4U=\r\n=zedb\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
-                  ]
-                }
-              },
-              "blockMaster": "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
-            },
-            "configChanges": {}
-          }
-        }
-      },
-      "contentHash": "9f72d684382bbc167735ad72d60c158af7b6b5bd1b189975711dd3d37ee8c035",
-      "signatures": {
-        "GENESIS": "GENESIS"
-      },
-      "signaturesHash": "5802612e380de8f088c9c9ab28412e853d75d86eed65d8415bca52daac7681ce",
-      "blockHash": "d8b872656a90f66507c5acd24f2b9c3cb20f399b9bd296c62967671a1ef65c6a"
+      "blockHash": "fb4f09f3d3abdf2c98ae8dcb41dcf6d070fd0dd77f0cd0119b1e2daa09243d1c"
     }
   },
   "manifest": {
     "interbitRoot": {
-      "chainId": "d8b872656a90f66507c5acd24f2b9c3cb20f399b9bd296c62967671a1ef65c6a",
+      "chainId": "fb4f09f3d3abdf2c98ae8dcb41dcf6d070fd0dd77f0cd0119b1e2daa09243d1c",
       "validators": [
-        "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
-        "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWut+NgECAI4y80VaEfL6tTbyECqE2rx4fmxsLc2dxQaGAIbiHjY15gaf\nHTF4zv7nWz0JNJbeN6K9/EsfPmiqXOEiUMdwvXEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa6342BgsJBwgDAgkQ1/MBdYQZN78EFQgKAgMWAgEC\nGQECGwMCHgEAAIZAAf94MBDqmbohRdBDAubCyzD0f39vYCz6ysNsOgVPVw5l\nOXjnwlsHSW3B0TixvQhrtfuSO2E1ec8mRQYZJJwvaNDEzk0EWut+NgEB/1oZ\nnEY3VWhW1+v4va/Yul6PCADi3L6kTXOA37Tu/zfVLrMXZBm4Er39i3KF1PK5\ny5BpE49vqgmIXm1wFXBXRv8AEQEAAcJfBBgBCAATBQJa6342CRDX8wF1hBk3\nvwIbDAAAevwCAIWOItKogE8OLAnGyhS3heS9oMG8/hbysWB0+5aTcO0FGyir\n28wOiF+LdzmvcYu4oo3YcDEPZHQt6FfqK1OHr4U=\r\n=zedb\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n",
-        "-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n"
+        "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q=",
+        "xk0EWxXMKAECAI+weRG4JyZaoxsFX8TQDQtQXVYk2gabygm7as4+f+0+py+FErkKIbz8m0r6A+UrmKYaD/fksj2DGRKn/7Ohv7EAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcwoBgsJBwgDAgkQmTQy2zEs+JUEFQgKAgMWAgEC\nGQECGwMCHgEAAOr4Af4sl2I7QkkJvdTSMPeUJNKtj45ArxBHmbLjpYuVTpnM\nLr2DJmlNFiYgZlZkExYEI5Gm3CxyHJeq/elBSe5V613Ozk0EWxXMKAEB/3LI\nfXPVHtBtHKVE+Zveb29bmDK/l6t0w+UYIw0qpJekjaFrrLtHm5ML9BwJCBei\nea1VCL/SGTf478lZZ7My+K0AEQEAAcJfBBgBCAATBQJbFcwoCRCZNDLbMSz4\nlQIbDAAA7U8B/iloThYXFYC7IU45OqWcr5uT72ZlSaUmxKcktcjA9DRH4GVg\nZysmi4/kjUvb+qoA9GIoc7MfXxw32zkNL8YjW9c=",
+        "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
       ],
-      "covenants": {},
+      "covenant": "interbitRoot",
+      "covenants": {
+        "interbitRoot": "interbitRoot",
+        "templateControl": "template-control"
+      },
+      "joins": {
+        "consume": [],
+        "provide": [],
+        "receiveActionFrom": [],
+        "sendActionTo": [
+          {
+            "alias": "accountsControl"
+          },
+          {
+            "alias": "accountsPublic"
+          },
+          {
+            "alias": "accountsGithubAuth"
+          },
+          {
+            "alias": "templatePublic"
+          },
+          {
+            "alias": "templateControl"
+          }
+        ]
+      },
       "chains": {
         "accountsControl": {
+          "chainId": "79045db6c953c57b67bb74c3bda4f7c7e46c23309572066e01854c48ab6bb77b",
+          "validators": [
+            "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q=",
+            "xk0EWxXMKAECAI+weRG4JyZaoxsFX8TQDQtQXVYk2gabygm7as4+f+0+py+FErkKIbz8m0r6A+UrmKYaD/fksj2DGRKn/7Ohv7EAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcwoBgsJBwgDAgkQmTQy2zEs+JUEFQgKAgMWAgEC\nGQECGwMCHgEAAOr4Af4sl2I7QkkJvdTSMPeUJNKtj45ArxBHmbLjpYuVTpnM\nLr2DJmlNFiYgZlZkExYEI5Gm3CxyHJeq/elBSe5V613Ozk0EWxXMKAEB/3LI\nfXPVHtBtHKVE+Zveb29bmDK/l6t0w+UYIw0qpJekjaFrrLtHm5ML9BwJCBei\nea1VCL/SGTf478lZZ7My+K0AEQEAAcJfBBgBCAATBQJbFcwoCRCZNDLbMSz4\nlQIbDAAA7U8B/iloThYXFYC7IU45OqWcr5uT72ZlSaUmxKcktcjA9DRH4GVg\nZysmi4/kjUvb+qoA9GIoc7MfXxw32zkNL8YjW9c=",
+            "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+          ],
+          "covenant": "app-account-control",
+          "covenants": {
+            "accountsControl": "app-account-control"
+          },
           "joins": {
             "provide": [
               {
@@ -340,12 +380,47 @@
                   "shared"
                 ],
                 "joinName": "HOSTING_SPONSOR"
+              },
+              {
+                "alias": "accountsGithubAuth",
+                "path": [
+                  "interbit",
+                  "chainId"
+                ],
+                "joinName": "CONTROL_CHAIN_ID"
               }
-            ]
+            ],
+            "receiveActionFrom": [
+              {
+                "alias": "accountsGithubAuth",
+                "authorizedActions": [
+                  "app-account-control/ADD_KEY_TO_SPONSORED_CHAIN"
+                ]
+              },
+              {
+                "alias": "interbitRoot",
+                "authorizedActions": [
+                  "@@MANIFEST/SET_MANIFEST"
+                ]
+              }
+            ],
+            "consume": [],
+            "sendActionTo": []
           },
-          "covenant": "app-account-control"
+          "chains": {},
+          "hash": "273a7e81be07052c8f756cf114e24836faecc1a5"
         },
         "accountsPublic": {
+          "chainId": "7bb53e1e7740707bb37feccb65a9de237ade84ae60329590a25d6d545b99d9cd",
+          "validators": [
+            "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q=",
+            "xk0EWxXMKAECAI+weRG4JyZaoxsFX8TQDQtQXVYk2gabygm7as4+f+0+py+FErkKIbz8m0r6A+UrmKYaD/fksj2DGRKn/7Ohv7EAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcwoBgsJBwgDAgkQmTQy2zEs+JUEFQgKAgMWAgEC\nGQECGwMCHgEAAOr4Af4sl2I7QkkJvdTSMPeUJNKtj45ArxBHmbLjpYuVTpnM\nLr2DJmlNFiYgZlZkExYEI5Gm3CxyHJeq/elBSe5V613Ozk0EWxXMKAEB/3LI\nfXPVHtBtHKVE+Zveb29bmDK/l6t0w+UYIw0qpJekjaFrrLtHm5ML9BwJCBei\nea1VCL/SGTf478lZZ7My+K0AEQEAAcJfBBgBCAATBQJbFcwoCRCZNDLbMSz4\nlQIbDAAA7U8B/iloThYXFYC7IU45OqWcr5uT72ZlSaUmxKcktcjA9DRH4GVg\nZysmi4/kjUvb+qoA9GIoc7MfXxw32zkNL8YjW9c=",
+            "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+          ],
+          "covenant": "app-account-public",
+          "covenants": {
+            "accountsPublic": "app-account-public"
+          },
           "joins": {
             "consume": [
               {
@@ -364,12 +439,42 @@
                 ],
                 "joinName": "HOSTING_SPONSOR"
               }
-            ]
+            ],
+            "provide": [],
+            "receiveActionFrom": [
+              {
+                "alias": "interbitRoot",
+                "authorizedActions": [
+                  "@@MANIFEST/SET_MANIFEST"
+                ]
+              }
+            ],
+            "sendActionTo": []
           },
-          "covenant": "app-account-public"
+          "chains": {},
+          "hash": "2b499fe5a17403b3c8002ea4673dfc05fa95e425"
         },
         "accountsGithubAuth": {
+          "chainId": "8626c5cebb01fa511fd56dcee743f215a00c9475517cef7777bb65e1ecb4a559",
+          "validators": [
+            "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q=",
+            "xk0EWxXMKAECAI+weRG4JyZaoxsFX8TQDQtQXVYk2gabygm7as4+f+0+py+FErkKIbz8m0r6A+UrmKYaD/fksj2DGRKn/7Ohv7EAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcwoBgsJBwgDAgkQmTQy2zEs+JUEFQgKAgMWAgEC\nGQECGwMCHgEAAOr4Af4sl2I7QkkJvdTSMPeUJNKtj45ArxBHmbLjpYuVTpnM\nLr2DJmlNFiYgZlZkExYEI5Gm3CxyHJeq/elBSe5V613Ozk0EWxXMKAEB/3LI\nfXPVHtBtHKVE+Zveb29bmDK/l6t0w+UYIw0qpJekjaFrrLtHm5ML9BwJCBei\nea1VCL/SGTf478lZZ7My+K0AEQEAAcJfBBgBCAATBQJbFcwoCRCZNDLbMSz4\nlQIbDAAA7U8B/iloThYXFYC7IU45OqWcr5uT72ZlSaUmxKcktcjA9DRH4GVg\nZysmi4/kjUvb+qoA9GIoc7MfXxw32zkNL8YjW9c=",
+            "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+          ],
+          "covenant": "app-account-github-kyc",
+          "covenants": {
+            "accountsGithubAuth": "app-account-github-kyc"
+          },
           "joins": {
+            "consume": [
+              {
+                "alias": "accountsControl",
+                "path": [
+                  "controlChainId"
+                ],
+                "joinName": "CONTROL_CHAIN_ID"
+              }
+            ],
             "provide": [
               {
                 "alias": "accountsPublic",
@@ -379,11 +484,35 @@
                 ],
                 "joinName": "OAUTH-CONFIG-GITHUB"
               }
+            ],
+            "sendActionTo": [
+              {
+                "alias": "accountsControl"
+              }
+            ],
+            "receiveActionFrom": [
+              {
+                "alias": "interbitRoot",
+                "authorizedActions": [
+                  "@@MANIFEST/SET_MANIFEST"
+                ]
+              }
             ]
           },
-          "covenant": "app-account-github-kyc"
+          "chains": {},
+          "hash": "673079a0b3861aa06c4e1033fc89db53009d1d57"
         },
         "templatePublic": {
+          "chainId": "b39b9fd2e4b3cb91686d060056b55dd6d95b095763799b47906c03ef7771f1a2",
+          "validators": [
+            "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q=",
+            "xk0EWxXMKAECAI+weRG4JyZaoxsFX8TQDQtQXVYk2gabygm7as4+f+0+py+FErkKIbz8m0r6A+UrmKYaD/fksj2DGRKn/7Ohv7EAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcwoBgsJBwgDAgkQmTQy2zEs+JUEFQgKAgMWAgEC\nGQECGwMCHgEAAOr4Af4sl2I7QkkJvdTSMPeUJNKtj45ArxBHmbLjpYuVTpnM\nLr2DJmlNFiYgZlZkExYEI5Gm3CxyHJeq/elBSe5V613Ozk0EWxXMKAEB/3LI\nfXPVHtBtHKVE+Zveb29bmDK/l6t0w+UYIw0qpJekjaFrrLtHm5ML9BwJCBei\nea1VCL/SGTf478lZZ7My+K0AEQEAAcJfBBgBCAATBQJbFcwoCRCZNDLbMSz4\nlQIbDAAA7U8B/iloThYXFYC7IU45OqWcr5uT72ZlSaUmxKcktcjA9DRH4GVg\nZysmi4/kjUvb+qoA9GIoc7MfXxw32zkNL8YjW9c=",
+            "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+          ],
+          "covenant": "template-public",
+          "covenants": {
+            "templatePublic": "template-public"
+          },
           "joins": {
             "consume": [
               {
@@ -392,12 +521,40 @@
                   "interbitServices"
                 ],
                 "joinName": "INTERBIT_SERVICES"
+              },
+              {
+                "alias": "templateControl",
+                "path": [
+                  "privateChainHosting"
+                ],
+                "joinName": "HOSTING_SPONSOR"
               }
-            ]
+            ],
+            "provide": [],
+            "receiveActionFrom": [
+              {
+                "alias": "interbitRoot",
+                "authorizedActions": [
+                  "@@MANIFEST/SET_MANIFEST"
+                ]
+              }
+            ],
+            "sendActionTo": []
           },
-          "covenant": "public"
+          "chains": {},
+          "hash": "6f6488b7a3f687d2f75025964840b8ea087e71e9"
         },
         "templateControl": {
+          "chainId": "ef28bf3cbb0c6b135b52176ec4b108e2b80bfe6e7ee2c0135e06f45cc9dec1ac",
+          "validators": [
+            "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q=",
+            "xk0EWxXMKAECAI+weRG4JyZaoxsFX8TQDQtQXVYk2gabygm7as4+f+0+py+FErkKIbz8m0r6A+UrmKYaD/fksj2DGRKn/7Ohv7EAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcwoBgsJBwgDAgkQmTQy2zEs+JUEFQgKAgMWAgEC\nGQECGwMCHgEAAOr4Af4sl2I7QkkJvdTSMPeUJNKtj45ArxBHmbLjpYuVTpnM\nLr2DJmlNFiYgZlZkExYEI5Gm3CxyHJeq/elBSe5V613Ozk0EWxXMKAEB/3LI\nfXPVHtBtHKVE+Zveb29bmDK/l6t0w+UYIw0qpJekjaFrrLtHm5ML9BwJCBei\nea1VCL/SGTf478lZZ7My+K0AEQEAAcJfBBgBCAATBQJbFcwoCRCZNDLbMSz4\nlQIbDAAA7U8B/iloThYXFYC7IU45OqWcr5uT72ZlSaUmxKcktcjA9DRH4GVg\nZysmi4/kjUvb+qoA9GIoc7MfXxw32zkNL8YjW9c=",
+            "xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q="
+          ],
+          "covenant": "template-control",
+          "covenants": {
+            "templateControl": "template-control"
+          },
           "joins": {
             "provide": [
               {
@@ -407,12 +564,33 @@
                   "shared"
                 ],
                 "joinName": "INTERBIT_SERVICES"
+              },
+              {
+                "alias": "templatePublic",
+                "path": [
+                  "privateChainHosting",
+                  "shared"
+                ],
+                "joinName": "HOSTING_SPONSOR"
               }
-            ]
+            ],
+            "consume": [],
+            "receiveActionFrom": [
+              {
+                "alias": "interbitRoot",
+                "authorizedActions": [
+                  "@@MANIFEST/SET_MANIFEST"
+                ]
+              }
+            ],
+            "sendActionTo": []
           },
-          "covenant": "control"
+          "chains": {},
+          "hash": "c9e8fb04cff4c84c4a812cd37f0740a02d1b222b"
         }
-      }
+      },
+      "hash": "3a07f848866473bbdfb4684ca0276d3c51471818"
     }
-  }
+  },
+  "hash": "89bf5072b5dc631b49510d3803d40cf44651cfc8"
 }

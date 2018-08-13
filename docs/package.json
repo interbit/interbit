@@ -1,10 +1,12 @@
 {
   "name": "interbit-docs",
-  "version": "0.4.44",
-  "description": "Interbit SDK",
+  "version": "0.4.46",
+  "description": "Interbit SDK documentation",
   "private": true,
   "keywords": [
-    "interbit"
+    "interbit",
+    "documentation",
+    "gitbook"
   ],
   "license": "MIT",
   "author": {
@@ -12,21 +14,13 @@
   },
   "main": "README.md",
   "dependencies": {
-    "ansi-escape-sequences": "^4.0.0",
-    "bluebird": "^3.5.1",
     "express": "4.15.2",
-    "fs-extra-promise": "^1.0.1",
-    "gitbook-cli": "2.3.0",
-    "heroku-ssl-redirect": "0.0.4",
-    "lodash": "^4.17.10",
-    "nspell": "^2.0.1",
-    "promisify-any": "^2.0.1"
+    "heroku-ssl-redirect": "0.0.4"
   },
   "scripts": {
     "start": "node index.js",
     "serve": "npm start",
     "build": "bash package.sh",
-    "proof": "htmlproofer --allow-hash-href --empty-alt-ignore gitbook/_book",
-    "check": "scripts/doc_checks.js"
+    "check": "cd gitbook && npm run test"
   }
 }

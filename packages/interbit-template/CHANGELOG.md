@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.46"></a>
+## [0.4.46](https://github.com/interbit/interbit/compare/v0.4.44...v0.4.46) (2018-08-09)
+
+
+### Bug Fixes
+
+* **interbit-template:** change app peer in config file so that browser node connects to platform-deploy node ([ab8709b](https://github.com/interbit/interbit/commit/ab8709b))
+
+
+
+
 <a name="0.4.44"></a>
 ## [0.4.44](https://github.com/interbit/interbit/compare/v0.4.43...v0.4.44) (2018-07-24)
 

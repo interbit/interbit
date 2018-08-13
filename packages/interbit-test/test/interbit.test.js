@@ -2,6 +2,10 @@
 const assert = require('assert')
 const interbit = require('interbit-core')
 
+const CI_INTERBIT_KEY_GEN_TIMEOUT = 20000
+const CI_SUBSCRIBE_UNSUBSCRIBE_TIMEOUT = 8000
+const CI_2_BLOCK_SLEEP = 5000
+
 const verifyApi = (api, expectedApi) => {
   const extras = Object.keys(api).reduce(
     (acc, key) => (expectedApi[key] ? acc : acc.concat(key)),
@@ -49,20 +53,27 @@ describe('interbit', () => {
   describe('hypervisor', () => {
     let hypervisor
     let keyPair
+    const env = Object.assign({}, process.env)
 
-    // regular function is required for before to honour timeout
-    // eslint-disable-next-line prefer-arrow-callback
-    before(async function() {
-      // Timeout extended for 2048 bit key generation
-      this.timeout(20000)
+    beforeAll(async done => {
+      console.log('Generating key pair...')
       keyPair = await interbit.generateKeyPair()
-      hypervisor = await interbit.createHypervisor({ keyPair })
-    })
 
-    after(async () => {
+      console.log('Creating hypervisor...')
+      process.env.DB_PATH = `./db-${Date.now()}`
+      hypervisor = await interbit.createHypervisor({ keyPair })
+
+      done()
+    }, CI_INTERBIT_KEY_GEN_TIMEOUT)
+
+    afterAll(async done => {
       if (hypervisor) {
+        console.log('Stopping hyperblocker...')
         hypervisor.stopHyperBlocker()
+        hypervisor = undefined
       }
+      process.env = env
+      done()
     })
 
     it('has expected API', () => {
@@ -92,8 +103,17 @@ describe('interbit', () => {
     describe('cli', () => {
       let cli
 
-      before(async () => {
+      beforeAll(async () => {
+        console.log('Creating cli...')
         cli = await interbit.createCli(hypervisor)
+      })
+
+      afterAll(async () => {
+        if (cli) {
+          console.log('Shutting down cli...')
+          await cli.shutdown()
+          cli = undefined
+        }
       })
 
       it('has expected API', async () => {
@@ -150,28 +170,32 @@ describe('interbit', () => {
         })
 
         // interbit-core 0.7.0 regression - unsubscribe() does not unsubscribe #186
-        it('subscribe and unsubscribe work', async () => {
-          const chainId = await cli.createChain()
-          const chain = await cli.getChain(chainId)
-          let unsubscribe = () => {}
-          let count = 0
-          console.time('Time to unsubscribe')
-          unsubscribe = chain.subscribe(() => {
-            console.log(`Subscribe callback: ${count}`)
-            count += 1
-            if (count === 1) {
-              unsubscribe()
-              console.timeEnd('Time to unsubscribe')
-            }
-          })
-          // Potentially brittle
-          // Test needs to wait for at least 2 blocks
-          // sleep timeout assumes a blocking frequency of 2 secs
-          // test timeout needs to be longer than the sleep period
-          // Added more wiggle room around timeouts for Heroku
-          await sleep(5000)
-          assert.equal(count, 1)
-        }).timeout(8000)
+        it(
+          'subscribe and unsubscribe work',
+          async () => {
+            const chainId = await cli.createChain()
+            const chain = await cli.getChain(chainId)
+            let unsubscribe = () => {}
+            let count = 0
+            console.time('Time to unsubscribe')
+            unsubscribe = chain.subscribe(() => {
+              console.log(`Subscribe callback: ${count}`)
+              count += 1
+              if (count === 1) {
+                unsubscribe()
+                console.timeEnd('Time to unsubscribe')
+              }
+            })
+            // Potentially brittle
+            // Test needs to wait for at least 2 blocks
+            // sleep timeout assumes a blocking frequency of 2 secs
+            // test timeout needs to be longer than the sleep period
+            // Added more wiggle room around timeouts for Heroku
+            await sleep(CI_2_BLOCK_SLEEP)
+            assert.equal(count, 1)
+          },
+          CI_SUBSCRIBE_UNSUBSCRIBE_TIMEOUT
+        )
 
         const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
       })

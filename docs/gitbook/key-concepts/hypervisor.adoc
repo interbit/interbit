@@ -1,4 +1,0 @@
-= Hypervisor
-
-The small piece of code that boots interbit and allows hosting of
-multiple blockchains on a single node.

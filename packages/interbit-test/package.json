@@ -1,10 +1,10 @@
 {
   "name": "interbit-test",
-  "version": "0.4.44",
-  "description": "Test the interbit package",
+  "version": "0.4.46",
+  "description": "Test the interbit package for API changes",
   "private": true,
   "scripts": {
-    "test": "mocha test/**/*.test.js"
+    "test": "jest"
   },
   "author": "BTL GROUP LTD",
   "license": "MIT",
@@ -13,6 +13,16 @@
   },
   "devDependencies": {
     "assert": "^1.4.1",
-    "mocha": "^4.0.1"
+    "jest": "20.0.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

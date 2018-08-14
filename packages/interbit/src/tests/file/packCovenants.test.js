@@ -44,7 +44,8 @@ describe.skip('packCovenants(location, covenantConfig)', () => {
           location: path.join(__dirname, '../testData/covenant')
         }
       }
-      const result = await packCovenants(location, covenantConfig)
+      const options = { dbPath: `./db-${Date.now()}` }
+      const result = await packCovenants(location, covenantConfig, options)
 
       await assertCovenantCorrectness('testCovenant', result)
       await assertCovenantCorrectness('interbitRoot', result)

@@ -5,7 +5,7 @@ const assert = require('assert')
 
 const { createMockDataStore, createTestContext } = require('.')
 
-const CI_INTERBIT_KEY_GEN_TIMEOUT = 20000
+const CI_INTERBIT_KEY_GEN_TIMEOUT = 45000
 
 describe('testContext', () => {
   describe('createDatastore', () => {

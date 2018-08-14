@@ -38,7 +38,7 @@
     "scripts": {
         "start": "cross-env REACT_APP_INTERBIT_WEB_SERVER=123 REACT_APP_INTERBIT_PORT=5025 react-scripts start",
         "build": "react-scripts build",
-        "serve": "cross-env serve --single build",
+        "serve": "cross-env serve --single build --listen $PORT",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
         "interbit:start": "interbit start --db-path ./db-interbit --port 5025 --dev --no-watch",

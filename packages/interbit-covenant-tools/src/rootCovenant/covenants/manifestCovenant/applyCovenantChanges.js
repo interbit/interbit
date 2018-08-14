@@ -8,7 +8,7 @@ const applyCovenantChanges = (state, newManifest) => {
   let nextState = state
 
   const currCovenantHash = covenantHash(state)
-  const newCovenantHash = newManifest.covenants[newManifest.covenant]
+  const newCovenantHash = newManifest.covenantHashMap[newManifest.covenant]
   const isCovenantAliasChanged = newCovenantHash !== currCovenantHash
 
   if (isCovenantAliasChanged) {

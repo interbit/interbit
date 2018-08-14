@@ -167,12 +167,17 @@
   },
   "manifest": {
     "interbitRoot": {
+      "alias": "interbitRoot",
       "chainId": "56399770d33b17fe3ba20a1d911cc56c3cc47ed11fc8f6935543c2b25da96f47",
+      "chainIdMap": {
+        "control": "7988dc0fe96bf5371909781b9cab0de21fcca8a740573267b1134e6889922162",
+        "public": "28884c86bb5f73e48726ebdc466d45f4034a22c7ce9b69e5b75bd94d55f78d7f"
+      },
       "validators": [
         "SuperSecurePubKey"
       ],
       "covenant": "interbitRoot",
-      "covenants": {
+      "covenantHashMap": {
         "interbitRoot": "interbitRoot",
         "control": "control"
       },
@@ -189,12 +194,17 @@
       },
       "chains": {
         "public": {
+          "alias": "public",
           "chainId": "28884c86bb5f73e48726ebdc466d45f4034a22c7ce9b69e5b75bd94d55f78d7f",
+          "chainIdMap": {
+            "interbitRoot": "56399770d33b17fe3ba20a1d911cc56c3cc47ed11fc8f6935543c2b25da96f47",
+            "control": "7988dc0fe96bf5371909781b9cab0de21fcca8a740573267b1134e6889922162"
+          },
           "validators": [
             "SuperSecurePubKey"
           ],
           "covenant": "public",
-          "covenants": {
+          "covenantHashMap": {
             "public": "public"
           },
           "joins": {
@@ -218,20 +228,20 @@
             ]
           },
           "chains": {},
-          "alias": "public",
-          "chainIds": {
-            "interbitRoot": "56399770d33b17fe3ba20a1d911cc56c3cc47ed11fc8f6935543c2b25da96f47",
-            "control": "7988dc0fe96bf5371909781b9cab0de21fcca8a740573267b1134e6889922162"
-          },
-          "hash": "bb4a98395b62269d5b7249d9da0ed6cbb2b8dd40"
+          "hash": "80ba2e0be5991b9c43f3a6685625d0b23f99c65c"
         },
         "control": {
+          "alias": "control",
           "chainId": "7988dc0fe96bf5371909781b9cab0de21fcca8a740573267b1134e6889922162",
+          "chainIdMap": {
+            "interbitRoot": "56399770d33b17fe3ba20a1d911cc56c3cc47ed11fc8f6935543c2b25da96f47",
+            "public": "28884c86bb5f73e48726ebdc466d45f4034a22c7ce9b69e5b75bd94d55f78d7f"
+          },
           "validators": [
             "SuperSecurePubKey"
           ],
           "covenant": "control",
-          "covenants": {
+          "covenantHashMap": {
             "control": "control"
           },
           "joins": {
@@ -256,21 +266,11 @@
             ]
           },
           "chains": {},
-          "alias": "control",
-          "chainIds": {
-            "interbitRoot": "56399770d33b17fe3ba20a1d911cc56c3cc47ed11fc8f6935543c2b25da96f47",
-            "public": "28884c86bb5f73e48726ebdc466d45f4034a22c7ce9b69e5b75bd94d55f78d7f"
-          },
-          "hash": "a3539c3807e7664c3637a2b74515be70576c7f88"
+          "hash": "fb5e1effeea952b637da12621f9cc755c95e88c5"
         }
       },
-      "alias": "interbitRoot",
-      "chainIds": {
-        "control": "7988dc0fe96bf5371909781b9cab0de21fcca8a740573267b1134e6889922162",
-        "public": "28884c86bb5f73e48726ebdc466d45f4034a22c7ce9b69e5b75bd94d55f78d7f"
-      },
-      "hash": "b21450b289f30145e5da730810ac184541dca39b"
+      "hash": "e0ea140cd84ae0b69e668a35b7e92e6d439b3632"
     }
   },
-  "hash": "aaa3d1448887ae6815a8c92249cc11258981987a"
+  "hash": "b7ab054bae4dbbf30a8b07909b79e3e4f6048e2d"
 }

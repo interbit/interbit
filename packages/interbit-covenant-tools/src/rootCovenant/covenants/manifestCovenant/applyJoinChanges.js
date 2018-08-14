@@ -101,7 +101,7 @@ const configureConsume = manifest => {
   }
   return consume.reduce(
     (prev, { alias: joinedChainAlias, path: mount, joinName }) => {
-      const provider = manifest.chainIds[joinedChainAlias]
+      const provider = manifest.chainIdMap[joinedChainAlias]
       const consumeAction = startConsumeState({
         provider,
         mount,
@@ -120,7 +120,7 @@ const configureProvide = manifest => {
   }
   return provide.reduce(
     (prev, { alias: joinedChainAlias, path: statePath, joinName }) => {
-      const consumer = manifest.chainIds[joinedChainAlias]
+      const consumer = manifest.chainIdMap[joinedChainAlias]
       const provideAction = startProvideState({
         consumer,
         statePath,
@@ -142,8 +142,7 @@ const configureReceive = manifest => {
       prev,
       { alias: joinedChainAlias, authorizedActions: permittedActions }
     ) => {
-      console.log(manifest.chainIds)
-      const senderChainId = manifest.chainIds[joinedChainAlias]
+      const senderChainId = manifest.chainIdMap[joinedChainAlias]
       const receiveAction = authorizeReceiveActions({
         senderChainId,
         permittedActions
@@ -160,7 +159,7 @@ const configureSend = manifest => {
     return []
   }
   return send.reduce((prev, { alias: joinedChainAlias }) => {
-    const receiverChainId = manifest.chainIds[joinedChainAlias]
+    const receiverChainId = manifest.chainIdMap[joinedChainAlias]
     const sendAction = authorizeSendActions({
       receiverChainId
     })

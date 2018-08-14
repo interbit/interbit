@@ -194,7 +194,7 @@ describe('rootCovenant', () => {
 
     const interbitRoot = {
       ...defaultManifest.manifest.interbitRoot,
-      covenants: {
+      covenantHashMap: {
         ...defaultManifest.manifest.interbitRoot.covenants,
         interbitRoot: covenantHash
       }

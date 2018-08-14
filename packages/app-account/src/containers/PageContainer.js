@@ -18,15 +18,17 @@ import urls from '../constants/urls'
 
 export default class PageContainer extends Component {
   static propTypes = {
-    isLoggedIn: PropTypes.bool
+    isLoggedIn: PropTypes.bool,
+    location: PropTypes.shape({})
   }
 
   static defaultProps = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    location: {}
   }
 
   render() {
-    const { isLoggedIn } = this.props
+    const { isLoggedIn, location } = this.props
 
     const redirectToSignIn = renderComponent =>
       isLoggedIn ? renderComponent : <Redirect to={paths.CREATE_ACCOUNT} />
@@ -48,6 +50,7 @@ export default class PageContainer extends Component {
               ? navigation.headerRightNav
               : navigation.headerRightNavLoggedOut
           }
+          location={location}
         />
 
         <Grid>

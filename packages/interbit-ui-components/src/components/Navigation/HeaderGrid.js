@@ -6,7 +6,7 @@ import NavLinkWrapper from './NavLinkWrapper'
 import LinkWrapper from '../UIKit/LinkWrapper'
 import Logo from '../UIKit/Logo'
 
-export default class Header extends Component {
+export default class HeaderGrid extends Component {
   static propTypes = {
     className: PropTypes.string,
     logo: PropTypes.shape({
@@ -31,7 +31,8 @@ export default class Header extends Component {
         className: PropTypes.string,
         id: PropTypes.string
       })
-    )
+    ),
+    location: PropTypes.shape({})
   }
 
   static defaultProps = {
@@ -42,11 +43,18 @@ export default class Header extends Component {
       isDisabled: false
     },
     leftNavItems: [],
-    rightNavItems: []
+    rightNavItems: [],
+    location: {}
   }
 
   render() {
-    const { leftNavItems, rightNavItems, logo, className } = this.props
+    const {
+      leftNavItems,
+      rightNavItems,
+      logo,
+      className,
+      location
+    } = this.props
 
     return (
       <div className={`ibweb-header ${className}`}>
@@ -64,7 +72,11 @@ export default class Header extends Component {
             {leftNavItems.map(
               navItem =>
                 !navItem.isHidden && (
-                  <NavLinkWrapper key={navItem.eventKey} {...navItem} />
+                  <NavLinkWrapper
+                    key={navItem.eventKey}
+                    {...navItem}
+                    location={location}
+                  />
                 )
             )}
           </Nav>
@@ -73,7 +85,11 @@ export default class Header extends Component {
             {rightNavItems.map(
               navItem =>
                 !navItem.isHidden && (
-                  <NavLinkWrapper key={navItem.eventKey} {...navItem} />
+                  <NavLinkWrapper
+                    key={navItem.eventKey}
+                    {...navItem}
+                    location={location}
+                  />
                 )
             )}
           </Nav>

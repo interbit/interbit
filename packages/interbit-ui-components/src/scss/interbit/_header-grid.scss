@@ -28,8 +28,12 @@
           font-weight: 700;
         }
 
-        a:hover {
+        a:hover, a:focus {
           background-color: transparent;
+        }
+
+        a.active {
+          color: $ib-nav-grey;
         }
       }
     }

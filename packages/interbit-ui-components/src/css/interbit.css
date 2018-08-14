@@ -5653,8 +5653,10 @@ a {
         padding: 5px 16px;
         color: #1385E8;
         font-weight: 700; }
-      .ibweb .ibweb-header .grid-cont .nav li a:hover {
+      .ibweb .ibweb-header .grid-cont .nav li a:hover, .ibweb .ibweb-header .grid-cont .nav li a:focus {
         background-color: transparent; }
+      .ibweb .ibweb-header .grid-cont .nav li a.active {
+        color: #828282; }
     .ibweb .ibweb-header .grid-cont .logo {
       padding-right: 16px; }
 

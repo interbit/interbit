@@ -5,7 +5,7 @@ const assert = require('assert')
 
 const { createMockDataStore, createTestContext } = require('.')
 
-const CI_INTERBIT_KEY_GEN_TIMEOUT = 20000
+const CI_INTERBIT_KEY_GEN_TIMEOUT = 45000
 
 describe('testContext', () => {
   describe('createDatastore', () => {
@@ -24,11 +24,23 @@ describe('testContext', () => {
 
   describe('createTestContext(dataStore)', () => {
     let testContext
+    const env = { ...{}, ...process.env }
 
-    afterEach(() => {
+    const cleanup = async caller => {
       if (testContext) {
-        testContext.unloadInterbit()
+        console.log(`Cleaning up interbit: ${caller}`)
+        await testContext.unloadInterbit()
+        testContext = undefined
       }
+    }
+
+    beforeEach(async () => {
+      process.env.DB_PATH = `./db-${Date.now()}`
+    })
+
+    afterEach(async () => {
+      await cleanup('jest afterEach()')
+      process.env = env
     })
 
     it(
@@ -37,20 +49,24 @@ describe('testContext', () => {
         const config = { chainData: {}, peers: ['abc.com'] }
         testContext = createTestContext(config)
 
-        assert.deepStrictEqual(testContext.getConfig(), config)
-        assert.strictEqual(testContext.isInterbitLoaded(), false)
-        assert.throws(() => testContext.getInterbit())
+        try {
+          assert.deepStrictEqual(testContext.getConfig(), config)
+          assert.strictEqual(testContext.isInterbitLoaded(), false)
+          assert.throws(() => testContext.getInterbit())
 
-        const interbitContext = await testContext.waitForInterbit()
-        assert.strictEqual(testContext.isInterbitLoaded(), true)
-        assert.strictEqual(testContext.getInterbit(), interbitContext)
+          const interbitContext = await testContext.waitForInterbit()
+          assert.strictEqual(testContext.isInterbitLoaded(), true)
+          assert.strictEqual(testContext.getInterbit(), interbitContext)
 
-        assert.ok(interbitContext.interbit)
-        assert.ok(interbitContext.hypervisor)
-        assert.ok(interbitContext.cli)
-        assert.ok(interbitContext.publicKey)
-        assert.ok(interbitContext.chains)
-        assert.ok(interbitContext.localDataStore)
+          assert.ok(interbitContext.interbit)
+          assert.ok(interbitContext.hypervisor)
+          assert.ok(interbitContext.cli)
+          assert.ok(interbitContext.publicKey)
+          assert.ok(interbitContext.chains)
+          assert.ok(interbitContext.localDataStore)
+        } finally {
+          await cleanup('finally block')
+        }
       },
       CI_INTERBIT_KEY_GEN_TIMEOUT
     )

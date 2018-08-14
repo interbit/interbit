@@ -61,11 +61,16 @@ const createTestContext = (config, localDataStore = createMockDataStore()) => {
       return getContext()
     },
     isInterbitLoaded,
-    unloadInterbit: () => {
+    unloadInterbit: async () => {
       if (interbitContext) {
-        if (interbitContext.hypervisor) {
+        const { cli, hypervisor } = interbitContext
+        if (cli) {
+          console.log(`${LOG_PREFIX}: Shutting down interbit cli`)
+          await cli.shutdown()
+        }
+        if (hypervisor) {
           console.log(`${LOG_PREFIX}: Stopping interbit hypervisor`)
-          interbitContext.hypervisor.stopHyperBlocker()
+          hypervisor.stopHyperBlocker()
         }
         interbitContext = undefined
       }

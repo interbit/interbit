@@ -26,7 +26,11 @@ const createManifestTree = (interbitConfig, manifest) => {
   const validators = getAdminValidators(config)
   const chains = getRootSubtrees(ROOT_CHAIN_ALIAS, config, manifest)
   const covenant = ROOT_CHAIN_ALIAS
-  const covenants = getSubtreeCovenants(ROOT_CHAIN_ALIAS, covenant, chains)
+  const covenantHashMap = getSubtreeCovenants(
+    ROOT_CHAIN_ALIAS,
+    covenant,
+    chains
+  )
 
   const joins = configureCascadingJoins(
     undefined,
@@ -34,15 +38,15 @@ const createManifestTree = (interbitConfig, manifest) => {
     minimumJoinconfig
   )
 
-  const chainIds = mergeJoinAndChildChainIds(joins, chains, manifest)
+  const chainIdMap = mergeJoinAndChildChainIds(joins, chains, manifest)
 
   const manifestEntry = {
     alias: ROOT_CHAIN_ALIAS,
     chainId,
-    chainIds,
+    chainIdMap,
     validators,
     covenant,
-    covenants,
+    covenantHashMap,
     joins,
     chains
   }
@@ -106,7 +110,7 @@ const getManifestEntry = (chainAlias, config, manifest, visited) => {
   )
 
   const covenant = getChainCovenant(chainAlias, config)
-  const covenants = getSubtreeCovenants(chainAlias, covenant, childChains)
+  const covenantHashMap = getSubtreeCovenants(chainAlias, covenant, childChains)
 
   const existingJoins = getChainJoins(chainAlias, config)
   const joins = configureCascadingJoins(
@@ -115,15 +119,15 @@ const getManifestEntry = (chainAlias, config, manifest, visited) => {
     existingJoins
   )
 
-  const chainIds = mergeJoinAndChildChainIds(joins, childChains, manifest)
+  const chainIdMap = mergeJoinAndChildChainIds(joins, childChains, manifest)
 
   const manifestEntry = {
     alias: chainAlias,
     chainId: getChainId(manifest.genesisBlocks[chainAlias]),
-    chainIds,
+    chainIdMap,
     validators: getAdminValidators(config),
     covenant,
-    covenants,
+    covenantHashMap,
     joins,
     chains: childChains
   }

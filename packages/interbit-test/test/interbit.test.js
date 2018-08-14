@@ -2,7 +2,7 @@
 const assert = require('assert')
 const interbit = require('interbit-core')
 
-const CI_INTERBIT_KEY_GEN_TIMEOUT = 20000
+const CI_INTERBIT_KEY_GEN_TIMEOUT = 45000
 const CI_SUBSCRIBE_UNSUBSCRIBE_TIMEOUT = 8000
 const CI_2_BLOCK_SLEEP = 5000
 
@@ -51,11 +51,13 @@ describe('interbit', () => {
   })
 
   describe('hypervisor', () => {
-    let hypervisor
     let keyPair
-    const env = Object.assign({}, process.env)
+    let hypervisor
+    let cli
 
     beforeAll(async done => {
+      const env = Object.assign({}, process.env)
+
       console.log('Generating key pair...')
       keyPair = await interbit.generateKeyPair()
 
@@ -63,16 +65,25 @@ describe('interbit', () => {
       process.env.DB_PATH = `./db-${Date.now()}`
       hypervisor = await interbit.createHypervisor({ keyPair })
 
+      console.log('Creating cli...')
+      cli = await interbit.createCli(hypervisor)
+
+      process.env = env
+
       done()
     }, CI_INTERBIT_KEY_GEN_TIMEOUT)
 
     afterAll(async done => {
+      if (cli) {
+        console.log('Shutting down cli...')
+        await cli.shutdown()
+        cli = undefined
+      }
       if (hypervisor) {
         console.log('Stopping hyperblocker...')
         hypervisor.stopHyperBlocker()
         hypervisor = undefined
       }
-      process.env = env
       done()
     })
 
@@ -101,21 +112,6 @@ describe('interbit', () => {
     })
 
     describe('cli', () => {
-      let cli
-
-      beforeAll(async () => {
-        console.log('Creating cli...')
-        cli = await interbit.createCli(hypervisor)
-      })
-
-      afterAll(async () => {
-        if (cli) {
-          console.log('Shutting down cli...')
-          await cli.shutdown()
-          cli = undefined
-        }
-      })
-
       it('has expected API', async () => {
         console.log('cli: ', cli)
 

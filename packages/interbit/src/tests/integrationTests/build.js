@@ -11,7 +11,8 @@ const testBuild = async () => {
   const options = {
     // eslint-disable-next-line
     config: require('./interbit.config'),
-    artifacts: path.join(location, 'dist')
+    artifacts: path.join(location, 'dist'),
+    dbPath: `./db-${Date.now()}`
   }
 
   await interbit.build(options)

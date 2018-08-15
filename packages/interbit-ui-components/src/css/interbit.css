@@ -5201,6 +5201,11 @@ a {
     margin-right: 16px; }
   .ibweb-app-logo .wordmark {
     display: inline-block; }
+  @media (max-width: 629px) {
+    .ibweb-app-logo .icon {
+      margin-right: 0; }
+    .ibweb-app-logo .wordmark {
+      display: none; } }
 
 .ibweb-well.email {
   padding: 16px 32px;
@@ -5635,11 +5640,12 @@ a {
         background: #17A6F2; } }
 .ibweb .ibweb-header {
   width: 100%;
-  padding: 16px 32px;
+  padding: 16px 8px 16px 16px;
   border-bottom: 1px solid #E6E6E6; }
   .ibweb .ibweb-header .grid-cont {
     display: grid;
     grid-template-columns: auto 1fr auto;
+    grid-column-gap: 16px;
     max-width: 1280px;
     margin: 0 auto; }
     .ibweb .ibweb-header .grid-cont .nav li {
@@ -5650,7 +5656,7 @@ a {
       .ibweb .ibweb-header .grid-cont .nav li.disabled.signed-in a {
         color: #00A451; }
       .ibweb .ibweb-header .grid-cont .nav li a {
-        padding: 5px 16px;
+        padding: 5px 8px;
         color: #1385E8;
         font-weight: 700; }
       .ibweb .ibweb-header .grid-cont .nav li a:hover, .ibweb .ibweb-header .grid-cont .nav li a:focus {
@@ -5658,7 +5664,10 @@ a {
       .ibweb .ibweb-header .grid-cont .nav li a.active {
         color: #828282; }
     .ibweb .ibweb-header .grid-cont .logo {
-      padding-right: 16px; }
+      padding-right: 8px; }
+  @media (max-width: 629px) {
+    .ibweb .ibweb-header .grid-cont {
+      grid-column-gap: 0; } }
 
 .ibweb-footer-container {
   margin-bottom: 64px; }

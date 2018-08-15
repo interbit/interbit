@@ -31,4 +31,14 @@
   .wordmark {
     display: inline-block;
   }
+
+  @media (max-width: $screen-sm-min - 1) {
+    .icon {
+      margin-right: 0;
+    }
+
+    .wordmark {
+      display: none;
+    }
+  }
 }

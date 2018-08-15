@@ -1,11 +1,12 @@
 .ibweb .ibweb-header {
   width: 100%;
-  padding: 16px 32px;
+  padding: 16px 8px 16px 16px;
   border-bottom: 1px solid $ib-med-grey;
 
   .grid-cont {
     display: grid;
     grid-template-columns: auto 1fr auto;
+    grid-column-gap: 16px;
     max-width: 1280px;
     margin: 0 auto;
 
@@ -23,7 +24,7 @@
         }
 
         a {
-          padding: 5px 16px;
+          padding: 5px 8px;
           color: $ib-blue-new;
           font-weight: 700;
         }
@@ -39,7 +40,13 @@
     }
 
     .logo {
-      padding-right: 16px;
+      padding-right: 8px;
+    }
+  }
+
+  @media (max-width: $screen-sm-min - 1) {
+    .grid-cont {
+      grid-column-gap: 0;
     }
   }
 }

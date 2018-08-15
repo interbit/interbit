@@ -14,7 +14,7 @@ export default class LogoAccounts extends Component {
         <img
           src={wordmarkAccounts}
           alt="Interbit Accounts App wordmark"
-          className="wordmark hidden-xs"
+          className="wordmark"
         />
       </div>
     )

@@ -1,13 +1,13 @@
 {
   "name": "interbit-root-covenant",
-  "version": "0.4.43",
+  "version": "0.4.44",
   "description": "Root covenant, for handling automatic manifest updates",
   "main": "src/index.js",
   "scripts": {
     "test": "mocha \"src/tests/**/*.test.js\""
   },
   "dependencies": {
-    "interbit-covenant-tools": "^0.4.43"
+    "interbit-covenant-tools": "^0.4.44"
   },
   "devDependencies": {
     "assert": "^1.4.1",

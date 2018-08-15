@@ -1,13 +1,13 @@
 const _ = require('lodash')
 const {
-  startConsumeState,
-  startProvideState,
-  authorizeReceiveActions,
-  authorizeSendActions
-} = require('interbit-covenant-utils')
-const {
   redispatch,
-  actionTypes: coreActionTypes
+  actionTypes: coreActionTypes,
+  actionCreators: {
+    startConsumeState,
+    startProvideState,
+    authorizeReceiveActions,
+    authorizeSendActions
+  }
 } = require('../../../coreCovenant')
 const {
   stopConsumeState,
@@ -29,9 +29,9 @@ const applyJoinChanges = (state, newManifest) => {
     return nextState
   }
 
-  const currManifest = !state.manifest.chainId
-    ? Object.values(state.manifest.manifest)[0]
-    : state.manifest
+  const currManifest = state.manifest.chainId
+    ? state.manifest
+    : Object.values(state.manifest.manifest)[0]
 
   const currJoinActions = manifestJoinsToActions(currManifest)
 

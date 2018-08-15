@@ -42,6 +42,10 @@ describe('module exports expected components', () => {
     assert.ok(api.Header)
   })
 
+  it('exports HeaderGrid component', () => {
+    assert.ok(api.HeaderGrid)
+  })
+
   it('exports Sidebar component', () => {
     assert.ok(api.Sidebar)
   })

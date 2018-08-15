@@ -10,10 +10,7 @@ import { Markdown } from 'interbit-ui-components'
 import ContentBarApp from '../components/ContentBarApp'
 import ContentBarAttention from '../components/ContentBarAttention'
 import ProfileForm from '../components/ProfileForm'
-import ModalAppAccess from '../components/ModalAppAccess'
 import ModalAttentionMoreInfo from '../components/ModalAttentionMoreInfo'
-
-import chairmanmeow from '../assets/chairmanmeow.jpg'
 
 import { actionCreators } from '../interbit/my-account/actions'
 import { toggleForm, toggleModal } from '../redux/uiReducer'
@@ -260,7 +257,6 @@ export class Account extends Component {
           </Row>
         </div>
 
-        <ModalAppAccess image={chairmanmeow} appName="App Name" />
         <ModalAttentionMoreInfo
           {...modals.attentionMoreInfo}
           toggleModal={toggleModalFunction}

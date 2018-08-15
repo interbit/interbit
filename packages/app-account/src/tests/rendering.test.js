@@ -60,8 +60,10 @@ describe('Renders without crashing:', () => {
           attention: contentBar
         },
         modals: {
-          title: 'modal',
-          content: 'content'
+          attentionMoreInfo: {
+            title: 'modal',
+            content: 'content'
+          }
         }
       }
       renderWithContext(<Account {...props} />)
@@ -94,16 +96,41 @@ describe('Renders without crashing:', () => {
     it('CreateAccount', () => {
       const props = {
         content: {
-          signIn: {}
+          intro: 'meow',
+          signIn: {
+            content: 'neigh'
+          }
         },
         contentBars: {
-          gitHubCreateAccount: {},
-          gitHubSignIn: {},
+          gitHubCreateAccount: {
+            buttonText: 'bacon',
+            image: 'burger'
+          },
+          gitHubSignIn: {
+            buttonText: 'salami',
+            image: 'sandwich'
+          },
           attention: {
+            title: 'woof',
+            image: 'dog',
+            content: 'pomsky',
             callToAction: {}
           }
         },
-        modals: {}
+        modals: {
+          attentionMoreInfo: {
+            title: 'pickles',
+            content: 'cucumbers'
+          },
+          attention: {
+            title: 'horchata',
+            content: 'rice',
+            checkbox: 'it is delicious',
+            moreInfo: 'more'
+          }
+        },
+        toggleButtonFunction: () => false,
+        toggleModalFunction: () => false
       }
       renderWithContext(<CreateAccount {...props} />)
     })
@@ -114,15 +141,12 @@ describe('Renders without crashing:', () => {
 
     it('InteractiveChains', () => {
       const props = {
-        selectedChain: {},
-        blockchainDispatch: () => {}
-      }
-      renderWithContext(<InteractiveChains {...props} />)
-    })
-
-    it('InteractiveChains', () => {
-      const props = {
-        blockchainDispatch: () => {}
+        selectedChain: {
+          chainAlias: 'iAmAChain',
+          state: {}
+        },
+        resetForm: () => false,
+        blockchainDispatch: () => () => {}
       }
       renderWithContext(<InteractiveChains {...props} />)
     })

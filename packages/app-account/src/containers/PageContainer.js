@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { Grid } from 'react-bootstrap'
-import { Header, Footer } from 'interbit-ui-components'
+import { HeaderGrid, Footer } from 'interbit-ui-components'
 
 import Account from '../containers/Account'
 import Home from '../containers/Home'
@@ -12,50 +12,45 @@ import ExploreChain from '../containers/ExploreChain'
 import CreateAccount from '../containers/CreateAccount'
 
 import LogoAccount from '../components/LogoAccounts'
-import LogoAccountSm from '../components/LogoAccountSm'
 import navigation from '../constants/navigation'
 import paths from '../constants/paths'
 import urls from '../constants/urls'
 
 export default class PageContainer extends Component {
   static propTypes = {
-    userName: PropTypes.string,
-    isLoggedIn: PropTypes.bool
+    isLoggedIn: PropTypes.bool,
+    location: PropTypes.shape({})
   }
 
   static defaultProps = {
-    userName: 'anonymous user',
-    isLoggedIn: false
+    isLoggedIn: false,
+    location: {}
   }
 
   render() {
-    const { userName, isLoggedIn } = this.props
+    const { isLoggedIn, location } = this.props
 
     const redirectToSignIn = renderComponent =>
       isLoggedIn ? renderComponent : <Redirect to={paths.CREATE_ACCOUNT} />
 
-    const headerTextNav = [
-      {
-        content: (
-          <div id="ib-test-signed-in" className="username">
-            <i className="fa fa-user" />&nbsp;
-            {userName}
-          </div>
-        ),
-        key: 'username'
-      }
-    ]
+    const logo = {
+      logoEl: <LogoAccount />,
+      to: '/'
+    }
 
     return (
       <div>
-        <Header
-          className="nav-main-menu"
-          logo={<LogoAccount />}
-          logoSm={<LogoAccountSm />}
-          navItems={
+        <HeaderGrid
+          logo={logo}
+          leftNavItems={
             isLoggedIn ? navigation.headerNav : navigation.headerNavLoggedOut
           }
-          textNavItems={isLoggedIn ? headerTextNav : []}
+          rightNavItems={
+            isLoggedIn
+              ? navigation.headerRightNav
+              : navigation.headerRightNavLoggedOut
+          }
+          location={location}
         />
 
         <Grid>

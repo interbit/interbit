@@ -2,48 +2,39 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import { Grid } from 'react-bootstrap'
-import { Header } from 'interbit-ui-components'
+import { HeaderGrid } from 'interbit-ui-components'
 
 import ChainConnect from '../containers/ChainConnect'
 import Connecting from '../containers/Connecting'
 import LogoAccount from '../components/LogoAccounts'
+import navigation from '../constants/navigation'
 import paths from '../constants/paths'
 
 export default class PageContainer extends Component {
   static propTypes = {
-    userName: PropTypes.string,
     isChainLoaded: PropTypes.bool,
     isLoggedIn: PropTypes.bool
   }
 
   static defaultProps = {
-    userName: '',
     isChainLoaded: false,
     isLoggedIn: false
   }
 
   render() {
-    const { userName, isLoggedIn, isChainLoaded } = this.props
-    const headerTextNav = [
-      {
-        content: (
-          <div id="ib-test-signed-in" className="username">
-            <i className="fa fa-user" />&nbsp;
-            {userName}
-          </div>
-        ),
-        key: 'username'
-      }
-    ]
+    const { isLoggedIn, isChainLoaded } = this.props
+
+    const logo = {
+      logoEl: <LogoAccount />,
+      to: '/',
+      isDisabled: true
+    }
 
     return (
       <div>
-        <Header
-          className="nav-main-menu"
-          logo={<LogoAccount />}
-          logoSm={<LogoAccount />}
-          textNavItems={isLoggedIn ? headerTextNav : []}
-          disableLogoLink
+        <HeaderGrid
+          logo={logo}
+          rightNavItems={isLoggedIn ? navigation.headerRightNav : []}
         />
 
         <Grid>

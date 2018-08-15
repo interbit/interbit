@@ -5194,6 +5194,19 @@ a {
 .ibweb-logo {
   margin-top: -4px; }
 
+.ibweb-app-logo {
+  display: inline-block; }
+  .ibweb-app-logo .icon {
+    display: inline-block;
+    margin-right: 16px; }
+  .ibweb-app-logo .wordmark {
+    display: inline-block; }
+  @media (max-width: 629px) {
+    .ibweb-app-logo .icon {
+      margin-right: 0; }
+    .ibweb-app-logo .wordmark {
+      display: none; } }
+
 .ibweb-well.email {
   padding: 16px 32px;
   margin: 0 32px;
@@ -5201,7 +5214,7 @@ a {
   -webkit-box-shadow: none;
   box-shadow: none;
   background: #FFFFFF;
-  color: #057514; }
+  color: #00A451; }
 
 .subsection {
   margin: 0 32px 32px 0;
@@ -5579,7 +5592,7 @@ a {
     font-weight: 400;
     color: #666666; }
     .ibweb-navbar .username span {
-      color: #057514; }
+      color: #00A451; }
 
 @media (max-width: 1023px) {
   .ibweb-navbar-container .col-md-3 {
@@ -5625,6 +5638,37 @@ a {
       .ibweb-navbar-container .nav-right-menu li.accounts-link a:hover, .ibweb-navbar-container .nav-right-menu li.accounts-link a:active, .ibweb-navbar-container .nav-right-menu li.accounts-link a:focus {
         color: #FFFFFF;
         background: #17A6F2; } }
+.ibweb .ibweb-header {
+  width: 100%;
+  padding: 16px 8px 16px 16px;
+  border-bottom: 1px solid #E6E6E6; }
+  .ibweb .ibweb-header .grid-cont {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-column-gap: 16px;
+    max-width: 1280px;
+    margin: 0 auto; }
+    .ibweb .ibweb-header .grid-cont .nav li {
+      display: inline-block;
+      margin-bottom: 0; }
+      .ibweb .ibweb-header .grid-cont .nav li.disabled a {
+        color: #828282; }
+      .ibweb .ibweb-header .grid-cont .nav li.disabled.signed-in a {
+        color: #00A451; }
+      .ibweb .ibweb-header .grid-cont .nav li a {
+        padding: 5px 8px;
+        color: #1385E8;
+        font-weight: 700; }
+      .ibweb .ibweb-header .grid-cont .nav li a:hover, .ibweb .ibweb-header .grid-cont .nav li a:focus {
+        background-color: transparent; }
+      .ibweb .ibweb-header .grid-cont .nav li a.active {
+        color: #828282; }
+    .ibweb .ibweb-header .grid-cont .logo {
+      padding-right: 8px; }
+  @media (max-width: 629px) {
+    .ibweb .ibweb-header .grid-cont {
+      grid-column-gap: 0; } }
+
 .ibweb-footer-container {
   margin-bottom: 64px; }
   .ibweb-footer-container .ibweb-footer {

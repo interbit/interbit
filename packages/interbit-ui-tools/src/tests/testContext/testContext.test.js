@@ -44,7 +44,7 @@ describe('testContext', () => {
     })
 
     it(
-      'Creates a testContext using interbit',
+      'Creates a testContext using interbit and buffers it for reuse',
       async () => {
         const config = { chainData: {}, peers: ['abc.com'] }
         testContext = createTestContext(config)
@@ -64,6 +64,9 @@ describe('testContext', () => {
           assert.ok(interbitContext.publicKey)
           assert.ok(interbitContext.chains)
           assert.ok(interbitContext.localDataStore)
+
+          const reloadedContext = await testContext.waitForInterbit()
+          assert.strictEqual(reloadedContext, interbitContext)
         } finally {
           await cleanup('finally block')
         }

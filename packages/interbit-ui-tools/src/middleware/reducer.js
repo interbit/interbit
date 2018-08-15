@@ -152,4 +152,4 @@ const mergeAtPath = (state, path, value) => {
   return state.setIn(path, newValue)
 }
 
-module.exports = reducer
+module.exports = { initialState, reducer }

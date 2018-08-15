@@ -32,6 +32,7 @@
     display: inline-block;
   }
 
+  // TODO: Issue #629 - adjust wordmark visibility based on new grid widths */
   @media (max-width: $screen-sm-min - 1) {
     .icon {
       margin-right: 0;

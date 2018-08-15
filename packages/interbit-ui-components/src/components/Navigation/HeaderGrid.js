@@ -61,7 +61,6 @@ export default class HeaderGrid extends Component {
         <div className="grid-cont">
           <div className="logo">
             {logo.isDisabled ? (
-              /* TODO: adjust wordmark visibility based on new grid widths */
               logo.logoEl
             ) : (
               <LinkWrapper to={logo.to}>{logo.logoEl}</LinkWrapper>

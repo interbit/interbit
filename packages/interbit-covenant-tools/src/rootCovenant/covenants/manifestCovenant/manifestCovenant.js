@@ -1,12 +1,16 @@
 const Immutable = require('seamless-immutable')
-const hashObject = require('../hash')
-const { remoteRedispatch } = require('../../coreCovenant')
-const { PATHS } = require('../constants')
 
-const prefix = '@@MANIFEST'
+const hashObject = require('../../hash')
+const { remoteRedispatch } = require('../../../coreCovenant')
+const { PATHS } = require('../../constants')
+const { applyJoinChanges } = require('./applyJoinChanges')
+const { applyCovenantChanges } = require('./applyCovenantChanges')
+const { applyAclChanges } = require('./applyAclChanges')
+
+const PREFIX = '@@MANIFEST'
 
 const actionTypes = {
-  SET_MANIFEST: `${prefix}/SET_MANIFEST`
+  SET_MANIFEST: `${PREFIX}/SET_MANIFEST`
 }
 
 const actionCreators = {
@@ -49,6 +53,7 @@ const reducer = (state = initialState, action) => {
       }
 
       nextState = redispatchManifest(state, ownManifest)
+      nextState = applyChanges(nextState, ownManifest)
 
       return nextState.setIn(PATHS.MANIFEST, manifest)
     }
@@ -81,6 +86,16 @@ const redispatchManifest = (state, manifestTree) => {
       setManifestAction
     )
   }
+
+  return nextState
+}
+
+const applyChanges = (state, newManifest) => {
+  let nextState = state
+
+  nextState = applyCovenantChanges(nextState, newManifest)
+  nextState = applyAclChanges(nextState, newManifest)
+  nextState = applyJoinChanges(nextState, newManifest)
 
   return nextState
 }

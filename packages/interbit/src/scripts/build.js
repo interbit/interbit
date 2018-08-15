@@ -11,7 +11,11 @@ const build = async options => {
 
   setupDist(location)
 
-  const covenantFilenames = await packCovenants(location, config.covenants)
+  const covenantFilenames = await packCovenants(
+    location,
+    config.covenants,
+    options
+  )
 
   const newManifest = generateManifest(
     location,

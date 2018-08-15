@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "interbit-covenant-tools": "0.4.44",
+    "interbit-covenant-tools": "0.4.46",
     "axios": "^0.18.0",
     "redux-saga": "^0.16.0",
     "seamless-immutable": "^7.1.2",

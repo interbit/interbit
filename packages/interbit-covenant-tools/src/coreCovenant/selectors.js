@@ -5,6 +5,7 @@ module.exports = {
   actionPermissions: state => state.getIn(PATHS.ACTION_PERMISSIONS),
   chainId: state => state.getIn(PATHS.CHAIN_ID),
   config: state => state.getIn(PATHS.CONFIG),
+  covenantHash: state => state.getIn(PATHS.COVENANT_HASH),
   blocks: state => state.getIn(PATHS.BLOCKS),
   sentActions: state => state.getIn(PATHS.SENT_ACTIONS),
   pendingActionsForChain: (state, chainId) =>

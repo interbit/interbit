@@ -7,13 +7,10 @@ const assertChainsConfigured = require('./assertChainsConfigured')
 const prepareTestLocation = require('./prepareTestLocation')
 
 const testDeploy = async () => {
-  let deployedInterbit = {
-    cli: { shutdown: () => {} },
-    hypervisor: { stopHyperBlocker: () => {} }
-  }
+  let interbitCleanup = () => {}
 
   try {
-    const { location, cleanup } = prepareTestLocation('deploy')
+    const { location, cleanup: locationCleanup } = prepareTestLocation('deploy')
     const artifacts = path.join(location, 'dist')
 
     const keysOptions = {
@@ -32,7 +29,8 @@ const testDeploy = async () => {
 
     const buildOptions = {
       config,
-      artifacts
+      artifacts,
+      dbPath: `./db-${Date.now()}`
     }
     await interbit.build(buildOptions)
 
@@ -49,13 +47,14 @@ const testDeploy = async () => {
     const deployOptions = {
       manifest,
       location: artifacts,
-      keyPair
+      keyPair,
+      dbPath: `./db-${Date.now()}`
     }
 
     log.info(deployOptions)
 
-    const { cli, hypervisor } = await interbit.deploy(deployOptions)
-    deployedInterbit = { cli, hypervisor }
+    const { cli, hypervisor, cleanup } = await interbit.deploy(deployOptions)
+    interbitCleanup = cleanup
     log.info('Deploy finished')
 
     assert.ok(cli)
@@ -66,10 +65,9 @@ const testDeploy = async () => {
     await assertChainsConfigured(cli, manifest.chains)
 
     log.success('Deployed chains were responsive and configured')
-    cleanup()
+    locationCleanup()
   } finally {
-    await deployedInterbit.cli.shutdown()
-    deployedInterbit.hypervisor.stopHyperBlocker()
+    await interbitCleanup()
   }
 }
 

@@ -13,11 +13,20 @@ const WRITE_JOIN_ACTION_STATUS = 'WRITE-JOIN-ACTION-STATUS'
 const revokeSendActions = (state, chainId) => {
   let nextState = state
 
-  const nextProviding = getProviding(nextState).filter(
+  const providing = getProviding(nextState)
+  if (!providing) {
+    return nextState
+  }
+  const nextProviding = providing.filter(
     join =>
       join.consumer !== chainId || join.joinName !== WRITE_JOIN_PENDING_ACTIONS
   )
-  const nextConsuming = getConsuming(nextState).filter(
+
+  const consuming = getConsuming(nextState)
+  if (!consuming) {
+    return nextState
+  }
+  const nextConsuming = consuming.filter(
     join =>
       join.provider !== chainId || join.joinName !== WRITE_JOIN_ACTION_STATUS
   )

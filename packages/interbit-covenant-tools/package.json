@@ -1,6 +1,6 @@
 {
   "name": "interbit-covenant-tools",
-  "version": "0.4.44",
+  "version": "0.4.46",
   "description": "Interbit platform covenants and covenant components",
   "main": "dist/interbit-covenant-tools.js",
   "scripts": {
@@ -33,6 +33,7 @@
   "dependencies": {
     "interbit-covenant-utils": "0.14.0",
     "json-stable-stringify": "^1.0.1",
+    "lodash": "^4.17.5",
     "object-hash": "^1.3.0",
     "seamless-immutable": "^7.1.2"
   }

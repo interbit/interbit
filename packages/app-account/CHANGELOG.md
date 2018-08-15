@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.46"></a>
+## [0.4.46](https://github.com/interbit/interbit/compare/v0.4.44...v0.4.46) (2018-08-09)
+
+
+### Bug Fixes
+
+* **app-account:** make chainConnect component render when requested cAuth fields are missing ([d83a5c0](https://github.com/interbit/interbit/commit/d83a5c0))
+
+
+
+
 <a name="0.4.44"></a>
 ## [0.4.44](https://github.com/interbit/interbit/compare/v0.4.43...v0.4.44) (2018-07-24)
 

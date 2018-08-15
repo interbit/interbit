@@ -5,22 +5,22 @@ const assertChainsConfigured = require('./assertChainsConfigured')
 const log = require('../../log')
 
 const testStart = async () => {
-  let startedInterbit = {
-    cli: { shutdown: () => {} },
-    hypervisor: { stopHyperBlocker: () => {} }
-  }
+  let interbitCleanup = () => {}
+
   try {
     const options = {
       // eslint-disable-next-line
       config: require('./interbit.config'),
-      noWatch: true
+      noWatch: true,
+      dbPath: `./db-${Date.now()}`
     }
 
-    const { cli, hypervisor, chainManifest } = await interbit.start(options)
-    startedInterbit = {
-      cli,
-      hypervisor
-    }
+    log.info(options)
+
+    const { cli, hypervisor, chainManifest, cleanup } = await interbit.start(
+      options
+    )
+    interbitCleanup = cleanup
 
     assert.ok(cli)
     assert.ok(hypervisor)
@@ -35,8 +35,7 @@ const testStart = async () => {
       'interbit.start(options): First joined to second and shared state'
     )
   } finally {
-    await startedInterbit.cli.shutdown()
-    startedInterbit.hypervisor.stopHyperBlocker()
+    await interbitCleanup()
   }
 }
 

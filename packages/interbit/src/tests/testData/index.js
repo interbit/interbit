@@ -79,6 +79,11 @@ const defaultManifest = {
       filename:
         'covenants/72fe3ca61c3af35ecca31e58c33c368e1554dc1dab01ab8fc3aadc965f608775.tgz',
       hash: '72fe3ca61c3af35ecca31e58c33c368e1554dc1dab01ab8fc3aadc965f608775'
+    },
+    interbitRoot: {
+      filename:
+        'covenants/4fd5sca61c3af35ecca31e58c33c368e1554dc1dab01ab8fc3aadc965f608775.tgz',
+      hash: '4fd5sca61c3af35ecca31e58c33c368e1554dc1dab01ab8fc3aadc965f608775'
     }
   },
   chains: {
@@ -220,13 +225,24 @@ const defaultManifest = {
   },
   manifest: {
     interbitRoot: {
+      alias: 'interbitRoot',
       chainId:
         '56399770d33b17fe3ba20a1d911cc56c3cc47ed11fc8f6935543c2b25da96f47',
+      chainIdMap: {
+        control:
+          '7988dc0fe96bf5371909781b9cab0de21fcca8a740573267b1134e6889922162',
+        public:
+          '28884c86bb5f73e48726ebdc466d45f4034a22c7ce9b69e5b75bd94d55f78d7f'
+      },
       validators: ['SuperSecurePubKey'],
       covenant: 'interbitRoot',
-      covenants: {
-        interbitRoot: 'interbitRoot',
-        control: 'control'
+      covenantHashMap: {
+        interbitRoot:
+          '4fd5sca61c3af35ecca31e58c33c368e1554dc1dab01ab8fc3aadc965f608775',
+        control:
+          '1abaa91370f606b575ba2bca4dc13a3717aba7c6b09b95b23334c89eb98650fa',
+        public:
+          '72fe3ca61c3af35ecca31e58c33c368e1554dc1dab01ab8fc3aadc965f608775'
       },
       joins: {
         sendActionTo: [
@@ -241,12 +257,20 @@ const defaultManifest = {
       },
       chains: {
         public: {
+          alias: 'public',
           chainId:
             '28884c86bb5f73e48726ebdc466d45f4034a22c7ce9b69e5b75bd94d55f78d7f',
+          chainIdMap: {
+            control:
+              '7988dc0fe96bf5371909781b9cab0de21fcca8a740573267b1134e6889922162',
+            interbitRoot:
+              '56399770d33b17fe3ba20a1d911cc56c3cc47ed11fc8f6935543c2b25da96f47'
+          },
           validators: ['SuperSecurePubKey'],
           covenant: 'public',
-          covenants: {
-            public: 'public'
+          covenantHashMap: {
+            public:
+              '72fe3ca61c3af35ecca31e58c33c368e1554dc1dab01ab8fc3aadc965f608775'
           },
           joins: {
             consume: [
@@ -265,15 +289,23 @@ const defaultManifest = {
             ]
           },
           chains: {},
-          hash: '89bcadf6c8eb1aa9923cd226d84795faede41a13'
+          hash: '4534531a7e3fb794d178e87fd12ce41853f85e4a'
         },
         control: {
+          alias: 'control',
           chainId:
             '7988dc0fe96bf5371909781b9cab0de21fcca8a740573267b1134e6889922162',
+          chainIdMap: {
+            public:
+              '28884c86bb5f73e48726ebdc466d45f4034a22c7ce9b69e5b75bd94d55f78d7f',
+            interbitRoot:
+              '56399770d33b17fe3ba20a1d911cc56c3cc47ed11fc8f6935543c2b25da96f47'
+          },
           validators: ['SuperSecurePubKey'],
           covenant: 'control',
-          covenants: {
-            control: 'control'
+          covenantHashMap: {
+            control:
+              '1abaa91370f606b575ba2bca4dc13a3717aba7c6b09b95b23334c89eb98650fa'
           },
           joins: {
             provide: [
@@ -292,13 +324,13 @@ const defaultManifest = {
             ]
           },
           chains: {},
-          hash: '49cb6f7ffaf3a8d36df768b396f06b7801774c95'
+          hash: 'd058115c23797f2f8167286f3ce1cc6510eedcc4'
         }
       },
-      hash: '11e3653946edd5ff9c0b0d66f8e1b92739ae2a20'
+      hash: '6579b116d3f76666bca7ead9a53afbca849b467f'
     }
   },
-  hash: '1198fac62f12081651cb00b88081117a3085f593'
+  hash: 'fd008fd0d71a1f78e1f626849c170c3d0e588115'
 }
 
 const defaultCovenants = defaultManifest.covenants

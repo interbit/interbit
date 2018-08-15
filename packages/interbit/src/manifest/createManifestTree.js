@@ -26,9 +26,7 @@ const createManifestTree = (interbitConfig, manifest) => {
   const validators = getAdminValidators(config)
   const chains = getRootSubtrees(ROOT_CHAIN_ALIAS, config, manifest)
   const covenant = ROOT_CHAIN_ALIAS
-  console.log('COVVENANTES')
-  console.log(manifest.covenants)
-  const covenantHashMap = getSubtreeCovenants(
+  const covenantHashMap = getCovenantHashMap(
     ROOT_CHAIN_ALIAS,
     manifest.covenants,
     chains
@@ -112,7 +110,7 @@ const getManifestEntry = (chainAlias, config, manifest, visited) => {
   )
 
   const covenant = getChainCovenant(chainAlias, config)
-  const covenantHashMap = getSubtreeCovenants(
+  const covenantHashMap = getCovenantHashMap(
     covenant,
     manifest.covenants,
     childChains
@@ -186,10 +184,11 @@ const checkForCycles = (chainAlias, visited) => {
   return visited.concat(chainAlias)
 }
 
-const getSubtreeCovenants = (myCovenantAlias, allCovenants, chains) => ({
+const getCovenantHashMap = (myCovenantAlias, allCovenants, chains) => ({
   [myCovenantAlias]: allCovenants[myCovenantAlias].hash,
   ...Object.values(chains).reduce(
     (accum, chain) => ({
+      ...accum,
       ...chain.covenantHashMap
     }),
     {}

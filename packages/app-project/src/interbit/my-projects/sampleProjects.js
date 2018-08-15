@@ -1,8 +1,8 @@
 const sampleProjects = [
   {
     projectAlias: 'To-Do-List-Sample',
-    projectName: 'Interbit Sample Applications - To Do List',
-    description: `To Do List builds on the well known To Do List Redux/React example, using an Interbit blockchain back-end.`,
+    projectName: 'Interbit Sample Applications - To-do List',
+    description: `To-do List builds on the well known To-do List Redux/React example, using an Interbit blockchain back-end.`,
     license: 'Interbit Open Source',
     icon: 'fa-list',
     documentation:

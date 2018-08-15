@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Grid, Row, Col, Well } from 'react-bootstrap'
-import { chainDispatch } from 'interbit-ui-tools'
-
-import { getExploreChainState } from '../redux/exploreChainReducer'
+import { interbitRedux } from 'interbit-ui-tools'
 import { PRIVATE } from '../constants/chainAliases'
 
+const { chainDispatch, selectors } = interbitRedux
+
 const mapStateToProps = state => {
-  const { state: chainState } = getExploreChainState(state)
+  const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
   if (!chainState) {
     return {
       profile: {},

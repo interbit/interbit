@@ -9,9 +9,10 @@ import Home from '../containers/Home'
 import NotFoundPage from '../containers/NotFoundPage'
 import InteractiveChains from '../containers/InteractiveChains'
 import ExploreChain from '../containers/ExploreChain'
-import CreateAccount from '../containers/CreateAcount'
+import CreateAccount from '../containers/CreateAccount'
 
 import LogoAccount from '../components/LogoAccounts'
+import LogoAccountSm from '../components/LogoAccountSm'
 import navigation from '../constants/navigation'
 import paths from '../constants/paths'
 import urls from '../constants/urls'
@@ -36,8 +37,9 @@ export default class PageContainer extends Component {
     const headerTextNav = [
       {
         content: (
-          <div className="username">
-            {userName} <span>(Signed in)</span>
+          <div id="ib-test-signed-in" className="username">
+            <i className="fa fa-user" />&nbsp;
+            {userName}
           </div>
         ),
         key: 'username'
@@ -49,6 +51,7 @@ export default class PageContainer extends Component {
         <Header
           className="nav-main-menu"
           logo={<LogoAccount />}
+          logoSm={<LogoAccountSm />}
           navItems={
             isLoggedIn ? navigation.headerNav : navigation.headerNavLoggedOut
           }

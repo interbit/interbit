@@ -1,37 +1,15 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
-const {
-  redispatch,
-  redispatches,
-  removeRedispatches,
-  remoteRedispatch,
-  shiftRedispatchQueue,
-  pushUpRedispatches,
-  actionTypes,
-  constants,
-  startProvideState,
-  startConsumeState,
-  sponsorChainRequest,
-  sponsorChain,
-  setAcl,
-  addToAcl,
-  authorizeReceiveActions,
-  authorizeSendActions,
-  createChildChain,
-  createAction,
-  destroy
-} = require('interbit-covenant-utils')
+const { createAction } = require('interbit-covenant-utils')
 
-const {
-  manifestCovenant,
-  rootCovenant,
-  rootStateSelectors
-} = require('./rootCovenant')
+const coreCovenant = require('./coreCovenant')
+const constants = require('./constants')
+
+const { rootStateSelectors, ...rest } = require('./rootCovenant')
 
 const cAuthConsumerCovenant = require('./cAuthConsumerCovenant')
-
+const config = require('./config')
+const manifest = require('./manifest')
 const mergeCovenants = require('./mergeCovenants')
-
-const selectors = require('./selectors')
 
 const {
   validate,
@@ -41,31 +19,11 @@ const {
 
 module.exports = {
   createAction,
-  coreCovenant: {
-    actionTypes,
-    actionCreators: {
-      authorizeReceiveActions,
-      authorizeSendActions,
-      startConsumeState,
-      startProvideState,
-      setAcl,
-      addToAcl,
-      createChildChain,
-      sponsorChainRequest,
-      sponsorChain,
-      destroy
-    },
-    constants,
-    redispatch,
-    redispatches,
-    removeRedispatches,
-    remoteRedispatch,
-    shiftRedispatchQueue,
-    pushUpRedispatches,
-    selectors
-  },
-  manifestCovenant,
-  rootCovenant,
+  config,
+  constants,
+  coreCovenant,
+  manifest,
+  rootCovenant: rest,
   rootStateSelectors,
   cAuthConsumerCovenant,
   mergeCovenants,

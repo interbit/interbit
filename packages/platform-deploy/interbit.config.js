@@ -1,7 +1,7 @@
 const _ = require('lodash')
 
-const accountConfig = require('../app-account/interbit.prod.config')
-const templateConfig = require('../template/interbit.prod.config')
+const accountConfig = require('../app-account/interbit.config')
+const templateConfig = require('../interbit-template/interbit.config')
 
 const init = {
   peers: [],
@@ -12,8 +12,8 @@ const init = {
 
 const config = [accountConfig, templateConfig].reduce(
   (prev, curr) => ({
-    peers: prev.peers.concat(curr.peers),
-    adminValidators: prev.adminValidators.concat(curr.adminValidators),
+    peers: _.uniq(prev.peers.concat(curr.peers)),
+    adminValidators: _.uniq(prev.adminValidators.concat(curr.adminValidators)),
     staticChains: {
       ...prev.staticChains,
       ...curr.staticChains
@@ -30,7 +30,6 @@ const config = [accountConfig, templateConfig].reduce(
   init
 )
 
-config.peers = _.uniq(config.peers)
-console.log(config)
+console.log(JSON.stringify(config, null, 2))
 
 module.exports = config

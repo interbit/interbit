@@ -31,7 +31,8 @@ export default class LinkBar extends Component {
       to,
       className,
       isMailto,
-      clickHandler
+      clickHandler,
+      ...rest
     } = this.props
 
     const isExternalLink = /^https?:\/\//.test(to)
@@ -51,14 +52,16 @@ export default class LinkBar extends Component {
       <a
         href={to}
         className={`ibweb-link-bar ${className}`}
-        onClick={clickHandler}>
+        onClick={clickHandler}
+        {...rest}>
         {linkBarContent}
       </a>
     ) : (
       <Link
         to={to}
         className={`ibweb-link-bar ${className}`}
-        onClick={clickHandler}>
+        onClick={clickHandler}
+        {...rest}>
         {linkBarContent}
       </Link>
     )

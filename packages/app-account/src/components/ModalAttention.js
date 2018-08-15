@@ -6,6 +6,7 @@ import { IconButton, Markdown, ModalWrapper } from 'interbit-ui-components'
 import OAuthButton from '../components/OAuthButton'
 import buttonNames from '../constants/buttonNames'
 import modalNames from '../constants/modalNames'
+import oAuthProviders from '../constants/oAuthProviders'
 
 export default class ModalAttention extends Component {
   static propTypes = {
@@ -44,6 +45,7 @@ export default class ModalAttention extends Component {
     const footer = (
       <div>
         <Checkbox
+          name="check"
           onClick={e => {
             toggleButton(buttonNames.DISCLAIMER_BUTTON_NAME, e.target.checked)
           }}>
@@ -53,12 +55,13 @@ export default class ModalAttention extends Component {
 
         <OAuthButton
           text="Continue"
-          {...oAuth}
-          oAuthProvider="gitHub"
+          name="continue"
+          oAuth={{ ...oAuth, oAuthProvider: oAuthProviders.GITHUB }}
           className={isEnabled ? '' : 'disabled'}
         />
         <IconButton
           text="Cancel"
+          name="cancel"
           className="secondary"
           clickHandler={() => toggleModal(modalNames.ATTENTION_MODAL_NAME)}
         />

@@ -4,18 +4,20 @@ import { Grid, Row, Col, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
-import { selectors } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
 import { LinkBar, LinkBarSlack } from 'interbit-ui-components'
 
+import { MY_PROJECTS } from '../constants/chainAliases'
 import urls from '../constants/urls'
 import ProjectItem from '../components/ProjectItem'
 import ProjectBar from '../components/ProjectBar'
 
-import { getExploreChainState } from '../redux/exploreChainReducer'
 import chairmanmeow from '../assets/chairmanmeow.jpg'
 
+const { selectors } = interbitRedux
+
 const mapStateToProps = state => {
-  const { state: chainState } = getExploreChainState(state)
+  const chainState = selectors.getChain(state, { chainAlias: MY_PROJECTS })
   if (!chainState) {
     return {
       projects: []
@@ -41,7 +43,7 @@ const mapStateToProps = state => {
 }
 
 const generateConnectUrl = state => {
-  const { state: chainState } = getExploreChainState(state)
+  const chainState = selectors.getChain(state, { chainAlias: MY_PROJECTS })
   if (!chainState || !chainState.dns) {
     return '#'
   }

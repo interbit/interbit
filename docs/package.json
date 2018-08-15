@@ -1,10 +1,12 @@
 {
   "name": "interbit-docs",
-  "version": "0.4.25",
-  "description": "Interbit SDK",
+  "version": "0.4.46",
+  "description": "Interbit SDK documentation",
   "private": true,
   "keywords": [
-    "interbit"
+    "interbit",
+    "documentation",
+    "gitbook"
   ],
   "license": "MIT",
   "author": {
@@ -13,12 +15,12 @@
   "main": "README.md",
   "dependencies": {
     "express": "4.15.2",
-    "gitbook-cli": "2.3.0",
     "heroku-ssl-redirect": "0.0.4"
   },
   "scripts": {
     "start": "node index.js",
     "serve": "npm start",
-    "build": "bash package.sh"
+    "build": "bash package.sh",
+    "check": "cd gitbook && npm run test"
   }
 }

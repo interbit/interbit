@@ -8,6 +8,8 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import App from '../App'
 import NotFoundPage from '../containers/NotFoundPage'
 import ChainConnect from '../containers/ChainConnect'
+import ExploreChain from '../containers/ExploreChain'
+import InteractiveChains from '../containers/InteractiveChains'
 import { ProjectDetails } from '../containers/ProjectDetails'
 import { ProjectList } from '../containers/ProjectList'
 import { NewProject } from '../containers/NewProject'
@@ -75,6 +77,24 @@ describe('Renders without crashing:', () => {
 
     it('404', () => {
       renderWithContext(<NotFoundPage />)
+    })
+
+    it('InteractiveChains', () => {
+      const props = {
+        location: {
+          search: ''
+        }
+      }
+      renderWithContext(<InteractiveChains {...props} />)
+    })
+
+    it('ExploreChain', () => {
+      const props = {
+        location: {
+          search: ''
+        }
+      }
+      renderWithContext(<ExploreChain {...props} />)
     })
 
     it('ChainConnect', () => {

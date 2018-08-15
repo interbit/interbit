@@ -1,16 +1,16 @@
 {
     "name": "app-interbit-io",
-    "version": "0.4.25",
+    "version": "0.4.46",
     "private": true,
     "license": "MIT",
     "author": "BTL GROUP LTD",
     "dependencies": {
         "cross-env": "^5.1.4",
-        "interbit-cli": "0.4.25",
-        "interbit-covenant-tools": "0.4.25",
-        "interbit-platform-tools": "0.4.25",
-        "interbit-ui-components": "0.4.25",
-        "interbit-ui-tools": "0.4.25",
+        "interbit-cli": "0.4.46",
+        "interbit-covenant-tools": "0.4.46",
+        "interbit-platform-tools": "0.4.46",
+        "interbit-ui-components": "0.4.46",
+        "interbit-ui-tools": "0.4.46",
         "react": "^16.2.0",
         "react-bootstrap": "^0.32.1",
         "react-dom": "^16.2.0",
@@ -24,7 +24,7 @@
         "redux-devtools-extension": "^2.13.2",
         "redux-saga": "^0.16.0",
         "seamless-immutable": "^7.1.2",
-        "serve": "^6.5.5"
+        "serve": "^7.0.0"
     },
     "devDependencies": {
         "react-scripts": "1.1.0"

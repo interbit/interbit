@@ -1,6 +1,6 @@
 import constants from '../../constants'
 
-import cardStartingBlock from '../../assets/cards/cardStartingBlock.jpg'
+import cardStartingBlock from '../../assets/cards/cardStartingBlock2.jpg'
 import cardNewsroom from '../../assets/cards/cardNewsroom.svg'
 import cardCore from '../../assets/cards/cardCore.jpg'
 import cardAccounts from '../../assets/cards/cardAccounts.jpg'
@@ -17,8 +17,14 @@ export default {
     cards: [
       {
         title: 'The Starting Block',
-        content: `Have an idea for a blockchain-based business or application? On May 7th we\u2019ll be accepting submissions to be part of the Starting Block program.`,
-        image: cardStartingBlock
+        content: `Have an idea for a blockchain-based business or application? We are accepting submissions to be part of the Starting Block program.`,
+        image: cardStartingBlock,
+        callToActions: [
+          {
+            to: constants.urls.STARTING_BLOCK,
+            text: 'Apply to the Program'
+          }
+        ]
       },
       {
         title: 'Newsroom',
@@ -36,7 +42,7 @@ export default {
   },
   weDoBlockChain: {
     title: 'We do blockchain differently',
-    content: `We realized nearly two years ago that a single blockchain would never scale to the requirements of enterprise applications. Nor could it meet the privacy demands of the enterprise. To solve these problems, Interbit uses many blockchains that can be joined to form many different solution architectures. Interbit applications can be designed to promote privacy, scalability, and resiliancy, all hallmarks of enterprise applications.`
+    content: `We realized nearly two years ago that a single blockchain would never scale to the requirements of enterprise applications. Nor could it meet the privacy demands of the enterprise. To solve these problems, Interbit uses many blockchains that can be joined to form many different solution architectures. Interbit applications can be designed to promote privacy, scalability, and resiliency - all hallmarks of enterprise applications.`
   },
   cardsSection: {
     cards: [

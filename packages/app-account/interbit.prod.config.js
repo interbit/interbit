@@ -1,10 +1,11 @@
 const path = require('path')
 const chainAliases = require('./src/constants/chainAliases')
+const { controlActionTypes } = require('./src/constants/actionTypes')
 
 const PUB_KEY =
-  '-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWtpPiAEB/1DUOOu08SW7IGGlw5AavcxUxtrJbJVliIcFNSTpn/z/p0Zi\nIfO58AK0dfcHyMb1vUY8zwM45if6iaNS98zF3lEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa2k+IBgsJBwgDAgkQjFLIxmtXVSMEFQgKAgMWAgEC\nGQECGwMCHgEAAIdvAf0SbWcBMphrR7wc6rL5ytyThLBsI72vz/0QyBcaRlsp\nQ9US66w6f+OWcpAiOeLDdx9l39difSXpjL9yYWxWRElSzk0EWtpPiAECAOpL\nfIIdC5S/lIaWI+Bx23FtSdxyqrKduDQCRDhB07udTv4bjGCSCtpyPS3Y03m6\nyl/GAa7OLIFeLzI4tzT0CXMAEQEAAcJfBBgBCAATBQJa2k+ICRCMUsjGa1dV\nIwIbDAAAxXwB/RUA88XTd6vDJDFeRx4/Escv5tyQuT9bxMkmSxaqiBRTU2X5\nhrFQs5NGOu2ySGbRvZMopK91sLK/uqlTaty1oVk=\r\n=yws5\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n'
+  'xk0EWxXLXgEB/1ZDEin4DMhsR9XN3PzYqVbyf7YsOXoF1E5ZEn2jTrh9e6kU8+zLfiaysPc4PntHAzDHWB2DjJv8+if8nTvTyGEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcteBgsJBwgDAgkQeEalLevEq6kEFQgKAgMWAgEC\nGQECGwMCHgEAAI60Af9FavirDL2L6pl6iywR9RV1qLrEgEtN/eMOKVj+3Tzt\n00dE12onmnWw2rcl1Amc0ZmM87vwGWYxoiRBt8tqqEbfzk0EWxXLXgECAMO+\nizeYvgWINZAtqSbn6k55j8xN9b7hVBmCrIr0PBUmg//rFCqYuelAGuEbkW+K\nv/pQki59N2lU9xucR9MhxSsAEQEAAcJfBBgBCAATBQJbFcteCRB4RqUt68Sr\nqQIbDAAAq9cB/Ax+0dq+pQN8lnkpqvQQKzUxHaiNsPbinU1XqcA51V/sGCiv\nuuOMrvm+y6jSf10lDNP7u/rGQRwSjTQ77rn5b5Q='
 const WEB_AUTH_PUB_KEY =
-  '-----BEGIN PGP PUBLIC KEY BLOCK-----\r\nVersion: OpenPGP.js v2.6.2\r\nComment: https://openpgpjs.org\r\n\r\nxk0EWut+NgECAI4y80VaEfL6tTbyECqE2rx4fmxsLc2dxQaGAIbiHjY15gaf\nHTF4zv7nWz0JNJbeN6K9/EsfPmiqXOEiUMdwvXEAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJa6342BgsJBwgDAgkQ1/MBdYQZN78EFQgKAgMWAgEC\nGQECGwMCHgEAAIZAAf94MBDqmbohRdBDAubCyzD0f39vYCz6ysNsOgVPVw5l\nOXjnwlsHSW3B0TixvQhrtfuSO2E1ec8mRQYZJJwvaNDEzk0EWut+NgEB/1oZ\nnEY3VWhW1+v4va/Yul6PCADi3L6kTXOA37Tu/zfVLrMXZBm4Er39i3KF1PK5\ny5BpE49vqgmIXm1wFXBXRv8AEQEAAcJfBBgBCAATBQJa6342CRDX8wF1hBk3\nvwIbDAAAevwCAIWOItKogE8OLAnGyhS3heS9oMG8/hbysWB0+5aTcO0FGyir\n28wOiF+LdzmvcYu4oo3YcDEPZHQt6FfqK1OHr4U=\r\n=zedb\r\n-----END PGP PUBLIC KEY BLOCK-----\r\n\r\n'
+  'xk0EWxXMKAECAI+weRG4JyZaoxsFX8TQDQtQXVYk2gabygm7as4+f+0+py+FErkKIbz8m0r6A+UrmKYaD/fksj2DGRKn/7Ohv7EAEQEAAc0NPGluZm9AYnRs\nLmNvPsJ1BBABCAApBQJbFcwoBgsJBwgDAgkQmTQy2zEs+JUEFQgKAgMWAgEC\nGQECGwMCHgEAAOr4Af4sl2I7QkkJvdTSMPeUJNKtj45ArxBHmbLjpYuVTpnM\nLr2DJmlNFiYgZlZkExYEI5Gm3CxyHJeq/elBSe5V613Ozk0EWxXMKAEB/3LI\nfXPVHtBtHKVE+Zveb29bmDK/l6t0w+UYIw0qpJekjaFrrLtHm5ML9BwJCBei\nea1VCL/SGTf478lZZ7My+K0AEQEAAcJfBBgBCAATBQJbFcwoCRCZNDLbMSz4\nlQIbDAAA7U8B/iloThYXFYC7IU45OqWcr5uT72ZlSaUmxKcktcjA9DRH4GVg\nZysmi4/kjUvb+qoA9GIoc7MfXxw32zkNL8YjW9c='
 
 const config = {
   peers: [
@@ -23,6 +24,17 @@ const config = {
               alias: chainAliases.PUBLIC,
               path: ['privateChainHosting', 'shared'],
               joinName: 'HOSTING_SPONSOR'
+            },
+            {
+              alias: chainAliases.GITHUB,
+              path: ['interbit', 'chainId'],
+              joinName: 'CONTROL_CHAIN_ID'
+            }
+          ],
+          receiveActionFrom: [
+            {
+              alias: chainAliases.GITHUB,
+              authorizedActions: [controlActionTypes.ADD_KEY_TO_SPONSORED_CHAIN]
             }
           ]
         }
@@ -53,13 +65,21 @@ const config = {
       config: {
         validators: [PUB_KEY, WEB_AUTH_PUB_KEY],
         joins: {
+          consume: [
+            {
+              alias: chainAliases.CONTROL,
+              path: ['controlChainId'],
+              joinName: 'CONTROL_CHAIN_ID'
+            }
+          ],
           provide: [
             {
               alias: chainAliases.PUBLIC,
               path: ['oAuth', 'shared'],
               joinName: 'OAUTH-CONFIG-GITHUB'
             }
-          ]
+          ],
+          sendActionTo: [{ alias: chainAliases.CONTROL }]
         }
       }
     }

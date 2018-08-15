@@ -8,7 +8,7 @@ const TIME = 'time'
 export default class BlockTable extends Component {
   static propTypes = {
     blocks: PropTypes.arrayOf(PropTypes.object).isRequired,
-    doSetSelectedBlockHash: PropTypes.func.isRequired,
+    doSelectBlock: PropTypes.func.isRequired,
     selectedBlockHash: PropTypes.string
   }
 
@@ -18,7 +18,7 @@ export default class BlockTable extends Component {
 
   onRowClick = ({ index }) => {
     const block = this.props.blocks[index]
-    this.props.doSetSelectedBlockHash(block.blockHash)
+    this.props.doSelectBlock(block.blockHash)
   }
 
   getRowData = index => this.props.blocks[index]

@@ -1,15 +1,18 @@
 const {
-  manifestCovenant: {
+  rootCovenant: {
     actionCreators: { setManifest }
+  },
+  manifest: {
+    selectors: { getRootChildren, getChainIdByAlias, getCovenantHashByAlias }
   }
 } = require('interbit-covenant-tools')
 
 const configureJoins = require('./configureJoins')
-const {
-  getRootChildren,
-  getChainIdByAlias,
-  getCovenantHashByAlias
-} = require('../manifest/manifestSelectors')
+
+process.on('unhandledRejection', reason => {
+  console.log(`Caught unhandled rejection. Reason: ${reason}`)
+  console.log(reason)
+})
 
 const configureChains = async (cli, interbitManifest) => {
   const childChains = getRootChildren(interbitManifest)
@@ -21,7 +24,9 @@ const configureChains = async (cli, interbitManifest) => {
 
     // TODO: Set covenants in watchers after cascading deployment is available
     const covenantHash = getCovenantHashByAlias(chainAlias, interbitManifest)
-    console.log(`Applying ${covenantHash} covenant to chain ${chainId}`)
+    console.log(
+      `Applying covenant ${covenantHash} to ${chainAlias} (${chainId})`
+    )
     await cli.applyCovenant(chainId, covenantHash)
 
     // TODO: Apply interbit-covenant-tools to root #267

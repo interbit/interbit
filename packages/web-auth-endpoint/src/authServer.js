@@ -1,4 +1,7 @@
 const express = require('express')
+const {
+  parameterEncoding: { parseState }
+} = require('interbit-ui-tools')
 
 const { AUTH_PORT } = require('./networkConfig')
 const waitForOAuth = require('./oAuth')
@@ -28,7 +31,7 @@ const startAuthServer = async (cli, manifest) => {
 
     const {
       requestId,
-      consumerChainId,
+      state,
       temporaryToken,
       error,
       errorDescription
@@ -37,7 +40,7 @@ const startAuthServer = async (cli, manifest) => {
     // Trigger the oAuth saga
     const redirectUrl = await waitForOAuth(githubChain, {
       requestId,
-      consumerChainId,
+      state,
       temporaryToken,
       error,
       errorDescription
@@ -54,16 +57,17 @@ const startAuthServer = async (cli, manifest) => {
 
 const parseQueryParameters = query => {
   const {
-    state: requestId,
-    state: consumerChainId,
+    state,
     code: temporaryToken,
     error,
     error_description: errorDescription
   } = query
 
+  const { requestId } = parseState(state)
+
   return {
     requestId,
-    consumerChainId,
+    state,
     temporaryToken,
     error,
     errorDescription

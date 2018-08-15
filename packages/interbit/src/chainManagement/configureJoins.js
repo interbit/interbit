@@ -6,17 +6,18 @@ const {
       authorizeReceiveActions,
       authorizeSendActions
     }
-  }
+  },
+  manifest: {
+    selectors: { getChainIdByAlias }
+  },
+  constants: { JOIN_TYPES }
 } = require('interbit-covenant-tools')
 
-const { joinTypes } = require('./constants')
-const { getChainIdByAlias } = require('../manifest/manifestSelectors')
-
 const configureJoins = (chainInterface, joins, interbitManifest) => {
-  const consume = configureConsume(joins[joinTypes.CONSUME], interbitManifest)
-  const provide = configureProvide(joins[joinTypes.PROVIDE], interbitManifest)
-  const send = configureSend(joins[joinTypes.SEND], interbitManifest)
-  const receive = configureReceive(joins[joinTypes.RECEIVE], interbitManifest)
+  const consume = configureConsume(joins[JOIN_TYPES.CONSUME], interbitManifest)
+  const provide = configureProvide(joins[JOIN_TYPES.PROVIDE], interbitManifest)
+  const send = configureSend(joins[JOIN_TYPES.SEND], interbitManifest)
+  const receive = configureReceive(joins[JOIN_TYPES.RECEIVE], interbitManifest)
 
   const joinActions = [...consume, ...provide, ...send, ...receive]
   console.log('JOINING', joinActions)
@@ -65,14 +66,17 @@ const configureReceive = (receive, interbitManifest) => {
   if (!Array.isArray(receive)) {
     return []
   }
-  return receive.reduce((prev, { alias: chainAlias, authorizedActions }) => {
-    const senderChainId = getChainIdByAlias(chainAlias, interbitManifest)
-    const receiveAction = authorizeReceiveActions({
-      senderChainId,
-      authorizedActions
-    })
-    return prev.concat(receiveAction)
-  }, [])
+  return receive.reduce(
+    (prev, { alias: chainAlias, authorizedActions: permittedActions }) => {
+      const senderChainId = getChainIdByAlias(chainAlias, interbitManifest)
+      const receiveAction = authorizeReceiveActions({
+        senderChainId,
+        permittedActions
+      })
+      return prev.concat(receiveAction)
+    },
+    []
+  )
 }
 
 const configureSend = (send, interbitManifest) => {

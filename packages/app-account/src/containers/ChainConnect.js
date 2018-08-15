@@ -4,11 +4,10 @@ import queryString from 'query-string'
 import { Grid, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
-import { chainDispatch, selectors } from 'interbit-ui-tools'
+import { interbitRedux, parameterEncoding } from 'interbit-ui-tools'
 
 import { actionCreators } from '../interbit/my-account/actions'
 import { getOAuthConfig } from '../interbit/public/selectors'
-import Connecting from '../components/Connecting'
 import ConnectFormAddMissingProfileField from '../components/ConnectFormAddMissingProfileField'
 import ConnectFormContinueAuth from '../components/ConnectFormContinueAuth'
 import ConnectFormLoggedOut from '../components/ConnectFormLoggedOut'
@@ -17,21 +16,26 @@ import ModalSignUp from '../components/ModalSignUp'
 import { toggleForm, toggleModal } from '../redux/uiReducer'
 import formNames from '../constants/formNames'
 import modalNames from '../constants/modalNames'
+import oAuthProviders from '../constants/oAuthProviders'
 import { PRIVATE, PUBLIC } from '../constants/chainAliases'
+
+const { chainDispatch, selectors } = interbitRedux
 
 const MODES = {
   NOT_LOGGED_IN: 0,
   ADD_PROFILE_FIELDS: 1,
-  CONTINUE_CAUTH: 2,
-  LOADING_CHAIN: 3
+  CONTINUE_CAUTH: 2
 }
 
 const mapStateToProps = (state, ownProps) => {
   const {
     location: { search }
   } = ownProps
-  const query = queryString.parse(search)
-  const { chainAlias, chainId, redirectUrl, tokens } = query
+  const { redirectUrl, state: encodedState } = queryString.parse(search)
+  const {
+    appConsumer: { chainAlias, chainId },
+    tokens
+  } = parameterEncoding.parseState(encodedState)
 
   const isChainLoaded = selectors.isChainLoaded(state, { chainAlias: PRIVATE })
   const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
@@ -51,9 +55,7 @@ const mapStateToProps = (state, ownProps) => {
     isEditable: isProfileFormEditable
   }
 
-  if (!isChainLoaded) {
-    mode = MODES.LOADING_CHAIN
-  } else if (!isLoggedIn) {
+  if (!isLoggedIn) {
     mode = MODES.NOT_LOGGED_IN
   } else if (profileFields) {
     missingFields = requestedTokens.filter(t => !profileFields[t])
@@ -64,6 +66,7 @@ const mapStateToProps = (state, ownProps) => {
   }
 
   const publicChainState = selectors.getChain(state, { chainAlias: PUBLIC })
+
   return {
     consumerChainAlias: chainAlias,
     consumerChainId: chainId,
@@ -76,6 +79,7 @@ const mapStateToProps = (state, ownProps) => {
     profileFields: chainState ? chainState.profile : {},
     profileFormProps,
     providerChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
+    publicKey: selectors.getPublicKey(state),
     redirectUrl,
     requestedTokens
   }
@@ -89,7 +93,7 @@ const mapDispatchToProps = dispatch => ({
 
 export class ChainConnect extends Component {
   static propTypes = {
-    blockchainDispatch: PropTypes.func.isRequired,
+    blockchainDispatch: PropTypes.func,
     consumerChainAlias: PropTypes.string,
     consumerChainId: PropTypes.string,
     content: PropTypes.shape({
@@ -101,18 +105,19 @@ export class ChainConnect extends Component {
     isSignUpModalVisible: PropTypes.bool,
     missingFields: PropTypes.arrayOf(PropTypes.string),
     mode: PropTypes.number,
-    // eslint-disable-next-line
-    oAuthConfig: PropTypes.object,
+    oAuthConfig: PropTypes.shape({}),
     profileFields: PropTypes.shape({}),
     profileFormProps: PropTypes.shape({}),
     providerChainId: PropTypes.string,
+    publicKey: PropTypes.string,
     redirectUrl: PropTypes.string,
     requestedTokens: PropTypes.arrayOf(PropTypes.string),
-    toggleFormFunction: PropTypes.func.isRequired,
-    toggleModalFunction: PropTypes.func.isRequired
+    toggleFormFunction: PropTypes.func,
+    toggleModalFunction: PropTypes.func
   }
 
   static defaultProps = {
+    blockchainDispatch: () => {},
     consumerChainAlias: '',
     consumerChainId: '',
     content: {
@@ -128,8 +133,11 @@ export class ChainConnect extends Component {
     profileFields: {},
     profileFormProps: {},
     providerChainId: '',
+    publicKey: undefined,
     redirectUrl: '',
-    requestedTokens: []
+    requestedTokens: [],
+    toggleFormFunction: () => {},
+    toggleModalFunction: () => {}
   }
 
   doConnectChains = async () => {
@@ -178,7 +186,6 @@ export class ChainConnect extends Component {
     const {
       blockchainDispatch,
       consumerChainAlias,
-      consumerChainId,
       content,
       isSignInModalVisible,
       isSignUpModalVisible,
@@ -188,22 +195,30 @@ export class ChainConnect extends Component {
       profileFields,
       profileFormProps,
       providerChainId,
+      publicKey,
       requestedTokens,
       toggleFormFunction,
       toggleModalFunction
     } = this.props
 
+    const oAuthProps = {
+      blockchainDispatch,
+      browserChainId: providerChainId,
+      oAuthConfig,
+      oAuthProvider: oAuthProviders.GITHUB,
+      publicKey
+    }
+
     const colLayout = {
-      md: 8,
-      mdOffset: 2
+      lg: 8,
+      lgOffset: 2,
+      md: 12
     }
 
     const getFormForCurrentMode = () => {
       const componentTitle = `Service ${consumerChainAlias} ${content.title}`
 
       switch (mode) {
-        case MODES.LOADING_CHAIN:
-          return <Connecting />
         case MODES.NOT_LOGGED_IN:
           return (
             <ConnectFormLoggedOut
@@ -224,6 +239,7 @@ export class ChainConnect extends Component {
               onCancel={this.cancelConnectChains}
               profileFields={profileFields}
               {...profileFormProps}
+              requestedTokens={requestedTokens}
               onSubmit={this.submitMissingProfileFieldForm}
               title={componentTitle}
               toggleForm={toggleFormFunction}
@@ -256,17 +272,13 @@ export class ChainConnect extends Component {
 
         {/* TODO: consolidate these two modals */}
         <ModalSignIn
-          blockchainDispatch={blockchainDispatch}
-          consumerChainId={consumerChainId}
-          oAuthConfig={oAuthConfig}
+          oAuth={oAuthProps}
           serviceName={consumerChainAlias}
           show={isSignInModalVisible}
           toggleModal={toggleModalFunction}
         />
         <ModalSignUp
-          blockchainDispatch={blockchainDispatch}
-          consumerChainId={consumerChainId}
-          oAuthConfig={oAuthConfig}
+          oAuth={oAuthProps}
           serviceName={consumerChainAlias}
           show={isSignUpModalVisible}
           toggleModal={toggleModalFunction}

@@ -1,8 +1,9 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const path = require('path')
 const {
-  argOptions: { ADMIN_KEYS },
+  argOptions: { KEY_PAIR },
   getArtifactsLocation,
+  getConnect,
   getKeyPair,
   getManifest,
   getPort,
@@ -18,7 +19,7 @@ const deployWithCliOptions = async () => {
 
   if (!options.keyPair) {
     console.warn(
-      `DEPLOY-WARNING: You are about to launch a node without ${ADMIN_KEYS}. The hypervisor will generate a new pair which may not match your ACL or network configuration.`
+      `interbit deploy: You are about to launch a node without ${KEY_PAIR}. The hypervisor will generate a new pair which may not match your ACL or network configuration.`
     )
   }
 
@@ -29,7 +30,8 @@ const getOptions = () => ({
   manifest: getManifest(),
   port: getPort(),
   keyPair: getKeyPair(),
-  location: path.relative(process.cwd(), getArtifactsLocation())
+  location: path.relative(process.cwd(), getArtifactsLocation()),
+  connect: getConnect()
 })
 
 deployWithCliOptions()

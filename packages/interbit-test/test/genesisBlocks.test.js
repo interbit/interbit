@@ -59,14 +59,16 @@ describe('chain sponsorship', () => {
     ],
     acl: {
       actionPermissions: {
-        '*': ['root', `chain-${sponsorChainId}`]
+        '*': ['root', `chain-${sponsorChainId}`],
+        '@@interbit/REMOVE_JOIN_CONFIG': [`chain-${sponsorChainId}`]
       },
       roles: {
         root: [blockMasterPublicKey, myPublicKey],
         [`chain-${sponsorChainId}`]: [sponsorChainId]
       }
     },
-    blockMaster: blockMasterPublicKey
+    blockMaster: blockMasterPublicKey,
+    sponsorChainId: 'chn_349dejiepajifiesr3krda9dca'
   }
 
   it('makes a sponsored chain config', async () => {

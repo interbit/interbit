@@ -3,6 +3,137 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.46"></a>
+## [0.4.46](https://github.com/interbit/interbit/compare/v0.4.44...v0.4.46) (2018-08-09)
+
+
+### Bug Fixes
+
+* **app-account:** make chainConnect component render when requested cAuth fields are missing ([d83a5c0](https://github.com/interbit/interbit/commit/d83a5c0))
+* **interbit-template:** change app peer in config file so that browser node connects to platform-deploy node ([ab8709b](https://github.com/interbit/interbit/commit/ab8709b))
+
+
+
+
+<a name="0.4.44"></a>
+## [0.4.44](https://github.com/interbit/interbit/compare/v0.4.43...v0.4.44) (2018-07-24)
+
+
+
+
+**Note:** Version bump only for package interbit-platform
+
+<a name="0.4.43"></a>
+## [0.4.43](https://github.com/interbit/interbit/compare/v0.4.42...v0.4.43) (2018-07-13)
+
+
+
+<a name="0.4.41"></a>
+## [0.4.41](https://github.com/interbit/interbit/compare/v0.4.39...v0.4.41) (2018-07-13)
+
+
+
+<a name="0.4.39"></a>
+## [0.4.39](https://github.com/interbit/interbit/compare/v0.4.38...v0.4.39) (2018-07-13)
+
+
+
+<a name="0.4.38"></a>
+## [0.4.38](https://github.com/interbit/interbit/compare/v0.4.37...v0.4.38) (2018-07-13)
+
+
+
+<a name="0.4.37"></a>
+## [0.4.37](https://github.com/interbit/interbit/compare/v0.4.35...v0.4.37) (2018-07-13)
+
+
+
+
+**Note:** Version bump only for package interbit-platform
+
+<a name="0.4.39"></a>
+## [0.4.39](https://github.com/interbit/interbit/compare/v0.4.38...v0.4.39) (2018-07-13)
+
+
+
+
+**Note:** Version bump only for package interbit-platform
+
+<a name="0.4.38"></a>
+## [0.4.38](https://github.com/interbit/interbit/compare/v0.4.37...v0.4.38) (2018-07-13)
+
+
+
+
+**Note:** Version bump only for package interbit-platform
+
+<a name="0.4.36"></a>
+## [0.4.36](https://github.com/interbit/interbit/compare/v0.4.35...v0.4.36) (2018-07-13)
+
+
+
+
+**Note:** Version bump only for package interbit-platform
+
+<a name="0.4.35"></a>
+## [0.4.35](https://github.com/interbit/interbit/compare/v0.4.34...v0.4.35) (2018-07-13)
+
+
+
+
+**Note:** Version bump only for package interbit-platform
+
+<a name="0.4.31"></a>
+## [0.4.31](https://github.com/interbit/interbit/compare/v0.4.30...v0.4.31) (2018-06-04)
+
+
+
+
+**Note:** Version bump only for package interbit-platform
+
+<a name="0.4.30"></a>
+## [0.4.30](https://github.com/interbit/interbit/compare/v0.4.29...v0.4.30) (2018-05-29)
+
+
+
+
+**Note:** Version bump only for package interbit-platform
+
+<a name="0.4.29"></a>
+## [0.4.29](https://github.com/interbit/interbit/compare/v0.4.28...v0.4.29) (2018-05-29)
+
+
+
+
+**Note:** Version bump only for package interbit-platform
+
+<a name="0.4.28"></a>
+## [0.4.28](https://github.com/interbit/interbit/compare/v0.4.27...v0.4.28) (2018-05-28)
+
+
+### Bug Fixes
+
+* update package tree to patch security vulnerabilities. Closes [#223](https://github.com/interbit/interbit/issues/223) ([8f8cbb4](https://github.com/interbit/interbit/commit/8f8cbb4))
+
+
+
+
+<a name="0.4.27"></a>
+## [0.4.27](https://github.com/interbit/interbit/compare/v0.4.26...v0.4.27) (2018-05-16)
+
+
+
+
+**Note:** Version bump only for package interbit-platform
+
+<a name="0.4.26"></a>
+## [0.4.26](https://github.com/interbit/interbit/compare/v0.4.25...v0.4.26) (2018-05-15)
+
+
+
+
+**Note:** Version bump only for package interbit-platform
+
 <a name="0.4.25"></a>
 ## [0.4.25](https://github.com/interbit/interbit/compare/v0.4.24...v0.4.25) (2018-05-15)
 

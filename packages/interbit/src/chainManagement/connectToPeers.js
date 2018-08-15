@@ -1,4 +1,4 @@
-// Port 443 appropriate for heroku deployment
+// Port 443 appropriate for https deployment
 const DEFAULT_PORT = 443
 
 const connectToPeers = async (
@@ -35,7 +35,7 @@ const tryConnect = async ({
       )
       console.log(`Connected to: ${toAddress}:${toPort}`)
     } catch (error) {
-      console.warn(`Connection failed: ${toAddress}:${toPort}: `, error)
+      console.warn(`Connection failed: ${toAddress}:${toPort}`)
     }
   }
 }

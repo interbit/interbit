@@ -12,7 +12,7 @@ const startNode = async manifest => {
     manifest,
     connect: true
   }
-  const cli = await deploy(options)
+  const { cli } = await deploy(options)
   return cli
 }
 

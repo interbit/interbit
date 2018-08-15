@@ -1,10 +1,13 @@
 const {
-  manifestCovenant: { actionCreators }
+  rootCovenant: { actionCreators },
+  manifest: {
+    selectors: { getChainIdByAlias }
+  },
+  config: {
+    selectors: { getChains }
+  },
+  constants: { ROOT_CHAIN_ALIAS }
 } = require('interbit-covenant-tools')
-
-const { getChains } = require('../config/configSelectors')
-const { getChainIdByAlias } = require('../manifest/manifestSelectors')
-const { ROOT_CHAIN_ALIAS } = require('./constants')
 
 const setRootChainManifest = (cli, manifest, config) => {
   console.log('UPDATING ROOT CHAIN WITH DEPLOYMENT INFO')

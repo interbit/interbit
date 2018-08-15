@@ -6,13 +6,12 @@ const {
       authorizeReceiveActions,
       authorizeSendActions
     }
-  }
+  },
+  config: {
+    selectors: { getChainJoins, getJoinTypeForChain }
+  },
+  constants: { JOIN_TYPES }
 } = require('interbit-covenant-tools')
-const {
-  getChainJoins,
-  getJoinTypeForChain,
-  joinTypes
-} = require('../config/configSelectors')
 
 // SET FOR DEPRECATION: Pending issue #79
 const joinChains = async (manifest, cli, config) => {
@@ -23,22 +22,22 @@ const joinChains = async (manifest, cli, config) => {
       if (getChainJoins(chainAlias, config)) {
         const provide = getJoinTypeForChain(
           chainAlias,
-          joinTypes.PROVIDE,
+          JOIN_TYPES.PROVIDE,
           config
         )
         const consume = getJoinTypeForChain(
           chainAlias,
-          joinTypes.CONSUME,
+          JOIN_TYPES.CONSUME,
           config
         )
         const sendActionTo = getJoinTypeForChain(
           chainAlias,
-          joinTypes.SEND,
+          JOIN_TYPES.SEND,
           config
         )
         const receiveActionFrom = getJoinTypeForChain(
           chainAlias,
-          joinTypes.RECEIVE,
+          JOIN_TYPES.RECEIVE,
           config
         )
 
@@ -113,6 +112,10 @@ const establishReceiveActions = async (
   for (const { alias, authorizedActions } of receiveActionFrom) {
     if (!alias || !manifest[alias]) {
       console.warn(`Unknown alias: ${alias}`)
+      continue
+    }
+    if (!authorizedActions) {
+      console.warn(`No authorized actions for write join to: ${alias}`)
       continue
     }
     const { chainId: senderChainId } = manifest[alias]

@@ -3,13 +3,14 @@
   "private": true,
   "dependencies": {
     "cross-env": "^5.1.4",
-    "lerna": "^2.10.2"
+    "lerna": "^2.10.2",
+    "tar": "^4.4.2"
   },
   "scripts": {
     "build": "cross-env-shell lerna run --scope $APP_NAME build",
     "build:modules": "lerna run --scope interbit-* build",
-    "postinstall": "lerna bootstrap --hoist --parallel",
-    "heroku-postbuild": "npm run build:modules && npm run build",
+    "postinstall": "lerna bootstrap --hoist --parallel && npm run build:modules",
+    "heroku-postbuild": "npm run build",
     "start": "cross-env-shell lerna run --scope $APP_NAME serve --stream",
     "test": "npm run lint && lerna run --parallel test -- -- --coverage",
     "lint": "eslint .",

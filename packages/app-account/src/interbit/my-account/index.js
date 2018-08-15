@@ -94,7 +94,8 @@ const reducer = (state = initialState, action) => {
       const request = state.getIn([...PATHS.AUTH_REQUESTS, requestId])
 
       if (!request) {
-        throw new Error('You did not originate this request')
+        console.log(`Request ${requestId} not found.`)
+        return state
       }
 
       nextState = removeAuthenticationRequest(nextState, requestId)
@@ -107,20 +108,29 @@ const reducer = (state = initialState, action) => {
       const { requestId, providerChainId, tokenName, joinName } = action.payload
 
       const request = state.getIn([...PATHS.AUTH_REQUESTS, requestId])
-
       if (!request) {
-        throw new Error('You did not originate this request')
+        console.log(`Request ${requestId} not found.`)
+        return state
       }
-      // TODO: Check for stale requests
 
-      const consumeAction = startConsumeState({
-        provider: providerChainId,
-        mount: [...PATHS.PRIVATE_PROFILE, tokenName],
+      const existingJoin = findExistingJoin(state, {
+        providerChainId,
         joinName
       })
 
-      console.log('REDISPATCH: ', consumeAction)
-      nextState = redispatch(nextState, consumeAction)
+      if (existingJoin) {
+        console.log(`Join ${existingJoin.joinName} already configured.`)
+      } else {
+        const consumeAction = startConsumeState({
+          provider: providerChainId,
+          mount: [...PATHS.PRIVATE_PROFILE, tokenName],
+          joinName
+        })
+
+        console.log('REDISPATCH: ', consumeAction)
+        nextState = redispatch(nextState, consumeAction)
+      }
+
       nextState = removeAuthenticationRequest(nextState, requestId)
       return nextState
     }
@@ -128,6 +138,13 @@ const reducer = (state = initialState, action) => {
     default:
       return state
   }
+}
+
+const findExistingJoin = (state, { providerChainId, joinName }) => {
+  const joinConsumers = state.getIn(PATHS.CONSUMING, [])
+  return joinConsumers.find(
+    join => join.provider === providerChainId && join.joinName === joinName
+  )
 }
 
 const updateProfile = (state, { alias, name, email }) => {

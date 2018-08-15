@@ -3,20 +3,19 @@ import { Grid, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
 import PropTypes from 'prop-types'
-import { chainDispatch } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
 import { LinkBarSlack } from 'interbit-ui-components'
+import uuid from 'uuid'
 
 import ProjectDetailsForm from '../components/ProjectDetailsForm'
 import { actionCreators } from '../interbit/my-projects/actions'
-import { getExploreChainState } from '../redux/exploreChainReducer'
 import urls from '../constants/urls'
 import chairmanmeow from '../assets/chairmanmeow.jpg'
 
+const { chainDispatch } = interbitRedux
+
 const mapStateToProps = state => {
-  const { blocks } = getExploreChainState(state)
-  const blockHeight =
-    blocks && blocks.length > 0 ? blocks[blocks.length - 1].content.height : 0
-  const newProjectAlias = `User-Project-${blockHeight}`
+  const newProjectAlias = `User-Project-${uuid.v4()}`
   return {
     newProjectAlias
   }

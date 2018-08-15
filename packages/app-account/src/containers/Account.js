@@ -4,7 +4,7 @@ import { Grid, Row, Col } from 'react-bootstrap'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { SubmissionError } from 'redux-form'
-import { chainDispatch, selectors } from 'interbit-ui-tools'
+import { interbitRedux } from 'interbit-ui-tools'
 import { Markdown } from 'interbit-ui-components'
 
 import ContentBarApp from '../components/ContentBarApp'
@@ -21,14 +21,16 @@ import formNames from '../constants/formNames'
 import modalNames from '../constants/modalNames'
 import { PUBLIC, PRIVATE } from '../constants/chainAliases'
 
+const { chainDispatch, selectors } = interbitRedux
+
 const mapStateToProps = (state, ownProps) => {
   const isAccountFormEditable =
     state.ui.editableForms[formNames.ACCOUNT_FORM_NAME]
   const isAttentionMoreInfoModalVisible =
     state.ui.modals[modalNames.ATTENTION_MORE_INFO_MODAL_NAME]
 
-  const chainState = selectors.getPrivateChain(state, {
-    privateChainAlias: PRIVATE
+  const chainState = selectors.getChain(state, {
+    chainAlias: PRIVATE
   })
   const profileFormProps = {
     isEditable: isAccountFormEditable
@@ -61,10 +63,10 @@ const mapStateToProps = (state, ownProps) => {
     match: { params }
   } = ownProps
   const query = queryString.parse(search)
-  const { requestId, providerChainId, joinName } = query
+  const { requestId, privateChainId, providerChainId, joinName } = query
   const { oAuthProvider } = params
 
-  if (!(oAuthProvider && requestId && providerChainId && joinName)) {
+  if (!(oAuthProvider && requestId)) {
     return notAuthenticating
   }
 
@@ -79,11 +81,14 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     ...notAuthenticating,
-    oAuthProvider,
-    providerChainId,
-    joinName,
-    requestId,
-    isAuthenticating: true
+    oAuth: {
+      oAuthProvider,
+      requestId,
+      browserChainId: selectors.getChainId(state, { chainAlias: PRIVATE }),
+      privateChainId,
+      providerChainId,
+      joinName
+    }
   }
 }
 
@@ -96,63 +101,73 @@ const mapDispatchToProps = dispatch => ({
 
 export class Account extends Component {
   static propTypes = {
+    blockchainDispatch: PropTypes.func,
+    content: PropTypes.shape({}).isRequired,
+    contentBars: PropTypes.shape({}).isRequired,
+    isAttentionMoreInfoModalVisible: PropTypes.bool,
+    modals: PropTypes.shape({}).isRequired,
+    oAuth: PropTypes.shape({
+      oAuthProvider: PropTypes.string,
+      requestId: PropTypes.string,
+      browserChainId: PropTypes.string,
+      privateChainId: PropTypes.string,
+      providerChainId: PropTypes.string,
+      joinName: PropTypes.string
+    }),
     profile: PropTypes.shape({
       alias: PropTypes.string,
       name: PropTypes.string,
-      email: PropTypes.string
+      email: PropTypes.string,
+      'gitHub-identity': PropTypes.shape({})
     }),
-    blockchainDispatch: PropTypes.func.isRequired,
-    publicChainDispatch: PropTypes.func.isRequired,
-    toggleFormFunction: PropTypes.func.isRequired,
     profileFormProps: PropTypes.shape({}),
-    isAuthenticating: PropTypes.bool,
-    providerChainId: PropTypes.string,
-    oAuthProvider: PropTypes.string,
-    joinName: PropTypes.string,
-    requestId: PropTypes.string,
-    content: PropTypes.shape({}).isRequired,
-    contentBars: PropTypes.shape({}).isRequired,
-    modals: PropTypes.shape({}).isRequired,
-    toggleModalFunction: PropTypes.func.isRequired,
-    isAttentionMoreInfoModalVisible: PropTypes.bool
+    publicChainDispatch: PropTypes.func,
+    toggleFormFunction: PropTypes.func,
+    toggleModalFunction: PropTypes.func
   }
 
   static defaultProps = {
+    blockchainDispatch: () => {},
+    isAttentionMoreInfoModalVisible: false,
+    oAuth: undefined,
     profile: {
       alias: '',
       name: '',
-      email: ''
+      email: '',
+      'gitHub-identity': {}
     },
     profileFormProps: {},
-    isAuthenticating: false,
-    oAuthProvider: undefined,
-    joinName: undefined,
-    requestId: undefined,
-    providerChainId: undefined,
-    isAttentionMoreInfoModalVisible: false
+    publicChainDispatch: () => {},
+    toggleFormFunction: () => {},
+    toggleModalFunction: () => {}
   }
 
   componentDidUpdate() {
-    const {
-      isAuthenticating,
-      oAuthProvider,
-      joinName,
-      requestId,
-      blockchainDispatch,
-      providerChainId
-    } = this.props
+    const { oAuth, blockchainDispatch } = this.props
 
-    if (isAuthenticating) {
-      const tokenName = `${oAuthProvider}-identity`
-
-      const privateChainAction = actionCreators.completeAuthentication({
+    if (oAuth) {
+      const {
         oAuthProvider,
-        providerChainId,
-        tokenName,
         joinName,
-        requestId
-      })
-      blockchainDispatch(privateChainAction)
+        requestId,
+        browserChainId,
+        privateChainId,
+        providerChainId
+      } = oAuth
+
+      if (browserChainId === privateChainId) {
+        // Complete the join to the private chain
+        const tokenName = `${oAuthProvider}-identity`
+
+        const privateChainAction = actionCreators.completeAuthentication({
+          oAuthProvider,
+          providerChainId,
+          tokenName,
+          joinName,
+          requestId
+        })
+        blockchainDispatch(privateChainAction)
+      }
     }
   }
 
@@ -192,7 +207,7 @@ export class Account extends Component {
     return (
       <Grid>
         <div className="ibweb-page">
-          <Row className="ibweb-mg-md">
+          <Row className="ibweb-mg-md ibweb-mg-md-scr-xs">
             <Col {...colLayout}>
               <h1>{content.title}</h1>
               <Markdown markdown={content.intro} className="ibweb-intro" />
@@ -208,7 +223,7 @@ export class Account extends Component {
             </Col>
           </Row>
 
-          <Row>
+          <Row className="ibweb-mg-md-scr-xs">
             <Col {...colLayout}>
               <ProfileForm
                 onSubmit={this.submit}
@@ -227,7 +242,7 @@ export class Account extends Component {
           </Row>
           */}
 
-          <Row className="ibweb-mg-md">
+          <Row className="ibweb-mg-md ibweb-mg-sm-scr-xs">
             <Col {...colLayout}>
               <h1>{content.apps.title}</h1>
               <Markdown

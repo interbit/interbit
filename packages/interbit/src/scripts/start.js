@@ -17,7 +17,7 @@ const start = async options => {
 
   // TODO: Use options.manifest as initial variable resolution for generating the new one #262
 
-  const { cli, hypervisor } = await startInterbit(undefined, options)
+  const { cli, hypervisor, cleanup } = await startInterbit(undefined, options)
   // TODO: This create based on config should only run in dev mode, else run chains based on manifest #276
   const { chainManifest, covenantHashes } = await createChainsFromConfig(
     cli,
@@ -57,7 +57,7 @@ const start = async options => {
   // Blocked by #258 #336
   // watchChain(cli, chainInterface)
 
-  return { cli, hypervisor, chainManifest }
+  return { cli, hypervisor, cleanup, chainManifest }
 }
 
 module.exports = start

@@ -11,6 +11,8 @@ const log = require('../../log')
 const covenant = require('./covenant')
 const { FIRST_CHAIN_ALIAS, SECOND_CHAIN_ALIAS } = require('./constants')
 
+const JOIN_PROPAGATION_TIMEOUT = 5000
+
 const assertChainsConfigured = async (cli, chainManifest) => {
   const firstChainId = getChainId(FIRST_CHAIN_ALIAS, chainManifest)
   const secondChainId = getChainId(SECOND_CHAIN_ALIAS, chainManifest)
@@ -38,7 +40,7 @@ const assertChainsConfigured = async (cli, chainManifest) => {
   await waitForState(
     secondChainInterface,
     state => state.sharedWithMe === testValue,
-    2500
+    JOIN_PROPAGATION_TIMEOUT
   )
 
   const secondState = secondChainInterface.getState()

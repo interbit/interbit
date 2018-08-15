@@ -207,7 +207,7 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
     should.ok(manifest.manifest[ROOT_CHAIN_ALIAS].chains.public)
   })
 
-  it('includes necessary configuration data in manifest tree', () => {
+  it.only('includes necessary configuration data in manifest tree', () => {
     const manifest = generateManifest(location, defaultConfig, defaultCovenants)
 
     should.ok(manifest.manifest)
@@ -237,6 +237,11 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
     should.ok(controlChain.validators)
     should.ok(controlChain.covenant)
     should.ok(controlChain.covenantHashMap)
+    console.log(controlChain.covenantHashMap)
+    should.equal(
+      controlChain.covenantHashMap.interbitRoot,
+      manifest.covenants.control.hash
+    )
     should.ok(controlChain.joins)
     should.ok(controlChain.chains)
     // should.ok(controlChain.acl)

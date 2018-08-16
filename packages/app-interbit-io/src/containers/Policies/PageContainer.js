@@ -45,6 +45,7 @@ class DevContainer extends Component {
               path={constants.paths.POLICY_TRADEMARK}
               component={Trademark}
             />
+            <Route component={TermsOfService} />
           </Switch>
         </Col>
       </Row>

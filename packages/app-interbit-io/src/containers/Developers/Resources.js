@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import { Markdown, LinkBarSlack, Divider } from 'interbit-ui-components'
+import { Markdown } from 'interbit-ui-components'
 
-import urls from '../../constants/urls'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({
+  linkBarContent: state.content.linkBars,
   ...state.content.developers
 })
 
@@ -25,7 +25,7 @@ class DevelopersResources extends Component {
           </Col>
         </Row>
 
-        <div className="sections">
+        <div className="sections ibweb-mg-xx-lg">
           {resources.sections.map(s => (
             <Row key={s.title} className="ibweb-mg-md">
               <Col {...colLayout}>
@@ -44,14 +44,6 @@ class DevelopersResources extends Component {
             </Row>
           ))}
         </div>
-
-        <Divider />
-
-        <Row className="ibweb-mg-xx-lg">
-          <Col {...colLayout}>
-            <LinkBarSlack to={urls.SUPPORT_SLACK} />
-          </Col>
-        </Row>
       </div>
     )
   }

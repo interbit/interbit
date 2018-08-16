@@ -2,16 +2,10 @@ import constants from '../../constants'
 
 import iconChainJoin from '../../assets/icons/iconChainJoin.svg'
 import iconDollar from '../../assets/icons/iconDollar.svg'
-import iconGitHub from '../../assets/icons/iconGitHub.svg'
 import iconForbes from '../../assets/icons/iconForbes.svg'
-import iconIdentityChain from '../../assets/icons/iconIdentityChain.svg'
 import iconManyChains from '../../assets/icons/iconManyChains.svg'
-import iconMarketplace from '../../assets/icons/iconMarketplace.svg'
-import iconOpenSource from '../../assets/icons/iconOpenSource.svg'
 import iconPlus from '../../assets/icons/iconPlus.svg'
-import iconPointer from '../../assets/icons/iconPointer.svg'
 import iconResiliency from '../../assets/icons/iconResiliency.svg'
-import iconStar from '../../assets/icons/iconStar.svg'
 import iconUsers from '../../assets/icons/iconUsers.svg'
 
 import platformCardScale from '../../assets/pagePlatform/platformCardScale.svg'
@@ -27,9 +21,6 @@ import platformLogoVattenfall from '../../assets/pagePlatform/platformLogoVatten
 import platformLogoHowyl from '../../assets/pagePlatform/platformLogoHowyl.png'
 import platformLogoMercuria from '../../assets/pagePlatform/platformLogoMercuria.png'
 import platformAppCore from '../../assets/pagePlatform/platformAppCore.jpg'
-import platformAppAccounts from '../../assets/pagePlatform/platformAppAccounts.jpg'
-import platformAppStore from '../../assets/pagePlatform/platformAppStore.jpg'
-import platformAppHosting from '../../assets/pagePlatform/platformAppHosting.jpg'
 import platformPatentPending from '../../assets/pagePlatform/platformPatentPending.svg'
 import platformPatentPrivacy from '../../assets/pagePlatform/platformPatentPrivacy.png'
 import platformPatentScale from '../../assets/pagePlatform/platformPatentScale.png'
@@ -209,10 +200,6 @@ Control access to individual chains, and the information on each.`,
         {
           to: constants.urls.GITHUB_IB,
           text: 'View Source for \u201CCreate Interbit App\u201D'
-        },
-        {
-          to: constants.urls.APP_STORE_CREATE_IB_APP,
-          text: 'View \u201CCreate Interbit App\u201D in Store'
         }
       ],
       image: platformAppCore,
@@ -228,81 +215,6 @@ Control access to individual chains, and the information on each.`,
           content:
             'Design elegant compound applications using service-orientated architecture.',
           image: iconManyChains
-        }
-      ]
-    },
-    {
-      title: 'Accounts',
-      content:
-        'Interbit provides secure identity services to users and app builders through an easy-to-integrate Single Sign-On experience.',
-      callToActions: [
-        {
-          to: constants.urls.GITHUB_IB,
-          text: 'View Source for \u201CAccounts\u201D'
-        },
-        {
-          to: constants.urls.APP_STORE_ACCOUNTS,
-          text: 'View in Store'
-        }
-      ],
-      image: platformAppAccounts,
-      cards: [
-        {
-          title: 'Identity chains',
-          content:
-            'Own your own identity chain and finally gain control over your personal data.',
-          image: iconIdentityChain
-        },
-        {
-          title: 'Open-source',
-          content:
-            'Use Interbit\u2019s open-source identity and authorization code in your own apps.',
-          image: iconOpenSource
-        }
-      ]
-    },
-    {
-      title: 'Store',
-      content:
-        'Discover new apps and services to use or commercialize your own.',
-      callToActions: [
-        {
-          to: constants.urls.APP_STORE,
-          text: 'View Store'
-        }
-      ],
-      image: platformAppStore,
-      cards: [
-        {
-          title: 'Participate in the marketplace',
-          content:
-            'Interbit\u2019s multi-sided marketplace encourages the promotion and sales of your skills, expertise, and applications.',
-          image: iconMarketplace
-        },
-        {
-          title: 'Next generation apps',
-          content:
-            'A new generation of blockchain-powered apps is coming and along with it, users who expect more.',
-          image: iconStar
-        }
-      ]
-    },
-    {
-      title: 'Hosting',
-      content:
-        'Simple, hassle-free hosting for your projects will soon be provided by the platform. You\u2019ll be able to host on the platform or wherever you choose.',
-      image: platformAppHosting,
-      cards: [
-        {
-          title: 'Hassle-free hosting',
-          content:
-            'Easily and economically deploy your app on Interbit and into the Store.',
-          image: iconPointer
-        },
-        {
-          title: 'GitHub integration',
-          content: 'Deploy your projects to Interbit directly from GitHub.',
-          image: iconGitHub
         }
       ]
     }

@@ -5201,7 +5201,7 @@ a {
     margin-right: 16px; }
   .ibweb-app-logo .wordmark {
     display: inline-block; }
-  @media (max-width: 629px) {
+  @media (max-width: 530px) {
     .ibweb-app-logo .icon {
       margin-right: 0; }
     .ibweb-app-logo .wordmark {

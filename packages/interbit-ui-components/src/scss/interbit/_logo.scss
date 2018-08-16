@@ -33,7 +33,9 @@
   }
 
   // TODO: Issue #629 - adjust wordmark visibility based on new grid widths */
-  @media (max-width: $screen-sm-min - 1) {
+  // - current width is for Accounts app
+  // @media (max-width: $screen-sm-min - 1) {
+  @media (max-width: 530px) {
     .icon {
       margin-right: 0;
     }

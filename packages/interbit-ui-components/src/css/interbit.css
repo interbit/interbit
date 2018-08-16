@@ -5116,6 +5116,13 @@ a {
     margin-bottom: 64px; }
   .ibweb-page .ibweb-mg-xx-lg-scr-xs {
     margin-bottom: 128px; } }
+.ibweb .ibweb-page {
+  padding: 16px; }
+  .ibweb .ibweb-page .grid-cont {
+    display: grid;
+    max-width: 1280px;
+    margin: 0 auto; }
+
 .ibweb-divider {
   margin: 0 0 16px 0; }
 

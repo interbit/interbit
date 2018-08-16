@@ -93,3 +93,13 @@
   }
 }
 
+// new scaffolding styles based on CSS grid
+.ibweb .ibweb-page{
+  padding: 16px;
+
+  .grid-cont {
+    display: grid;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+}

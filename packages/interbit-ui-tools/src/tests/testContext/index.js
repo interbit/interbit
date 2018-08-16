@@ -11,7 +11,10 @@ const createMockDataStore = () => {
     setItem: (key, value) => {
       datastore[key] = value
     },
-    hasItem: key => key in datastore
+    removeItem: key => {
+      delete datastore[key]
+    },
+    keys: () => Object.keys(datastore)
   }
 }
 

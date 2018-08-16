@@ -16,7 +16,7 @@ describe('testContext', () => {
 
       datastore.setItem(key, value)
 
-      assert(datastore.hasItem(key))
+      assert(datastore.keys().includes(key))
 
       assert.deepStrictEqual(datastore.getItem(key), value)
     })

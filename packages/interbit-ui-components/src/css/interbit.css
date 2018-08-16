@@ -5122,6 +5122,48 @@ a {
     display: grid;
     max-width: 1280px;
     margin: 0 auto; }
+    .ibweb .ibweb-page .grid-cont.two-col {
+      grid-template-columns: minmax(328px, 487px) minmax(64px, 306px) minmax(328px, 487px);
+      grid-template-rows: repeat(3, auto); }
+      .ibweb .ibweb-page .grid-cont.two-col .name {
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+        background-color: palegoldenrod; }
+      .ibweb .ibweb-page .grid-cont.two-col .edit {
+        grid-column: 3 / span 1;
+        grid-row: 1 / span 1;
+        background-color: palevioletred; }
+      .ibweb .ibweb-page .grid-cont.two-col .line {
+        grid-column: 1 / span 3;
+        grid-row: 2 / span 1;
+        background-color: red; }
+      .ibweb .ibweb-page .grid-cont.two-col .col1 {
+        grid-column: 1 / span 1;
+        grid-row: 3 / span 1;
+        background-color: palegreen; }
+      .ibweb .ibweb-page .grid-cont.two-col .col2 {
+        grid-column: 3 / span 1;
+        grid-row: 3 / span 1;
+        background-color: paleturquoise; }
+    @media (max-width: 752px) {
+      .ibweb .ibweb-page .grid-cont.two-col {
+        grid-template-columns: 1fr minmax(328px, 487px) 1fr;
+        grid-template-rows: repeat(5, auto); }
+        .ibweb .ibweb-page .grid-cont.two-col .name {
+          grid-column: 2 / span 1;
+          grid-row: 1 / span 1; }
+        .ibweb .ibweb-page .grid-cont.two-col .line {
+          grid-column: 2 / span 1;
+          grid-row: 2 / span 1; }
+        .ibweb .ibweb-page .grid-cont.two-col .col1 {
+          grid-column: 2 / span 1;
+          grid-row: 3 / span 1; }
+        .ibweb .ibweb-page .grid-cont.two-col .edit {
+          grid-column: 2 / span 1;
+          grid-row: 4 / span 1; }
+        .ibweb .ibweb-page .grid-cont.two-col .col2 {
+          grid-column: 2 / span 1;
+          grid-row: 5 / span 1; } }
 
 .ibweb-divider {
   margin: 0 0 16px 0; }

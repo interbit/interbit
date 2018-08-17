@@ -261,6 +261,11 @@ describe('middleware sagas', () => {
       })
       .not.put.like({
         action: {
+          type: actionTypes.CHAIN_LOADING
+        }
+      })
+      .not.put.like({
+        action: {
           type: actionTypes.CHAIN_ERROR
         }
       })
@@ -330,7 +335,7 @@ describe('middleware sagas', () => {
       .run()
   })
 
-  it('If private chain ID in local storage, load the chain', async () => {
+  it('If public chain is blocking and private chain ID in local storage, load the chain', async () => {
     const contextWithChainIdInLocalStorage = mockContext({
       dataStoreContent: privateChainIdInLocalStorage
     })
@@ -338,7 +343,6 @@ describe('middleware sagas', () => {
     await expectSaga(rootSaga)
       .withReducer(reducers)
       .dispatch(
-        // We need the public chain ID
         actionCreators.chainUpdated(PUBLIC_CHAIN_ALIAS, {
           interbit: { chainId: PUBLIC_CHAIN_ID }
         })
@@ -378,12 +382,11 @@ describe('middleware sagas', () => {
       .run()
   })
 
-  it('If private chain ID not known, sponsor a new chain', async () => {
+  it('If public chain has sponsorship config and private chain ID not in local storage, sponsor a new private chain', async () => {
     const { rootSaga } = middlewareSagas(mockContext())
     await expectSaga(rootSaga)
       .withReducer(reducers)
       .dispatch(
-        // We need the public chain ID and sponsor config
         actionCreators.chainUpdated(PUBLIC_CHAIN_ALIAS, {
           interbit: { chainId: PUBLIC_CHAIN_ID },
           [SPONSOR_CONFIG]: {
@@ -454,7 +457,6 @@ describe('middleware sagas', () => {
     await expectSaga(rootSaga)
       .withReducer(reducers)
       .dispatch(
-        // We need the public chain ID
         actionCreators.chainUpdated(PUBLIC_CHAIN_ALIAS, {
           interbit: { chainId: PUBLIC_CHAIN_ID }
         })
@@ -514,7 +516,7 @@ describe('middleware sagas', () => {
       .run()
   })
 
-  it('Dispatch SPONSOR_CHAIN_SAGA to sponsor a new chain', async () => {
+  it('If public chain has sponsorship config, dispatch SPONSOR_CHAIN_SAGA to sponsor a new chain', async () => {
     const SPONSORED_CHAIN_ALIAS = 'application'
     const SPONSORED_CHAIN_ID = '920044625fa22243b329e353898cc55fc...'
     const SPONSORED_CHAIN_COVENANT_HASH = 'fa22243b3290044625e35923898cc55fc...'
@@ -524,7 +526,6 @@ describe('middleware sagas', () => {
     await expectSaga(rootSaga)
       .withReducer(reducers)
       .dispatch(
-        // We need the public chain ID and sponsor config
         actionCreators.chainUpdated(PUBLIC_CHAIN_ALIAS, {
           interbit: { chainId: PUBLIC_CHAIN_ID },
           [SPONSOR_CONFIG]: {

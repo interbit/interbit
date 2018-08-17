@@ -1,13 +1,13 @@
 .ibweb .ibweb-header {
   width: 100%;
   padding: 16px 8px 16px 16px;
-  border-bottom: 1px solid $ib-med-grey;
+  border-bottom: 1px solid $ib-grid-med-grey;
 
   .grid-cont {
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-column-gap: 16px;
-    max-width: 1280px;
+    max-width: $ib-grid-max-width;
     margin: 0 auto;
 
     .nav {
@@ -20,12 +20,12 @@
         }
 
         &.disabled.signed-in a {
-          color: $ib-green;
+          color: $ib-grid-green;
         }
 
         a {
           padding: 5px 8px;
-          color: $ib-blue-new;
+          color: $ib-grid-blue;
           font-weight: 700;
         }
 

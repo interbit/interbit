@@ -46,7 +46,7 @@
   .ibweb.app-account .app-auth .table td {
     padding: 20px 16px;
     color: #666;
-    border-color: #e6e6e6; }
+    border-color: #E6E6E6; }
   .ibweb.app-account .app-auth .table td:first-child {
     text-transform: capitalize;
     font-weight: 500; }
@@ -55,7 +55,7 @@
   .ibweb.app-account .app-auth .table td[colspan="2"] {
     text-align: left; }
   .ibweb.app-account .app-auth .table tr:last-child td {
-    border-bottom: 1px solid #e6e6e6; }
+    border-bottom: 1px solid #E6E6E6; }
   .ibweb.app-account .app-auth .table .form-td {
     padding: 16px 0; }
     .ibweb.app-account .app-auth .table .form-td input {

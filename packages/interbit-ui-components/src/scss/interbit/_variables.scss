@@ -52,45 +52,27 @@ $border-radius-sm:    8px;
 $border-radius-md:    16px;
 $border-radius-lg:    30px;
 
+// CSS grid redesign scaffolding values
+$ib-grid-max-width: 1280px;
+
 // Interbit website colours, temporary. Use these variables in the CSS for now.
+$ib-black:            #000000;
 $ib-grey:             #F7F7F7;
 $ib-dark-grey:        #e7e7e7;
 $ib-text-grey:        #666666;
 $ib-nav-grey:         #828282;
 $ib-white:            #FFFFFF;
 $ib-blue:             #17A6F2;
-$ib-blue-new:         #1385E8;
-
 $ib-light-blue:       rgba(23, 166, 242, .1);
-$ib-black:            #000000;
 $ib-red:              #d0021b;
-$ib-green:            #00A451;
 $slack-purple:        #51384c;
-
-// Redesign colours
-$ib-med-grey:         #E6E6E6;
-
-// Interbit branding colours
-$ib-black-100:        #111111;
-$ib-black-80:         #414141;
-$ib-black-60:         #707070;
-$ib-black-40:         #9F9F9F;
 $ib-black-20:         #CECECE;
-$ib-black-10:         #E7E7E7;
-
-$ib-gold-100:         #FFAD1C;
-$ib-gold-75:          #FFC155;
-$ib-gold-50:          #FFD58D;
-
 $ib-aqua-100:         #21D6D6;
-$ib-aqua-75:          #59DFDF;
-$ib-aqua-50:          #8FEAEA;
 
-$ib-emerald-100:      #5FD8A1;
-$ib-light-blue-100:   #64B3E2;
-$ib-navy-100:         #25474B;
-$ib-orange-100:       #FE7862;
-$ib-sand-100:         #D1AA9B;
-$ib-stone-100:        #A8CFD4;
-$ib-turquoise-100:    #64E2CD;
-$ib-violet-100:       #848BCC;
+// Colours for CSS grid redesign
+$ib-grid-med-grey:    #E6E6E6;
+$ib-grid-blue:        #1385E8;
+$ib-grid-green:       #00A451;
+$ib-grid-pale-blue:   #D5E1EB;
+$ib-grid-red:         #EB5757;
+$ib-grid-yellow:      #F3C94C;

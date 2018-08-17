@@ -99,7 +99,7 @@
 
   .grid-cont {
     display: grid;
-    max-width: 1280px;
+    max-width: $ib-grid-max-width;
     margin: 0 auto;
 
     &.two-col {
@@ -130,7 +130,7 @@
         .line {
           grid-column: 1 / span 3;
           grid-row: 2 / span 1;
-          border-bottom: 1px solid $ib-med-grey;
+          border-bottom: 1px solid $ib-grid-med-grey;
           margin: 16px 0;
         }
         .col-left {

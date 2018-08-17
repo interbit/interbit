@@ -76,6 +76,15 @@ const reducer = (state = initialState, action) => {
       return removeSharedProfile(state, consumerChainId)
     }
 
+    case actionTypes.RESET_PROFILE: {
+      console.log('DISPATCH: ', action)
+
+      // This removes the data that would be shared
+      nextState = resetSharedProfiles(nextState)
+      nextState = resetProfile(nextState)
+      return nextState
+    }
+
     case actionTypes.START_AUTHENTICATION: {
       console.log('DISPATCH: ', action)
       const { oAuthProvider, requestId, timestamp } = action.payload
@@ -210,6 +219,12 @@ const updateSharedProfile = (current, profile) => ({
 
 const removeAuthenticationRequest = (state, requestId) =>
   state.updateIn([...PATHS.AUTH_REQUESTS], Immutable.without, requestId)
+
+const resetProfile = state =>
+  state.setIn(PATHS.PRIVATE_PROFILE, initialState.getIn(PATHS.PRIVATE_PROFILE))
+
+const resetSharedProfiles = state =>
+  state.setIn(PATHS.SHARED_ROOT, initialState.getIn(PATHS.SHARED_ROOT))
 
 module.exports = {
   actionTypes,

@@ -4,7 +4,7 @@
   "description": "End to end tests for the Interbit platform",
   "private": true,
   "scripts": {
-    "test": "mocha test/**/*.test.js",
+    "test": "jest",
     "mttf": "node scripts/mttf.js"
   },
   "author": "BTL GROUP LTD",
@@ -16,7 +16,18 @@
   },
   "devDependencies": {
     "assert": "^1.4.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "chromedriver": "^2.38.3",
-    "mocha": "^4.0.1"
+    "jest": "20.0.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

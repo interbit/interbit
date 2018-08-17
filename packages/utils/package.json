@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/packagePolice.js",
-    "test": "mocha src/tests/*",
+    "test": "jest",
     "distribute:template": "node src/scripts/distributeTemplate.js"
   },
   "author": "BTL GROUP LTD",
@@ -15,7 +15,18 @@
     "glob": "^7.1.2"
   },
   "devDependencies": {
-    "mocha": "^4.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "jest": "20.0.4",
     "nodemon": "^1.14.12"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

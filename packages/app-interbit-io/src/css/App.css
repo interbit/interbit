@@ -57,7 +57,7 @@
 .ibweb.app-interbit-io .ibweb-page.pricing .pricing-tile .cont {
   padding: 16px;
   margin-bottom: 16px;
-  border: 1px dashed #e6e6e6;
+  border: 1px dashed #E6E6E6;
   border-radius: 16px;
   color: #999; }
   .ibweb.app-interbit-io .ibweb-page.pricing .pricing-tile .cont h3 sup {
@@ -72,7 +72,7 @@
     color: #999; }
   .ibweb.app-interbit-io .ibweb-page.pricing .pricing-tile .cont ul li {
     padding: 16px 0;
-    border-bottom: 1px solid #e6e6e6; }
+    border-bottom: 1px solid #E6E6E6; }
     .ibweb.app-interbit-io .ibweb-page.pricing .pricing-tile .cont ul li:last-child {
       border-bottom: none; }
 .ibweb.app-interbit-io .ibweb-page.pricing .pricing-note {

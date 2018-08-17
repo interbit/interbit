@@ -2,6 +2,8 @@ const interbit = require('interbit-core')
 
 const { LOG_PREFIX, DATASTORE_KEYS } = require('../../middleware/constants')
 
+const DEFAULT_PORT = 5000
+
 const createMockDataStore = () => {
   const datastore = {}
   return {
@@ -9,7 +11,10 @@ const createMockDataStore = () => {
     setItem: (key, value) => {
       datastore[key] = value
     },
-    hasItem: key => key in datastore
+    removeItem: key => {
+      delete datastore[key]
+    },
+    keys: () => Object.keys(datastore)
   }
 }
 
@@ -48,6 +53,7 @@ const createTestContext = (config, localDataStore = createMockDataStore()) => {
   }
   return {
     getConfig: () => config,
+    getDefaultPort: () => process.env.PORT || DEFAULT_PORT,
     getInterbit: () => {
       if (!isInterbitLoaded()) {
         throw new Error('interbit is not available')

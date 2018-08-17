@@ -105,7 +105,7 @@ function* loadPrivateChain({
     )
   }
 
-  const userOwnsChain = call(userHasRole, {
+  const userOwnsChain = yield call(userHasRole, {
     chain: privateChain,
     publicKey,
     role: 'root'

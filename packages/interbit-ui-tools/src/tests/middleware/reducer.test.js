@@ -1,9 +1,8 @@
 const assert = require('assert')
-const Immutable = require('seamless-immutable')
-const { actionCreators, reducer } = require('../../middleware')
+
+const { actionCreators, initialState, reducer } = require('../../middleware')
 
 describe('middleware.reducer', () => {
-  const initialState = Immutable.from({ status: 'PENDING' })
   const chainAlias = 'myChain'
   const chainId = '123456'
 
@@ -28,6 +27,23 @@ describe('middleware.reducer', () => {
   const assertUnchangedState = (state, expectedState = initialState) => {
     assert.strictEqual(state, expectedState)
   }
+
+  it('no args call returns initial state', () => {
+    const result = reducer()
+    assertUnchangedState(result, initialState)
+  })
+
+  it('undefined action has no effect', () => {
+    const action = undefined
+    const result = reducer(initialState, action)
+    assertUnchangedState(result, initialState)
+  })
+
+  it('unknown action has no effect', () => {
+    const action = { type: 'UNKNOWN', payload: 42 }
+    const result = reducer(initialState, action)
+    assertUnchangedState(result, initialState)
+  })
 
   it('adds more than one chain to state', () => {
     const chainAlias1 = 'first'
@@ -61,12 +77,6 @@ describe('middleware.reducer', () => {
       startState: intermediateState,
       expectedStateChange: { chains: { [chainAlias]: chainState2 } }
     })
-  })
-
-  it('unknown action has no effect', () => {
-    const action = { type: 'UNKNOWN', payload: 42 }
-    const result = reducer(initialState, action)
-    assertUnchangedState(result, initialState)
   })
 
   it('interbitStatus updates status', () => {
@@ -264,5 +274,15 @@ describe('middleware.reducer', () => {
       startState,
       expectedEndState: initialStateWithChains
     })
+  })
+
+  it('chainDispatch is not processed by the reducer', () => {
+    const chainAction = {
+      type: 'CHAIN_ACTION',
+      payload: { ramen: 'meh' }
+    }
+    const action = actionCreators.chainDispatch(chainAlias, chainAction)
+    const result = reducer(initialState, action)
+    assertUnchangedState(result, initialState)
   })
 })

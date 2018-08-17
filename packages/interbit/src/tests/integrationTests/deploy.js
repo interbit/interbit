@@ -19,10 +19,10 @@ const testDeploy = async () => {
     await interbit.keys(keysOptions)
 
     // eslint-disable-next-line
-  const keyPair = require(path.join(process.cwd(), keysOptions.filename))
+    const keyPair = require(path.join(process.cwd(), keysOptions.filename))
 
     // eslint-disable-next-line
-  const config = require('./interbit.config')
+    const config = require('./interbit.config')
     config.adminValidators = [keyPair.publicKey]
     config.staticChains.first.config.validators = [keyPair.publicKey]
     config.staticChains.second.config.validators = [keyPair.publicKey]
@@ -37,7 +37,7 @@ const testDeploy = async () => {
     log.info('Pre-deploy build completed')
 
     // eslint-disable-next-line
-  const manifest = require(path.join(
+    const manifest = require(path.join(
       process.cwd(),
       artifacts,
       'interbit.manifest.json'

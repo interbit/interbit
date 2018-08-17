@@ -42,11 +42,15 @@ const createChainsFromManifest = async (location, cli, manifest, options) => {
       await cli.loadChain(chainId)
       console.log(`Loaded chain ${chainId}`)
     } catch (e) {
-      await cli.startChain({ genesisBlock })
-      console.log(`Created chain ${chainId}`)
+      if (e.message.startsWith('waitForState timeout after waiting 20000 ms')) {
+        await cli.startChain({ genesisBlock })
+        console.log(`Created chain ${chainId}`)
 
-      const chain = cli.getChain(chainId)
-      chain.dispatch({ type: '@@interbit/DEPLOY' })
+        const chain = cli.getChain(chainId)
+        chain.dispatch({ type: '@@interbit/DEPLOY' })
+      } else {
+        throw e
+      }
     }
   }
 }

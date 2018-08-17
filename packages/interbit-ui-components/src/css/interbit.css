@@ -5064,58 +5064,6 @@ a {
   h1 {
     font-size: 2rem;
     margin-bottom: 16px; } }
-.ibweb .row {
-  cursor: default; }
-.ibweb .ibweb-image-full-width {
-  width: 100%; }
-  .ibweb .ibweb-image-full-width.header {
-    position: relative;
-    margin-top: -1px;
-    z-index: -1; }
-.ibweb .ibweb-intro p {
-  font-size: 1.375rem; }
-.ibweb .flex {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex; }
-.ibweb .flex.center {
-  align-items: center; }
-.ibweb .flex.right {
-  justify-content: flex-end; }
-
-.ibweb-page .row {
-  margin-bottom: 64px; }
-.ibweb-page .ibweb-mg-sm {
-  margin-bottom: 16px; }
-.ibweb-page .ibweb-mg-md {
-  margin-bottom: 32px; }
-.ibweb-page .ibweb-mg-lg {
-  margin-bottom: 64px; }
-.ibweb-page .ibweb-mg-xx-lg {
-  margin-bottom: 128px; }
-
-@media (max-width: 629px) {
-  .ibweb .col-xs-1, .ibweb .col-sm-1, .ibweb .col-md-1, .ibweb .col-lg-1, .ibweb .col-xs-2, .ibweb .col-sm-2, .ibweb .col-md-2, .ibweb .col-lg-2, .ibweb .col-xs-3, .ibweb .col-sm-3, .ibweb .col-md-3, .ibweb .col-lg-3, .ibweb .col-xs-4, .ibweb .col-sm-4, .ibweb .col-md-4, .ibweb .col-lg-4, .ibweb .col-xs-5, .ibweb .col-sm-5, .ibweb .col-md-5, .ibweb .col-lg-5, .ibweb .col-xs-6, .ibweb .col-sm-6, .ibweb .col-md-6, .ibweb .col-lg-6, .ibweb .col-xs-7, .ibweb .col-sm-7, .ibweb .col-md-7, .ibweb .col-lg-7, .ibweb .col-xs-8, .ibweb .col-sm-8, .ibweb .col-md-8, .ibweb .col-lg-8, .ibweb .col-xs-9, .ibweb .col-sm-9, .ibweb .col-md-9, .ibweb .col-lg-9, .ibweb .col-xs-10, .ibweb .col-sm-10, .ibweb .col-md-10, .ibweb .col-lg-10, .ibweb .col-xs-11, .ibweb .col-sm-11, .ibweb .col-md-11, .ibweb .col-lg-11, .ibweb .col-xs-12, .ibweb .col-sm-12, .ibweb .col-md-12, .ibweb .col-lg-12 {
-    padding-left: 16px;
-    padding-right: 16px; }
-  .ibweb .ibweb-image-full-width.bleed {
-    width: calc(100% + 32px);
-    margin-left: -16px;
-    margin-right: -16px; }
-  .ibweb .ibweb-intro p {
-    font-size: 1rem; }
-
-  .ibweb-page .row {
-    margin-bottom: 64px; }
-  .ibweb-page .ibweb-mg-sm-scr-xs {
-    margin-bottom: 16px; }
-  .ibweb-page .ibweb-mg-md-scr-xs {
-    margin-bottom: 32px; }
-  .ibweb-page .ibweb-mg-lg-scr-xs {
-    margin-bottom: 64px; }
-  .ibweb-page .ibweb-mg-xx-lg-scr-xs {
-    margin-bottom: 128px; } }
 .ibweb-divider {
   margin: 0 0 16px 0; }
 
@@ -5201,7 +5149,7 @@ a {
     margin-right: 16px; }
   .ibweb-app-logo .wordmark {
     display: inline-block; }
-  @media (max-width: 629px) {
+  @media (max-width: 530px) {
     .ibweb-app-logo .icon {
       margin-right: 0; }
     .ibweb-app-logo .wordmark {

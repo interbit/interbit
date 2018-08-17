@@ -133,11 +133,7 @@ describe('my-account/covenant', () => {
         .setIn(['profile'], {
           email: 'meow@meowmeow.com',
           alias: 'cat',
-          name: 'Marmaduke',
-          'gitHub-identity': {
-            id: 123456,
-            name: 'Marmaduke'
-          }
+          name: 'Marmaduke'
         })
         .setIn(['shared', '123456789', 'sharedProfile'], {
           alias: 'cat',
@@ -149,6 +145,41 @@ describe('my-account/covenant', () => {
       const afterState = covenant.reducer(state, action)
 
       assert.deepStrictEqual(afterState.profile, covenant.initialState.profile)
+      assert.deepStrictEqual(afterState.shared, {})
+    })
+
+    it('leaves KYC join provided profile data on RESET_PROFILE', () => {
+      const kycTokenName = 'smoogle-identity'
+      const kycToken = {
+        id: 123456,
+        name: 'Marmaduke',
+        alias: 'marmasboy22'
+      }
+      const state = covenant.initialState
+        .setIn(
+          ['interbit', 'config', 'consuming'],
+          [{ mount: ['profile', kycTokenName] }]
+        )
+        .setIn(['profile'], {
+          email: 'meow@meowmeow.com',
+          alias: 'cat',
+          name: 'Marmaduke',
+          [kycTokenName]: kycToken
+        })
+        .setIn(['shared', '123456789', 'sharedProfile'], {
+          alias: 'cat',
+          name: 'Marmaduke',
+          [kycTokenName]: kycToken
+        })
+
+      const action = covenant.actionCreators.resetProfile()
+
+      const afterState = covenant.reducer(state, action)
+
+      assert.deepStrictEqual(afterState.profile, {
+        ...covenant.initialState.profile,
+        [kycTokenName]: kycToken
+      })
       assert.deepStrictEqual(afterState.shared, {})
     })
   })

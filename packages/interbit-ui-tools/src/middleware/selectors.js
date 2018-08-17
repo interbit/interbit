@@ -36,7 +36,7 @@ const getChainId = (state, { subtree = interbitSubtree, chainAlias } = {}) =>
 const getChain = (
   state,
   { subtree = interbitSubtree, chainAlias, defaultValue = emptyObject } = {}
-) => subtree(state).getIn([CHAINS, chainAlias], defaultValue)
+) => subtree(state).getIn([CHAINS, chainAlias], immutable(defaultValue))
 
 const getBlockMaster = (
   state,

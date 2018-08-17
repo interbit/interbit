@@ -17,6 +17,14 @@ const deployCovenants = require('./deployCovenants')
 const connectToPeers = require('./connectToPeers')
 const { joinChains } = require('./joinChains')
 
+/**
+ * Uses a manifest to create chains from genesisBlocks and configures the
+ * cli with peers and covenants from the manifest.
+ * @param {string} location - The file location to work from
+ * @param {Object} cli - The Interbit cli to configure and create chains on
+ * @param {Object} manifest - The Interbit manifest with config options
+ * @param {Object} options - Additional options for configuration
+ */
 const createChainsFromManifest = async (location, cli, manifest, options) => {
   console.log('DEPLOYING COVENANTS')
   if (!options.connect) {

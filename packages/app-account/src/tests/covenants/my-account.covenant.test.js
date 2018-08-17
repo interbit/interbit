@@ -99,11 +99,8 @@ describe('my-account/covenant', () => {
       const afterState = covenant.reducer(state, action)
       const sideEffects = afterState.sideEffects
 
-      assert.deepStrictEqual(
-        sideEffects[0].type,
-        '@@interbit/START_PROVIDE_STATE'
-      )
-      assert.deepStrictEqual(sideEffects[0].payload.consumer, requestingChainId)
+      assert.strictEqual(sideEffects[0].type, '@@interbit/START_PROVIDE_STATE')
+      assert.strictEqual(sideEffects[0].payload.consumer, requestingChainId)
       assert.deepStrictEqual(sideEffects[0].payload.statePath, [
         'shared',
         requestingChainId,
@@ -125,7 +122,7 @@ describe('my-account/covenant', () => {
 
       const afterState = covenant.reducer(state, action)
 
-      assert.deepStrictEqual(afterState.shared[requestingChainId], undefined)
+      assert.strictEqual(afterState.shared[requestingChainId], undefined)
     })
 
     it('resets profile data on RESET_PROFILE', () => {

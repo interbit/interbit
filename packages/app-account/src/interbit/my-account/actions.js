@@ -8,7 +8,8 @@ const actionTypes = {
   STOP_SHARING: `${actionPrefix}/STOP_SHARING`,
   START_AUTHENTICATION: `${actionPrefix}/START_AUTHENTICATION`,
   CANCEL_AUTHENTICATION: `${actionPrefix}/CANCEL_AUTHENTICATION`,
-  COMPLETE_AUTHENTICATION: `${actionPrefix}/COMPLETE_AUTHENTICATION`
+  COMPLETE_AUTHENTICATION: `${actionPrefix}/COMPLETE_AUTHENTICATION`,
+  RESET_PROFILE: `${actionPrefix}/RESET_PROFILE`
 }
 
 const generateJoinName = () => `PROFILE-${uuid.v4().toUpperCase()}`
@@ -76,6 +77,11 @@ const actionCreators = {
       requestId,
       timestamp
     }
+  }),
+
+  resetProfile: () => ({
+    type: actionTypes.RESET_PROFILE,
+    payload: {}
   })
 }
 

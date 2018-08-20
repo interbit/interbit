@@ -1,0 +1,52 @@
+.ibweb .ibweb-header {
+  width: 100%;
+  padding: 16px 8px 16px 16px;
+  border-bottom: 1px solid $ib-grid-med-grey;
+
+  .grid-cont {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-column-gap: 16px;
+    max-width: $ib-grid-max-width;
+    margin: 0 auto;
+
+    .nav {
+      li {
+        display: inline-block;
+        margin-bottom: 0;
+
+        &.disabled a {
+          color: $ib-nav-grey;
+        }
+
+        &.disabled.signed-in a {
+          color: $ib-grid-green;
+        }
+
+        a {
+          padding: 5px 8px;
+          color: $ib-grid-blue;
+          font-weight: 700;
+        }
+
+        a:hover, a:focus {
+          background-color: transparent;
+        }
+
+        a.active {
+          color: $ib-nav-grey;
+        }
+      }
+    }
+
+    .logo {
+      padding-right: 8px;
+    }
+  }
+
+  @media (max-width: $screen-sm-min - 1) {
+    .grid-cont {
+      grid-column-gap: 0;
+    }
+  }
+}

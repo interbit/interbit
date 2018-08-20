@@ -14,10 +14,21 @@ export default {
       eventKey: 'explore'
     }
   ],
-  headerNavLoggedOut: [
+  headerNavLoggedOut: [],
+  headerRightNav: [
+    {
+      text: 'Signed-in',
+      eventKey: 'signed-in',
+      id: 'ib-test-signed-in',
+      className: 'signed-in',
+      isDisabled: true
+    }
+  ],
+  headerRightNavLoggedOut: [
     {
       text: 'Create Account / Sign-in',
       to: paths.CREATE_ACCOUNT,
+      url: paths.CREATE_ACCOUNT,
       eventKey: 'create-account'
     }
   ],

@@ -12,14 +12,6 @@ export const footerNav = [
       {
         text: 'Interbit for Business',
         to: paths.PLATFORM_INTERBIT_FOR_BUSINESS
-      },
-      {
-        text: 'Product Roadmap',
-        to: paths.PLATFORM_ROADMAP
-      },
-      {
-        text: 'Pricing',
-        to: paths.PRICING
       }
     ]
   },
@@ -53,19 +45,6 @@ export const footerNav = [
       {
         text: 'Support',
         to: paths.DEVELOPERS_SUPPORT
-      }
-    ]
-  },
-  {
-    title: 'Platform',
-    items: [
-      {
-        text: 'Accounts',
-        to: urls.APP_ACCOUNT
-      },
-      {
-        text: 'Store',
-        to: urls.APP_STORE
       }
     ]
   },
@@ -117,19 +96,7 @@ export const headerNav = [
     text: 'Developers',
     to: paths.DEVELOPERS,
     eventKey: 'developers'
-  },
-  {
-    text: 'Pricing',
-    to: paths.PRICING,
-    eventKey: 'pricing'
   }
 ]
 
-export const headerRightNav = [
-  {
-    text: 'Go to Accounts',
-    to: urls.APP_ACCOUNT,
-    eventKey: 'accounts',
-    className: 'accounts-link'
-  }
-]
+export const headerRightNav = []

@@ -14,6 +14,7 @@ import { ChainConnect } from '../containers/ChainConnect'
 import { EmailSuccess } from '../containers/EmailSuccess'
 import { CreateAccount } from '../containers/CreateAccount'
 import { InteractiveChains } from '../containers/InteractiveChains'
+import { Profile } from '../containers/Profile'
 import reducers from '../redux'
 
 const renderWithContext = component => {
@@ -60,8 +61,10 @@ describe('Renders without crashing:', () => {
           attention: contentBar
         },
         modals: {
-          title: 'modal',
-          content: 'content'
+          attentionMoreInfo: {
+            title: 'modal',
+            content: 'content'
+          }
         }
       }
       renderWithContext(<Account {...props} />)
@@ -94,16 +97,41 @@ describe('Renders without crashing:', () => {
     it('CreateAccount', () => {
       const props = {
         content: {
-          signIn: {}
+          intro: 'meow',
+          signIn: {
+            content: 'neigh'
+          }
         },
         contentBars: {
-          gitHubCreateAccount: {},
-          gitHubSignIn: {},
+          gitHubCreateAccount: {
+            buttonText: 'bacon',
+            image: 'burger'
+          },
+          gitHubSignIn: {
+            buttonText: 'salami',
+            image: 'sandwich'
+          },
           attention: {
+            title: 'woof',
+            image: 'dog',
+            content: 'pomsky',
             callToAction: {}
           }
         },
-        modals: {}
+        modals: {
+          attentionMoreInfo: {
+            title: 'pickles',
+            content: 'cucumbers'
+          },
+          attention: {
+            title: 'horchata',
+            content: 'rice',
+            checkbox: 'it is delicious',
+            moreInfo: 'more'
+          }
+        },
+        toggleButtonFunction: () => false,
+        toggleModalFunction: () => false
       }
       renderWithContext(<CreateAccount {...props} />)
     })
@@ -112,17 +140,19 @@ describe('Renders without crashing:', () => {
       renderWithContext(<PageContainer />)
     })
 
-    it('InteractiveChains', () => {
-      const props = {
-        selectedChain: {},
-        blockchainDispatch: () => {}
-      }
-      renderWithContext(<InteractiveChains {...props} />)
+    // TODO: Issue #638 - write rendering test for Profile component
+    it.skip('Profile', () => {
+      renderWithContext(<Profile />)
     })
 
     it('InteractiveChains', () => {
       const props = {
-        blockchainDispatch: () => {}
+        selectedChain: {
+          chainAlias: 'iAmAChain',
+          state: {}
+        },
+        resetForm: () => false,
+        blockchainDispatch: () => () => {}
       }
       renderWithContext(<InteractiveChains {...props} />)
     })

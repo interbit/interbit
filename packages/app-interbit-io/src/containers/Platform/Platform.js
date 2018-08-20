@@ -24,15 +24,7 @@ class Platform extends Component {
 
     return (
       <div className="ibweb-page platform">
-        <Row>
-          <Col md={12}>
-            <img
-              src={platform.headerImage.image}
-              alt={platform.headerImage.title}
-              className="ibweb-image-full-width bleed header"
-            />
-          </Col>
-        </Row>
+        <Row />
 
         <Row className="ibweb-mg-sm-scr-xs">
           <Col {...colLayout}>
@@ -154,7 +146,7 @@ class Platform extends Component {
                 />
               </Col>
             </Row>
-            <Row>
+            <Row className="ibweb-mg-xx-lg">
               {p.cards.map((c, i) => (
                 <Col md={6} lg={4} lgOffset={i % 2 === 0 ? 2 : 0} key={c.title}>
                   <Card {...c} className="sm" />
@@ -163,12 +155,6 @@ class Platform extends Component {
             </Row>
           </div>
         ))}
-
-        <Row className="ibweb-mg-xx-lg">
-          <Col {...colLayout}>
-            <LinkBar {...linkBarContent.productRoadmap} />
-          </Col>
-        </Row>
       </div>
     )
   }

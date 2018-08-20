@@ -10,11 +10,38 @@
     width: 32px;
     height: 32px;
     border-radius: $border-radius-sm;
-    border: 1px solid $ib-med-grey;
+    border: 1px solid $ib-grid-med-grey;
   }
 }
 
 // App page logos
 .ibweb-logo {
   margin-top: -4px;
+}
+
+// New CSS Grid style icon and wordmark combo
+.ibweb-app-logo {
+  display: inline-block;
+
+  .icon {
+    display: inline-block;
+    margin-right: 16px;
+  }
+
+  .wordmark {
+    display: inline-block;
+  }
+
+  // TODO: Issue #629 - adjust wordmark visibility based on new grid widths */
+  // - current width is for Accounts app
+  // @media (max-width: $screen-sm-min - 1) {
+  @media (max-width: 530px) {
+    .icon {
+      margin-right: 0;
+    }
+
+    .wordmark {
+      display: none;
+    }
+  }
 }

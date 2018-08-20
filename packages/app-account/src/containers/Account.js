@@ -10,10 +10,8 @@ import { Markdown } from 'interbit-ui-components'
 import ContentBarApp from '../components/ContentBarApp'
 import ContentBarAttention from '../components/ContentBarAttention'
 import ProfileForm from '../components/ProfileForm'
-import ModalAppAccess from '../components/ModalAppAccess'
 import ModalAttentionMoreInfo from '../components/ModalAttentionMoreInfo'
-
-import chairmanmeow from '../assets/chairmanmeow.jpg'
+import DeleteData from '../components/DeleteData'
 
 import { actionCreators } from '../interbit/my-account/actions'
 import { toggleForm, toggleModal } from '../redux/uiReducer'
@@ -36,22 +34,24 @@ const mapStateToProps = (state, ownProps) => {
     isEditable: isAccountFormEditable
   }
 
-  if (chainState && chainState.profile) {
-    const profile = chainState.profile
-    const hasProfileInfo = Object.values(profile).some(
-      x => x !== null && x !== ''
-    )
-    hasProfileInfo && (profileFormProps.initialValues = profile)
-  }
+  const profile = chainState.getIn(['profile'], {})
+  const hasProfileInfo = Object.values(profile).some(
+    x => x !== null && x !== '' && x !== undefined
+  )
+  hasProfileInfo && (profileFormProps.initialValues = profile)
+
+  const isSignedIn = !!chainState.getIn(['profile', 'gitHub-identity', 'id'])
+  const canDeleteData = isSignedIn && !isAccountFormEditable
 
   const notAuthenticating = {
-    profile: chainState ? chainState.profile : {},
+    profile,
     isAccountFormEditable,
     profileFormProps,
     content: state.content.account,
     contentBars: state.content.contentBars,
     modals: state.content.modals,
-    isAttentionMoreInfoModalVisible
+    isAttentionMoreInfoModalVisible,
+    canDeleteData
   }
 
   if (!selectors.isChainLoaded(state, { chainAlias: PRIVATE })) {
@@ -123,7 +123,8 @@ export class Account extends Component {
     profileFormProps: PropTypes.shape({}),
     publicChainDispatch: PropTypes.func,
     toggleFormFunction: PropTypes.func,
-    toggleModalFunction: PropTypes.func
+    toggleModalFunction: PropTypes.func,
+    canDeleteData: PropTypes.bool
   }
 
   static defaultProps = {
@@ -139,7 +140,8 @@ export class Account extends Component {
     profileFormProps: {},
     publicChainDispatch: () => {},
     toggleFormFunction: () => {},
-    toggleModalFunction: () => {}
+    toggleModalFunction: () => {},
+    canDeleteData: false
   }
 
   componentDidUpdate() {
@@ -185,6 +187,18 @@ export class Account extends Component {
     }
   }
 
+  reset = () => {
+    try {
+      const action = actionCreators.resetProfile()
+      this.props.blockchainDispatch(action)
+    } catch (error) {
+      console.log(error)
+      throw new SubmissionError({
+        _error: error.message
+      })
+    }
+  }
+
   render() {
     const {
       profile,
@@ -194,7 +208,8 @@ export class Account extends Component {
       contentBars,
       modals,
       toggleModalFunction,
-      isAttentionMoreInfoModalVisible
+      isAttentionMoreInfoModalVisible,
+      canDeleteData
     } = this.props
 
     const colLayout = {
@@ -234,13 +249,15 @@ export class Account extends Component {
             </Col>
           </Row>
 
-          {/* TODO: to be added when delete account info functionality exists
           <Row>
             <Col {...colLayout}>
-              <DeleteData {...content.deleteData} />
+              <DeleteData
+                {...content.deleteData}
+                canDeleteData={canDeleteData}
+                onDeleteData={this.reset}
+              />
             </Col>
           </Row>
-          */}
 
           <Row className="ibweb-mg-md ibweb-mg-sm-scr-xs">
             <Col {...colLayout}>
@@ -260,7 +277,6 @@ export class Account extends Component {
           </Row>
         </div>
 
-        <ModalAppAccess image={chairmanmeow} appName="App Name" />
         <ModalAttentionMoreInfo
           {...modals.attentionMoreInfo}
           toggleModal={toggleModalFunction}

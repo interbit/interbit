@@ -30,7 +30,6 @@ describe('module exports expected API', () => {
     assert.ok(api.coreCovenant.pushUpRedispatches)
     assert.ok(api.coreCovenant.selectors)
     assert.ok(api.coreCovenant.selectors.chainId)
-    assert.ok(api.coreCovenant.selectors.blocks)
     assert.ok(api.coreCovenant.selectors.config)
   })
 

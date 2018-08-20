@@ -213,17 +213,17 @@ describe('<LaunchPad />', () => {
 })
 
 describe('<LaunchPadRow />', () => {
-  it('renders 4 <LaunchPad />s', () => {
+  it('renders 2 <LaunchPad />s', () => {
     const buttonLink = {
       title: 'foo',
       text: 'bar',
       image: placeholder
     }
     const buttonLinks = []
-    for (let i = 0; i < 4; i += 1) {
+    for (let i = 0; i < 2; i += 1) {
       buttonLinks.push(buttonLink)
     }
-    countChildren(<LaunchPadRow buttonLinks={buttonLinks} />, LaunchPad, 4)
+    countChildren(<LaunchPadRow buttonLinks={buttonLinks} />, LaunchPad, 2)
   })
 })
 

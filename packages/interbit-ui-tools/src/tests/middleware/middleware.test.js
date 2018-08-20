@@ -156,6 +156,21 @@ describe('middleware', () => {
       stateChange: { publicKey }
     },
     {
+      action: actionCreators.loadInterbitSaga(),
+      stateChange: {}
+    },
+    {
+      action: actionCreators.staticChainsSaga(),
+      stateChange: {}
+    },
+    {
+      action: actionCreators.sponsorChainSaga({
+        chainAlias: PRIVATE,
+        publicChainAlias: PUBLIC
+      }),
+      stateChange: {}
+    },
+    {
       action: actionCreators.chainStatus({ chainAlias, status: 'REALLY_BAD' }),
       stateChange: { chainData: { [chainAlias]: { status: 'REALLY_BAD' } } }
     },

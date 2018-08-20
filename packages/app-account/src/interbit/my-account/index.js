@@ -76,6 +76,15 @@ const reducer = (state = initialState, action) => {
       return removeSharedProfile(state, consumerChainId)
     }
 
+    case actionTypes.RESET_PROFILE: {
+      console.log('DISPATCH: ', action)
+
+      // This removes the data that would be shared
+      nextState = resetSharedProfiles(nextState)
+      nextState = resetProfile(nextState)
+      return nextState
+    }
+
     case actionTypes.START_AUTHENTICATION: {
       console.log('DISPATCH: ', action)
       const { oAuthProvider, requestId, timestamp } = action.payload
@@ -180,10 +189,10 @@ const makeProfileShareable = (
     joinName
   })
 
-const filterTokens = (profile, sharedTokens) =>
-  sharedTokens.reduce(
-    (sharedProfile, tokenName) => ({
-      ...sharedProfile,
+const filterTokens = (profile, tokenNames) =>
+  tokenNames.reduce(
+    (newProfile, tokenName) => ({
+      ...newProfile,
       [tokenName]: profile[tokenName]
     }),
     {}
@@ -210,6 +219,34 @@ const updateSharedProfile = (current, profile) => ({
 
 const removeAuthenticationRequest = (state, requestId) =>
   state.updateIn([...PATHS.AUTH_REQUESTS], Immutable.without, requestId)
+
+const resetProfile = state =>
+  state.setIn(PATHS.PRIVATE_PROFILE, {
+    ...initialState.getIn(PATHS.PRIVATE_PROFILE),
+    ...filterThirdPartyTokens(state, state.getIn(PATHS.PRIVATE_PROFILE))
+  })
+
+const filterThirdPartyTokens = (state, profile) =>
+  Object.entries(profile).reduce(
+    (filtered, [tokenName, value]) =>
+      isThirdPartyToken(state, tokenName)
+        ? { ...filtered, [tokenName]: value }
+        : filtered,
+    {}
+  )
+
+const isThirdPartyToken = (state, tokenName) => {
+  const path = [...PATHS.PRIVATE_PROFILE, tokenName]
+  const consuming = state.getIn(PATHS.CONSUMING, [])
+  return consuming.some(
+    join =>
+      path.length === join.mount.length &&
+      path.every((value, i) => value === join.mount[i])
+  )
+}
+
+const resetSharedProfiles = state =>
+  state.setIn(PATHS.SHARED_ROOT, initialState.getIn(PATHS.SHARED_ROOT))
 
 module.exports = {
   actionTypes,

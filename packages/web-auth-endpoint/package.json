@@ -25,13 +25,24 @@
   "devDependencies": {
     "assert": "^1.4.1",
     "cross-env": "^5.1.4",
-    "mocha": "^4.0.1"
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "jest": "20.0.4"
   },
   "scripts": {
     "serve": "npm start",
     "build": "interbit build --config ../platform-deploy/interbit.prod.config.js --artifacts ../platform-deploy/platform",
     "build:dev": "interbit build --config ../platform-deploy/interbit.config.js --artifacts ../platform-deploy/platform",
     "start": "cross-env DB_PATH=./db-interbit node src/index.js",
-    "test": "echo \"Error: no test specified\""
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
   }
 }

@@ -17,6 +17,7 @@ export default {
   PLATFORM_INTERBIT_FOR_BUSINESS: '/platform/interbit-for-business',
   PLATFORM_ROADMAP: '/platform/roadmap',
   PRICING: '/pricing',
+  POLICY: '/policy',
   POLICY_ACCEPTABLE_USE: '/policy/acceptable-use',
   POLICY_PRIVACY: '/policy/privacy',
   POLICY_TOS: '/policy/terms-of-use',

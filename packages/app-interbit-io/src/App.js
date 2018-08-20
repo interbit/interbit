@@ -8,8 +8,6 @@ import Home from './containers/Home'
 import Contact from './containers/Contact'
 import Platform from './containers/Platform/Platform'
 import PlatformInterbitForBusiness from './containers/Platform/InterbitForBusiness'
-import PlatformRoadmap from './containers/Platform/Roadmap'
-import Pricing from './containers/Pricing'
 import NotFound from './containers/NotFound'
 import DevPageContainer from './containers/Developers/PageContainer'
 import PolicyPageContainer from './containers/Policies/PageContainer'
@@ -38,12 +36,6 @@ class App extends Component {
               component={PlatformInterbitForBusiness}
             />
             <Route
-              exact
-              path={constants.paths.PLATFORM_ROADMAP}
-              component={PlatformRoadmap}
-            />
-            <Route exact path={constants.paths.PRICING} component={Pricing} />
-            <Route
               path={constants.paths.DEVELOPERS}
               component={DevPageContainer}
             />
@@ -51,7 +43,6 @@ class App extends Component {
               path={constants.paths.POLICY}
               component={PolicyPageContainer}
             />
-
             <Route component={NotFound} />
           </Switch>
 

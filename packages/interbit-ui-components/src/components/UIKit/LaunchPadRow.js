@@ -34,15 +34,6 @@ export default class LaunchPadRow extends Component {
             <LaunchPad {...buttonLinks[1]} />
           </Col>
         </Row>
-        <Row>
-          <Col lg={2} md={0} />
-          <Col lg={4} md={6}>
-            <LaunchPad {...buttonLinks[2]} />
-          </Col>
-          <Col lg={4} md={6}>
-            <LaunchPad {...buttonLinks[3]} />
-          </Col>
-        </Row>
       </Row>
     )
   }

@@ -5266,18 +5266,33 @@ a {
     .ibweb-button.pill.blue.secondary:active {
       border-color: #66AFFF;
       color: #66AFFF; }
-    .ibweb-button.pill.red {
+    .ibweb-button.pill.red, .ibweb-button.pill.delete {
       background-color: #EB5757;
       border-color: #D61E1E;
       color: #FFFFFF; }
-    .ibweb-button.pill.red:active {
+    .ibweb-button.pill.delete {
+      position: relative;
+      padding-left: 28px; }
+    .ibweb-button.pill.delete:before {
+      position: absolute;
+      content: url("../assets/icons/trash.svg");
+      left: 8px; }
+    .ibweb-button.pill.red:active, .ibweb-button.pill.delete:active {
       background-color: #F39A9A;
       border-color: #E03535; }
-    .ibweb-button.pill.red.secondary {
+    .ibweb-button.pill.red.secondary, .ibweb-button.pill.reset {
       background-color: #FFFFFF;
       border-color: #EB5757;
       color: #EB5757; }
-    .ibweb-button.pill.red.secondary:active {
+    .ibweb-button.pill.reset {
+      position: relative;
+      padding-left: 28px; }
+    .ibweb-button.pill.reset:before {
+      position: absolute;
+      content: url("../assets/icons/reset.svg");
+      left: 8px; }
+    .ibweb-button.pill.red.secondary:active, .ibweb-button.pill.red.secondary:active:focus, .ibweb-button.pill.reset:active, .ibweb-button.pill.reset:active:focus {
+      background-color: #FFFFFF;
       border-color: #F39A9A;
       color: #F39A9A; }
     .ibweb-button.pill.disabled {

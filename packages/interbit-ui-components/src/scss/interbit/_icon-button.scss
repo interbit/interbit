@@ -144,21 +144,47 @@ $ib-pill-border-radius: 30px;
       color: $ib-pill-blue-60;
     }
 
-    &.red {
+    &.red,
+    &.delete {
       background-color: $ib-pill-red-80;
       border-color: $ib-pill-red-100;
       color: $ib-white;
     }
-    &.red:active {
+    &.delete {
+      position: relative;
+      padding-left: 28px;
+    }
+    &.delete:before {
+      position: absolute;
+      content: url('../assets/icons/trash.svg');
+      left: 8px;
+    }
+    &.red:active,
+    &.delete:active {
       background-color: $ib-pill-red-60;
       border-color: $ib-pill-red-90;
     }
-    &.red.secondary {
+
+    &.red.secondary,
+    &.reset {
       background-color: $ib-white;
       border-color: $ib-pill-red-80;
       color: $ib-pill-red-80;
     }
-    &.red.secondary:active {
+    &.reset {
+      position: relative;
+      padding-left: 28px;
+    }
+    &.reset:before {
+      position: absolute;
+      content: url('../assets/icons/reset.svg');
+      left: 8px;
+    }
+    &.red.secondary:active,
+    &.red.secondary:active:focus,
+    &.reset:active,
+    &.reset:active:focus {
+      background-color: $ib-white;
       border-color: $ib-pill-red-60;
       color: $ib-pill-red-60;
     }

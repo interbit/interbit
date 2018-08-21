@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap'
 
 export default class IconButton extends Component {
   static propTypes = {
-    icon: PropTypes.string,
     image: PropTypes.string,
     text: PropTypes.string.isRequired,
     to: PropTypes.string,
@@ -13,7 +12,6 @@ export default class IconButton extends Component {
   }
 
   static defaultProps = {
-    icon: '',
     image: '',
     to: '#',
     className: '',
@@ -21,23 +19,14 @@ export default class IconButton extends Component {
   }
 
   render() {
-    const {
-      icon,
-      text,
-      to,
-      image,
-      className,
-      clickHandler,
-      ...rest
-    } = this.props
+    const { text, to, image, className, clickHandler, ...rest } = this.props
     return (
       <Button
-        className={`ibweb-button ${image && 'img '}${className}`}
+        className={`ibweb-button pill reset ${image && 'img '}${className}`}
         href={clickHandler ? undefined : to}
         onClick={clickHandler}
         {...rest}>
         {image && <img alt="" width={32} height={32} src={image} />}
-        {icon && <i className={`fa ${icon}`} />}
         {text}
       </Button>
     )

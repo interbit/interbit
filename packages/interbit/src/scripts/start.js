@@ -32,7 +32,7 @@ const start = async options => {
 
   console.log('available chains + covenants: ', deploymentDetails)
 
-  setRootChainManifest(cli, deploymentDetails, config)
+  setRootChainManifest(cli, deploymentDetails)
 
   if (dev && !noWatch) {
     watchCovenants(cli, config, chainManifest)

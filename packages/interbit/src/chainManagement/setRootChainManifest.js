@@ -1,40 +1,22 @@
 const {
-  rootCovenant: { actionCreators },
-  manifest: {
-    selectors: { getChainIdByAlias }
-  },
-  config: {
-    selectors: { getChains }
-  },
-  constants: { ROOT_CHAIN_ALIAS }
+  rootCovenant: {
+    actionCreators: { setManifest }
+  }
 } = require('interbit-covenant-tools')
 
-const setRootChainManifest = (cli, manifest, config) => {
+const setRootChainManifest = (cli, manifest) => {
   console.log('UPDATING ROOT CHAIN WITH DEPLOYMENT INFO')
 
-  const setManifestAction = actionCreators.setManifest(manifest)
-
-  // NOTE: This is a tmp kludge - cascading manifest updates in a future release
-  // will only do the root chain (then root will manage setting other chains)
-  const chainEntries = Object.entries(getChains(config))
-  chainEntries
-    .filter(([, chainConfig]) => chainConfig.applyInterbuffer)
-    .forEach(([chainAlias]) => {
-      const chainId = getChainIdByAlias(chainAlias, manifest)
-      const chainInterface = cli.getChain(chainId)
-      waitForBlockToDispatch(chainInterface, setManifestAction)
-    })
-
-  const rootChainId = getChainIdByAlias(ROOT_CHAIN_ALIAS, manifest)
-  const rootChainInterface = cli.getChain(rootChainId)
+  const rootChainInterface = cli.getChain(manifest.chains.interbitRoot)
 
   if (!rootChainInterface) {
-    console.error(
-      `No root chain was found for this deployment at chain ID: ${rootChainId}`
-    )
+    // TODO: Make this a proper thrown error with #263
+    console.warn(`No root chain was found for this deployment`)
     return
   }
 
+  const setManifestAction = setManifest(manifest)
+  console.log(setManifestAction)
   waitForBlockToDispatch(rootChainInterface, setManifestAction)
 }
 
@@ -45,7 +27,7 @@ const waitForBlockToDispatch = (chainInterface, action) => {
   unsubscribe = chainInterface.subscribe(() => {
     if (count === 0) {
       chainInterface.dispatch(action)
-      unsubscribe() // interbit-core 0.7.0 regression - unsubscripe does not unsubscribe #186
+      unsubscribe()
       count += 1
     }
   })

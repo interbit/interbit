@@ -29,12 +29,12 @@ const destroyRemovedChains = (cli, manifest) => {
 
   const chainAliasesConfiguredOnRoot = getChainAliases(rootChainManifest)
   const chainEntries = Object.entries(getChains(manifest))
-  const removedChains = chainEntries.filter(
-    chainEntry => !chainAliasesConfiguredOnRoot.includes(chainEntry[0])
+  const removedChainEntries = chainEntries.filter(
+    ([chainAlias]) => !chainAliasesConfiguredOnRoot.includes(chainAlias)
   )
 
-  for (const removedChain of removedChains) {
-    const removedChainInterface = cli.getChain(removedChain)
+  for (const [, removedChainId] of removedChainEntries) {
+    const removedChainInterface = cli.getChain(removedChainId)
     if (removedChainInterface) {
       const destroyAction = destroy()
       removedChainInterface.dispatch(destroyAction)

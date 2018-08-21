@@ -3,7 +3,7 @@ const base64url = require('base64-url')
 
 const { getChainId, getPublicKey } = require('../middleware/selectors')
 
-const packState = (state, whiteList) =>
+const packState = (state = '', whiteList) =>
   base64url.encode(JSON.stringify(state, whiteList))
 
 const packCAuthParams = (

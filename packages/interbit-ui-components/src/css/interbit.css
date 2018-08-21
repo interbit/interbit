@@ -5237,6 +5237,53 @@ a {
     color: #FFFFFF;
     opacity: 1;
     filter: alpha(opacity=100); }
+  .ibweb-button.pill {
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 16px;
+    padding: 8px;
+    border: 1px solid transparent;
+    transition: all .2s; }
+    .ibweb-button.pill:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); }
+    .ibweb-button.pill:active {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); }
+    .ibweb-button.pill:focus, .ibweb-button.pill:active:hover, .ibweb-button.pill:active:focus {
+      outline: none;
+      border-radius: 30px; }
+    .ibweb-button.pill.blue {
+      background-color: #007AFF;
+      border-color: #003AFF;
+      color: #FFFFFF; }
+    .ibweb-button.pill.blue:active {
+      background-color: #66AFFF;
+      border-color: #0054FF; }
+    .ibweb-button.pill.blue.secondary {
+      background-color: #FFFFFF;
+      border-color: #007AFF;
+      color: #007AFF; }
+    .ibweb-button.pill.blue.secondary:active {
+      border-color: #66AFFF;
+      color: #66AFFF; }
+    .ibweb-button.pill.red {
+      background-color: #EB5757;
+      border-color: #D61E1E;
+      color: #FFFFFF; }
+    .ibweb-button.pill.red:active {
+      background-color: #F39A9A;
+      border-color: #E03535; }
+    .ibweb-button.pill.red.secondary {
+      background-color: #FFFFFF;
+      border-color: #EB5757;
+      color: #EB5757; }
+    .ibweb-button.pill.red.secondary:active {
+      border-color: #F39A9A;
+      color: #F39A9A; }
+    .ibweb-button.pill.disabled {
+      background-color: #FFFFFF;
+      border-color: #FFFFFF;
+      color: #C4C4C4; }
 
 .ibweb-ib-icon > div {
   display: -webkit-box !important;
@@ -5468,10 +5515,12 @@ a {
       margin-right: 16px;
       width: 164px;
       height: 164px; }
-  .ibweb-content-bar .media-body p {
-    margin-bottom: 8px; }
-  .ibweb-content-bar .media-body a {
-    font-weight: 600; }
+  .ibweb-content-bar .media-body {
+    overflow: visible; }
+    .ibweb-content-bar .media-body p {
+      margin-bottom: 8px; }
+    .ibweb-content-bar .media-body a {
+      font-weight: 600; }
   .ibweb-content-bar.image-lg .media-left img {
     width: 256px;
     height: 256px; }

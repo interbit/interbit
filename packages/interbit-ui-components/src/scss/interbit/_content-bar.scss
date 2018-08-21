@@ -26,6 +26,8 @@
   }
 
   .media-body {
+    overflow: visible;
+
     p {
       margin-bottom: $margin-x-sm;
     }

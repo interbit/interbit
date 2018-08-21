@@ -10,10 +10,10 @@ const plugins = []
 const outputFile = `${libraryName}.js`
 
 const config = {
-  entry: `${__dirname}/src/index.js`,
+  entry: path.join(__dirname, './src/index.js'),
   devtool: 'source-map',
   output: {
-    path: `${__dirname}/dist`,
+    path: path.join(__dirname, './dist'),
     filename: outputFile,
     library: libraryName,
     libraryTarget: 'umd',
@@ -29,20 +29,34 @@ const config = {
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader?modules'
+      },
+      {
+        test: /\.(png|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: '[name][md5:hash].[ext]',
+              outputPath: 'assets/',
+              publicPath: '/assets/'
+            }
+          }
+        ]
       }
     ]
   },
   resolve: {
     alias: {
       react: path.resolve(__dirname, './node_modules/react'),
-      'react-dom': path.resolve(__dirname, './node_modules/react-dom')
+      'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
+      assets: path.resolve(__dirname, 'assets')
     },
     modules: [
       path.resolve('./node_modules'),
       path.resolve('./src'),
       path.resolve('../../node_modules')
     ],
-    extensions: ['.json', '.js', '.jsx', '.css']
+    extensions: ['.json', '.js', '.jsx', '.css', '.svg', '.png']
   },
   plugins,
   externals: {

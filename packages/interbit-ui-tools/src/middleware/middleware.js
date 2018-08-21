@@ -65,19 +65,38 @@ const createMiddleware = (
     const chain = cli.getChain(chainId)
     const currentState = chain.getState()
 
-    chains[chainAlias] = chain
-
-    chain.subscribe(() => {
+    const unsubscribe = chain.subscribe(() => {
       const appState = chain.getState()
       store.dispatch(actionCreators.chainUpdated(chainAlias, appState))
     })
 
-    chain.blockSubscribe(() => {
+    const blockUnsubscribe = chain.blockSubscribe(() => {
       const newBlock = chain.getCurrentBlock()
       store.dispatch(actionCreators.chainBlockAdded(chainAlias, newBlock))
     })
 
+    chains[chainAlias] = {
+      ...chain,
+      unsubscribe: () => {
+        unsubscribe()
+        blockUnsubscribe()
+      }
+    }
+
     store.dispatch(actionCreators.chainSubscribed(chainAlias, currentState))
+  }
+
+  const unsubscribeFromChain = ({ chainAlias }) => {
+    console.log(`${LOG_PREFIX}: Disconnecting chain '${chainAlias}' from store`)
+    const { chains } = runtimeContext.getInterbit()
+
+    const chain = chains[chainAlias]
+
+    if (chain && chain.unsubscribe) {
+      chain.unsubscribe()
+      delete chains[chainAlias]
+      store.dispatch(actionCreators.chainUnsubscribed(chainAlias))
+    }
   }
 
   if (publicChainAlias && privateChainAlias) {
@@ -111,6 +130,15 @@ const createMiddleware = (
         const { chainAlias, chainId } = action.payload
 
         subscribeToChain({ chainAlias, chainId })
+
+        return next(action)
+      }
+
+      case actionTypes.CHAIN_UNLOADING:
+      case actionTypes.CHAIN_DELETING: {
+        const { chainAlias } = action.payload
+
+        unsubscribeFromChain({ chainAlias })
 
         return next(action)
       }

@@ -237,7 +237,7 @@ function* tryLoadChain({ cli, chainAlias, chainId }) {
 function* tryDeleteChain({ cli, chainAlias, chainId }) {
   console.log(`${LOG_PREFIX}: *tryDeleteChain()`, { chainAlias, chainId })
   try {
-    yield put(actionCreators.chainDeleting({ chainAlias, chainId }))
+    yield put.resolve(actionCreators.chainDeleting({ chainAlias, chainId }))
 
     // Broadcast chain removal from the network
     yield call(cli.destroyChain, chainId)
@@ -250,6 +250,14 @@ function* tryDeleteChain({ cli, chainAlias, chainId }) {
     console.warn(`${LOG_PREFIX}:`, { chainId, error })
     yield put(actionCreators.chainError({ chainAlias, error: error.message }))
   }
+}
+
+function* unloadChain({ chainAlias }) {
+  console.log(`${LOG_PREFIX}: *unloadChain()`, { chainAlias })
+
+  yield put.resolve(actionCreators.chainUnloading({ chainAlias }))
+
+  yield put(actionCreators.chainUnloaded({ chainAlias }))
 }
 
 const detectBlocking = (chain, maxTime = 5000) =>
@@ -271,5 +279,6 @@ module.exports = {
   loadChain,
   loadPrivateChain,
   sponsorChain,
-  tryLoadChain
+  tryLoadChain,
+  unloadChain
 }

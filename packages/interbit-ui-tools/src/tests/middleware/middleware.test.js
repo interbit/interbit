@@ -61,15 +61,22 @@ const instrumentedStore = (params = MIDDLEWARE_PARAMS.PUBLIC_ONLY) => {
   const chains = {}
   const subscribers = []
   const blockSubscribers = []
+  const unsubscribed = {}
 
   const mockChain = {
     getState: () => chainState,
     getCurrentBlock: () => block,
     subscribe: callback => {
       subscribers.push(callback)
+      return () => {
+        unsubscribed.subscribe = true
+      }
     },
     blockSubscribe: callback => {
       blockSubscribers.push(callback)
+      return () => {
+        unsubscribed.blockSubscribe = true
+      }
     },
     dispatch: action => {
       chainActions.push(action)
@@ -118,7 +125,8 @@ const instrumentedStore = (params = MIDDLEWARE_PARAMS.PUBLIC_ONLY) => {
     dispatch: store.dispatch,
     resetSpy,
     simulateChainStateChange: notifySubscribers,
-    simulateNewBlock: notifyBlockSubscribers
+    simulateNewBlock: notifyBlockSubscribers,
+    unsubscribed
   }
 }
 
@@ -168,6 +176,12 @@ describe('middleware', () => {
       stateChange: {}
     },
     {
+      action: actionCreators.unloadChainSaga({
+        chainAlias: SOME_OTHER
+      }),
+      stateChange: {}
+    },
+    {
       action: actionCreators.chainStatus({ chainAlias, status: 'REALLY_BAD' }),
       stateChange: { chainData: { [chainAlias]: { status: 'REALLY_BAD' } } }
     },
@@ -196,6 +210,16 @@ describe('middleware', () => {
       stateChange: {
         chains: { [chainAlias]: chainState },
         chainData: { [chainAlias]: { status: 'SUBSCRIBED' } }
+      }
+    },
+    {
+      action: actionCreators.chainUnloading({ chainAlias }),
+      stateChange: { chainData: { [chainAlias]: { status: 'UNLOADING' } } }
+    },
+    {
+      action: actionCreators.chainUnsubscribed(chainAlias),
+      stateChange: {
+        chainData: { [chainAlias]: { status: 'UNSUBSCRIBED' } }
       }
     },
     {
@@ -559,5 +583,67 @@ describe('middleware', () => {
 
     store.dispatch(sagaAction)
     assert.deepStrictEqual(store.actions, [sagaAction])
+  })
+
+  it('CHAIN_UNLOADING causes CHAIN_UNSUBSCRIBED action', () => {
+    const store = instrumentedStore()
+
+    store.dispatch(
+      actionCreators.chainLoaded({
+        chainAlias: PRIVATE,
+        chainId: CHAIN_IDS.PRIVATE
+      })
+    )
+
+    store.dispatch(
+      actionCreators.chainBlocking({
+        chainAlias: PRIVATE
+      })
+    )
+
+    store.resetSpy()
+
+    const chainUnloadingAction = actionCreators.chainUnloading({
+      chainAlias: PRIVATE
+    })
+    store.dispatch(chainUnloadingAction)
+
+    assert.deepStrictEqual(store.actions, [
+      {
+        type: actionTypes.CHAIN_UNSUBSCRIBED,
+        payload: { chainAlias: PRIVATE }
+      },
+      chainUnloadingAction
+    ])
+  })
+
+  it('CHAIN_UNLOADING calls unsubscribe methods from chain.subscribe() and chain.blockSubscribe()', () => {
+    const store = instrumentedStore()
+
+    store.dispatch(
+      actionCreators.chainLoaded({
+        chainAlias: PRIVATE,
+        chainId: CHAIN_IDS.PRIVATE
+      })
+    )
+
+    store.dispatch(
+      actionCreators.chainBlocking({
+        chainAlias: PRIVATE
+      })
+    )
+
+    store.resetSpy()
+
+    store.dispatch(
+      actionCreators.chainUnloading({
+        chainAlias: PRIVATE
+      })
+    )
+
+    assert.deepStrictEqual(store.unsubscribed, {
+      subscribe: true,
+      blockSubscribe: true
+    })
   })
 })

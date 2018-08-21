@@ -16,8 +16,6 @@ import DevelopersResources from '../containers/Developers/Resources'
 import DeveloperPageContainer from '../containers/Developers/PageContainer'
 import InterbitForBusiness from '../containers/Platform/InterbitForBusiness'
 import Platform from '../containers/Platform/Platform'
-import Roadmap from '../containers/Platform/Roadmap'
-import Pricing from '../containers/Pricing'
 import Privacy from '../containers/Policies/Privacy'
 import TermsOfService from '../containers/Policies/TermsOfService'
 import AcceptableUse from '../containers/Policies/AcceptableUse'
@@ -72,12 +70,6 @@ describe('Renders without crashing:', () => {
     })
     it('Platform Interbit for Business', () => {
       renderWithContext(<InterbitForBusiness />)
-    })
-    it('Pricing', () => {
-      renderWithContext(<Pricing />)
-    })
-    it('Product Roadmap', () => {
-      renderWithContext(<Roadmap />)
     })
 
     it('Privacy Policy', () => {

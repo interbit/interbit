@@ -56,7 +56,7 @@ describe('interbit', () => {
     let cli
 
     beforeAll(async done => {
-      const env = Object.assign({}, process.env)
+      const env = { ...process.env }
 
       console.log('Generating key pair...')
       keyPair = await interbit.generateKeyPair()

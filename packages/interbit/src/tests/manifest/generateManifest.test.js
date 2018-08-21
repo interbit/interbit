@@ -223,6 +223,18 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
     should.ok(rootChain.validators)
     should.ok(rootChain.covenant)
     should.ok(rootChain.covenantHashMap)
+    should.equal(
+      rootChain.covenantHashMap.interbitRoot,
+      manifest.covenants.interbitRoot.hash
+    )
+    should.equal(
+      rootChain.covenantHashMap.control,
+      manifest.covenants.control.hash
+    )
+    should.equal(
+      rootChain.covenantHashMap.public,
+      manifest.covenants.public.hash
+    )
     should.ok(rootChain.joins)
     should.ok(rootChain.chains)
     // should.ok(rootChain.acl)
@@ -237,6 +249,10 @@ describe('generateManifest(location, interbitConfig, covenants, originalManifest
     should.ok(controlChain.validators)
     should.ok(controlChain.covenant)
     should.ok(controlChain.covenantHashMap)
+    should.equal(
+      controlChain.covenantHashMap.control,
+      manifest.covenants.control.hash
+    )
     should.ok(controlChain.joins)
     should.ok(controlChain.chains)
     // should.ok(controlChain.acl)

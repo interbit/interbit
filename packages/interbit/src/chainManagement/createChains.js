@@ -17,6 +17,14 @@ const deployCovenants = require('./deployCovenants')
 const connectToPeers = require('./connectToPeers')
 const { joinChains } = require('./joinChains')
 
+/**
+ * Uses a manifest to create chains from genesisBlocks and configures the
+ * cli with peers and covenants from the manifest.
+ * @param {string} location - The file location to work from
+ * @param {Object} cli - The Interbit cli to configure and create chains on
+ * @param {Object} manifest - The Interbit manifest with config options
+ * @param {Object} options - Additional options for configuration
+ */
 const createChainsFromManifest = async (location, cli, manifest, options) => {
   console.log('DEPLOYING COVENANTS')
   if (!options.connect) {
@@ -38,16 +46,19 @@ const createChainsFromManifest = async (location, cli, manifest, options) => {
   const genesisBlockEntries = Object.values(genesisBlocks)
   for (const genesisBlock of genesisBlockEntries) {
     const chainId = genesisBlock.blockHash
-    if (options.connect) {
+    try {
       await cli.loadChain(chainId)
       console.log(`Loaded chain ${chainId}`)
-    } else {
-      await cli.startChain({ genesisBlock })
-      console.log(`Created chain ${chainId}`)
-      // The covenant will apply itself due to its presence in the genesis block
+    } catch (e) {
+      if (e.message.startsWith('waitForState timeout after waiting 20000 ms')) {
+        await cli.startChain({ genesisBlock })
+        console.log(`Created chain ${chainId}`)
 
-      const chain = cli.getChain(chainId)
-      chain.dispatch({ type: '@@interbit/DEPLOY' })
+        const chain = cli.getChain(chainId)
+        chain.dispatch({ type: '@@interbit/DEPLOY' })
+      } else {
+        throw e
+      }
     }
   }
 }

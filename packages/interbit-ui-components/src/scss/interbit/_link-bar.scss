@@ -3,7 +3,7 @@
   margin: 0 0 $margin-sm 0;
   padding: 16px;
   border-radius: $border-radius-lg;
-  border: 1px solid $ib-med-grey;
+  border: 1px solid $ib-grid-med-grey;
   color: $ib-blue;
   transition: box-shadow .5s;
 
@@ -67,7 +67,7 @@
   }
 
   &.dotted {
-    border: 2px dashed $ib-med-grey;
+    border: 2px dashed $ib-grid-med-grey;
   }
 }
 

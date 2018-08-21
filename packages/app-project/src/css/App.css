@@ -105,7 +105,7 @@
   .ibweb.app-project .ibweb-content-bar.project-bar .status i:before {
     font-size: 20px; }
   .ibweb.app-project .ibweb-content-bar.project-bar .status.pass {
-    color: #057514; }
+    color: #00A451; }
   .ibweb.app-project .ibweb-content-bar.project-bar .status.fail {
     color: #d0021b; }
 .ibweb.app-project .ibweb-content-bar.project-bar .app-url i {
@@ -139,7 +139,7 @@
     .ibweb.app-project .app-project-details .status.fail {
       color: #d0021b; }
     .ibweb.app-project .app-project-details .status.pass {
-      color: #057514; }
+      color: #00A451; }
     .ibweb.app-project .app-project-details .status i {
       vertical-align: bottom;
       padding-right: 8px; }

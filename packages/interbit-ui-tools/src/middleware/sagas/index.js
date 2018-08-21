@@ -1,8 +1,9 @@
-const { put, takeEvery, call } = require('redux-saga/effects')
+const { put, takeEvery, call, select } = require('redux-saga/effects')
 
 const browserContext = require('../browserContext')
 const { actionTypes, actionCreators } = require('../actions')
-const { LOG_PREFIX } = require('../constants')
+const selectors = require('../selectors')
+const { LOG_PREFIX, INTERBIT_STATUS } = require('../constants')
 const { connectToPeers } = require('./connections')
 const { getInterbitContext } = require('./interbit')
 const { loadStaticChains, loadPrivateChain, sponsorChain } = require('./chains')
@@ -12,16 +13,19 @@ const middlewareSagas = (runtimeContext = browserContext) => {
     console.log(`${LOG_PREFIX}: *rootSaga(): loading interbit`)
     yield call(loadInterbitSaga)
 
-    console.log(`${LOG_PREFIX}: *rootSaga(): listening for: `, [
-      actionTypes.STATIC_CHAINS_SAGA,
-      actionTypes.PRIVATE_CHAIN_SAGA,
-      actionTypes.SPONSOR_CHAIN_SAGA
-    ])
-    yield takeEvery(actionTypes.STATIC_CHAINS_SAGA, staticChainsSaga)
-    yield takeEvery(actionTypes.PRIVATE_CHAIN_SAGA, privateChainSaga)
-    yield takeEvery(actionTypes.SPONSOR_CHAIN_SAGA, sponsorChainSaga)
+    const status = yield select(selectors.getInterbitStatus)
+    if (status === INTERBIT_STATUS.READY) {
+      console.log(`${LOG_PREFIX}: *rootSaga(): listening for: `, [
+        actionTypes.STATIC_CHAINS_SAGA,
+        actionTypes.PRIVATE_CHAIN_SAGA,
+        actionTypes.SPONSOR_CHAIN_SAGA
+      ])
+      yield takeEvery(actionTypes.STATIC_CHAINS_SAGA, staticChainsSaga)
+      yield takeEvery(actionTypes.PRIVATE_CHAIN_SAGA, privateChainSaga)
+      yield takeEvery(actionTypes.SPONSOR_CHAIN_SAGA, sponsorChainSaga)
 
-    yield put(actionCreators.staticChainsSaga())
+      yield put(actionCreators.staticChainsSaga())
+    }
   }
 
   function* loadInterbitSaga() {
@@ -30,7 +34,10 @@ const middlewareSagas = (runtimeContext = browserContext) => {
     try {
       const { cli } = yield call(getInterbitContext, runtimeContext)
 
-      yield call(connectToPeers, { cli })
+      yield call(connectToPeers, {
+        cli,
+        defaultPort: runtimeContext.getDefaultPort()
+      })
 
       yield put(actionCreators.interbitReady())
     } catch (error) {

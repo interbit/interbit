@@ -22,7 +22,7 @@ const actionTypes = {
   CHAIN_SPONSORING: `${ACTION_PREFIX}/CHAIN_SPONSORING`,
   CHAIN_LOADING: `${ACTION_PREFIX}/CHAIN_LOADING`,
   CHAIN_LOADED: `${ACTION_PREFIX}/CHAIN_LOADED`,
-  CHAIN_SUBSCRIBED: `${ACTION_PREFIX}/CHAIN_SUBSCRIBE`,
+  CHAIN_SUBSCRIBED: `${ACTION_PREFIX}/CHAIN_SUBSCRIBED`,
   CHAIN_BLOCKING: `${ACTION_PREFIX}/CHAIN_BLOCKING`,
   CHAIN_ERROR: `${ACTION_PREFIX}/CHAIN_ERROR`,
   CHAIN_GENESIS: `${ACTION_PREFIX}/CHAIN_GENESIS`,
@@ -53,7 +53,8 @@ const actionCreators = {
       publicChainAlias,
       privateChainAlias,
       sponsoredChainId,
-      privateChainId
+      privateChainId,
+      dependsOnChainAlias: publicChainAlias
     }
   }),
 
@@ -61,15 +62,17 @@ const actionCreators = {
     type: actionTypes.SPONSOR_CHAIN_SAGA,
     payload: {
       chainAlias,
-      publicChainAlias
+      publicChainAlias,
+      dependsOnChainAlias: publicChainAlias
     }
   }),
 
-  loadChainSaga: ({ chainAlias, chainId }) => ({
+  loadChainSaga: ({ chainAlias, chainId, dependsOnChainAlias }) => ({
     type: actionTypes.LOAD_CHAIN_SAGA,
     payload: {
       chainAlias,
-      chainId
+      chainId,
+      dependsOnChainAlias
     }
   }),
 

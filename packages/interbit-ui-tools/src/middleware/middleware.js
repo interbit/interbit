@@ -102,9 +102,9 @@ const createMiddleware = (
 
         bufferAction(chainAlias, action)
         console.warn(
-          `${LOG_PREFIX}: Chain '${chainAlias}' is unavailable; action was buffered.`
+          `${LOG_PREFIX}: Chain '${chainAlias}' is not blocking; action was buffered.`
         )
-        return undefined
+        return action
       }
 
       case actionTypes.CHAIN_LOADED: {
@@ -124,6 +124,21 @@ const createMiddleware = (
         dispatchBufferedActions(chainAlias)
 
         return result
+      }
+
+      case actionTypes.LOAD_CHAIN_SAGA:
+      case actionTypes.PRIVATE_CHAIN_SAGA:
+      case actionTypes.SPONSOR_CHAIN_SAGA: {
+        const { dependsOnChainAlias } = action.payload
+        if (!dependsOnChainAlias || isBlocking(dependsOnChainAlias)) {
+          return next(action)
+        }
+
+        bufferAction(dependsOnChainAlias, action)
+        console.warn(
+          `${LOG_PREFIX}: Chain '${dependsOnChainAlias}' is not blocking; action was buffered.`
+        )
+        return action
       }
 
       default:

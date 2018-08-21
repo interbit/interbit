@@ -5,7 +5,8 @@ const { createStore, combineReducers, applyMiddleware } = require('redux')
 const {
   createMiddleware,
   reducer,
-  actionCreators
+  actionCreators,
+  actionTypes
 } = require('../../middleware')
 
 const PUBLIC = 'mockPublicChain'
@@ -160,17 +161,6 @@ describe('middleware', () => {
       stateChange: {}
     },
     {
-      action: actionCreators.staticChainsSaga(),
-      stateChange: {}
-    },
-    {
-      action: actionCreators.sponsorChainSaga({
-        chainAlias: PRIVATE,
-        publicChainAlias: PUBLIC
-      }),
-      stateChange: {}
-    },
-    {
       action: actionCreators.loadChainSaga({
         chainAlias: SOME_OTHER,
         chainId: CHAIN_IDS.SOME_OTHER
@@ -252,7 +242,7 @@ describe('middleware', () => {
     })
   })
 
-  it('PRIVATE_CHAIN_SAGA is dispatched when public chain blocks', () => {
+  it('Configured PRIVATE_CHAIN_SAGA is dispatched when public chain blocks', () => {
     const store = instrumentedStore(MIDDLEWARE_PARAMS.PUBLIC_AND_PRIVATE)
 
     const chainBlockingAction = actionCreators.chainBlocking({
@@ -263,18 +253,19 @@ describe('middleware', () => {
     assert.deepStrictEqual(store.actions, [
       chainBlockingAction,
       {
-        type: 'interbit-middleware/PRIVATE_CHAIN_SAGA',
+        type: actionTypes.PRIVATE_CHAIN_SAGA,
         payload: {
           publicChainAlias: PUBLIC,
           privateChainAlias: PRIVATE,
           sponsoredChainId: undefined,
-          privateChainId: undefined
+          privateChainId: undefined,
+          dependsOnChainAlias: PUBLIC
         }
       }
     ])
   })
 
-  it('PRIVATE_CHAIN_SAGA for other device chain is dispatched when public chain blocks', () => {
+  it('Configured PRIVATE_CHAIN_SAGA for other device chain is dispatched when public chain blocks', () => {
     const sponsoredChainId = CHAIN_IDS.PRIVATE
     const privateChainId = CHAIN_IDS.OTHER_DEVICE
     const store = instrumentedStore({
@@ -291,15 +282,35 @@ describe('middleware', () => {
     assert.deepStrictEqual(store.actions, [
       chainBlockingAction,
       {
-        type: 'interbit-middleware/PRIVATE_CHAIN_SAGA',
+        type: actionTypes.PRIVATE_CHAIN_SAGA,
         payload: {
           publicChainAlias: PUBLIC,
           privateChainAlias: PRIVATE,
           sponsoredChainId,
-          privateChainId
+          privateChainId,
+          dependsOnChainAlias: PUBLIC
         }
       }
     ])
+  })
+
+  it('PRIVATE_CHAIN_SAGA dispatched to store is buffered until public chain blocks', () => {
+    const store = instrumentedStore(MIDDLEWARE_PARAMS.PUBLIC_ONLY)
+
+    const sagaAction = actionCreators.privateChainSaga({
+      publicChainAlias: PUBLIC,
+      privateChainAlias: SOME_OTHER
+    })
+
+    store.dispatch(sagaAction)
+    assert.deepStrictEqual(store.actions, [])
+
+    const chainBlockingAction = actionCreators.chainBlocking({
+      chainAlias: PUBLIC
+    })
+    store.dispatch(chainBlockingAction)
+
+    assert.deepStrictEqual(store.actions, [chainBlockingAction, sagaAction])
   })
 
   it('PRIVATE_CHAIN_SAGA is not dispatched if private chain alias is not provided', () => {
@@ -313,7 +324,7 @@ describe('middleware', () => {
     assert.deepStrictEqual(store.actions, [chainBlockingAction])
   })
 
-  it('CHAIN_LOADED causes CHAIN_SUBSCRIBE action', () => {
+  it('CHAIN_LOADED causes CHAIN_SUBSCRIBED action', () => {
     const store = instrumentedStore()
 
     const chainLoadedAction = actionCreators.chainLoaded({
@@ -324,7 +335,7 @@ describe('middleware', () => {
 
     assert.deepStrictEqual(store.actions, [
       {
-        type: 'interbit-middleware/CHAIN_SUBSCRIBE',
+        type: actionTypes.CHAIN_SUBSCRIBED,
         payload: { chainAlias, chainState }
       },
       chainLoadedAction
@@ -347,7 +358,7 @@ describe('middleware', () => {
 
     assert.deepStrictEqual(store.actions, [
       {
-        type: 'interbit-middleware/CHAIN_UPDATED',
+        type: actionTypes.CHAIN_UPDATED,
         payload: { chainAlias, chainState }
       }
     ])
@@ -369,7 +380,7 @@ describe('middleware', () => {
 
     assert.deepStrictEqual(store.actions, [
       {
-        type: 'interbit-middleware/CHAIN_BLOCK_ADDED',
+        type: actionTypes.CHAIN_BLOCK_ADDED,
         payload: { chainAlias, newBlock: block }
       }
     ])
@@ -468,5 +479,85 @@ describe('middleware', () => {
 
     assert.deepStrictEqual(store.actions, [])
     assert.deepStrictEqual(store.chainActions, [chainAction1, chainAction2])
+  })
+
+  it('SPONSOR_CHAIN_SAGA is buffered until public chain blocks', () => {
+    const store = instrumentedStore(MIDDLEWARE_PARAMS.PUBLIC_ONLY)
+
+    const sagaAction = actionCreators.sponsorChainSaga({
+      publicChainAlias: PUBLIC,
+      chainAlias: SOME_OTHER
+    })
+
+    store.dispatch(sagaAction)
+    assert.deepStrictEqual(store.actions, [])
+
+    const chainBlockingAction = actionCreators.chainBlocking({
+      chainAlias: PUBLIC
+    })
+    store.dispatch(chainBlockingAction)
+
+    assert.deepStrictEqual(store.actions, [chainBlockingAction, sagaAction])
+  })
+
+  it('LOAD_CHAIN_SAGA without dependencies is handled immediately', () => {
+    const store = instrumentedStore(MIDDLEWARE_PARAMS.PUBLIC_AND_PRIVATE)
+
+    const sagaAction = actionCreators.loadChainSaga({
+      chainAlias: SOME_OTHER,
+      chainId: CHAIN_IDS.SOME_OTHER
+    })
+
+    store.dispatch(sagaAction)
+
+    assert.deepStrictEqual(store.actions, [sagaAction])
+  })
+
+  it('LOAD_CHAIN_SAGA is buffered until chain it depends on blocks', () => {
+    const store = instrumentedStore(MIDDLEWARE_PARAMS.PUBLIC_AND_PRIVATE)
+
+    const sagaAction = actionCreators.loadChainSaga({
+      chainAlias: SOME_OTHER,
+      chainId: CHAIN_IDS.SOME_OTHER,
+      dependsOnChainAlias: PRIVATE
+    })
+
+    store.dispatch(sagaAction)
+    assert.deepStrictEqual(store.actions, [])
+
+    const chainBlockingAction = actionCreators.chainBlocking({
+      chainAlias: PRIVATE
+    })
+    store.dispatch(chainBlockingAction)
+
+    assert.deepStrictEqual(store.actions, [chainBlockingAction, sagaAction])
+  })
+
+  it('LOAD_CHAIN_SAGA is handled immediately if chain it depends on is already blocking', () => {
+    const store = instrumentedStore(MIDDLEWARE_PARAMS.PUBLIC_AND_PRIVATE)
+
+    store.dispatch(
+      actionCreators.chainLoaded({
+        chainAlias: PRIVATE,
+        chainId: CHAIN_IDS.PRIVATE
+      })
+    )
+
+    store.dispatch(
+      actionCreators.chainBlocking({
+        chainAlias: PRIVATE
+      })
+    )
+
+    store.resetSpy()
+
+    const sagaAction = actionCreators.loadChainSaga({
+      chainAlias: SOME_OTHER,
+      chainId: CHAIN_IDS.SOME_OTHER,
+      dependsOnChainAlias: PRIVATE
+    })
+
+    store.dispatch(sagaAction)
+    assert.deepStrictEqual(store.actions, [sagaAction])
   })
 })

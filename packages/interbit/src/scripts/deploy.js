@@ -1,9 +1,21 @@
 const {
   startInterbit,
   createChains: { createChainsFromManifest },
-  configureChains
+  configureChains,
+  initializeCovenants,
+  destroyRemovedChains
 } = require('../chainManagement')
 
+/**
+ * Deploys an Interbit node based on the provided options.
+ * @param {Object} options - Deployment options
+ * @param {Object} options.keyPair - The key pair to use for this node
+ * @param {Object} options.keyPair.publicKey - The public key portion of this key pair
+ * @param {Object} options.keyPair.privateKey - The private key portion of this key pair
+ * @param {Object} options.location - The file location to run the deploy process from
+ * @param {Object} options.manifest - The interbit manifest file used to configure this node
+ * @param {Object} options.connect - Whether this node is connecting to other nodes for configuration or configuring itself
+ */
 const deploy = async options => {
   const { keyPair, location, manifest, connect } = options
 
@@ -13,17 +25,16 @@ const deploy = async options => {
 
   const { cli, hypervisor, cleanup } = await startInterbit(keyPair, options)
 
-  // TODO: Refactor deployCovenants to its own function and move options up into here
-  // Rename connect to configure and invert it so it makes more sense. ATM this is backwards
-  // compatible with other uses of deploy throughout the code
-
   await createChainsFromManifest(location, cli, manifest, options)
 
+  await initializeCovenants(cli, manifest, options)
+
+  // TODO: Remove connect option #652
   if (!connect) {
     await configureChains(cli, manifest, options)
   }
 
-  // TODO: Once deployed, watch the root chain for manifest updates and reconfigure #267
+  destroyRemovedChains(cli, manifest)
 
   return { cli, hypervisor, cleanup }
 }

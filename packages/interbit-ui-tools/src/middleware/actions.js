@@ -14,6 +14,7 @@ const actionTypes = {
   STATIC_CHAINS_SAGA: `${ACTION_PREFIX}/STATIC_CHAINS_SAGA`,
   PRIVATE_CHAIN_SAGA: `${ACTION_PREFIX}/PRIVATE_CHAIN_SAGA`,
   SPONSOR_CHAIN_SAGA: `${ACTION_PREFIX}/SPONSOR_CHAIN_SAGA`,
+  LOAD_CHAIN_SAGA: `${ACTION_PREFIX}/LOAD_CHAIN_SAGA`,
 
   CHAIN_UPDATED: `${ACTION_PREFIX}/CHAIN_UPDATED`,
   CHAIN_BLOCK_ADDED: `${ACTION_PREFIX}/CHAIN_BLOCK_ADDED`,
@@ -61,6 +62,14 @@ const actionCreators = {
     payload: {
       chainAlias,
       publicChainAlias
+    }
+  }),
+
+  loadChainSaga: ({ chainAlias, chainId }) => ({
+    type: actionTypes.LOAD_CHAIN_SAGA,
+    payload: {
+      chainAlias,
+      chainId
     }
   }),
 

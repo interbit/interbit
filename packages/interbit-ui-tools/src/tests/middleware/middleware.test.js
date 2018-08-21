@@ -171,6 +171,13 @@ describe('middleware', () => {
       stateChange: {}
     },
     {
+      action: actionCreators.loadChainSaga({
+        chainAlias: SOME_OTHER,
+        chainId: CHAIN_IDS.SOME_OTHER
+      }),
+      stateChange: {}
+    },
+    {
       action: actionCreators.chainStatus({ chainAlias, status: 'REALLY_BAD' }),
       stateChange: { chainData: { [chainAlias]: { status: 'REALLY_BAD' } } }
     },

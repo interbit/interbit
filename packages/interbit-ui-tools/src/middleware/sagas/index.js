@@ -6,7 +6,12 @@ const selectors = require('../selectors')
 const { LOG_PREFIX, INTERBIT_STATUS } = require('../constants')
 const { connectToPeers } = require('./connections')
 const { getInterbitContext } = require('./interbit')
-const { loadStaticChains, loadPrivateChain, sponsorChain } = require('./chains')
+const {
+  loadStaticChains,
+  loadPrivateChain,
+  sponsorChain,
+  loadChain
+} = require('./chains')
 
 const middlewareSagas = (runtimeContext = browserContext) => {
   function* rootSaga() {
@@ -23,6 +28,7 @@ const middlewareSagas = (runtimeContext = browserContext) => {
       yield takeEvery(actionTypes.STATIC_CHAINS_SAGA, staticChainsSaga)
       yield takeEvery(actionTypes.PRIVATE_CHAIN_SAGA, privateChainSaga)
       yield takeEvery(actionTypes.SPONSOR_CHAIN_SAGA, sponsorChainSaga)
+      yield takeEvery(actionTypes.LOAD_CHAIN_SAGA, loadChainSaga)
 
       yield put(actionCreators.staticChainsSaga())
     }
@@ -118,6 +124,32 @@ const middlewareSagas = (runtimeContext = browserContext) => {
         publicKey,
         publicChainAlias,
         chainAlias
+      })
+    } catch (error) {
+      console.error(`${LOG_PREFIX}: `, error)
+      yield put(actionCreators.chainError({ chainAlias, error: error.message }))
+    }
+  }
+
+  function* loadChainSaga(action) {
+    console.log(`${LOG_PREFIX}: *loadChainSaga()`, action)
+
+    const { chainAlias, chainId } = action.payload || {}
+
+    try {
+      if (!chainAlias) {
+        throw new Error('chainAlias is required')
+      }
+      if (!chainId) {
+        throw new Error('chainId is required')
+      }
+
+      const { cli } = yield call(getInterbitContext, runtimeContext)
+
+      yield call(loadChain, {
+        cli,
+        chainAlias,
+        chainId
       })
     } catch (error) {
       console.error(`${LOG_PREFIX}: `, error)

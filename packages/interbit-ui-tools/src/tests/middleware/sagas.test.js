@@ -586,4 +586,45 @@ describe('middleware sagas', () => {
       })
       .run()
   })
+
+  it('Load another chain on demand', async () => {
+    const SOME_OTHER_CHAIN_ALIAS = 'someOther'
+    const SOME_OTHER_CHAIN_ID = 'a3898cc55fc22243b329e35920044625f...'
+    const { rootSaga } = middlewareSagas(mockContext())
+    await expectSaga(rootSaga)
+      .withReducer(reducers)
+      .dispatch(
+        actionCreators.loadChainSaga({
+          chainAlias: SOME_OTHER_CHAIN_ALIAS,
+          chainId: SOME_OTHER_CHAIN_ID
+        })
+      )
+      .put.like({
+        action: {
+          type: actionTypes.CHAIN_LOADING,
+          payload: { chainAlias: SOME_OTHER_CHAIN_ALIAS }
+        }
+      })
+      .put.like({
+        action: {
+          type: actionTypes.CHAIN_LOADED,
+          payload: {
+            chainAlias: SOME_OTHER_CHAIN_ALIAS,
+            chainId: SOME_OTHER_CHAIN_ID
+          }
+        }
+      })
+      .put.like({
+        action: {
+          type: actionTypes.CHAIN_BLOCKING,
+          payload: { chainAlias: SOME_OTHER_CHAIN_ALIAS }
+        }
+      })
+      .not.put.like({
+        action: {
+          type: actionTypes.CHAIN_ERROR
+        }
+      })
+      .run()
+  })
 })

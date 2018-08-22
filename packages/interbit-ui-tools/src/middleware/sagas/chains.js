@@ -3,7 +3,7 @@ const { put, select, call, all } = require('redux-saga/effects')
 const { userHasRole } = require('./privileges')
 const { actionCreators } = require('../actions')
 const selectors = require('../selectors')
-const { LOG_PREFIX } = require('../constants')
+const { LOG_PREFIX, CHAIN_STATUS } = require('../constants')
 
 function* loadStaticChains({ cli }) {
   const chainsToLoad = yield select(selectors.getConfiguredChains)
@@ -255,9 +255,13 @@ function* tryDeleteChain({ cli, chainAlias, chainId }) {
 function* unloadChain({ chainAlias }) {
   console.log(`${LOG_PREFIX}: *unloadChain()`, { chainAlias })
 
-  yield put.resolve(actionCreators.chainUnloading({ chainAlias }))
+  const chainStatus = yield select(selectors.getChainStatus, { chainAlias })
 
-  yield put(actionCreators.chainUnloaded({ chainAlias }))
+  if (chainStatus !== CHAIN_STATUS.UNKNOWN) {
+    yield put.resolve(actionCreators.chainUnloading({ chainAlias }))
+
+    yield put(actionCreators.chainUnloaded({ chainAlias }))
+  }
 }
 
 const detectBlocking = (chain, maxTime = 5000) =>

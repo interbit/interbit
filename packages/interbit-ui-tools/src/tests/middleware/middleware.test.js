@@ -609,11 +609,11 @@ describe('middleware', () => {
     store.dispatch(chainUnloadingAction)
 
     assert.deepStrictEqual(store.actions, [
+      chainUnloadingAction,
       {
         type: actionTypes.CHAIN_UNSUBSCRIBED,
         payload: { chainAlias: PRIVATE }
-      },
-      chainUnloadingAction
+      }
     ])
   })
 

@@ -635,7 +635,7 @@ describe('middleware sagas', () => {
     await expectSaga(rootSaga)
       .withReducer(reducers)
       .dispatch(
-        actionCreators.loadChainSaga({
+        actionCreators.chainLoaded({
           chainAlias: SOME_OTHER_CHAIN_ALIAS,
           chainId: SOME_OTHER_CHAIN_ID
         })

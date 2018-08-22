@@ -136,11 +136,13 @@ const createMiddleware = (
 
       case actionTypes.CHAIN_UNLOADING:
       case actionTypes.CHAIN_DELETING: {
+        const result = next(action)
+
         const { chainAlias } = action.payload
 
         unsubscribeFromChain({ chainAlias })
 
-        return next(action)
+        return result
       }
 
       case actionTypes.CHAIN_BLOCKING: {

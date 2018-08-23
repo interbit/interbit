@@ -232,6 +232,43 @@ describe('middleware.reducer', () => {
     assertExpectedState(result, { startState, expectedStateChange })
   })
 
+  it('chainUnloading updates chain status', () => {
+    const action = actionCreators.chainUnloading({
+      chainAlias
+    })
+    const expectedStateChange = {
+      chainData: { [chainAlias]: { status: 'UNLOADING' } }
+    }
+    const result = reducer(initialState, action)
+    assertExpectedState(result, { expectedStateChange })
+  })
+
+  it('chainUnsubscribed updates chain status', () => {
+    const action = actionCreators.chainUnsubscribed(chainAlias)
+    const expectedStateChange = {
+      chainData: { [chainAlias]: { status: 'UNSUBSCRIBED' } }
+    }
+    const result = reducer(initialState, action)
+    assertExpectedState(result, { expectedStateChange })
+  })
+
+  it('chainUnloaded updates chain status and removes chain state', () => {
+    const startState = initialState.merge({
+      chains: { [chainAlias]: { thingy: 'wotsit' } },
+      chainData: { [chainAlias]: { chainId, status: 'UNLOADING' } }
+    })
+    const expectedEndState = initialState.merge({
+      chains: {},
+      chainData: { [chainAlias]: { chainId, status: 'UNLOADED' } }
+    })
+    const action = actionCreators.chainUnloaded({ chainAlias })
+    const result = reducer(startState, action)
+    assertExpectedState(result, {
+      startState,
+      expectedEndState
+    })
+  })
+
   it('chainError updates chain status and error', () => {
     const error = { message: 'Something went wrong' }
     const startState = initialState.merge({
@@ -259,7 +296,7 @@ describe('middleware.reducer', () => {
     assertExpectedState(result, { startState, expectedStateChange })
   })
 
-  it('chainDeleted remove chain data', () => {
+  it('chainDeleted removes all chain data', () => {
     const initialStateWithChains = initialState.merge({
       chains: {},
       chainData: {}

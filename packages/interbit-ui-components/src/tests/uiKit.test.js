@@ -177,11 +177,6 @@ describe('<IconButton />', () => {
     countChildren(<IconButton {...props} />, 'img', 0)
   })
 
-  it('renders an <i/> if there is an icon', () => {
-    countChildren(<IconButton icon={placeholder} {...props} />, 'i', 1)
-    countChildren(<IconButton {...props} />, 'i', 0)
-  })
-
   it('passes href prop to <Button /> only if clickHandler is undefined', () => {
     const mockFn = jest.fn()
     const wrapperWithHandler = shallow(

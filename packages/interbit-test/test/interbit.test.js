@@ -1,6 +1,7 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const assert = require('assert')
 const interbit = require('interbit-core')
+const fs = require('fs-extra')
 
 const CI_INTERBIT_KEY_GEN_TIMEOUT = 45000
 const CI_SUBSCRIBE_UNSUBSCRIBE_TIMEOUT = 8000
@@ -54,15 +55,17 @@ describe('interbit', () => {
     let keyPair
     let hypervisor
     let cli
+    let dbPath
 
     beforeAll(async done => {
       const env = { ...process.env }
+      dbPath = `./db-${Date.now()}`
 
       console.log('Generating key pair...')
       keyPair = await interbit.generateKeyPair()
 
       console.log('Creating hypervisor...')
-      process.env.DB_PATH = `./db-${Date.now()}`
+      process.env.DB_PATH = dbPath
       hypervisor = await interbit.createHypervisor({ keyPair })
 
       console.log('Creating cli...')
@@ -83,6 +86,11 @@ describe('interbit', () => {
         console.log('Stopping hyperblocker...')
         hypervisor.stopHyperBlocker()
         hypervisor = undefined
+      }
+      if (dbPath) {
+        console.log('Removing DB...')
+        await fs.remove(dbPath)
+        dbPath = undefined
       }
       done()
     })

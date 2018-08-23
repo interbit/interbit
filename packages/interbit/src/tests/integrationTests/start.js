@@ -1,18 +1,26 @@
 const assert = require('assert')
+const fs = require('fs-extra')
 const interbit = require('../../')
 
 const assertChainsConfigured = require('./assertChainsConfigured')
 const log = require('../../log')
 
 const testStart = async () => {
+  let dbPath
+  const dbCleanup = async () => {
+    if (dbPath) {
+      await fs.remove(dbPath)
+    }
+  }
   let interbitCleanup = () => {}
 
   try {
+    dbPath = `./db-${Date.now()}`
     const options = {
       // eslint-disable-next-line
       config: require('./interbit.config'),
       noWatch: true,
-      dbPath: `./db-${Date.now()}`
+      dbPath
     }
 
     log.info(options)
@@ -36,6 +44,7 @@ const testStart = async () => {
     )
   } finally {
     await interbitCleanup()
+    await dbCleanup()
   }
 }
 

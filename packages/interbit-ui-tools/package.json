@@ -25,6 +25,7 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "fs-extra": "^5.0.0",
     "interbit-core": "0.14.0",
     "jest": "20.0.4",
     "redux-saga-test-plan": "^3.6.0",

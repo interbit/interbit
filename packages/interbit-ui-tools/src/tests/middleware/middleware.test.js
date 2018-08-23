@@ -282,8 +282,7 @@ describe('middleware', () => {
           publicChainAlias: PUBLIC,
           privateChainAlias: PRIVATE,
           sponsoredChainId: undefined,
-          privateChainId: undefined,
-          dependsOnChainAlias: PUBLIC
+          privateChainId: undefined
         }
       }
     ])
@@ -311,8 +310,7 @@ describe('middleware', () => {
           publicChainAlias: PUBLIC,
           privateChainAlias: PRIVATE,
           sponsoredChainId,
-          privateChainId,
-          dependsOnChainAlias: PUBLIC
+          privateChainId
         }
       }
     ])
@@ -543,7 +541,7 @@ describe('middleware', () => {
     const sagaAction = actionCreators.loadChainSaga({
       chainAlias: SOME_OTHER,
       chainId: CHAIN_IDS.SOME_OTHER,
-      dependsOnChainAlias: PRIVATE
+      dependsOnBlockingChain: PRIVATE
     })
 
     store.dispatch(sagaAction)
@@ -578,7 +576,7 @@ describe('middleware', () => {
     const sagaAction = actionCreators.loadChainSaga({
       chainAlias: SOME_OTHER,
       chainId: CHAIN_IDS.SOME_OTHER,
-      dependsOnChainAlias: PRIVATE
+      dependsOnBlockingChain: PRIVATE
     })
 
     store.dispatch(sagaAction)

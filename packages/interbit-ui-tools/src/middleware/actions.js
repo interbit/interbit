@@ -57,8 +57,7 @@ const actionCreators = {
       publicChainAlias,
       privateChainAlias,
       sponsoredChainId,
-      privateChainId,
-      dependsOnChainAlias: publicChainAlias
+      privateChainId
     }
   }),
 
@@ -66,17 +65,16 @@ const actionCreators = {
     type: actionTypes.SPONSOR_CHAIN_SAGA,
     payload: {
       chainAlias,
-      publicChainAlias,
-      dependsOnChainAlias: publicChainAlias
+      publicChainAlias
     }
   }),
 
-  loadChainSaga: ({ chainAlias, chainId, dependsOnChainAlias }) => ({
+  loadChainSaga: ({ chainAlias, chainId, dependsOnBlockingChain }) => ({
     type: actionTypes.LOAD_CHAIN_SAGA,
     payload: {
       chainAlias,
       chainId,
-      dependsOnChainAlias
+      dependsOnBlockingChain
     }
   }),
 

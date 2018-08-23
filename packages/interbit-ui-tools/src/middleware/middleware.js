@@ -14,7 +14,8 @@ const createMiddleware = (
   const blockingChains = []
   const dispatchBuffer = {}
 
-  const isBlocking = chainAlias => blockingChains.includes(chainAlias)
+  const isBlocking = chainAlias =>
+    chainAlias && blockingChains.includes(chainAlias)
 
   const chainIsBlocking = chainAlias => {
     blockingChains.push(chainAlias)
@@ -38,8 +39,7 @@ const createMiddleware = (
     const actions = getBufferedActions(chainAlias)
     actions.forEach(action => {
       if (action.type === actionTypes.CHAIN_DISPATCH) {
-        const { action: chainAction } = action.payload
-        dispatchToChain(chainAlias, chainAction)
+        dispatchToChain(action)
       } else {
         store.dispatch(action)
       }
@@ -47,7 +47,9 @@ const createMiddleware = (
     clearBufferedActions(chainAlias)
   }
 
-  const dispatchToChain = (chainAlias, action) => {
+  const dispatchToChain = action => {
+    const { chainAlias, action: chainAction } = action.payload
+
     const { chains } = runtimeContext.getInterbit()
     const chain = chains[chainAlias]
     if (typeof chain === 'undefined') {
@@ -55,8 +57,8 @@ const createMiddleware = (
         `${LOG_PREFIX}: Chain '${chainAlias}' is not loaded. Check your interbit.config.js file.`
       )
     }
-    console.log(`${LOG_PREFIX}: dispatchToChain(): `, { chainAlias, action })
-    return chain.dispatch(action)
+    console.log(`${LOG_PREFIX}: dispatchToChain(): `, action.payload)
+    return chain.dispatch(chainAction)
   }
 
   const subscribeToChain = ({ chainAlias, chainId }) => {
@@ -99,6 +101,22 @@ const createMiddleware = (
     }
   }
 
+  const bufferActionIfChainNotBlocking = (
+    chainAlias,
+    action,
+    actionHandler
+  ) => {
+    if (!chainAlias || isBlocking(chainAlias)) {
+      return actionHandler(action)
+    }
+
+    bufferAction(chainAlias, action)
+    console.warn(
+      `${LOG_PREFIX}: Chain '${chainAlias}' is not blocking; action was buffered.`
+    )
+    return action
+  }
+
   if (publicChainAlias && privateChainAlias) {
     bufferAction(
       publicChainAlias,
@@ -114,16 +132,13 @@ const createMiddleware = (
   return next => action => {
     switch (action.type) {
       case actionTypes.CHAIN_DISPATCH: {
-        const { chainAlias, action: chainAction } = action.payload
-        if (isBlocking(chainAlias)) {
-          return dispatchToChain(chainAlias, chainAction)
-        }
+        const { chainAlias } = action.payload
 
-        bufferAction(chainAlias, action)
-        console.warn(
-          `${LOG_PREFIX}: Chain '${chainAlias}' is not blocking; action was buffered.`
+        return bufferActionIfChainNotBlocking(
+          chainAlias,
+          action,
+          dispatchToChain
         )
-        return action
       }
 
       case actionTypes.CHAIN_LOADED: {
@@ -156,19 +171,25 @@ const createMiddleware = (
         return result
       }
 
-      case actionTypes.LOAD_CHAIN_SAGA:
+      case actionTypes.LOAD_CHAIN_SAGA: {
+        const { dependsOnBlockingChain } = action.payload
+
+        return bufferActionIfChainNotBlocking(
+          dependsOnBlockingChain,
+          action,
+          next
+        )
+      }
+
       case actionTypes.PRIVATE_CHAIN_SAGA:
       case actionTypes.SPONSOR_CHAIN_SAGA: {
-        const { dependsOnChainAlias } = action.payload
-        if (!dependsOnChainAlias || isBlocking(dependsOnChainAlias)) {
-          return next(action)
-        }
+        const { publicChainAlias: dependsOnBlockingChain } = action.payload
 
-        bufferAction(dependsOnChainAlias, action)
-        console.warn(
-          `${LOG_PREFIX}: Chain '${dependsOnChainAlias}' is not blocking; action was buffered.`
+        return bufferActionIfChainNotBlocking(
+          dependsOnBlockingChain,
+          action,
+          next
         )
-        return action
       }
 
       default:

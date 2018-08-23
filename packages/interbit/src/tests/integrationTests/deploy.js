@@ -1,5 +1,6 @@
 const assert = require('assert')
 const path = require('path')
+const fs = require('fs-extra')
 
 const interbit = require('../../')
 const log = require('../../log')
@@ -8,6 +9,13 @@ const prepareTestLocation = require('./prepareTestLocation')
 
 const testDeploy = async () => {
   let interbitCleanup = () => {}
+  let buildDbPath
+  let deployDbPath
+  const dbCleanup = async dbPath => {
+    if (dbPath) {
+      await fs.remove(dbPath)
+    }
+  }
 
   try {
     const { location, cleanup: locationCleanup } = prepareTestLocation('deploy')
@@ -27,10 +35,11 @@ const testDeploy = async () => {
     config.staticChains.first.config.validators = [keyPair.publicKey]
     config.staticChains.second.config.validators = [keyPair.publicKey]
 
+    buildDbPath = `./db-${Date.now()}`
     const buildOptions = {
       config,
       artifacts,
-      dbPath: `./db-${Date.now()}`
+      dbPath: buildDbPath
     }
     await interbit.build(buildOptions)
 
@@ -44,11 +53,12 @@ const testDeploy = async () => {
     ))
     log.info(manifest)
 
+    deployDbPath = `./db-${Date.now()}`
     const deployOptions = {
       manifest,
       location: artifacts,
       keyPair,
-      dbPath: `./db-${Date.now()}`
+      dbPath: deployDbPath
     }
 
     log.info(deployOptions)
@@ -68,6 +78,8 @@ const testDeploy = async () => {
     locationCleanup()
   } finally {
     await interbitCleanup()
+    await dbCleanup(buildDbPath)
+    await dbCleanup(deployDbPath)
   }
 }
 

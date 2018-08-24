@@ -5,6 +5,7 @@ const {
   }
 } = require('interbit-covenant-tools')
 
+const log = require('../log')
 const {
   generateDeploymentDetails,
   deployCovenants
@@ -13,7 +14,7 @@ const {
 const watchCovenants = (cli, interbitConfig, chainManifest) => {
   const covenants = getCovenants(interbitConfig)
   Object.entries(covenants).forEach(([name, config]) => {
-    console.log(`Watching for changes in ${config.location}`)
+    log.info(`Watching for changes in ${config.location}`)
 
     watch.createMonitor(config.location, monitor => {
       try {
@@ -28,7 +29,7 @@ const watchCovenants = (cli, interbitConfig, chainManifest) => {
         })
       } catch (e) {
         monitor.stop()
-        console.error(
+        log.error(
           `interbit: Problem redeploying covenant ${name} at ${config.location}`
         )
       }
@@ -42,7 +43,7 @@ const redeployBuffer = {
 }
 
 const redeployCovenants = async (cli, interbitConfig, chainManifest) => {
-  console.log('attempted to redeploy')
+  log.info('attempted to redeploy')
   if (redeployBuffer.isDeploying) {
     redeployBuffer.isDeployPending = true
     return undefined
@@ -51,7 +52,7 @@ const redeployCovenants = async (cli, interbitConfig, chainManifest) => {
   }
   redeployBuffer.isDeploying = true
 
-  console.log('Redeploying updated covenants...')
+  log.info('Redeploying updated covenants...')
 
   const covenantHashes = await deployCovenants({
     cli,
@@ -85,7 +86,7 @@ const updateManifest = (chainManifest, covenantHashes, defaultChain) => {
     chainManifest,
     covenantHashes
   )
-  console.log('Updated deploymentDetails ', deploymentDetails)
+  log.info('Updated deploymentDetails ', deploymentDetails)
 
   // TODO: dispatch updated deployment deets to the defaultChain
 }

@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs-extra')
 
+const log = require('../log')
 const getArtifactsLocation = require('./getArtifactsLocation')
 const { getArg } = require('./getArg')
 const { MANIFEST } = require('./argOptions')
@@ -15,14 +16,17 @@ const getManifestLocation = () => {
   return manifestLocation
 }
 
+/**
+ * Gets the interbit manifest file from disk based on the --manifest
+ * option passed through process args.
+ * @returns {Object|undefined} The manifest file, if found, as a JSON object
+ */
 const getManifest = () => {
   const manifestLocation = getManifestLocation()
 
   const doesManifestExist = fs.existsSync(manifestLocation)
   if (!doesManifestExist) {
-    console.error(
-      `Manifest file does not exist at location ${manifestLocation}`
-    )
+    log.error(`Manifest file does not exist at location ${manifestLocation}`)
     return undefined
   }
 
@@ -30,7 +34,7 @@ const getManifest = () => {
     ? `${manifestLocation}/interbit.manifest.json`
     : manifestLocation
 
-  console.log(`Loading manifest at ${manifestFilepath}`)
+  log.info(`Loading manifest at ${manifestFilepath}`)
 
   // eslint-disable-next-line
   const manifest = require(manifestFilepath)

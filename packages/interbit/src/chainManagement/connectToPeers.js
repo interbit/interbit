@@ -1,6 +1,15 @@
+const log = require('../log')
+
 // Port 443 appropriate for https deployment
 const DEFAULT_PORT = 443
 
+/**
+ * Attempts to connect node to peers.
+ * @param {Object} cli - the cli for the node to connect
+ * @param {Array} manifestPeers - the list of peers to connect to
+ * @param {number} maxRetries - the maximum number of times to attempt each connection
+ * @param {number} timeout - the maximum time to wait for each connection attempt
+ */
 const connectToPeers = async (
   cli,
   manifestPeers = [],
@@ -10,11 +19,12 @@ const connectToPeers = async (
   const peerOverride = process.env.CONNECT_TO_PEERS
   const peers = peerOverride ? peerOverride.split(',') : manifestPeers
 
-  console.log('CONNECTING TO PEERS', peers)
+  log.info('CONNECTING TO PEERS', peers)
   for (const peer of peers) {
     const [toAddress, toPort] = peer.split(':')
     await tryConnect({ cli, toAddress, toPort, maxRetries, timeout })
   }
+  log.success('Connected to peers')
 }
 
 const tryConnect = async ({
@@ -26,16 +36,16 @@ const tryConnect = async ({
 }) => {
   if (toAddress && toPort) {
     try {
-      console.log(`Connecting: ${toAddress}:${toPort}`)
+      log.info(`Connecting: ${toAddress}:${toPort}`)
       await cli.connect(
         Number(toPort),
         toAddress,
         Number(maxRetries),
         Number(timeout)
       )
-      console.log(`Connected to: ${toAddress}:${toPort}`)
+      log.info(`Connected to: ${toAddress}:${toPort}`)
     } catch (error) {
-      console.warn(`Connection failed: ${toAddress}:${toPort}`)
+      log.warn(`Connection failed: ${toAddress}:${toPort}`)
     }
   }
 }

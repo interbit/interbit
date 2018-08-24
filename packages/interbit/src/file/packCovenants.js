@@ -6,20 +6,33 @@ const {
   constants: { ROOT_CHAIN_ALIAS }
 } = require('interbit-covenant-tools')
 
+const log = require('../log')
 const { startInterbit } = require('../chainManagement')
 
 // Note: Because interbit-core does not expose it's hashing function (yet) we ned to
 // start a cli and deploy the covenants to get a valid hash that is in sync with interbit
 // TODO: update this to use the hashing function instead of starting a CLI -- Blocked until core releases hashing algo in API
+/**
+ * Packs the covenants specified in covenantConfig and stores them in the artifacts
+ * folder for future deployment to an Interbit node.
+ * @param {String} location - file location to work from
+ * @param {Object} covenantConfig - Configuration for the covenants to pack.
+ *    Typically from an interbit config file.
+ * @param {Object} options - Options for packing this covenant
+ * @param {Object} options.keyPair - public private key pair (to start the node for packing)
+ * @param {Object} options.port - Port for this node to bind to
+ * @param {Object} options.dbPath - Filepath to hold this node's database
+ * @returns {Object} - A map of the covenant aliases packed to the hash and packed fle location
+ */
 const packCovenants = async (location, covenantConfig, options = {}) => {
   const { cli, cleanup } = await startInterbit(undefined, options)
   const packedCovenants = {}
 
   try {
     const covenants = Object.entries(covenantConfig)
-    console.log('PACKING COVENANTS', covenants)
+    log.info('PACKING COVENANTS', covenants)
     for (const [covenantAlias, config] of covenants) {
-      console.log(`...packing ${covenantAlias} from ${config.location}`)
+      log.info(`...packing ${covenantAlias} from ${config.location}`)
       const packedCovenant = await packCovenant(cli, location, config.location)
 
       packedCovenants[covenantAlias] = packedCovenant

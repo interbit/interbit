@@ -3,16 +3,24 @@ const path = require('path')
 const promisify = require('util').promisify
 const exec = promisify(require('child_process').exec)
 const writeJsonFile = require('../file/writeJsonFile')
+const log = require('../log')
 
 const TEMPLATE_VERSION = '0.4.27'
 
+/**
+ * Creates a new Interbit/React/Redux template application from options in
+ * the filesystem.
+ * @param {Object} options - The creation options
+ * @param {Object} options.appName - Desired application name
+ * @param {Object} options.location - File location to work from, usually process.cwd()
+ */
 const create = async options => {
   const { appName, location } = options
 
   process.chdir(location)
   const newAppDir = path.join(location, appName)
 
-  console.log(`interbit create: Creating ${appName} in ${newAppDir}`)
+  log.info(`interbit create: Creating ${appName} in ${newAppDir}`)
 
   if (!appName) {
     throw new Error('interbit create: appName must be provided')
@@ -30,7 +38,7 @@ const create = async options => {
     )
   }
 
-  console.log('Pulling template file from npm...')
+  log.info('Pulling template file from npm...')
   const tmpDir = path.join(newAppDir, 'tmp')
   const expectedTemplateLocation = await installTemplate(tmpDir)
 
@@ -38,16 +46,16 @@ const create = async options => {
     throw new Error('interbit create: Problem installing template from npm')
   }
 
-  console.log(`Customizing ${appName}...`)
+  log.info(`Customizing ${appName}...`)
   process.chdir(location)
   fs.copySync(expectedTemplateLocation, newAppDir)
 
-  console.log('Cleaning up...')
+  log.info('Cleaning up...')
   cleanupPackageJson(newAppDir, appName)
   await npmInstall(newAppDir)
   fs.removeSync(tmpDir)
 
-  console.log('... done!')
+  log.info('... done!')
 }
 
 const installTemplate = async dir => {

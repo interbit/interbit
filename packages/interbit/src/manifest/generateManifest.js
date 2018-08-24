@@ -10,17 +10,27 @@ const {
   resolveGenesisBlocks,
   resolveChainIdsFromGenesis
 } = require('../genesisBlock')
-
+const log = require('../log')
 const { createManifestTree } = require('./createManifestTree')
 
+/**
+ * Generates a manifest file based on the configuration and optional original
+ * manifest passed into parameters, resolving config specifications to chain Ids,
+ * covenant hashes, and genesis blocks.
+ * @param {String} location - file location to work from. Commonly process.cwd()
+ * @param {Obejct} interbitConfig - interbit configuration file as JSON
+ * @param {Object} covenants - Covenant alias to hash map
+ * @param {[originalManifest]} manifest - interbit manifest file if available
+ * @returns {Object} - generated Interbit manifest
+ */
 const generateManifest = (
   location,
   interbitConfig,
   covenants,
   originalManifest
 ) => {
-  console.log('GENERATING A MANIFEST')
-  console.log({ location, interbitConfig, covenants, originalManifest })
+  log.info('GENERATING A MANIFEST')
+  log.info({ location, interbitConfig, covenants, originalManifest })
   const config = validateConfig(interbitConfig)
 
   const genesisBlocks = resolveGenesisBlocks(

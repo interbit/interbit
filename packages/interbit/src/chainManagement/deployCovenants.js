@@ -1,5 +1,17 @@
+const log = require('../log')
+
+/**
+ * Deploys a set of covenants defined in config to a chain.
+ * These covenant configurations should point to covenant package
+ * file locations.
+ * @param {Object} params - Params object
+ * @param {Object} params.cli - cli of the node to deploy the covenants to
+ * @param {Object} params.covenantConfig - configuration info for the covenants
+ *    to deploy Typically out of a config file.
+ * @returns {Object} - The covenant hashes mapped to the covenant aliases
+ */
 const deployCovenants = async ({ cli, covenantConfig }) => {
-  console.log('DEPLOYING COVENANTS')
+  log.info('DEPLOYING COVENANTS')
   const covenants = Object.keys(covenantConfig)
 
   const covenantHashes = {}
@@ -7,7 +19,7 @@ const deployCovenants = async ({ cli, covenantConfig }) => {
   for (const covenantName of covenants) {
     const config = covenantConfig[covenantName]
 
-    console.log('DEPLOYING COVENANT:', {
+    log.info('DEPLOYING COVENANT:', {
       covenantName,
       location: config.location
     })
@@ -15,13 +27,13 @@ const deployCovenants = async ({ cli, covenantConfig }) => {
     const covenantHash = await cli.deployCovenant(config.location)
     covenantHashes[covenantName] = covenantHash
 
-    console.log('DEPLOYED COVENANT:', {
+    log.info('DEPLOYED COVENANT:', {
       covenantName,
       covenantHash
     })
   }
 
-  console.log('DEPLOYED COVENANTS')
+  log.success('DEPLOYED COVENANTS')
   return covenantHashes
 }
 

@@ -6,8 +6,18 @@ const {
   }
 } = require('interbit-covenant-tools')
 
+const log = require('../log')
+
+/**
+ * Updates the index.html files in the configured applications with their
+ * configured peers and chain Ids so that browser nodes know how to connect
+ * to the network.
+ * @param {Object} params - Params object
+ * @param {Object} params.config - The interbit configuration specifying apps config
+ * @param {Object} params.chains - The chain alias to chain ID map to use
+ */
 const updateIndexHtmls = ({ config, chains }) => {
-  console.log({ config, chains })
+  log.info({ config, chains })
   const apps = getApps(config)
   if (!apps) {
     return
@@ -21,10 +31,10 @@ const updateIndexHtmls = ({ config, chains }) => {
 }
 
 const updateIndexHtml = ({ appConfig, chains }) => {
-  console.log(appConfig)
+  log.info(appConfig)
   const indexHtmlFilepath = appConfig.indexLocation
 
-  console.log('Updating index.html with chain data...', indexHtmlFilepath)
+  log.info('Updating index.html with chain data...', indexHtmlFilepath)
   const indexHtml = fs.readFileSync(indexHtmlFilepath).toString()
 
   const dom = cheerio.load(indexHtml)
@@ -33,15 +43,13 @@ const updateIndexHtml = ({ appConfig, chains }) => {
   const updatedIndexHtml = `<!DOCTYPE html>\n${dom(':root').toString()}`
   fs.writeFileSync(indexHtmlFilepath, updatedIndexHtml)
 
-  console.log('Finished updating index.html with chain IDs')
+  log.success('Finished updating index.html with chain IDs')
 }
 
 const updateDom = (dom, appConfig, chains) => {
   const interbitElement = dom('#interbit')
   if (!interbitElement.length) {
-    console.error(
-      'ERR index.html must contain a <script> tag with [id="interbit"]'
-    )
+    log.error('ERR index.html must contain a <script> tag with [id="interbit"]')
     return
   }
 
@@ -63,7 +71,7 @@ const stripChainAttrs = interbitElement => {
 
 const insertChainsInDom = (interbitElement, appConfig, chains) => {
   if (!chains) {
-    console.error('No chains have been deployed to your node')
+    log.error('No chains have been deployed to your node')
     return
   }
 
@@ -78,7 +86,7 @@ const insertChainsInDom = (interbitElement, appConfig, chains) => {
 const updateMetadata = (interbitElement, appConfig) => {
   const { peers } = appConfig
   if (!peers) {
-    console.warn(
+    log.warn(
       'Interbit configuration file does not contain any peers for one of its apps'
     )
   } else {

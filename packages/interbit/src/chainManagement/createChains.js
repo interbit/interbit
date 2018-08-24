@@ -13,6 +13,7 @@ const {
   }
 } = require('interbit-covenant-tools')
 
+const log = require('../log')
 const deployCovenants = require('./deployCovenants')
 const connectToPeers = require('./connectToPeers')
 const { joinChains } = require('./joinChains')
@@ -26,7 +27,7 @@ const { joinChains } = require('./joinChains')
  * @param {Object} options - Additional options for configuration
  */
 const createChainsFromManifest = async (location, cli, manifest, options) => {
-  console.log('DEPLOYING COVENANTS')
+  log.info('DEPLOYING COVENANTS')
   if (!options.connect) {
     const covenants = getCovenantsFromManifest(manifest)
     const covenantEntries = Object.values(covenants)
@@ -35,7 +36,7 @@ const createChainsFromManifest = async (location, cli, manifest, options) => {
         `${location}/${covenantManifest.filename}`
       )
       await cli.deployCovenant(covenantLocation)
-      console.log(`...deployed${covenantLocation}`)
+      log.info(`...deployed${covenantLocation}`)
     }
   }
 
@@ -48,11 +49,11 @@ const createChainsFromManifest = async (location, cli, manifest, options) => {
     const chainId = genesisBlock.blockHash
     try {
       await cli.loadChain(chainId)
-      console.log(`Loaded chain ${chainId}`)
+      log.info(`Loaded chain ${chainId}`)
     } catch (e) {
       if (e.message.startsWith('waitForState timeout after waiting 20000 ms')) {
         await cli.startChain({ genesisBlock })
-        console.log(`Created chain ${chainId}`)
+        log.info(`Created chain ${chainId}`)
 
         const chain = cli.getChain(chainId)
         chain.dispatch({ type: '@@interbit/DEPLOY' })
@@ -61,11 +62,19 @@ const createChainsFromManifest = async (location, cli, manifest, options) => {
       }
     }
   }
+
+  log.success('Chains were created from manifest')
 }
 
 // SET FOR DEPRECATION: Pending issue #79
+/**
+ * Uses a config to create chains from genesisBlocks and configures the
+ * cli with peers and covenants from the manifest.
+ * @param {Object} cli - cli of the node to configure
+ * @param {Object} interbitConfig - configuration to use
+ */
 const createChainsFromConfig = async (cli, interbitConfig) => {
-  console.log('BOOTING CHAINS')
+  log.info('BOOTING CHAINS')
 
   const chainsConfig = getChains(interbitConfig)
 
@@ -90,7 +99,7 @@ const createChainsFromConfig = async (cli, interbitConfig) => {
       const covenantHash = covenantHashes[chainConfig.covenant]
       const chainId = await cli.createChain()
 
-      console.log('CREATING CHAIN: ', {
+      log.info('CREATING CHAIN: ', {
         chainAlias,
         covenantHash,
         chainId
@@ -107,13 +116,13 @@ const createChainsFromConfig = async (cli, interbitConfig) => {
       }
     }
 
-    console.log('BOOTING COMPLETE')
-
+    log.info('BOOTING COMPLETE')
     await joinChains(chainManifest, cli, interbitConfig)
+    log.success('Chains were created from config')
 
     return { chainManifest, covenantHashes }
   } catch (err) {
-    console.error('CREATE CHAINS FAILURE:', err)
+    log.error('CREATE CHAINS FAILURE:', err)
     throw err
   }
 }

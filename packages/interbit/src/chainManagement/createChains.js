@@ -19,12 +19,12 @@ const connectToPeers = require('./connectToPeers')
 const { joinChains } = require('./joinChains')
 
 /**
- * Uses a manifest to create chains from genesisBlocks and configures the
+ * Uses a manifest to create chains from genesis blocks and configures the
  * cli with peers and covenants from the manifest.
- * @param {string} location - The file location to work from
- * @param {Object} cli - The Interbit cli to configure and create chains on
- * @param {Object} manifest - The Interbit manifest with config options
- * @param {Object} options - Additional options for configuration
+ * @param {string} location - The file location to work from.
+ * @param {Object} cli - The Interbit cli to configure and create chains on.
+ * @param {Object} manifest - The Interbit manifest with config options.
+ * @param {Object} options - Additional options for configuration.
  */
 const createChainsFromManifest = async (location, cli, manifest, options) => {
   log.info('DEPLOYING COVENANTS')
@@ -68,10 +68,10 @@ const createChainsFromManifest = async (location, cli, manifest, options) => {
 
 // SET FOR DEPRECATION: Pending issue #79
 /**
- * Uses a config to create chains from genesisBlocks and configures the
+ * Uses a config to create chains without genesis blocks or keys and configures the
  * cli with peers and covenants from the manifest.
- * @param {Object} cli - cli of the node to configure
- * @param {Object} interbitConfig - configuration to use
+ * @param {Object} cli - The cli of the node to configure.
+ * @param {Object} interbitConfig - The Interbit configuration to use.
  */
 const createChainsFromConfig = async (cli, interbitConfig) => {
   log.info('BOOTING CHAINS')

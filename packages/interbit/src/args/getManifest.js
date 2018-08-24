@@ -17,9 +17,9 @@ const getManifestLocation = () => {
 }
 
 /**
- * Gets the interbit manifest file from disk based on the --manifest
+ * Gets the Interbit manifest file from disk based on the `--manifest`
  * option passed through process args.
- * @returns {Object|undefined} The manifest file, if found, as a JSON object
+ * @returns {Object|undefined} The manifest file, if found, as a JSON object.
  */
 const getManifest = () => {
   const manifestLocation = getManifestLocation()

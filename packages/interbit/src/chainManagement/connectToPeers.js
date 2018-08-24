@@ -4,11 +4,11 @@ const log = require('../log')
 const DEFAULT_PORT = 443
 
 /**
- * Attempts to connect node to peers.
- * @param {Object} cli - the cli for the node to connect
- * @param {Array} manifestPeers - the list of peers to connect to
- * @param {number} maxRetries - the maximum number of times to attempt each connection
- * @param {number} timeout - the maximum time to wait for each connection attempt
+ * Attempts to connect a node to peers.
+ * @param {Object} cli - The cli that is connecting to peers.
+ * @param {Array} manifestPeers - The list of peers to connect to.
+ * @param {number} maxRetries - The maximum number of times to attempt each connection.
+ * @param {number} timeout - The maximum time to wait for each connection attempt.
  */
 const connectToPeers = async (
   cli,

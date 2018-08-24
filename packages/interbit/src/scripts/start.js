@@ -13,11 +13,11 @@ const {
 const log = require('../log')
 
 /**
- * Starts an interbit node with chains based on the provided options
- * @param {Object} options - interbit node start options
- * @param {Object} options.config - Interbit configuration for the node
- * @param {boolean} options.dev - whether to run in dev mode and watch covenant files for changes
- * @param {boolean} options.noWatch - override covenant watch: don't do it
+ * Starts an interbit node with chains based on the provided options.
+ * @param {Object} options - The Interbit node start options.
+ * @param {Object} options.config - Interbit configuration for the node.
+ * @param {boolean} options.dev - Whether to run in dev mode and watch covenant files for changes.
+ * @param {boolean} options.noWatch - Option to override covenant watch if in dev mode.
  */
 const start = async options => {
   const { config, dev, noWatch } = options

@@ -4,11 +4,11 @@ const log = require('../log')
  * Deploys a set of covenants defined in config to a chain.
  * These covenant configurations should point to covenant package
  * file locations.
- * @param {Object} params - Params object
- * @param {Object} params.cli - cli of the node to deploy the covenants to
- * @param {Object} params.covenantConfig - configuration info for the covenants
- *    to deploy Typically out of a config file.
- * @returns {Object} - The covenant hashes mapped to the covenant aliases
+ * @param {Object} params - The params object.
+ * @param {Object} params.cli - The cli of the node to deploy the covenants to.
+ * @param {Object} params.covenantConfig - Configuration info for the covenants
+ *    to deploy, typically out of a config file.
+ * @returns {Object} - The covenant hashes mapped to the covenant aliases.
  */
 const deployCovenants = async ({ cli, covenantConfig }) => {
   log.info('DEPLOYING COVENANTS')

@@ -17,9 +17,9 @@ const log = require('../log')
 /**
  * Configures joins on the chain whose interface is passed into params, based
  * on joins as param. Uses the manifest for chain ID resolution in the joins.
- * @param {Object} chainInterface - Interface to the chain to be configured
- * @param {Object} joins - Join configuration for the chain
- * @param {Object} interbitManifest - Manifest containing chain ID to alias resolutions
+ * @param {Object} chainInterface - Interface to the chain to be configured.
+ * @param {Object} joins - Join configuration for the chain.
+ * @param {Object} interbitManifest - Manifest containing chain ID to alias resolutions.
  */
 const configureJoins = (chainInterface, joins, interbitManifest) => {
   const consume = configureConsume(joins[JOIN_TYPES.CONSUME], interbitManifest)

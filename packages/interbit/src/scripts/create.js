@@ -10,9 +10,9 @@ const TEMPLATE_VERSION = '0.4.27'
 /**
  * Creates a new Interbit/React/Redux template application from options in
  * the filesystem.
- * @param {Object} options - The creation options
- * @param {Object} options.appName - Desired application name
- * @param {Object} options.location - File location to work from, usually process.cwd()
+ * @param {Object} options - The creation options.
+ * @param {Object} options.appName - Desired application name.
+ * @param {Object} options.location - File location to work from, usually `process.cwd()`.
  */
 const create = async options => {
   const { appName, location } = options

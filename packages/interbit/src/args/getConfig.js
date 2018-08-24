@@ -15,9 +15,9 @@ const getConfigLocation = () => {
 }
 
 /**
- * Gets the interbit configuration file from disk based on the --config
+ * Gets the Interbit configuration file from disk based on the `--config`
  * option passed through process args.
- * @returns {Object|undefined} The configuration file, if found, as a JSON object
+ * @returns {Object|undefined} The configuration file, if found, as a JSON object.
  */
 const getConfig = () => {
   const configLocation = getConfigLocation()

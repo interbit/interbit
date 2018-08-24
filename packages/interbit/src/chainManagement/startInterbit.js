@@ -10,13 +10,13 @@ const log = require('../log')
  * Starts an interbit node, returning the cli, hypervisor, and a function
  * to safely cleanup the node.
  * @param {Object} keyPair - The key pair to use to create and authorize this
- *  node in the network
- * @param {Object} keyPair.publicKey - Public key part of this key pair
- * @param {Object} keyPair.privateKey - Private key part of this key pair
- * @param {Object} options - The options used to configure and create this node
- * @param {Object} options.port - Port for this node to bind to
- * @param {Object} options.dbPath - Filepath to hold this node's database
- * @returns {Object} - cli, hypervisor, and cleanup function for this node
+ *  node in the network.
+ * @param {Object} keyPair.publicKey - Public key for this key pair.
+ * @param {Object} keyPair.privateKey - Private key for this key pair.
+ * @param {Object} options - The options used to configure and create this node.
+ * @param {Object} options.port - Port for this node to bind to.
+ * @param {Object} options.dbPath - Filepath to hold this node's database.
+ * @returns {Object} - `cli`, `hypervisor`, and `cleanup` function for this node.
  */
 const startInterbit = async (keyPair, options = {}) => {
   const port = _.get(options, ['port']) || 5000

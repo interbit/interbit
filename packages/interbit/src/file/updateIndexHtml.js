@@ -9,12 +9,12 @@ const {
 const log = require('../log')
 
 /**
- * Updates the index.html files in the configured applications with their
- * configured peers and chain Ids so that browser nodes know how to connect
+ * Updates the `index.html` files in the configured applications with their
+ * configured peers and chain IDs so that browser nodes know how to connect
  * to the network.
- * @param {Object} params - Params object
- * @param {Object} params.config - The interbit configuration specifying apps config
- * @param {Object} params.chains - The chain alias to chain ID map to use
+ * @param {Object} params - The params object.
+ * @param {Object} params.config - The interbit configuration specifying apps config.
+ * @param {Object} params.chains - The chain alias to chain ID map to use.
  */
 const updateIndexHtmls = ({ config, chains }) => {
   log.info({ config, chains })

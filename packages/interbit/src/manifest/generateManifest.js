@@ -17,11 +17,11 @@ const { createManifestTree } = require('./createManifestTree')
  * Generates a manifest file based on the configuration and optional original
  * manifest passed into parameters, resolving config specifications to chain Ids,
  * covenant hashes, and genesis blocks.
- * @param {String} location - file location to work from. Commonly process.cwd()
- * @param {Obejct} interbitConfig - interbit configuration file as JSON
- * @param {Object} covenants - Covenant alias to hash map
- * @param {[originalManifest]} manifest - interbit manifest file if available
- * @returns {Object} - generated Interbit manifest
+ * @param {String} location - The file location to work from, commonly `process.cwd()`.
+ * @param {Obejct} interbitConfig - The Interbit configuration file as JSON.
+ * @param {Object} covenants - A map of covenant aliases to their hashes.
+ * @param {[originalManifest]} manifest - The Interbit manifest file as JSON, if available.
+ * @returns {Object} - The newly generated Interbit manifest.
  */
 const generateManifest = (
   location,

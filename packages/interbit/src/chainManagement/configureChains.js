@@ -19,8 +19,8 @@ process.on('unhandledRejection', reason => {
  * Configures the chains on a node to the specifications in the Interbit
  * manifest file passed in params. Applies covenants, configures joins, and
  * dispatches the manifest to the chain.
- * @param {Object} cli - Interbit cli for the node to configure
- * @param {Object} interbitManifest - Manifest file specifying configuration
+ * @param {Object} cli - Interbit cli for the node to configure.
+ * @param {Object} interbitManifest - Manifest file specifying configuration.
  */
 const configureChains = async (cli, interbitManifest) => {
   const childChains = getRootChildren(interbitManifest)

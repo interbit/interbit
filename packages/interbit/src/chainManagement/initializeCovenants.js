@@ -16,16 +16,21 @@ const {
  * @param {Object} options - Additional options related to this node
  */
 const initializeCovenants = async (cli, manifest, options) => {
+  console.log('INITIALIZING COVENANTS')
   const chainEntries = Object.entries(getChains(manifest))
   for (const [chainAlias, chainId] of chainEntries) {
     const chainInterface = cli.getChain(chainId)
     const state = chainInterface.getState()
+    console.log(`STATE FOR ${chainAlias}:`)
+    console.log(JSON.stringify(state, null, 2))
     const currentCovenantHash = getCovenantHash(state)
-
     if (!currentCovenantHash) {
       const configuredCovenantHash = getCovenantHashByAlias(
         chainAlias,
         manifest
+      )
+      console.log(
+        `No covenant found on ${chainAlias}... applying covenant ${configuredCovenantHash}`
       )
       cli.applyCovenant(chainId, configuredCovenantHash)
     }

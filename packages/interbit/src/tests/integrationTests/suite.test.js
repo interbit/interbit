@@ -11,5 +11,5 @@ test('interbit keys generates a keypair', testKeys, TIMEOUT)
 test(
   'interbit keys>build>deploy runs correctly configured',
   testDeploy,
-  TIMEOUT * 3
+  TIMEOUT * 5
 )

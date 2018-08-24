@@ -22,7 +22,7 @@ const { startInterbit } = require('../chainManagement')
  * @param {Object} options.keyPair - public private key pair (to start the node for packing)
  * @param {Object} options.port - Port for this node to bind to
  * @param {Object} options.dbPath - Filepath to hold this node's database
- * @returns {Object} - A map of the covenant aliases packed to the hash and packed fle location
+ * @returns {Object} - A map of the covenant aliases packed to the hash and packed file location
  */
 const packCovenants = async (location, covenantConfig, options = {}) => {
   const { cli, cleanup } = await startInterbit(undefined, options)

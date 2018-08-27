@@ -1,6 +1,5 @@
 export default {
   HOME: '/',
-  CONTACT: '/contact',
   DEVELOPERS: '/developers',
   DEVELOPERS_APP_DIRECTORY: '/developers/app-directory',
   DEVELOPERS_ARCHITECTURE: '/developers/architecture',

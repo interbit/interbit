@@ -17,7 +17,7 @@ We will be continually updating Interbit - adding functionality, applications, a
   intro: `We won\u2019t have pay-as-you grow pricing until we transition out of test mode. During this time we are talking to our growing community to be sure that our customers can start for free and then pay only for what they need. And, be happy with the bill.
 
 Connect with us [here](${
-    constants.paths.CONTACT
+    constants.urls.BTL_CONTACT
   }) or come talk to us at the next [event](http://btl.co/events/).`,
 
   pricingTitle: 'Pay-as-you-grow',

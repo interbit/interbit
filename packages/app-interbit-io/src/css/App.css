@@ -13,20 +13,6 @@
   @media (max-width: 629px) {
     .ibweb.app-interbit-io .ibweb-page.platform-roadmap h1, .ibweb.app-interbit-io .ibweb-page.pricing h1 {
       margin-bottom: 16px; } }
-.ibweb.app-interbit-io .ibweb-page.contact .pipedrive-container {
-  padding: 64px;
-  border-radius: 16px;
-  height: 1005px;
-  background: #f3f5f6; }
-  .ibweb.app-interbit-io .ibweb-page.contact .pipedrive-container .pipedriveWebForms {
-    height: 100%; }
-    .ibweb.app-interbit-io .ibweb-page.contact .pipedrive-container .pipedriveWebForms iframe {
-      position: relative;
-      border: none;
-      overflow: hidden;
-      width: 100%;
-      max-width: 768px;
-      height: 100%; }
 .ibweb.app-interbit-io .ibweb-page.platform .logos h4 {
   margin-bottom: 32px; }
 .ibweb.app-interbit-io .ibweb-page.platform .logos .logo {

@@ -41,7 +41,7 @@ export default {
     image: iconChatEmpty,
     content:
       'Get in touch to receive more information about Interbit and learn what it can do for your business.',
-    to: constants.paths.CONTACT,
+    to: constants.urls.BTL_CONTACT,
     className: 'blue'
   },
   downloadSDK: {
@@ -87,7 +87,7 @@ export default {
     image: iconChatEmpty,
     content:
       'If you\u2019re looking for a customized Enterprise level pricing option, please contact us for more information.',
-    to: constants.paths.CONTACT,
+    to: constants.urls.BTL_CONTACT,
     className: 'blue'
   },
   pricingFree: {
@@ -108,7 +108,7 @@ export default {
     title: 'Request a Demo',
     image: iconChatEmpty,
     content: 'Arrange to view a demo and speak to one of our experts.',
-    to: constants.paths.CONTACT,
+    to: constants.urls.BTL_CONTACT,
     className: 'blue'
   },
   resources: {

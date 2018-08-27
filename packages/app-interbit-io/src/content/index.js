@@ -1,6 +1,5 @@
 import constants from '../constants'
 
-import contact from './contact'
 import developers from './developers'
 import home from './home'
 import linkBars from './linkBars'
@@ -8,7 +7,6 @@ import platform from './platform'
 import policies from './policies'
 
 export default {
-  contact,
   developers,
   home,
   linkBars,

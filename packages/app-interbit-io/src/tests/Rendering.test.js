@@ -6,7 +6,6 @@ import { BrowserRouter } from 'react-router-dom'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import App from '../App'
-import Contact from '../containers/Contact'
 import DevelopersArchitecture from '../containers/Developers/Architecture'
 import DevelopersExampleApps from '../containers/Developers/ExampleApps'
 import DevelopersOverview from '../containers/Developers/Overview'
@@ -40,9 +39,6 @@ describe('Renders without crashing:', () => {
   })
 
   describe('Containers', () => {
-    it('Contact', () => {
-      renderWithContext(<Contact />)
-    })
     it('Dev Chain Architecture', () => {
       renderWithContext(<DevelopersArchitecture />)
     })

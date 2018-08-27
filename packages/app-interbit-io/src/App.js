@@ -5,7 +5,6 @@ import { Header, Footer, Logo, IBIcon } from 'interbit-ui-components'
 
 import constants from './constants'
 import Home from './containers/Home'
-import Contact from './containers/Contact'
 import Platform from './containers/Platform/Platform'
 import PlatformInterbitForBusiness from './containers/Platform/InterbitForBusiness'
 import NotFound from './containers/NotFound'
@@ -28,7 +27,6 @@ class App extends Component {
         <Grid>
           <Switch>
             <Route exact path={constants.paths.HOME} component={Home} />
-            <Route exact path={constants.paths.CONTACT} component={Contact} />
             <Route exact path={constants.paths.PLATFORM} component={Platform} />
             <Route
               exact

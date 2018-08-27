@@ -14,6 +14,7 @@ import { ChainConnect } from '../containers/ChainConnect'
 import { EmailSuccess } from '../containers/EmailSuccess'
 import { CreateAccount } from '../containers/CreateAccount'
 import { InteractiveChains } from '../containers/InteractiveChains'
+import { Profile } from '../containers/Profile'
 import reducers from '../redux'
 
 const renderWithContext = component => {
@@ -137,6 +138,11 @@ describe('Renders without crashing:', () => {
 
     it('PageContainer', () => {
       renderWithContext(<PageContainer />)
+    })
+
+    // TODO: Issue #638 - write rendering test for Profile component
+    it.skip('Profile', () => {
+      renderWithContext(<Profile />)
     })
 
     it('InteractiveChains', () => {

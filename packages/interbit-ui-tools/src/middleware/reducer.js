@@ -103,6 +103,29 @@ const reducer = (state = initialState, action = {}) => {
       return state.setIn([CHAIN_DATA, chainAlias, STATUS], CHAIN_STATUS.LOADING)
     }
 
+    case actionTypes.CHAIN_UNLOADING: {
+      const { chainAlias } = action.payload
+      return state.setIn(
+        [CHAIN_DATA, chainAlias, STATUS],
+        CHAIN_STATUS.UNLOADING
+      )
+    }
+
+    case actionTypes.CHAIN_UNSUBSCRIBED: {
+      const { chainAlias } = action.payload
+      return state.setIn(
+        [CHAIN_DATA, chainAlias, STATUS],
+        CHAIN_STATUS.UNSUBSCRIBED
+      )
+    }
+
+    case actionTypes.CHAIN_UNLOADED: {
+      const { chainAlias } = action.payload
+      return state
+        .updateIn([CHAINS], Immutable.without, chainAlias)
+        .setIn([CHAIN_DATA, chainAlias, STATUS], CHAIN_STATUS.UNLOADED)
+    }
+
     case actionTypes.CHAIN_STATUS: {
       const { chainAlias, status } = action.payload
       return state.setIn([CHAIN_DATA, chainAlias, STATUS], status)
@@ -152,4 +175,4 @@ const mergeAtPath = (state, path, value) => {
   return state.setIn(path, newValue)
 }
 
-module.exports = reducer
+module.exports = { initialState, reducer }

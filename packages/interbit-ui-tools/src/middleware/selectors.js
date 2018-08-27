@@ -19,14 +19,14 @@ const interbitSubtree = state =>
 const getChainAliases = (state, { subtree = interbitSubtree } = {}) =>
   Object.keys(subtree(state).getIn([CHAINS], emptyObject))
 
-const isChainLoaded = (
+const getChainStatus = (
   state,
   { subtree = interbitSubtree, chainAlias } = {}
-) => {
-  const chainStatus = subtree(state).getIn(
-    [CHAIN_DATA, chainAlias, STATUS],
-    CHAIN_STATUS.UNKNOWN
-  )
+) =>
+  subtree(state).getIn([CHAIN_DATA, chainAlias, STATUS], CHAIN_STATUS.UNKNOWN)
+
+const isChainLoaded = (state, { subtree, chainAlias } = {}) => {
+  const chainStatus = getChainStatus(state, { subtree, chainAlias })
   return chainStatus === CHAIN_STATUS.BLOCKING
 }
 
@@ -36,7 +36,7 @@ const getChainId = (state, { subtree = interbitSubtree, chainAlias } = {}) =>
 const getChain = (
   state,
   { subtree = interbitSubtree, chainAlias, defaultValue = emptyObject } = {}
-) => subtree(state).getIn([CHAINS, chainAlias], defaultValue)
+) => subtree(state).getIn([CHAINS, chainAlias], immutable(defaultValue))
 
 const getBlockMaster = (
   state,
@@ -71,6 +71,7 @@ module.exports = {
   getChain,
   getChainAliases,
   getChainId,
+  getChainStatus,
   getConfiguredChains,
   getConfiguredPeers,
   getInterbitStatus,

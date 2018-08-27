@@ -10,7 +10,6 @@ const PATHS = {
   ACL: [INTERBIT, CONFIG, ACL],
   ACTION_PERMISSIONS: [INTERBIT, CONFIG, ACL, 'actionPermissions'],
   ROLES: [INTERBIT, CONFIG, ACL, 'roles'],
-  BLOCKS: [INTERBIT, 'blocks'],
   SENT_ACTIONS: [INTERBIT, 'sent-actions'],
   PENDING_ACTIONS: ['pending-actions'],
   COVENANT_HASH: [INTERBIT, CONFIG, 'covenantHash']

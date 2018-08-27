@@ -2,6 +2,7 @@
  * @jest-environment node
  */
 const assert = require('assert')
+const fs = require('fs-extra')
 
 const { createMockDataStore, createTestContext } = require('.')
 
@@ -16,7 +17,7 @@ describe('testContext', () => {
 
       datastore.setItem(key, value)
 
-      assert(datastore.hasItem(key))
+      assert(datastore.keys().includes(key))
 
       assert.deepStrictEqual(datastore.getItem(key), value)
     })
@@ -24,6 +25,7 @@ describe('testContext', () => {
 
   describe('createTestContext(dataStore)', () => {
     let testContext
+    let dbPath
     const env = { ...{}, ...process.env }
 
     const cleanup = async caller => {
@@ -32,10 +34,15 @@ describe('testContext', () => {
         await testContext.unloadInterbit()
         testContext = undefined
       }
+      if (dbPath) {
+        console.log(`Cleaning up interbit DB: ${dbPath}`)
+        fs.remove(dbPath)
+      }
     }
 
     beforeEach(async () => {
-      process.env.DB_PATH = `./db-${Date.now()}`
+      dbPath = `./db-${Date.now()}`
+      process.env.DB_PATH = dbPath
     })
 
     afterEach(async () => {
@@ -44,7 +51,7 @@ describe('testContext', () => {
     })
 
     it(
-      'Creates a testContext using interbit',
+      'Creates a testContext using interbit and buffers it for reuse',
       async () => {
         const config = { chainData: {}, peers: ['abc.com'] }
         testContext = createTestContext(config)
@@ -64,6 +71,9 @@ describe('testContext', () => {
           assert.ok(interbitContext.publicKey)
           assert.ok(interbitContext.chains)
           assert.ok(interbitContext.localDataStore)
+
+          const reloadedContext = await testContext.waitForInterbit()
+          assert.strictEqual(reloadedContext, interbitContext)
         } finally {
           await cleanup('finally block')
         }

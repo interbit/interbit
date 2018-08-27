@@ -122,7 +122,7 @@
         .cont {
           padding: 16px;
           margin-bottom: 16px;
-          border: 1px dashed #e6e6e6;
+          border: 1px dashed $ib-grid-med-grey;
           border-radius: 16px;
           color: #999;
 
@@ -145,7 +145,7 @@
           ul {
             li {
               padding: 16px 0;
-              border-bottom: 1px solid #e6e6e6;
+              border-bottom: 1px solid $ib-grid-med-grey;
 
               &:last-child {
                 border-bottom: none;

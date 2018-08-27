@@ -1,10 +1,10 @@
 const assert = require('assert')
 const Immutable = require('seamless-immutable')
+
 const middleware = require('../../middleware')
-const { reducer, actionCreators } = require('../../blockExplorer')
+const { actionCreators, initialState, reducer } = require('../../blockExplorer')
 
 describe('blockExplorer.reducer', () => {
-  const initialState = Immutable.from({ chains: {} })
   const chainAlias = 'myChain'
   const chainId = '123456'
 
@@ -29,6 +29,17 @@ describe('blockExplorer.reducer', () => {
   const assertUnchangedState = (state, expectedState = initialState) => {
     assert.strictEqual(state, expectedState)
   }
+
+  it('no args call returns initial state', () => {
+    const result = reducer()
+    assertUnchangedState(result, initialState)
+  })
+
+  it('undefined action has no effect', () => {
+    const action = undefined
+    const result = reducer(initialState, action)
+    assertUnchangedState(result, initialState)
+  })
 
   it('unknown action has no effect', () => {
     const action = { type: 'UNKNOWN', payload: 42 }
@@ -120,6 +131,31 @@ describe('blockExplorer.reducer', () => {
 
     assert.deepStrictEqual(result.chains[chainAlias1].state, chainState1)
     assert.deepStrictEqual(result.chains[chainAlias2].state, chainState2)
+  })
+
+  it('CHAIN_UPDATED handles missing state gracefully', () => {
+    const chainState = undefined
+    const action = middleware.actionCreators.chainUpdated(
+      chainAlias,
+      chainState
+    )
+    const unknownAliasResult = reducer(initialState, action)
+
+    assertExpectedState(unknownAliasResult, {
+      expectedStateChange: {
+        chains: {
+          [chainAlias]: {
+            chainAlias,
+            interbit: {},
+            blocks: [],
+            state: {}
+          }
+        }
+      }
+    })
+
+    const knownAliasResult = reducer(unknownAliasResult, action)
+    assertUnchangedState(knownAliasResult, unknownAliasResult)
   })
 
   it('CHAIN_BLOCK_ADDED adds chain to state if not present', () => {
@@ -274,7 +310,29 @@ describe('blockExplorer.reducer', () => {
     })
   })
 
-  it('CHAIN_UPDATED adds chain to state if not present', () => {
+  it('CHAIN_BLOCK_ADDED handles missing block gracefully', () => {
+    const block = undefined
+    const action = middleware.actionCreators.chainBlockAdded(chainAlias, block)
+    const unknownAliasResult = reducer(initialState, action)
+
+    assertExpectedState(unknownAliasResult, {
+      expectedStateChange: {
+        chains: {
+          [chainAlias]: {
+            chainAlias,
+            interbit: {},
+            blocks: [],
+            state: {}
+          }
+        }
+      }
+    })
+
+    const knownAliasResult = reducer(unknownAliasResult, action)
+    assertUnchangedState(knownAliasResult, unknownAliasResult)
+  })
+
+  it('SELECT_CHAIN adds chain to state if not present', () => {
     const action = actionCreators.selectChain(chainAlias)
     const result = reducer(initialState, action)
 

@@ -8,8 +8,12 @@ const getGenesisBlocks = manifest => manifest.genesisBlocks
 const getManifest = manifest => manifest.manifest
 const getPeers = manifest => manifest.peers
 
+const getChainAliases = manifest => Object.keys(getChains(manifest))
+const getChainIds = manifest => Object.values(getChains(manifest))
+
 const getChainIdByAlias = (chainAlias, manifest) =>
   _.get(manifest, ['chains', chainAlias])
+const getRootChainId = manifest => getChainIdByAlias(ROOT_CHAIN_ALIAS, manifest)
 
 const getCovenantHashByAlias = (chainAlias, manifest) => {
   const covenantAlias = _.get(getChildChainByAlias(chainAlias, manifest), [
@@ -77,6 +81,8 @@ const findAliasInSubtree = (chainAlias, subtree) => {
 module.exports = {
   findAliasInSubtree,
   getApps,
+  getChainAliases,
+  getChainIds,
   getChains,
   getChildChainByAlias,
   getCovenants,
@@ -86,5 +92,7 @@ module.exports = {
   getChainIdByAlias,
   getCovenantHashByAlias,
   getGenesisBlockByAlias,
+  getManifest,
+  getRootChainId,
   getRootChildren
 }

@@ -5,5 +5,6 @@ export default {
   CONNECT: '/connect',
   CREATE_ACCOUNT: '/create-account',
   DEVELOPMENT: '/development',
-  HOME: '/'
+  HOME: '/',
+  PROFILE: '/profile'
 }

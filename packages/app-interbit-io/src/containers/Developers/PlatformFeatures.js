@@ -1,14 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
-import {
-  Divider,
-  LinkBar,
-  LinkBarSlack,
-  Markdown
-} from 'interbit-ui-components'
+import { Divider, LinkBar, Markdown } from 'interbit-ui-components'
 
-import urls from '../../constants/urls'
 import layout from '../../constants/layout'
 
 const mapStateToProps = state => ({
@@ -51,7 +45,6 @@ class DevelopersPlatformFeatures extends Component {
         <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
             <LinkBar {...linkBarsContent.chainArchitecture} />
-            <LinkBarSlack to={urls.SUPPORT_SLACK} />
           </Col>
         </Row>
       </div>

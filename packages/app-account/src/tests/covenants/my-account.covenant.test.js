@@ -22,7 +22,7 @@ describe('my-account/covenant', () => {
         email: 'woof@woofwoof.com',
         name: 'Rover'
       }
-      assert.deepEqual(afterState.profile, expectedProfile)
+      assert.deepStrictEqual(afterState.profile, expectedProfile)
     })
 
     it('existing tokens are not removed on UPDATE_PROFILE', () => {
@@ -52,7 +52,7 @@ describe('my-account/covenant', () => {
           name: 'Marmaduke'
         }
       }
-      assert.deepEqual(afterState.profile, expectedProfile)
+      assert.deepStrictEqual(afterState.profile, expectedProfile)
     })
 
     it('adds a new connection path on SHARE_PROFILE_TOKENS', () => {
@@ -74,7 +74,7 @@ describe('my-account/covenant', () => {
       const afterState = covenant.reducer(state, action)
 
       const expectedSharedTokens = { catSays: 'meowmeowmeow' }
-      assert.deepEqual(
+      assert.deepStrictEqual(
         afterState.shared[requestingChainId].sharedProfile,
         expectedSharedTokens
       )
@@ -99,9 +99,9 @@ describe('my-account/covenant', () => {
       const afterState = covenant.reducer(state, action)
       const sideEffects = afterState.sideEffects
 
-      assert.equal(sideEffects[0].type, '@@interbit/START_PROVIDE_STATE')
-      assert.equal(sideEffects[0].payload.consumer, requestingChainId)
-      assert.deepEqual(sideEffects[0].payload.statePath, [
+      assert.strictEqual(sideEffects[0].type, '@@interbit/START_PROVIDE_STATE')
+      assert.strictEqual(sideEffects[0].payload.consumer, requestingChainId)
+      assert.deepStrictEqual(sideEffects[0].payload.statePath, [
         'shared',
         requestingChainId,
         'sharedProfile'
@@ -122,7 +122,62 @@ describe('my-account/covenant', () => {
 
       const afterState = covenant.reducer(state, action)
 
-      assert.equal(afterState.shared[requestingChainId], undefined)
+      assert.strictEqual(afterState.shared[requestingChainId], undefined)
+    })
+
+    it('resets profile data on RESET_PROFILE', () => {
+      const state = covenant.initialState
+        .setIn(['profile'], {
+          email: 'meow@meowmeow.com',
+          alias: 'cat',
+          name: 'Marmaduke'
+        })
+        .setIn(['shared', '123456789', 'sharedProfile'], {
+          alias: 'cat',
+          name: 'Marmaduke'
+        })
+
+      const action = covenant.actionCreators.resetProfile()
+
+      const afterState = covenant.reducer(state, action)
+
+      assert.deepStrictEqual(afterState.profile, covenant.initialState.profile)
+      assert.deepStrictEqual(afterState.shared, {})
+    })
+
+    it('leaves KYC join provided profile data on RESET_PROFILE', () => {
+      const kycTokenName = 'smoogle-identity'
+      const kycToken = {
+        id: 123456,
+        name: 'Marmaduke',
+        alias: 'marmasboy22'
+      }
+      const state = covenant.initialState
+        .setIn(
+          ['interbit', 'config', 'consuming'],
+          [{ mount: ['profile', kycTokenName] }]
+        )
+        .setIn(['profile'], {
+          email: 'meow@meowmeow.com',
+          alias: 'cat',
+          name: 'Marmaduke',
+          [kycTokenName]: kycToken
+        })
+        .setIn(['shared', '123456789', 'sharedProfile'], {
+          alias: 'cat',
+          name: 'Marmaduke',
+          [kycTokenName]: kycToken
+        })
+
+      const action = covenant.actionCreators.resetProfile()
+
+      const afterState = covenant.reducer(state, action)
+
+      assert.deepStrictEqual(afterState.profile, {
+        ...covenant.initialState.profile,
+        [kycTokenName]: kycToken
+      })
+      assert.deepStrictEqual(afterState.shared, {})
     })
   })
 })

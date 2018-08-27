@@ -177,11 +177,6 @@ describe('<IconButton />', () => {
     countChildren(<IconButton {...props} />, 'img', 0)
   })
 
-  it('renders an <i/> if there is an icon', () => {
-    countChildren(<IconButton icon={placeholder} {...props} />, 'i', 1)
-    countChildren(<IconButton {...props} />, 'i', 0)
-  })
-
   it('passes href prop to <Button /> only if clickHandler is undefined', () => {
     const mockFn = jest.fn()
     const wrapperWithHandler = shallow(
@@ -213,17 +208,17 @@ describe('<LaunchPad />', () => {
 })
 
 describe('<LaunchPadRow />', () => {
-  it('renders 4 <LaunchPad />s', () => {
+  it('renders 2 <LaunchPad />s', () => {
     const buttonLink = {
       title: 'foo',
       text: 'bar',
       image: placeholder
     }
     const buttonLinks = []
-    for (let i = 0; i < 4; i += 1) {
+    for (let i = 0; i < 2; i += 1) {
       buttonLinks.push(buttonLink)
     }
-    countChildren(<LaunchPadRow buttonLinks={buttonLinks} />, LaunchPad, 4)
+    countChildren(<LaunchPadRow buttonLinks={buttonLinks} />, LaunchPad, 2)
   })
 })
 

@@ -37,34 +37,6 @@ The Interbit platform provides the development community with access to patent-p
 Developers are able to learn from, contribute and use the open-source code from various platform components and applications.
 
 [View our open-source repositories on GitHub ›](https://github.com/interbit)`
-    },
-    {
-      title: 'Accounts',
-      content: `An open-source identity service that can be implemented, and leveraged by other Interbit-powered applications. The service also enables an easy sign-up workflow for users. Interbit's user base can start using new applications that have integrated with the service immediately.`
-    },
-    {
-      title: 'Projects',
-      content: `The projects page allows you to manage your Interbit blockchain applications and host them on our cloud service. This page is intended to interface with the Store and identity service.`
-    },
-    {
-      title: 'Hosting',
-      content: `The hosting service provides sandboxing for application code, and allows you to manage your Interbit blockchain applications and host them on our cloud infrastructure. Deploy your project directly to Interbit by linking your GitHub repo.
-
-(Hosting fees apply for commercial use)`
-    },
-    {
-      title: 'Store',
-      content: `Integrate existing application services into your project, or build services for others to consume.
-
-The platform is an online marketplace where applications are commercialized. Search, browse, and explore the Store for apps and services built on Interbit.`
-    },
-    {
-      title: 'Support',
-      content: `Support for the platform, application development, and general technical discussion about Interbit is provided via our [Slack community](http://slack.test-interbit.io/).`
-    },
-    {
-      title: 'Payments (coming soon)',
-      content: `Our payment processing service (built on Interbit) makes invoicing your customers easy.`
     }
   ]
 }

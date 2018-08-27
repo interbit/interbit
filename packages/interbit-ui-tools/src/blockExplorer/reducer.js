@@ -19,12 +19,7 @@ const ensureChainStateExists = (state, chainAlias) =>
     : state.setIn([CHAINS, chainAlias], emptyChainState(chainAlias))
 
 const selectChain = (state, chainAlias) =>
-  chainAlias
-    ? ensureChainStateExists(state, chainAlias).setIn(
-        [SELECTED_CHAIN],
-        chainAlias
-      )
-    : state
+  ensureChainStateExists(state, chainAlias).setIn([SELECTED_CHAIN], chainAlias)
 
 const updateChainState = (state, { chainAlias, chainState }) => {
   let nextState = ensureChainStateExists(state, chainAlias)
@@ -91,4 +86,4 @@ const reducer = (state = initialState, action = {}) => {
   }
 }
 
-module.exports = reducer
+module.exports = { reducer, initialState }

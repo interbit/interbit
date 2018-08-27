@@ -11,12 +11,13 @@ const log = require('../log')
  * to safely cleanup the node.
  * @param {Object} keyPair - The key pair to use to create and authorize this
  *  node in the network.
- * @param {Object} keyPair.publicKey - Public key for this key pair.
- * @param {Object} keyPair.privateKey - Private key for this key pair.
+ * @param {String} keyPair.publicKey - Public key for this key pair.
+ * @param {String} keyPair.privateKey - Private key for this key pair.
  * @param {Object} options - The options used to configure and create this node.
- * @param {Object} options.port - Port for this node to bind to.
- * @param {Object} options.dbPath - Filepath to hold this node's database.
- * @returns {Object} - `cli`, `hypervisor`, and `cleanup` function for this node.
+ * @param {String|number} options.port - Port for this node to bind to.
+ * @param {String} options.dbPath - Filepath to hold this node's database.
+ * @returns {{ cli:Object, hypervisor:Object, cleanup:Function }} The cli interface
+ *  for the Interbit node, the node's hypervisor, and a function to cleanup the node.
  */
 const startInterbit = async (keyPair, options = {}) => {
   const port = _.get(options, ['port']) || 5000

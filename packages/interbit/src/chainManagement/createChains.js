@@ -68,8 +68,9 @@ const createChainsFromManifest = async (location, cli, manifest, options) => {
 
 // SET FOR DEPRECATION: Pending issue #79
 /**
- * Uses a config to create chains without genesis blocks or keys and configures the
+ * Uses a config to create chains without genesis blocks or keys, and configures the
  * cli with peers and covenants from the manifest.
+ * @deprecated
  * @param {Object} cli - The cli of the node to configure.
  * @param {Object} interbitConfig - The Interbit configuration to use.
  */

@@ -18,8 +18,10 @@ const log = require('../log')
 // SET FOR DEPRECATION: Pending issue #79
 /**
  * Configures chains in the node's cli to be joined according to config.
- * Used within the interbit start script and set for pending deprecation. (#263)
- * @param {Object} manifest - The deployment details from start (covenant hashes and chain ids).
+ * Used within the interbit `start` script and set for pending deprecation. (#263)
+ * @deprecated
+ * @param {Object} manifest - The covenant hashes and chain ids mapped to aliases
+ *  for the node from the `generateDeploymentDetails` function.
  * @param {Object} cli - The cli for the node.
  * @param {Object} config - The interbit config file specifying join configuration.
  */

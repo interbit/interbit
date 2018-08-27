@@ -13,16 +13,17 @@ const { startInterbit } = require('../chainManagement')
 // start a cli and deploy the covenants to get a valid hash that is in sync with interbit
 // TODO: update this to use the hashing function instead of starting a CLI -- Blocked until core releases hashing algo in API
 /**
- * Packs the covenants specified in covenantConfig and stores them in the artifacts
+ * NPM packs the covenants specified in `covenantConfig` and stores them in the artifacts
  * folder for future deployment to an Interbit node.
  * @param {String} location - The file location to work from.
  * @param {Object} covenantConfig - Configuration for the covenants to pack,
  *    typically from an interbit config file.
  * @param {Object} options - Options for packing this covenant.
  * @param {Object} options.keyPair - Public private key pair to start the node for packing.
- * @param {Object} options.port - Port for this node to bind to.
- * @param {Object} options.dbPath - Filepath to hold this node's database.
- * @returns {Object} - A map of the covenant aliases packed to the hash and packed file location.
+ * @param {String|number} options.port - Port for this node to bind to.
+ * @param {String} options.dbPath - Filepath to hold this node's database.
+ * @returns {Object} A map of the covenant aliases to the NPM packed file location
+ *  and a hash of the binary file.
  */
 const packCovenants = async (location, covenantConfig, options = {}) => {
   const { cli, cleanup } = await startInterbit(undefined, options)

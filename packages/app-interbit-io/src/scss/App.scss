@@ -8,9 +8,7 @@
       margin-top: -64px;
     }
 
-    &.platform-roadmap,
-    &.policy,
-    &.pricing {
+    &.policy {
       margin-top: 96px;
 
       @media (max-width: $screen-lg-min - 1) {
@@ -19,41 +17,6 @@
 
       @media (max-width: $screen-sm-min - 1) {
         margin-top: 0;
-      }
-    }
-
-    &.platform-roadmap h1,
-    &.pricing h1 {
-      margin-bottom: 64px;
-
-      @media (max-width: $screen-lg-min - 1) {
-      }
-
-      @media (max-width: $screen-sm-min - 1) {
-        margin-bottom: 16px;
-      }
-    }
-
-    // Contact page
-    &.contact {
-      .pipedrive-container {
-        padding: 64px;
-        border-radius: 16px;
-        height: 1005px;
-        background: #f3f5f6;
-
-        .pipedriveWebForms {
-          height: 100%;
-
-          iframe {
-            position: relative;
-            border: none;
-            overflow: hidden;
-            width: 100%;
-            max-width: 768px;
-            height: 100%;
-          }
-        }
       }
     }
 
@@ -108,65 +71,6 @@
 
         img {
           margin-left: 0;
-        }
-      }
-    }
-
-    // Pricing page
-    &.pricing {
-      h2 {
-        margin-bottom: 32px;
-      }
-
-      .pricing-tile {
-        .cont {
-          padding: 16px;
-          margin-bottom: 16px;
-          border: 1px dashed $ib-grid-med-grey;
-          border-radius: 16px;
-          color: #999;
-
-          h3 sup {
-            font-size: 16px;
-            font-weight: 400;
-          }
-
-          img {
-            margin-bottom: 16px;
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-          }
-
-          p {
-            color: #999;
-          }
-
-          ul {
-            li {
-              padding: 16px 0;
-              border-bottom: 1px solid $ib-grid-med-grey;
-
-              &:last-child {
-                border-bottom: none;
-              }
-            }
-          }
-        }
-
-      }
-
-      .pricing-note {
-        font-style: italic;
-        color: #999;
-      }
-    }
-
-    // Platform Roadmap page
-    &.platform-roadmap {
-      .ibweb-content-bar.in-progress {
-        h3 {
-          color: #999;
         }
       }
     }

@@ -1,32 +1,13 @@
 .ibweb.app-interbit-io .ibweb-page.home .header, .ibweb.app-interbit-io .ibweb-page.ib-for-business .header, .ibweb.app-interbit-io .ibweb-page.platform .header {
   margin-top: -64px; }
-.ibweb.app-interbit-io .ibweb-page.platform-roadmap, .ibweb.app-interbit-io .ibweb-page.policy, .ibweb.app-interbit-io .ibweb-page.pricing {
+.ibweb.app-interbit-io .ibweb-page.policy {
   margin-top: 96px; }
   @media (max-width: 1023px) {
-    .ibweb.app-interbit-io .ibweb-page.platform-roadmap, .ibweb.app-interbit-io .ibweb-page.policy, .ibweb.app-interbit-io .ibweb-page.pricing {
+    .ibweb.app-interbit-io .ibweb-page.policy {
       margin-top: 64px; } }
   @media (max-width: 629px) {
-    .ibweb.app-interbit-io .ibweb-page.platform-roadmap, .ibweb.app-interbit-io .ibweb-page.policy, .ibweb.app-interbit-io .ibweb-page.pricing {
+    .ibweb.app-interbit-io .ibweb-page.policy {
       margin-top: 0; } }
-.ibweb.app-interbit-io .ibweb-page.platform-roadmap h1, .ibweb.app-interbit-io .ibweb-page.pricing h1 {
-  margin-bottom: 64px; }
-  @media (max-width: 629px) {
-    .ibweb.app-interbit-io .ibweb-page.platform-roadmap h1, .ibweb.app-interbit-io .ibweb-page.pricing h1 {
-      margin-bottom: 16px; } }
-.ibweb.app-interbit-io .ibweb-page.contact .pipedrive-container {
-  padding: 64px;
-  border-radius: 16px;
-  height: 1005px;
-  background: #f3f5f6; }
-  .ibweb.app-interbit-io .ibweb-page.contact .pipedrive-container .pipedriveWebForms {
-    height: 100%; }
-    .ibweb.app-interbit-io .ibweb-page.contact .pipedrive-container .pipedriveWebForms iframe {
-      position: relative;
-      border: none;
-      overflow: hidden;
-      width: 100%;
-      max-width: 768px;
-      height: 100%; }
 .ibweb.app-interbit-io .ibweb-page.platform .logos h4 {
   margin-bottom: 32px; }
 .ibweb.app-interbit-io .ibweb-page.platform .logos .logo {
@@ -52,34 +33,6 @@
     margin-right: 0; }
   .ibweb.app-interbit-io .ibweb-page.ib-for-business .logo-third img {
     margin-left: 0; }
-.ibweb.app-interbit-io .ibweb-page.pricing h2 {
-  margin-bottom: 32px; }
-.ibweb.app-interbit-io .ibweb-page.pricing .pricing-tile .cont {
-  padding: 16px;
-  margin-bottom: 16px;
-  border: 1px dashed #E6E6E6;
-  border-radius: 16px;
-  color: #999; }
-  .ibweb.app-interbit-io .ibweb-page.pricing .pricing-tile .cont h3 sup {
-    font-size: 16px;
-    font-weight: 400; }
-  .ibweb.app-interbit-io .ibweb-page.pricing .pricing-tile .cont img {
-    margin-bottom: 16px;
-    width: 64px;
-    height: 64px;
-    border-radius: 16px; }
-  .ibweb.app-interbit-io .ibweb-page.pricing .pricing-tile .cont p {
-    color: #999; }
-  .ibweb.app-interbit-io .ibweb-page.pricing .pricing-tile .cont ul li {
-    padding: 16px 0;
-    border-bottom: 1px solid #E6E6E6; }
-    .ibweb.app-interbit-io .ibweb-page.pricing .pricing-tile .cont ul li:last-child {
-      border-bottom: none; }
-.ibweb.app-interbit-io .ibweb-page.pricing .pricing-note {
-  font-style: italic;
-  color: #999; }
-.ibweb.app-interbit-io .ibweb-page.platform-roadmap .ibweb-content-bar.in-progress h3 {
-  color: #999; }
 .ibweb.app-interbit-io .ibweb-page.dev-overview .app-characteristics > div {
   margin-bottom: 16px; }
 .ibweb.app-interbit-io .ibweb-page.dev-overview .app-characteristics p {

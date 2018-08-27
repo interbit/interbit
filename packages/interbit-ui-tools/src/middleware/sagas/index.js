@@ -6,7 +6,13 @@ const selectors = require('../selectors')
 const { LOG_PREFIX, INTERBIT_STATUS } = require('../constants')
 const { connectToPeers } = require('./connections')
 const { getInterbitContext } = require('./interbit')
-const { loadStaticChains, loadPrivateChain, sponsorChain } = require('./chains')
+const {
+  loadStaticChains,
+  loadPrivateChain,
+  sponsorChain,
+  loadChain,
+  unloadChain
+} = require('./chains')
 
 const middlewareSagas = (runtimeContext = browserContext) => {
   function* rootSaga() {
@@ -18,11 +24,15 @@ const middlewareSagas = (runtimeContext = browserContext) => {
       console.log(`${LOG_PREFIX}: *rootSaga(): listening for: `, [
         actionTypes.STATIC_CHAINS_SAGA,
         actionTypes.PRIVATE_CHAIN_SAGA,
-        actionTypes.SPONSOR_CHAIN_SAGA
+        actionTypes.SPONSOR_CHAIN_SAGA,
+        actionTypes.LOAD_CHAIN_SAGA,
+        actionTypes.UNLOAD_CHAIN_SAGA
       ])
       yield takeEvery(actionTypes.STATIC_CHAINS_SAGA, staticChainsSaga)
       yield takeEvery(actionTypes.PRIVATE_CHAIN_SAGA, privateChainSaga)
       yield takeEvery(actionTypes.SPONSOR_CHAIN_SAGA, sponsorChainSaga)
+      yield takeEvery(actionTypes.LOAD_CHAIN_SAGA, loadChainSaga)
+      yield takeEvery(actionTypes.UNLOAD_CHAIN_SAGA, unloadChainSaga)
 
       yield put(actionCreators.staticChainsSaga())
     }
@@ -125,11 +135,58 @@ const middlewareSagas = (runtimeContext = browserContext) => {
     }
   }
 
+  function* loadChainSaga(action) {
+    console.log(`${LOG_PREFIX}: *loadChainSaga()`, action)
+
+    const { chainAlias, chainId } = action.payload || {}
+
+    try {
+      if (!chainAlias) {
+        throw new Error('chainAlias is required')
+      }
+      if (!chainId) {
+        throw new Error('chainId is required')
+      }
+
+      const { cli } = yield call(getInterbitContext, runtimeContext)
+
+      yield call(loadChain, {
+        cli,
+        chainAlias,
+        chainId
+      })
+    } catch (error) {
+      console.error(`${LOG_PREFIX}: `, error)
+      yield put(actionCreators.chainError({ chainAlias, error: error.message }))
+    }
+  }
+
+  function* unloadChainSaga(action) {
+    console.log(`${LOG_PREFIX}: *unloadChainSaga()`, action)
+
+    const { chainAlias } = action.payload || {}
+
+    try {
+      if (!chainAlias) {
+        throw new Error('chainAlias is required')
+      }
+
+      yield call(unloadChain, {
+        chainAlias
+      })
+    } catch (error) {
+      console.error(`${LOG_PREFIX}: `, error)
+      yield put(actionCreators.chainError({ chainAlias, error: error.message }))
+    }
+  }
+
   return {
     rootSaga,
     staticChainsSaga,
     privateChainSaga,
-    sponsorChainSaga
+    sponsorChainSaga,
+    loadChainSaga,
+    unloadChainSaga
   }
 }
 

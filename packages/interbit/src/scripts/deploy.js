@@ -3,6 +3,7 @@ const {
   createChains: { createChainsFromManifest },
   setRootChainManifest,
   initializeCovenants,
+  initializeJoins,
   destroyRemovedChains
 } = require('../chainManagement')
 
@@ -27,7 +28,8 @@ const deploy = async options => {
 
   await createChainsFromManifest(location, cli, manifest, options)
 
-  await initializeCovenants(cli, manifest, options)
+  await initializeCovenants(cli, manifest)
+  await initializeJoins(cli, manifest)
   destroyRemovedChains(cli, manifest)
 
   await setRootChainManifest(cli, manifest)

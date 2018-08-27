@@ -15,7 +15,7 @@ const deploy = async options => {
 
   await createChainsFromManifest(location, cli, manifest, options)
 
-  setRootChainManifest(cli, manifest)
+  await setRootChainManifest(cli, manifest)
 
   return { cli, hypervisor, cleanup }
 }

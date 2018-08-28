@@ -9,8 +9,17 @@ const {
   constants: { ROOT_CHAIN_ALIAS }
 } = require('interbit-covenant-tools')
 
+const log = require('../log')
+
+/**
+ * Sets the root chain manifest by dispatching the manifest file
+ * to the root chain for inclusion in root chain state.
+ * @param {Object} cli - The cli of the node containing the root chain.
+ * @param {Object} manifest - The manifest file to set.
+ * @param {Object} config - The chain configuration file as JSON.
+ */
 const setRootChainManifest = (cli, manifest, config) => {
-  console.log('UPDATING ROOT CHAIN WITH DEPLOYMENT INFO')
+  log.info('UPDATING ROOT CHAIN WITH DEPLOYMENT INFO')
 
   const setManifestAction = actionCreators.setManifest(manifest)
 
@@ -29,7 +38,7 @@ const setRootChainManifest = (cli, manifest, config) => {
   const rootChainInterface = cli.getChain(rootChainId)
 
   if (!rootChainInterface) {
-    console.error(
+    log.error(
       `No root chain was found for this deployment at chain ID: ${rootChainId}`
     )
     return

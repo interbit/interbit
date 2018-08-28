@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs-extra')
 
+const log = require('../log')
 const { getArg } = require('./getArg')
 const { CONFIG } = require('./argOptions')
 
@@ -13,6 +14,11 @@ const getConfigLocation = () => {
   return configLocation
 }
 
+/**
+ * Gets the Interbit configuration file from disk based on the `--config`
+ * command-line argument.
+ * @returns {Object|undefined} The configuration file, if found, as a JSON object.
+ */
 const getConfig = () => {
   const configLocation = getConfigLocation()
 
@@ -21,7 +27,7 @@ const getConfig = () => {
     return undefined
   }
 
-  console.log(`Loading config at ${configLocation}`)
+  log.info(`Loading config at ${configLocation}`)
 
   // eslint-disable-next-line
   const interbitConfig = require(configLocation)

@@ -9,32 +9,6 @@ import iconManyChains from '../../assets/icons/iconManyChains.svg'
 export default {
   title: 'Overview',
   heading: 'How to build better apps, faster',
-  productRoadmap: {
-    title: 'Product Roadmap',
-    items: [
-      {
-        text: `Spare ribs
-      (Q4 2018)`
-      },
-      {
-        text: `Turducken
-        (Q4 2018)`
-      },
-      {
-        text: `Beef pork belly
-        (Q4 2018)`
-      },
-      {
-        text: `Ribs jerky prosciutto
-        (Q4 2018)`
-      },
-      {
-        text: `Steak
-        (Q4 2018)`
-      }
-    ]
-  },
-
   intro: {
     text: `Interbit helps you build better apps, faster—and get them into the hands of users who need them.
 

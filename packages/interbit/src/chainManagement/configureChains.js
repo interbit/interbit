@@ -7,13 +7,21 @@ const {
   }
 } = require('interbit-covenant-tools')
 
+const log = require('../log')
 const configureJoins = require('./configureJoins')
 
 process.on('unhandledRejection', reason => {
-  console.log(`Caught unhandled rejection. Reason: ${reason}`)
-  console.log(reason)
+  log.error(`Caught unhandled rejection. Reason: ${reason}`)
+  log.error(reason)
 })
 
+/**
+ * Configures the chains on a node to the specifications in the Interbit
+ * manifest file passed as `interbitManifest`. Applies covenants, configures joins, and
+ * dispatches the manifest to the chain.
+ * @param {Object} cli - Interbit cli for the node to configure.
+ * @param {Object} interbitManifest - Manifest file specifying configuration.
+ */
 const configureChains = async (cli, interbitManifest) => {
   const childChains = getRootChildren(interbitManifest)
   const childChainEntries = Object.entries(childChains)
@@ -24,9 +32,7 @@ const configureChains = async (cli, interbitManifest) => {
 
     // TODO: Set covenants in watchers after cascading deployment is available
     const covenantHash = getCovenantHashByAlias(chainAlias, interbitManifest)
-    console.log(
-      `Applying covenant ${covenantHash} to ${chainAlias} (${chainId})`
-    )
+    log.info(`Applying covenant ${covenantHash} to ${chainAlias} (${chainId})`)
     await cli.applyCovenant(chainId, covenantHash)
 
     // TODO: Apply interbit-covenant-tools to root #267
@@ -40,9 +46,12 @@ const configureChains = async (cli, interbitManifest) => {
 
     // TODO: Only dispatch this to the root once cascading deployment is available
     const setManifestAction = setManifest(interbitManifest)
-    console.log(setManifestAction)
+    log.info('Set the manifest')
+    log.action(setManifestAction)
     chainInterface.dispatch(setManifestAction)
   }
+
+  log.success('Chains were configured')
 }
 
 module.exports = configureChains

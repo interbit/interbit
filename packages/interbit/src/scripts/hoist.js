@@ -3,9 +3,10 @@ const promisify = require('util').promisify
 const exec = promisify(require('child_process').exec)
 const { getArg } = require('../args/getArg')
 const writeJsonFile = require('../file/writeJsonFile')
+const log = require('../log')
 
 const hoistPackages = async ({ appLocation, covenantConfig }) => {
-  console.log('interbit-hoist: Hoisting covenant packages', {
+  log.info('interbit-hoist: Hoisting covenant packages', {
     appLocation,
     covenantConfig
   })
@@ -15,7 +16,7 @@ const hoistPackages = async ({ appLocation, covenantConfig }) => {
   const isHoistAlreadyLocked = fs.existsSync(originalPackageJsonPath)
 
   if (isHoistAlreadyLocked) {
-    console.error(
+    log.error(
       'interbit-hoist: interbit-hoist.locked.package.json exists already.'
     )
     return
@@ -28,7 +29,7 @@ const hoistPackages = async ({ appLocation, covenantConfig }) => {
   // Lift up all of the dependencies from covenant packages into the app dependencies
   // eslint-disable-next-line
   const appPackageJson = require(appPackageJsonPath)
-  console.log('app found')
+  log.info('app found')
   const covenantPackageJsons = loadCovenantPackageJsons(covenantConfig)
   const hoistedDependencies = hoistAllCovenantPackages(
     appPackageJson,
@@ -45,7 +46,7 @@ const hoistPackages = async ({ appLocation, covenantConfig }) => {
       ...hoistedDependencies.devDependencies
     }
   }
-  console.log('interbit-hoist: Writing new dependencies', hoistedPackageJson)
+  log.info('interbit-hoist: Writing new dependencies', hoistedPackageJson)
 
   writeJsonFile(appPackageJsonPath, hoistedPackageJson)
 
@@ -53,13 +54,13 @@ const hoistPackages = async ({ appLocation, covenantConfig }) => {
   const installDirectory = getArg(process.argv, '--install-dir') || appLocation
   await exec('npm install', { cwd: installDirectory })
 
-  console.log('interbit-hoist: running npm i')
+  log.info('interbit-hoist: running npm i')
 
   // delete the tmp package.json and restore original
   fs.removeSync(appPackageJsonPath)
   fs.rename(originalPackageJsonPath, appPackageJsonPath)
 
-  console.log('interbit-hoist: Restored original')
+  log.info('interbit-hoist: Restored original')
 }
 
 const loadCovenantPackageJsons = covenantConfig => {
@@ -69,7 +70,7 @@ const loadCovenantPackageJsons = covenantConfig => {
   covenantEntries.forEach(([name, config]) => {
     // eslint-disable-next-line
     const covenantPackageJson = require(`${config.location}/package.json`)
-    console.log(`covenantPackageJson ${covenantPackageJson.name} found`)
+    log.info(`covenantPackageJson ${covenantPackageJson.name} found`)
     covenantPackageJsons.push(covenantPackageJson)
   })
 
@@ -112,7 +113,7 @@ const hoistDependencies = (covenant, appDependencies, covenantDependencies) => {
   // Check each covenant dependency
   Object.entries(covenantDependencies).forEach(([name, version]) => {
     // if it doesn't exist in the root app deps hoist it
-    console.log(`Checking dependency... "${name}": "${version}" in ${covenant}`)
+    log.info(`Checking dependency... "${name}": "${version}" in ${covenant}`)
     const appDependency = appDependencies[name]
     if (typeof appDependency === 'undefined') {
       hoisted = {
@@ -121,7 +122,7 @@ const hoistDependencies = (covenant, appDependencies, covenantDependencies) => {
       }
     } else if (appDependency !== version) {
       // If it does exist in the appDependencies but is a different version, give a warning
-      console.warn(
+      log.warn(
         `HOIST: App version of "${name}": "${appDependency}" does not match version installed in covenant "${version}"`
       )
     }

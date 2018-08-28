@@ -25,14 +25,8 @@ import platformPatentPending from '../../assets/pagePlatform/platformPatentPendi
 import platformPatentPrivacy from '../../assets/pagePlatform/platformPatentPrivacy.png'
 import platformPatentScale from '../../assets/pagePlatform/platformPatentScale.png'
 
-import platformHeader from '../../assets/pagePlatform/platformHeader.jpg'
-
 export default {
   title: 'Focus on your product, not your infrastructure',
-  headerImage: {
-    image: platformHeader,
-    title: 'foo'
-  },
 
   intro: {
     content:

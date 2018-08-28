@@ -33,7 +33,7 @@ const devMap = {
   template: 'https://ib-dev-template.herokuapp.com'
 }
 const stagingMap = {
-  accounts: 'https://ib-stg-app-account.herokuapp.com',
+  accounts: 'https://ib-stg-account.herokuapp.com',
   docs: 'https://ib-stg-docs.herokuapp.com',
   interbit: 'https://ib-stg-interbit-io.herokuapp.com',
   projects: 'https://ib-stg-app-projects.herokuapp.com',
@@ -41,11 +41,11 @@ const stagingMap = {
   template: 'https://ib-stg-template.herokuapp.com'
 }
 const prodMap = {
-  accounts: 'https://ib-prod-app-account.herokuapp.com',
+  accounts: 'https://ib-prod-account.herokuapp.com',
   docs: 'https://ib-prod-docs.herokuapp.com',
   interbit: 'https://ib-prod-interbit-io.herokuapp.com',
   projects: 'https://ib-prod-app-projects.herokuapp.com',
-  store: 'https://ib-stg-prod-store.herokuapp.com',
+  store: 'https://ib-prod-app-store.herokuapp.com',
   template: 'https://ib-prod-template.herokuapp.com'
 }
 const liveMap = {

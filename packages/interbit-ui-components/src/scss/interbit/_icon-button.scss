@@ -1,3 +1,16 @@
+$ib-pill-blue-100:    #003AFF;
+$ib-pill-blue-90:     #0054FF;
+$ib-pill-blue-80:     #007AFF;
+$ib-pill-blue-60:     #66AFFF;
+$ib-pill-red-100:     #D61E1E;
+$ib-pill-red-90:      #E03535;
+$ib-pill-red-80:      #EB5757; //$ib-grid-red
+$ib-pill-red-60:      #F39A9A;
+$ib-pill-grey:        #C4C4C4;
+
+$ib-box-shadow: rgba(0, 0, 0, 0.15);
+$ib-pill-border-radius: 30px;
+
 .ibweb-button {
   padding: 7px 40px;
   margin-right: $margin-sm;
@@ -88,6 +101,99 @@
     color:$ib-white;
     opacity: 1;
     filter: alpha(opacity=100);
+  }
+
+  &.pill {
+    border-radius: $ib-pill-border-radius;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 16px;
+    padding: 8px;
+    border: 1px solid transparent;
+    transition: all .2s;
+
+    &:hover {
+      box-shadow: 0 4px 8px $ib-box-shadow;
+    }
+    &:active {
+      box-shadow: 0 4px 8px $ib-box-shadow;
+    }
+    &:focus,
+    &:active:hover,
+    &:active:focus {
+      outline: none;
+      border-radius: $ib-pill-border-radius;
+    }
+
+    &.blue {
+      background-color: $ib-pill-blue-80;
+      border-color: $ib-pill-blue-100;
+      color: $ib-white;
+    }
+    &.blue:active {
+      background-color: $ib-pill-blue-60;
+      border-color: $ib-pill-blue-90;
+    }
+    &.blue.secondary {
+      background-color: $ib-white;
+      border-color: $ib-pill-blue-80;
+      color: $ib-pill-blue-80;
+    }
+    &.blue.secondary:active {
+      border-color: $ib-pill-blue-60;
+      color: $ib-pill-blue-60;
+    }
+
+    &.red,
+    &.delete {
+      background-color: $ib-pill-red-80;
+      border-color: $ib-pill-red-100;
+      color: $ib-white;
+    }
+    &.delete {
+      position: relative;
+      padding-left: 28px;
+    }
+    &.delete:before {
+      position: absolute;
+      content: url('../assets/icons/trash.svg');
+      left: 8px;
+    }
+    &.red:active,
+    &.delete:active {
+      background-color: $ib-pill-red-60;
+      border-color: $ib-pill-red-90;
+    }
+
+    &.red.secondary,
+    &.reset {
+      background-color: $ib-white;
+      border-color: $ib-pill-red-80;
+      color: $ib-pill-red-80;
+    }
+    &.reset {
+      position: relative;
+      padding-left: 28px;
+    }
+    &.reset:before {
+      position: absolute;
+      content: url('../assets/icons/reset.svg');
+      left: 8px;
+    }
+    &.red.secondary:active,
+    &.red.secondary:active:focus,
+    &.reset:active,
+    &.reset:active:focus {
+      background-color: $ib-white;
+      border-color: $ib-pill-red-60;
+      color: $ib-pill-red-60;
+    }
+
+    &.disabled {
+      background-color: $ib-white;
+      border-color: $ib-white;
+      color: $ib-pill-grey;
+    }
   }
 }
 

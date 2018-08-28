@@ -9,12 +9,16 @@ const location = 'tmp'
 // starting a hypervisor here and running monorepo tests in parallel with the test-interbit
 // lib causes database and hypervisor collisions.
 describe.skip('packCovenants(location, covenantConfig)', () => {
+  let dbPath
+
   beforeEach(async () => {
+    dbPath = `./db-${Date.now()}`
     await fs.mkdirp(location)
   })
 
   afterEach(async () => {
     await fs.remove(location)
+    await fs.remove(dbPath)
   })
 
   const assertCovenantCorrectness = async (covenantName, result) => {
@@ -44,7 +48,7 @@ describe.skip('packCovenants(location, covenantConfig)', () => {
           location: path.join(__dirname, '../testData/covenant')
         }
       }
-      const options = { dbPath: `./db-${Date.now()}` }
+      const options = { dbPath }
       const result = await packCovenants(location, covenantConfig, options)
 
       await assertCovenantCorrectness('testCovenant', result)

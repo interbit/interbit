@@ -1,7 +1,5 @@
 import constants from '../constants'
-import iconChatBlue from '../assets/icons/iconChatBlue.svg'
 import iconChatEmpty from '../assets/icons/iconChatEmpty.svg'
-import iconCreateAccount from '../assets/icons/iconCreateAccount.svg'
 import iconDownload from '../assets/icons/iconDownload.svg'
 import iconExampleApp from '../assets/icons/iconExampleApp.svg'
 import iconGitHuBBlue from '../assets/icons/iconGitHubBlue.svg'
@@ -9,19 +7,10 @@ import iconIBForDevs from '../assets/icons/iconIBForDevs.svg'
 import iconManyChainsBlue from '../assets/icons/iconManyChainsBlue.svg'
 import iconIBForBusiness from '../assets/icons/iconIBForBusiness.svg'
 import iconPlatformFeaturesBlue from '../assets/icons/iconPlatformFeaturesBlue.svg'
-import iconPricingFreeBlue from '../assets/icons/iconPricingFreeBlue.svg'
 import iconResources from '../assets/icons/iconResources.svg'
-import iconRoadmap from '../assets/icons/iconRoadmap.svg'
 import iconShare from '../assets/icons/iconShare.svg'
 
 export default {
-  accountChain: {
-    title: 'Sign up & explore your own Account chain',
-    image: iconCreateAccount,
-    content:
-      'Use the Block Explorer to create, access, and view your individual Account chain in the browser.',
-    to: constants.urls.APP_ACCOUNT
-  },
   architectureExample: {
     title: 'Examples',
     image: iconExampleApp,
@@ -41,7 +30,7 @@ export default {
     image: iconChatEmpty,
     content:
       'Get in touch to receive more information about Interbit and learn what it can do for your business.',
-    to: constants.paths.CONTACT,
+    to: constants.urls.BTL_CONTACT,
     className: 'blue'
   },
   downloadSDK: {
@@ -82,33 +71,11 @@ export default {
       'Patent-pending blockchain technology, and application services for building the next generation of distributed applications.',
     to: constants.paths.DEVELOPERS_PLATFORM_FEATURES
   },
-  pricingEnterprise: {
-    title: 'Contact us for Enterprise pricing options',
-    image: iconChatEmpty,
-    content:
-      'If you\u2019re looking for a customized Enterprise level pricing option, please contact us for more information.',
-    to: constants.paths.CONTACT,
-    className: 'blue'
-  },
-  pricingFree: {
-    title: 'FREE to developers for non-commercial use',
-    image: iconPricingFreeBlue,
-    content: 'Click here to learn more and get started with development.',
-    to: constants.paths.DEVELOPERS,
-    className: 'blue'
-  },
-  productRoadmap: {
-    title: 'Product Roadmap',
-    image: iconRoadmap,
-    content:
-      'We\u2019re building a platform of technologies to help you build better apps, faster. See what we have planned.',
-    to: constants.paths.PLATFORM_ROADMAP
-  },
   requestDemo: {
     title: 'Request a Demo',
     image: iconChatEmpty,
     content: 'Arrange to view a demo and speak to one of our experts.',
-    to: constants.paths.CONTACT,
+    to: constants.urls.BTL_CONTACT,
     className: 'blue'
   },
   resources: {
@@ -126,12 +93,5 @@ export default {
       'Introduce Interbit to your colleagues or friends. They\u2019ll receive an email and link that indicates it came from you. Don\u2019t worry we won\u2019t put them on any marketing lists.',
     to: `mailto:?subject=Interbit&body=I was recently on the interbit.io website and I thought you'd find it interesting. I'm emailing you this link so that you can take a look for yourself.`,
     className: 'blue'
-  },
-  support: {
-    title: 'Support',
-    image: iconChatBlue,
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    to: constants.paths.DEVELOPERS_SUPPORT
   }
 }

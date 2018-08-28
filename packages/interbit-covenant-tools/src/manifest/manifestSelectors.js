@@ -22,6 +22,9 @@ const getCovenantHashByAlias = (chainAlias, manifest) => {
   return _.get(getCovenants(manifest), [covenantAlias, 'hash'])
 }
 
+const getJoinsByAlias = (chainAlias, manifest) =>
+  _.get(getChildChainByAlias(chainAlias, manifest), ['joins'])
+
 const getGenesisBlockByAlias = (chainAlias, manifest) =>
   _.get(manifest, ['genesisBlocks', chainAlias])
 
@@ -81,18 +84,19 @@ const findAliasInSubtree = (chainAlias, subtree) => {
 module.exports = {
   findAliasInSubtree,
   getApps,
+  getBlockMasterByAlias,
   getChainAliases,
+  getChainIdByAlias,
   getChainIds,
   getChains,
   getChildChainByAlias,
-  getCovenants,
-  getGenesisBlocks,
-  getPeers,
-  getBlockMasterByAlias,
-  getChainIdByAlias,
   getCovenantHashByAlias,
+  getCovenants,
   getGenesisBlockByAlias,
+  getGenesisBlocks,
+  getJoinsByAlias,
   getManifest,
+  getPeers,
   getRootChainId,
   getRootChildren
 }

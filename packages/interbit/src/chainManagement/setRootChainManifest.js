@@ -4,7 +4,7 @@ const {
   }
 } = require('interbit-covenant-tools')
 
-const setRootChainManifest = (cli, manifest) => {
+const setRootChainManifest = async (cli, manifest) => {
   console.log('UPDATING ROOT CHAIN WITH DEPLOYMENT INFO')
 
   const rootChainInterface = cli.getChain(manifest.chains.interbitRoot)
@@ -15,22 +15,25 @@ const setRootChainManifest = (cli, manifest) => {
     return
   }
 
+  await detectBlocking(rootChainInterface, 10000)
+
   const setManifestAction = setManifest(manifest)
   console.log(setManifestAction)
-  waitForBlockToDispatch(rootChainInterface, setManifestAction)
+  await rootChainInterface.dispatch(setManifestAction)
 }
 
-// Wait for chain to init and make it's first block before setting manifest
-const waitForBlockToDispatch = (chainInterface, action) => {
-  let unsubscribe = () => {}
-  let count = 0
-  unsubscribe = chainInterface.subscribe(() => {
-    if (count === 0) {
-      chainInterface.dispatch(action)
+const detectBlocking = (chain, maxTime = 5000) =>
+  new Promise((resolve, reject) => {
+    let unsubscribe = () => {}
+    const timeout = setTimeout(() => {
+      reject(new Error('Chain is not blocking'))
       unsubscribe()
-      count += 1
-    }
+    }, maxTime)
+    unsubscribe = chain.blockSubscribe(() => {
+      unsubscribe()
+      timeout && clearTimeout(timeout)
+      resolve(true)
+    })
   })
-}
 
 module.exports = setRootChainManifest

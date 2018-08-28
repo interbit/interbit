@@ -14,6 +14,8 @@ const actionTypes = {
   STATIC_CHAINS_SAGA: `${ACTION_PREFIX}/STATIC_CHAINS_SAGA`,
   PRIVATE_CHAIN_SAGA: `${ACTION_PREFIX}/PRIVATE_CHAIN_SAGA`,
   SPONSOR_CHAIN_SAGA: `${ACTION_PREFIX}/SPONSOR_CHAIN_SAGA`,
+  LOAD_CHAIN_SAGA: `${ACTION_PREFIX}/LOAD_CHAIN_SAGA`,
+  UNLOAD_CHAIN_SAGA: `${ACTION_PREFIX}/UNLOAD_CHAIN_SAGA`,
 
   CHAIN_UPDATED: `${ACTION_PREFIX}/CHAIN_UPDATED`,
   CHAIN_BLOCK_ADDED: `${ACTION_PREFIX}/CHAIN_BLOCK_ADDED`,
@@ -21,7 +23,10 @@ const actionTypes = {
   CHAIN_SPONSORING: `${ACTION_PREFIX}/CHAIN_SPONSORING`,
   CHAIN_LOADING: `${ACTION_PREFIX}/CHAIN_LOADING`,
   CHAIN_LOADED: `${ACTION_PREFIX}/CHAIN_LOADED`,
-  CHAIN_SUBSCRIBED: `${ACTION_PREFIX}/CHAIN_SUBSCRIBE`,
+  CHAIN_SUBSCRIBED: `${ACTION_PREFIX}/CHAIN_SUBSCRIBED`,
+  CHAIN_UNLOADING: `${ACTION_PREFIX}/CHAIN_UNLOADING`,
+  CHAIN_UNLOADED: `${ACTION_PREFIX}/CHAIN_UNLOADED`,
+  CHAIN_UNSUBSCRIBED: `${ACTION_PREFIX}/CHAIN_UNSUBSCRIBED`,
   CHAIN_BLOCKING: `${ACTION_PREFIX}/CHAIN_BLOCKING`,
   CHAIN_ERROR: `${ACTION_PREFIX}/CHAIN_ERROR`,
   CHAIN_GENESIS: `${ACTION_PREFIX}/CHAIN_GENESIS`,
@@ -64,6 +69,22 @@ const actionCreators = {
     }
   }),
 
+  loadChainSaga: ({ chainAlias, chainId, dependsOnBlockingChain }) => ({
+    type: actionTypes.LOAD_CHAIN_SAGA,
+    payload: {
+      chainAlias,
+      chainId,
+      dependsOnBlockingChain
+    }
+  }),
+
+  unloadChainSaga: ({ chainAlias }) => ({
+    type: actionTypes.UNLOAD_CHAIN_SAGA,
+    payload: {
+      chainAlias
+    }
+  }),
+
   chainUpdated: (chainAlias, chainState) => ({
     type: actionTypes.CHAIN_UPDATED,
     payload: {
@@ -93,6 +114,13 @@ const actionCreators = {
     payload: {
       chainAlias,
       chainState
+    }
+  }),
+
+  chainUnsubscribed: chainAlias => ({
+    type: actionTypes.CHAIN_UNSUBSCRIBED,
+    payload: {
+      chainAlias
     }
   }),
 
@@ -163,6 +191,20 @@ const actionCreators = {
     payload: {
       chainAlias,
       chainId
+    }
+  }),
+
+  chainUnloading: ({ chainAlias }) => ({
+    type: actionTypes.CHAIN_UNLOADING,
+    payload: {
+      chainAlias
+    }
+  }),
+
+  chainUnloaded: ({ chainAlias }) => ({
+    type: actionTypes.CHAIN_UNLOADED,
+    payload: {
+      chainAlias
     }
   }),
 

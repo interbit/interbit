@@ -13,11 +13,11 @@ const {
  * the covenant specified in the manifest to that chain.
  * @param {Object} cli - The cli to interact with the Interbit node
  * @param {Object} manifest - The manifest configuration applied to this node
- * @param {Object} options - Additional options related to this node
  */
 const initializeCovenants = async (cli, manifest, options) => {
   console.log('INITIALIZING COVENANTS')
   const chainEntries = Object.entries(getChains(manifest))
+  const covenantPromises = []
   for (const [chainAlias, chainId] of chainEntries) {
     const chainInterface = cli.getChain(chainId)
     const state = chainInterface.getState()
@@ -32,9 +32,11 @@ const initializeCovenants = async (cli, manifest, options) => {
       console.log(
         `No covenant found on ${chainAlias}... applying covenant ${configuredCovenantHash}`
       )
-      cli.applyCovenant(chainId, configuredCovenantHash)
+      const covenantPromise = cli.applyCovenant(chainId, configuredCovenantHash)
+      covenantPromises.push(covenantPromise)
     }
   }
+  await Promise.all(covenantPromises)
 }
 
 module.exports = initializeCovenants

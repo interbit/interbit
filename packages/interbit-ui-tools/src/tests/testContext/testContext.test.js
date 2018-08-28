@@ -2,6 +2,7 @@
  * @jest-environment node
  */
 const assert = require('assert')
+const fs = require('fs-extra')
 
 const { createMockDataStore, createTestContext } = require('.')
 
@@ -24,6 +25,7 @@ describe('testContext', () => {
 
   describe('createTestContext(dataStore)', () => {
     let testContext
+    let dbPath
     const env = { ...{}, ...process.env }
 
     const cleanup = async caller => {
@@ -32,10 +34,15 @@ describe('testContext', () => {
         await testContext.unloadInterbit()
         testContext = undefined
       }
+      if (dbPath) {
+        console.log(`Cleaning up interbit DB: ${dbPath}`)
+        fs.remove(dbPath)
+      }
     }
 
     beforeEach(async () => {
-      process.env.DB_PATH = `./db-${Date.now()}`
+      dbPath = `./db-${Date.now()}`
+      process.env.DB_PATH = dbPath
     })
 
     afterEach(async () => {

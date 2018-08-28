@@ -7,6 +7,12 @@ const prepareTestLocation = require('./prepareTestLocation')
 const log = require('../../log')
 
 const testBuild = async () => {
+  const dbCleanup = async dbPath => {
+    if (dbPath) {
+      await fs.remove(dbPath)
+    }
+  }
+
   const { location, cleanup } = prepareTestLocation('build')
   const options = {
     // eslint-disable-next-line
@@ -70,6 +76,7 @@ const testBuild = async () => {
   log.success('Build was successful')
 
   cleanup()
+  dbCleanup(options.dbPath)
 }
 
 module.exports = testBuild

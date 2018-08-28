@@ -3,7 +3,7 @@ const { put, select, call, all } = require('redux-saga/effects')
 const { userHasRole } = require('./privileges')
 const { actionCreators } = require('../actions')
 const selectors = require('../selectors')
-const { LOG_PREFIX } = require('../constants')
+const { LOG_PREFIX, CHAIN_STATUS } = require('../constants')
 
 function* loadStaticChains({ cli }) {
   const chainsToLoad = yield select(selectors.getConfiguredChains)
@@ -237,7 +237,7 @@ function* tryLoadChain({ cli, chainAlias, chainId }) {
 function* tryDeleteChain({ cli, chainAlias, chainId }) {
   console.log(`${LOG_PREFIX}: *tryDeleteChain()`, { chainAlias, chainId })
   try {
-    yield put(actionCreators.chainDeleting({ chainAlias, chainId }))
+    yield put.resolve(actionCreators.chainDeleting({ chainAlias, chainId }))
 
     // Broadcast chain removal from the network
     yield call(cli.destroyChain, chainId)
@@ -249,6 +249,18 @@ function* tryDeleteChain({ cli, chainAlias, chainId }) {
   } catch (error) {
     console.warn(`${LOG_PREFIX}:`, { chainId, error })
     yield put(actionCreators.chainError({ chainAlias, error: error.message }))
+  }
+}
+
+function* unloadChain({ chainAlias }) {
+  console.log(`${LOG_PREFIX}: *unloadChain()`, { chainAlias })
+
+  const chainStatus = yield select(selectors.getChainStatus, { chainAlias })
+
+  if (chainStatus !== CHAIN_STATUS.UNKNOWN) {
+    yield put.resolve(actionCreators.chainUnloading({ chainAlias }))
+
+    yield put(actionCreators.chainUnloaded({ chainAlias }))
   }
 }
 
@@ -271,5 +283,6 @@ module.exports = {
   loadChain,
   loadPrivateChain,
   sponsorChain,
-  tryLoadChain
+  tryLoadChain,
+  unloadChain
 }

@@ -65,7 +65,7 @@ const testDeploy = async () => {
 
     const { cli, hypervisor, cleanup } = await interbit.deploy(deployOptions)
     interbitCleanup = cleanup
-    log.info('Deploy finished')
+    log.success('Deploy finished')
 
     assert.ok(cli)
     assert.ok(hypervisor)

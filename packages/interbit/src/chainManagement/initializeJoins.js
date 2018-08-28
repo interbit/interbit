@@ -30,18 +30,18 @@ const initializeJoins = async (cli, manifest) => {
     }
 
     log.info(`... chain ${chainAlias} did not have a manifest... initializing`)
-    const sendPromises = initializeSendJoins(
+    const sendPromise = initializeSendJoins(
       chainAlias,
       chainInterface,
       manifest
     )
-    const receivePromises = initializeReceiveJoins(
+    const receivePromise = initializeReceiveJoins(
       chainAlias,
       chainInterface,
       manifest
     )
 
-    dispatchPromises = [...sendPromises, ...receivePromises]
+    dispatchPromises = [sendPromise, receivePromise]
   }
 
   await Promise.all(dispatchPromises)
@@ -49,8 +49,8 @@ const initializeJoins = async (cli, manifest) => {
 
 const initializeSendJoins = async (chainAlias, chainInterface, manifest) => {
   const joins = getJoinsByAlias(chainAlias, manifest)
-  log.info(JSON.stringify(joins, null, 2))
   const sendJoins = joins[JOIN_TYPES.SEND]
+  log.info('Found send join configuration to apply:')
   log.info(JSON.stringify(sendJoins, null, 2))
 
   const dispatchPromises = []
@@ -59,6 +59,7 @@ const initializeSendJoins = async (chainAlias, chainInterface, manifest) => {
     const sendAction = authorizeSendActions({
       receiverChainId
     })
+    log.action(sendAction)
     const dispatchPromise = chainInterface.dispatch(sendAction)
     dispatchPromises.push(dispatchPromise)
   }
@@ -68,24 +69,22 @@ const initializeSendJoins = async (chainAlias, chainInterface, manifest) => {
 
 const initializeReceiveJoins = async (chainAlias, chainInterface, manifest) => {
   const joins = getJoinsByAlias(chainAlias, manifest)
-  log.info(JSON.stringify(joins, null, 2))
   const receiveManifestJoins = joins[JOIN_TYPES.RECEIVE].filter(
     join =>
       join.authorizedActions.length === 1 &&
       join.authorizedActions[0] === '@@MANIFEST/SET_MANIFEST'
   )
+  log.info('Found receive join configuration to apply:')
   log.info(JSON.stringify(receiveManifestJoins, null, 2))
 
   const dispatchPromises = []
   for (const receiveManifestJoin of receiveManifestJoins) {
-    const senderChainId = getChainIdByAlias(
-      receiveManifestJoin.chainAlias,
-      manifest
-    )
+    const senderChainId = getChainIdByAlias(receiveManifestJoin.alias, manifest)
     const receiveAction = authorizeReceiveActions({
       senderChainId,
-      permittedActions: receiveManifestJoins.authorizedActions
+      permittedActions: receiveManifestJoin.authorizedActions
     })
+    log.action(receiveAction)
     const dispatchPromise = chainInterface.dispatch(receiveAction)
     dispatchPromises.push(dispatchPromise)
   }

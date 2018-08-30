@@ -17,7 +17,7 @@ describe('hubCovenant', () => {
 
     const afterState = hubCovenant.smartContract(chainState, action)
 
-    assert.equal(afterState.chainMetadata.chainName, chainName)
+    assert.strictEqual(afterState.chainMetadata.chainName, chainName)
   })
 
   it('updates privateTokens on PRIVATE_TOKEN', () => {
@@ -30,7 +30,7 @@ describe('hubCovenant', () => {
 
     const afterState = hubCovenant.smartContract(chainState, action)
 
-    assert.equal(afterState.privateTokens[tokenName], value)
+    assert.strictEqual(afterState.privateTokens[tokenName], value)
   })
 
   it('updates sharedTokens on SHAREABLE_TOKEN', () => {
@@ -42,7 +42,7 @@ describe('hubCovenant', () => {
     })
 
     const afterState = hubCovenant.smartContract(chainState, action)
-    assert.equal(afterState.shareableTokens[tokenName], value)
+    assert.strictEqual(afterState.shareableTokens[tokenName], value)
   })
 
   it('updates tokenRequests on TOKEN_REQUEST', () => {
@@ -132,7 +132,7 @@ describe('hubCovenant', () => {
     })
 
     const afterState = hubCovenant.smartContract(beforeState, action)
-    assert.equal(afterState.sharedTokens[requestId][tokenName], value)
+    assert.strictEqual(afterState.sharedTokens[requestId][tokenName], value)
   })
 
   it('sets up a START_PROVIDE_STATE side-effect on MOUNT_TOKEN', () => {
@@ -158,8 +158,8 @@ describe('hubCovenant', () => {
 
     const afterState = hubCovenant.smartContract(beforeState, action)
     const sideEffect = afterState.sideEffects[0]
-    assert.equal(sideEffect.type, '@@interbit/START_PROVIDE_STATE')
-    assert.equal(sideEffect.payload.consumer, consumerChainId)
+    assert.strictEqual(sideEffect.type, '@@interbit/START_PROVIDE_STATE')
+    assert.strictEqual(sideEffect.payload.consumer, consumerChainId)
     assert.deepStrictEqual(sideEffect.payload.statePath, [
       'sharedTokens',
       requestId
@@ -191,10 +191,16 @@ describe('hubCovenant', () => {
     const pendingAction =
       afterState.interbit['sent-actions'][consumerChainId]['pending-actions'][0]
 
-    assert.equal(pendingAction.type, spokeCovenant.actionTypes.MOUNT_TOKEN)
-    assert.equal(pendingAction.payload.providerChainId, chainId)
-    assert.equal(pendingAction.payload.tokenName, tokenName)
-    assert.equal(pendingAction.payload.consumerRequestId, consumerRequestId)
+    assert.strictEqual(
+      pendingAction.type,
+      spokeCovenant.actionTypes.MOUNT_TOKEN
+    )
+    assert.strictEqual(pendingAction.payload.providerChainId, chainId)
+    assert.strictEqual(pendingAction.payload.tokenName, tokenName)
+    assert.strictEqual(
+      pendingAction.payload.consumerRequestId,
+      consumerRequestId
+    )
   })
 
   it('removes token on REVOKE_TOKEN', () => {

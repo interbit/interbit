@@ -29,7 +29,7 @@ const verifyApi = (api, expectedApi) => {
   )
 
   Object.entries(expectedApi).forEach(([key, expectedType]) => {
-    assert.equal(
+    assert.strictEqual(
       typeof api[key],
       expectedType,
       `${key} is not a ${expectedType}`
@@ -160,7 +160,7 @@ describe('interbit', () => {
       it('will boot a chain that has the chain ID specified in the generated genesis block', async () => {
         const genesisBlock = await cli.createGenesisBlock()
         const chainId = await cli.startChain({ genesisBlock })
-        assert.equal(chainId, genesisBlock.blockHash)
+        assert.strictEqual(chainId, genesisBlock.blockHash)
       })
 
       describe('chain', () => {
@@ -204,7 +204,7 @@ describe('interbit', () => {
             // test timeout needs to be longer than the sleep period
             // Added more wiggle room around timeouts for Heroku
             await sleep(CI_2_BLOCK_SLEEP)
-            assert.equal(count, 1)
+            assert.strictEqual(count, 1)
           },
           CI_SUBSCRIBE_UNSUBSCRIBE_TIMEOUT
         )

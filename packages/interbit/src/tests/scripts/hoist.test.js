@@ -33,11 +33,11 @@ describe('hoist interbit covenant dependencies into app', () => {
         covenantPackageJsons
       )
 
-      assert.equal(hoistedDependencies.dependencies.one, '1.0.0')
-      assert.equal(hoistedDependencies.dependencies.two, '2.0.0')
-      assert.equal(hoistedDependencies.devDependencies.three, '3.0.0')
-      assert.equal(hoistedDependencies.dependencies.four, '4.0.0')
-      assert.equal(hoistedDependencies.devDependencies.five, '5.0.0')
+      assert.strictEqual(hoistedDependencies.dependencies.one, '1.0.0')
+      assert.strictEqual(hoistedDependencies.dependencies.two, '2.0.0')
+      assert.strictEqual(hoistedDependencies.devDependencies.three, '3.0.0')
+      assert.strictEqual(hoistedDependencies.dependencies.four, '4.0.0')
+      assert.strictEqual(hoistedDependencies.devDependencies.five, '5.0.0')
     })
 
     it('does not hoist a package that already exists in the app', () => {
@@ -68,12 +68,18 @@ describe('hoist interbit covenant dependencies into app', () => {
         covenantPackageJsons
       )
 
-      assert.equal(Object.keys(hoistedDependencies.dependencies).length, 2)
-      assert.equal(Object.keys(hoistedDependencies.devDependencies).length, 1)
+      assert.strictEqual(
+        Object.keys(hoistedDependencies.dependencies).length,
+        2
+      )
+      assert.strictEqual(
+        Object.keys(hoistedDependencies.devDependencies).length,
+        1
+      )
 
-      assert.equal(hoistedDependencies.dependencies.one, '1.0.0')
-      assert.equal(hoistedDependencies.dependencies.two, '2.0.0')
-      assert.equal(hoistedDependencies.devDependencies.three, '3.0.0')
+      assert.strictEqual(hoistedDependencies.dependencies.one, '1.0.0')
+      assert.strictEqual(hoistedDependencies.dependencies.two, '2.0.0')
+      assert.strictEqual(hoistedDependencies.devDependencies.three, '3.0.0')
     })
 
     it('only hoists dependencies if they exist', () => {

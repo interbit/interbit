@@ -74,7 +74,7 @@ describe('template private covenant', () => {
       const action = actionCreators.add(number)
       const startState = initialState.set('runningTotal', currentTotal)
       const newState = reducer(startState, action)
-      assert.equal(newState.runningTotal, expectedTotal)
+      assert.strictEqual(newState.runningTotal, expectedTotal)
     })
 
     invalidInputs.forEach(testCase => {
@@ -82,7 +82,7 @@ describe('template private covenant', () => {
       const action = actionCreators.add(number)
       const startState = initialState.set('runningTotal', currentTotal)
       const newState = reducer(startState, action)
-      assert.equal(newState.runningTotal, startState.runningTotal)
+      assert.strictEqual(newState.runningTotal, startState.runningTotal)
     })
   })
 })

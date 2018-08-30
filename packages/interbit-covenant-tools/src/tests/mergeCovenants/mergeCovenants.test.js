@@ -47,10 +47,10 @@ describe('chainServices/mergeCovenants', () => {
     const resultCovenant = mergeCovenants([firstCovenant, secondCovenant])
 
     assert.ok(resultCovenant)
-    assert.equal('function', typeof resultCovenant.actionCreators.one)
-    assert.equal('function', typeof resultCovenant.actionCreators.two)
-    assert.equal('first/ONE', resultCovenant.actionTypes.one)
-    assert.equal('second/TWO', resultCovenant.actionTypes.two)
+    assert.strictEqual('function', typeof resultCovenant.actionCreators.one)
+    assert.strictEqual('function', typeof resultCovenant.actionCreators.two)
+    assert.strictEqual('first/ONE', resultCovenant.actionTypes.one)
+    assert.strictEqual('second/TWO', resultCovenant.actionTypes.two)
     assert.deepStrictEqual(
       Immutable.from({
         one: 1,

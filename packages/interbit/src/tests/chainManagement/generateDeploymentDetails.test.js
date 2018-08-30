@@ -19,7 +19,10 @@ describe('generateProdConfig(chainManifest, covenantHashes)', () => {
 
     const prodConfig = generateProdConfig(chainManifest, covenantHashes)
 
-    assert.equal(prodConfig.chains.template, chainManifest.template.chainId)
-    assert.equal(prodConfig.covenants.template, covenantHashes.template)
+    assert.strictEqual(
+      prodConfig.chains.template,
+      chainManifest.template.chainId
+    )
+    assert.strictEqual(prodConfig.covenants.template, covenantHashes.template)
   })
 })

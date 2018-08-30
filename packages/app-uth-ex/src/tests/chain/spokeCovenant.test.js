@@ -50,7 +50,7 @@ describe('spokeCovenant', () => {
 
     const afterState = spokeCovenant.smartContract(chainState, action)
 
-    assert.deepEqual(Object.values(afterState.tokenRequests)[0], expected)
+    assert.deepStrictEqual(Object.values(afterState.tokenRequests)[0], expected)
   })
 
   it('adds a pending TOKEN_REQUEST action to dispatch to the hub chain on REQUEST_TOKEN', () => {
@@ -97,7 +97,7 @@ describe('spokeCovenant', () => {
     )
 
     const afterState = spokeCovenant.smartContract(beforeState, action)
-    assert.deepEqual(afterState.tokenRequests, {})
+    assert.deepStrictEqual(afterState.tokenRequests, {})
   })
 
   it('sets up a START_CONSUME_STATE side-effect on MOUNT_TOKEN', () => {
@@ -116,7 +116,7 @@ describe('spokeCovenant', () => {
     const afterState = spokeCovenant.smartContract(chainState, action)
     const sideEffect = afterState.sideEffects[0]
     assert.equal(sideEffect.type, '@@interbit/START_CONSUME_STATE')
-    assert.deepEqual(sideEffect.payload, {
+    assert.deepStrictEqual(sideEffect.payload, {
       provider: providerChainId,
       mount: ['providerTokens', tokenName],
       joinName

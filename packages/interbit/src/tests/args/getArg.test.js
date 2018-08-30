@@ -40,7 +40,7 @@ describe('args', () => {
 
       const args = getArgs(argv, argName)
 
-      assert.deepEqual(args, expectedArgs)
+      assert.deepStrictEqual(args, expectedArgs)
     })
 
     it('returns an empty array when argName is followed by another argName', () => {
@@ -49,7 +49,7 @@ describe('args', () => {
 
       const args = getArgs(argv, argName)
 
-      assert.deepEqual(args, expectedArgs)
+      assert.deepStrictEqual(args, expectedArgs)
     })
 
     it('returns an array of specified args if more than one was supplied', () => {
@@ -66,7 +66,7 @@ describe('args', () => {
 
       const args = getArgs(argv, argName)
 
-      assert.deepEqual(args, expectedArgs)
+      assert.deepStrictEqual(args, expectedArgs)
     })
   })
 

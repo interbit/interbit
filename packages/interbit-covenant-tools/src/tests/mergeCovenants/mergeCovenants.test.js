@@ -51,7 +51,7 @@ describe('chainServices/mergeCovenants', () => {
     assert.equal('function', typeof resultCovenant.actionCreators.two)
     assert.equal('first/ONE', resultCovenant.actionTypes.one)
     assert.equal('second/TWO', resultCovenant.actionTypes.two)
-    assert.deepEqual(
+    assert.deepStrictEqual(
       Immutable.from({
         one: 1,
         two: [],
@@ -65,7 +65,7 @@ describe('chainServices/mergeCovenants', () => {
     )
 
     const action = resultCovenant.actionCreators.one({ number: 1 })
-    assert.deepEqual(
+    assert.deepStrictEqual(
       Immutable.from({
         one: 2,
         two: [],
@@ -80,7 +80,7 @@ describe('chainServices/mergeCovenants', () => {
 
     const anotherAction = resultCovenant.actionCreators.two({ text: 'meow' })
     console.log(anotherAction)
-    assert.deepEqual(
+    assert.deepStrictEqual(
       Immutable.from({
         one: 1,
         two: ['meow'],

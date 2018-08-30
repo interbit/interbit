@@ -25,7 +25,7 @@ describe('template private covenant', () => {
       const action = actionCreators.memo(text)
       const startState = initialState.set('memos', currentMemos)
       const newState = reducer(startState, action)
-      assert.deepEqual(newState.memos, expectedMemos)
+      assert.deepStrictEqual(newState.memos, expectedMemos)
     })
 
     invalidInputs.forEach(testCase => {
@@ -33,7 +33,7 @@ describe('template private covenant', () => {
       const action = actionCreators.memo(text)
       const startState = initialState.set('memos', currentMemos)
       const newState = reducer(startState, action)
-      assert.deepEqual(newState.memos, startState.memos)
+      assert.deepStrictEqual(newState.memos, startState.memos)
     })
   })
 

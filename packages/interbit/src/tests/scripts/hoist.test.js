@@ -89,8 +89,8 @@ describe('hoist interbit covenant dependencies into app', () => {
         covenantPackageJsons
       )
 
-      assert.deepEqual(hoistedDependencies.dependencies, {})
-      assert.deepEqual(hoistedDependencies.devDependencies, {})
+      assert.deepStrictEqual(hoistedDependencies.dependencies, {})
+      assert.deepStrictEqual(hoistedDependencies.devDependencies, {})
     })
   })
 })

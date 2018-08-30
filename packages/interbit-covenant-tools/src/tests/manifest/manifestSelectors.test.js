@@ -23,7 +23,7 @@ describe('Manifest Selectors', () => {
       defaultManifest
     )
 
-    assert.deepEqual(actualGenesisBlock, expectedGenesisBlock)
+    assert.deepStrictEqual(actualGenesisBlock, expectedGenesisBlock)
   })
 
   it('gets the block master by alias', () => {

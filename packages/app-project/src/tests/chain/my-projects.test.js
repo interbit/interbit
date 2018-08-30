@@ -23,7 +23,10 @@ describe('myProjectsChain', () => {
 
       const result = covenant.reducer(covenant.initialState, action)
 
-      assert.deepEqual(covenant.initialState, result.without('sideEffects'))
+      assert.deepStrictEqual(
+        covenant.initialState,
+        result.without('sideEffects')
+      )
     })
 
     it('does not modify state on CREATE_SAMPLE_PROJECT', () => {
@@ -35,7 +38,10 @@ describe('myProjectsChain', () => {
 
       const result = covenant.reducer(covenant.initialState, action)
 
-      assert.deepEqual(covenant.initialState, result.without('sideEffects'))
+      assert.deepStrictEqual(
+        covenant.initialState,
+        result.without('sideEffects')
+      )
     })
 
     it('forwards action on FORWARD_PROJECT_ACTION', () => {
@@ -61,7 +67,7 @@ describe('myProjectsChain', () => {
       })
 
       const afterState = covenant.reducer(state, action)
-      assert.deepEqual(
+      assert.deepStrictEqual(
         afterState.getIn([
           'interbit',
           'sent-actions',

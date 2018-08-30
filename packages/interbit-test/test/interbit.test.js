@@ -12,13 +12,21 @@ const verifyApi = (api, expectedApi) => {
     (acc, key) => (expectedApi[key] ? acc : acc.concat(key)),
     []
   )
-  assert.deepEqual(extras, [], 'Interface has extra properties or methods')
+  assert.deepStrictEqual(
+    extras,
+    [],
+    'Interface has extra properties or methods'
+  )
 
   const missing = Object.keys(expectedApi).reduce(
     (acc, key) => (api[key] ? acc : acc.concat(key)),
     []
   )
-  assert.deepEqual(missing, [], 'Interface has missing properties or methods')
+  assert.deepStrictEqual(
+    missing,
+    [],
+    'Interface has missing properties or methods'
+  )
 
   Object.entries(expectedApi).forEach(([key, expectedType]) => {
     assert.equal(
@@ -116,7 +124,7 @@ describe('interbit', () => {
     })
 
     it('boots with the supplied key', () => {
-      assert.deepEqual(hypervisor.keyPair, keyPair)
+      assert.deepStrictEqual(hypervisor.keyPair, keyPair)
     })
 
     describe('cli', () => {

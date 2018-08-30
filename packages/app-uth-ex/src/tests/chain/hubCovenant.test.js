@@ -64,7 +64,7 @@ describe('hubCovenant', () => {
       justification
     }
     const afterState = hubCovenant.smartContract(chainState, action)
-    assert.deepEqual(Object.values(afterState.tokenRequests)[0], expected)
+    assert.deepStrictEqual(Object.values(afterState.tokenRequests)[0], expected)
   })
 
   it('removes tokenRequest on DENY_TOKEN_REQUEST', () => {
@@ -84,7 +84,7 @@ describe('hubCovenant', () => {
     })
 
     const afterState = hubCovenant.smartContract(state, action)
-    assert.deepEqual(afterState.tokenRequests, {})
+    assert.deepStrictEqual(afterState.tokenRequests, {})
   })
 
   it('removes tokenRequest on APPROVE_TOKEN_REQUEST', () => {
@@ -107,7 +107,7 @@ describe('hubCovenant', () => {
     })
 
     const afterState = hubCovenant.smartContract(beforeState, action)
-    assert.deepEqual(afterState.tokenRequests, {})
+    assert.deepStrictEqual(afterState.tokenRequests, {})
   })
 
   it('makes a consumer specific copy of the token on APPROVE_TOKEN_REQUEST', () => {
@@ -160,7 +160,10 @@ describe('hubCovenant', () => {
     const sideEffect = afterState.sideEffects[0]
     assert.equal(sideEffect.type, '@@interbit/START_PROVIDE_STATE')
     assert.equal(sideEffect.payload.consumer, consumerChainId)
-    assert.deepEqual(sideEffect.payload.statePath, ['sharedTokens', requestId])
+    assert.deepStrictEqual(sideEffect.payload.statePath, [
+      'sharedTokens',
+      requestId
+    ])
   })
 
   it('adds a pending MOUNT_TOKEN action to dispatch to the consumer chain on APPROVE_TOKEN_REQUEST', () => {
@@ -209,6 +212,6 @@ describe('hubCovenant', () => {
     })
 
     const afterState = hubCovenant.smartContract(beforeState, action)
-    assert.deepEqual(afterState.sharedTokens, {})
+    assert.deepStrictEqual(afterState.sharedTokens, {})
   })
 })

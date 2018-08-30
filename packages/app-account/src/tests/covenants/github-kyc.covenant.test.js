@@ -19,7 +19,7 @@ describe('github-kyc/covenant', () => {
 
       const result = covenant.reducer(covenant.initialState, action)
 
-      assert.deepEqual(
+      assert.deepStrictEqual(
         result.getIn(['profiles', privateChainId, 'sharedProfile']),
         profile
       )

@@ -6,7 +6,7 @@ describe('control covenant', () => {
     const expectedState = controlCovenant.initialState
     const actualState = controlCovenant.reducer(expectedState, { type: 'TEST' })
 
-    assert.deepEqual(actualState, expectedState)
+    assert.deepStrictEqual(actualState, expectedState)
   })
 
   it('returns state on SET_MANIFEST', () => {

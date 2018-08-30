@@ -29,6 +29,6 @@ describe('configSelectors', () => {
     const actualParent = getParentByChainAlias('superspoke', config)
     const expectedParent = 'spoke'
 
-    assert.equal(actualParent, expectedParent)
+    assert.strictEqual(actualParent, expectedParent)
   })
 })

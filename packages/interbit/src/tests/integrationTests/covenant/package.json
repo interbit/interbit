@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "interbit-root-covenant": "0.4.46",
     "seamless-immutable": "7.1.2"
   }
 }

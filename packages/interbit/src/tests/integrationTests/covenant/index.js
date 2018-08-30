@@ -1,3 +1,4 @@
+const { reducer: rootReducer } = require('interbit-root-covenant')
 const Immutable = require('seamless-immutable')
 
 const initialState = Immutable.from({
@@ -18,7 +19,7 @@ const actionCreators = {
 }
 
 const reducer = (state = initialState, action) => {
-  let nextState = state
+  let nextState = rootReducer(state, action)
   if (action.type === actionTypes.ADD_STATE) {
     const { newState } = action.payload
     nextState = state.set('shared', newState)

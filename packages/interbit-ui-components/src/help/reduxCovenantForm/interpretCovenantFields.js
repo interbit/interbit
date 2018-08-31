@@ -13,7 +13,7 @@ export default covenant => {
         ...accum,
         [action.type]: {
           actionCreator: action.invoke || formActionCreator(action.type),
-          payloadFields: Object.keys(action.arguments || action.payload)
+          payloadFields: Object.keys(action.arguments || action.payload || {})
         }
       }
     },

@@ -63,20 +63,3 @@ export function match(field) {
     return undefined
   }
 }
-
-export function createFieldValidator(validators) {
-  return (value, allValues, props) => {
-    if (validators) {
-      for (let i = 0; i < validators.length; i += 1) {
-        const validator = validators[i]
-        if (typeof validator === 'function') {
-          const result = validators[i](value, allValues, props)
-          if (result) {
-            return result
-          }
-        }
-      }
-    }
-    return undefined
-  }
-}

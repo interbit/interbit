@@ -9,8 +9,8 @@ const log = require('../log')
  * @param {Object} covenants - The map of covenant aliases to covenant hashes.
  * @returns {Object} - Details of node deployment.
  */
-const generateDeploymentDetails = (chainManifest, covenants) => {
-  log.info({ chainManifest, covenants })
+const generateDeploymentDetails = (chainManifest, covenantHashes) => {
+  log.info({ chainManifest, covenantHashes })
   return {
     chains: Object.entries(chainManifest).reduce(
       (chains, [alias, chainData]) => ({
@@ -19,7 +19,13 @@ const generateDeploymentDetails = (chainManifest, covenants) => {
       }),
       {}
     ),
-    covenants
+    covenants: Object.entries(covenantHashes).reduce(
+      (covenants, [alias, hash]) => ({
+        ...covenants,
+        [alias]: { hash }
+      }),
+      {}
+    )
   }
 }
 

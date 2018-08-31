@@ -180,4 +180,21 @@ describe('my-account/covenant', () => {
       assert.deepStrictEqual(afterState.shared, {})
     })
   })
+
+  it('starts the authentication flow by adding an auth request', () => {
+    const payload = {
+      oAuthProvider: 'fancyIdentityService',
+      requestId: 1234,
+      timestamp: 123456789
+    }
+    const state = covenant.initialState.setIn(
+      ['authenticationRequests', payload.requestId],
+      { oAuthProvider: payload.oAuthProvider, timestamp: payload.timestamp }
+    )
+
+    const action = covenant.actionCreators.startAuthentication(payload)
+    const afterState = covenant.reducer(covenant.initialState, action)
+
+    assert.deepStrictEqual(state, afterState)
+  })
 })

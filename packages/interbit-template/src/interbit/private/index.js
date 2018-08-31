@@ -1,5 +1,6 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
 const Immutable = require('seamless-immutable')
+const { takeEvery, call, put } = require('redux-saga').effects
 
 const {
   cAuthConsumerCovenant,
@@ -19,10 +20,10 @@ const reducer = (state = initialState, action) => {
     return state
   }
 
-  console.log('REDUCING: ', action)
-
   switch (action.type) {
     case actionTypes.MEMO: {
+      console.log('REDUCER: ', action)
+
       const { text } = action.payload
       const memos = state.getIn(['memos'], Immutable.from([]))
 
@@ -30,6 +31,8 @@ const reducer = (state = initialState, action) => {
     }
 
     case actionTypes.ADD: {
+      console.log('REDUCER: ', action)
+
       const { number: maybeNumber } = action.payload
       const number = Number(maybeNumber)
       const runningTotal = state.getIn(['runningTotal'], 0)
@@ -39,16 +42,45 @@ const reducer = (state = initialState, action) => {
         : state
     }
 
+    case actionTypes.SET_TIMESTAMP: {
+      console.log('REDUCER: ', action)
+
+      const { timestamp } = action.payload
+      return Number.isFinite(Number(timestamp))
+        ? state.set('timestamp', timestamp)
+        : state
+    }
+
     default:
       return state
   }
+}
+
+function* rootSaga() {
+  console.log(`ROOT SAGA: watching for ${actionTypes.CURRENT_TIMESTAMP_SAGA}`)
+  yield takeEvery(actionTypes.CURRENT_TIMESTAMP_SAGA, currentTimestampSaga)
+}
+
+function* currentTimestampSaga(action) {
+  // action is always the first argument when called from takeEvery
+  console.log('SAGA: ', action)
+
+  // Yield the result of a non-deterministic function
+  const timestamp = yield call(Date.now)
+
+  // Create an action containing the result
+  const setTimestampAction = actionCreators.setTimestamp(timestamp)
+
+  // Now the action is deterministic and can be handled by the reducer
+  yield put(setTimestampAction)
 }
 
 const covenant = {
   actionTypes,
   actionCreators,
   initialState,
-  reducer
+  reducer,
+  rootSaga
 }
 
 module.exports = mergeCovenants([covenant, cAuthConsumerCovenant])

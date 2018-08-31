@@ -9,7 +9,6 @@ import {
   Field
 } from 'redux-form'
 import { renderInput } from '../../help/reduxForm/reduxForm'
-import { createFieldValidator } from '../../help/reduxForm/validation'
 
 class EditableTable extends Component {
   static propTypes = {
@@ -89,7 +88,7 @@ class EditableTable extends Component {
                         component={renderInput}
                         label={o.label}
                         disabled={o.readOnly}
-                        validate={createFieldValidator(o.validators)}
+                        validate={o.validators}
                         selectPlaceholder={o.selectPlaceholder}
                         selectValues={o.selectValues}
                         labelSm={4}

@@ -181,20 +181,59 @@ describe('my-account/covenant', () => {
     })
   })
 
-  it('starts the authentication flow by adding an auth request', () => {
-    const payload = {
+  it('adds an auth request on START_AUTHENTICATION', () => {
+    const request = {
       oAuthProvider: 'fancyIdentityService',
       requestId: 1234,
       timestamp: 123456789
     }
     const state = covenant.initialState.setIn(
-      ['authenticationRequests', payload.requestId],
-      { oAuthProvider: payload.oAuthProvider, timestamp: payload.timestamp }
+      ['authenticationRequests', request.requestId],
+      { oAuthProvider: request.oAuthProvider, timestamp: request.timestamp }
     )
 
-    const action = covenant.actionCreators.startAuthentication(payload)
+    const action = covenant.actionCreators.startAuthentication(request)
     const afterState = covenant.reducer(covenant.initialState, action)
 
     assert.deepStrictEqual(state, afterState)
+  })
+
+  it('removes the auth request on CANCEL_AUTHENTICATION', () => {
+    const request = {
+      oAuthProvider: 'fancyIdentityService',
+      requestId: 1234,
+      timestamp: 123456789
+    }
+    const expectedState = covenant.initialState
+
+    const state = covenant.initialState.setIn(
+      ['authenticationRequests', request.requestId],
+      { oAuthProvider: request.oAuthProvider, timestamp: request.timestamp }
+    )
+    const action = covenant.actionCreators.cancelAuthentication({
+      requestId: request.requestId
+    })
+    const afterState = covenant.reducer(state, action)
+
+    assert.deepStrictEqual(expectedState, afterState)
+  })
+
+  it('does nothing if the auth request does not exist on CANCEL_AUTHENTICATION', () => {
+    const request = {
+      oAuthProvider: 'fancyIdentityService',
+      requestId: 1234,
+      timestamp: 123456789
+    }
+    const expectedState = covenant.initialState.setIn(
+      ['authenticationRequests', request.requestId],
+      { oAuthProvider: request.oAuthProvider, timestamp: request.timestamp }
+    )
+
+    const action = covenant.actionCreators.cancelAuthentication({
+      requestId: 1111
+    })
+    const afterState = covenant.reducer(expectedState, action)
+
+    assert.deepStrictEqual(expectedState, afterState)
   })
 })

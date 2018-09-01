@@ -11,6 +11,7 @@ import ProjectDetailsForm from '../components/ProjectDetailsForm'
 import { actionCreators } from '../interbit/my-projects/actions'
 import urls from '../constants/urls'
 import chairmanmeow from '../assets/chairmanmeow.jpg'
+import { PRIVATE } from '../constants/chainAliases'
 
 const { chainDispatch } = interbitRedux
 
@@ -22,7 +23,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  blockchainDispatch: action => dispatch(chainDispatch('myProjects', action))
+  blockchainDispatch: action => dispatch(chainDispatch(PRIVATE, action))
 })
 
 export class NewProject extends Component {

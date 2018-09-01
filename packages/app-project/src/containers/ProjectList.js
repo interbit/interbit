@@ -7,7 +7,7 @@ import queryString from 'query-string'
 import { interbitRedux } from 'interbit-ui-tools'
 import { LinkBar, LinkBarSlack } from 'interbit-ui-components'
 
-import { MY_PROJECTS } from '../constants/chainAliases'
+import { PRIVATE } from '../constants/chainAliases'
 import urls from '../constants/urls'
 import ProjectItem from '../components/ProjectItem'
 import ProjectBar from '../components/ProjectBar'
@@ -17,7 +17,7 @@ import chairmanmeow from '../assets/chairmanmeow.jpg'
 const { selectors } = interbitRedux
 
 const mapStateToProps = state => {
-  const chainState = selectors.getChain(state, { chainAlias: MY_PROJECTS })
+  const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
   if (!chainState) {
     return {
       projects: []
@@ -43,7 +43,7 @@ const mapStateToProps = state => {
 }
 
 const generateConnectUrl = state => {
-  const chainState = selectors.getChain(state, { chainAlias: MY_PROJECTS })
+  const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
   if (!chainState || !chainState.dns) {
     return '#'
   }

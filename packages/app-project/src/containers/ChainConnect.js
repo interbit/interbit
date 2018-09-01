@@ -4,10 +4,9 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { interbitRedux } from 'interbit-ui-tools'
-
+import { PRIVATE } from '../constants/chainAliases'
 import { actionCreators } from '../interbit/my-projects'
 
-const PRIVATE_CHAIN_ALIAS = 'myProjects'
 const { chainDispatch, selectors } = interbitRedux
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,7 +17,7 @@ const mapStateToProps = (state, ownProps) => {
   const { providerChainId, joinName, error } = query
 
   const isChainLoaded = selectors.isChainLoaded(state, {
-    chainAlias: PRIVATE_CHAIN_ALIAS
+    chainAlias: PRIVATE
   })
 
   return {
@@ -30,8 +29,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  blockchainDispatch: action =>
-    dispatch(chainDispatch(PRIVATE_CHAIN_ALIAS, action))
+  blockchainDispatch: action => dispatch(chainDispatch(PRIVATE, action))
 })
 
 export class ChainConnect extends Component {

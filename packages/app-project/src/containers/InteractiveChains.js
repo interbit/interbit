@@ -7,7 +7,7 @@ import queryString from 'query-string'
 import { interbitRedux } from 'interbit-ui-tools'
 import { LinkedCovenant } from 'interbit-ui-components'
 
-import { MY_PROJECTS } from '../constants/chainAliases'
+import { PRIVATE } from '../constants/chainAliases'
 import { actionCreators } from '../adapters/my-projects.adapter'
 
 const { chainDispatch, selectors } = interbitRedux
@@ -19,7 +19,7 @@ const mapStateToProps = (state, ownProps) => {
   const query = queryString.parse(search)
   const { alias } = query
 
-  const chainAlias = alias || MY_PROJECTS
+  const chainAlias = alias || PRIVATE
   const chainState = selectors.getChain(state, { chainAlias })
   const chainId = selectors.getChainId(state, { chainAlias })
 

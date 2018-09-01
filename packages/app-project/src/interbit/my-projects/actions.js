@@ -9,7 +9,7 @@ const {
   }
 } = require('interbit-covenant-tools')
 
-const covenantName = 'app-project_my-projects'
+const covenantName = 'projects-my-projects'
 
 const actionTypes = {
   // Update basic account details about the owner of these projects

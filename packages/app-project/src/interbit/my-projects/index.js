@@ -18,7 +18,7 @@ const { actionTypes, actionCreators } = require('./actions')
 const {
   actionCreators: projectActionCreators,
   authorizedRemoteActions
-} = require('../project/actions')
+} = require('./projectActions')
 
 const initialState = Immutable.from({
   // Shown in list of running chains

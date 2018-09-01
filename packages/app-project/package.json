@@ -1,14 +1,11 @@
 {
     "name": "app-project",
     "description": "Interbit projects",
-    "author": "BTL GROUP LTD",
     "version": "0.4.46",
     "private": true,
-    "license": "MIT",
     "main": "src/exports.js",
-    "files": [
-        "src/interbit/*"
-    ],
+    "license": "MIT",
+    "author": "BTL GROUP LTD",
     "dependencies": {
         "cross-env": "^5.1.4",
         "interbit-cli": "0.4.46",
@@ -35,21 +32,17 @@
         "uuid": "^3.1.0"
     },
     "devDependencies": {
-        "concurrently": "^3.5.1",
-        "cross-env": "^5.1.4",
-        "jest": "20.0.4",
-        "nodemon": "^1.14.12",
         "should": "^13.2.1"
     },
     "scripts": {
-        "start": "cross-env REACT_APP_INTERBIT_WEB_SERVER=123 REACT_APP_INTERBIT_PORT=5000 react-scripts start",
+        "start": "cross-env REACT_APP_INTERBIT_WEB_SERVER=123 REACT_APP_INTERBIT_PORT=5035 react-scripts start",
         "build": "react-scripts build",
         "serve": "cross-env serve --single build --listen $PORT",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject",
-        "interbit:start": "cross-env COVENANT_DEV_MODE=true DB_PATH=./db-interbit interbit start",
-        "interbit:create": "cross-env COVENANT_DEV_MODE=true interbit create",
+        "interbit:start": "interbit start --db-path ./db-interbit --port 5035 --dev",
+        "interbit:create": "interbit create --dev",
         "interbit:build": "interbit build",
-        "interbit:deploy": "interbit deploy"
-    }
+        "interbit:deploy": "interbit deploy --key-pair keyPair.js"
+  }
 }

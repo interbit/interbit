@@ -237,7 +237,32 @@ describe('my-account/covenant', () => {
     assert.deepStrictEqual(expectedState, afterState)
   })
 
-  it('adds the token info on COMPLETE_AUTHENTICATION', () => {})
+  it('consumes the token info on COMPLETE_AUTHENTICATION and removes the auth request', () => {
+    const payload = {
+      oAuthProvider: 'fancyIdentityService',
+      providerChainId: 'woof',
+      tokenName: 'cat',
+      joinName: 'meow',
+      requestId: 1234,
+      timestamp: 123456789
+    }
+    const startState = covenant.initialState.setIn(
+      ['authenticationRequests', payload.requestId],
+      { oAuthProvider: payload.oAuthProvider, timestampe: payload.timestamp }
+    )
+
+    const action = covenant.actionCreators.completeAuthentication(payload)
+    const afterState = covenant.reducer(startState, action)
+    const sideEffect = afterState.sideEffects[0]
+
+    assert.strictEqual(sideEffect.type, '@@interbit/START_CONSUME_STATE')
+    assert.deepStrictEqual(sideEffect.payload, {
+      joinName: payload.joinName,
+      mount: ['profile', payload.tokenName],
+      provider: payload.providerChainId
+    })
+    assert.deepStrictEqual(afterState.authenticationRequests, {})
+  })
 
   it('does nothing on COMPLETE_AUTHENTICATION if the auth request does not exist', () => {
     const expectedState = covenant.initialState

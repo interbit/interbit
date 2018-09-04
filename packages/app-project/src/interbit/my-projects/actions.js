@@ -38,10 +38,22 @@ const actionCreators = {
     )
   }),
 
-  createProject: ({ projectAlias, projectName, description, icon }) => ({
+  createProject: ({
+    projectAlias,
+    projectName,
+    description,
+    icon,
+    sponsorChainConfig
+  }) => ({
     type: actionTypes.CREATE_PROJECT,
     payload: validate(
-      { projectAlias, projectName, description, icon },
+      {
+        projectAlias,
+        projectName,
+        description,
+        icon,
+        sponsorChainConfig
+      },
       {
         projectAlias: required(),
         projectName: required(),
@@ -50,14 +62,17 @@ const actionCreators = {
     )
   }),
 
-  createSampleProject: ({ sampleProjectName }) => ({
+  createSampleProject: ({ sampleProjectName, sponsorChainConfig }) => ({
     type: actionTypes.CREATE_SAMPLE_PROJECT,
-    payload: validate({ sampleProjectName }, { sampleProjectName: required() })
+    payload: validate(
+      { sampleProjectName, sponsorChainConfig },
+      { sampleProjectName: required() }
+    )
   }),
 
-  createSampleProjects: () => ({
+  createSampleProjects: ({ sponsorChainConfig }) => ({
     type: actionTypes.CREATE_SAMPLE_PROJECTS,
-    payload: {}
+    payload: { sponsorChainConfig }
   }),
 
   forwardActionToProject: ({ projectAlias, action }) => ({

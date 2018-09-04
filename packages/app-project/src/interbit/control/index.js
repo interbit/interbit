@@ -1,5 +1,10 @@
 // © 2018 BTL GROUP LTD -  This package is licensed under the MIT license https://opensource.org/licenses/MIT
-const { rootCovenant } = require('interbit-covenant-tools')
+const {
+  rootCovenant,
+  coreCovenant: {
+    selectors: { chainId, config }
+  }
+} = require('interbit-covenant-tools')
 const Immutable = require('seamless-immutable')
 
 const { CHAIN_ALIASES, COVENANTS } = require('./constants')
@@ -37,21 +42,23 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case rootCovenant.actionTypes.SET_MANIFEST: {
       const { manifest } = action.payload
-      const covenantHash = getCovenantHash(COVENANTS.PRIVATE, manifest)
 
-      return nextState.setIn(
-        ['privateChainHosting', 'shared', CHAIN_ALIASES.PRIVATE],
-        {
-          blockMaster: nextState.getIn(['interbit', 'config', 'blockMaster']),
-          sponsorChainId: nextState.getIn(['interbit', 'chainId']),
-          covenantHash
-        }.setIn(['privateChainHosting', 'shared', 'covenants'], {
-          [COVENANTS.PRIVATE]: { hash: covenantHash },
-          [COVENANTS.PRIVATE_PROJECT]: {
-            hash: getCovenantHash(COVENANTS.PRIVATE_PROJECT, manifest)
-          }
+      const { blockMaster } = config(nextState)
+
+      return nextState
+        .setIn(['privateChainHosting', 'shared', CHAIN_ALIASES.PRIVATE], {
+          blockMaster,
+          sponsorChainId: chainId(nextState),
+          covenantHash: getCovenantHash(COVENANTS.PRIVATE, manifest)
         })
-      )
+        .setIn(
+          ['privateChainHosting', 'shared', CHAIN_ALIASES.PRIVATE_PROJECT],
+          {
+            blockMaster,
+            sponsorChainId: chainId(nextState),
+            covenantHash: getCovenantHash(COVENANTS.PRIVATE_PROJECT, manifest)
+          }
+        )
     }
 
     default:

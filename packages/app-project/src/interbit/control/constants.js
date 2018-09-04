@@ -2,7 +2,8 @@ module.exports = {
   CHAIN_ALIASES: {
     CONTROL: 'projectsControl',
     PUBLIC: 'projectsPublic',
-    PRIVATE: 'projectsPrivate'
+    PRIVATE: 'projectsPrivate',
+    PRIVATE_PROJECT: 'projectsProject'
   },
   COVENANTS: {
     CONTROL: 'projects-control',

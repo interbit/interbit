@@ -6,7 +6,6 @@ const {
     remoteRedispatch,
     actionCreators: { createChildChain, startConsumeState }
   },
-  rootStateSelectors,
   rootCovenant: { reducer: rootReducer }
 } = require('interbit-covenant-tools')
 
@@ -73,21 +72,26 @@ const reducer = (state = initialState, action) => {
         projectName,
         description,
         icon,
-        launchUrl
+        launchUrl,
+        sponsorChainConfig
       } = action.payload
 
-      return createProjectChain(nextState, {
-        projectAlias,
-        projectName,
-        description,
-        icon,
-        launchUrl
-      })
+      return createProjectChain(
+        nextState,
+        {
+          projectAlias,
+          projectName,
+          description,
+          icon,
+          launchUrl
+        },
+        sponsorChainConfig
+      )
     }
 
     case actionTypes.CREATE_SAMPLE_PROJECT: {
       console.log('DISPATCH: ', action)
-      const { sampleProjectName } = action.payload
+      const { sampleProjectName, sponsorChainConfig } = action.payload
       const sampleProjectToCreate = findMatchingSampleProject(
         state,
         sampleProjectName
@@ -102,13 +106,17 @@ const reducer = (state = initialState, action) => {
           launchUrl
         } = sampleProjectToCreate
 
-        return createProjectChain(nextState, {
-          projectAlias,
-          projectName,
-          description,
-          icon,
-          launchUrl
-        })
+        return createProjectChain(
+          nextState,
+          {
+            projectAlias,
+            projectName,
+            description,
+            icon,
+            launchUrl
+          },
+          sponsorChainConfig
+        )
       }
 
       return state
@@ -116,6 +124,7 @@ const reducer = (state = initialState, action) => {
 
     case actionTypes.CREATE_SAMPLE_PROJECTS: {
       console.log('DISPATCH: ', action)
+      const { sponsorChainConfig } = action.payload
       const missingSampleProjects = findMissingSampleProjects(state)
 
       if (missingSampleProjects.length) {
@@ -128,13 +137,17 @@ const reducer = (state = initialState, action) => {
             launchUrl
           } = missingSampleProjects[i]
 
-          nextState = createProjectChain(nextState, {
-            projectAlias,
-            projectName,
-            description,
-            icon,
-            launchUrl
-          })
+          nextState = createProjectChain(
+            nextState,
+            {
+              projectAlias,
+              projectName,
+              description,
+              icon,
+              launchUrl
+            },
+            sponsorChainConfig
+          )
         }
         return nextState
       }
@@ -172,20 +185,17 @@ const reducer = (state = initialState, action) => {
 
 const createProjectChain = (
   state,
-  { projectAlias, projectName, description, icon, launchUrl }
+  { projectAlias, projectName, description, icon, launchUrl },
+  { covenantHash: childCovenantHash, sponsorChainId, blockMaster }
 ) => {
   let nextState = state
 
   console.log('CREATING PROJECT CHAIN: ')
-  const covenantHash = rootStateSelectors.getCovenantHash(
-    state,
-    'app-project_project'
-  )
-  console.log({ covenantHash })
-
   const createChildChainAction = createProjectChainAction({
-    covenantHash,
-    projectAlias
+    projectAlias,
+    childCovenantHash,
+    sponsorChainId,
+    blockMaster
   })
 
   console.log('REDISPATCH: ', createChildChainAction)
@@ -208,7 +218,12 @@ const createProjectChain = (
   return nextState
 }
 
-const createProjectChainAction = ({ projectAlias, covenantHash }) => {
+const createProjectChainAction = ({
+  projectAlias,
+  childCovenantHash,
+  sponsorChainId,
+  blockMaster
+}) => {
   const directoryJoinName = `Directory-${projectAlias}`
 
   return createChildChain({
@@ -242,7 +257,9 @@ const createProjectChainAction = ({ projectAlias, covenantHash }) => {
         }
       ]
     },
-    childCovenantHash: covenantHash
+    childCovenantHash,
+    sponsorChainId,
+    blockMaster
   })
 }
 

@@ -49,7 +49,7 @@ const initialState = Immutable.from({
 describe('revokeReadJoin(state, joinName)', () => {
   it('does nothing if the join does not exist', () => {
     const nextState = revokeReadJoin(initialState, 'PHONY')
-    assert.deepEqual(nextState, initialState)
+    assert.deepStrictEqual(nextState, initialState)
   })
 
   it('revokes a read join and associated permissions', () => {
@@ -67,7 +67,7 @@ describe('revokeReadJoin(state, joinName)', () => {
       )
     const nextState = revokeReadJoin(initialState, READ_JOIN_NAME)
 
-    assert.deepEqual(nextState, expectedState)
+    assert.deepStrictEqual(nextState, expectedState)
   })
 
   it('does not revoke permission if joins remain for chain after removing', () => {
@@ -97,6 +97,6 @@ describe('revokeReadJoin(state, joinName)', () => {
 
     const nextState = revokeReadJoin(state, OTHER_JOIN_NAME)
 
-    assert.deepEqual(initialState, nextState)
+    assert.deepStrictEqual(initialState, nextState)
   })
 })

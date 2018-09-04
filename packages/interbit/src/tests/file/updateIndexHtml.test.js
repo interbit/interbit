@@ -33,7 +33,7 @@ describe('updateIndexHtml', () => {
     it('does not muck up the app store', () => {
       const result = camelCaseToHyphenated('appStore')
 
-      assert.equal(result, 'app-store')
+      assert.strictEqual(result, 'app-store')
     })
   })
 
@@ -50,7 +50,10 @@ describe('updateIndexHtml', () => {
 
       updateDom(dom, appConfig, chains)
 
-      assert.equal(dom('#interbit').attr('data-chain-id-meow'), chains.meow)
+      assert.strictEqual(
+        dom('#interbit').attr('data-chain-id-meow'),
+        chains.meow
+      )
     })
 
     it('strips old chain id data', () => {
@@ -63,8 +66,8 @@ describe('updateIndexHtml', () => {
 
       updateDom(dom, appConfig, chains)
 
-      assert.equal(dom('#interbit').data('chain-id-spoke1'), undefined)
-      assert.equal(dom('#interbit').data('chain-id-hub'), undefined)
+      assert.strictEqual(dom('#interbit').data('chain-id-spoke1'), undefined)
+      assert.strictEqual(dom('#interbit').data('chain-id-hub'), undefined)
     })
 
     it('includes peer hints', () => {
@@ -78,7 +81,7 @@ describe('updateIndexHtml', () => {
 
       updateDom(dom, appConfig, chains)
 
-      assert.equal(dom('#interbit').data('peer-hints'), peers.toString())
+      assert.strictEqual(dom('#interbit').data('peer-hints'), peers.toString())
     })
 
     it('updates dom under normal operating conditions', () => {
@@ -102,8 +105,11 @@ describe('updateIndexHtml', () => {
 
       updateDom(dom, appConfig, chains)
 
-      assert.equal(dom('#interbit').data('chain-id-public'), chains.public)
-      assert.equal(dom('#interbit').data('peer-hints'), peers.toString())
+      assert.strictEqual(
+        dom('#interbit').data('chain-id-public'),
+        chains.public
+      )
+      assert.strictEqual(dom('#interbit').data('peer-hints'), peers.toString())
     })
   })
 })

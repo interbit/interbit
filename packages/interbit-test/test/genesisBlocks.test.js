@@ -78,7 +78,7 @@ describe('chain sponsorship', () => {
       sponsorChainId
     })
 
-    assert.deepEqual(config, expectedConfig)
+    assert.deepStrictEqual(config, expectedConfig)
   })
 
   it('makes a genesis block with a known ID', async () => {
@@ -90,6 +90,9 @@ describe('chain sponsorship', () => {
 
     const genesisBlock = createGenesisBlock({ config })
 
-    assert.deepEqual(genesisBlock.content.state.interbit.config, expectedConfig)
+    assert.deepStrictEqual(
+      genesisBlock.content.state.interbit.config,
+      expectedConfig
+    )
   })
 })

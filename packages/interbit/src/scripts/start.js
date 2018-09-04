@@ -41,6 +41,8 @@ const start = async options => {
 
   log.info('available chains + covenants: ', deploymentDetails)
 
+  // required to trigger SET_MANIFEST action on chains for setting-up PPC config
+  // TODO: switch to using a real manifest
   setRootChainManifest(cli, deploymentDetails, config)
 
   if (dev && !noWatch) {

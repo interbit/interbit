@@ -4,6 +4,7 @@ const generateDeploymentDetails = require('./generateDeploymentDetails')
 const startInterbit = require('./startInterbit')
 const setRootChainManifest = require('./setRootChainManifest')
 const watchChain = require('./watchChain')
+const deployCovenants = require('./deployCovenants')
 
 module.exports = {
   configureChains,
@@ -11,5 +12,6 @@ module.exports = {
   generateDeploymentDetails,
   startInterbit,
   setRootChainManifest,
-  watchChain
+  watchChain,
+  deployCovenants
 }

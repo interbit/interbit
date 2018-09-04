@@ -31,12 +31,17 @@ const setRootChainManifest = (cli, manifest, config) => {
     .forEach(([chainAlias]) => {
       const chainId = getChainIdByAlias(chainAlias, manifest)
       const chainInterface = cli.getChain(chainId)
+      log.info(`Updating manifest on ${chainAlias}`)
       waitForBlockToDispatch(chainInterface, setManifestAction)
     })
 
   const rootChainId = getChainIdByAlias(ROOT_CHAIN_ALIAS, manifest)
-  const rootChainInterface = cli.getChain(rootChainId)
+  if (!rootChainId) {
+    log.error(`No root chain was configured for this deployment`)
+    return
+  }
 
+  const rootChainInterface = cli.getChain(rootChainId)
   if (!rootChainInterface) {
     log.error(
       `No root chain was found for this deployment at chain ID: ${rootChainId}`
@@ -44,6 +49,7 @@ const setRootChainManifest = (cli, manifest, config) => {
     return
   }
 
+  log.info(`Updating root manifest on ${ROOT_CHAIN_ALIAS}`)
   waitForBlockToDispatch(rootChainInterface, setManifestAction)
 }
 
@@ -51,10 +57,11 @@ const setRootChainManifest = (cli, manifest, config) => {
 const waitForBlockToDispatch = (chainInterface, action) => {
   let unsubscribe = () => {}
   let count = 0
-  unsubscribe = chainInterface.subscribe(() => {
+  unsubscribe = chainInterface.blockSubscribe(() => {
     if (count === 0) {
+      log.action(action)
       chainInterface.dispatch(action)
-      unsubscribe() // interbit-core 0.7.0 regression - unsubscripe does not unsubscribe #186
+      unsubscribe()
       count += 1
     }
   })

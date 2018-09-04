@@ -23,6 +23,9 @@ describe('generateProdConfig(chainManifest, covenantHashes)', () => {
       prodConfig.chains.template,
       chainManifest.template.chainId
     )
-    assert.strictEqual(prodConfig.covenants.template, covenantHashes.template)
+    assert.strictEqual(
+      prodConfig.covenants.template.hash,
+      covenantHashes.template
+    )
   })
 })

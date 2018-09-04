@@ -8,7 +8,7 @@ import { interbitRedux } from 'interbit-ui-tools'
 import { LinkedCovenant } from 'interbit-ui-components'
 
 import { PRIVATE } from '../constants/chainAliases'
-import { actionCreators } from '../adapters/my-projects.adapter'
+import { createActionCreators } from '../adapters/my-projects.adapter'
 
 const { chainDispatch, selectors } = interbitRedux
 
@@ -23,6 +23,8 @@ const mapStateToProps = (state, ownProps) => {
   const chainState = selectors.getChain(state, { chainAlias })
   const chainId = selectors.getChainId(state, { chainAlias })
 
+  const actionCreators = createActionCreators(state)
+
   return {
     selectedChain: {
       chainId,
@@ -30,7 +32,8 @@ const mapStateToProps = (state, ownProps) => {
       state: {
         ...chainState,
         interbit: chainState.interbit
-      }
+      },
+      actionCreators
     }
   }
 }
@@ -48,7 +51,8 @@ export class InteractiveChains extends Component {
     selectedChain: PropTypes.shape({
       chainId: PropTypes.string,
       chainAlias: PropTypes.string.isRequired,
-      state: PropTypes.object.isRequired
+      state: PropTypes.object.isRequired,
+      actionCreators: PropTypes.object
     }),
     resetForm: PropTypes.func.isRequired,
     blockchainDispatch: PropTypes.func.isRequired
@@ -72,7 +76,7 @@ export class InteractiveChains extends Component {
             chainId={selectedChain.chainId}
             chainAlias={selectedChain.chainAlias}
             raw={selectedChain.state}
-            covenant={{ actionCreators }}
+            covenant={{ actionCreators: selectedChain.actionCreators || {} }}
             reset={resetForm}
             blockchainDispatch={blockchainDispatch(selectedChain.chainAlias)}
           />

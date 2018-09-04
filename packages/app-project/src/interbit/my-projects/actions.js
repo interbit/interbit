@@ -28,6 +28,13 @@ const actionTypes = {
   FORWARD_ACTION_TO_PROJECT: `${covenantName}/FORWARD_ACTION_TO_PROJECT`
 }
 
+const validateSponsorChainConfig = (config = {}) =>
+  validate(config, {
+    covenantHash: required(),
+    sponsorChainId: chainIdPattern(),
+    blockMaster: required()
+  })
+
 const actionCreators = {
   // Public actions that can be invoked by clients
   authorized: ({ providerChainId, joinName }) => ({
@@ -52,7 +59,7 @@ const actionCreators = {
         projectName,
         description,
         icon,
-        sponsorChainConfig
+        sponsorChainConfig: validateSponsorChainConfig(sponsorChainConfig)
       },
       {
         projectAlias: required(),
@@ -65,14 +72,19 @@ const actionCreators = {
   createSampleProject: ({ sampleProjectName, sponsorChainConfig }) => ({
     type: actionTypes.CREATE_SAMPLE_PROJECT,
     payload: validate(
-      { sampleProjectName, sponsorChainConfig },
+      {
+        sampleProjectName,
+        sponsorChainConfig: validateSponsorChainConfig(sponsorChainConfig)
+      },
       { sampleProjectName: required() }
     )
   }),
 
-  createSampleProjects: ({ sponsorChainConfig }) => ({
+  createSampleProjects: ({ sponsorChainConfig } = {}) => ({
     type: actionTypes.CREATE_SAMPLE_PROJECTS,
-    payload: { sponsorChainConfig }
+    payload: {
+      sponsorChainConfig: validateSponsorChainConfig(sponsorChainConfig)
+    }
   }),
 
   forwardActionToProject: ({ projectAlias, action }) => ({

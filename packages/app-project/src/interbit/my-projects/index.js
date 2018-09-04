@@ -186,7 +186,7 @@ const reducer = (state = initialState, action) => {
 const createProjectChain = (
   state,
   { projectAlias, projectName, description, icon, launchUrl },
-  { covenantHash: childCovenantHash, sponsorChainId, blockMaster }
+  { covenantHash: childCovenantHash, sponsorChainId, blockMaster } = {}
 ) => {
   let nextState = state
 

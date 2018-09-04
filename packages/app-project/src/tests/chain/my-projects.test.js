@@ -6,6 +6,13 @@ import { actionTypes, actionCreators } from '../../interbit/my-projects/actions'
 import sampleProjects from '../../interbit/my-projects/sampleProjects'
 import { actionTypes as projectActionTypes } from '../../interbit/project/actions'
 
+const sponsorChainConfig = {
+  covenantHash: '123456...',
+  sponsorChainId:
+    '5aa0b00bf8ef27a02590f544c8096ee71f0a056d617b786255bb04613df754e3',
+  blockMaster: 'fxYxTTT3452...'
+}
+
 describe('myProjectsChain', () => {
   describe('.reducer(state, action)', () => {
     it('does not modify state on CREATE_PROJECT', () => {
@@ -18,7 +25,8 @@ describe('myProjectsChain', () => {
         projectAlias,
         projectName,
         description,
-        icon
+        icon,
+        sponsorChainConfig
       })
 
       const result = covenant.reducer(covenant.initialState, action)
@@ -30,7 +38,8 @@ describe('myProjectsChain', () => {
       const sampleProject = sampleProjects[0]
 
       const action = actionCreators.createSampleProject({
-        sampleProjectName: sampleProject.projectName
+        sampleProjectName: sampleProject.projectName,
+        sponsorChainConfig
       })
 
       const result = covenant.reducer(covenant.initialState, action)
@@ -98,7 +107,8 @@ describe('myProjectsChain', () => {
     const sampleProject = sampleProjects[0]
 
     const action = actionCreators.createSampleProject({
-      sampleProjectName: sampleProject.projectName
+      sampleProjectName: sampleProject.projectName,
+      sponsorChainConfig
     })
 
     const afterState = covenant.reducer(covenant.initialState, action)
@@ -115,7 +125,7 @@ describe('myProjectsChain', () => {
   })
 
   it('schedules multiple sample project creation on CREATE_SAMPLE_PROJECTS', () => {
-    const action = actionCreators.createSampleProjects()
+    const action = actionCreators.createSampleProjects({ sponsorChainConfig })
 
     const afterState = covenant.reducer(covenant.initialState, action)
     const sideEffects = afterState.sideEffects

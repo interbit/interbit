@@ -11,25 +11,25 @@ describe('args', () => {
       const argv = ['interbit', 'start', argName, argValue]
       const arg = getArg(argv, argName)
 
-      assert.equal(arg, argValue)
+      assert.strictEqual(arg, argValue)
     })
 
     it('does not explode if arg was named but not supplied', () => {
       const argv = ['interbit', 'start', argName]
       const arg = getArg(argv, argName)
-      assert.equal(arg, undefined)
+      assert.strictEqual(arg, undefined)
     })
 
     it('returns undefined if argName is followed by another argName', () => {
       const argv = ['interbit', 'start', argName, anotherArgName]
       const arg = getArg(argv, argName)
-      assert.equal(arg, undefined)
+      assert.strictEqual(arg, undefined)
     })
 
     it('returns undefined if arg does not exist', () => {
       const argv = ['interbit', 'start']
       const arg = getArg(argv, argName)
-      assert.equal(arg, undefined)
+      assert.strictEqual(arg, undefined)
     })
   })
 
@@ -40,7 +40,7 @@ describe('args', () => {
 
       const args = getArgs(argv, argName)
 
-      assert.deepEqual(args, expectedArgs)
+      assert.deepStrictEqual(args, expectedArgs)
     })
 
     it('returns an empty array when argName is followed by another argName', () => {
@@ -49,7 +49,7 @@ describe('args', () => {
 
       const args = getArgs(argv, argName)
 
-      assert.deepEqual(args, expectedArgs)
+      assert.deepStrictEqual(args, expectedArgs)
     })
 
     it('returns an array of specified args if more than one was supplied', () => {
@@ -66,7 +66,7 @@ describe('args', () => {
 
       const args = getArgs(argv, argName)
 
-      assert.deepEqual(args, expectedArgs)
+      assert.deepStrictEqual(args, expectedArgs)
     })
   })
 
@@ -75,14 +75,14 @@ describe('args', () => {
       const argv = ['interbit', 'start', argName]
       const arg = isArg(argv, argName)
 
-      assert.equal(arg, true)
+      assert.strictEqual(arg, true)
     })
 
     it('returns false when arg is not specified', () => {
       const argv = ['interbit', 'start']
       const arg = isArg(argv, argName)
 
-      assert.equal(arg, false)
+      assert.strictEqual(arg, false)
     })
   })
 })

@@ -30,7 +30,7 @@ describe('args', () => {
     process.argv = ['--artifacts', artifacts]
     const arg = args.getArtifactsLocation()
 
-    assert.equal(arg, artifacts)
+    assert.strictEqual(arg, artifacts)
   })
 
   it('gets config if it exists', () => {
@@ -51,7 +51,7 @@ describe('args', () => {
 
     const arg = args.getConfig()
 
-    assert.equal(arg, undefined)
+    assert.strictEqual(arg, undefined)
   })
 
   it('gets manifest', () => {
@@ -80,7 +80,7 @@ describe('args', () => {
 
     const arg = args.getConnect()
 
-    assert.equal(arg, true)
+    assert.strictEqual(arg, true)
   })
 
   it('gets a port', () => {
@@ -89,7 +89,7 @@ describe('args', () => {
 
     const arg = args.getPort()
 
-    assert.equal(arg, port)
+    assert.strictEqual(arg, port)
   })
 
   it('gets a keyPair', () => {
@@ -100,6 +100,6 @@ describe('args', () => {
 
     // eslint-disable-next-line
     const keyPairContents = require(keyPair)
-    assert.equal(arg, keyPairContents)
+    assert.strictEqual(arg, keyPairContents)
   })
 })

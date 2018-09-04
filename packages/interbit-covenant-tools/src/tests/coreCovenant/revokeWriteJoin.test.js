@@ -128,7 +128,7 @@ describe('revokeReceiveAction(state, chainId, actionType', () => {
 
     const nextState = revokeReceiveActions(initialState, CHAIN_ID, ACTION_TYPE)
 
-    assert.deepEqual(nextState, expectedState)
+    assert.deepStrictEqual(nextState, expectedState)
   })
 
   it('revokes ability to REMOVE_JOIN_CONFIG if this is the only join', () => {
@@ -148,7 +148,7 @@ describe('revokeReceiveAction(state, chainId, actionType', () => {
 
     const nextState = revokeReceiveActions(state, CHAIN_ID, ACTION_TYPE)
 
-    assert.deepEqual(nextState, expectedState)
+    assert.deepStrictEqual(nextState, expectedState)
   })
 })
 
@@ -160,7 +160,7 @@ describe('revokeSendActions(chainId)', () => {
 
     const nextState = revokeSendActions(initialState, CHAIN_ID)
 
-    assert.deepEqual(nextState, expectedState)
+    assert.deepStrictEqual(nextState, expectedState)
   })
 
   it('revokes ability to REMOVE_JOIN_CONFIG if this is the only join', () => {
@@ -183,6 +183,6 @@ describe('revokeSendActions(chainId)', () => {
 
     const nextState = revokeSendActions(state, CHAIN_ID)
 
-    assert.deepEqual(nextState, expectedState)
+    assert.deepStrictEqual(nextState, expectedState)
   })
 })

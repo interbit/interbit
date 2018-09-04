@@ -38,7 +38,7 @@ describe('configureJoins(chainInterface, joins, manifest)', () => {
     }
 
     const chainInterface = mockChainInterface(action => {
-      assert.deepEqual(action, expectedAction)
+      assert.deepStrictEqual(action, expectedAction)
     })
 
     configureJoins(chainInterface, joins, manifest)
@@ -65,7 +65,7 @@ describe('configureJoins(chainInterface, joins, manifest)', () => {
     }
 
     const chainInterface = mockChainInterface(action => {
-      assert.deepEqual(action, expectedAction)
+      assert.deepStrictEqual(action, expectedAction)
     })
 
     configureJoins(chainInterface, joins, manifest)
@@ -90,7 +90,7 @@ describe('configureJoins(chainInterface, joins, manifest)', () => {
     }
 
     const chainInterface = mockChainInterface(action => {
-      assert.deepEqual(action, expectedAction)
+      assert.deepStrictEqual(action, expectedAction)
     })
 
     configureJoins(chainInterface, joins, manifest)
@@ -113,7 +113,7 @@ describe('configureJoins(chainInterface, joins, manifest)', () => {
     }
 
     const chainInterface = mockChainInterface(action => {
-      assert.deepEqual(action, expectedAction)
+      assert.deepStrictEqual(action, expectedAction)
     })
 
     configureJoins(chainInterface, joins, manifest)

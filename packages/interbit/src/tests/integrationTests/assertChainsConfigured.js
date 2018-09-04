@@ -31,7 +31,7 @@ const assertChainsConfigured = async (cli, chainManifest) => {
   await dispatchAction(firstChainInterface, testAction)
 
   const firstState = firstChainInterface.getState()
-  assert.equal(
+  assert.strictEqual(
     firstState.shared,
     testValue,
     'First chain did not block ADD_STATE'
@@ -44,7 +44,7 @@ const assertChainsConfigured = async (cli, chainManifest) => {
   )
 
   const secondState = secondChainInterface.getState()
-  assert.equal(
+  assert.strictEqual(
     secondState.sharedWithMe,
     testValue,
     'Read join from first to second not functioning'

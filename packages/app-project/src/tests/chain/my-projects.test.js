@@ -23,7 +23,10 @@ describe('myProjectsChain', () => {
 
       const result = covenant.reducer(covenant.initialState, action)
 
-      assert.deepEqual(covenant.initialState, result.without('sideEffects'))
+      assert.deepStrictEqual(
+        covenant.initialState,
+        result.without('sideEffects')
+      )
     })
 
     it('does not modify state on CREATE_SAMPLE_PROJECT', () => {
@@ -35,7 +38,10 @@ describe('myProjectsChain', () => {
 
       const result = covenant.reducer(covenant.initialState, action)
 
-      assert.deepEqual(covenant.initialState, result.without('sideEffects'))
+      assert.deepStrictEqual(
+        covenant.initialState,
+        result.without('sideEffects')
+      )
     })
 
     it('forwards action on FORWARD_PROJECT_ACTION', () => {
@@ -61,7 +67,7 @@ describe('myProjectsChain', () => {
       })
 
       const afterState = covenant.reducer(state, action)
-      assert.deepEqual(
+      assert.deepStrictEqual(
         afterState.getIn([
           'interbit',
           'sent-actions',
@@ -104,11 +110,17 @@ describe('myProjectsChain', () => {
     const afterState = covenant.reducer(covenant.initialState, action)
     const sideEffects = afterState.sideEffects
 
-    assert.equal(sideEffects[0].type, '@@interbit/CREATE_CHILD_CHAIN')
-    assert.equal(sideEffects[0].payload.childAlias, sampleProject.projectAlias)
+    assert.strictEqual(sideEffects[0].type, '@@interbit/CREATE_CHILD_CHAIN')
+    assert.strictEqual(
+      sideEffects[0].payload.childAlias,
+      sampleProject.projectAlias
+    )
 
-    assert.equal(sideEffects[1].type, actionTypes.FORWARD_ACTION_TO_PROJECT)
-    assert.equal(
+    assert.strictEqual(
+      sideEffects[1].type,
+      actionTypes.FORWARD_ACTION_TO_PROJECT
+    )
+    assert.strictEqual(
       sideEffects[1].payload.projectAlias,
       sampleProject.projectAlias
     )
@@ -120,38 +132,47 @@ describe('myProjectsChain', () => {
     const afterState = covenant.reducer(covenant.initialState, action)
     const sideEffects = afterState.sideEffects
 
-    assert.equal(sideEffects[0].type, '@@interbit/CREATE_CHILD_CHAIN')
-    assert.equal(
+    assert.strictEqual(sideEffects[0].type, '@@interbit/CREATE_CHILD_CHAIN')
+    assert.strictEqual(
       sideEffects[0].payload.childAlias,
       sampleProjects[0].projectAlias
     )
 
-    assert.equal(sideEffects[1].type, actionTypes.FORWARD_ACTION_TO_PROJECT)
-    assert.equal(
+    assert.strictEqual(
+      sideEffects[1].type,
+      actionTypes.FORWARD_ACTION_TO_PROJECT
+    )
+    assert.strictEqual(
       sideEffects[1].payload.projectAlias,
       sampleProjects[0].projectAlias
     )
 
-    assert.equal(sideEffects[2].type, '@@interbit/CREATE_CHILD_CHAIN')
-    assert.equal(
+    assert.strictEqual(sideEffects[2].type, '@@interbit/CREATE_CHILD_CHAIN')
+    assert.strictEqual(
       sideEffects[2].payload.childAlias,
       sampleProjects[1].projectAlias
     )
 
-    assert.equal(sideEffects[3].type, actionTypes.FORWARD_ACTION_TO_PROJECT)
-    assert.equal(
+    assert.strictEqual(
+      sideEffects[3].type,
+      actionTypes.FORWARD_ACTION_TO_PROJECT
+    )
+    assert.strictEqual(
       sideEffects[3].payload.projectAlias,
       sampleProjects[1].projectAlias
     )
 
-    assert.equal(sideEffects[4].type, '@@interbit/CREATE_CHILD_CHAIN')
-    assert.equal(
+    assert.strictEqual(sideEffects[4].type, '@@interbit/CREATE_CHILD_CHAIN')
+    assert.strictEqual(
       sideEffects[4].payload.childAlias,
       sampleProjects[2].projectAlias
     )
 
-    assert.equal(sideEffects[5].type, actionTypes.FORWARD_ACTION_TO_PROJECT)
-    assert.equal(
+    assert.strictEqual(
+      sideEffects[5].type,
+      actionTypes.FORWARD_ACTION_TO_PROJECT
+    )
+    assert.strictEqual(
       sideEffects[5].payload.projectAlias,
       sampleProjects[2].projectAlias
     )

@@ -27,7 +27,7 @@ describe('control covenant reducer ', () => {
     const actualState = covenant.reducer(state, action)
 
     assert.ok(actualState)
-    assert.equal(
+    assert.strictEqual(
       actualState.getIn([
         'privateChainHosting',
         'shared',

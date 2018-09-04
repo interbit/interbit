@@ -44,7 +44,7 @@ describe('The Build Must Not be Tampered With: It', () => {
       const appName = appNames[index].startsWith(prefix)
         ? appNames[index].substr(prefix.length)
         : appNames[index]
-      assert.equal(name, appName, message)
+      assert.strictEqual(name, appName, message)
     })
   })
 
@@ -54,7 +54,7 @@ describe('The Build Must Not be Tampered With: It', () => {
     // eslint-disable-next-line
     const lernaStandard = require('../standards/std.lerna.json')
 
-    assert.equal(
+    assert.strictEqual(
       JSON.stringify(lernaPolice),
       JSON.stringify(lernaStandard),
       'lerna.json has been modified.'
@@ -67,7 +67,7 @@ describe('The Build Must Not be Tampered With: It', () => {
     // eslint-disable-next-line
     const jsonStandard = require('../standards/std.package.json')
 
-    assert.equal(
+    assert.strictEqual(
       JSON.stringify(packageJsonPolice),
       JSON.stringify(jsonStandard),
       'package.json has been modified.'
@@ -78,7 +78,7 @@ describe('The Build Must Not be Tampered With: It', () => {
     const wallabyConf = fs.readFileSync('../../wallaby.conf.js')
     const wallabyPolice = fs.readFileSync('src/standards/std.wallaby.conf.js')
 
-    assert.equal(
+    assert.strictEqual(
       wallabyConf.toString(),
       wallabyPolice.toString(),
       'wallaby.conf.js has been modified'
@@ -106,7 +106,11 @@ describe('The Build Must Not be Tampered With: It', () => {
         const compareFile = fs.readFileSync(newFileName)
 
         const message = `File ${templateFileName} in ${packageName}does not match template file.`
-        assert.equal(templateFile.toString(), compareFile.toString(), message)
+        assert.strictEqual(
+          templateFile.toString(),
+          compareFile.toString(),
+          message
+        )
       })
     })
   })

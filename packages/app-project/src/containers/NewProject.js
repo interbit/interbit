@@ -11,14 +11,22 @@ import ProjectDetailsForm from '../components/ProjectDetailsForm'
 import { actionCreators } from '../interbit/my-projects/actions'
 import urls from '../constants/urls'
 import chairmanmeow from '../assets/chairmanmeow.jpg'
-import { PRIVATE } from '../constants/chainAliases'
+import { PUBLIC, PRIVATE, PRIVATE_PROJECT } from '../constants/chainAliases'
 
-const { chainDispatch } = interbitRedux
+const {
+  chainDispatch,
+  selectors: { getSponsorConfig }
+} = interbitRedux
 
 const mapStateToProps = state => {
+  const sponsorChainConfig = getSponsorConfig(state, {
+    publicChainAlias: PUBLIC,
+    privateChainAlias: PRIVATE_PROJECT
+  })
   const newProjectAlias = `User-Project-${uuid.v4()}`
   return {
-    newProjectAlias
+    newProjectAlias,
+    sponsorChainConfig
   }
 }
 
@@ -29,18 +37,32 @@ const mapDispatchToProps = dispatch => ({
 export class NewProject extends Component {
   static propTypes = {
     blockchainDispatch: PropTypes.func.isRequired,
-    newProjectAlias: PropTypes.string.isRequired
+    newProjectAlias: PropTypes.string.isRequired,
+    sponsorChainConfig: PropTypes.shape({
+      covenantHash: PropTypes.string,
+      sponsorChainId: PropTypes.string,
+      blockMaster: PropTypes.string
+    })
+  }
+
+  static defaultProps = {
+    sponsorChainConfig: {}
   }
 
   submit = formValues => {
     try {
-      const { blockchainDispatch, newProjectAlias } = this.props
+      const {
+        blockchainDispatch,
+        newProjectAlias,
+        sponsorChainConfig
+      } = this.props
 
       const action = actionCreators.createProject({
         ...formValues,
         projectAlias: newProjectAlias,
         projectName: formValues.name,
-        icon: formValues.faIcon
+        icon: formValues.faIcon,
+        sponsorChainConfig
       })
 
       console.log(`dispatching action: ${JSON.stringify(action)}`)

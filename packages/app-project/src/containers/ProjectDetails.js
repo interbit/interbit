@@ -26,7 +26,12 @@ const mapStateToProps = (state, ownProps) => {
 
   const projectAlias = ownProps.match.params.projectAlias
   const projectDetails = chainState.myProjects[projectAlias] || {}
-  const { name, description, faIcon, launchUrl } = projectDetails
+  const {
+    projectName: name,
+    description,
+    icon: faIcon,
+    launchUrl
+  } = projectDetails
 
   const project = {
     projectAlias,
@@ -41,7 +46,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  blockchainDispatch: action => chainDispatch(PRIVATE, action)
+  blockchainDispatch: action => dispatch(chainDispatch(PRIVATE, action))
 })
 
 export class ProjectDetails extends Component {
@@ -138,6 +143,7 @@ export class ProjectDetails extends Component {
                   submitText="Save Changes"
                   name={project.name}
                   description={project.description}
+                  faIcon={project.icon}
                   onSubmit={this.submit}
                   initialValues={project}
                 />

@@ -160,18 +160,18 @@ const reducer = (state = initialState, action) => {
 
       const { projectAlias, actionToForward } = action.payload
 
-      if (!isValidProjectAction(state, actionToForward)) {
-        console.log(`Invalid project action: ${actionToForward}`)
-        throw new Error(`Invalid project action: ${actionToForward}`)
-      }
-
       const projectChainId =
         state.getIn(['interbit', 'children', projectAlias, 'blockHash']) ||
         state.getIn(['interbit', 'newChildren', projectAlias, 'blockHash'])
 
       if (!projectChainId) {
-        console.log(`Unknown project alias: ${actionToForward}`)
-        throw new Error(`Unknown project alias: ${actionToForward}`)
+        console.log(`Unknown project alias: ${projectAlias}`)
+        throw new Error(`Unknown project alias: ${projectAlias}`)
+      }
+
+      if (!isValidProjectAction(state, actionToForward)) {
+        console.log(`Invalid project action: ${actionToForward}`)
+        throw new Error(`Invalid project action: ${actionToForward}`)
       }
 
       console.log('REMOTE DISPATCH: ', projectChainId, actionToForward)

@@ -247,7 +247,7 @@ describe('my-account/covenant', () => {
       const payload = completeAuthPayload
       const startState = covenant.initialState.setIn(
         ['authenticationRequests', payload.requestId],
-        { oAuthProvider: payload.oAuthProvider, timestampe: payload.timestamp }
+        { oAuthProvider: payload.oAuthProvider, timestamp: payload.timestamp }
       )
       const action = covenant.actionCreators.completeAuthentication(payload)
       const afterState = covenant.reducer(startState, action)

@@ -36,4 +36,6 @@ export { default as LinkBarSlack } from './components/UIKit/LinkBarSlack'
 export { default as LinkWrapper } from './components/UIKit/LinkWrapper'
 export { default as ModalWrapper } from './components/UIKit/ModalWrapper'
 
+// Redux form
+export { default as validation } from './help/newReduxForm/validation'
 export { renderInput } from './help/reduxForm/reduxForm'

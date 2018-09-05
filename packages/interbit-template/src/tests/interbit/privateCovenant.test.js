@@ -25,7 +25,7 @@ describe('template private covenant', () => {
       const action = actionCreators.memo(text)
       const startState = initialState.set('memos', currentMemos)
       const newState = reducer(startState, action)
-      assert.deepEqual(newState.memos, expectedMemos)
+      assert.deepStrictEqual(newState.memos, expectedMemos)
     })
 
     invalidInputs.forEach(testCase => {
@@ -33,7 +33,7 @@ describe('template private covenant', () => {
       const action = actionCreators.memo(text)
       const startState = initialState.set('memos', currentMemos)
       const newState = reducer(startState, action)
-      assert.deepEqual(newState.memos, startState.memos)
+      assert.deepStrictEqual(newState.memos, startState.memos)
     })
   })
 
@@ -74,7 +74,7 @@ describe('template private covenant', () => {
       const action = actionCreators.add(number)
       const startState = initialState.set('runningTotal', currentTotal)
       const newState = reducer(startState, action)
-      assert.equal(newState.runningTotal, expectedTotal)
+      assert.strictEqual(newState.runningTotal, expectedTotal)
     })
 
     invalidInputs.forEach(testCase => {
@@ -82,7 +82,7 @@ describe('template private covenant', () => {
       const action = actionCreators.add(number)
       const startState = initialState.set('runningTotal', currentTotal)
       const newState = reducer(startState, action)
-      assert.equal(newState.runningTotal, startState.runningTotal)
+      assert.strictEqual(newState.runningTotal, startState.runningTotal)
     })
   })
 })

@@ -13,7 +13,7 @@ describe('Manifest Selectors', () => {
       defaultManifest
     )
 
-    assert.equal(actualChainId, expectedChainId)
+    assert.strictEqual(actualChainId, expectedChainId)
   })
 
   it('gets a genesis block by alias', () => {
@@ -23,7 +23,7 @@ describe('Manifest Selectors', () => {
       defaultManifest
     )
 
-    assert.deepEqual(actualGenesisBlock, expectedGenesisBlock)
+    assert.deepStrictEqual(actualGenesisBlock, expectedGenesisBlock)
   })
 
   it('gets the block master by alias', () => {
@@ -35,7 +35,7 @@ describe('Manifest Selectors', () => {
       defaultManifest
     )
 
-    assert.equal(actualBlockMaster, expectedBlockMaster)
+    assert.strictEqual(actualBlockMaster, expectedBlockMaster)
   })
 
   it('gets the covenant hash by chain alias', () => {
@@ -45,7 +45,7 @@ describe('Manifest Selectors', () => {
       defaultManifest
     )
 
-    assert.equal(actualCovenantHash, expectedCovenantHash)
+    assert.strictEqual(actualCovenantHash, expectedCovenantHash)
   })
 
   it('gets a child chain from the manifestTree by chain alias', () => {
@@ -56,6 +56,6 @@ describe('Manifest Selectors', () => {
       defaultManifest
     )
 
-    assert.equal(actualChildChain, expectedChildChain)
+    assert.strictEqual(actualChildChain, expectedChildChain)
   })
 })

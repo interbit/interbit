@@ -38,7 +38,7 @@ const testBuild = async () => {
   ))
   log.info(manifest)
 
-  assert.deepEqual(manifest.peers, options.config.peers)
+  assert.deepStrictEqual(manifest.peers, options.config.peers)
 
   const configuredCovenants = Object.keys(options.config.covenants)
   const builtCovenants = Object.keys(manifest.covenants)
@@ -57,14 +57,17 @@ const testBuild = async () => {
 
   log.success('Covenants were packed in manifest locations')
 
-  assert.deepEqual(builtCovenants, [...configuredCovenants, 'interbitRoot'])
+  assert.deepStrictEqual(builtCovenants, [
+    ...configuredCovenants,
+    'interbitRoot'
+  ])
 
   log.success('All configured covenants and root were packed')
 
   const configuredChains = Object.keys(options.config.staticChains)
   const builtChains = Object.keys(manifest.manifest.interbitRoot.chains)
 
-  assert.deepEqual(
+  assert.deepStrictEqual(
     builtChains,
     configuredChains,
     'Chains in manifest were not correctly configured'

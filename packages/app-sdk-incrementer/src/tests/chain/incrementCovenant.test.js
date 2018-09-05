@@ -11,6 +11,6 @@ describe('covenant', () => {
 
     const afterState = covenant.reducer(chainState, action)
 
-    assert.equal(afterState.sum, 35)
+    assert.strictEqual(afterState.sum, 35)
   })
 })

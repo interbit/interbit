@@ -25,6 +25,6 @@ describe('projectChain/covenant', () => {
 
     const result = covenant.reducer(covenant.initialState, action)
 
-    assert.deepEqual(result.directoryEntry, expected)
+    assert.deepStrictEqual(result.directoryEntry, expected)
   })
 })

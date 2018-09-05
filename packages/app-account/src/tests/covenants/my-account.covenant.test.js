@@ -180,4 +180,129 @@ describe('my-account/covenant', () => {
       assert.deepStrictEqual(afterState.shared, {})
     })
   })
+
+  describe('Authentication actions', () => {
+    const authRequest = {
+      oAuthProvider: 'fancyIdentityService',
+      requestId: 1234,
+      timestamp: 123456789
+    }
+    const completeAuthPayload = {
+      oAuthProvider: 'fancyIdentityService',
+      providerChainId: 'woof',
+      tokenName: 'cat',
+      joinName: 'meow',
+      requestId: 1234,
+      timestamp: 123456789
+    }
+
+    it('adds an auth request on START_AUTHENTICATION', () => {
+      const expectedState = covenant.initialState.setIn(
+        ['authenticationRequests', authRequest.requestId],
+        {
+          oAuthProvider: authRequest.oAuthProvider,
+          timestamp: authRequest.timestamp
+        }
+      )
+      const action = covenant.actionCreators.startAuthentication(authRequest)
+      const afterState = covenant.reducer(covenant.initialState, action)
+
+      assert.deepStrictEqual(expectedState, afterState)
+    })
+
+    it('removes the auth request on CANCEL_AUTHENTICATION', () => {
+      const expectedState = covenant.initialState
+      const startState = covenant.initialState.setIn(
+        ['authenticationRequests', authRequest.requestId],
+        {
+          oAuthProvider: authRequest.oAuthProvider,
+          timestamp: authRequest.timestamp
+        }
+      )
+      const action = covenant.actionCreators.cancelAuthentication({
+        requestId: authRequest.requestId
+      })
+      const afterState = covenant.reducer(startState, action)
+
+      assert.deepStrictEqual(expectedState, afterState)
+    })
+
+    it('does nothing if the auth request does not exist on CANCEL_AUTHENTICATION', () => {
+      const expectedState = covenant.initialState.setIn(
+        ['authenticationRequests', authRequest.requestId],
+        {
+          oAuthProvider: authRequest.oAuthProvider,
+          timestamp: authRequest.timestamp
+        }
+      )
+      const action = covenant.actionCreators.cancelAuthentication({
+        requestId: 1111
+      })
+      const afterState = covenant.reducer(expectedState, action)
+
+      assert.deepStrictEqual(expectedState, afterState)
+    })
+
+    it('consumes the token info on COMPLETE_AUTHENTICATION and removes the auth request', () => {
+      const payload = completeAuthPayload
+      const startState = covenant.initialState.setIn(
+        ['authenticationRequests', payload.requestId],
+        { oAuthProvider: payload.oAuthProvider, timestamp: payload.timestamp }
+      )
+      const action = covenant.actionCreators.completeAuthentication(payload)
+      const afterState = covenant.reducer(startState, action)
+      const sideEffect = afterState.sideEffects[0]
+
+      assert.strictEqual(sideEffect.type, '@@interbit/START_CONSUME_STATE')
+      assert.deepStrictEqual(sideEffect.payload, {
+        joinName: payload.joinName,
+        mount: ['profile', payload.tokenName],
+        provider: payload.providerChainId
+      })
+      assert.deepStrictEqual(afterState.authenticationRequests, {})
+    })
+
+    it('does nothing on COMPLETE_AUTHENTICATION if the auth request does not exist', () => {
+      const expectedState = covenant.initialState.setIn(
+        ['authenticationRequests', 1111],
+        {
+          oAuthProvider: authRequest.oAuthProvider,
+          timestamp: authRequest.timestamp
+        }
+      )
+      const payload = completeAuthPayload
+      const action = covenant.actionCreators.completeAuthentication(payload)
+      const afterState = covenant.reducer(expectedState, action)
+
+      assert.deepStrictEqual(expectedState, afterState)
+    })
+
+    it('removes the auth request on COMPLETE_AUTHENTICATION if the join already exists', () => {
+      const payload = completeAuthPayload
+      const expectedState = covenant.initialState.setIn(
+        ['interbit', 'config', 'consuming'],
+        [{ provider: payload.providerChainId, joinName: payload.joinName }]
+      )
+
+      const startState = covenant.initialState
+        .setIn(
+          ['interbit', 'config', 'consuming'],
+          [
+            {
+              provider: payload.providerChainId,
+              joinName: payload.joinName
+            }
+          ]
+        )
+        .setIn(['authenticationRequests', payload.requestId], {
+          oAuthProvider: payload.oAuthProvider,
+          timestamp: payload.timestamp
+        })
+
+      const action = covenant.actionCreators.completeAuthentication(payload)
+      const afterState = covenant.reducer(startState, action)
+
+      assert.deepStrictEqual(expectedState, afterState)
+    })
+  })
 })

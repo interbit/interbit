@@ -1,3 +1,1 @@
-module.exports = {
-  MY_PROJECTS: 'myProjects'
-}
+module.exports = require('../interbit/control/constants').CHAIN_ALIASES

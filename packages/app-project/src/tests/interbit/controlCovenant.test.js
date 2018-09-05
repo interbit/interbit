@@ -13,26 +13,31 @@ describe('control covenant', () => {
     const chainId = '123456...'
     const blockMaster = 'xfdbhj...'
     const privateCovenantHash = 'abcdef...'
+    const projectCovenantHash = 'defghi...'
 
     const stateWithConfig = controlCovenant.initialState
       .setIn(['interbit', 'chainId'], chainId)
       .setIn(['interbit', 'config', 'blockMaster'], blockMaster)
 
-    const expectedState = stateWithConfig.setIn(
-      ['privateChainHosting', 'shared', 'templatePrivate'],
-      {
+    const expectedState = stateWithConfig
+      .setIn(['privateChainHosting', 'shared', 'projectsPrivate'], {
         blockMaster,
         sponsorChainId: chainId,
         covenantHash: privateCovenantHash
-      }
-    )
+      })
+      .setIn(['privateChainHosting', 'shared', 'projectsProject'], {
+        blockMaster,
+        sponsorChainId: chainId,
+        covenantHash: projectCovenantHash
+      })
 
     const actualState = controlCovenant.reducer(stateWithConfig, {
       type: '@@MANIFEST/SET_MANIFEST',
       payload: {
         manifest: {
           covenants: {
-            'template-private': { hash: privateCovenantHash }
+            'projects-my-projects': { hash: privateCovenantHash },
+            'projects-project': { hash: projectCovenantHash }
           }
         }
       }

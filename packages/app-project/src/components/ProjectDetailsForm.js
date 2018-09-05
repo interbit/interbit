@@ -12,11 +12,16 @@ class ProjectDetailsForm extends Component {
   static propTypes = {
     // eslint-disable-next-line react/no-unused-prop-types
     form: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    submitText: PropTypes.string
+  }
+
+  static defaultProps = {
+    submitText: 'Create Project'
   }
 
   render() {
-    const { handleSubmit } = this.props
+    const { handleSubmit, submitText } = this.props
 
     const detailsView = (
       <div style={{ display: 'none' }}>
@@ -128,7 +133,7 @@ class ProjectDetailsForm extends Component {
               className="Select-icon"
             />
           </FormGroup>
-          <IconButton text="Create Project" clickHandler={handleSubmit} />
+          <IconButton text={submitText} clickHandler={handleSubmit} />
           <LinkContainer to="/projects">
             <IconButton text="Cancel" className="secondary" />
           </LinkContainer>

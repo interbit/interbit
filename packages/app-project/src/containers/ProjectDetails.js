@@ -9,7 +9,7 @@ import { interbitRedux } from 'interbit-ui-tools'
 import { actionCreators as myProjectsActionCreators } from '../interbit/my-projects/actions'
 import { actionCreators as projectActionCreators } from '../interbit/project/actions'
 
-import { MY_PROJECTS } from '../constants/chainAliases'
+import { PRIVATE } from '../constants/chainAliases'
 
 import ProjectPackages from '../components/ProjectPackages'
 import ProjectDetailsForm from '../components/ProjectDetailsForm'
@@ -17,7 +17,7 @@ import ProjectDetailsForm from '../components/ProjectDetailsForm'
 const { chainDispatch, selectors } = interbitRedux
 
 const mapStateToProps = (state, ownProps) => {
-  const chainState = selectors.getChain(state, { chainAlias: MY_PROJECTS })
+  const chainState = selectors.getChain(state, { chainAlias: PRIVATE })
   if (!chainState || !chainState.myProjects) {
     return {
       project: {}
@@ -26,7 +26,12 @@ const mapStateToProps = (state, ownProps) => {
 
   const projectAlias = ownProps.match.params.projectAlias
   const projectDetails = chainState.myProjects[projectAlias] || {}
-  const { name, description, faIcon, launchUrl } = projectDetails
+  const {
+    projectName: name,
+    description,
+    icon: faIcon,
+    launchUrl
+  } = projectDetails
 
   const project = {
     projectAlias,
@@ -41,7 +46,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  blockchainDispatch: action => chainDispatch(MY_PROJECTS, action)
+  blockchainDispatch: action => dispatch(chainDispatch(PRIVATE, action))
 })
 
 export class ProjectDetails extends Component {
@@ -138,6 +143,7 @@ export class ProjectDetails extends Component {
                   submitText="Save Changes"
                   name={project.name}
                   description={project.description}
+                  faIcon={project.icon}
                   onSubmit={this.submit}
                   initialValues={project}
                 />

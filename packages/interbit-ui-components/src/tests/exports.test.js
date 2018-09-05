@@ -114,6 +114,10 @@ describe('module exports expected components', () => {
     assert.ok(api.ModalWrapper)
   })
 
+  it('exports validation', () => {
+    assert.ok(api.validation)
+  })
+
   it('exports renderInput', () => {
     assert.ok(api.renderInput)
   })

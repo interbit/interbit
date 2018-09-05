@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 import { Field, reduxForm } from 'redux-form'
-import { ContentBox } from 'interbit-ui-components'
+import { ContentBox, validation } from 'interbit-ui-components'
 import PropTypes from 'prop-types'
+
 import formNames from '../constants/formNames'
 
 // eslint-disable-next-line
@@ -14,15 +15,6 @@ const renderInput = ({onChange, props, placeholder, type, input, meta: {touched,
         (warning && <span>{warning}</span>))}
   </div>
 )
-
-// TODO: move validate function so that it can be reused for other forms
-const validate = values => {
-  const errors = {}
-  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-  return errors
-}
 
 class ProfileForm extends Component {
   static propTypes = {
@@ -92,6 +84,7 @@ class ProfileForm extends Component {
             component={renderInput}
             name="email"
             placeholder="Email"
+            validate={[validation.email]}
           />
         </FormGroup>
 
@@ -157,6 +150,5 @@ class ProfileForm extends Component {
 }
 
 export default reduxForm({
-  form: formNames.ACCOUNT_FORM_NAME,
-  validate
+  form: formNames.ACCOUNT_FORM_NAME
 })(ProfileForm)

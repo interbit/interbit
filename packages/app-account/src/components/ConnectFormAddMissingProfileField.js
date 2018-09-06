@@ -1,20 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
-import { Button, FormControl, Table } from 'react-bootstrap'
-import { IconButton, validation } from 'interbit-ui-components'
+import { Button, Table } from 'react-bootstrap'
+import { IconButton, validation, renderInputNew } from 'interbit-ui-components'
 
 import formNames from '../constants/formNames'
-
-// eslint-disable-next-line
-const renderInput = ({onChange, props, placeholder, type, input, meta: {touched, error, warning}}) => (
-  <div className={touched && error ? 'field-error' : ''}>
-    <FormControl placeholder={placeholder} type={type} {...input} />
-    {touched &&
-      ((error && <span className="error-msg">{error}</span>) ||
-        (warning && <span>{warning}</span>))}
-  </div>
-)
 
 export class ConnectFormAddMissingProfileField extends Component {
   static propTypes = {
@@ -106,7 +96,11 @@ export class ConnectFormAddMissingProfileField extends Component {
                 <td>{field}</td>
                 <td>
                   {profileFields[field]}
-                  <Field component={renderInput} name={field} type="hidden" />
+                  <Field
+                    component={renderInputNew}
+                    name={field}
+                    type="hidden"
+                  />
                 </td>
               </tr>
             ))}
@@ -114,7 +108,7 @@ export class ConnectFormAddMissingProfileField extends Component {
               <tr key={field}>
                 <td colSpan={2} className="form-td">
                   <Field
-                    component={renderInput}
+                    component={renderInputNew}
                     name={field}
                     placeholder={`Add ${field}`}
                     type={field === 'email' ? 'email' : 'text'}

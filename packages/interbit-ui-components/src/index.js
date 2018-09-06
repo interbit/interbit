@@ -38,4 +38,5 @@ export { default as ModalWrapper } from './components/UIKit/ModalWrapper'
 
 // Redux form
 export { default as validation } from './help/newReduxForm/validation'
+export { renderInputNew } from './help/newReduxForm/renderInput'
 export { renderInput } from './help/reduxForm/reduxForm'

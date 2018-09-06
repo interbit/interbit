@@ -1,20 +1,10 @@
 import React, { Component } from 'react'
 import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 import { Field, reduxForm } from 'redux-form'
-import { ContentBox, validation } from 'interbit-ui-components'
+import { ContentBox, validation, renderInputNew } from 'interbit-ui-components'
 import PropTypes from 'prop-types'
 
 import formNames from '../constants/formNames'
-
-// eslint-disable-next-line
-const renderInput = ({onChange, props, placeholder, type, input, meta: {touched, error, warning}}) => (
-  <div className={touched && error ? 'field-error' : ''}>
-    <FormControl placeholder={placeholder} type={type} {...input} />
-    {touched &&
-      ((error && <span className="error-msg">{error}</span>) ||
-        (warning && <span>{warning}</span>))}
-  </div>
-)
 
 class ProfileForm extends Component {
   static propTypes = {
@@ -81,7 +71,7 @@ class ProfileForm extends Component {
           <ControlLabel>Email</ControlLabel>
           <Field
             type="email"
-            component={renderInput}
+            component={renderInputNew}
             name="email"
             placeholder="Email"
             validate={[validation.email]}
@@ -92,7 +82,7 @@ class ProfileForm extends Component {
           <ControlLabel>Username</ControlLabel>
           <Field
             type="text"
-            component={renderInput}
+            component={renderInputNew}
             name="alias"
             placeholder="Username"
           />
@@ -102,7 +92,7 @@ class ProfileForm extends Component {
           <ControlLabel>Name</ControlLabel>
           <Field
             type="text"
-            component={renderInput}
+            component={renderInputNew}
             name="name"
             placeholder="Name"
           />

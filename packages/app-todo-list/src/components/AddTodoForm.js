@@ -1,19 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
-import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
+import { FormGroup, ControlLabel, Button } from 'react-bootstrap'
+import { renderInputNew } from 'interbit-ui-components'
 
 import formNames from '../constants/formNames'
-
-// eslint-disable-next-line
-const renderInput = ({onChange, props, placeholder, type, input, meta: {touched, error, warning}}) => (
-  <div className={touched && error ? 'field-error' : ''}>
-    <FormControl placeholder={placeholder} type={type} {...input} />
-    {touched &&
-      ((error && <span className="error-msg">{error}</span>) ||
-        (warning && <span>{warning}</span>))}
-  </div>
-)
 
 class AddTodoForm extends Component {
   static propTypes = {
@@ -30,7 +21,7 @@ class AddTodoForm extends Component {
           <ControlLabel>Title *</ControlLabel>
           <Field
             type="text"
-            component={renderInput}
+            component={renderInputNew}
             name="title"
             placeholder="Title"
           />
@@ -40,7 +31,7 @@ class AddTodoForm extends Component {
           <ControlLabel>Description</ControlLabel>
           <Field
             type="text"
-            component={renderInput}
+            component={renderInputNew}
             name="description"
             placeholder="Description"
           />

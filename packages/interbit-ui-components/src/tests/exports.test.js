@@ -118,6 +118,10 @@ describe('module exports expected components', () => {
     assert.ok(api.validation)
   })
 
+  it('exports renderInputNew', () => {
+    assert.ok(api.renderInputNew)
+  })
+
   it('exports renderInput', () => {
     assert.ok(api.renderInput)
   })

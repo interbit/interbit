@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { Button, Table } from 'react-bootstrap'
-import { IconButton, validation, renderInputNew } from 'interbit-ui-components'
+import { IconButton, IbField, validation } from 'interbit-ui-components'
 
 import formNames from '../constants/formNames'
 
@@ -96,19 +96,14 @@ export class ConnectFormAddMissingProfileField extends Component {
                 <td>{field}</td>
                 <td>
                   {profileFields[field]}
-                  <Field
-                    component={renderInputNew}
-                    name={field}
-                    type="hidden"
-                  />
+                  <IbField name={field} type="hidden" />
                 </td>
               </tr>
             ))}
             {missingFields.map(field => (
               <tr key={field}>
                 <td colSpan={2} className="form-td">
-                  <Field
-                    component={renderInputNew}
+                  <IbField
                     name={field}
                     placeholder={`Add ${field}`}
                     type={field === 'email' ? 'email' : 'text'}

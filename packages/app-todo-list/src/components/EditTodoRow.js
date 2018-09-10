@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { Form, FormGroup, Button } from 'react-bootstrap'
-import { renderInputNew } from 'interbit-ui-components'
+import { IbField } from 'interbit-ui-components'
 
 import formNames from '../constants/formNames'
 
@@ -25,31 +25,21 @@ class EditTodoRow extends Component {
         <td className="col-id">{id}</td>
         <td className="col-form" colSpan={4}>
           <Form inline onSubmit={handleSubmit}>
-            <Field type="hidden" component={renderInputNew} name="id" />
+            <IbField type="hidden" name="id" />
             <FormGroup className="form-title">
-              <Field
-                type="text"
-                component={renderInputNew}
-                name="title"
-                placeholder="Title *"
-              />
+              <IbField type="text" name="title" placeholder="Title *" />
             </FormGroup>
 
             <FormGroup className="form-description">
-              <Field
+              <IbField
                 type="text"
-                component={renderInputNew}
                 name="description"
                 placeholder="Description"
               />
             </FormGroup>
 
             <FormGroup className="form-completed">
-              <Field
-                type="checkbox"
-                component={renderInputNew}
-                name="completed"
-              />
+              <IbField type="checkbox" name="completed" />
             </FormGroup>
 
             <FormGroup className="form-buttons">

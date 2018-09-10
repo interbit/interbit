@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { FormGroup, ControlLabel, Button } from 'react-bootstrap'
-import { renderInputNew } from 'interbit-ui-components'
+import { IbField } from 'interbit-ui-components'
 
 import formNames from '../constants/formNames'
 
@@ -19,22 +19,12 @@ class AddTodoForm extends Component {
         <h3>Add a new to-do item</h3>
         <FormGroup>
           <ControlLabel>Title *</ControlLabel>
-          <Field
-            type="text"
-            component={renderInputNew}
-            name="title"
-            placeholder="Title"
-          />
+          <IbField type="text" name="title" placeholder="Title" />
         </FormGroup>
 
         <FormGroup>
           <ControlLabel>Description</ControlLabel>
-          <Field
-            type="text"
-            component={renderInputNew}
-            name="description"
-            placeholder="Description"
-          />
+          <IbField type="text" name="description" placeholder="Description" />
         </FormGroup>
 
         <FormGroup>

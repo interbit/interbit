@@ -77,8 +77,7 @@ const middlewareSagas = (runtimeContext = browserContext) => {
       publicChainAlias,
       sponsoredChainId,
       privateChainId
-    } =
-      action.payload || {}
+    } = action.payload || {}
 
     try {
       const { interbit, cli, localDataStore, publicKey } = yield call(

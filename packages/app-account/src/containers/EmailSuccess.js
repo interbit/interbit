@@ -57,4 +57,7 @@ export class EmailSuccess extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmailSuccess)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EmailSuccess)

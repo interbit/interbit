@@ -147,8 +147,11 @@ class EditableTable extends Component {
 export default reduxForm({
   destroyOnUnmount: true
 })(
-  connect(state => ({}), {
-    initialize: initializeForm,
-    touch: touchForm
-  })(EditableTable)
+  connect(
+    state => ({}),
+    {
+      initialize: initializeForm,
+      touch: touchForm
+    }
+  )(EditableTable)
 )

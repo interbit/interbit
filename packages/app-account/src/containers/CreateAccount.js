@@ -223,4 +223,7 @@ export class CreateAccount extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateAccount)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateAccount)

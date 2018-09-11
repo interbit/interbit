@@ -1,5 +1,5 @@
 import assert from 'assert'
-import validation from '../help/newReduxForm/validation'
+import validation from '../components/ReduxForm/validation'
 
 describe('redux-form validation functions', () => {
   it('checks for valid email formats in validation.email', () => {

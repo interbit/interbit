@@ -1,19 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Field, reduxForm } from 'redux-form'
-import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
+import { reduxForm } from 'redux-form'
+import { FormGroup, ControlLabel, Button } from 'react-bootstrap'
+import { IbField } from 'interbit-ui-components'
 
 import formNames from '../constants/formNames'
-
-// eslint-disable-next-line
-const renderInput = ({onChange, props, placeholder, type, input, meta: {touched, error, warning}}) => (
-  <div className={touched && error ? 'field-error' : ''}>
-    <FormControl placeholder={placeholder} type={type} {...input} />
-    {touched &&
-      ((error && <span className="error-msg">{error}</span>) ||
-        (warning && <span>{warning}</span>))}
-  </div>
-)
 
 class AddTodoForm extends Component {
   static propTypes = {
@@ -28,22 +19,12 @@ class AddTodoForm extends Component {
         <h3>Add a new to-do item</h3>
         <FormGroup>
           <ControlLabel>Title *</ControlLabel>
-          <Field
-            type="text"
-            component={renderInput}
-            name="title"
-            placeholder="Title"
-          />
+          <IbField type="text" name="title" placeholder="Title" />
         </FormGroup>
 
         <FormGroup>
           <ControlLabel>Description</ControlLabel>
-          <Field
-            type="text"
-            component={renderInput}
-            name="description"
-            placeholder="Description"
-          />
+          <IbField type="text" name="description" placeholder="Description" />
         </FormGroup>
 
         <FormGroup>

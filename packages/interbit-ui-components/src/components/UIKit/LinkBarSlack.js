@@ -21,7 +21,8 @@ export default class LinkBarSlack extends Component {
       <a
         href={to}
         className={`ibweb-link-bar slack ${className}`}
-        target="_blank">
+        target="_blank"
+        rel="noopener noreferrer">
         <Media>
           <Media.Left>
             <SlackIcon />

@@ -154,4 +154,7 @@ export class TodoList extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList)

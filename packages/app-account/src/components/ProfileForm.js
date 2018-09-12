@@ -1,28 +1,10 @@
 import React, { Component } from 'react'
 import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
-import { Field, reduxForm } from 'redux-form'
-import { ContentBox } from 'interbit-ui-components'
+import { reduxForm } from 'redux-form'
+import { ContentBox, validation, IbField } from 'interbit-ui-components'
 import PropTypes from 'prop-types'
+
 import formNames from '../constants/formNames'
-
-// eslint-disable-next-line
-const renderInput = ({onChange, props, placeholder, type, input, meta: {touched, error, warning}}) => (
-  <div className={touched && error ? 'field-error' : ''}>
-    <FormControl placeholder={placeholder} type={type} {...input} />
-    {touched &&
-      ((error && <span className="error-msg">{error}</span>) ||
-        (warning && <span>{warning}</span>))}
-  </div>
-)
-
-// TODO: move validate function so that it can be reused for other forms
-const validate = values => {
-  const errors = {}
-  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-  return errors
-}
 
 class ProfileForm extends Component {
   static propTypes = {
@@ -87,32 +69,22 @@ class ProfileForm extends Component {
       <form onSubmit={handleSubmit}>
         <FormGroup controlId="formHorizontalEmail">
           <ControlLabel>Email</ControlLabel>
-          <Field
+          <IbField
             type="email"
-            component={renderInput}
             name="email"
             placeholder="Email"
+            validate={[validation.email]}
           />
         </FormGroup>
 
         <FormGroup controlId="formHorizontalAlias">
           <ControlLabel>Username</ControlLabel>
-          <Field
-            type="text"
-            component={renderInput}
-            name="alias"
-            placeholder="Username"
-          />
+          <IbField type="text" name="alias" placeholder="Username" />
         </FormGroup>
 
         <FormGroup controlId="formHorizontalName">
           <ControlLabel>Name</ControlLabel>
-          <Field
-            type="text"
-            component={renderInput}
-            name="name"
-            placeholder="Name"
-          />
+          <IbField type="text" name="name" placeholder="Name" />
         </FormGroup>
 
         <FormGroup>
@@ -157,6 +129,5 @@ class ProfileForm extends Component {
 }
 
 export default reduxForm({
-  form: formNames.ACCOUNT_FORM_NAME,
-  validate
+  form: formNames.ACCOUNT_FORM_NAME
 })(ProfileForm)

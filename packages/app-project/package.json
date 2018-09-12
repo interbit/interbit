@@ -1,18 +1,18 @@
 {
     "name": "app-project",
     "description": "Interbit projects",
-    "version": "0.4.46",
+    "version": "0.4.47",
     "private": true,
     "main": "src/exports.js",
     "license": "MIT",
     "author": "BTL GROUP LTD",
     "dependencies": {
         "cross-env": "^5.1.4",
-        "interbit-cli": "0.4.46",
-        "interbit-covenant-tools": "0.4.46",
-        "interbit-platform-tools": "0.4.46",
-        "interbit-ui-components": "0.4.46",
-        "interbit-ui-tools": "0.4.46",
+        "interbit-cli": "0.4.47",
+        "interbit-covenant-tools": "0.4.47",
+        "interbit-platform-tools": "0.4.47",
+        "interbit-ui-components": "0.4.47",
+        "interbit-ui-tools": "0.4.47",
         "query-string": "^5.0.1",
         "react": "^16.2.0",
         "react-bootstrap": "^0.32.1",
@@ -44,5 +44,5 @@
         "interbit:create": "interbit create --dev",
         "interbit:build": "interbit build",
         "interbit:deploy": "interbit deploy --key-pair keyPair.js"
-  }
+    }
 }

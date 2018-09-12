@@ -13,16 +13,18 @@ const email = value => {
 
 const number = value => {
   const error = 'Must be a number.'
+  const num = Number(value)
 
-  if (
-    typeof value === 'object' ||
-    typeof value === 'boolean' ||
-    Number.isNaN(Number(value)) ||
-    !Number.isFinite(value)
-  ) {
+  if (value === undefined || value === null) {
+    return undefined
+  }
+  if (typeof value === 'object' || typeof value === 'boolean') {
     return error
   }
-  return undefined
+  if (Number.isFinite(num)) {
+    return undefined
+  }
+  return error
 }
 
 const required = value => {

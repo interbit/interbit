@@ -13,7 +13,8 @@ describe('ReduxForm component', () => {
 
   describe('Validation functions', () => {
     it('checks for valid email formats in validation.email', () => {
-      const validEmails = ['meow@meow.com', '', undefined, null]
+      const validEmails = ['meow@meow.com']
+      const validEmptyValues = ['', undefined, null]
       const invalidEmails = [
         'meow',
         '@meow',
@@ -29,27 +30,32 @@ describe('ReduxForm component', () => {
       validEmails.forEach(email => {
         assert.strictEqual(validation.email(email), undefined)
       })
+      validEmptyValues.forEach(val => {
+        assert.strictEqual(validation.email(val), undefined)
+      })
       invalidEmails.forEach(email => {
         assert.strictEqual(validation.email(email), 'Invalid email address.')
       })
     })
 
     it('checks for finite numbers in validation.number', () => {
-      const validValues = [0, 100, 100.0]
+      const validValues = [0, 100, 100.0, '100', '100.1', '-10', '0x11']
+      const validEmptyValues = [undefined, null, '']
       const invalidValues = [
         false,
         true,
         'meow',
-        undefined,
-        null,
         [],
         {},
+        NaN,
         Number.POSITIVE_INFINITY,
-        Number.NEGATIVE_INFINITY,
-        '100'
+        Number.NEGATIVE_INFINITY
       ]
 
       validValues.forEach(val => {
+        assert.strictEqual(validation.number(val), undefined)
+      })
+      validEmptyValues.forEach(val => {
         assert.strictEqual(validation.number(val), undefined)
       })
       invalidValues.forEach(val => {

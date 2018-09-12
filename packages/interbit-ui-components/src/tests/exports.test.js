@@ -122,6 +122,10 @@ describe('module exports expected components', () => {
     assert.ok(api.renderInputNew)
   })
 
+  it('exports IbField', () => {
+    assert.ok(api.IbField)
+  })
+
   it('exports renderInput', () => {
     assert.ok(api.renderInput)
   })

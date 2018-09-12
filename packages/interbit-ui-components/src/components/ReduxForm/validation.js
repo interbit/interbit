@@ -13,14 +13,15 @@ const email = value => {
 
 const number = value => {
   const error = 'Must be a number.'
-  const num = Number(value)
 
-  if (value === undefined || value === null) {
+  if (value === undefined || value === null || value === '') {
     return undefined
   }
   if (typeof value === 'object' || typeof value === 'boolean') {
     return error
   }
+
+  const num = Number(value)
   if (Number.isFinite(num)) {
     return undefined
   }

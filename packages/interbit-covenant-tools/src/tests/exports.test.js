@@ -31,6 +31,14 @@ describe('module exports expected API', () => {
     assert.ok(api.coreCovenant.selectors)
     assert.ok(api.coreCovenant.selectors.chainId)
     assert.ok(api.coreCovenant.selectors.config)
+    assert.ok(api.coreCovenant.selectors.blockMaster)
+    assert.ok(api.coreCovenant.selectors.acl)
+    assert.ok(api.coreCovenant.selectors.actionPermissions)
+    assert.ok(api.coreCovenant.selectors.roles)
+    assert.ok(api.coreCovenant.selectors.providing)
+    assert.ok(api.coreCovenant.selectors.consuming)
+    assert.ok(api.coreCovenant.selectors.sentActions)
+    assert.ok(api.coreCovenant.selectors.pendingActionsForChain)
   })
 
   it('rootCovenant', () => {

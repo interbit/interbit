@@ -77,4 +77,9 @@ export class ExploreChain extends Component {
 export default reduxForm({
   form: 'ExploreChain',
   destroyOnUnmount: true
-})(connect(mapStateToProps, mapDispatchToProps)(ExploreChain))
+})(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ExploreChain)
+)

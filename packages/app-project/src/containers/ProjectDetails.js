@@ -157,4 +157,7 @@ export class ProjectDetails extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetails)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProjectDetails)

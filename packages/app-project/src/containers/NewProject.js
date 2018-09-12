@@ -118,4 +118,7 @@ export class NewProject extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewProject)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewProject)

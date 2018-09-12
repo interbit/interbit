@@ -89,4 +89,7 @@ export class ChainConnect extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChainConnect)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChainConnect)

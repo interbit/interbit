@@ -114,6 +114,18 @@ describe('module exports expected components', () => {
     assert.ok(api.ModalWrapper)
   })
 
+  it('exports validation', () => {
+    assert.ok(api.validation)
+  })
+
+  it('exports renderInputNew', () => {
+    assert.ok(api.renderInputNew)
+  })
+
+  it('exports IbField', () => {
+    assert.ok(api.IbField)
+  })
+
   it('exports renderInput', () => {
     assert.ok(api.renderInput)
   })

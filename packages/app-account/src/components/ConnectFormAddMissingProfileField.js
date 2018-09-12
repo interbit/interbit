@@ -1,28 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Field, reduxForm } from 'redux-form'
-import { Button, FormControl, Table } from 'react-bootstrap'
-import { IconButton } from 'interbit-ui-components'
+import { reduxForm } from 'redux-form'
+import { Button, Table } from 'react-bootstrap'
+import { IconButton, IbField, validation } from 'interbit-ui-components'
 
 import formNames from '../constants/formNames'
-
-// eslint-disable-next-line
-const renderInput = ({onChange, props, placeholder, type, input, meta: {touched, error, warning}}) => (
-  <div className={touched && error ? 'field-error' : ''}>
-    <FormControl placeholder={placeholder} type={type} {...input} />
-    {touched &&
-      ((error && <span className="error-msg">{error}</span>) ||
-        (warning && <span>{warning}</span>))}
-  </div>
-)
-
-// TODO: move this to a common validation file
-const required = value => (value ? undefined : 'This field is required.')
-
-const email = value =>
-  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? undefined
-    : 'Invalid email address.'
 
 export class ConnectFormAddMissingProfileField extends Component {
   static propTypes = {
@@ -114,20 +96,21 @@ export class ConnectFormAddMissingProfileField extends Component {
                 <td>{field}</td>
                 <td>
                   {profileFields[field]}
-                  <Field component={renderInput} name={field} type="hidden" />
+                  <IbField name={field} type="hidden" />
                 </td>
               </tr>
             ))}
             {missingFields.map(field => (
               <tr key={field}>
                 <td colSpan={2} className="form-td">
-                  <Field
-                    component={renderInput}
+                  <IbField
                     name={field}
                     placeholder={`Add ${field}`}
                     type={field === 'email' ? 'email' : 'text'}
                     validate={
-                      field === 'email' ? [required, email] : [required]
+                      field === 'email'
+                        ? [validation.required, validation.email]
+                        : [validation.required]
                     }
                   />
                 </td>

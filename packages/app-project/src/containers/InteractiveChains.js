@@ -86,4 +86,7 @@ export class InteractiveChains extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InteractiveChains)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(InteractiveChains)

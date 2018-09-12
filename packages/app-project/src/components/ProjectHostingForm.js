@@ -135,4 +135,7 @@ export class ProjectHostingForm extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectHostingForm)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProjectHostingForm)

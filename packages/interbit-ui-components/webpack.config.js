@@ -36,9 +36,11 @@ const config = {
           {
             loader: 'url-loader',
             options: {
-              name: '[name][md5:hash].[ext]',
-              outputPath: 'assets/',
-              publicPath: '/assets/'
+              limit: 25000,
+              fallback: 'file-loader',
+              // Options for the fallback
+              name: '[name]-[md5:hash].[ext]',
+              outputPath: '/assets/'
             }
           }
         ]

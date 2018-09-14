@@ -15,7 +15,7 @@ const writeStandardsToPackageJson = packageJsonPath => {
 }
 
 const templatePaths =
-  '../template/{src/redux/chainReducer.js,src/tests/chainReducer.test.js,public/!(manifest.json)*,src/!(App|exports)*.*(js|svg)}'
+  '../interbit-template/{src/redux/chainReducer.js,src/tests/chainReducer.test.js,public/!(manifest.json)*,src/!(App|exports)*.*(js|svg)}'
 const templateFileNames = glob.sync(templatePaths)
 
 // Obliterate the base files in all the app-* packages by replacing with the template

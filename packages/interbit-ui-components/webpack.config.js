@@ -2,10 +2,11 @@
 
 const path = require('path')
 const pkg = require('./package.json')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+const plugins = [new ExtractTextPlugin({ filename: '/css/[name].css' })]
 
 const libraryName = pkg.name
-
-const plugins = []
 
 const outputFile = `${libraryName}.js`
 
@@ -27,8 +28,11 @@ const config = {
         exclude: /(node_modules|bower_components)/
       },
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader?modules'
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
+        })
       },
       {
         test: /\.(png|svg)$/,

@@ -1,17 +1,9 @@
-Bar example:
+Full-sized examples. To see how the component behaves responsively, change your viewport width.
 
 ```js
-const ReactDOM = require('react-dom');
-const { Provider } = require('react-redux');
-const { createStore } = require('redux');
-const { BrowserRouter } = require('react-router-dom');
-const { composeWithDevTools } = require('redux-devtools-extension');
-
-const store = createStore(() => {}, composeWithDevTools());
-
-<Provider store={store}>
-  <BrowserRouter>
-    <LinkBar to="http://google.com" image="placeholder-md.png" title="Interaction Bar" content="Lorem ipsum dolor sit amet." />
-  </BrowserRouter>
-</Provider>
+<div>
+  <LinkBar to="http://google.com" image="placeholder-md.png" title="Default LinkBar" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rhoncus, velit nec dignissim luctus." />
+  <LinkBar to="http://google.com" className="blue" image="placeholder-md.png" title="Blue LinkBar" content="Apply the 'blue' class to the component. Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
+  <LinkBar to="http://google.com" className="dotted" image="placeholder-md.png" title="Dotted LinkBar" content="Apply the 'dotted' class to the component. Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
+</div>
 ```

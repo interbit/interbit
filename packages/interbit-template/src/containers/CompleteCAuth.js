@@ -67,7 +67,8 @@ export class CompleteCAuth extends Component {
 
     if (!isChainLoaded) {
       return <div>Loading...</div>
-    } else if (error) {
+    }
+    if (error) {
       return <div>User cancelled the app&rsquo;s authorization request</div>
     }
 

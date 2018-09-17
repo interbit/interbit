@@ -1,5 +1,5 @@
 import assert from 'assert'
-import controlCovenant from '../../../src/interbit/control'
+import controlCovenant from '../../interbit/control'
 
 describe('control covenant', () => {
   it('returns state on blank action', () => {

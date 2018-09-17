@@ -8,8 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import createSagaMiddleware from 'redux-saga'
 import { interbitRedux } from 'interbit-ui-tools'
 
-import 'interbit-ui-components/src/css/index.css'
-import 'interbit-ui-components/src/css/interbit.css'
+import 'interbit-ui-components/dist/css/interbit.css'
 
 import App from './App'
 import reducers from './redux'

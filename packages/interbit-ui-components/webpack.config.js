@@ -4,7 +4,7 @@ const path = require('path')
 const pkg = require('./package.json')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const plugins = [new ExtractTextPlugin({ filename: '/css/[name].css' })]
+const plugins = [new ExtractTextPlugin({ filename: '/css/interbit.css' })]
 
 const libraryName = pkg.name
 
@@ -28,13 +28,6 @@ const config = {
         exclude: /(node_modules|bower_components)/
       },
       {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
-      },
-      {
         test: /\.(png|svg)$/,
         use: [
           {
@@ -48,6 +41,23 @@ const config = {
             }
           }
         ]
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                publicPath: '/'
+              }
+            },
+            {
+              loader: 'sass-loader'
+            }
+          ]
+        })
       }
     ]
   },

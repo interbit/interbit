@@ -42,5 +42,4 @@ export { renderInputNew } from './components/ReduxForm/IbField'
 export { default as IbField } from './components/ReduxForm/IbField'
 export { renderInput } from './help/reduxForm/reduxForm'
 
-// SASS
 export { default as ibWebStyles } from './scss/interbit.scss'

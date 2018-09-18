@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.50"></a>
+## [0.4.50](https://github.com/interbit/interbit/compare/v0.4.49...v0.4.50) (2018-09-18)
+
+
+
+
+**Note:** Version bump only for package interbit-test
+
 <a name="0.4.49"></a>
 ## [0.4.49](https://github.com/interbit/interbit/compare/v0.4.48...v0.4.49) (2018-09-17)
 

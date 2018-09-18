@@ -1,6 +1,6 @@
 {
   "name": "interbit-ui-components",
-  "version": "0.4.49",
+  "version": "0.4.50",
   "description": "React components helpful for working with Interbit",
   "main": "dist/interbit-ui-components.js",
   "files": [

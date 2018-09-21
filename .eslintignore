@@ -16,3 +16,5 @@ ops
 vendor/interbit
 **/*.browser.js
 **/*.server.js
+**/coverage-total/*
+packages/utils/src/templates

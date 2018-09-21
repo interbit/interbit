@@ -15,7 +15,8 @@
     "test": "npm run lint && lerna run --parallel test -- -- --coverage",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "release": "npm run build:modules && lerna publish --force-publish=* --exact --conventional-commits"
+    "release": "npm run build:modules && lerna publish --force-publish=* --exact --conventional-commits",
+    "coverage": "npm run test && lerna run --scope utils coverage"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",

@@ -4,12 +4,10 @@ import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
 import PropTypes from 'prop-types'
 import { interbitRedux } from 'interbit-ui-tools'
-import { LinkBarSlack } from 'interbit-ui-components'
 import uuid from 'uuid'
 
 import ProjectDetailsForm from '../components/ProjectDetailsForm'
 import { actionCreators } from '../interbit/my-projects/actions'
-import urls from '../constants/urls'
 import chairmanmeow from '../assets/chairmanmeow.jpg'
 import { PUBLIC, PRIVATE, PRIVATE_PROJECT } from '../constants/chainAliases'
 
@@ -105,12 +103,6 @@ export class NewProject extends Component {
             <div className="app-project-details">
               <ProjectDetailsForm form="new" onSubmit={this.submit} />
             </div>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col {...colLayout}>
-            <LinkBarSlack to={urls.SUPPORT_SLACK} />
           </Col>
         </Row>
       </Grid>

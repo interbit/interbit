@@ -5,10 +5,9 @@ import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { interbitRedux } from 'interbit-ui-tools'
-import { LinkBar, LinkBarSlack } from 'interbit-ui-components'
+import { LinkBar } from 'interbit-ui-components'
 
 import { PRIVATE } from '../constants/chainAliases'
-import urls from '../constants/urls'
 import ProjectItem from '../components/ProjectItem'
 import ProjectBar from '../components/ProjectBar'
 
@@ -160,11 +159,6 @@ export class ProjectList extends Component {
                   launchUrl={project.launchUrl}
                 />
               ))}
-            </Col>
-          </Row>
-          <Row>
-            <Col {...colLayout}>
-              <LinkBarSlack to={urls.SUPPORT_SLACK} />
             </Col>
           </Row>
         </div>

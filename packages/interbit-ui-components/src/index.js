@@ -32,7 +32,6 @@ export { default as IconButton } from './components/UIKit/IconButton'
 export { default as LaunchPad } from './components/UIKit/LaunchPad'
 export { default as LaunchPadRow } from './components/UIKit/LaunchPadRow'
 export { default as LinkBar } from './components/UIKit/LinkBar'
-export { default as LinkBarSlack } from './components/UIKit/LinkBarSlack'
 export { default as LinkWrapper } from './components/UIKit/LinkWrapper'
 export { default as ModalWrapper } from './components/UIKit/ModalWrapper'
 

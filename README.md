@@ -11,7 +11,7 @@ Disclaimer
 
 The Interbit Platform is currently a test environment provided for information, education, and evaluation purposes. There is no guarantee of data preservation, uptime, stability, or security - the environment is provided "as is" with no express or implied warranty.
 
-We will be updating this environment regularly - adding functionality, applications, and addressing issues. Our Slack community is open for reporting issues, feedback, and announcements of updates to the platform.
+We will be updating this environment regularly - adding functionality, applications, and addressing issues.
 
 #### Version Requirements
 To develop Interbit applications, your development environment will need the following software:

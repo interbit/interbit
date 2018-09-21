@@ -4,13 +4,11 @@ import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
 import PropTypes from 'prop-types'
 import { interbitRedux } from 'interbit-ui-tools'
-import { LinkBarSlack } from 'interbit-ui-components'
 import uuid from 'uuid'
 
 import ProjectDetailsForm from '../components/ProjectDetailsForm'
 import { actionCreators } from '../interbit/my-projects/actions'
-import urls from '../constants/urls'
-import chairmanmeow from '../assets/chairmanmeow.jpg'
+import placeholder from '../assets/placeholder.svg'
 import { PUBLIC, PRIVATE, PRIVATE_PROJECT } from '../constants/chainAliases'
 
 const {
@@ -98,19 +96,13 @@ export class NewProject extends Component {
         <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
             <img
-              src={chairmanmeow}
+              src={placeholder}
               alt="App Icon"
               className="app-project-icon"
             />
             <div className="app-project-details">
               <ProjectDetailsForm form="new" onSubmit={this.submit} />
             </div>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col {...colLayout}>
-            <LinkBarSlack to={urls.SUPPORT_SLACK} />
           </Col>
         </Row>
       </Grid>

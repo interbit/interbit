@@ -39,20 +39,6 @@
     box-shadow: 0 8px 32px 0 rgba(204, 204, 204, 0.5);
   }
 
-  &.slack {
-    background: $slack-purple;
-    color: $ib-white;
-    p {
-      color: $ib-white;
-    }
-  }
-
-  &.slack:hover,
-  &.slack:focus,
-  &.slack:active {
-    color: $ib-white;
-  }
-
   &.blue {
     background: $ib-blue;
     border-color: $ib-blue;

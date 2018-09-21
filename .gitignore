@@ -11,6 +11,7 @@ _book
 
 # testing
 /coverage
+**/coverage-total
 .nyc_output
 
 # production

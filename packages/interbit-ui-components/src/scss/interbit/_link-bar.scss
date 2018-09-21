@@ -16,6 +16,9 @@
   }
 
   .media-body {
+    h3 {
+      color: $ib-blue;
+    }
     p {
       color: $ib-blue;
     }
@@ -55,7 +58,7 @@
     border-color: $ib-blue;
     color: $ib-white;
 
-    p {
+    p, h3 {
       color: $ib-white;
     }
   }

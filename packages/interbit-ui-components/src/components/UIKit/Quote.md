@@ -4,6 +4,6 @@ Quote example:
   content="Andouille bacon venison jerky, brisket tri-tip short ribs turducken."
   author="Jane Doe"
   publication="Publication name"
-  image="placeholder.png"
+  image="placeholder.svg"
 />
 ```

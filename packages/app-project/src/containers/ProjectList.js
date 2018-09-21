@@ -11,7 +11,7 @@ import { PRIVATE } from '../constants/chainAliases'
 import ProjectItem from '../components/ProjectItem'
 import ProjectBar from '../components/ProjectBar'
 
-import chairmanmeow from '../assets/chairmanmeow.jpg'
+import placeholder from '../assets/placeholder.svg'
 
 const { selectors } = interbitRedux
 
@@ -127,26 +127,26 @@ export class ProjectList extends Component {
               <LinkBar
                 title="Create a New Project"
                 content="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                image={chairmanmeow}
+                image={placeholder}
                 to="/new-project"
                 className="dotted"
               />
               <ProjectBar
                 name="Project name"
-                image={chairmanmeow}
+                image={placeholder}
                 isDeployed
                 launchUrl="#"
               />
               <ProjectBar
                 name="Project name"
-                image={chairmanmeow}
+                image={placeholder}
                 isDeployed
                 isPassing
                 launchUrl="#"
               />
               <ProjectBar
                 name="Project name"
-                image={chairmanmeow}
+                image={placeholder}
                 isDeployed={false}
                 launchUrl="#"
               />
@@ -155,7 +155,7 @@ export class ProjectList extends Component {
                 <ProjectBar
                   key={project.projectAlias}
                   name={project.name}
-                  image={chairmanmeow}
+                  image={placeholder}
                   launchUrl={project.launchUrl}
                 />
               ))}

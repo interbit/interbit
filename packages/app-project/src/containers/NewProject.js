@@ -8,7 +8,7 @@ import uuid from 'uuid'
 
 import ProjectDetailsForm from '../components/ProjectDetailsForm'
 import { actionCreators } from '../interbit/my-projects/actions'
-import chairmanmeow from '../assets/chairmanmeow.jpg'
+import placeholder from '../assets/placeholder.svg'
 import { PUBLIC, PRIVATE, PRIVATE_PROJECT } from '../constants/chainAliases'
 
 const {
@@ -96,7 +96,7 @@ export class NewProject extends Component {
         <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
             <img
-              src={chairmanmeow}
+              src={placeholder}
               alt="App Icon"
               className="app-project-icon"
             />

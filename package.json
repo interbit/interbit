@@ -16,7 +16,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "release": "npm run build:modules && lerna publish --force-publish=* --exact --conventional-commits",
-    "coverage": "lerna run --scope utils coverage"
+    "coverage": "npm run test && lerna run --scope utils coverage"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",

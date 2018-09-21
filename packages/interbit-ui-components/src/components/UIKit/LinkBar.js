@@ -18,7 +18,7 @@ export default class LinkBar extends Component {
      */
     content: PropTypes.string.isRequired,
     /**
-     * An image
+     * An image that provides context for the call-to-action
      */
     image: PropTypes.string,
     /**

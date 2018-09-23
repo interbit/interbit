@@ -1,0 +1,41 @@
+.ibweb-activity-bar {
+  padding: 0 16px 16px 16px;
+  min-width: 320px;
+  max-width: 600px;
+  color: #000;
+  font-size: 12px;
+
+  a {
+    color: #007aaf;
+    opacity: 100% !important;
+
+    .title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+    margin-right: 16px;
+  }
+
+  .metadata {
+    font-weight: 400;
+    opacity: 50%;
+    border-bottom: 1px solid #fff;
+    margin-bottom: 16px;
+
+    .date-time {
+      margin-left: 16px;
+    }
+  }
+
+  .body {
+    opacity: 85%;
+    line-height: 120%;
+    font-weight: 400;
+  }
+}

@@ -57,7 +57,7 @@ class ActivityBar extends React.PureComponent {
 
     return (
       <div className="ibweb-activity-bar">
-        <div className="title">
+        <div className="metadata">
           {breadcrumb.map(item => (
             <a href="#" onClick={e => this.handleBreadcrumbClick(e, item)}>
               {item.title}
@@ -67,22 +67,22 @@ class ActivityBar extends React.PureComponent {
             {moment(timestamp).format(dateTimeFormat)}
           </div>
         </div>
+        {avatar ? (
+          <img src={avatar} alt="" />
+        ) : (
+          <img src="default.png" alt="" />
+        )}
+        <a href="#" className="title" onClick={() => this.handleUserClick()}>
+          {firstName} {lastName}
+        </a>
         <div className="body">
-          {avatar ? (
-            <img src={avatar} alt="" />
-          ) : (
-            <img src="default.png" alt="" />
-          )}
-          <a href="#" onClick={() => this.handleUserClick()}>
-            {firstName} {lastName}
-          </a>
           {change ? (
             <span>
               Changed {change.fieldName} from {change.oldValue} to{' '}
-              {change.newValue}.
+              {change.newValue}
             </span>
           ) : (
-            <span>{comment}</span>
+            { comment }
           )}
         </div>
       </div>

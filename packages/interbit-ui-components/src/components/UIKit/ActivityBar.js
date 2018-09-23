@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 
 class ActivityBar extends React.PureComponent {
   static propTypes = {
@@ -31,9 +32,61 @@ class ActivityBar extends React.PureComponent {
     comment: ''
   }
 
+  handleBreadcrumbClick = (e, breadcrumb) => {
+    e.preventDefault()
+    breadcrumb.clickHandler()
+  }
+
+  handleUserClick = e => {
+    e.preventDefault()
+    const { userClickHandler } = this.props
+    userClickHandler()
+  }
+
   render = () => {
-    const { firstName, lastName, avatar, userClickHandler, breadcrumb, timestamp, dateTimeFormat, change, comment } = this.props
-    return <div />
+    const {
+      firstName,
+      lastName,
+      avatar,
+      breadcrumb,
+      timestamp,
+      dateTimeFormat,
+      change,
+      comment
+    } = this.props
+
+    return (
+      <div className="ibweb-activity-bar">
+        <div className="title">
+          {breadcrumb.map(item => (
+            <a href="#" onClick={e => this.handleBreadcrumbClick(e, item)}>
+              {item.title}
+            </a>
+          ))}
+          <div className="date-time">
+            {moment(timestamp).format(dateTimeFormat)}
+          </div>
+        </div>
+        <div className="body">
+          {avatar ? (
+            <img src={avatar} alt="" />
+          ) : (
+            <img src="default.png" alt="" />
+          )}
+          <a href="#" onClick={() => this.handleUserClick()}>
+            {firstName} {lastName}
+          </a>
+          {change ? (
+            <span>
+              Changed {change.fieldName} from {change.oldValue} to{' '}
+              {change.newValue}.
+            </span>
+          ) : (
+            <span>{comment}</span>
+          )}
+        </div>
+      </div>
+    )
   }
 }
 

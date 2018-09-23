@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "moment": "^2.20.1",
+    "moment": "^2.22.2",
     "react-bootstrap": "^0.32.1",
     "react-dates": "^16.0.1",
     "react-helmet": "^5.2.0",

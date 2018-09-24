@@ -22,3 +22,5 @@ To develop Interbit applications, your development environment will need the fol
 ## To get started, make a new Interbit site
 
 See our [Getting Started Guide](https://docs.interbit.io/getting-started/).
+
+.

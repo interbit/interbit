@@ -1,0 +1,70 @@
+// Activity-Bar
+.ibweb-activity-bar {
+  background-color: $ib-grey;
+  min-width: 320px;
+  max-width: 600px;
+  border-radius: $border-radius-sm;
+  margin: 0 0 $margin-sm 0;
+
+  .meta-data {
+    display: flex;
+    justify-content: space-between;
+    padding: $margin-xx-sm $margin-sm;
+
+    span {
+      font-size: $font-size-xx-sm;
+      font-weight: 400;
+    }
+    .activity-bar-breadcrumb {
+      color: $ib-dark-blue;
+      display: block;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 50%;
+    }
+    .activity-bar-timestamp {
+      color: $ib-opaque-black;
+      display: block;
+      width: 50%;
+      text-align: right;
+    }
+  }
+
+  .ibweb-divider {
+    width: 100%;
+    border-top: 1px solid $ib-white;
+  }
+
+  .content {
+    padding: $margin-sm;
+    padding-top: 0;
+    display: grid;
+    grid-template-columns: 56px minmax(232px, 512px);
+
+    img {
+      height: 40px;
+      width: 40px;
+      margin-right: $margin-sm;
+      cursor: pointer;
+    }
+
+    .name {
+      color: $ib-dark-blue;
+      font-size: $font-size-x-sm;
+      font-weight: 700;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      cursor: pointer;
+      margin-bottom: $margin-xx-sm;
+    }
+
+    .body {
+      color: rgba(0, 0, 0, 0.85);
+      font-size: $font-size-xx-sm;
+    }
+  }
+}
+
+

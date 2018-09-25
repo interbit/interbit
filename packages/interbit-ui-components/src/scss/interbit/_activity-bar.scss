@@ -15,14 +15,28 @@
       font-size: $font-size-xx-sm;
       font-weight: 400;
     }
+
     .activity-bar-breadcrumb {
+      list-style: none;
       color: $ib-dark-blue;
       display: block;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
       width: 50%;
+
+      li {
+        display: inline;
+        font-size: 12px;
+      }
+
+      li + li:before {
+        padding: 4px;
+        color: black;
+        content: ">";
+      }
     }
+
     .activity-bar-timestamp {
       color: $ib-opaque-black;
       display: block;
@@ -66,5 +80,3 @@
     }
   }
 }
-
-

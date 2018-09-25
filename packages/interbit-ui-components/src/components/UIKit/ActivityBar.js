@@ -35,6 +35,7 @@ export default class ActivityBar extends Component {
       firstName,
       secondName,
       avatar,
+      breadcrumb,
       comment,
       timestamp,
       dateTimeFormat,
@@ -44,7 +45,11 @@ export default class ActivityBar extends Component {
     return (
       <div className="ibweb-activity-bar">
         <div className="meta-data">
-          <span className="activity-bar-breadcrumb">123457890</span>
+          <ul className="activity-bar-breadcrumb">
+            {breadcrumb.map(item => (
+              <li>{item.title}</li>
+            ))}
+          </ul>
           <span className="activity-bar-timestamp">
             {moment(timestamp).format(dateTimeFormat)}
           </span>

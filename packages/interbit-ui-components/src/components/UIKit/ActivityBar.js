@@ -43,6 +43,11 @@ export default class ActivityBar extends Component {
       change,
       userClickHandler
     } = this.props
+    // For displaying timestamp in user's local zone, assuming original date time to be in UTC
+    // const dateUtc = moment.utc(timestamp)
+    // const localDate = dateUtc.local()
+    // const localTimeStamp = localDate.format(dateTimeFormat)
+    const displayTimeStamp = moment(new Date(timestamp)).format(dateTimeFormat)
     return (
       <div className="ibweb-activity-bar">
         <div className="meta-data">
@@ -53,9 +58,7 @@ export default class ActivityBar extends Component {
               </li>
             ))}
           </ul>
-          <span className="activity-bar-timestamp">
-            {moment(new Date(timestamp)).format(dateTimeFormat)}
-          </span>
+          <span className="activity-bar-timestamp">{displayTimeStamp}</span>
         </div>
         <Divider />
         <div className="content">

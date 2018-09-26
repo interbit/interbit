@@ -6,7 +6,7 @@ Activity Bar example:
     firstName="John"
     secondName="Doe"
     timestamp="Tue Sep 25 18:19:57 2018"
-    dateTimeFormat="MMM-Do-YY, h:mm:ss a"
+    dateTimeFormat="MMM Do YY, h:mm:ss a"
     change={{
       fieldName: "test",
       oldVal: "123",

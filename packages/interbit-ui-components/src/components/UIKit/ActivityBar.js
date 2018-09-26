@@ -28,7 +28,8 @@ export default class ActivityBar extends Component {
 
   static defaultProps = {
     avatar: undefined,
-    comment: ''
+    comment: '',
+    change: undefined
   }
   render() {
     const {
@@ -46,12 +47,14 @@ export default class ActivityBar extends Component {
       <div className="ibweb-activity-bar">
         <div className="meta-data">
           <ul className="activity-bar-breadcrumb">
-            {breadcrumb.map(item => (
-              <li>{item.title}</li>
+            {breadcrumb.map((item, index) => (
+              <li key={`item-${index}`}>
+                <a onClick={item.clickHandler}>{item.title}</a>
+              </li>
             ))}
           </ul>
           <span className="activity-bar-timestamp">
-            {moment(timestamp).format(dateTimeFormat)}
+            {moment(new Date(timestamp)).format(dateTimeFormat)}
           </span>
         </div>
         <Divider />
@@ -62,9 +65,9 @@ export default class ActivityBar extends Component {
             onClick={userClickHandler}
           />
           <div>
-            <div className="name" onClick={userClickHandler}>
+            <span className="name" onClick={userClickHandler}>
               {firstName} {secondName}
-            </div>
+            </span>
             <div className="body">
               {change && (
                 <div>

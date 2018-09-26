@@ -20,6 +20,7 @@ import Quote from '../components/UIKit/Quote'
 import TitledList from '../components/UIKit/TitledList'
 import Markdown from '../components/Markdown'
 import placeholder from '../assets/placeholder.svg'
+import ActivityBar from '../components/UIKit/ActivityBar'
 
 configure({ adapter: new Adapter() })
 
@@ -326,5 +327,43 @@ describe('<TitledList />', () => {
     }
 
     countChildren(<TitledList {...props} />, 'li', props.items.length)
+  })
+})
+
+describe('<ActivityBar />', () => {
+  const props = {}
+  beforeEach(() => {
+    props.firstName = 'foo'
+    props.secondName = 'bar'
+    props.breadcrumb = [{ title: 'foo' }, { title: 'bar' }]
+    props.userClickHandler = jest.fn()
+    props.timestamp = 'Tue Sep 25 18:19:57 2018'
+    props.dateTimeFormat = 'l'
+  })
+
+  it('renders a breadcrumb', () => {
+    countChildren(<ActivityBar {...props} />, 'ul li', props.breadcrumb.length)
+  })
+
+  it('renders a timestamp in specified format', () => {
+    countChildren(
+      <ActivityBar {...props} />,
+      '.meta-data .activity-bar-timestamp',
+      1
+    )
+  })
+
+  it('renders an avatar if one is provided', () => {
+    countChildren(<ActivityBar {...props} avatar={placeholder} />, 'img', 1)
+  })
+
+  it('renders the username', () => {
+    countChildren(<ActivityBar {...props} />, '.content .name', 1)
+  })
+
+  it('renders the correct type of text block', () => {
+    const change = { fieldName: 'doo', oldVal: 'foo', newVal: 'bar' }
+    countChildren(<ActivityBar {...props} comment="foo" />, '.body div', 1)
+    countChildren(<ActivityBar {...props} change={change} />, '.body div', 1)
   })
 })

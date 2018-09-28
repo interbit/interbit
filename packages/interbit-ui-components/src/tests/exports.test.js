@@ -54,6 +54,10 @@ describe('module exports expected components', () => {
     assert.ok(api.Card)
   })
 
+  it('exports ActivityBar component', () => {
+    assert.ok(api.ActivityBar)
+  })
+
   it('exports ConnectingTo component', () => {
     assert.ok(api.ConnectingTo)
   })

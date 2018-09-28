@@ -4,6 +4,7 @@ import { configure, shallow } from 'enzyme'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+import ActivityBar from '../components/UIKit/ActivityBar'
 import CallToAction from '../components/UIKit/CallToAction'
 import Card from '../components/UIKit/Card'
 import ConnectingTo from '../components/UIKit/ConnectingTo'
@@ -27,6 +28,42 @@ const countChildren = (parent, child, count) => {
   const wrapper = shallow(parent)
   expect(wrapper.find(child).length).toBe(count)
 }
+
+describe('<ActivityBar />', () => {
+  const props = {
+    breadcrumb: [
+      {
+        title: 'First Level',
+        clickHandler: () => {}
+      }
+    ],
+    dateTimeFormat: 'YYYY MM DD',
+    firstName: 'John',
+    lastName: 'Doe',
+    timestamp: 1537852467,
+    userClickHandler: () => {}
+  }
+
+  it('renders a bredcrumb', () => {})
+
+  it('It renders a timestamp in the specified format', () => {
+    countChildren(<ActivityBar {...props} />, 'div.date-time', 1)
+  })
+
+  it('It renders an avatar if one is provided', () => {
+    Object.assign(props, { avatar: 'string' })
+    countChildren(<ActivityBar {...props} />, 'img', 1)
+  })
+
+  it('It renders the username', () => {
+    countChildren(<ActivityBar {...props} />, 'a.title', 1)
+  })
+
+  it('It renders the correct type of text block', () => {
+    Object.assign(props, { comment: 'Some fake comment' })
+    countChildren(<ActivityBar {...props} />, 'div.body > span.comment', 1)
+  })
+})
 
 describe('<CallToAction />', () => {
   const props = {}

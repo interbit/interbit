@@ -5,8 +5,8 @@ Activity Bar example:
   <ActivityBar
     firstName="John"
     secondName="Doe"
-    timestamp="Tue Sep 25 18:19:57 2018"
-    dateTimeFormat="MMM Do YY, h:mm:ss a"
+    timestamp={1538117894366}
+    dateTimeFormat="lll"
     change={{
       fieldName: "test",
       oldVal: "123",

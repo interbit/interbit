@@ -16,7 +16,8 @@ export default class ActivityBar extends Component {
         clickHandler: PropTypes.func
       })
     ).isRequired,
-    timestamp: PropTypes.string.isRequired,
+    timestamp: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
     dateTimeFormat: PropTypes.string.isRequired,
     change: PropTypes.shape({
       fieldName: PropTypes.string,
@@ -44,10 +45,9 @@ export default class ActivityBar extends Component {
       userClickHandler
     } = this.props
     // For displaying timestamp in user's local zone, assuming original date time to be in UTC
-    // const dateUtc = moment.utc(timestamp)
-    // const localDate = dateUtc.local()
-    // const localTimeStamp = localDate.format(dateTimeFormat)
-    const displayTimeStamp = moment(new Date(timestamp)).format(dateTimeFormat)
+    const dateUtc = moment.utc(timestamp)
+    const localDate = dateUtc.local()
+    const localTimeStamp = localDate.format(dateTimeFormat)
     return (
       <div className="ibweb-activity-bar">
         <div className="meta-data">
@@ -58,7 +58,7 @@ export default class ActivityBar extends Component {
               </li>
             ))}
           </ul>
-          <span className="activity-bar-timestamp">{displayTimeStamp}</span>
+          <span className="activity-bar-timestamp">{localTimeStamp}</span>
         </div>
         <Divider />
         <div className="content">

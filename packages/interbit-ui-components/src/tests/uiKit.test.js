@@ -1,6 +1,6 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
-import { configure, shallow } from 'enzyme'
+import { configure, shallow, render } from 'enzyme'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
@@ -337,8 +337,8 @@ describe('<ActivityBar />', () => {
     props.secondName = 'bar'
     props.breadcrumb = [{ title: 'foo' }, { title: 'bar' }]
     props.userClickHandler = jest.fn()
-    props.timestamp = 'Tue Sep 25 18:19:57 2018'
-    props.dateTimeFormat = 'l'
+    props.timestamp = 1538117894366
+    props.dateTimeFormat = 'lll'
   })
 
   it('renders a breadcrumb', () => {
@@ -351,6 +351,18 @@ describe('<ActivityBar />', () => {
       '.meta-data .activity-bar-timestamp',
       1
     )
+    expect(
+      render(
+        <ActivityBar
+          firstName="foo"
+          secondName="bar"
+          breadcrumb={[{ title: 'foo' }, { title: 'bar' }]}
+          userClickHandler={() => jest.fn()}
+          timestamp={1538117894366}
+          dateTimeFormat="lll"
+        />
+      ).text()
+    ).toContain('Sep 28, 2018 12:28 PM')
   })
 
   it('renders an avatar if one is provided', () => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import Divider from './Divider'
-import defaultAvatar from '../../assets/icons/default-avatar.png'
+import defaultAvatar from '../../assets/icons/default-avatar.svg'
 
 export default class ActivityBar extends Component {
   static propTypes = {

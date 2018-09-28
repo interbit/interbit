@@ -29,39 +29,79 @@ const countChildren = (parent, child, count) => {
   expect(wrapper.find(child).length).toBe(count)
 }
 
-describe('<ActivityBar />', () => {
-  const props = {
-    breadcrumb: [
-      {
-        title: 'First Level',
-        clickHandler: () => {}
-      }
-    ],
-    dateTimeFormat: 'YYYY MM DD',
-    firstName: 'John',
-    lastName: 'Doe',
-    timestamp: 1537852467,
-    userClickHandler: () => {}
-  }
+const equalInnerText = (parent, child, text) => {
+  const wrapper = shallow(parent)
+  expect(wrapper.find(child).text()).toEqual(text)
+}
 
-  it('renders a bredcrumb', () => {})
+const hasPropertyEqualTo = (parent, child, property, value) => {
+  const wrapper = shallow(parent)
+  expect(wrapper.find(child).prop(property)).toEqual(value)
+}
+
+describe('<ActivityBar />', () => {
+  let props = {}
+  beforeEach(() => {
+    props = {}
+    Object.assign(props, {
+      breadcrumb: [
+        {
+          title: 'First Level',
+          clickHandler: () => {}
+        }
+      ],
+      dateTimeFormat: 'YYYY MM DD',
+      firstName: 'John',
+      lastName: 'Doe',
+      timestamp: 1537852467,
+      userClickHandler: () => {}
+    })
+  })
+
+  it('renders a bredcrumb', () => {
+    countChildren(<ActivityBar {...props} />, 'div.breadcrumbs', 1)
+  })
 
   it('It renders a timestamp in the specified format', () => {
-    countChildren(<ActivityBar {...props} />, 'div.date-time', 1)
+    equalInnerText(<ActivityBar {...props} />, 'div.date-time', '2018 09 25')
   })
 
   it('It renders an avatar if one is provided', () => {
-    Object.assign(props, { avatar: 'string' })
-    countChildren(<ActivityBar {...props} />, 'img', 1)
+    Object.assign(props, { avatar: 'path_to_image' })
+    hasPropertyEqualTo(
+      <ActivityBar {...props} />,
+      'div.body div.avatar img',
+      'src',
+      'path_to_image'
+    )
   })
 
   it('It renders the username', () => {
-    countChildren(<ActivityBar {...props} />, 'a.title', 1)
+    equalInnerText(<ActivityBar {...props} />, 'div.title a', 'John Doe')
   })
 
-  it('It renders the correct type of text block', () => {
+  it('It renders the correct type of text block for comment', () => {
     Object.assign(props, { comment: 'Some fake comment' })
-    countChildren(<ActivityBar {...props} />, 'div.body > span.comment', 1)
+    equalInnerText(
+      <ActivityBar {...props} />,
+      'div.body div.comment',
+      'Some fake comment'
+    )
+  })
+
+  it('It renders the correct type of text block for change', () => {
+    Object.assign(props, {
+      change: {
+        fieldName: 'FieldName',
+        oldVal: 'old value',
+        newVal: 'new value'
+      }
+    })
+    equalInnerText(
+      <ActivityBar {...props} />,
+      'div.body div.comment',
+      'Changed (FieldName) from (old value) to (new value)'
+    )
   })
 })
 

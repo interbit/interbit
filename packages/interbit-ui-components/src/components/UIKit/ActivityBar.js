@@ -86,29 +86,24 @@ class ActivityBar extends React.PureComponent {
             {moment.unix(timestamp).format(dateTimeFormat)}
           </div>
         </div>
+
         <div className="separator" />
 
         <div className="body">
           <div className="avatar">
-            {avatar ? (
-              <img src={avatar} alt="" />
-            ) : (
-              <img src={defaultProfileImage} alt="" />
-            )}
+            <img src={avatar || defaultProfileImage} alt="" />
           </div>
           <div className="title">
             <a href="#" onClick={() => this.handleUserClick()}>
               {firstName} {lastName}
             </a>
           </div>
-          {comment ? (
-            <div className="comment">{comment}</div>
-          ) : (
-            <div className="change">
-              Changed ({change.fieldName}) from ({change.oldVal}) to (
-              {change.newVal})
-            </div>
-          )}
+          <div className="comment">
+            {comment ||
+              `Changed (${change.fieldName}) from (${change.oldVal}) to (${
+                change.newVal
+              })`}
+          </div>
         </div>
       </div>
     )

@@ -2,14 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
+import defaultProfileImage from '../../../src/assets/icons/icon_default_profile_picture.png'
+
 /**
- * The `ActivityBar` displays the following information:
- * - The name of the user who made the change.
- * - An avatar of the user who made the change. If no avatar is provided, a default user icon is displayed.
- * - The nature of the change, e.g. `Changed (field name) from (old value) to (new value)` or a comment as a block of text.
- * - A timestamp of the change, displayed in a user-friendly [Moment.js](https://momentjs.com/) format, specified by the parent component.
- * - Bonus points: implement a solution that displays the timestamp in the user's local timezone
- * - A breadcrumb showing where the changed field exists in the larger context of the structured piece of data, e.g. `UUID > DataFieldName`.
+ * The ActivityBar is a UI component that illustrates a single change made to a structured piece of data by a user.
  */
 class ActivityBar extends React.PureComponent {
   static propTypes = {
@@ -74,34 +70,44 @@ class ActivityBar extends React.PureComponent {
     return (
       <div className="ibweb-activity-bar">
         <div className="metadata">
-          {breadcrumb.map(item => (
-            <a
-              key={item.title}
-              href="#"
-              onClick={e => this.handleBreadcrumbClick(e, item)}>
-              {item.title}
-            </a>
-          ))}
+          <div className="breadcrumbs">
+            {breadcrumb
+              .map(item => (
+                <a
+                  key={item.title}
+                  href="#"
+                  onClick={e => this.handleBreadcrumbClick(e, item)}>
+                  {item.title}
+                </a>
+              ))
+              .reduce((prev, curr) => [prev, ' > ', curr])}
+          </div>
           <div className="date-time">
             {moment.unix(timestamp).format(dateTimeFormat)}
           </div>
         </div>
-        {avatar ? (
-          <img src={avatar} alt="" />
-        ) : (
-          <img src="default.png" alt="" />
-        )}
-        <a href="#" className="title" onClick={() => this.handleUserClick()}>
-          {firstName} {lastName}
-        </a>
+        <div className="separator" />
+
         <div className="body">
-          {change ? (
-            <span className="change">
-              Changed {change.fieldName} from {change.oldValue} to{' '}
-              {change.newValue}
-            </span>
+          <div className="avatar">
+            {avatar ? (
+              <img src={avatar} alt="" />
+            ) : (
+              <img src={defaultProfileImage} alt="" />
+            )}
+          </div>
+          <div className="title">
+            <a href="#" onClick={() => this.handleUserClick()}>
+              {firstName} {lastName}
+            </a>
+          </div>
+          {comment ? (
+            <div className="comment">{comment}</div>
           ) : (
-            <span className="comment">{comment}</span>
+            <div className="change">
+              Changed ({change.fieldName}) from ({change.oldVal}) to (
+              {change.newVal})
+            </div>
           )}
         </div>
       </div>

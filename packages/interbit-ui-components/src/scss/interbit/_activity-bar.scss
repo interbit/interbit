@@ -1,41 +1,69 @@
 .ibweb-activity-bar {
-  padding: 0 16px 16px 16px;
   min-width: 320px;
   max-width: 600px;
   color: #000;
   font-size: 12px;
+  background-color: #F7F7F7;
 
   a {
-    color: #007aaf;
-    opacity: 100% !important;
-
-    .title {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
+    color: rgba(0, 122, 255, 1) !important;
   }
 
-  img {
-    width: 40px;
-    height: 40px;
-    margin-right: 16px;
+  .title {
+    display: flex;
+    margin-bottom: 4px;
+
+    a {
+      flex:1;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 
   .metadata {
+    display: flex;
+    color: rgba(0, 0, 0, 0.5);
     font-weight: 400;
-    opacity: 50%;
-    border-bottom: 1px solid #fff;
-    margin-bottom: 16px;
+    padding: 8px 16px;
+
+    .breadcrumbs {
+      flex:1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      float: left;
+    }
 
     .date-time {
+      white-space: nowrap;
       margin-left: 16px;
+      float: right;
     }
   }
 
+  .separator {
+    height: 1px;
+    width: 100%;
+    background-color: #fff;
+  }
+
   .body {
-    opacity: 85%;
+    color: rgba(0, 0, 0, 0.85);
     line-height: 120%;
     font-weight: 400;
+    padding: 16px 16px 16px 72px;
+
+    .avatar {
+      width: 40px;
+      margin-left: -56px;
+      float: left;
+
+      img {
+        width: 100%;
+      }
+    }
   }
 }

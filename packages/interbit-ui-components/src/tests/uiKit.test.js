@@ -3,6 +3,7 @@ import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow, render } from 'enzyme'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 import CallToAction from '../components/UIKit/CallToAction'
 import Card from '../components/UIKit/Card'
@@ -346,6 +347,10 @@ describe('<ActivityBar />', () => {
   })
 
   it('renders a timestamp in specified format', () => {
+    const dateUtc = moment.utc(props.timestamp)
+    const localDate = dateUtc.local()
+    const localTimeStamp = localDate.format(props.dateTimeFormat)
+
     countChildren(
       <ActivityBar {...props} />,
       '.meta-data .activity-bar-timestamp',
@@ -362,7 +367,7 @@ describe('<ActivityBar />', () => {
           dateTimeFormat="lll"
         />
       ).text()
-    ).toContain('Sep 28, 2018 12:28 PM')
+    ).toContain(localTimeStamp)
   })
 
   it('renders an avatar if one is provided', () => {

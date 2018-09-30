@@ -3,6 +3,7 @@ import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow } from 'enzyme'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 import ActivityBar from '../components/UIKit/ActivityBar'
 import CallToAction from '../components/UIKit/CallToAction'
@@ -63,7 +64,14 @@ describe('<ActivityBar />', () => {
   })
 
   it('It renders a timestamp in the specified format', () => {
-    equalInnerText(<ActivityBar {...props} />, 'div.date-time', '2018 09 25')
+    const formattedTimestamp = moment
+      .unix(props.timestamp)
+      .format(props.dateTimeFormat)
+    equalInnerText(
+      <ActivityBar {...props} />,
+      'div.date-time',
+      formattedTimestamp
+    )
   })
 
   it('It renders an avatar if one is provided', () => {

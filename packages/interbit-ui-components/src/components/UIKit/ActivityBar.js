@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import defaultProfileImage from '../../../src/assets/icons/icon_default_profile_picture.png'
+import defaultProfileImage from '../../../src/assets/icons/icon_default_profile_picture.svg'
 
 /**
  * The ActivityBar is a UI component that illustrates a single change made to a structured piece of data by a user.

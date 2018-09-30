@@ -1,12 +1,14 @@
+@import "variables";
+
 .ibweb-activity-bar {
   min-width: 320px;
   max-width: 600px;
-  color: #000;
   font-size: 12px;
-  background-color: #F7F7F7;
+  color: $ib-black;
+  background-color: $ib-grey;
 
   a {
-    color: rgba(0, 122, 255, 1) !important;
+    color: $ib-anchor-blue !important;
   }
 
   .title {
@@ -14,7 +16,7 @@
     margin-bottom: 4px;
 
     a {
-      flex:1;
+      flex: 1;
       font-size: 14px;
       font-weight: 700;
       white-space: nowrap;
@@ -25,12 +27,12 @@
 
   .metadata {
     display: flex;
-    color: rgba(0, 0, 0, 0.5);
+    color: $ib-black-50;
     font-weight: 400;
     padding: 8px 16px;
 
     .breadcrumbs {
-      flex:1;
+      flex: 1;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -47,11 +49,11 @@
   .separator {
     height: 1px;
     width: 100%;
-    background-color: #fff;
+    background-color: $ib-white;
   }
 
   .body {
-    color: rgba(0, 0, 0, 0.85);
+    color: $ib-black-85;
     line-height: 120%;
     font-weight: 400;
     padding: 16px 16px 16px 72px;

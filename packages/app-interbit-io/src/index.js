@@ -11,7 +11,6 @@ import 'interbit-ui-components/dist/css/interbit.css'
 import App from './App'
 
 import ScrollToTop from './components/ScrollToTop'
-import registerServiceWorker from './registerServiceWorker'
 import reducers from './redux'
 
 const store = createStore(reducers, composeWithDevTools())
@@ -27,5 +26,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 )
-
-registerServiceWorker()

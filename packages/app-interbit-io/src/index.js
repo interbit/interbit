@@ -11,6 +11,7 @@ import 'interbit-ui-components/dist/css/interbit.css'
 import App from './App'
 
 import ScrollToTop from './components/ScrollToTop'
+import unregisterServiceWorker from './unregisterServiceWorker'
 import reducers from './redux'
 
 const store = createStore(reducers, composeWithDevTools())
@@ -27,11 +28,4 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-// Unregister existing service workers in the client. See Issue #725
-if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then(registrations => {
-    for (const registration of registrations) {
-      registration.unregister()
-    }
-  })
-}
+unregisterServiceWorker()

@@ -14,6 +14,7 @@ import 'interbit-ui-components/dist/css/interbit.css'
 import App from './App'
 
 import { PUBLIC, PRIVATE } from './constants/chainAliases'
+import unregisterServiceWorker from './unregisterServiceWorker'
 import reducers from './redux'
 
 const { browserChainId: sponsoredChainId, privateChainId } = queryString.parse(
@@ -44,3 +45,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 )
+
+unregisterServiceWorker()

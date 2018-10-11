@@ -18,6 +18,8 @@
     "styleguide:build": "styleguidist build"
   },
   "dependencies": {
+    "@material-ui/core": "^3.2.0",
+    "@material-ui/icons": "^3.0.1",
     "bootstrap": "^3.3.7",
     "moment": "^2.20.1",
     "react-bootstrap": "^0.32.1",

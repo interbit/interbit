@@ -1,0 +1,113 @@
+.ibweb-app-bucket {
+  $transition-delay: 200ms;
+  $arrow-size: 10px;
+
+  .ibweb-app-bucket-container {
+    &.open {
+      .ibweb-app-bucket-popover {
+        // display: block;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity $transition-delay linear, visibility 0s linear;
+      }
+      .ibweb-app-bucket-trigger {
+        &:after {
+          opacity: 1;
+          visibility: visible;
+          transition: opacity $transition-delay linear, visibility 0s linear;
+        }
+      }
+    }
+    float: right;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    .ibweb-app-bucket-trigger {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      z-index: 5;
+      &:after {
+        box-sizing: content-box;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity $transition-delay linear, visibility 0s linear $transition-delay;
+        position: absolute;
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 $arrow-size $arrow-size $arrow-size;
+        border-color: transparent transparent #ffffff transparent;
+        left: 50%;
+        top: 100%;
+        transform: translate(-50%, 0);
+      }
+    }
+    .ibweb-app-bucket-popover {
+      z-index: 5;
+      position: absolute;
+      border-radius: 6px;
+      top: calc(100% + #{$arrow-size});
+      left: 50%;
+      transform: translate(-50%, 0);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity $transition-delay linear, visibility 0s linear $transition-delay;
+      .ibweb-app-bucket-item-row {
+        display: block;
+        float: left;
+      }
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+      background-color: #fff;
+      font-family: "Roboto", sans-serif;
+      width: 252px;
+      height: 304px;
+      padding: 40px;
+      .ibweb-app-bucket-item-wrapper {
+        &:hover {
+          border: 1px solid rgba(0, 0, 0, 0.12);
+          .item-text {
+            color: rgba(000, 000, 000, 0.6);
+          }
+        }
+        border: 1px solid transparent;
+        transition: all 0.3s;
+        cursor: pointer;
+        position: relative;
+        float: left;
+        border-radius: 8px;
+        padding: 8px;
+        text-align: center;
+        width: 80px;
+        &:nth-child(even) {
+          float: right;
+        }
+        .ibweb-app-bucket-item {
+          &.ibweb-app-bucket-item-placeholder {
+            background-color: #dedede;
+          }
+          width: 64px;
+          height: 64px;
+          overflow: hidden;
+          border-radius: 8px;
+          & img {
+            width: 64px;
+            height: 64px;
+          }
+        }
+        .ibweb-app-bucket-item-text {
+          display: inline-block;
+          font-size: 14px;
+          color: #000;
+          line-height: 14px;
+          padding: 10px 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

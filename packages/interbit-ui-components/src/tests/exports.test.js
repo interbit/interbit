@@ -125,4 +125,8 @@ describe('module exports expected components', () => {
   it('exports renderInput', () => {
     assert.ok(api.renderInput)
   })
+
+  it('export AppBucket', () => {
+    assert.ok(api.AppBucket)
+  })
 })

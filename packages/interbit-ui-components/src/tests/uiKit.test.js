@@ -4,6 +4,7 @@ import { configure, shallow } from 'enzyme'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+import AppBucket from '../components/UIKit/AppBucket'
 import CallToAction from '../components/UIKit/CallToAction'
 import Card from '../components/UIKit/Card'
 import ConnectingTo from '../components/UIKit/ConnectingTo'
@@ -27,6 +28,72 @@ const countChildren = (parent, child, count) => {
   const wrapper = shallow(parent)
   expect(wrapper.find(child).length).toBe(count)
 }
+
+describe('<AppBucket />', () => {
+  let props = {}
+  beforeEach(() =>
+    (props = {
+      items: [
+        {
+          label: 'App1',
+          icon: '/assets/icon1.png',
+          to: '',
+          clickHandler: () => {}
+        },
+        {
+          label: 'App2',
+          icon: '/assets/icon1.png',
+          to: '',
+          clickHandler: () => {}
+        },
+        {
+          label: 'App3',
+          icon: '/assets/icon1.png',
+          to: '',
+          clickHandler: () => {}
+        },
+        {
+          label: 'App4',
+          icon: '/assets/icon1.png',
+          to: '',
+          clickHandler: () => {}
+        }
+      ],
+      onClose: () => {}
+    }))
+
+  it('renders the right number of items', () => {
+    countChildren(
+      <AppBucket {...props}>
+        <IconButton text="Trigger" />
+      </AppBucket>,
+      '.ibweb-app-bucket-item',
+      props.items.length
+    )
+  })
+
+  it('renders the app names passed in through the items prop', () => {
+    const wrapper = shallow(
+      <AppBucket {...props}>
+        <IconButton text="Trigger" />
+      </AppBucket>
+    )
+    expect(
+      wrapper.find('.ibweb-app-bucket-item-text').map(item => item.text())
+    ).toEqual(props.items.map(item => item.label))
+  })
+
+  it('renders the app icons passed in through the items prop', () => {
+    const wrapper = shallow(
+      <AppBucket {...props}>
+        <IconButton text="Trigger" />
+      </AppBucket>
+    )
+    expect(
+      wrapper.find('.ibweb-app-bucket-item img').map(item => item.prop('src'))
+    ).toEqual(props.items.map(item => item.icon))
+  })
+})
 
 describe('<CallToAction />', () => {
   const props = {}

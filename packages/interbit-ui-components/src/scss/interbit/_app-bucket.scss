@@ -1,0 +1,31 @@
+.ibweb-app-bucket {
+  .app-bucket-icon {
+    cursor: pointer;
+    position: relative;
+    left: 118px;
+    margin-bottom: 16px;
+    z-index: 5;
+  }
+  .app-bucket-content::before {
+    position: relative;
+    content: "";
+    left: calc(50% - 10px);
+    top: -29px;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent $ib-white transparent;
+  }
+  .app-bucket-content {
+    position: absolute;
+    height: 304px;
+    width: 252px;
+    background-color: $ib-white;
+    box-shadow: 0 8px 15px 0 $ib-black-opaque-25,
+      0 6px 20px 0 $ib-black-opaque-20;
+    -moz-box-shadow: 0 8px 15px 0 $ib-black-opaque-25,
+      0 6px 20px 0 $ib-black-opaque-20;
+    -webkit-box-shadow: 0 8px 15px 0 $ib-black-opaque-25,
+      0 6px 20px 0 $ib-black-opaque-20;
+  }
+
+}

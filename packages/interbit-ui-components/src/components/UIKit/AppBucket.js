@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import appBucket from '../../assets/icons/app-bucket.svg'
 
 /**
  * The *AppBucket* is a React UI component that behaves as a popover-style
@@ -28,7 +29,53 @@ export default class AppBucket extends Component {
   static defaultProps = {
     isVisible: false
   }
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      showContent: false
+    }
+    this.contentRef = null
+
+    this.setContentRef = element => {
+      this.contentRef = element
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside)
+  }
+
+  handleClickOutside = event => {
+    if (this.contentRef && !this.contentRef.contains(event.target)) {
+      this.setState({ showContent: false })
+    }
+  }
+  showAppBucket = () => {
+    this.setState(prevState => ({
+      showContent: true
+    }))
+  }
+
   render() {
-    return <div>AppBucket</div>
+    const { showContent } = this.state
+    return (
+      <div className="ibweb-app-bucket">
+        <img
+          className="app-bucket-icon"
+          id="icon"
+          src={appBucket}
+          alt="app-bucket"
+          onClick={this.showAppBucket}
+        />
+        {showContent && (
+          <div className="app-bucket-content" ref={this.setContentRef} />
+        )}
+      </div>
+    )
   }
 }

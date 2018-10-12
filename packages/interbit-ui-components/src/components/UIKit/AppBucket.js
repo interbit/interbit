@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import LinkWrapper from './LinkWrapper'
+import { Link } from 'react-router-dom'
 
 /**
  * UI Component that behaves as a popover-style menu to navigate between different apps.
@@ -105,7 +105,7 @@ export default class AppBucket extends React.Component {
           <div className="ibweb-app-bucket-popover" ref={this.setBoxRef}>
             <div className="ibweb-app-bucket-item-row">
               {items.map(({ label, icon, to, clickHandler }) => (
-                <LinkWrapper
+                <Link
                   key={`link-${label}`}
                   to={to}
                   clickHandler={clickHandler}
@@ -117,7 +117,7 @@ export default class AppBucket extends React.Component {
                     {icon && <img src={icon} alt={label} />}
                   </div>
                   <div className="ibweb-app-bucket-item-text">{label}</div>
-                </LinkWrapper>
+                </Link>
               ))}
             </div>
           </div>

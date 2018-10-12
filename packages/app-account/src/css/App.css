@@ -1,10 +1,17 @@
+.ibweb.app-account .ibweb-page.home .header {
+  margin-top: -17px; }
+  @media (max-width: 629px) {
+    .ibweb.app-account .ibweb-page.home .header {
+      margin-top: 0; } }
+.ibweb.app-account .ibweb-page.create-account .ibweb-content-bar.github .error {
+  color: #d0021b; }
 .ibweb.app-account .ibweb-navbar .ibweb-ib-icon {
   padding: 18px 0;
   width: auto;
   height: auto; }
 .ibweb.app-account .ibweb-navbar .nav-main-menu li a {
   font-weight: 500;
-  color: #17A6F2;
+  color: #17a6f2;
   line-height: 1.38; }
 .ibweb.app-account .ibweb-navbar .nav-main-menu li.active a {
   color: #666; }
@@ -22,13 +29,13 @@
     margin-bottom: 16px;
     width: 200px; } }
 .ibweb.app-account .account-edit-button {
-  color: #17A6F2;
+  color: #17a6f2;
   position: absolute;
   top: 0;
   right: 0;
   border: transparent; }
   .ibweb.app-account .account-edit-button:hover, .ibweb.app-account .account-edit-button:active, .ibweb.app-account .account-edit-button:focus, .ibweb.app-account .account-edit-button:active.focus, .ibweb.app-account .account-edit-button.active:hover, .ibweb.app-account .account-edit-button.active:focus, .ibweb.app-account .account-edit-button.active.focus {
-    background: #FFF;
+    background: #fff;
     outline: 0;
     -webkit-box-shadow: none;
     box-shadow: none; }
@@ -46,7 +53,7 @@
   .ibweb.app-account .app-auth .table td {
     padding: 20px 16px;
     color: #666;
-    border-color: #E6E6E6; }
+    border-color: #e6e6e6; }
   .ibweb.app-account .app-auth .table td:first-child {
     text-transform: capitalize;
     font-weight: 500; }
@@ -55,7 +62,7 @@
   .ibweb.app-account .app-auth .table td[colspan="2"] {
     text-align: left; }
   .ibweb.app-account .app-auth .table tr:last-child td {
-    border-bottom: 1px solid #E6E6E6; }
+    border-bottom: 1px solid #e6e6e6; }
   .ibweb.app-account .app-auth .table .form-td {
     padding: 16px 0; }
     .ibweb.app-account .app-auth .table .form-td input {
@@ -75,14 +82,6 @@
     .ibweb.app-account .app-auth .btn-container .btn {
       width: 200px;
       margin-bottom: 8px; } }
-
-.ibweb.app-account .ibweb-page.home .header {
-  margin-top: -17px; }
-  @media (max-width: 629px) {
-    .ibweb.app-account .ibweb-page.home .header {
-      margin-top: 0; } }
-.ibweb.app-account .ibweb-page.create-account .ibweb-content-bar.github .error {
-  color: #d0021b; }
 
 .ibweb-modal-wrapper.modal-sign-in .modal-header h2 span {
   word-break: break-all; }

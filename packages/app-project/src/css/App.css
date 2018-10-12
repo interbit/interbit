@@ -8,13 +8,13 @@
   margin: 10px 20px 18px 0;
   text-decoration: underline;
   display: inline-block;
-  transition: .25s; }
+  transition: 0.25s; }
   @media (min-width: 768px) {
     .App .Project-item .Project-title {
       font-size: 20px; } }
   .App .Project-item .Project-title:hover {
     cursor: pointer;
-    color: #1EC0C0; }
+    color: #1ec0c0; }
 .App .Project-item .fa {
   margin-top: 10px;
   font-size: 33px; }
@@ -57,7 +57,7 @@
       width: 100%; } }
 .App .Project-details .Project-packages {
   padding-top: 40px;
-  border-top: 1px solid #E7E7E7; }
+  border-top: 1px solid #e7e7e7; }
   .App .Project-details .Project-packages h3 {
     margin-right: 20px; }
     @media (min-width: 768px) {
@@ -92,27 +92,10 @@
   height: auto; }
 .ibweb.app-project .ibweb-navbar .nav-main-menu li a {
   font-weight: 500;
-  color: #17A6F2;
+  color: #17a6f2;
   line-height: 1.38; }
 .ibweb.app-project .ibweb-navbar .nav-main-menu li.active a {
   color: #666; }
-.ibweb.app-project .ibweb-content-bar.project-bar .status {
-  display: inline-block;
-  width: 170px; }
-  .ibweb.app-project .ibweb-content-bar.project-bar .status i {
-    vertical-align: bottom;
-    padding-right: 8px; }
-  .ibweb.app-project .ibweb-content-bar.project-bar .status i:before {
-    font-size: 20px; }
-  .ibweb.app-project .ibweb-content-bar.project-bar .status.pass {
-    color: #00A451; }
-  .ibweb.app-project .ibweb-content-bar.project-bar .status.fail {
-    color: #d0021b; }
-.ibweb.app-project .ibweb-content-bar.project-bar .app-url i {
-  vertical-align: bottom;
-  padding-right: 8px; }
-.ibweb.app-project .ibweb-content-bar.project-bar .app-url i:before {
-  font-size: 20px; }
 .ibweb.app-project .app-project-icon {
   display: block;
   float: left;
@@ -139,16 +122,33 @@
     .ibweb.app-project .app-project-details .status.fail {
       color: #d0021b; }
     .ibweb.app-project .app-project-details .status.pass {
-      color: #00A451; }
+      color: #00a451; }
     .ibweb.app-project .app-project-details .status i {
       vertical-align: bottom;
       padding-right: 8px; }
-      .ibweb.app-project .app-project-details .status i:before {
+      .ibweb.app-project .app-project-details .status i::before {
         font-size: 20px; }
   .ibweb.app-project .app-project-details .app-url i {
     vertical-align: bottom;
     padding-right: 8px; }
-    .ibweb.app-project .app-project-details .app-url i:before {
+    .ibweb.app-project .app-project-details .app-url i::before {
       font-size: 20px; }
+.ibweb.app-project .ibweb-content-bar.project-bar .status {
+  display: inline-block;
+  width: 170px; }
+  .ibweb.app-project .ibweb-content-bar.project-bar .status i {
+    vertical-align: bottom;
+    padding-right: 8px; }
+  .ibweb.app-project .ibweb-content-bar.project-bar .status i::before {
+    font-size: 20px; }
+  .ibweb.app-project .ibweb-content-bar.project-bar .status.pass {
+    color: #00a451; }
+  .ibweb.app-project .ibweb-content-bar.project-bar .status.fail {
+    color: #d0021b; }
+.ibweb.app-project .ibweb-content-bar.project-bar .app-url i {
+  vertical-align: bottom;
+  padding-right: 8px; }
+.ibweb.app-project .ibweb-content-bar.project-bar .app-url i::before {
+  font-size: 20px; }
 
 /*# sourceMappingURL=App.css.map */

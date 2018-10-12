@@ -13,9 +13,10 @@
 
   h5 {
     padding-left: 15px;
+
     &.heading {
-      margin-top: 0px;
-      margin-bottom: 0px;
+      margin-top: 0;
+      margin-bottom: 0;
       padding-top: 11px;
     }
   }
@@ -24,9 +25,11 @@
     height: 100%;
     border-left: $column-border;
     border-bottom: $column-border;
+
     &:last-child {
       border-right: $column-border;
     }
+
     p {
       padding-top: 10px;
     }
@@ -34,6 +37,7 @@
 
   .explorerColumnHeading {
     @include header;
+
     padding-top: 9px;
     height: 40px;
   }
@@ -43,17 +47,18 @@
   }
 
   .search {
-    :global(.input-group) {
-      margin-top: -6px;
-    }
+    // :global(.input-group) {
+    //   margin-top: -6px;
+    // }
 
-    text-align: right
+    text-align: right;
   }
 
   .form {
     label {
-      color: $dark-gray !important
+      color: $dark-gray !important;
     }
+
     vertical-align: middle;
     height: $form-height;
     padding-top: 10px;
@@ -67,6 +72,7 @@
     overflow-x: scroll;
     overflow-y: scroll;
     padding-left: 15px;
+
     pre {
       overflow: initial;
       font-size: $font-size-small;
@@ -128,14 +134,18 @@
     }
   }
 
-  .metadata, .actions {
+  .metadata,
+  .actions {
     overflow-y: auto;
+
     table {
       font-size: $font-size-small;
+
       th {
         font-size: $font-size-base;
         font-weight: $medium-font-weight;
       }
+
       thead tr th:first-child,
       tbody tr td:first-child {
         vertical-align: middle;
@@ -151,14 +161,17 @@
 
   .actions {
     height: calc(60% - #{$explorer-header-height});
+
     .actionTitle {
       background-color: $tbl-border-gray;
-      margin: 0px;
+      margin: 0;
       padding-top: 10px;
       padding-bottom: 10px;
     }
+
     table {
-      margin-bottom: 0px;
+      margin-bottom: 0;
+
       tbody tr:first-child td:first-child {
         vertical-align: top;
         padding-top: 18px;
@@ -177,10 +190,6 @@
     .col-state {
       height: 800px;
       border-right: 1px solid #333;
-    }
-
-    .col-state {
-      height: 800px;
     }
   }
 

@@ -1,13 +1,11 @@
 // Interbit Mixins
 
 @mixin heading-font {
-  font-family: "Whitney A", "Whitney B";
+  font-family: "Whitney A", "Whitney B", sans-serif;
   font-style: normal;
   font-weight: 700;
 }
 
-
 @mixin body-font {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
-

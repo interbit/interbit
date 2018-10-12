@@ -114,7 +114,9 @@
         color: $ib-white;
         border: 1px solid $ib-blue;
 
-        &:hover, &:active, &:focus {
+        &:hover,
+        &:active,
+        &:focus {
           color: $ib-white;
           background: $ib-blue;
         }

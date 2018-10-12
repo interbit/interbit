@@ -23,17 +23,20 @@
     box-shadow: none;
     height: auto;
   }
+
   select.form-control {
     height: 48px;
     // -webkit-appearance: none;
     -webkit-border-radius: $border-radius-md;
   }
 
-  .radio, .checkbox {
+  .radio,
+  .checkbox {
     margin: 0 0 $margin-sm 0;
   }
 
-  .radio label, .checkbox label {
+  .radio label,
+  .checkbox label {
     padding-left: 30px;
     color: #666;
   }
@@ -54,7 +57,6 @@
     .error-msg {
       padding: 0 16px;
       color: $ib-red;
-
     }
   }
 }

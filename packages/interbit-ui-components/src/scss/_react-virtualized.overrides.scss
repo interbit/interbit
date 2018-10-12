@@ -15,6 +15,7 @@
 
   .ReactVirtualized__Table__headerRow {
     @include header;
+
     padding-top: 6px;
     height: $react-virtualized-header-height;
     cursor: default !important;

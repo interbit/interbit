@@ -15,6 +15,7 @@ export { default as HeaderGrid } from './components/Navigation/HeaderGrid'
 export { default as Sidebar } from './components/Navigation/Sidebar'
 
 // Content Components
+export { default as ActivityBar } from './components/UIKit/ActivityBar'
 export { default as Card } from './components/UIKit/Card'
 export { default as ConnectingTo } from './components/UIKit/ConnectingTo'
 export { default as ContentBox } from './components/UIKit/ContentBox'

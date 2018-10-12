@@ -1,0 +1,71 @@
+@import "variables";
+
+.ibweb-activity-bar {
+  min-width: 320px;
+  max-width: 600px;
+  font-size: 12px;
+  color: $ib-black;
+  background-color: $ib-grey;
+
+  a {
+    color: $ib-anchor-blue !important;
+  }
+
+  .title {
+    display: flex;
+    margin-bottom: 4px;
+
+    a {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .metadata {
+    display: flex;
+    color: $ib-black-50;
+    font-weight: 400;
+    padding: 8px 16px;
+
+    .breadcrumbs {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      float: left;
+    }
+
+    .date-time {
+      white-space: nowrap;
+      margin-left: 16px;
+      float: right;
+    }
+  }
+
+  .separator {
+    height: 1px;
+    width: 100%;
+    background-color: $ib-white;
+  }
+
+  .body {
+    color: $ib-black-85;
+    line-height: 120%;
+    font-weight: 400;
+    padding: 16px 16px 16px 72px;
+
+    .avatar {
+      width: 40px;
+      margin-left: -56px;
+      float: left;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

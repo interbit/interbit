@@ -3,7 +3,9 @@ import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow } from 'enzyme'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
+import ActivityBar from '../components/UIKit/ActivityBar'
 import CallToAction from '../components/UIKit/CallToAction'
 import Card from '../components/UIKit/Card'
 import ConnectingTo from '../components/UIKit/ConnectingTo'
@@ -27,6 +29,89 @@ const countChildren = (parent, child, count) => {
   const wrapper = shallow(parent)
   expect(wrapper.find(child).length).toBe(count)
 }
+
+const equalInnerText = (parent, child, text) => {
+  const wrapper = shallow(parent)
+  expect(wrapper.find(child).text()).toEqual(text)
+}
+
+const hasPropertyEqualTo = (parent, child, property, value) => {
+  const wrapper = shallow(parent)
+  expect(wrapper.find(child).prop(property)).toEqual(value)
+}
+
+describe('<ActivityBar />', () => {
+  let props = {}
+  beforeEach(() => {
+    props = {}
+    Object.assign(props, {
+      breadcrumb: [
+        {
+          title: 'First Level',
+          clickHandler: () => {}
+        }
+      ],
+      dateTimeFormat: 'YYYY MM DD',
+      firstName: 'John',
+      lastName: 'Doe',
+      timestamp: 1537852467,
+      userClickHandler: () => {}
+    })
+  })
+
+  it('renders a bredcrumb', () => {
+    countChildren(<ActivityBar {...props} />, 'div.breadcrumbs', 1)
+  })
+
+  it('It renders a timestamp in the specified format', () => {
+    const formattedTimestamp = moment
+      .unix(props.timestamp)
+      .format(props.dateTimeFormat)
+    equalInnerText(
+      <ActivityBar {...props} />,
+      'div.date-time',
+      formattedTimestamp
+    )
+  })
+
+  it('It renders an avatar if one is provided', () => {
+    Object.assign(props, { avatar: 'path_to_image' })
+    hasPropertyEqualTo(
+      <ActivityBar {...props} />,
+      'div.body div.avatar img',
+      'src',
+      'path_to_image'
+    )
+  })
+
+  it('It renders the username', () => {
+    equalInnerText(<ActivityBar {...props} />, 'div.title a', 'John Doe')
+  })
+
+  it('It renders the correct type of text block for comment', () => {
+    Object.assign(props, { comment: 'Some fake comment' })
+    equalInnerText(
+      <ActivityBar {...props} />,
+      'div.body div.comment',
+      'Some fake comment'
+    )
+  })
+
+  it('It renders the correct type of text block for change', () => {
+    Object.assign(props, {
+      change: {
+        fieldName: 'FieldName',
+        oldVal: 'old value',
+        newVal: 'new value'
+      }
+    })
+    equalInnerText(
+      <ActivityBar {...props} />,
+      'div.body div.comment',
+      'Changed (FieldName) from (old value) to (new value)'
+    )
+  })
+})
 
 describe('<CallToAction />', () => {
   const props = {}

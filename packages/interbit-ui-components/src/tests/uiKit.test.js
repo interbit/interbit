@@ -18,6 +18,7 @@ import LinkWrapper from '../components/UIKit/LinkWrapper'
 import ModalWrapper from '../components/UIKit/ModalWrapper'
 import Quote from '../components/UIKit/Quote'
 import TitledList from '../components/UIKit/TitledList'
+import AppBucket from '../components/UIKit/AppBucket'
 import Markdown from '../components/Markdown'
 import placeholder from '../assets/placeholder.svg'
 
@@ -326,5 +327,79 @@ describe('<TitledList />', () => {
     }
 
     countChildren(<TitledList {...props} />, 'li', props.items.length)
+  })
+})
+
+describe('<AppBucket />', () => {
+  const props = {}
+  beforeEach(() => {
+    props.items = [
+      {
+        label: 'TestApp-1',
+        icon: placeholder,
+        to: 'test'
+      },
+      {
+        label: 'TestApp-2',
+        icon: placeholder,
+        to: 'test'
+      },
+      {
+        label: 'TestApp-3',
+        icon: placeholder,
+        to: 'test'
+      },
+      {
+        label: 'App',
+        icon: placeholder,
+        to: 'test'
+      }
+    ]
+    props.isVisible = true
+    props.closeAppBucket = jest.fn()
+    props.toggleAppBucket = jest.fn()
+  })
+
+  it('renders all the element from items', () => {
+    countChildren(
+      <AppBucket {...props} />,
+      '.ibweb-app-bucket-content-item',
+      props.items.length
+    )
+  })
+
+  it('renders the app icons passed through items correctly', () => {
+    countChildren(
+      <AppBucket {...props} />,
+      '.ibweb-app-bucket-content-item-icon',
+      props.items.length
+    )
+
+    const wrapper = shallow(<AppBucket {...props} />)
+    const appIcons = wrapper
+      .find('.ibweb-app-bucket-content-item-icon')
+      .map(item => item.prop('src'))
+
+    expect(appIcons).toEqual([
+      placeholder,
+      placeholder,
+      placeholder,
+      placeholder
+    ])
+  })
+
+  it('renders the app labels passed through items correctly', () => {
+    countChildren(
+      <AppBucket {...props} />,
+      '.ibweb-app-bucket-content-item > span',
+      props.items.length
+    )
+
+    const wrapper = shallow(<AppBucket {...props} />)
+    const appLabels = wrapper
+      .find('.ibweb-app-bucket-content-item > span')
+      .map(item => item.text())
+
+    expect(appLabels).toEqual(['TestApp-1', 'TestApp-2', 'TestApp-3', 'App'])
   })
 })

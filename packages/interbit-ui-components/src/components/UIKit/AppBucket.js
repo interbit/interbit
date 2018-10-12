@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import appBucket from '../../assets/icons/app-bucket.svg'
 
 /**
@@ -23,7 +24,11 @@ export default class AppBucket extends Component {
       })
     ).isRequired,
     /** Is `true` if the `AppBucket` is visible. This `prop` is updated via `mapStateToProps` from `react-redux`. */
-    isVisible: PropTypes.bool
+    isVisible: PropTypes.bool,
+    /** The function that is triggered on click outside of the bucket */
+    closeAppBucket: PropTypes.func.isRequired,
+    /** The function that is triggered when AppBucket icon is clicked to toggle the state of AppBucket */
+    toggleAppBucket: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -32,13 +37,15 @@ export default class AppBucket extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      showContent: false
-    }
+
     this.contentRef = null
+    this.iconRef = null
 
     this.setContentRef = element => {
       this.contentRef = element
+    }
+    this.setIconRef = element => {
+      this.iconRef = element
     }
   }
 
@@ -51,29 +58,49 @@ export default class AppBucket extends Component {
   }
 
   handleClickOutside = event => {
-    if (this.contentRef && !this.contentRef.contains(event.target)) {
-      this.setState({ showContent: false })
+    if (
+      this.contentRef &&
+      !this.contentRef.contains(event.target) &&
+      this.iconRef &&
+      !this.iconRef.contains(event.target)
+    ) {
+      this.props.closeAppBucket()
     }
   }
-  showAppBucket = () => {
-    this.setState(prevState => ({
-      showContent: true
-    }))
+  toggleAppBucket = () => {
+    this.props.toggleAppBucket()
   }
 
   render() {
-    const { showContent } = this.state
+    const { items, isVisible } = this.props
     return (
       <div className="ibweb-app-bucket">
         <img
-          className="app-bucket-icon"
+          className="ibweb-app-bucket-icon"
           id="icon"
           src={appBucket}
           alt="app-bucket"
-          onClick={this.showAppBucket}
+          onClick={this.toggleAppBucket}
+          ref={this.setIconRef}
         />
-        {showContent && (
-          <div className="app-bucket-content" ref={this.setContentRef} />
+        {isVisible && (
+          <div className="ibweb-app-bucket-content" ref={this.setContentRef}>
+            <div className="ibweb-app-bucket-content-items">
+              {items.map((item, index) => (
+                <Link
+                  to={item.to}
+                  className="ibweb-app-bucket-content-item"
+                  key={`${item.label}+index`}>
+                  <img
+                    src={item.icon}
+                    className="ibweb-app-bucket-content-item-icon"
+                    onClick={item.clickHandler}
+                  />
+                  <span onClick={item.clickHandler}>{item.label}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
         )}
       </div>
     )

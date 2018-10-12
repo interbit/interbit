@@ -1,6 +1,20 @@
+@import "./../variables";
+
 .ibweb-app-bucket {
   $transition-delay: 200ms;
+  $transition: opacity $transition-delay linear, visibility 0s linear;
   $arrow-size: 10px;
+  $font-family: "Roboto", sans-serif;
+  $popover-border-radius: 6px;
+  $popover-padding: 40px;
+  $popover-width: 252px;
+  $popover-height: 304px;
+  $item-wrapper-padding: 8px;
+  $item-border-radius: 8px;
+  $item-height: 64px;
+  $item-width: 64px;
+  $item-text-padding: 10px 0;
+  $item-text-size: 14px;
 
   .ibweb-app-bucket-container {
     &.open {
@@ -8,13 +22,13 @@
         // display: block;
         opacity: 1;
         visibility: visible;
-        transition: opacity $transition-delay linear, visibility 0s linear;
+        transition: $transition;
       }
       .ibweb-app-bucket-trigger {
         &:after {
           opacity: 1;
           visibility: visible;
-          transition: opacity $transition-delay linear, visibility 0s linear;
+          transition: $transition;
         }
       }
     }
@@ -31,14 +45,14 @@
         box-sizing: content-box;
         opacity: 0;
         visibility: hidden;
-        transition: opacity $transition-delay linear, visibility 0s linear $transition-delay;
+        transition: $transition;
         position: absolute;
         content: "";
         width: 0;
         height: 0;
         border-style: solid;
         border-width: 0 $arrow-size $arrow-size $arrow-size;
-        border-color: transparent transparent #ffffff transparent;
+        border-color: $app-bucket-border-color;
         left: 50%;
         top: 100%;
         transform: translate(-50%, 0);
@@ -47,29 +61,29 @@
     .ibweb-app-bucket-popover {
       z-index: 5;
       position: absolute;
-      border-radius: 6px;
+      border-radius: $popover-border-radius;
       top: calc(100% + #{$arrow-size});
       left: 50%;
       transform: translate(-50%, 0);
       opacity: 0;
       visibility: hidden;
       display: none;
-      transition: opacity $transition-delay linear, visibility 0s linear $transition-delay;
+      transition: $transition;
       .ibweb-app-bucket-item-row {
         display: block;
         float: left;
       }
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-      background-color: #fff;
-      font-family: "Roboto", sans-serif;
-      width: 252px;
-      height: 304px;
-      padding: 40px;
+      box-shadow: $app-bucket-popover-shadow;
+      background-color: $app-bucket-popover-bg;
+      font-family: $font-family;
+      width: $popover-width;
+      height: $popover-height;
+      padding: $popover-padding;
       .ibweb-app-bucket-item-wrapper {
         &:hover {
-          border: 1px solid rgba(0, 0, 0, 0.12);
+          border: $app-bucket-item-border-hover;
           .item-text {
-            color: rgba(000, 000, 000, 0.6);
+            color: $app-bucket-item-text-color-hover;
           }
         }
         border: 1px solid transparent;
@@ -77,8 +91,8 @@
         cursor: pointer;
         position: relative;
         float: left;
-        border-radius: 8px;
-        padding: 8px;
+        border-radius: $item-border-radius;
+        padding: $item-wrapper-padding;
         text-align: center;
         width: 80px;
         &:nth-child(even) {
@@ -86,23 +100,23 @@
         }
         .ibweb-app-bucket-item {
           &.ibweb-app-bucket-item-placeholder {
-            background-color: #dedede;
+            background-color: $app-bucket-item-placeholder-bg;
           }
-          width: 64px;
-          height: 64px;
+          width: $item-width;
+          height: $item-height;
           overflow: hidden;
-          border-radius: 8px;
+          border-radius: $item-border-radius;
           & img {
-            width: 64px;
-            height: 64px;
+            width: $item-width;
+            height: $item-height;
           }
         }
         .ibweb-app-bucket-item-text {
           display: inline-block;
-          font-size: 14px;
-          color: #000;
+          font-size: $item-text-size;
+          color: $app-bucket-item-text-color;
           line-height: 14px;
-          padding: 10px 0;
+          padding: $item-text-padding;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;

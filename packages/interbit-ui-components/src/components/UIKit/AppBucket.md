@@ -16,9 +16,9 @@ initialState = { isVisible: false, isVisibleMenu: false };
 <Router>
   <div style={{ backgroundColor: "#dedede", width: "100%", height: 50 }}>
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar style={{ padding: 0 }}>
         <IconButton
-          style={{ marginLeft: -12, marginRight: 20 }}
+          style={{ marginRight: 20 }}
           color="inherit"
           aria-label="Menu"
         >
@@ -60,7 +60,6 @@ initialState = { isVisible: false, isVisibleMenu: false };
           ]}
         >
           <IconButton
-            style={{marginRight: -25}}
             onClick={() => {
               setState({ isVisible: true });
             }}

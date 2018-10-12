@@ -53,6 +53,7 @@
       transform: translate(-50%, 0);
       opacity: 0;
       visibility: hidden;
+      display: none;
       transition: opacity $transition-delay linear, visibility 0s linear $transition-delay;
       .ibweb-app-bucket-item-row {
         display: block;

@@ -69,7 +69,8 @@ export default class AppBucket extends React.Component {
     const restWidth = (dropWrapperWidth - triggerWidth) / 2
     const triggerPosition = utils.getOffset(this.triggerRef).left
     const restWindowWidth = windowWidth - triggerPosition - triggerWidth
-    const check = restWindowWidth - restWidth - 10
+    const check = restWindowWidth - restWidth
+    this.popoverRef.style.display = 'block'
     if (check < 0) {
       this.popoverRef.style.left = `${check}px`
     } else {

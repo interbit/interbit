@@ -1,6 +1,7 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow } from 'enzyme'
+import sinon from 'sinon'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
@@ -92,6 +93,21 @@ describe('<AppBucket />', () => {
     expect(
       wrapper.find('.ibweb-app-bucket-item img').map(item => item.prop('src'))
     ).toEqual(props.items.map(item => item.icon))
+  })
+
+  it('handle click events', () => {
+    const onLinkClick = sinon.spy()
+    props.items[0].clickHandler = onLinkClick
+    const wrapper = shallow(
+      <AppBucket {...props}>
+        <IconButton text="Trigger" />
+      </AppBucket>
+    )
+    wrapper
+      .find('.ibweb-app-bucket-item-wrapper')
+      .first()
+      .simulate('click')
+    expect(onLinkClick.calledOnce).toBe(true)
   })
 })
 

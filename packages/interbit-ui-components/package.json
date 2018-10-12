@@ -20,7 +20,7 @@
   "dependencies": {
     "@material-ui/core": "^3.2.0",
     "@material-ui/icons": "^3.0.1",
-    "@babel/runtime-corejs2" : "^7.1.2",
+    "@babel/runtime-corejs2": "^7.1.2",
     "bootstrap": "^3.3.7",
     "moment": "^2.20.1",
     "react-bootstrap": "^0.32.1",
@@ -64,6 +64,7 @@
     "react-dom": "^16.2.0",
     "react-styleguidist": "^6.2.4",
     "sass-loader": "^7.1.0",
+    "sinon": "^6.3.5",
     "url-loader": "^1.1.1",
     "webpack": "^3.10.0",
     "yargs": "^10.0.3"

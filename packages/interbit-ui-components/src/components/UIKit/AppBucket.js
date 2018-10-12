@@ -109,7 +109,7 @@ export default class AppBucket extends React.Component {
                 <Link
                   key={`link-${label}`}
                   to={to}
-                  clickHandler={clickHandler}
+                  onClick={clickHandler}
                   className="ibweb-app-bucket-item-wrapper">
                   <div
                     className={`ibweb-app-bucket-item ${

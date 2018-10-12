@@ -8,18 +8,6 @@
       margin-top: -64px;
     }
 
-    &.policy {
-      margin-top: 96px;
-
-      @media (max-width: $screen-lg-min - 1) {
-        margin-top: 64px;
-      }
-
-      @media (max-width: $screen-sm-min - 1) {
-        margin-top: 0;
-      }
-    }
-
     // Platform page
     &.platform {
       .logos {
@@ -40,10 +28,10 @@
         .links {
           margin-bottom: 32px;
 
-          a:after {
+          a::after {
             display: inline-block;
             margin-left: 8px;
-            font-family: FontAwesome;
+            font-family: FontAwesome, sans-serif;
             content: '\f105';
           }
         }
@@ -106,6 +94,7 @@
         .row:last-child {
           margin-bottom: 64px;
         }
+
         .subtitle {
           font-size: 22px;
           font-weight: 600;
@@ -170,6 +159,16 @@
 
     // Policy pages
     &.policy {
+      margin-top: 96px;
+
+      @media (max-width: $screen-lg-min - 1) {
+        margin-top: 64px;
+      }
+
+      @media (max-width: $screen-sm-min - 1) {
+        margin-top: 0;
+      }
+
       .policy-content {
         ol {
           margin: 32px 0 8px 32px;
@@ -192,7 +191,6 @@
         .subsection {
           margin-left: 64px;
         }
-
       }
     }
   }

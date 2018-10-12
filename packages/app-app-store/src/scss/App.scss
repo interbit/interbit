@@ -19,6 +19,22 @@
     }
   }
 
+  .reviews {
+    color: #999;
+
+    p {
+      color: #999;
+    }
+
+    .stars {
+      margin-bottom: 32px;
+
+      i {
+        padding-right: 3px;
+      }
+    }
+  }
+
   .image-with-text {
     .text {
       position: absolute;
@@ -42,22 +58,6 @@
   .ibweb-content-bar.in-progress.store-listing {
     h3 {
       color: #999;
-    }
-  }
-
-  .reviews {
-    color: #999;
-
-    p {
-      color: #999;
-    }
-
-    .stars {
-      margin-bottom: 32px;
-
-      i {
-        padding-right: 3px;
-      }
     }
   }
 

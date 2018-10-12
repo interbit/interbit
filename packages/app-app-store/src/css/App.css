@@ -10,6 +10,14 @@
     display: block;
     max-width: 100%;
     margin: 64px auto 0 auto; }
+.ibweb.app-app-store .reviews {
+  color: #999; }
+  .ibweb.app-app-store .reviews p {
+    color: #999; }
+  .ibweb.app-app-store .reviews .stars {
+    margin-bottom: 32px; }
+    .ibweb.app-app-store .reviews .stars i {
+      padding-right: 3px; }
 .ibweb.app-app-store .image-with-text .text {
   position: absolute;
   bottom: 64px;
@@ -24,14 +32,6 @@
     color: #fff; }
 .ibweb.app-app-store .ibweb-content-bar.in-progress.store-listing h3 {
   color: #999; }
-.ibweb.app-app-store .reviews {
-  color: #999; }
-  .ibweb.app-app-store .reviews p {
-    color: #999; }
-  .ibweb.app-app-store .reviews .stars {
-    margin-bottom: 32px; }
-    .ibweb.app-app-store .reviews .stars i {
-      padding-right: 3px; }
 .ibweb.app-app-store .app-details .ibweb-breadcrumb {
   margin-bottom: 16px;
   color: #666; }

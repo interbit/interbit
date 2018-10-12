@@ -1,4 +1,6 @@
 {
+  "css.validate": false,
+  "scss.validate": false,
   "eslint.autoFixOnSave": true,
   "javascript.validate.enable": true,
   "files.exclude": {

@@ -60,6 +60,7 @@ initialState = { isVisible: false, isVisibleMenu: false };
           ]}
         >
           <IconButton
+            style={{marginRight: -25}}
             onClick={() => {
               setState({ isVisible: true });
             }}

@@ -2,7 +2,6 @@ AppBucket example
 
 ```js
 const Router = require("react-router-dom").BrowserRouter;
-const Icon = require("../../assets/icons/apps.svg");
 const AppBar = require("@material-ui/core").AppBar;
 const Toolbar = require("@material-ui/core").Toolbar;
 const IconButton = require("@material-ui/core").IconButton;
@@ -77,7 +76,6 @@ initialState = { isVisible: false, isVisibleMenu: false };
 Example of a centered AppBucket
 ```js
 const Router = require("react-router-dom").BrowserRouter;
-const Icon = require("../../assets/icons/apps.svg");
 const AppBar = require("@material-ui/core").AppBar;
 const Toolbar = require("@material-ui/core").Toolbar;
 const IconButton = require("@material-ui/core").IconButton;

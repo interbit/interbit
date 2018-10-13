@@ -43,14 +43,15 @@ export default class AppBucket extends React.Component {
     this.recalculateArrowPosition()
   }
   componentWillUnmount() {
-    document.removeEventListener('click', this.outsideClickListener)
-    window.addEventListener('resize', this.recalculateArrowPosition)
+    window.removeEventListener('resize', this.recalculateArrowPosition)
+    document.removeEventListener(
+      'click',
+      this.outsideClickListener(this.popoverRef, this.props.onClose)
+    )
   }
   setBoxRef = element => {
     this.popoverRef = element
-    this.detectClickOutside(element, () => {
-      this.props.onClose()
-    })
+    this.detectClickOutside(this.popoverRef, this.props.onClose)
   }
   setTriggerRef = element => {
     this.triggerRef = element

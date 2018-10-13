@@ -1,7 +1,6 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow } from 'enzyme'
-import sinon from 'sinon'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
@@ -96,7 +95,7 @@ describe('<AppBucket />', () => {
   })
 
   it('handle click events', () => {
-    const onLinkClick = sinon.spy()
+    const onLinkClick = jest.fn()
     props.items[0].clickHandler = onLinkClick
     const wrapper = shallow(
       <AppBucket {...props}>
@@ -107,7 +106,67 @@ describe('<AppBucket />', () => {
       .find('.ibweb-app-bucket-item-wrapper')
       .first()
       .simulate('click')
-    expect(onLinkClick.calledOnce).toBe(true)
+    expect(onLinkClick).toHaveBeenCalled()
+  })
+
+  describe('event listener', () => {
+    let windowRemoveEventListenerMock
+    let documentRemoveEventListenerMock
+    beforeEach(() => {
+      windowRemoveEventListenerMock = jest.spyOn(
+        global.window,
+        'removeEventListener'
+      )
+      documentRemoveEventListenerMock = jest.spyOn(
+        global.document,
+        'removeEventListener'
+      )
+    })
+
+    afterEach(() => {
+      global.window.removeEventListener.mockRestore()
+      global.document.removeEventListener.mockRestore()
+    })
+
+    it('should remove document click event listener', () => {
+      const wrapper = shallow(
+        <AppBucket {...props}>
+          <IconButton text="Trigger" />
+        </AppBucket>
+      )
+
+      expect(
+        documentRemoveEventListenerMock.mock.calls.find(
+          call => call[0] === 'click'
+        )
+      ).toBeUndefined()
+      wrapper.unmount()
+      expect(
+        documentRemoveEventListenerMock.mock.calls.find(
+          call => call[0] === 'click'
+        )
+      ).toBeDefined()
+    })
+
+    it('should remove window resize event listener', () => {
+      const wrapper = shallow(
+        <AppBucket {...props}>
+          <IconButton text="Trigger" />
+        </AppBucket>
+      )
+
+      expect(
+        windowRemoveEventListenerMock.mock.calls.find(
+          call => call[0] === 'resize'
+        )
+      ).toBeUndefined()
+      wrapper.unmount()
+      expect(
+        windowRemoveEventListenerMock.mock.calls.find(
+          call => call[0] === 'resize'
+        )
+      ).toBeDefined()
+    })
   })
 })
 

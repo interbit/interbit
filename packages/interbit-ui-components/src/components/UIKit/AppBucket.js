@@ -38,8 +38,13 @@ export default class AppBucket extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      changePosition: false
+    }
+
     this.contentRef = null
     this.iconRef = null
+    this.componentRef = null
 
     this.setContentRef = element => {
       this.contentRef = element
@@ -47,14 +52,44 @@ export default class AppBucket extends Component {
     this.setIconRef = element => {
       this.iconRef = element
     }
+    this.setComponentRef = element => {
+      this.componentRef = element
+    }
   }
 
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside)
+    window.addEventListener('resize', this.positionPopOver)
+    this.positionPopOver()
   }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside)
+    window.addEventListener('resize', this.positionPopOver)
+  }
+  positionPopOver = () => {
+    if (this.componentRef) {
+      console.log(
+        this.componentRef.parentNode.getBoundingClientRect(),
+        this.componentRef.getBoundingClientRect(),
+        window.innerWidth
+      )
+      const parentData = this.componentRef.parentNode.getBoundingClientRect()
+      const componentData = this.componentRef.getBoundingClientRect()
+      if (
+        componentData.x - parentData.x + componentData.width ===
+        parentData.width
+      ) {
+        this.setState(() => ({ changePosition: true }))
+        console.log(
+          componentData.x - parentData.x + componentData.width ===
+            parentData.width,
+          'jdh'
+        )
+      } else {
+        this.setState(() => ({ changePosition: false }))
+      }
+    }
   }
 
   handleClickOutside = event => {
@@ -72,9 +107,10 @@ export default class AppBucket extends Component {
   }
 
   render() {
+    const { changePosition } = this.state
     const { items, isVisible } = this.props
     return (
-      <div className="ibweb-app-bucket">
+      <div className="ibweb-app-bucket" ref={this.setComponentRef}>
         <img
           className="ibweb-app-bucket-icon"
           id="icon"
@@ -84,9 +120,10 @@ export default class AppBucket extends Component {
           ref={this.setIconRef}
         />
         <div
-          className={`ibweb-app-bucket-content ${
+          className={`${
             isVisible ? 'show-bucket' : 'hide-bucket'
-          }`}
+          } ibweb-app-bucket-content 
+          ${changePosition && 'position-arrow'}`}
           ref={this.setContentRef}>
           <div className="ibweb-app-bucket-content-items">
             {items.map((item, index) => (

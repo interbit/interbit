@@ -52,6 +52,12 @@
       transition: $app-bucket-transition;
     }
   }
+  .position-arrow{
+    left: -220px;
+  }
+  .position-arrow::before{
+    left: calc(100% + 10px)
+  }
 
   .ibweb-app-bucket-content-items {
     display: grid;

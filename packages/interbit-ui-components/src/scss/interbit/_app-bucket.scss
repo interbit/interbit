@@ -1,10 +1,13 @@
 .ibweb-app-bucket {
+  $app-bucket-transition: opacity 0.2s, visibility 0.2s;
   position: relative;
+  width:24px;
+
 
   .ibweb-app-bucket-icon {
     cursor: pointer;
     position: relative;
-    z-index: 5;
+    z-index: 1000;
   }
   .ibweb-app-bucket-content::before {
     position: relative;
@@ -17,11 +20,12 @@
   }
   .ibweb-app-bucket-content {
     position: absolute;
-    height: 304px;
+    min-height: 304px;
     width: 252px;
     padding: 40px;
     left: -114px;
     top: 38px;
+    z-index: 9999;
     background-color: $ib-white;
     box-shadow: 0 8px 15px 0 $ib-black-opaque-25,
       0 6px 20px 0 $ib-black-opaque-20;
@@ -29,15 +33,23 @@
       0 6px 20px 0 $ib-black-opaque-20;
     -webkit-box-shadow: 0 8px 15px 0 $ib-black-opaque-25,
       0 6px 20px 0 $ib-black-opaque-20;
+
     &.hide-bucket {
       opacity: 0;
       visibility: hidden;
-      transition: opacity 1s ease, visibility 1s ease
+      -webkit-transition: $app-bucket-transition;
+      -moz-transition: $app-bucket-transition;
+      -o-transition: $app-bucket-transition;
+      transition: $app-bucket-transition;
     }
+
     &.show-bucket {
       opacity: 1;
       visibility: visible;
-      transition: opacity 1s ease, visibility 1s ease
+      -webkit-transition: $app-bucket-transition;
+      -moz-transition: $app-bucket-transition;
+      -o-transition: $app-bucket-transition;
+      transition: $app-bucket-transition;
     }
   }
 
@@ -51,20 +63,20 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      color: rgba(0, 0, 0, 0.6);
+      color: $ib-black-opaque-60;
       text-decoration: none;
     }
 
     .ibweb-app-bucket-content-item:hover {
-      border: 1px solid rgba(0, 0, 0, 0.12);
-      border-radius: 8px;
+      border: 1px solid $ib-black-opaque-12;
+      border-radius: $border-radius-sm;
       margin: -1px;
     }
 
     .ibweb-app-bucket-content-item-icon {
       height: 64px;
       width: 64px;
-      margin: 8px;
+      margin: $margin-x-sm;
     }
 
     .ibweb-app-bucket-content-item > span {
@@ -73,7 +85,8 @@
       overflow: hidden;
       white-space: nowrap;
       text-align: center;
-      font-size: 14px;
+      font-size: $font-size-x-sm;
+      margin-bottom: $margin-x-sm
     }
   }
 }

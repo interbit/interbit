@@ -5,7 +5,7 @@ const BrowserRouter = require("react-router-dom").BrowserRouter;
 
 initialState = { isVisible: false };
 <BrowserRouter>
-  <div style={{ backgroundColor: "#e7e7e7",padding:'20px'}}>
+  <div style={{ backgroundColor: "#e7e7e7"}}>
     <AppBucket
       isVisible={state.isVisible}
       closeAppBucket={() => {
@@ -20,7 +20,7 @@ initialState = { isVisible: false };
         {
           label: "App",
           icon: "placeholder.svg",
-          to: "test",
+          to: "#",
           clickHandler: () => {
             alert("It tickles");
           }
@@ -28,7 +28,7 @@ initialState = { isVisible: false };
         {
           label: "App",
           icon: "placeholder.svg",
-          to: "test",
+          to: "#",
           clickHandler: () => {
             alert("It tickles");
           }
@@ -36,7 +36,7 @@ initialState = { isVisible: false };
         {
           label: "App",
           icon: "placeholder.svg",
-          to: "test",
+          to: "#",
           clickHandler: () => {
             alert("It tickles");
           }
@@ -44,7 +44,7 @@ initialState = { isVisible: false };
         {
           label: "App",
           icon: "placeholder.svg",
-          to: "test",
+          to: "#",
           clickHandler: () => {
             alert("It tickles");
           }

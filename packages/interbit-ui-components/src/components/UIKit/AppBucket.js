@@ -73,7 +73,6 @@ export default class AppBucket extends Component {
 
   render() {
     const { items, isVisible } = this.props
-    console.log(this.props)
     return (
       <div className="ibweb-app-bucket">
         <img

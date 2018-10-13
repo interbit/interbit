@@ -73,6 +73,7 @@ export default class AppBucket extends Component {
 
   render() {
     const { items, isVisible } = this.props
+    console.log(this.props)
     return (
       <div className="ibweb-app-bucket">
         <img
@@ -83,25 +84,28 @@ export default class AppBucket extends Component {
           onClick={this.toggleAppBucket}
           ref={this.setIconRef}
         />
-        {isVisible && (
-          <div className="ibweb-app-bucket-content" ref={this.setContentRef}>
-            <div className="ibweb-app-bucket-content-items">
-              {items.map((item, index) => (
-                <Link
-                  to={item.to}
-                  className="ibweb-app-bucket-content-item"
-                  key={`${item.label}+index`}>
-                  <img
-                    src={item.icon}
-                    className="ibweb-app-bucket-content-item-icon"
-                    onClick={item.clickHandler}
-                  />
-                  <span onClick={item.clickHandler}>{item.label}</span>
-                </Link>
-              ))}
-            </div>
+        <div
+          className={`ibweb-app-bucket-content ${
+            isVisible ? 'show-bucket' : 'hide-bucket'
+          }`}
+          ref={this.setContentRef}>
+          <div className="ibweb-app-bucket-content-items">
+            {items.map((item, index) => (
+              <Link
+                to={item.to}
+                className="ibweb-app-bucket-content-item"
+                key={`${item.label}${index}`}>
+                <img
+                  src={item.icon}
+                  className="ibweb-app-bucket-content-item-icon"
+                  alt={`${item.label} icon`}
+                  onClick={item.clickHandler}
+                />
+                <span onClick={item.clickHandler}>{item.label}</span>
+              </Link>
+            ))}
           </div>
-        )}
+        </div>
       </div>
     )
   }

@@ -69,23 +69,14 @@ export default class AppBucket extends Component {
   }
   positionPopOver = () => {
     if (this.componentRef) {
-      console.log(
-        this.componentRef.parentNode.getBoundingClientRect(),
-        this.componentRef.getBoundingClientRect(),
-        window.innerWidth
-      )
       const parentData = this.componentRef.parentNode.getBoundingClientRect()
       const componentData = this.componentRef.getBoundingClientRect()
       if (
-        componentData.x - parentData.x + componentData.width ===
-        parentData.width
+        parentData.width -
+          (componentData.x - parentData.x + componentData.width) <
+        113
       ) {
         this.setState(() => ({ changePosition: true }))
-        console.log(
-          componentData.x - parentData.x + componentData.width ===
-            parentData.width,
-          'jdh'
-        )
       } else {
         this.setState(() => ({ changePosition: false }))
       }

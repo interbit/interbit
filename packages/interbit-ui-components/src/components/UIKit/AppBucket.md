@@ -23,7 +23,7 @@ initialState = { isVisible: false , isSecondVisible:false};
           icon: "placeholder.svg",
           to: "#",
           clickHandler: () => {
-            alert("It tickles");
+            alert("Clicked me");
           }
         },
         {
@@ -31,7 +31,7 @@ initialState = { isVisible: false , isSecondVisible:false};
           icon: "placeholder.svg",
           to: "#",
           clickHandler: () => {
-            alert("It tickles");
+            alert("Clicked me");
           }
         },
         {
@@ -39,7 +39,7 @@ initialState = { isVisible: false , isSecondVisible:false};
           icon: "placeholder.svg",
           to: "#",
           clickHandler: () => {
-            alert("It tickles");
+            alert("Clicked me");
           }
         },
         {
@@ -47,7 +47,7 @@ initialState = { isVisible: false , isSecondVisible:false};
           icon: "placeholder.svg",
           to: "#",
           clickHandler: () => {
-            alert("It tickles");
+            alert("Clicked me");
           }
         }
       ]}
@@ -71,7 +71,7 @@ initialState = { isVisible: false , isSecondVisible:false};
           icon: "placeholder.svg",
           to: "#",
           clickHandler: () => {
-            alert("It tickles");
+            alert("Clicked me");
           }
         },
         {
@@ -79,7 +79,7 @@ initialState = { isVisible: false , isSecondVisible:false};
           icon: "placeholder.svg",
           to: "#",
           clickHandler: () => {
-            alert("It tickles");
+            alert("Clicked me");
           }
         },
         {
@@ -87,7 +87,7 @@ initialState = { isVisible: false , isSecondVisible:false};
           icon: "placeholder.svg",
           to: "#",
           clickHandler: () => {
-            alert("It tickles");
+            alert("Clicked me");
           }
         },
         {
@@ -95,7 +95,7 @@ initialState = { isVisible: false , isSecondVisible:false};
           icon: "placeholder.svg",
           to: "#",
           clickHandler: () => {
-            alert("It tickles");
+            alert("Clicked me");
           }
         }
       ]}

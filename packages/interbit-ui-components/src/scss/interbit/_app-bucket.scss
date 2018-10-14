@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:500');
+@import "variables";
+
+.ibweb-app-bucket {
+  position: relative;
+
+  .arrow-up {
+    position: absolute;
+    bottom: 3px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+
+    border-bottom: 8px solid #fafafa;
+  }
+
+  .shown {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+  }
+
+  .fade-out {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.2s, opacity 0.2s  ease-in;
+
+    div {
+      margin-top: -10000px;
+      transition: margin-top 0s 0.2s;
+    }
+  }
+
+  .app-bucket-container {
+    position: absolute;
+    top: 44px;
+    overflow: hidden;
+    background-color: #fafafa;
+    box-shadow: 0 7px 8px rgba(0, 0, 0, 0.2), 0 5px 22px $ib-black-12, 0 12px 17px $ib-black-14;
+    border-radius: 2px;
+
+    > div {
+      height: 304px;
+      width: 252px;
+      padding: 28px;
+    }
+
+    .app-container {
+      float: left;
+      width: 80px;
+      text-align: center;
+      padding: 7px;
+      margin: 9px;
+      border: #fafafa solid 1px;
+
+      img {
+        width: 64px;
+      }
+
+      .app-label {
+        font-size: 14px;
+        color: $ib-black-60;
+        font-family: 'Roboto', sans-serif;
+        line-height: 14px;
+        margin-top: 8px;
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .app-container:hover {
+      border: $ib-black-12 solid 1px;
+      border-radius: 8px;
+    }
+
+  }
+
+}

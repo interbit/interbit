@@ -3,8 +3,10 @@ import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow, render } from 'enzyme'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import configureStore from 'redux-mock-store'
 import moment from 'moment'
 
+import AppBucketContainer, { AppBucket } from '../components/UIKit/AppBucket'
 import CallToAction from '../components/UIKit/CallToAction'
 import Card from '../components/UIKit/Card'
 import ConnectingTo from '../components/UIKit/ConnectingTo'
@@ -29,6 +31,80 @@ const countChildren = (parent, child, count) => {
   const wrapper = shallow(parent)
   expect(wrapper.find(child).length).toBe(count)
 }
+
+describe('<AppBucket/>', () => {
+  const initialState = { appBucket: { isVisible: true } }
+  const mockStore = configureStore()
+
+  const props = {
+    items: [
+      {
+        label: 'First App',
+        icon: 'https://via.placeholder.com/64x64',
+        to: '/app-1',
+        clickHandler: () => {}
+      },
+      {
+        label: 'Second App',
+        icon: 'https://via.placeholder.com/64x64',
+        to: '/app-2'
+      },
+      {
+        label: 'Third App',
+        icon: 'https://via.placeholder.com/64x64',
+        to: '/app-3'
+      },
+      {
+        label: 'Fourth App',
+        icon: 'https://via.placeholder.com/64x64',
+        to: '/app-4'
+      }
+    ]
+  }
+
+  const store = mockStore(initialState)
+  const container = shallow(<AppBucketContainer store={store} {...props} />)
+  const dummy = shallow(
+    <AppBucket
+      items={props.items}
+      isVisible
+      history={{}}
+      toggleAppBucketAction={() => {}}
+    />
+  )
+
+  it('render the connected(SMART) component', () => {
+    expect(container.length).toEqual(1)
+  })
+
+  it('check Prop matches with initialState', () => {
+    expect(container.prop('isVisible')).toEqual(
+      initialState.appBucket.isVisible
+    )
+  })
+
+  it('render a <AppBucket> component with correct number of app icons', () => {
+    expect(dummy.find('div.app-container').length).toBe(props.items.length)
+  })
+
+  it('render app names passed in through the `items` prop', () => {
+    const expectedAppNames = props.items.map(item => item.label)
+    const renderedAppNames = dummy
+      .find('div.app-label')
+      .map(label => label.text())
+
+    expect(renderedAppNames).toEqual(expect.arrayContaining(expectedAppNames))
+    expect(expectedAppNames).toEqual(expect.arrayContaining(renderedAppNames))
+  })
+
+  it('render app icons passed in through the `items` prop', () => {
+    const expectedAppIcons = props.items.map(item => item.icon)
+    const renderedAppIcons = dummy.find('img').map(img => img.prop('src'))
+
+    expect(renderedAppIcons).toEqual(expect.arrayContaining(expectedAppIcons))
+    expect(expectedAppIcons).toEqual(expect.arrayContaining(renderedAppIcons))
+  })
+})
 
 describe('<CallToAction />', () => {
   const props = {}

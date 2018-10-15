@@ -28,7 +28,9 @@ export default class AppBucket extends Component {
     /** The function that is triggered on click outside of the bucket */
     closeAppBucket: PropTypes.func.isRequired,
     /** The function that is triggered when AppBucket icon is clicked to toggle the state of AppBucket */
-    toggleAppBucket: PropTypes.func.isRequired
+    toggleAppBucket: PropTypes.func.isRequired,
+    /**This prop is for applying custom style on AppBucket*/
+    customStyles: PropTypes.object
   }
 
   static defaultProps = {
@@ -99,9 +101,9 @@ export default class AppBucket extends Component {
 
   render() {
     const { changePosition } = this.state
-    const { items, isVisible } = this.props
+    const { items, isVisible, customStyles } = this.props
     return (
-      <div className="ibweb-app-bucket" ref={this.setComponentRef}>
+      <div className="ibweb-app-bucket" ref={this.setComponentRef} style = {customStyles}>
         <img
           className="ibweb-app-bucket-icon"
           id="icon"

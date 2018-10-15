@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import { Button } from 'react-bootstrap'
 import Divider from './Divider'
 import defaultAvatar from '../../assets/icons/default-avatar.svg'
 
@@ -54,7 +55,9 @@ export default class ActivityBar extends Component {
           <ul className="activity-bar-breadcrumb">
             {breadcrumb.map((item, index) => (
               <li key={`item-${index}`}>
-                <a onClick={item.clickHandler}>{item.title}</a>
+                <Button onClick={item.clickHandler} bsStyle="link">
+                  {item.title}
+                </Button>
               </li>
             ))}
           </ul>
@@ -62,15 +65,13 @@ export default class ActivityBar extends Component {
         </div>
         <Divider />
         <div className="content">
-          <img
-            src={avatar || defaultAvatar}
-            alt={firstName}
-            onClick={userClickHandler}
-          />
+          <Button onClick={userClickHandler} bsStyle="link">
+            <img src={avatar || defaultAvatar} alt={firstName} />
+          </Button>
           <div>
-            <span className="name" onClick={userClickHandler}>
+            <Button onClick={userClickHandler} className="name" bsStyle="link">
               {firstName} {secondName}
-            </span>
+            </Button>
             <div className="body">
               {change && (
                 <div>

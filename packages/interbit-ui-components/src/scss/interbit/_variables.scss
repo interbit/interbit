@@ -57,6 +57,7 @@ $ib-grid-max-width: 1280px;
 
 // Interbit website colours, temporary. Use these variables in the CSS for now.
 $ib-black:            #000000;
+$ib-opaque-black:     rgba(0,0,0,0.5);
 $ib-grey:             #F7F7F7;
 $ib-dark-grey:        #e7e7e7;
 $ib-text-grey:        #666666;
@@ -67,6 +68,7 @@ $ib-light-blue:       rgba(23, 166, 242, .1);
 $ib-red:              #d0021b;
 $ib-black-20:         #CECECE;
 $ib-aqua-100:         #21D6D6;
+$ib-dark-blue:        #007FA0;
 
 // Colours for CSS grid redesign
 $ib-grid-med-grey:    #E6E6E6;

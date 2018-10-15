@@ -30,8 +30,8 @@
         display: inline;
         font-size: 12px;
 
-        a {
-          cursor: pointer;
+        .btn-link {
+          padding: 0;
         }
       }
 
@@ -61,11 +61,14 @@
     display: grid;
     grid-template-columns: 56px minmax(232px, 512px);
 
-    img {
+    .btn-link {
+      padding: 0;
+    }
+
+    & > .btn-link {
       height: 40px;
       width: 40px;
       margin-right: $margin-sm;
-      cursor: pointer;
     }
 
     .name {
@@ -77,7 +80,6 @@
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
-      cursor: pointer;
       margin-bottom: $margin-xx-sm;
     }
 

@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'mixins';
 
+/* stylelint-disable selector-class-pattern */
 .App {
   .Project-item {
     .Project-container {
@@ -267,3 +268,5 @@
     }
   }
 }
+
+/* stylelint-enable */

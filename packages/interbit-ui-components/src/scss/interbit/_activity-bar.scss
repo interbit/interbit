@@ -35,7 +35,7 @@
         }
       }
 
-      li + li:before {
+      li + li::before {
         padding: 4px;
         color: black;
         content: ">";

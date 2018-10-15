@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'mixins';
 
+/* stylelint-disable selector-class-pattern */
 .ReactVirtualized__Table {
   background-color: $alt-gray;
 
@@ -21,3 +22,5 @@
     cursor: default !important;
   }
 }
+
+/* stylelint enable */

@@ -13,9 +13,13 @@
     "heroku-postbuild": "npm run build",
     "start": "cross-env-shell lerna run --scope $APP_NAME serve --stream",
     "test": "npm run lint && lerna run --parallel test -- -- --coverage",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "codelint": "eslint .",
+    "codelint:fix": "eslint . --fix",
+    "lint": "eslint . && stylelint \"**/*.scss\"",
+    "lint:fix": "eslint . --fix && stylelint \"**/*.scss\" --fix",
     "release": "npm run build:modules && lerna publish --force-publish=* --exact --conventional-commits",
+    "stylelint": "stylelint \"**/*.scss\"",
+    "stylelint:fix": "stylelint \"**/*.scss\" --fix",
     "coverage": "npm run test && lerna run --scope utils coverage"
   },
   "devDependencies": {
@@ -33,7 +37,9 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.4.0",
     "eslint-plugin-standard": "^3.0.1",
-    "prettier": "^1.6.1"
+    "prettier": "^1.6.1",
+    "stylelint": "^9.6.0",
+    "stylelint-config-standard": "^18.2.0"
   },
   "engines": {
     "npm": "5.6.0",

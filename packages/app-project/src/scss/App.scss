@@ -2,6 +2,9 @@
 @import 'mixins';
 
 /* stylelint-disable selector-class-pattern */
+
+/* Disable class name format check for legacy styles */
+
 .App {
   .Project-item {
     .Project-container {

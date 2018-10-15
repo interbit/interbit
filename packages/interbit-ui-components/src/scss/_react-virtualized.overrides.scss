@@ -2,6 +2,9 @@
 @import 'mixins';
 
 /* stylelint-disable selector-class-pattern */
+
+/* Disable class name format check for legacy styles */
+
 .ReactVirtualized__Table {
   background-color: $alt-gray;
 

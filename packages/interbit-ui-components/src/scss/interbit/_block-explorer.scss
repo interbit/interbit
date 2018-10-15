@@ -1,5 +1,7 @@
 /* stylelint-disable selector-class-pattern */
 
+/* Disable class name format check for legacy styles */
+
 .ibweb-block-explorer {
   // Make the table 50vh tall, and have the history use remaining space  (less than 50vh)
   $form-height: 50px;

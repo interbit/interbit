@@ -6,6 +6,40 @@
   border-radius: $border-radius-sm;
   margin: 0 0 $margin-sm 0;
 
+  .content {
+    padding: $margin-sm;
+    padding-top: 0;
+    display: grid;
+    grid-template-columns: 56px minmax(232px, 512px);
+
+    .btn-link {
+      padding: 0;
+    }
+
+    & > .btn-link {
+      height: 40px;
+      width: 40px;
+      margin-right: $margin-sm;
+    }
+
+    .name {
+      color: $ib-dark-blue;
+      font-size: $font-size-x-sm;
+      font-weight: 700;
+      display: inline-block;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-bottom: $margin-xx-sm;
+    }
+
+    .body {
+      color: rgba(0, 0, 0, 0.85);
+      font-size: $font-size-xx-sm;
+    }
+  }
+
   .meta-data {
     display: flex;
     justify-content: space-between;
@@ -53,39 +87,5 @@
   .ibweb-divider {
     width: 100%;
     border-top: 1px solid $ib-white;
-  }
-
-  .content {
-    padding: $margin-sm;
-    padding-top: 0;
-    display: grid;
-    grid-template-columns: 56px minmax(232px, 512px);
-
-    .btn-link {
-      padding: 0;
-    }
-
-    & > .btn-link {
-      height: 40px;
-      width: 40px;
-      margin-right: $margin-sm;
-    }
-
-    .name {
-      color: $ib-dark-blue;
-      font-size: $font-size-x-sm;
-      font-weight: 700;
-      display: inline-block;
-      max-width: 100%;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
-      margin-bottom: $margin-xx-sm;
-    }
-
-    .body {
-      color: rgba(0, 0, 0, 0.85);
-      font-size: $font-size-xx-sm;
-    }
   }
 }

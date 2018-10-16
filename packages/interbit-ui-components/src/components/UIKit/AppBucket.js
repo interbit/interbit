@@ -62,9 +62,23 @@ export class AppBucket extends React.Component {
     }
   }
 
+  positionPopOver = () => {
+    if (this.appBucketContainer) {
+      const parentData = this.appBucketContainer.parentNode.parentNode.getBoundingClientRect()
+      const componentData = this.appBucketContainer.getBoundingClientRect()
+      const iconArrowData = this.iconArrow.getBoundingClientRect()
+
+      if (parentData.right < componentData.right) {
+        return { right: 0 }
+      }
+      const newLeft = (-1 * (componentData.width - iconArrowData.width)) / 2
+      return { left: newLeft }
+    }
+    return null
+  }
+
   render = () => {
     const { items, isVisible } = this.props
-
     return (
       <div className="ibweb-app-bucket">
         <IconButton
@@ -72,12 +86,19 @@ export class AppBucket extends React.Component {
           color="inherit"
           onClick={this.toggleAppBucket}>
           <Apps />
-          <div className={`arrow-up ${isVisible ? 'shown' : 'fade-out'}`} />
+          <div
+            className={`arrow-up ${isVisible ? 'shown' : 'fade-out'}`}
+            ref={iconArrow => {
+              this.iconArrow = iconArrow
+            }}
+          />
         </IconButton>
         <div
-          className={`app-bucket-container ${
-            isVisible ? 'shown' : 'fade-out'
-          }`}>
+          className={`app-bucket-container ${isVisible ? 'shown' : 'fade-out'}`}
+          ref={appBucketContainer => {
+            this.appBucketContainer = appBucketContainer
+          }}
+          style={this.positionPopOver()}>
           <div>
             {items.map((item, index) => (
               <Link

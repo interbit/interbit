@@ -34,7 +34,7 @@ export default class AppBucket extends Component {
     customStyles: PropTypes.object,
     /** Is `true` if popover position needs to be change */
     changePosition: PropTypes.bool,
-    /** The function that decides to change the position of popover or not */
+    /** The function that changes the position of popover */
     changePopOverPosition: PropTypes.func.isRequired
   }
 
@@ -72,6 +72,8 @@ export default class AppBucket extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside)
     window.addEventListener('resize', this.positionPopOver)
   }
+  // Changes the position of popover on the basis of its position(App-Bucket Component)
+  // in the parent container
   positionPopOver = () => {
     if (this.componentRef) {
       const parentData = this.componentRef.parentNode.getBoundingClientRect()

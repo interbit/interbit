@@ -1,5 +1,6 @@
 .ibweb-app-bucket {
-  $app-bucket-transition: opacity 0.2s, visibility 0.2s;
+  $app-bucket-transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1) 150ms,
+    visibility 0.2s cubic-bezier(0.4, 0, 0.2, 1) 150ms;
   position: relative;
 
   .ibweb-app-bucket-content::before {
@@ -45,11 +46,11 @@
       transition: $app-bucket-transition;
     }
   }
-  .position-arrow{
+  .position-arrow {
     left: -208px;
   }
-  .position-arrow::before{
-    left: calc(100% + 10px)
+  .position-arrow::before {
+    left: calc(100% + 10px);
   }
 
   .ibweb-app-bucket-content-items {
@@ -85,7 +86,7 @@
       white-space: nowrap;
       text-align: center;
       font-size: $font-size-x-sm;
-      margin-bottom: $margin-x-sm
+      margin-bottom: $margin-x-sm;
     }
   }
 }

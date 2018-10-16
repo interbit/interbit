@@ -1,14 +1,7 @@
 .ibweb-app-bucket {
   $app-bucket-transition: opacity 0.2s, visibility 0.2s;
   position: relative;
-  width:24px;
 
-
-  .ibweb-app-bucket-icon {
-    cursor: pointer;
-    position: relative;
-    z-index: 1000;
-  }
   .ibweb-app-bucket-content::before {
     position: relative;
     content: "";
@@ -23,8 +16,8 @@
     min-height: 304px;
     width: 252px;
     padding: 40px;
-    left: -114px;
-    top: 38px;
+    left: -102px;
+    top: 48px;
     z-index: 9999;
     background-color: $ib-white;
     box-shadow: 0 8px 15px 0 $ib-black-opaque-25,
@@ -53,7 +46,7 @@
     }
   }
   .position-arrow{
-    left: -220px;
+    left: -208px;
   }
   .position-arrow::before{
     left: calc(100% + 10px)

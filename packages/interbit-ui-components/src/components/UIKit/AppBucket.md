@@ -12,8 +12,14 @@ const SearchIcon = require("@material-ui/icons").Search;
 const AccountCircle = require("@material-ui/icons").AccountCircle;
 const MailIcon = require("@material-ui/icons").Mail;
 const NotificationsIcon = require("@material-ui/icons").Notifications;
+const AppIcon = require("@material-ui/icons").Apps;
 
-initialState = { isVisible: false, isSecondVisible: false };
+initialState = {
+  isVisible: false,
+  changePosition: false,
+  changeSecondPosition: false,
+  isSecondVisible: false
+};
 
 <BrowserRouter>
   <React.Fragment>
@@ -35,6 +41,10 @@ initialState = { isVisible: false, isSecondVisible: false };
             setState(prevState => ({
               isVisible: !prevState.isVisible
             }));
+          }}
+          changePosition={state.changePosition}
+          changePopOverPosition={changePosition => {
+            setState({ changePosition });
           }}
           items={[
             {
@@ -70,7 +80,11 @@ initialState = { isVisible: false, isSecondVisible: false };
               }
             }
           ]}
-        />
+        >
+          <IconButton color="inherit" aria-label="AppIcon">
+            <AppIcon />
+          </IconButton>
+        </AppBucket>
         <IconButton color="inherit" aria-label="AccountCircle">
           <AccountCircle />
         </IconButton>
@@ -82,7 +96,7 @@ initialState = { isVisible: false, isSecondVisible: false };
         </IconButton>
       </Toolbar>
     </AppBar>
-    
+
     <div style={{ margin: "10px 0" }} />
 
     <AppBar color="primary" position="static">
@@ -114,6 +128,10 @@ initialState = { isVisible: false, isSecondVisible: false };
               isSecondVisible: !prevState.isSecondVisible
             }));
           }}
+          changePosition={state.changeSecondPosition}
+          changePopOverPosition={changePosition => {
+            setState({ changeSecondPosition: changePosition });
+          }}
           items={[
             {
               label: "App",
@@ -148,7 +166,11 @@ initialState = { isVisible: false, isSecondVisible: false };
               }
             }
           ]}
-        />
+        >
+          <IconButton color="inherit" aria-label="AppIcon">
+            <AppIcon />
+          </IconButton>
+        </AppBucket>
       </Toolbar>
     </AppBar>
   </React.Fragment>

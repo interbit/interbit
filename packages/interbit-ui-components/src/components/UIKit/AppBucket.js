@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import appBucket from '../../assets/icons/app-bucket.svg'
 
 /**
  * The *AppBucket* is a React UI component that behaves as a popover-style
@@ -23,26 +22,30 @@ export default class AppBucket extends Component {
         clickHandler: PropTypes.func
       })
     ).isRequired,
+    /** The element which will be rendered to open AppBucket */
+    children: PropTypes.node.isRequired,
     /** Is `true` if the `AppBucket` is visible. This `prop` is updated via `mapStateToProps` from `react-redux`. */
     isVisible: PropTypes.bool,
     /** The function that is triggered on click outside of the bucket */
     closeAppBucket: PropTypes.func.isRequired,
     /** The function that is triggered when AppBucket icon is clicked to toggle the state of AppBucket */
     toggleAppBucket: PropTypes.func.isRequired,
-    /**This prop is for applying custom style on AppBucket*/
-    customStyles: PropTypes.object
+    /** This prop is for applying custom style on AppBucket */
+    customStyles: PropTypes.object,
+    /** Is `true` if popover position needs to be change */
+    changePosition: PropTypes.bool,
+    /** The function that decides to change the position of popover or not */
+    changePopOverPosition: PropTypes.func.isRequired
   }
 
   static defaultProps = {
-    isVisible: false
+    isVisible: false,
+    customStyles: {},
+    changePosition: false
   }
 
   constructor(props) {
     super(props)
-
-    this.state = {
-      changePosition: false
-    }
 
     this.contentRef = null
     this.iconRef = null
@@ -78,9 +81,7 @@ export default class AppBucket extends Component {
           (componentData.x - parentData.x + componentData.width) <
         113
       ) {
-        this.setState(() => ({ changePosition: true }))
-      } else {
-        this.setState(() => ({ changePosition: false }))
+        this.props.changePopOverPosition(true)
       }
     }
   }
@@ -100,18 +101,25 @@ export default class AppBucket extends Component {
   }
 
   render() {
-    const { changePosition } = this.state
-    const { items, isVisible, customStyles } = this.props
+    const {
+      items,
+      isVisible,
+      customStyles,
+      changePosition,
+      children
+    } = this.props
     return (
-      <div className="ibweb-app-bucket" ref={this.setComponentRef} style = {customStyles}>
-        <img
+      <div
+        className="ibweb-app-bucket"
+        ref={this.setComponentRef}
+        style={customStyles}>
+        <div
           className="ibweb-app-bucket-icon"
           id="icon"
-          src={appBucket}
-          alt="app-bucket"
           onClick={this.toggleAppBucket}
-          ref={this.setIconRef}
-        />
+          ref={this.setIconRef}>
+          {children}
+        </div>
         <div
           className={`${
             isVisible ? 'show-bucket' : 'hide-bucket'

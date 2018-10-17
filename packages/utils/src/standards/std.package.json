@@ -17,7 +17,7 @@
     "codelint:fix": "eslint . --fix",
     "lint": "eslint . && stylelint \"**/*.scss\"",
     "lint:fix": "eslint . --fix && stylelint \"**/*.scss\" --fix",
-    "release": "npm run build:modules && lerna publish --force-publish=* --exact --conventional-commits",
+    "release": "cross-env-shell NODE_ENV=production npm run build:modules && lerna publish --force-publish=* --exact --conventional-commits",
     "stylelint": "stylelint \"**/*.scss\"",
     "stylelint:fix": "stylelint \"**/*.scss\" --fix",
     "coverage": "npm run test && lerna run --scope utils coverage"

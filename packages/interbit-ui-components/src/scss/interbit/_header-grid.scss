@@ -15,26 +15,27 @@
         display: inline-block;
         margin-bottom: 0;
 
-        &.disabled a {
-          color: $ib-nav-grey;
-        }
-
-        &.disabled.signed-in a {
-          color: $ib-grid-green;
-        }
-
         a {
           padding: 5px 8px;
           color: $ib-grid-blue;
           font-weight: 700;
         }
 
-        a:hover, a:focus {
+        a:hover,
+        a:focus {
           background-color: transparent;
         }
 
         a.active {
           color: $ib-nav-grey;
+        }
+
+        &.disabled a {
+          color: $ib-nav-grey;
+        }
+
+        &.disabled.signed-in a {
+          color: $ib-grid-green;
         }
       }
     }

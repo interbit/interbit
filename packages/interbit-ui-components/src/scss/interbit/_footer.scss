@@ -22,6 +22,15 @@
       text-decoration: none;
     }
 
+    .copyright {
+      text-align: center;
+      color: #666;
+
+      a {
+        margin-right: $margin-sm;
+      }
+    }
+
     #footer-accordion {
       padding: 0 10px;
 
@@ -47,19 +56,21 @@
             font-weight: 700;
           }
 
-          a:hover, a:focus, a:active {
+          a:hover,
+          a:focus,
+          a:active {
             text-decoration: none;
           }
 
-          a:after {
+          a::after {
             position: absolute;
             right: 0;
-            font-family: FontAwesome;
+            font-family: FontAwesome, sans-serif;
             content: '\f0d7';
             color: $ib-blue;
           }
 
-          a[aria-expanded=true]:after {
+          a[aria-expanded=true]::after {
             content: '\f0d8';
           }
         }
@@ -71,15 +82,6 @@
       }
     }
   }
-
-  .copyright {
-    text-align: center;
-    color: #666;
-
-    a {
-      margin-right: $margin-sm;
-    }
-  }
 }
 
 @media (max-width: $screen-lg-min - 1) {
@@ -88,7 +90,7 @@
       padding: $margin-sm;
 
       .ibweb-ib-logo {
-        margin: $margin-sm 0 $margin-sm $margin-md
+        margin: $margin-sm 0 $margin-sm $margin-md;
       }
 
       #footer-accordion {
@@ -113,7 +115,7 @@
     .copyright {
       a {
         display: inline-block;
-        margin-bottom: $margin-x-sm
+        margin-bottom: $margin-x-sm;
       }
 
       span {
@@ -126,4 +128,3 @@
     margin: 0 4px $margin-sm 4px;
   }
 }
-

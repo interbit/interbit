@@ -1,13 +1,5 @@
 .ibweb.app-interbit-io .ibweb-page.home .header, .ibweb.app-interbit-io .ibweb-page.ib-for-business .header, .ibweb.app-interbit-io .ibweb-page.platform .header {
   margin-top: -64px; }
-.ibweb.app-interbit-io .ibweb-page.policy {
-  margin-top: 96px; }
-  @media (max-width: 1023px) {
-    .ibweb.app-interbit-io .ibweb-page.policy {
-      margin-top: 64px; } }
-  @media (max-width: 629px) {
-    .ibweb.app-interbit-io .ibweb-page.policy {
-      margin-top: 0; } }
 .ibweb.app-interbit-io .ibweb-page.platform .logos h4 {
   margin-bottom: 32px; }
 .ibweb.app-interbit-io .ibweb-page.platform .logos .logo {
@@ -16,10 +8,10 @@
   margin-bottom: 16px; }
 .ibweb.app-interbit-io .ibweb-page.platform .app-section .links {
   margin-bottom: 32px; }
-  .ibweb.app-interbit-io .ibweb-page.platform .app-section .links a:after {
+  .ibweb.app-interbit-io .ibweb-page.platform .app-section .links a::after {
     display: inline-block;
     margin-left: 8px;
-    font-family: FontAwesome;
+    font-family: FontAwesome, sans-serif;
     content: '\f105'; }
 .ibweb.app-interbit-io .ibweb-page.platform .app-section .ibweb-card {
   height: 230px; }
@@ -67,19 +59,27 @@
   margin-bottom: 32px; }
 .ibweb.app-interbit-io .ibweb-page.dev-support .sections .row:last-child {
   margin-bottom: 64px; }
-.ibweb.app-interbit-io .ibweb-page.policy .policy-content ol {
-  margin: 32px 0 8px 32px;
-  list-style-type: decimal;
-  font-size: 22px;
-  color: #666; }
-  .ibweb.app-interbit-io .ibweb-page.policy .policy-content ol li {
-    margin-bottom: 32px; }
-.ibweb.app-interbit-io .ibweb-page.policy .policy-content ul {
-  margin: 8px 0 8px 32px;
-  list-style-type: disc;
-  font-size: 22px;
-  color: #666; }
-.ibweb.app-interbit-io .ibweb-page.policy .policy-content .subsection {
-  margin-left: 64px; }
+.ibweb.app-interbit-io .ibweb-page.policy {
+  margin-top: 96px; }
+  @media (max-width: 1023px) {
+    .ibweb.app-interbit-io .ibweb-page.policy {
+      margin-top: 64px; } }
+  @media (max-width: 629px) {
+    .ibweb.app-interbit-io .ibweb-page.policy {
+      margin-top: 0; } }
+  .ibweb.app-interbit-io .ibweb-page.policy .policy-content ol {
+    margin: 32px 0 8px 32px;
+    list-style-type: decimal;
+    font-size: 22px;
+    color: #666; }
+    .ibweb.app-interbit-io .ibweb-page.policy .policy-content ol li {
+      margin-bottom: 32px; }
+  .ibweb.app-interbit-io .ibweb-page.policy .policy-content ul {
+    margin: 8px 0 8px 32px;
+    list-style-type: disc;
+    font-size: 22px;
+    color: #666; }
+  .ibweb.app-interbit-io .ibweb-page.policy .policy-content .subsection {
+    margin-left: 64px; }
 
 /*# sourceMappingURL=App.css.map */

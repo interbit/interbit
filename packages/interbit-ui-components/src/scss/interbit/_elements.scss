@@ -6,6 +6,7 @@ html {
 
 body {
   @include body-font;
+
   font-size: $font-size-sm;
 }
 
@@ -22,6 +23,7 @@ p {
 
 h1 {
   @include heading-font;
+
   margin: 0 0 $margin-md 0;
   font-size: $font-size-xx-lg;
   line-height: 1.33;
@@ -29,6 +31,7 @@ h1 {
 
 h2 {
   @include heading-font;
+
   margin: 0 0 $margin-sm 0;
   font-size: $font-size-x-lg;
   line-height: 1.25;
@@ -36,6 +39,7 @@ h2 {
 
 h3 {
   @include heading-font;
+
   margin: 0 0 $margin-x-sm 0;
   font-size: $font-size-lg;
   line-height: 1.33;
@@ -43,12 +47,14 @@ h3 {
 
 h4 {
   @include heading-font;
+
   margin: 0 0 $margin-x-sm 0;
   font-size: $font-size-sm;
   line-height: 1.5;
 }
 
-ol, ul {
+ol,
+ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -68,10 +74,6 @@ a {
   }
 }
 
-
-@media (max-width: $screen-lg-min - 1) {
-}
-
 @media (max-width: $screen-sm-min - 1) {
   p {
     margin-bottom: $margin-sm;
@@ -81,7 +83,4 @@ a {
     font-size: $font-size-x-lg;
     margin-bottom: $margin-sm;
   }
-
 }
-
-

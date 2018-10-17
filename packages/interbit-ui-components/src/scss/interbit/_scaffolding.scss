@@ -6,6 +6,7 @@
 
   .ibweb-image-full-width {
     width: 100%;
+
     &.header {
       position: relative;
       margin-top: -1px;
@@ -23,9 +24,11 @@
     display: -ms-flexbox;
     display: flex;
   }
+
   .flex.center {
     align-items: center;
   }
+
   .flex.right {
     justify-content: flex-end;
   }
@@ -39,28 +42,28 @@
   .ibweb-mg-sm {
     margin-bottom: $margin-sm;
   }
+
   .ibweb-mg-md {
     margin-bottom: $margin-md;
   }
+
   .ibweb-mg-lg {
     margin-bottom: $margin-lg;
   }
+
   .ibweb-mg-xx-lg {
     margin-bottom: $margin-xx-lg;
   }
 }
 
-@media (max-width: $screen-lg-min - 1) {
-
-}
-
 @media (max-width: $screen-sm-min - 1) {
   .ibweb {
-
+    /* stylelint-disable  selector-list-comma-newline-after */
     .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
       padding-left: $margin-sm;
       padding-right: $margin-sm;
     }
+    /* stylelint-enable */
 
     .ibweb-image-full-width.bleed {
       width: calc(100% + 32px);
@@ -81,12 +84,15 @@
     .ibweb-mg-sm-scr-xs {
       margin-bottom: $margin-sm;
     }
+
     .ibweb-mg-md-scr-xs {
       margin-bottom: $margin-md;
     }
+
     .ibweb-mg-lg-scr-xs {
       margin-bottom: $margin-lg;
     }
+
     .ibweb-mg-xx-lg-scr-xs {
       margin-bottom: $margin-xx-lg;
     }
@@ -94,7 +100,7 @@
 }
 
 // new scaffolding styles based on CSS grid
-.ibweb .ibweb-page{
+.ibweb .ibweb-page {
   padding: 16px;
 
   .grid-cont {
@@ -111,6 +117,7 @@
           grid-column: 3 / span 1;
           grid-row: 1 / span 1;
         }
+
         .intro {
           grid-column: 1 / span 2;
           grid-row: 2 / span 1;
@@ -122,21 +129,25 @@
           grid-column: 1 / span 1;
           grid-row: 1 / span 1;
         }
+
         .heading-right {
           grid-column: 3 / span 1;
           grid-row: 1 / span 1;
           justify-self: right;
         }
+
         .line {
           grid-column: 1 / span 3;
           grid-row: 2 / span 1;
           border-bottom: 1px solid $ib-grid-med-grey;
           margin: 16px 0;
         }
+
         .col-left {
           grid-column: 1 / span 1;
           grid-row: 3 / span 1;
         }
+
         .col-right {
           grid-column: 3 / span 1;
           grid-row: 3 / span 1;
@@ -154,6 +165,7 @@
             grid-column: 2 / span 1;
             grid-row: 1 / span 1;
           }
+
           .intro {
             grid-column: 2 / span 1;
             grid-row: 2 / span 1;
@@ -165,24 +177,27 @@
             grid-column: 2 / span 1;
             grid-row: 1 / span 1;
           }
+
           .line {
             grid-column: 2 / span 1;
             grid-row: 2 / span 1;
           }
+
           .col-left {
             grid-column: 2 / span 1;
             grid-row: 3 / span 1;
           }
+
           .heading-right {
             grid-column: 2 / span 1;
             grid-row: 4 / span 1;
           }
+
           .col-right {
             grid-column: 2 / span 1;
             grid-row: 5 / span 1;
           }
         }
-
       }
     }
   }

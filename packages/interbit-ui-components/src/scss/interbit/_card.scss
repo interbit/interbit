@@ -7,7 +7,7 @@
     border-radius: $border-radius-md;
     margin-bottom: $margin-sm;
 
-    &:before {
+    &::before {
       display: block;
       content: '';
       padding-top: 100%;
@@ -27,10 +27,10 @@
   }
 
   .links {
-    a:after {
+    a::after {
       display: inline-block;
       margin-left: 8px;
-      font-family: FontAwesome;
+      font-family: FontAwesome, sans-serif;
       content: '\f105';
     }
   }
@@ -44,7 +44,7 @@
     }
 
     h3 {
-      font-size: $font-size-sm
+      font-size: $font-size-sm;
     }
 
     .content {
@@ -72,6 +72,5 @@
         min-height: 0;
       }
     }
-
   }
 }

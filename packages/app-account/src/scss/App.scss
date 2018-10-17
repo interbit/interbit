@@ -1,6 +1,24 @@
 @import 'variables';
 
 .ibweb.app-account {
+  .ibweb-page.home {
+    .header {
+      margin-top: -17px;
+
+      @media (max-width: $screen-sm - 1) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .ibweb-page.create-account {
+    .ibweb-content-bar.github {
+      .error {
+        color: $ib-red;
+      }
+    }
+  }
+
   .ibweb-navbar {
     .ibweb-ib-icon {
       padding: 18px 0;
@@ -61,7 +79,7 @@
     &.active:hover,
     &.active:focus,
     &.active.focus {
-      background: #FFF;
+      background: #fff;
       outline: 0;
       -webkit-box-shadow: none;
       box-shadow: none;
@@ -149,34 +167,13 @@
   }
 }
 
-
-.ibweb.app-account {
-  .ibweb-page.home {
-    .header {
-      margin-top: -17px;
-
-      @media (max-width: $screen-sm - 1) {
-        margin-top: 0;
-      }
-    }
-  }
-
-  .ibweb-page.create-account {
-    .ibweb-content-bar.github {
-      .error {
-        color: $ib-red;
-      }
-    }
-  }
-}
-
-
 .ibweb-modal-wrapper.modal-sign-in {
   .modal-header {
     h2 span {
       word-break: break-all;
     }
   }
+
   .modal-footer {
     .text-button:last-child {
       float: right;

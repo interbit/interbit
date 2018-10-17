@@ -11,7 +11,6 @@ $container-tablet: $screen-sm - 2*$grid-gutter-width;
 
 $navbar-border-radius: 0;
 
-
 // Functions
 $browser-context: 16;
 
@@ -26,7 +25,6 @@ $browser-context: 16;
 
   @return $pixels / $context * 1rem;
 }
-
 
 // Font sizes
 $font-size-xx-sm:     rem(12);
@@ -56,24 +54,34 @@ $border-radius-lg:    30px;
 $ib-grid-max-width: 1280px;
 
 // Interbit website colours, temporary. Use these variables in the CSS for now.
-$ib-black:            #000000;
-$ib-opaque-black:     rgba(0,0,0,0.5);
-$ib-grey:             #F7F7F7;
+$ib-black:            #000;
+$ib-opaque-black:     rgba(0, 0, 0, 0.5);
+$ib-grey:             #f7f7f7;
 $ib-dark-grey:        #e7e7e7;
-$ib-text-grey:        #666666;
+$ib-text-grey:        #666;
 $ib-nav-grey:         #828282;
-$ib-white:            #FFFFFF;
-$ib-blue:             #17A6F2;
-$ib-light-blue:       rgba(23, 166, 242, .1);
+$ib-white:            #fff;
+$ib-blue:             #17a6f2;
+$ib-light-blue:       rgba(23, 166, 242, 0.1);
 $ib-red:              #d0021b;
-$ib-black-20:         #CECECE;
-$ib-aqua-100:         #21D6D6;
-$ib-dark-blue:        #007FA0;
+$ib-black-20:         #cecece;
+$ib-aqua-100:         #21d6d6;
 
 // Colours for CSS grid redesign
-$ib-grid-med-grey:    #E6E6E6;
-$ib-grid-blue:        #1385E8;
-$ib-grid-green:       #00A451;
-$ib-grid-pale-blue:   #D5E1EB;
-$ib-grid-red:         #EB5757;
-$ib-grid-yellow:      #F3C94C;
+$ib-grid-med-grey:    #e6e6e6;
+$ib-grid-blue:        #1385e8;
+$ib-grid-green:       #00a451;
+$ib-grid-pale-blue:   #d5e1eb;
+$ib-grid-red:         #eb5757;
+$ib-grid-yellow:      #f3c94c;
+$ib-black-20:         #cecece;
+$ib-aqua-100:         #21d6d6;
+$ib-dark-blue:        #007fa0;
+
+// Colours for CSS grid redesign
+$ib-grid-med-grey:    #e6e6e6;
+$ib-grid-blue:        #1385e8;
+$ib-grid-green:       #00a451;
+$ib-grid-pale-blue:   #d5e1eb;
+$ib-grid-red:         #eb5757;
+$ib-grid-yellow:      #f3c94c;

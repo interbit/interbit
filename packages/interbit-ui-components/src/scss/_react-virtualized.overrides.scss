@@ -1,6 +1,10 @@
 @import 'variables';
 @import 'mixins';
 
+/* stylelint-disable selector-class-pattern */
+
+/* Disable class name format check for legacy styles */
+
 .ReactVirtualized__Table {
   background-color: $alt-gray;
 
@@ -15,8 +19,11 @@
 
   .ReactVirtualized__Table__headerRow {
     @include header;
+
     padding-top: 6px;
     height: $react-virtualized-header-height;
     cursor: default !important;
   }
 }
+
+/* stylelint enable */

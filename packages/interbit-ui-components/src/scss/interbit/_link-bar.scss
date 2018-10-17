@@ -5,27 +5,7 @@
   border-radius: $border-radius-lg;
   border: 1px solid $ib-grid-med-grey;
   color: $ib-blue;
-  transition: box-shadow .5s;
-
-  .media-left {
-    padding-right: 16px;
-
-    img {
-      border-radius: $border-radius-md;
-    }
-  }
-
-  .media-body {
-    h3 {
-      color: $ib-blue;
-    }
-    p {
-      color: $ib-blue;
-    }
-    p:last-child {
-      margin-bottom: 0;
-    }
-  }
+  transition: box-shadow 0.5s;
 
   &:last-child {
     margin-bottom: 0;
@@ -44,7 +24,8 @@
     border-color: $ib-blue;
     color: $ib-white;
 
-    p, h3 {
+    p,
+    h3 {
       color: $ib-white;
     }
   }
@@ -57,6 +38,28 @@
 
   &.dotted {
     border: 2px dashed $ib-grid-med-grey;
+  }
+
+  .media-left {
+    padding-right: 16px;
+
+    img {
+      border-radius: $border-radius-md;
+    }
+  }
+
+  .media-body {
+    h3 {
+      color: $ib-blue;
+    }
+
+    p {
+      color: $ib-blue;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -73,4 +76,3 @@
     }
   }
 }
-

@@ -1,0 +1,11 @@
+**/build
+**/dist
+**/node_modules
+**/.sass-cache
+
+# Compiled CSS
+docs
+
+# Vendor styles
+packages/interbit-ui-components/src/scss/bootstrap
+packages/interbit-ui-components/src/scss/_bootstrap*.scss

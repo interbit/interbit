@@ -1,8 +1,11 @@
 @import 'variables';
 @import 'mixins';
 
-.App {
+/* stylelint-disable selector-class-pattern */
 
+/* Disable class name format check for legacy styles */
+
+.App {
   .Project-item {
     .Project-container {
       hr {
@@ -10,6 +13,7 @@
         margin-bottom: 30px;
       }
     }
+
     &:last-child {
       hr {
         display: none;
@@ -21,18 +25,22 @@
       margin: 10px 20px 18px 0;
       text-decoration: underline;
       display: inline-block;
-      transition: .25s;
+      transition: 0.25s;
+
       @media (min-width: $screen-sm) {
         font-size: 20px;
       }
+
       &:hover {
         cursor: pointer;
         color: $interbit-dark-blue;
       }
     }
+
     .fa {
       margin-top: 10px;
       font-size: 33px;
+
       @media (max-width: $screen-sm - 1) {
         display: none;
       }
@@ -47,10 +55,12 @@
     margin-bottom: 20px;
     padding-top: 12px;
     text-align: right;
+
     .Connect {
       @media (max-width: $screen-sm - 1) {
         padding: 7px 20px;
       }
+
       @media (min-width: $screen-sm) {
         display: inline-block;
         width: 190px;
@@ -59,12 +69,14 @@
         padding-bottom: 5px;
       }
     }
+
     .Create-new {
       @media (max-width: $screen-sm - 1) {
         padding: 8px 20px;
         margin-top: 12px;
         margin-bottom: 24px;
       }
+
       @media (min-width: $screen-sm) {
         display: inline-block;
         width: 190px;
@@ -73,108 +85,64 @@
   }
 
   .Project-details {
-    // padding-top: 15px;
-    // h3 {
-    //   font-size: 18px;
-    //   margin-top: 4px;
-    //   @media (min-width: $screen-sm) {
-    //     font-size: 20px;
-    //     margin-top: 10px;
-    //   }
-    // }
-    // @media (min-width: $screen-sm) {
-    //   padding-top: 76px;
-    // }
-    // .Project-back {
-    //   background-color: $white;
-    //   border: 2px solid $dark-gray;
-    //   transition: .25s;
-    //   padding: 4px 10px;
-    //   margin-top: 6px;
-    //   .fa-angle-double-left {
-    //     font-weight: 700;
-    //     font-size: 16px;
-    //   }
-    //   &:hover {
-    //     background-color: $light-gray;
-    //   }
-    //   @media (max-width: $screen-sm - 1) {
-    //     margin-bottom: 12px;
-    //   }
-    // }
     .Open {
       display: inline-block;
       margin-top: 6px;
       width: 190px;
+
       @media (max-width: $screen-sm - 1) {
         margin-top: 12px;
         padding: 7px 20px;
         width: 100%;
       }
     }
-    // .Project-form-row {
-    //   padding-bottom: 40px;
-    //   .Project-details-form {
-    //     padding-top: 30px;
-    //     .name, .description, .faIcon {
-    //       select {
-    //         font-family: FontAwesome, 'Open Sans';
-    //       }
-    //       margin-bottom: 15px;
-    //       border-radius: 0px;
-    //     }
-    //     textarea.description {
-    //       height: 110px;
-    //     }
-    //     .form-control-feedback {
-    //       right: 34px;
-    //     }
-    //     .Primary-button {
-    //       width: 190px;
-    //       @media (max-width: $screen-sm - 1) {
-    //         margin-top: 12px;
-    //         padding: 8px 20px;
-    //         width: 100%;
-    //       }
-    //     }
-    //   }
-    // }
+
     .Project-packages {
       padding-top: 40px;
-      border-top : 1px solid $light-gray;
+      border-top: 1px solid $light-gray;
+
       h3 {
         margin-right: 20px;
+
         @media (min-width: $screen-sm) {
           display: inline-block;
         }
       }
+
       .Status {
-        display: inline-block
+        display: inline-block;
       }
+
       .Secondary-button {
         margin-top: 6px;
         width: 190px;
+
         @media (max-width: $screen-sm - 1) {
           margin-top: 16px;
           padding: 7px 20px;
           width: 100%;
         }
       }
+
       table {
         margin-top: 20px;
         background-color: #f5f5f5;
+
         th {
           color: $dark-gray;
+
           &:nth-child(3) {
             width: 90px;
             text-align: center;
           }
         }
+
         tbody > tr > td:nth-child(3) {
-          text-align: center
+          text-align: center;
         }
       }
     }
+
     textarea {
       resize: none;
     }
@@ -198,41 +166,6 @@
 
       li.active a {
         color: #666;
-      }
-    }
-  }
-
-  .ibweb-content-bar.project-bar {
-    .status {
-      display: inline-block;
-      width: 170px;
-
-      i {
-        vertical-align: bottom;
-        padding-right: 8px;
-      }
-
-      i:before {
-        font-size: 20px;
-      }
-
-      &.pass {
-        color: $ib-grid-green;
-      }
-
-      &.fail {
-        color: $ib-red;
-      }
-    }
-
-    .app-url {
-      i {
-        vertical-align: bottom;
-        padding-right: 8px;
-      }
-
-      i:before {
-        font-size: 20px;
       }
     }
   }
@@ -262,6 +195,7 @@
     .app-status {
       span {
         @include body-font;
+
         font-weight: 400;
         padding-left: 16px;
         color: #999;
@@ -284,7 +218,7 @@
         vertical-align: bottom;
         padding-right: 8px;
 
-        &:before {
+        &::before {
           font-size: 20px;
         }
       }
@@ -295,10 +229,47 @@
         vertical-align: bottom;
         padding-right: 8px;
 
-        &:before {
+        &::before {
           font-size: 20px;
         }
       }
     }
   }
+
+  .ibweb-content-bar.project-bar {
+    .status {
+      display: inline-block;
+      width: 170px;
+
+      i {
+        vertical-align: bottom;
+        padding-right: 8px;
+      }
+
+      i::before {
+        font-size: 20px;
+      }
+
+      &.pass {
+        color: $ib-grid-green;
+      }
+
+      &.fail {
+        color: $ib-red;
+      }
+    }
+
+    .app-url {
+      i {
+        vertical-align: bottom;
+        padding-right: 8px;
+      }
+
+      i::before {
+        font-size: 20px;
+      }
+    }
+  }
 }
+
+/* stylelint-enable */

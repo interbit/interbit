@@ -42,7 +42,7 @@
   }
 }
 
-.ibweb-launchpad:before {
+.ibweb-launchpad::before {
   display: block;
   content: '';
   //padding-top: 87.5%;
@@ -62,7 +62,7 @@
 }
 
 @media (max-width: $screen-lg-min - 1) {
-  .ibweb-launchpad:before {
+  .ibweb-launchpad::before {
     padding-top: 80%;
   }
 }

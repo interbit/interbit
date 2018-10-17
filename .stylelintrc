@@ -1,0 +1,23 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["function", "if", "include", "mixin", "return"]
+      }
+    ],
+    "font-weight-notation": "numeric",
+    "function-url-quotes": [
+      "always",
+      "except": ["empty"]
+    ],
+    "selector-class-pattern": [
+      "^[a-z]+(-[a-z0-9]+)*$",
+      {
+        "resolveNestedSelectors": true
+      }
+    ],
+    "selector-id-pattern": "^[a-z]+(-[a-z0-9]+)*$"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "web-auth-endpoint",
-  "version": "0.4.50",
+  "version": "0.4.53",
   "description": "Express instance to handle incoming auth redirects for APC model (auth-private-control)",
   "main": "src/index.js",
   "private": true,
@@ -14,12 +14,12 @@
   "author": "BTL GROUP LTD",
   "license": "MIT",
   "dependencies": {
-    "app-account": "0.4.50",
+    "app-account": "0.4.53",
     "express": "^4.16.2",
     "http-proxy": "^1.17.0",
-    "interbit": "0.4.50",
-    "interbit-cli": "0.4.50",
-    "interbit-ui-tools": "0.4.50",
+    "interbit": "0.4.53",
+    "interbit-cli": "0.4.53",
+    "interbit-ui-tools": "0.4.53",
     "query-string": "^5.0.1"
   },
   "devDependencies": {

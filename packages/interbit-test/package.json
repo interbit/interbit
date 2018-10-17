@@ -1,6 +1,6 @@
 {
   "name": "interbit-test",
-  "version": "0.4.51",
+  "version": "0.4.52",
   "description": "Test the interbit package for API changes",
   "private": true,
   "scripts": {

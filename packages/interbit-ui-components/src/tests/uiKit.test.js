@@ -5,6 +5,7 @@ import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import configureStore from 'redux-mock-store'
 import moment from 'moment'
+import { createMemoryHistory } from 'history'
 
 import AppBucketContainer, { AppBucket } from '../components/UIKit/AppBucket'
 import CallToAction from '../components/UIKit/CallToAction'
@@ -61,14 +62,14 @@ describe('<AppBucket/>', () => {
       }
     ]
   }
-
+  const history = createMemoryHistory('/')
   const store = mockStore(initialState)
   const container = shallow(<AppBucketContainer store={store} {...props} />)
   const dummy = shallow(
     <AppBucket
       items={props.items}
       isVisible
-      history={{}}
+      history={history}
       toggleAppBucketAction={() => {}}
     />
   )

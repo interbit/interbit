@@ -70,8 +70,9 @@ describe('<AppBucket/>', () => {
       items={props.items}
       isVisible
       history={history}
-      toggleAppBucketAction={() => {}}
-    />
+      toggleAppBucketAction={() => {}}>
+      <div />
+    </AppBucket>
   )
 
   it('render the connected(SMART) component', () => {

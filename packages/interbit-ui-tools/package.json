@@ -27,7 +27,7 @@
     "babel-loader": "8.0.4",
     "fs-extra": "^5.0.0",
     "interbit-core": "0.14.0",
-    "jest": "20.0.4",
+    "jest": "23.6.0",
     "redux-saga-test-plan": "^3.6.0",
     "webpack": "^3.10.0",
     "yargs": "^10.0.3"

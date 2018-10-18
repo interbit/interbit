@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 import enhanceWithClickOutside from 'react-click-outside'
-import Apps from '@material-ui/icons/Apps'
-import IconButton from '@material-ui/core/IconButton'
 
 /**
  * The `AppBucket` is a React UI component that behaves as a popover-style
@@ -39,7 +37,9 @@ export class AppBucket extends React.Component {
       push: PropTypes.func.isRequired
     }).isRequired,
     /** This action toggle isVisible prop */
-    toggleAppBucketAction: PropTypes.func.isRequired
+    toggleAppBucketAction: PropTypes.func.isRequired,
+    /** Element-toggler, App Bucket will shown/hidden by click on it */
+    children: PropTypes.node.isRequired
   }
 
   handleClickOutside = () => {
@@ -66,33 +66,25 @@ export class AppBucket extends React.Component {
     if (this.appBucketContainer) {
       const parentData = this.appBucketContainer.parentNode.parentNode.getBoundingClientRect()
       const componentData = this.appBucketContainer.getBoundingClientRect()
-      const iconArrowData = this.iconArrow.getBoundingClientRect()
 
       if (parentData.right < componentData.right) {
         return { right: 0 }
       }
-      const newLeft = (-1 * (componentData.width - iconArrowData.width)) / 2
-      return { left: newLeft }
     }
     return null
   }
 
   render = () => {
-    const { items, isVisible } = this.props
+    const { items, isVisible, children } = this.props
     return (
       <div className="ibweb-app-bucket">
-        <IconButton
-          aria-haspopup="true"
-          color="inherit"
-          onClick={this.toggleAppBucket}>
-          <Apps />
-          <div
-            className={`arrow-up ${isVisible ? 'shown' : 'fade-out'}`}
-            ref={iconArrow => {
-              this.iconArrow = iconArrow
-            }}
-          />
-        </IconButton>
+        <div onClick={this.toggleAppBucket}>{children}</div>
+        <div
+          className={`arrow-up ${isVisible ? 'shown' : 'fade-out'}`}
+          ref={iconArrow => {
+            this.iconArrow = iconArrow
+          }}
+        />
         <div
           className={`app-bucket-container ${isVisible ? 'shown' : 'fade-out'}`}
           ref={appBucketContainer => {

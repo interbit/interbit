@@ -6,6 +6,8 @@ const { createStore, combineReducers } =require('redux')
 const AppBar = require('@material-ui/core/AppBar').default
 const Toolbar = require('@material-ui/core/Toolbar').default
 const Typography = require('@material-ui/core/Typography').default
+const Apps = require('@material-ui/icons/Apps').default
+const IconButton = require('@material-ui/core/IconButton').default
 
 const initialState = {
   isVisible: false
@@ -55,7 +57,11 @@ const store = createStore(combineReducers({appBucket}))
                   to: '/app-4'
                 },
               ]}
-           />
+           >
+             <IconButton aria-haspopup="true" color="inherit">
+               <Apps />
+             </IconButton>
+           </AppBucket>
          </Toolbar>
        </AppBar>
     </div>
@@ -72,6 +78,8 @@ const store = createStore(combineReducers({appBucket}))
   const AppBar = require('@material-ui/core/AppBar').default
   const Toolbar = require('@material-ui/core/Toolbar').default
   const Typography = require('@material-ui/core/Typography').default
+  const Apps = require('@material-ui/icons/Apps').default
+  const IconButton = require('@material-ui/core/IconButton').default
   
   const initialState = {
     isVisible: false
@@ -121,7 +129,11 @@ const store = createStore(combineReducers({appBucket}))
                    to: '/app-4'
                  },
                ]}
-            />
+            >
+              <IconButton aria-haspopup="true" color="inherit">
+                <Apps />
+              </IconButton>
+            </AppBucket>
             <Typography color="inherit" style={{flexGrow: 1}}>
               More Fake Element(s)
             </Typography>

@@ -1,9 +1,8 @@
 {
-  "presets": ["env"],
+  "presets": ["@babel/preset-env"],
   "plugins": [
-    "babel-plugin-add-module-exports",
-    "transform-object-rest-spread",
-    ["transform-runtime", {
+    "@babel/plugin-proposal-object-rest-spread",
+    ["@babel/plugin-transform-runtime", {
       "polyfill": false,
       "regenerator": true
     }]

@@ -2,7 +2,7 @@
   "env": {
     "test": {
       "plugins": [
-        "transform-object-rest-spread"
+        "@babel/plugin-proposal-object-rest-spread"
       ]
     }
   }

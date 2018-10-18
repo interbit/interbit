@@ -61,7 +61,7 @@
     "react-styleguidist": "^7.3.11",
     "sass-loader": "^7.1.0",
     "url-loader": "^1.1.1",
-    "webpack": "^3.10.0",
+    "webpack": "4.19.1",
     "yargs": "^10.0.3"
   },
   "homepage": "https://btl.co",

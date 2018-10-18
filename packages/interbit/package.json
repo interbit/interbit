@@ -21,8 +21,8 @@
     "watch": "^1.0.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0",
     "assert": "^1.4.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "debug": "^3.1.0",
     "jest": "20.0.4",
     "should": "^13.2.1",

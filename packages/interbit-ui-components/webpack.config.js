@@ -8,14 +8,12 @@ const plugins = [new ExtractTextPlugin({ filename: '/css/interbit.css' })]
 
 const libraryName = pkg.name
 
-const outputFile = `${libraryName}.js`
-
 const config = {
   entry: path.join(__dirname, './src/index.js'),
   devtool: 'source-map',
   output: {
     path: path.join(__dirname, './dist'),
-    filename: outputFile,
+    filename: `${libraryName}.js`,
     library: libraryName,
     libraryTarget: 'umd',
     umdNamedDefine: true

@@ -1,7 +1,7 @@
 {
   "presets": ["@babel/preset-env"],
   "plugins": [
-    "transform-async-to-generator",
+    "@babel/transform-async-to-generator",
     "@babel/plugin-proposal-object-rest-spread"
   ]
 }

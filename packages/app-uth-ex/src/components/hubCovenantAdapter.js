@@ -1,12 +1,12 @@
 const hubCovenant = require('../interbit/hub/actions')
 
-const covenantName = 'Interbit Under-the-Hood token provider'
+export const covenantName = 'Interbit Under-the-Hood token provider'
 const privateTokenName = 'My age'
 const sharableTokenName = 'Favourite colour'
 const chainNameLabel = 'Chain name'
 const requestIdLabel = 'Request ID'
 
-const actionCreators = {
+export const actionCreators = {
   // Public actions that can be invoked by clients
   chainMetadata: () => ({
     type: 'Give the chain a name',
@@ -75,9 +75,4 @@ const actionCreators = {
         requestId
       })
   })
-}
-
-module.exports = {
-  covenantName,
-  actionCreators
 }

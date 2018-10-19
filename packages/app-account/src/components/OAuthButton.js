@@ -6,7 +6,8 @@ import uuid from 'uuid'
 import amplitude from 'amplitude-js'
 import { IconButton } from 'interbit-ui-components'
 import { parameterEncoding } from 'interbit-ui-tools'
-import { actionCreators } from '../interbit/my-account'
+
+const { actionCreators } = require('../interbit/my-account')
 
 const authenticationHandler = ({
   oAuth: {

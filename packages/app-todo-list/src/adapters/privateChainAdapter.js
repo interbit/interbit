@@ -1,6 +1,6 @@
 const covenant = require('../interbit/private')
 
-const covenantName = 'Interbit To-do List Private Chain'
+export const covenantName = 'Interbit To-do List Private Chain'
 
 const addTodoActionLabel = 'Add a to-do item'
 const addTodoTitleLabel = 'Enter a title *'
@@ -11,7 +11,7 @@ const editTodoIdLabel = 'Enter the ID of the to-do to edit'
 const editTodoTitleLabel = 'Enter a new title *'
 const editTodoDescriptionLabel = 'Enter a new description'
 
-const actionCreators = {
+export const actionCreators = {
   addTodo: () => ({
     type: addTodoActionLabel,
     arguments: {
@@ -36,9 +36,4 @@ const actionCreators = {
       [editTodoDescriptionLabel]: description
     }) => covenant.actionCreators.editTodo(id, title, description)
   })
-}
-
-module.exports = {
-  covenantName,
-  actionCreators
 }

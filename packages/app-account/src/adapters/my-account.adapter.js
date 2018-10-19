@@ -7,9 +7,9 @@ const consumerChainIdLabel = 'Consumer chain ID'
 const providerChainIdLabel = 'Provider chain ID'
 const sharedTokensLabel = 'Share tokens'
 
-const covenantName = accountsPrivate.covenantName
+export const covenantName = accountsPrivate.covenantName
 
-const actionCreators = {
+export const actionCreators = {
   updateProfile: () => ({
     type: 'Update user profile',
     arguments: {
@@ -48,9 +48,4 @@ const actionCreators = {
     invoke: ({ [consumerChainIdLabel]: consumerChainId }) =>
       accountsPrivate.actionCreators.stopSharing({ consumerChainId })
   })
-}
-
-module.exports = {
-  covenantName,
-  actionCreators
 }

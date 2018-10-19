@@ -1,9 +1,9 @@
 const covenant = require('../interbit/increment')
 
-const covenantName = 'Interbit SDK Increment Example'
+export const covenantName = 'Interbit SDK Increment Example'
 const valueLabel = 'Enter a number'
 
-const actionCreators = {
+export const actionCreators = {
   add: () => ({
     type: 'Add to the sum',
     arguments: {
@@ -11,9 +11,4 @@ const actionCreators = {
     },
     invoke: ({ [valueLabel]: value }) => covenant.actionCreators.add(value)
   })
-}
-
-module.exports = {
-  covenantName,
-  actionCreators
 }

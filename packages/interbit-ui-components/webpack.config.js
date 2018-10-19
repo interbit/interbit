@@ -3,13 +3,11 @@ const path = require('path')
 const pkg = require('./package.json')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const isInProduction = process.env.NODE_ENV === 'production'
 const libraryName = pkg.name
 
 const plugins = [
   new MiniCssExtractPlugin({
-    filename: isInProduction ? '[name].[hash].css' : '[name].css',
-    chunkFilename: isInProduction ? '[id].[hash].css' : '[id].css'
+    filename: 'css/interbit.css'
   })
 ]
 

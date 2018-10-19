@@ -1,12 +1,17 @@
 /* global __dirname, require, module */
-
 const path = require('path')
 const pkg = require('./package.json')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-const plugins = [new ExtractTextPlugin({ filename: '/css/interbit.css' })]
-
+const isInProduction = process.env.NODE_ENV === 'production'
 const libraryName = pkg.name
+
+const plugins = [
+  new MiniCssExtractPlugin({
+    filename: isInProduction ? '[name].[hash].css' : '[name].css',
+    chunkFilename: isInProduction ? '[id].[hash].css' : '[id].css'
+  })
+]
 
 const config = {
   entry: path.join(__dirname, './src/index.js'),
@@ -41,21 +46,23 @@ const config = {
         ]
       },
       {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                publicPath: '/'
-              }
-            },
-            {
-              loader: 'sass-loader'
+        test: /\.(scss)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              precision: 8,
+              data: `$ENV: ${process.env.NODE_ENV};`
             }
-          ]
-        })
+          }
+        ]
       }
     ]
   },

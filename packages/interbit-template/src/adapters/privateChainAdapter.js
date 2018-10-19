@@ -2,7 +2,7 @@ const {
   actionCreators: covenantActionCreators
 } = require('../interbit/private/actions')
 
-const covenantName = 'Interbit Template Private Chain'
+export const covenantName = 'Interbit Template Private Chain'
 
 const memoActionLabel = 'Record your thoughts'
 const textParamLabel = 'Enter some text'
@@ -17,7 +17,7 @@ const setTimestampActionCreatorLabel = 'Get timestamp from the action creator'
 
 const currentTimestampLabel = 'Get timestamp from a saga side-effect'
 
-const actionCreators = {
+export const actionCreators = {
   memo: () => ({
     type: memoActionLabel,
     arguments: {
@@ -53,9 +53,4 @@ const actionCreators = {
     type: currentTimestampLabel,
     invoke: () => covenantActionCreators.currentTimestampSaga()
   })
-}
-
-module.exports = {
-  covenantName,
-  actionCreators
 }

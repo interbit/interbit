@@ -42,6 +42,17 @@ export class AppBucket extends React.Component {
     children: PropTypes.node.isRequired
   }
 
+  componentDidMount = () => {
+    if (this.appBucketContainer) {
+      const parentData = this.appBucketContainer.parentNode.parentNode.getBoundingClientRect()
+      const componentData = this.appBucketContainer.getBoundingClientRect()
+
+      if (parentData.right < componentData.right) {
+        this.rightAligned = true
+      }
+    }
+  }
+
   handleClickOutside = () => {
     const { isVisible } = this.props
     if (isVisible) {
@@ -62,20 +73,9 @@ export class AppBucket extends React.Component {
     }
   }
 
-  positionPopOver = () => {
-    if (this.appBucketContainer) {
-      const parentData = this.appBucketContainer.parentNode.parentNode.getBoundingClientRect()
-      const componentData = this.appBucketContainer.getBoundingClientRect()
-
-      if (parentData.right < componentData.right) {
-        return { right: 0 }
-      }
-    }
-    return null
-  }
-
   render = () => {
     const { items, isVisible, children } = this.props
+
     return (
       <div className="ibweb-app-bucket">
         <div onClick={this.toggleAppBucket}>{children}</div>
@@ -90,7 +90,7 @@ export class AppBucket extends React.Component {
           ref={appBucketContainer => {
             this.appBucketContainer = appBucketContainer
           }}
-          style={this.positionPopOver()}>
+          style={this.rightAligned && { right: 0 }}>
           <div>
             {items.map((item, index) => (
               <Link

@@ -28,7 +28,7 @@ const create = async options => {
 
   if (!appName.match(/^([a-z0-9-]+)+$/)) {
     throw new Error(
-      'interbit create: app name must match regex /^(app|interbit)(-[a-z0-9]+)+$/'
+      'interbit create: app name must match regex /^([a-z0-9-]+)+$/'
     )
   }
 

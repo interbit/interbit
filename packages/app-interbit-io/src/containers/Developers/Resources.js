@@ -35,7 +35,7 @@ class DevelopersResources extends Component {
                 )}
                 {s.callToActions.map(a => (
                   <p key={a.to}>
-                    <a href={a.to} target="_blank">
+                    <a href={a.to} target="_blank" rel="noopener noreferrer">
                       {a.to}
                     </a>
                   </p>

@@ -13,9 +13,20 @@ const {
   constants: { JOIN_TYPES }
 } = require('interbit-covenant-tools')
 
+const log = require('../log')
+
 // SET FOR DEPRECATION: Pending issue #79
+/**
+ * Configures chains in the node's cli to be joined according to config.
+ * Used within the interbit `start` script and set for pending deprecation. (#263)
+ * @deprecated
+ * @param {Object} manifest - The covenant hashes and chain ids mapped to aliases
+ *  for the node from the `generateDeploymentDetails` function.
+ * @param {Object} cli - The cli for the node.
+ * @param {Object} config - The interbit config file specifying join configuration.
+ */
 const joinChains = async (manifest, cli, config) => {
-  console.log('JOINING CHAINS')
+  log.info('JOINING CHAINS')
   try {
     for (const [chainAlias, chainDetails] of Object.entries(manifest)) {
       const chainInterface = await cli.getChain(chainDetails.chainId)
@@ -51,12 +62,12 @@ const joinChains = async (manifest, cli, config) => {
         await establishSendActions(chainInterface, sendActionTo, manifest)
       }
       const state = await chainInterface.getState()
-      console.log({ chainAlias, chainDetails, state })
+      log.info({ chainAlias, chainDetails, state })
     }
 
-    console.log('JOINING COMPLETE')
+    log.success('JOINING COMPLETE')
   } catch (err) {
-    console.error(err.message)
+    log.error(err.message)
     throw err
   }
 }
@@ -67,7 +78,7 @@ const establishConsumes = async (chainInterface, consume, manifest) => {
   }
   for (const { alias, path: mount, joinName } of consume) {
     if (!alias || !manifest[alias]) {
-      console.warn(`Unknown alias: ${alias}`)
+      log.warn(`Unknown alias: ${alias}`)
       continue
     }
     const { chainId: provider } = manifest[alias]
@@ -76,7 +87,7 @@ const establishConsumes = async (chainInterface, consume, manifest) => {
       mount,
       joinName
     })
-    console.log(consumeAction)
+    log.action(consumeAction)
     await chainInterface.dispatch(consumeAction)
   }
 }
@@ -87,7 +98,7 @@ const establishProvides = async (chainInterface, provide, manifest) => {
   }
   for (const { alias, path: statePath, joinName } of provide) {
     if (!alias || !manifest[alias]) {
-      console.warn(`Unknown alias: ${alias}`)
+      log.warn(`Unknown alias: ${alias}`)
       continue
     }
     const { chainId: consumer } = manifest[alias]
@@ -96,7 +107,7 @@ const establishProvides = async (chainInterface, provide, manifest) => {
       statePath,
       joinName
     })
-    console.log(provideAction)
+    log.action(provideAction)
     await chainInterface.dispatch(provideAction)
   }
 }
@@ -111,11 +122,11 @@ const establishReceiveActions = async (
   }
   for (const { alias, authorizedActions } of receiveActionFrom) {
     if (!alias || !manifest[alias]) {
-      console.warn(`Unknown alias: ${alias}`)
+      log.warn(`Unknown alias: ${alias}`)
       continue
     }
     if (!authorizedActions) {
-      console.warn(`No authorized actions for write join to: ${alias}`)
+      log.warn(`No authorized actions for write join to: ${alias}`)
       continue
     }
     const { chainId: senderChainId } = manifest[alias]
@@ -123,7 +134,7 @@ const establishReceiveActions = async (
       senderChainId,
       permittedActions: authorizedActions
     })
-    console.log(authorizeReceiveAction)
+    log.action(authorizeReceiveAction)
     await chainInterface.dispatch(authorizeReceiveAction)
   }
 }
@@ -134,14 +145,14 @@ const establishSendActions = async (chainInterface, sendActionTo, manifest) => {
   }
   for (const { alias } of sendActionTo) {
     if (!alias || !manifest[alias]) {
-      console.warn(`Unknown alias: ${alias}`)
+      log.warn(`Unknown alias: ${alias}`)
       continue
     }
     const { chainId: receiverChainId } = manifest[alias]
     const authorizeSendAction = authorizeSendActions({
       receiverChainId
     })
-    console.log(authorizeSendAction)
+    log.action(authorizeSendAction)
     await chainInterface.dispatch(authorizeSendAction)
   }
 }

@@ -10,6 +10,15 @@ const {
   config: { validateConfig }
 } = require('interbit-covenant-tools')
 
+const log = require('../log')
+
+/**
+ * Starts an interbit node with chains based on the provided options.
+ * @param {Object} options - The Interbit node start options.
+ * @param {Object} options.config - Interbit configuration for the node.
+ * @param {boolean} options.dev - Whether to run in dev mode and watch covenant files for changes.
+ * @param {boolean} options.noWatch - Option to override covenant watch if in dev mode.
+ */
 const start = async options => {
   const { config, dev, noWatch } = options
 
@@ -30,8 +39,10 @@ const start = async options => {
     covenantHashes
   )
 
-  console.log('available chains + covenants: ', deploymentDetails)
+  log.info('available chains + covenants: ', deploymentDetails)
 
+  // required to trigger SET_MANIFEST action on chains for setting-up PPC config
+  // TODO: switch to using a real manifest
   setRootChainManifest(cli, deploymentDetails, config)
 
   if (dev && !noWatch) {
@@ -56,6 +67,8 @@ const start = async options => {
   // TODO: Watch the chains for manifest changes #267
   // Blocked by #258 #336
   // watchChain(cli, chainInterface)
+
+  log.success('Interbit node started')
 
   return { cli, hypervisor, cleanup, chainManifest }
 }

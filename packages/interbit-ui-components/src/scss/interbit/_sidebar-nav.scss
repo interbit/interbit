@@ -8,7 +8,7 @@
   }
 
   h4 {
-    margin-bottom:0;
+    margin-bottom: 0;
     color: $ib-black;
     line-height: 1.38;
   }
@@ -60,7 +60,6 @@
       }
     }
 
-
     .panel-title {
       position: relative;
 
@@ -71,19 +70,21 @@
         color: $ib-blue;
       }
 
-      a:hover, a:active, a:focus {
+      a:hover,
+      a:active,
+      a:focus {
         text-decoration: none;
       }
 
-      a:after {
+      a::after {
         position: absolute;
         right: 0;
-        font-family: FontAwesome;
+        font-family: FontAwesome, sans-serif;
         content: '\f0d7';
         color: $ib-blue;
       }
 
-      a[aria-expanded=true]:after {
+      a[aria-expanded=true]::after {
         content: '\f0d8';
       }
     }

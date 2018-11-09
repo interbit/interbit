@@ -12,7 +12,16 @@ const {
   },
   constants: { JOIN_TYPES }
 } = require('interbit-covenant-tools')
+const log = require('../log')
 
+/**
+ * Configures joins on the chain whose interface is passed as `chainInterface`,
+ * based on the `joins` parameter. Uses the manifest for chain ID resolution
+ * in the joins.
+ * @param {Object} chainInterface - Interface to the chain to be configured.
+ * @param {Object} joins - Join configuration for the chain.
+ * @param {Object} interbitManifest - Manifest containing chain ID to alias resolutions.
+ */
 const configureJoins = (chainInterface, joins, interbitManifest) => {
   const consume = configureConsume(joins[JOIN_TYPES.CONSUME], interbitManifest)
   const provide = configureProvide(joins[JOIN_TYPES.PROVIDE], interbitManifest)
@@ -20,10 +29,11 @@ const configureJoins = (chainInterface, joins, interbitManifest) => {
   const receive = configureReceive(joins[JOIN_TYPES.RECEIVE], interbitManifest)
 
   const joinActions = [...consume, ...provide, ...send, ...receive]
-  console.log('JOINING', joinActions)
+  log.info('JOINING', joinActions)
   for (const action of joinActions) {
     chainInterface.dispatch(action)
   }
+  log.success('Chain join actions dispatched')
 }
 
 const configureConsume = (consume, interbitManifest) => {

@@ -15,6 +15,5 @@ export default {
   APP_ACCOUNTS: accountsUrl,
   APP_ACCOUNTS_CONNECT: `${accountsUrl}/connect`,
   APP_PROJECT: projectUrl,
-  APP_STORE: storeUrl,
-  SUPPORT_SLACK: 'http://slack.test-interbit.io/'
+  APP_STORE: storeUrl
 }

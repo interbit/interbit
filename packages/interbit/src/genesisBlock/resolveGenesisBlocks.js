@@ -8,6 +8,8 @@ const {
 } = require('interbit-covenant-tools')
 const { getChainId } = require('./genesisBlockSelectors')
 
+const log = require('../log')
+
 const resolveGenesisBlocks = (config, originalManifest, covenants) => {
   const chainsConfig = getChains(config)
   const resolvedChainAliases = originalManifest
@@ -84,7 +86,7 @@ const mergeResolutions = (config, originalManifest, newlyResolvedChains) => {
 }
 
 const createGenesisBlock = (chainAlias, config) => {
-  console.log(`BUILDING GENESIS FOR ${chainAlias}`)
+  log.info(`BUILDING GENESIS FOR ${chainAlias}`)
 
   const validators =
     chainAlias === ROOT_CHAIN_ALIAS

@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.53"></a>
+## [0.4.53](https://github.com/interbit/interbit/compare/v0.4.52...v0.4.53) (2018-10-17)
+
+
+
+
+**Note:** Version bump only for package web-auth-endpoint
+
+<a name="0.4.52"></a>
+## [0.4.52](https://github.com/interbit/interbit/compare/v0.4.51...v0.4.52) (2018-10-17)
+
+
+
+
+**Note:** Version bump only for package web-auth-endpoint
+
+<a name="0.4.51"></a>
+## [0.4.51](https://github.com/interbit/interbit/compare/v0.4.50...v0.4.51) (2018-10-17)
+
+
+
+
+**Note:** Version bump only for package web-auth-endpoint
+
+<a name="0.4.50"></a>
+## [0.4.50](https://github.com/interbit/interbit/compare/v0.4.49...v0.4.50) (2018-09-18)
+
+
+
+
+**Note:** Version bump only for package web-auth-endpoint
+
+<a name="0.4.49"></a>
+## [0.4.49](https://github.com/interbit/interbit/compare/v0.4.48...v0.4.49) (2018-09-17)
+
+
+
+
+**Note:** Version bump only for package web-auth-endpoint
+
+<a name="0.4.48"></a>
+## [0.4.48](https://github.com/interbit/interbit/compare/v0.4.47...v0.4.48) (2018-09-12)
+
+
+
+
+**Note:** Version bump only for package web-auth-endpoint
+
+<a name="0.4.47"></a>
+## [0.4.47](https://github.com/interbit/interbit/compare/v0.4.46...v0.4.47) (2018-09-12)
+
+
+
+
+**Note:** Version bump only for package web-auth-endpoint
+
 <a name="0.4.46"></a>
 ## [0.4.46](https://github.com/interbit/interbit/compare/v0.4.44...v0.4.46) (2018-08-09)
 

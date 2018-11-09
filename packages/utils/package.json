@@ -1,17 +1,20 @@
 {
   "name": "utils",
-  "version": "0.4.46",
+  "version": "0.4.53",
   "description": "",
   "private": true,
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/packagePolice.js",
     "test": "jest",
-    "distribute:template": "node src/scripts/distributeTemplate.js"
+    "distribute:template": "node src/scripts/distributeTemplate.js",
+    "coverage": "node src/scripts/generateCoverageReport.js"
   },
   "author": "BTL GROUP LTD",
   "license": "MIT",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "fs-extra": "^5.0.0",
     "glob": "^7.1.2"
   },
   "devDependencies": {

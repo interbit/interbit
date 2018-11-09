@@ -1,7 +1,5 @@
 # Contributing
 
-If you would like to ask a question about Interbit head to our [Slack Channel](http://interbitdev.slack.com) for some support.
-
 If you would like to know more about how it works head over to our [SDK Documentation](https://docs.interbit.io/).
 
 Please do not open issues just to ask a question. We are happy to help and are available for questions and comments on other channels.
@@ -9,8 +7,8 @@ Please do not open issues just to ask a question. We are happy to help and are a
 
 ## Opening an Issue
 
-A good issue is one that 
-- is clear 
+A good issue is one that
+- is clear
 - describes its own closing criteria
 - contains a description that explains what the issue is
 - has a description of how to reproduce the bug if it is for a bug
@@ -26,7 +24,7 @@ For our example ticket you could specify which link is broken.
 
 ## Opening a PR
 
-A good PR is one that 
+A good PR is one that
 - contains tests for its features
 - has a descriptive title
 - has even more description in the description box

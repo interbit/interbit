@@ -12,6 +12,5 @@ export default {
   APP_IB_IO_DEVELOPERS_SUPPORT: `${interbitIoUrl}/developers/support`,
   APP_IB_IO_PLATFORM: `${interbitIoUrl}/platform`,
   APP_PROJECT: projectUrl,
-  APP_STORE: storeUrl,
-  SUPPORT_SLACK: 'http://slack.test-interbit.io/'
+  APP_STORE: storeUrl
 }

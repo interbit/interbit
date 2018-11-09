@@ -1,8 +1,9 @@
 import assert from 'assert'
-import { actionCreators } from '../../adapters/my-projects.adapter'
+import { createActionCreators } from '../../adapters/my-projects.adapter'
 
 describe('myProjectsChain/covenant', () => {
   it('can access the action creator', () => {
+    const actionCreators = createActionCreators()
     const fields = Object.values(actionCreators).reduce(
       (accum, actionCreator) => {
         const action = actionCreator({})

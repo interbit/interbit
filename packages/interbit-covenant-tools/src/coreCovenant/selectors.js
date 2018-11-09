@@ -10,5 +10,6 @@ module.exports = {
     state.getIn([...PATHS.SENT_ACTIONS, chainId, ...PATHS.PENDING_ACTIONS]),
   providing: state => state.getIn(PATHS.PROVIDING),
   consuming: state => state.getIn(PATHS.CONSUMING),
-  roles: state => state.getIn(PATHS.ROLES)
+  roles: state => state.getIn(PATHS.ROLES),
+  blockMaster: state => state.getIn(PATHS.BLOCK_MASTER)
 }

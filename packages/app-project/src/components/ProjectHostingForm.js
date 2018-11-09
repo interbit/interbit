@@ -8,7 +8,7 @@ import { toggleModal } from '../redux/uiReducer'
 import modalNames from '../constants/modalNames'
 import ModalDeleteProject from '../components/ModalDeleteProject'
 import ModalResetProject from '../components/ModalResetProject'
-import chairmanmeow from '../assets/chairmanmeow.jpg'
+import placeholder from '../assets/placeholder.svg'
 
 const mapStateToProps = (state, ownProps) => {
   const isDeleteProjectModalVisible =
@@ -121,12 +121,12 @@ export class ProjectHostingForm extends Component {
         </div>
 
         <ModalDeleteProject
-          image={chairmanmeow}
+          image={placeholder}
           show={isDeleteProjectModalVisible}
           toggleModal={toggleModalFunction}
         />
         <ModalResetProject
-          image={chairmanmeow}
+          image={placeholder}
           show={isResetProjectModalVisible}
           toggleModal={toggleModalFunction}
         />
@@ -135,4 +135,7 @@ export class ProjectHostingForm extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProjectHostingForm)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProjectHostingForm)

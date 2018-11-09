@@ -9,6 +9,21 @@ const actionCreators = {
   add: number => ({
     type: actionTypes.ADD,
     payload: { number }
+  }),
+
+  setTimestamp: timestamp => ({
+    type: actionTypes.SET_TIMESTAMP,
+    payload: { timestamp }
+  }),
+
+  setCurrentTimestampInActionCreator: () => ({
+    type: actionTypes.SET_TIMESTAMP,
+    payload: { timestamp: Date.now() }
+  }),
+
+  currentTimestampSaga: () => ({
+    type: actionTypes.CURRENT_TIMESTAMP_SAGA,
+    payload: {}
   })
 }
 

@@ -53,6 +53,9 @@ describe('Renders without crashing:', () => {
           apps: {
             title: 'apps',
             content: 'app content'
+          },
+          deleteData: {
+            buttonText: 'Reset my data'
           }
         },
         contentBars: {

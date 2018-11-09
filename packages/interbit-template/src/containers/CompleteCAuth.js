@@ -87,4 +87,7 @@ export class CompleteCAuth extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompleteCAuth)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CompleteCAuth)

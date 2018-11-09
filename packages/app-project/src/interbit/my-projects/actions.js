@@ -9,7 +9,7 @@ const {
   }
 } = require('interbit-covenant-tools')
 
-const covenantName = 'app-project_my-projects'
+const covenantName = 'projects-my-projects'
 
 const actionTypes = {
   // Update basic account details about the owner of these projects
@@ -28,6 +28,13 @@ const actionTypes = {
   FORWARD_ACTION_TO_PROJECT: `${covenantName}/FORWARD_ACTION_TO_PROJECT`
 }
 
+const validateSponsorChainConfig = (config = {}) =>
+  validate(config, {
+    covenantHash: required(),
+    sponsorChainId: chainIdPattern(),
+    blockMaster: required()
+  })
+
 const actionCreators = {
   // Public actions that can be invoked by clients
   authorized: ({ providerChainId, joinName }) => ({
@@ -38,10 +45,22 @@ const actionCreators = {
     )
   }),
 
-  createProject: ({ projectAlias, projectName, description, icon }) => ({
+  createProject: ({
+    projectAlias,
+    projectName,
+    description,
+    icon,
+    sponsorChainConfig
+  }) => ({
     type: actionTypes.CREATE_PROJECT,
     payload: validate(
-      { projectAlias, projectName, description, icon },
+      {
+        projectAlias,
+        projectName,
+        description,
+        icon,
+        sponsorChainConfig: validateSponsorChainConfig(sponsorChainConfig)
+      },
       {
         projectAlias: required(),
         projectName: required(),
@@ -50,14 +69,22 @@ const actionCreators = {
     )
   }),
 
-  createSampleProject: ({ sampleProjectName }) => ({
+  createSampleProject: ({ sampleProjectName, sponsorChainConfig }) => ({
     type: actionTypes.CREATE_SAMPLE_PROJECT,
-    payload: validate({ sampleProjectName }, { sampleProjectName: required() })
+    payload: validate(
+      {
+        sampleProjectName,
+        sponsorChainConfig: validateSponsorChainConfig(sponsorChainConfig)
+      },
+      { sampleProjectName: required() }
+    )
   }),
 
-  createSampleProjects: () => ({
+  createSampleProjects: ({ sponsorChainConfig } = {}) => ({
     type: actionTypes.CREATE_SAMPLE_PROJECTS,
-    payload: {}
+    payload: {
+      sponsorChainConfig: validateSponsorChainConfig(sponsorChainConfig)
+    }
   }),
 
   forwardActionToProject: ({ projectAlias, action }) => ({

@@ -1,3 +1,0 @@
-export default {
-  CONTACT_FORM_ID: '7148955b25f0e873fca3d9eb37c1118f906729'
-}

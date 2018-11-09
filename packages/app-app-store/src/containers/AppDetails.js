@@ -71,7 +71,10 @@ export class AppDetails extends Component {
               <div className="info">
                 <h3>{appInfo.name}</h3>
                 <p>
-                  <a href={appInfo.companyUrl} target="_blank">
+                  <a
+                    href={appInfo.companyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer">
                     {appInfo.companyName}
                   </a>
                   {appInfo.category}

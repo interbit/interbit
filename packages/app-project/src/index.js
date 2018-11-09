@@ -8,14 +8,17 @@ import { BrowserRouter } from 'react-router-dom'
 import createSagaMiddleware from 'redux-saga'
 import { interbitRedux } from 'interbit-ui-tools'
 
-import 'interbit-ui-components/src/css/index.css'
-import 'interbit-ui-components/src/css/interbit.css'
+import 'interbit-ui-components/dist/css/interbit.css'
 
 import App from './App'
+
+import { PUBLIC, PRIVATE } from './constants/chainAliases'
 import reducers from './redux'
 
-// TODO: Provide public/private chain arguments to createMiddleware
-const interbitMiddleware = interbitRedux.createMiddleware()
+const interbitMiddleware = interbitRedux.createMiddleware({
+  publicChainAlias: PUBLIC,
+  privateChainAlias: PRIVATE
+})
 
 const sagaMiddleware = createSagaMiddleware()
 

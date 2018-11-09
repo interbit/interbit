@@ -6,14 +6,15 @@ export default class ProjectBar extends Component {
   static propTypes = {
     image: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    launchUrl: PropTypes.string.isRequired,
+    launchUrl: PropTypes.string,
     isDeployed: PropTypes.bool,
     isPassing: PropTypes.bool
   }
 
   static defaultProps = {
     isDeployed: false,
-    isPassing: false
+    isPassing: false,
+    launchUrl: '#'
   }
 
   render() {

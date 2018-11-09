@@ -4,42 +4,63 @@ import { connect } from 'react-redux'
 import { SubmissionError } from 'redux-form'
 import PropTypes from 'prop-types'
 import { interbitRedux } from 'interbit-ui-tools'
-import { LinkBarSlack } from 'interbit-ui-components'
 import uuid from 'uuid'
 
 import ProjectDetailsForm from '../components/ProjectDetailsForm'
 import { actionCreators } from '../interbit/my-projects/actions'
-import urls from '../constants/urls'
-import chairmanmeow from '../assets/chairmanmeow.jpg'
+import placeholder from '../assets/placeholder.svg'
+import { PUBLIC, PRIVATE, PRIVATE_PROJECT } from '../constants/chainAliases'
 
-const { chainDispatch } = interbitRedux
+const {
+  chainDispatch,
+  selectors: { getSponsorConfig }
+} = interbitRedux
 
 const mapStateToProps = state => {
+  const sponsorChainConfig = getSponsorConfig(state, {
+    publicChainAlias: PUBLIC,
+    privateChainAlias: PRIVATE_PROJECT
+  })
   const newProjectAlias = `User-Project-${uuid.v4()}`
   return {
-    newProjectAlias
+    newProjectAlias,
+    sponsorChainConfig
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  blockchainDispatch: action => dispatch(chainDispatch('myProjects', action))
+  blockchainDispatch: action => dispatch(chainDispatch(PRIVATE, action))
 })
 
 export class NewProject extends Component {
   static propTypes = {
     blockchainDispatch: PropTypes.func.isRequired,
-    newProjectAlias: PropTypes.string.isRequired
+    newProjectAlias: PropTypes.string.isRequired,
+    sponsorChainConfig: PropTypes.shape({
+      covenantHash: PropTypes.string,
+      sponsorChainId: PropTypes.string,
+      blockMaster: PropTypes.string
+    })
+  }
+
+  static defaultProps = {
+    sponsorChainConfig: {}
   }
 
   submit = formValues => {
     try {
-      const { blockchainDispatch, newProjectAlias } = this.props
+      const {
+        blockchainDispatch,
+        newProjectAlias,
+        sponsorChainConfig
+      } = this.props
 
       const action = actionCreators.createProject({
         ...formValues,
         projectAlias: newProjectAlias,
         projectName: formValues.name,
-        icon: formValues.faIcon
+        icon: formValues.faIcon,
+        sponsorChainConfig
       })
 
       console.log(`dispatching action: ${JSON.stringify(action)}`)
@@ -75,7 +96,7 @@ export class NewProject extends Component {
         <Row className="ibweb-mg-xx-lg">
           <Col {...colLayout}>
             <img
-              src={chairmanmeow}
+              src={placeholder}
               alt="App Icon"
               className="app-project-icon"
             />
@@ -84,15 +105,12 @@ export class NewProject extends Component {
             </div>
           </Col>
         </Row>
-
-        <Row>
-          <Col {...colLayout}>
-            <LinkBarSlack to={urls.SUPPORT_SLACK} />
-          </Col>
-        </Row>
       </Grid>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewProject)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewProject)

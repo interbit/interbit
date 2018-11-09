@@ -7,8 +7,8 @@ import queryString from 'query-string'
 import { interbitRedux } from 'interbit-ui-tools'
 import { LinkedCovenant } from 'interbit-ui-components'
 
-import { MY_PROJECTS } from '../constants/chainAliases'
-import { actionCreators } from '../adapters/my-projects.adapter'
+import { PRIVATE } from '../constants/chainAliases'
+import { createActionCreators } from '../adapters/my-projects.adapter'
 
 const { chainDispatch, selectors } = interbitRedux
 
@@ -19,9 +19,11 @@ const mapStateToProps = (state, ownProps) => {
   const query = queryString.parse(search)
   const { alias } = query
 
-  const chainAlias = alias || MY_PROJECTS
+  const chainAlias = alias || PRIVATE
   const chainState = selectors.getChain(state, { chainAlias })
   const chainId = selectors.getChainId(state, { chainAlias })
+
+  const actionCreators = createActionCreators(state)
 
   return {
     selectedChain: {
@@ -30,7 +32,8 @@ const mapStateToProps = (state, ownProps) => {
       state: {
         ...chainState,
         interbit: chainState.interbit
-      }
+      },
+      actionCreators
     }
   }
 }
@@ -48,7 +51,8 @@ export class InteractiveChains extends Component {
     selectedChain: PropTypes.shape({
       chainId: PropTypes.string,
       chainAlias: PropTypes.string.isRequired,
-      state: PropTypes.object.isRequired
+      state: PropTypes.object.isRequired,
+      actionCreators: PropTypes.object
     }),
     resetForm: PropTypes.func.isRequired,
     blockchainDispatch: PropTypes.func.isRequired
@@ -72,7 +76,7 @@ export class InteractiveChains extends Component {
             chainId={selectedChain.chainId}
             chainAlias={selectedChain.chainAlias}
             raw={selectedChain.state}
-            covenant={{ actionCreators }}
+            covenant={{ actionCreators: selectedChain.actionCreators || {} }}
             reset={resetForm}
             blockchainDispatch={blockchainDispatch(selectedChain.chainAlias)}
           />
@@ -82,4 +86,7 @@ export class InteractiveChains extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InteractiveChains)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(InteractiveChains)

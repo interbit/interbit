@@ -1,8 +1,9 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
-import { configure, shallow } from 'enzyme'
+import { configure, shallow, render } from 'enzyme'
 import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 import CallToAction from '../components/UIKit/CallToAction'
 import Card from '../components/UIKit/Card'
@@ -20,6 +21,7 @@ import Quote from '../components/UIKit/Quote'
 import TitledList from '../components/UIKit/TitledList'
 import Markdown from '../components/Markdown'
 import placeholder from '../assets/placeholder.svg'
+import ActivityBar from '../components/UIKit/ActivityBar'
 
 configure({ adapter: new Adapter() })
 
@@ -326,5 +328,59 @@ describe('<TitledList />', () => {
     }
 
     countChildren(<TitledList {...props} />, 'li', props.items.length)
+  })
+})
+
+describe('<ActivityBar />', () => {
+  const props = {}
+  beforeEach(() => {
+    props.firstName = 'foo'
+    props.secondName = 'bar'
+    props.breadcrumb = [{ title: 'foo' }, { title: 'bar' }]
+    props.userClickHandler = jest.fn()
+    props.timestamp = 1538117894366
+    props.dateTimeFormat = 'lll'
+  })
+
+  it('renders a breadcrumb', () => {
+    countChildren(<ActivityBar {...props} />, 'ul li', props.breadcrumb.length)
+  })
+
+  it('renders a timestamp in specified format', () => {
+    const dateUtc = moment.utc(props.timestamp)
+    const localDate = dateUtc.local()
+    const localTimeStamp = localDate.format(props.dateTimeFormat)
+
+    countChildren(
+      <ActivityBar {...props} />,
+      '.meta-data .activity-bar-timestamp',
+      1
+    )
+    expect(
+      render(
+        <ActivityBar
+          firstName="foo"
+          secondName="bar"
+          breadcrumb={[{ title: 'foo' }, { title: 'bar' }]}
+          userClickHandler={() => jest.fn()}
+          timestamp={1538117894366}
+          dateTimeFormat="lll"
+        />
+      ).text()
+    ).toContain(localTimeStamp)
+  })
+
+  it('renders an avatar if one is provided', () => {
+    countChildren(<ActivityBar {...props} avatar={placeholder} />, 'img', 1)
+  })
+
+  it('renders the username', () => {
+    countChildren(<ActivityBar {...props} />, '.content .name', 1)
+  })
+
+  it('renders the correct type of text block', () => {
+    const change = { fieldName: 'doo', oldVal: 'foo', newVal: 'bar' }
+    countChildren(<ActivityBar {...props} comment="foo" />, '.body div', 1)
+    countChildren(<ActivityBar {...props} change={change} />, '.body div', 1)
   })
 })

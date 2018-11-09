@@ -6,7 +6,6 @@
   font-weight: $light-font-weight;
 }
 
-
 @mixin modal {
   // width: 80%;
 }
@@ -14,7 +13,9 @@
 @mixin modalHeader {
   background-color: $dark-gray;
   padding: 13px;
-  h4, button > span {
+
+  h4,
+  button > span {
     color: $white-smoke;
     font-weight: $light-font-weight;
   }
@@ -22,18 +23,17 @@
 
 @mixin modalBody {
   position: relative;
-  padding: 15px 15px 0px;
+  padding: 15px 15px 0;
 }
-
 
 @mixin formContainer {
   margin-bottom: 15px;
 
-  :global {
-    .form-group {
-      margin-bottom: 0;
-    }
-  }
+  // :global {
+  //   .form-group {
+  //     margin-bottom: 0;
+  //   }
+  // }
 
   label {
     padding-top: 0 !important;
@@ -54,7 +54,6 @@
     border: $report-input-border;
   }
 }
-
 
 // Tables
 @mixin alternatingRow {

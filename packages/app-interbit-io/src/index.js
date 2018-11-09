@@ -6,13 +6,12 @@ import { createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { BrowserRouter } from 'react-router-dom'
 
-import 'interbit-ui-components/src/css/index.css'
-import 'interbit-ui-components/src/css/interbit.css'
+import 'interbit-ui-components/dist/css/interbit.css'
 
 import App from './App'
 
 import ScrollToTop from './components/ScrollToTop'
-import registerServiceWorker from './registerServiceWorker'
+import unregisterServiceWorker from './unregisterServiceWorker'
 import reducers from './redux'
 
 const store = createStore(reducers, composeWithDevTools())
@@ -29,4 +28,4 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-registerServiceWorker()
+unregisterServiceWorker()

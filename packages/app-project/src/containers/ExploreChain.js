@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form'
 import { BlockExplorer } from 'interbit-ui-components'
 import { blockExplorerRedux } from 'interbit-ui-tools'
 
-import { MY_PROJECTS } from '../constants/chainAliases'
+import { PRIVATE } from '../constants/chainAliases'
 
 const {
   actionCreators: { selectBlock, showRawState },
@@ -26,7 +26,7 @@ const mapStateToProps = (state, ownProps) => {
   const query = queryString.parse(search)
   const { alias: aliasFromUrl } = query
 
-  const chainAlias = aliasFromUrl || getSelectedChainAlias(state) || MY_PROJECTS
+  const chainAlias = aliasFromUrl || getSelectedChainAlias(state) || PRIVATE
 
   return {
     selectedChain: getChainState(state, { chainAlias }),
@@ -83,4 +83,9 @@ export class ExploreChain extends Component {
 export default reduxForm({
   form: 'ExploreChain',
   destroyOnUnmount: true
-})(connect(mapStateToProps, mapDispatchToProps)(ExploreChain))
+})(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ExploreChain)
+)

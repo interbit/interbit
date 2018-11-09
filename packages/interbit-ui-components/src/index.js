@@ -32,8 +32,13 @@ export { default as IconButton } from './components/UIKit/IconButton'
 export { default as LaunchPad } from './components/UIKit/LaunchPad'
 export { default as LaunchPadRow } from './components/UIKit/LaunchPadRow'
 export { default as LinkBar } from './components/UIKit/LinkBar'
-export { default as LinkBarSlack } from './components/UIKit/LinkBarSlack'
 export { default as LinkWrapper } from './components/UIKit/LinkWrapper'
 export { default as ModalWrapper } from './components/UIKit/ModalWrapper'
 
+// Redux form
+export { default as validation } from './components/ReduxForm/validation'
+export { renderInputNew } from './components/ReduxForm/IbField'
+export { default as IbField } from './components/ReduxForm/IbField'
 export { renderInput } from './help/reduxForm/reduxForm'
+
+export { default as ibWebStyles } from './scss/interbit.scss'

@@ -1,4 +1,6 @@
-const covenant = require('../interbit/private')
+const {
+  actionCreators: covenantActionCreators
+} = require('../interbit/private/actions')
 
 const covenantName = 'Interbit Template Private Chain'
 
@@ -8,13 +10,20 @@ const textParamLabel = 'Enter some text'
 const addActionLabel = 'Add-up some numbers'
 const numberParamLabel = 'Enter a number'
 
+const setTimestampLabel = 'Enter a timestamp explicitly'
+const timestampParamLabel = 'Enter milliseconds since Unix epoch'
+
+const setTimestampActionCreatorLabel = 'Get timestamp from the action creator'
+
+const currentTimestampLabel = 'Get timestamp from a saga side-effect'
+
 const actionCreators = {
   memo: () => ({
     type: memoActionLabel,
     arguments: {
       [textParamLabel]: ''
     },
-    invoke: ({ [textParamLabel]: text }) => covenant.actionCreators.memo(text)
+    invoke: ({ [textParamLabel]: text }) => covenantActionCreators.memo(text)
   }),
 
   add: () => ({
@@ -23,7 +32,26 @@ const actionCreators = {
       [numberParamLabel]: ''
     },
     invoke: ({ [numberParamLabel]: number }) =>
-      covenant.actionCreators.add(number)
+      covenantActionCreators.add(number)
+  }),
+
+  setTimestamp: () => ({
+    type: setTimestampLabel,
+    arguments: {
+      [timestampParamLabel]: ''
+    },
+    invoke: ({ [timestampParamLabel]: timestamp }) =>
+      covenantActionCreators.setTimestamp(timestamp)
+  }),
+
+  setCurrentTimestampInActionCreator: () => ({
+    type: setTimestampActionCreatorLabel,
+    invoke: () => covenantActionCreators.setCurrentTimestampInActionCreator()
+  }),
+
+  currentTimestampSaga: () => ({
+    type: currentTimestampLabel,
+    invoke: () => covenantActionCreators.currentTimestampSaga()
   })
 }
 

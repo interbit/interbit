@@ -102,16 +102,24 @@ describe('module exports expected components', () => {
     assert.ok(api.LinkBar)
   })
 
-  it('exports LinkBarSlack component', () => {
-    assert.ok(api.LinkBarSlack)
-  })
-
   it('exports LinkWrapper component', () => {
     assert.ok(api.LinkWrapper)
   })
 
   it('exports ModalWrapper component', () => {
     assert.ok(api.ModalWrapper)
+  })
+
+  it('exports validation', () => {
+    assert.ok(api.validation)
+  })
+
+  it('exports renderInputNew', () => {
+    assert.ok(api.renderInputNew)
+  })
+
+  it('exports IbField', () => {
+    assert.ok(api.IbField)
   })
 
   it('exports renderInput', () => {

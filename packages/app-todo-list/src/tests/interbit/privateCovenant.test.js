@@ -103,7 +103,7 @@ describe('app-todo-list private covenant', () => {
   tests.forEach(test => {
     it(test.name, () => {
       const actualState = reducer(test.state, test.action)
-      assert.deepEqual(actualState.todos, test.expectedTodos)
+      assert.deepStrictEqual(actualState.todos, test.expectedTodos)
     })
   })
 })

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:500');
+//import $ib-delay-period;
 
 .ibweb-timeline-stepper {
 
@@ -10,7 +11,6 @@
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    padding: 40px 0 0 0;
 
     .point-container {
       display: flex;
@@ -18,9 +18,9 @@
       align-items: center;
       justify-content: flex-end;
       cursor: pointer;
-      margin: 16px 0;
+      margin: 0 0 12px 0;
       position: relative;
-      height: 40px;
+      height: 62px;
 
       &.clicked {
         .show-tooltip {
@@ -66,7 +66,8 @@
         justify-content: flex-end;
         visibility: visible;
         opacity: 1;
-        transition: visibility 0s, opacity 0.3s linear;
+        transition: visibility 0.1s, opacity 0.1s linear;
+        transition-delay: 0.3s;
       }
 
       .hide-tooltip {
@@ -99,6 +100,8 @@
           left: calc(50% - 6px);
           background-color: #007AFF;
           border: 4px solid #9ECCFF;
+          transition: width 0.1s, height 0.1s, border 0.1s, bottom 0.1s, left 0.1s;
+          transition-delay: 0.3s;
 
           &.first-point {
             left: -6px;
@@ -157,7 +160,7 @@
 
       &.first-step {
         .point-tooltip {
-          left: -100%
+          left: -70%
         }
         .triangle-down {
           left: -4px;
@@ -172,7 +175,7 @@
 
       &.last-step {
         .point-tooltip {
-          left: 0
+          left: 30%
         }
         .triangle-down {
           right: -4px;
@@ -249,7 +252,6 @@
         letter-spacing: 0.4px;
         color: white;
         position: absolute;
-        border: 1px solid #eee;
         background-color: #2F80ED;
         border-radius: 4px;
         bottom: 22px;
@@ -292,6 +294,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-content: center;
+    align-items: flex-start;
 
     .primary-button {
       font-family: Roboto, serif;
@@ -312,11 +315,11 @@
       }
     }
     > div.helper {
-      margin: auto;
+      padding-top: 8px;
       font-family: Roboto, serif;
       font-style: normal;
       font-weight: normal;
-      line-height: 20px;
+      line-height: 16px;
       font-size: 12px;
       text-align: center;
       letter-spacing: 0.15px;

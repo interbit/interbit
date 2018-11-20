@@ -193,8 +193,7 @@ export class TimelineStepper extends React.PureComponent {
             Back
           </Button>
           <div className="helper">
-            Drag from the current state to a new state or click one of the dots
-            to jump to that point in time.
+            Click a dot to navigate between versions of your data.
           </div>
           <Button
             className="primary-button right"

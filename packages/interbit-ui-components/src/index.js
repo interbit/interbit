@@ -34,6 +34,9 @@ export { default as LaunchPadRow } from './components/UIKit/LaunchPadRow'
 export { default as LinkBar } from './components/UIKit/LinkBar'
 export { default as LinkWrapper } from './components/UIKit/LinkWrapper'
 export { default as ModalWrapper } from './components/UIKit/ModalWrapper'
+export {
+  default as TimelineStepper
+} from './components/UIKit/TimelineStepper/TimelineStepper'
 
 // Redux form
 export { default as validation } from './components/ReduxForm/validation'

@@ -5,6 +5,7 @@ module.exports = {
   require: [path.join(__dirname, '/dist/css/interbit.css')],
   assetsDir: path.join(__dirname, '/src/assets'),
   ignore: [
+    '**/src/components/**/*.test.js',
     '**/src/components/Welcome.js',
     '**/src/components/BlockExplorer/**',
     '**/src/components/Covenant/**',
